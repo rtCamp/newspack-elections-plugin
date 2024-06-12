@@ -10,6 +10,7 @@
 
 $profile_block = $extra["profile_block"];
 $profile_data = $extra["profile_data"];
+//$profile = $extra["profile"];
 $block_class = $attributes["className"];
 $show = gp_get_show_data($profile_data, $attributes);
 $available_widths = gp_get_available_widths();
@@ -28,13 +29,14 @@ $container_classes = join(
 	) 
 );
 
+
 ?>
 
 <aside <?php echo get_block_wrapper_attributes([
 	'class' => gp_classnames("wp-block-govpack-profile-self", [
 		( isset( $attributes['align'] ) ? 'align' . $attributes['align'] : false ),
 	] ),
-	'style' => gp_style_attr_generator([
+	'style' => gp_style_attribute_generator([
 		"max-width" => $available_widths[ $attributes['width'] ?? 'auto' ]['maxWidth']
 	])
 ]); ?>>

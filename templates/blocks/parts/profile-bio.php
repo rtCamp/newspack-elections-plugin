@@ -5,9 +5,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $profile_data = $extra["profile_data"];
-$show = gp_get_show_data($profile_data, $attributes);
+$profile_block = $extra["profile_block"];
 
-if ( $show['bio'] ) {
+
+if ( $profile_block->show('bio') ) {
 	echo $profile_data['bio'];
 } 
 			

@@ -4,29 +4,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$profile_data = $extra["profile_data"];
-$show = gp_get_show_data($profile_data, $attributes);
+$profile_block = $extra["profile_block"];
 
-
-foreach(gp_get_profile_lines($attributes, $profile_data) as $index => $line){
-	if ( ! $line["shouldShow"] ) {
+foreach($profile_block->rows() as $index => $row){
+	if ( ! $row["shouldShow"] ) {
 		continue;
 	}
 
-	if ( ! $line["value"] ) {
+	if ( ! $row["value"] ) {
 		continue;
 	}
 
 	?>
-		<div <?php echo gp_line_attributes($line, $attributes);?>>
-			<?php if(isset($line["label"]) && ($line["label"])){ ?>
+		<div <?php echo gp_line_attributes($row, $attributes);?>>
+			<?php if(isset($row["label"]) && ($row["label"])){ ?>
 			<dt 
 				class="<?php echo gp_classnames("govpack-line__label", [
-					$show["labels"] ? "govpack-line__label--show" : "govpack-line__label--hide"
+					"govpack-line__label--show" => $profile_block->show("labels"),
+					"govpack-line__label--hide" => !$profile_block->show("labels"),
 				]);?>"
-			><?php esc_html_e($line["label"]);?></dt>
+			><?php esc_html_e($row["label"]);?></dt>
 			<?php } ?>
-			<dd class="govpack-line__content"><?php echo $line["value"]; ?></dd>
+			<dd class="govpack-line__content"><?php echo $row["value"]; ?></dd>
 		</div>
 	<?php
 }
