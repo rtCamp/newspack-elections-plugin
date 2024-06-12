@@ -4,45 +4,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$profile_data = $extra['profile_data'];
-$show         = gp_get_show_data( $profile_data, $attributes );
+$profile_block = $extra["profile_block"];
 
 
-foreach ( gp_get_profile_lines( $attributes, $profile_data ) as $index => $line ) {
-	if ( ! $line['shouldShow'] ) {
+
+foreach($profile_block->rows() as $index => $row){
+	if ( ! $row["shouldShow"] ) {
 		continue;
 	}
 
-	if ( ! $line['value'] ) {
+	if ( ! $row["value"] ) {
 		continue;
 	}
 
 	?>
-		<div <?php echo gp_line_attributes( $line, $attributes ); ?>>
-			<?php if ( isset( $line['label'] ) && ( $line['label'] ) ) { ?>
+		<div <?php echo gp_line_attributes($row, $attributes);?>>
+			<?php if(isset($row["label"]) && ($row["label"])){ ?>
 			<dt 
-				class="
-				<?php
-				echo esc_attr(
-					gp_classnames(
-						'govpack-line__label',
-						[
-							$show['labels'] ? 'govpack-line__label--show' : 'govpack-line__label--hide',
-						]
-					)
-				);
-				?>
-				"
-			><?php echo esc_html( $line['label'] ); ?></dt>
+				class="<?php echo gp_classnames("govpack-line__label", [
+					"govpack-line__label--show" => $profile_block->show("labels"),
+					"govpack-line__label--hide" => !$profile_block->show("labels"),
+				]);?>"
+			><?php esc_html_e($row["label"]);?></dt>
 			<?php } ?>
-			<dd class="govpack-line__content">
-			<?php 
-				// Do not escape here. Should escape in the functions that generate the output for value.
-				// This will be mixed strings and HTML
-				// TODO : Consider a custom wp_kses function but this may cause double escaping
-				echo $line['value']; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			?>
-				</dd> 
+			<dd class="govpack-line__content"><?php echo $row["value"]; ?></dd>
 		</div>
 	<?php
 }
