@@ -527,14 +527,12 @@ function gp_social_media_row( $label, $links = [] ) {
  * @param array $links Data about the profile.
  * @param array $attrs Attributes from the Block.
  */
-if ( ! function_exists( 'gp_contact_info' ) ) {
-	function gp_contact_info( $label, $links, $attrs ) {
-		$outer_template = '
-		<div class="wp-block-govpack-profile__comms">
-			<div class="wp-block-govpack-profile__label">%s:</div>
-			<ul class="wp-block-govpack-profile__comms-icons govpack-inline-list">
-				%s
-			</ul>
+/*
+function gp_contact_info( $label, $links, $attrs ) {
+	$outer_template = '
+	<div class="wp-block-govpack-profile__comms">
+		<div class="wp-block-govpack-profile__label">%s:</div>
+		<ul class="wp-block-govpack-profile__comms-icons govpack-inline-list">
 			%s
 		</div>';
 
@@ -608,6 +606,7 @@ if ( ! function_exists( 'gp_contact_info' ) ) {
 		return sprintf( $outer_template, $label, $content, $address ); 
 	}
 }
+*/
 
 /**
  * Utility Function that Outputs a Profiles's Contact Other
