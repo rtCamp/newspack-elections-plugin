@@ -49,6 +49,12 @@ class Govpack {
 		return GOVPACK_PLUGIN_PATH . $path;
 	}
 
+	public function build_path($path){
+		return trailingslashit(
+			trailingslashit($this->path("build")) . $path
+		);
+	}
+
 	public function hooks() {
 		\add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		\add_action( 'plugins_loaded', [ '\Govpack\Core\ActionScheduler\ActionScheduler', 'hooks' ], 0 );
@@ -123,7 +129,7 @@ class Govpack {
 	}
 
 	public function register_blocks(){
-		$this->blocks()->register(new \Govpack\Blocks\Profile\Profile());
-		$this->blocks()->register(new \Govpack\Blocks\ProfileSelf\ProfileSelf());
+		$this->blocks()->register(new \Govpack\Blocks\Profile\Profile($this));
+		$this->blocks()->register(new \Govpack\Blocks\ProfileSelf\ProfileSelf($this));
 	}
 }
