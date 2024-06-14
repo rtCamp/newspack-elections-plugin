@@ -170,31 +170,31 @@ class Profile extends \Govpack\Core\Abstracts\Block {
 			],
 			[
 				"key" => "social",
-				"value" => gp_social_media( $this->profile, $this->attributes ),
+				"value" => $this->profile["social"],
 				"label" => "Social Media",
 				"shouldShow" => $this->show("social")
 			],
 			[
 				"key" => "comms_capitol",
-				"value" => gp_contact_info( 'Capitol', $this->profile['comms']['capitol'], $this->attributes['selectedCapitolCommunicationDetails'] ),
+				//"value" => gp_contact_info( 'Capitol', $this->profile['comms']['capitol'], $this->attributes['selectedCapitolCommunicationDetails'] ),
 				"label" => "Contact Info (Capitol)",
 				"shouldShow" => $this->attributes["showCapitolCommunicationDetails"]
 			],
 			[
 				"key" => "comms_district",
-				"value" => gp_contact_info( 'District', $this->profile['comms']['district'], $this->attributes['selectedDistrictCommunicationDetails'] ),
+				//"value" => gp_contact_info( 'District', $this->profile['comms']['district'], $this->attributes['selectedDistrictCommunicationDetails'] ),
 				"label" => "Contact Info (District)",
 				"shouldShow" => $this->attributes["showDistrictCommunicationDetails"]
 			],
 			[
 				"key" => "comms_campaign",
-				"value" => gp_contact_info( 'Campaign', $this->profile['comms']['campaign'], $this->attributes['selectedCampaignCommunicationDetails'] ),
+				//"value" => gp_contact_info( 'Campaign', $this->profile['comms']['campaign'], $this->attributes['selectedCampaignCommunicationDetails'] ),
 				"label" => "Contact Info (Campaign)",
 				"shouldShow" => $this->attributes["showCampaignCommunicationDetails"]
 			],
 			[
 				"key" => "comms_other",
-				"value" => gp_contact_other( 'Other', $this->profile['comms']['other'], $this->attributes['selectedOtherCommunicationDetails'] ),
+				//"value" => gp_contact_other( 'Other', $this->profile['comms']['other'], $this->attributes['selectedOtherCommunicationDetails'] ),
 				"label" => "Contact Info (Campaign)",
 				"shouldShow" => $this->attributes["showOtherCommunicationDetails"]
 			],
@@ -205,7 +205,7 @@ class Profile extends \Govpack\Core\Abstracts\Block {
 			],
 			[
 				"key" => "more_about",
-				"value" => gp_maybe_link( sprintf('More About %s', $this->profile['name']['name']), $this->profile['link'], isset($this->attributes['showProfileLink']) && $this->attributes['showProfileLink']),
+				//"value" => gp_maybe_link( sprintf('More About %s', $this->profile['name']['name']), $this->profile['link'], isset($this->attributes['showProfileLink']) && $this->attributes['showProfileLink']),
 				"shouldShow" => (isset($this->attributes['showProfileLink']) && $this->attributes['showProfileLink'])
 			],
 			

@@ -9,14 +9,12 @@ $profile_block = $extra["profile_block"];
 
 
 foreach($profile_block->rows() as $index => $row){
+
 	if ( ! $row["shouldShow"] ) {
 		continue;
 	}
 
-	if ( ! $row["value"] ) {
-		continue;
-	}
-
+	
 	?>
 		<div <?php echo gp_line_attributes($row, $attributes);?>>
 			<?php if(isset($row["label"]) && ($row["label"])){ ?>
@@ -27,7 +25,20 @@ foreach($profile_block->rows() as $index => $row){
 				]);?>"
 			><?php esc_html_e($row["label"]);?></dt>
 			<?php } ?>
-			<dd class="govpack-line__content"><?php echo $row["value"]; ?></dd>
+			<dd class="govpack-line__content">
+				<?php
+				switch($row["key"]){
+					case "social" :
+						gp_get_block_part("blocks/parts/row", "social", $attributes, $content, $block, $extra);
+						break;
+					default:
+						if(isset($row["value"]) && $row["value"] ){
+							echo $row["value"];
+						}
+						break;
+				}
+				?>
+			</dd>
 		</div>
 	<?php
 }

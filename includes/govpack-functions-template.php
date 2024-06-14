@@ -422,8 +422,8 @@ if ( ! function_exists( 'gp_should_show_link' ) ) {
  * @param array $profile_data Data about the profile.
  * @param array $attributes Attributes from the Block.
  */
-if ( ! function_exists( 'gp_social_media' ) ) {
-	function gp_social_media( $profile_data, $attributes ) {
+/*
+function gp_social_media( $profile_data, $attributes ) {
 
 		$template = '<div class="wp-block-govpack-profile__social">
 			<ul class="wp-block-govpack-profile__services govpack-vertical-list">
@@ -448,6 +448,7 @@ if ( ! function_exists( 'gp_social_media' ) ) {
 		return sprintf( $template, $content ); 
 	}
 }
+*/
 
 if ( ! function_exists( 'gp_get_icons' ) ) {
 	function gp_get_icons() {
@@ -472,8 +473,8 @@ if ( ! function_exists( 'gp_has_icon' ) ) {
  * @param string $label Row label to shoe.
  * @param array  $links Links for social media profiles.
  */
-if ( ! function_exists( 'gp_social_media_row' ) ) {
-	function gp_social_media_row( $label, $links = [] ) {
+/*
+function gp_social_media_row( $label, $links = [] ) {
 
 
 		$outer_template = 
@@ -517,6 +518,8 @@ if ( ! function_exists( 'gp_social_media_row' ) ) {
 		return sprintf( $outer_template, $label, $content ); 
 	}
 }
+*/
+
 /**
  * Utility Function that Outputs a Profiles's Contact Sections
  * 
