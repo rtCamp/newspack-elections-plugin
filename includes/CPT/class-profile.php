@@ -863,25 +863,34 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 			],
 			'social'           => [
 				'official' => [
-					'x'         => $profile_raw_meta_data['x_official'][0] ?? $profile_raw_meta_data['twitter_official'][0] ?? null,
-					'facebook'  => $profile_raw_meta_data['facebook_official'][0] ?? null,
-					'twitter'   => $profile_raw_meta_data['twitter_official'][0] ?? null,
-					'instagram' => $profile_raw_meta_data['instagram_official'][0] ?? null,
-					'youtube'   => $profile_raw_meta_data['youtube_official'][0] ?? null,
+					'label' => "Official",
+					'services' => [
+						'x'         => $profile_raw_meta_data['x_official'][0] ?? $profile_raw_meta_data['twitter_official'][0] ?? null,
+						'facebook'  => $profile_raw_meta_data['facebook_official'][0] ?? null,
+						'twitter'   => $profile_raw_meta_data['twitter_official'][0] ?? null,
+						'instagram' => $profile_raw_meta_data['instagram_official'][0] ?? null,
+						'youtube'   => $profile_raw_meta_data['youtube_official'][0] ?? null,
+					]
 				], 
 				'personal' => [
-					'x'         => $profile_raw_meta_data['x_personal'][0] ?? $profile_raw_meta_data['twitter_personal'][0] ?? null,
-					'facebook'  => $profile_raw_meta_data['facebook_personal'][0] ?? null,
-					'twitter'   => $profile_raw_meta_data['twitter_personal'][0] ?? null,
-					'instagram' => $profile_raw_meta_data['instagram_personal'][0] ?? null,
-					'youtube'   => $profile_raw_meta_data['youtube_personal'][0] ?? null,
+					'label' => "Personal",
+					'services' => [
+						'x'         => $profile_raw_meta_data['x_personal'][0] ?? $profile_raw_meta_data['twitter_personal'][0] ?? null,
+						'facebook'  => $profile_raw_meta_data['facebook_personal'][0] ?? null,
+						'twitter'   => $profile_raw_meta_data['twitter_personal'][0] ?? null,
+						'instagram' => $profile_raw_meta_data['instagram_personal'][0] ?? null,
+						'youtube'   => $profile_raw_meta_data['youtube_personal'][0] ?? null,
+					]
 				], 
 				'campaign' => [
-					'x'         => $profile_raw_meta_data['x_campaign'][0] ?? $profile_raw_meta_data['twitter_campaign'][0] ?? null,
-					'facebook'  => $profile_raw_meta_data['facebook_campaign'][0] ?? null,
-					'twitter'   => $profile_raw_meta_data['twitter_campaign'][0] ?? null,
-					'instagram' => $profile_raw_meta_data['instagram_campaign'][0] ?? null,
-					'youtube'   => $profile_raw_meta_data['youtube_campaign'][0] ?? null,
+					'label' => "Campaign",
+					'services' => [
+						'x'         => $profile_raw_meta_data['x_campaign'][0] ?? $profile_raw_meta_data['twitter_campaign'][0] ?? null,
+						'facebook'  => $profile_raw_meta_data['facebook_campaign'][0] ?? null,
+						'twitter'   => $profile_raw_meta_data['twitter_campaign'][0] ?? null,
+						'instagram' => $profile_raw_meta_data['instagram_campaign'][0] ?? null,
+						'youtube'   => $profile_raw_meta_data['youtube_campaign'][0] ?? null
+					]
 				],
 			],
 			'comms'            => [
@@ -949,8 +958,16 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 
 		
 		$profile_data['hasWebsites'] = ( $profile_data['websites']['campaign'] ?? $profile_data['websites']['legislative'] ?? false );
-		$profile_data['social']      = array_map( 'array_filter', $profile_data['social'] );
+		
+		$profile_data['social']      = array_map( function($group){
+			$group['services'] = array_filter($group['services']);
+			if(empty($group['services'])){
+				return false;
+			}
+			return $group;
+		},$profile_data['social'] );
 		$profile_data['social']      = array_filter( $profile_data['social'] );
+
 		$profile_data['hasSocial']   = ! ( empty( $profile_data['social']['official'] ) && empty( $profile_data['social']['personal'] ) && empty( $profile_data['social']['campaign'] ) ?? false );
 		
 		return apply_filters("govpack_profile_data", $profile_data);

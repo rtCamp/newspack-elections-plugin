@@ -42,7 +42,7 @@ $container_classes = gp_classnames(
 		<?php gp_get_block_part("blocks/parts/profile", "photo", $attributes, $content, $block, $extra);  ?>
 		<dl class="wp-block-govpack-profile__info">
 			<?php gp_get_block_part("blocks/parts/profile", "header", $attributes, $content, $block, $extra);  ?>
-			<?php gp_get_block_part("blocks/parts/profile", "lines", $attributes, $content, $block, $extra);  ?>
+			<?php gp_get_block_part("blocks/parts/profile", "rows", $attributes, $content, $block, $extra);  ?>
 		</dl>
 	</div>
 	<!-- end block__container -->

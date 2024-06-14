@@ -365,6 +365,7 @@ function gp_contacts( $profile_data, $attributes ) {
  * @param array $profile_data Data about the profile.
  * @param array $attributes Attributes from the Block.
  */
+/*
 function gp_social_media( $profile_data, $attributes ) {
 
 	$template = '<div class="wp-block-govpack-profile__social">
@@ -390,6 +391,7 @@ function gp_social_media( $profile_data, $attributes ) {
 	return sprintf( $template, $content ); 
 
 }
+*/
 
 function gp_get_icons(){
 	return gp()->icons()->all();
@@ -405,6 +407,7 @@ function gp_get_icon($key){
  * @param string $label Row label to shoe.
  * @param array  $links Links for social media profiles.
  */
+/*
 function gp_social_media_row( $label, $links = [] ) {
 
 
@@ -449,6 +452,7 @@ function gp_social_media_row( $label, $links = [] ) {
 
 	return sprintf( $outer_template, $label, $content ); 
 }
+*/
 
 /**
  * Utility Function that Outputs a Profiles's Contact Sections
