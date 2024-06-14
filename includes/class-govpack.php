@@ -157,8 +157,8 @@ class Govpack {
 
 	public function icons() {
 
-		if ( ! isset( $this->icons ) ) {
-			$this->icons = new Icons();
+		if(!isset($this->icons)){
+			$this->icons = new Icons($this);
 		}
 		
 		return $this->icons;
