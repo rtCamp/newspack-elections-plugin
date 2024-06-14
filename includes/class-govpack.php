@@ -42,7 +42,11 @@ class Govpack {
 	}
 
 	public function require($path){
-		require_once ( GOVPACK_PLUGIN_PATH . $path);
+		require_once ($this->path($path));
+	}
+
+	public function path($path){
+		return GOVPACK_PLUGIN_PATH . $path;
 	}
 
 	public function hooks() {
@@ -112,7 +116,7 @@ class Govpack {
 	public function icons(){
 
 		if(!isset($this->icons)){
-			$this->icons = new Icons();
+			$this->icons = new Icons($this);
 		}
 		
 		return $this->icons;
