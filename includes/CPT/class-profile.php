@@ -72,8 +72,37 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 		add_filter( 'govpack_profile_register_meta_field_args', [ __CLASS__, 'filter_meta_registration_for_links' ], 10, 2);
 
 		add_action('rest_api_init', [__CLASS__, "add_rest_fields"]);
+
+		add_filter('default_post_metadata', [__CLASS__, "fallback_x_meta_fields_to_twitter"], 10, 5);
 	}
 
+	public static function fallback_x_meta_fields_to_twitter($value, $object_id, $meta_key, $single, $meta_type){
+
+		// check for an empty string if we expect a string, exit otherwise
+		if($single && $value !== ""){
+			return $value;
+		}
+
+		// check for an empty array if we expect an array, exit otherwise
+		if(!$single && !empty($value) ){
+			return $value;
+		}
+		
+		// if we're looking at some other entity type then exit
+		if($meta_type !== "post"){
+			return $value;
+		}
+
+		// if not a request for one of our specific keys, exit
+		$target_keys = ["x_official", "x_campaign", "x_personal"];
+		if(!in_array($meta_key, $target_keys)){
+			return $value;
+		}
+
+		$fallback_key = str_replace("x_", "twitter_", $meta_key);
+		
+		return get_metadata($meta_type, $object_id, $fallback_key, $single);
+	}
 
 	public static function add_rest_fields(){
 		register_rest_field( self::CPT_SLUG, "profile_links", [
@@ -419,7 +448,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 		];
 
 		// Social Panel.
-		$groups = [ 'facebook', 'twitter', 'instagram', 'youtube' ];
+		$groups = [ 'facebook', 'twitter', 'instagram', 'youtube', 'x' ];
 		$keys   = [ 'official', 'campaign', 'personal' ];
 
 		foreach ( $groups as $group ) {
@@ -834,18 +863,21 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 			],
 			'social'           => [
 				'official' => [
+					'x'         => $profile_raw_meta_data['x_official'][0] ?? $profile_raw_meta_data['twitter_official'][0] ?? null,
 					'facebook'  => $profile_raw_meta_data['facebook_official'][0] ?? null,
 					'twitter'   => $profile_raw_meta_data['twitter_official'][0] ?? null,
 					'instagram' => $profile_raw_meta_data['instagram_official'][0] ?? null,
 					'youtube'   => $profile_raw_meta_data['youtube_official'][0] ?? null,
 				], 
 				'personal' => [
+					'x'         => $profile_raw_meta_data['x_personal'][0] ?? $profile_raw_meta_data['twitter_personal'][0] ?? null,
 					'facebook'  => $profile_raw_meta_data['facebook_personal'][0] ?? null,
 					'twitter'   => $profile_raw_meta_data['twitter_personal'][0] ?? null,
 					'instagram' => $profile_raw_meta_data['instagram_personal'][0] ?? null,
 					'youtube'   => $profile_raw_meta_data['youtube_personal'][0] ?? null,
 				], 
 				'campaign' => [
+					'x'         => $profile_raw_meta_data['x_campaign'][0] ?? $profile_raw_meta_data['twitter_campaign'][0] ?? null,
 					'facebook'  => $profile_raw_meta_data['facebook_campaign'][0] ?? null,
 					'twitter'   => $profile_raw_meta_data['twitter_campaign'][0] ?? null,
 					'instagram' => $profile_raw_meta_data['instagram_campaign'][0] ?? null,

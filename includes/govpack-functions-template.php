@@ -292,18 +292,12 @@ function gp_websites( $websites ) {
  */
 function gp_contacts( $profile_data, $attributes ) {
 
-	$icons = [
-		'facebook'  => file_get_contents( GOVPACK_PLUGIN_FILE . '/src/images/facebook.svg' ),
-		'twitter'   => file_get_contents( GOVPACK_PLUGIN_FILE . '/src/images/twitter.svg' ),
-		'linkedin'  => file_get_contents( GOVPACK_PLUGIN_FILE . '/src/images/linkedin.svg' ),
-		'instagram' => file_get_contents( GOVPACK_PLUGIN_FILE . '/src/images/instagram.svg' ),
-		'email'     => file_get_contents( GOVPACK_PLUGIN_FILE . '/src/images/email.svg' ),
-	];
+	$icons = gp_get_icons();
   
 	$icon = '<span class="wp-block-govpack-profile__contact__icon wp-block-govpack-profile__contact__icon--{%s}">%s</span>';
 
 	if ( $attributes['showEmail'] && $profile_data['email'] ) {
-		$email_icon = sprintf( $icon, 'email', $icons['email'] );
+		$email_icon = sprintf( $icon, 'email', gp_get_icon('email') );
 		$classes    = [
 			'wp-block-govpack-profile__contact--hide-label',
 		];
@@ -318,12 +312,12 @@ function gp_contacts( $profile_data, $attributes ) {
         </li>";
 
 	}
-
+  
 
 	$social = '';
 	if ( $attributes['showSocial'] ) {
 
-		$services = [ 'facebook', 'twitter', 'linkedin', 'instagram' ];
+		$services = [ 'facebook', 'x', 'linkedin', 'instagram' ];
 
 
 		foreach ( $services as $service ) {
@@ -340,7 +334,7 @@ function gp_contacts( $profile_data, $attributes ) {
 			$classes = join( ' ', $classes );
 
 
-			$contact_icon = sprintf( $icon, $service, $icons[ $service ] );
+			$contact_icon = sprintf( $icon, $service, gp_get_icons($service) );
 			$social      .=  
 			"<li class=\"{$classes} \">
                 <a href=\"{$profile_data[$service]}\" class=\"wp-block-govpack-profile__contact__link\">
@@ -397,6 +391,14 @@ function gp_social_media( $profile_data, $attributes ) {
 
 }
 
+function gp_get_icons(){
+	return gp()->icons()->all();
+}
+
+function gp_get_icon($key){
+	return gp()->icons()->get($key);
+}
+
 /**
  * Utility Function that Outputs a Profiles's Social Media Row
  * 
@@ -416,16 +418,8 @@ function gp_social_media_row( $label, $links = [] ) {
 
 	$content = '';
 
-	$services = [ 'facebook', 'twitter', 'linkedin', 'instagram', 'youtube' ];
+	$services = [ 'facebook', 'x', 'linkedin', 'instagram', 'youtube' ];
 
-	$icons = [
-		'facebook'  => file_get_contents( GOVPACK_PLUGIN_FILE . '/src/images/facebook.svg' ),
-		'twitter'   => file_get_contents( GOVPACK_PLUGIN_FILE . '/src/images/twitter.svg' ),
-		'linkedin'  => file_get_contents( GOVPACK_PLUGIN_FILE . '/src/images/linkedin.svg' ),
-		'instagram' => file_get_contents( GOVPACK_PLUGIN_FILE . '/src/images/instagram.svg' ),
-		'email'     => file_get_contents( GOVPACK_PLUGIN_FILE . '/src/images/email.svg' ),
-		'youtube'     => file_get_contents( GOVPACK_PLUGIN_FILE . '/src/images/youtube.svg' ),
-	];
 
 	foreach ( $services as $service ) {
 		if ( ! isset( $links[ $service ] ) || ! $links[ $service ] ) {
@@ -441,7 +435,7 @@ function gp_social_media_row( $label, $links = [] ) {
 		$classes = join( ' ', $classes );
 
 		$icon         = '<span class="wp-block-govpack-profile__contact__icon wp-block-govpack-profile__contact__icon--{%s}">%s</span>';
-		$contact_icon = sprintf( $icon, $service, $icons[ $service ] );
+		$contact_icon = sprintf( $icon, $service, gp_get_icon($service) );
 
 		$content .=  
 		"<li class=\"{$classes} \">
@@ -473,12 +467,7 @@ function gp_contact_info( $label, $links, $attrs ) {
 		%s
 	</div>';
 
-	$icons = [
-		'phone'   => file_get_contents( GOVPACK_PLUGIN_FILE . '/src/images/phone.svg' ),
-		'fax'     => file_get_contents( GOVPACK_PLUGIN_FILE . '/src/images/fax.svg' ),
-		'website' => file_get_contents( GOVPACK_PLUGIN_FILE . '/src/images/globe.svg' ),
-		'email'   => file_get_contents( GOVPACK_PLUGIN_FILE . '/src/images/email.svg' ),
-	];
+	$icons = gp_get_icons();
 
 	$services = [ 
 		'email'   => 'showEmail',
@@ -510,7 +499,7 @@ function gp_contact_info( $label, $links, $attrs ) {
 		$classes = join( ' ', $classes );
 
 		$icon         = '<span class="wp-block-govpack-profile__contact__icon wp-block-govpack-profile__contact__icon--{%s}">%s</span>';
-		$contact_icon = sprintf( $icon, $service, $icons[ $service ] );
+		$contact_icon = sprintf( $icon, $service, gp_get_icon($service) );
 
 		if ( ( 'phone' === $service ) || ( 'fax' === $service ) ) {
 			$protocol = 'tel:';
