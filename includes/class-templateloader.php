@@ -63,12 +63,16 @@ class TemplateLoader extends \Govpack_Vendor_Gamajo_Template_Loader {
 		return $template;
 	}
 
+	
+
 	private function do_render( $template, $attributes = [], $content = '', $block = null, $extra = null ) {
 		ob_start();
 		require $template; //phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
 		$html = ob_get_clean();
 		return $html;
 	}
+
+
 	public function render_block( $slug, $attributes = [], $content = '', $block = null, $extra = null ) {
 		$template = $this->get_template_part( $slug, null, false );
 		return $this->do_render( $template, $attributes, $content, $block, $extra );

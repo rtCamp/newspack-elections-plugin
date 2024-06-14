@@ -22,18 +22,21 @@ class Profile extends \Govpack\Core\Abstracts\Block {
 	private $show = null;
 	private $profile = null;
 	private $attributes = [];
+	protected $plugin;
+
+	public function __construct($plugin)
+	{
+		$this->plugin = $plugin;
+	}
 
 	public function disable_block( $allowed_blocks, $editor_context ) {
 		return false;
 	}
 
-
-	public function block_build_path(): string {
-		return trailingslashit( GOVPACK_PLUGIN_BUILD_PATH . 'blocks/Profile' );
+	public function block_build_path() : string {
+		return $this->plugin->build_path('blocks/Profile');
 	}
 	
-	
-
 	/**
 	 * Block render handler for .
 	 *
@@ -66,8 +69,6 @@ class Profile extends \Govpack\Core\Abstracts\Block {
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
 
-		
-		
 		$this->profile = \Govpack\Core\CPT\Profile::get_data( $attributes['profileId'] );
 	
 		if ( ! $this->profile ) {

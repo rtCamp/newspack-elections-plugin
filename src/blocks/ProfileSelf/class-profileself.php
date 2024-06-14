@@ -17,8 +17,9 @@ class ProfileSelf extends \Govpack\Blocks\Profile\Profile {
 	public $block_name = 'govpack/profile-self';
 	public $template   = 'profile-self';
 
-	public function block_build_path(): string {
-		return trailingslashit( GOVPACK_PLUGIN_BUILD_PATH . 'blocks/ProfileSelf' );
+
+	public function block_build_path() : string {
+		return $this->plugin->build_path('blocks/ProfileSelf');
 	}
 
 	/**
