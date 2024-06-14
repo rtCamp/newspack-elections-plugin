@@ -100,8 +100,40 @@ class Profile extends \Govpack\Core\Abstracts\Block {
 			"social" => ($this->attributes['showSocial'] && $this->profile['hasSocial']),
 			"bio" => ($this->attributes['showBio'] && $this->profile['bio']),
 			"labels" => (isset( $this->attributes['showLabels'] ) && ($this->attributes['showLabels']) ),
-			"links" => $this->should_show_links()
+			"links" => $this->should_show_links(),
+			"capitol_comms" => $this->should_show_comms("capitol"),
+			"district_comms" => $this->should_show_comms("district"),
+			"campaign_comms" => $this->should_show_comms("campaign"),
 		];
+	}
+
+	private function should_show_comms($group){
+
+		if($group === "capitol"){
+			$show_attr = "showCapitolCommunicationDetails";
+			$selected_attr = "selectedCapitolCommunicationDetails";
+		} elseif($group === "district"){
+			$show_attr = "showDistrictCommunicationDetails";
+			$selected_attr = "selectedDistrictCommunicationDetails";
+		} elseif($group === "campaign"){
+			$show_attr = "showCampaignCommunicationDetails";
+			$selected_attr = "selectedCampaignCommunicationDetails";
+		} else {
+			var_dump($group);
+		}
+
+		
+		if(!isset($this->attributes[$show_attr]) || !isset($this->attributes[$selected_attr]) || empty($this->attributes[$selected_attr]) || (!$this->attributes[$show_attr])){
+			return false;
+		}
+
+		$selected_attrs = array_filter($this->attributes[$selected_attr]);
+
+		if(empty($selected_attrs)){
+			return false;
+		}
+
+		return true;
 	}
 
 	private function should_show_Links(){
@@ -176,27 +208,34 @@ class Profile extends \Govpack\Core\Abstracts\Block {
 			],
 			[
 				"key" => "comms_capitol",
-				//"value" => gp_contact_info( 'Capitol', $this->profile['comms']['capitol'], $this->attributes['selectedCapitolCommunicationDetails'] ),
+				"value" => $this->profile['comms']['capitol'],
 				"label" => "Contact Info (Capitol)",
-				"shouldShow" => $this->attributes["showCapitolCommunicationDetails"]
+				"shouldShow" => $this->show("capital_comms"),
+				"show" => $this->attributes['selectedCapitolCommunicationDetails']
 			],
 			[
 				"key" => "comms_district",
 				//"value" => gp_contact_info( 'District', $this->profile['comms']['district'], $this->attributes['selectedDistrictCommunicationDetails'] ),
 				"label" => "Contact Info (District)",
-				"shouldShow" => $this->attributes["showDistrictCommunicationDetails"]
+				"value" => $this->profile['comms']['district'],
+				"shouldShow" => $this->show("district_comms"),
+				"show" => $this->attributes['selectedDistrictCommunicationDetails']
 			],
 			[
 				"key" => "comms_campaign",
 				//"value" => gp_contact_info( 'Campaign', $this->profile['comms']['campaign'], $this->attributes['selectedCampaignCommunicationDetails'] ),
+				"value" => $this->profile['comms']['campaign'],
 				"label" => "Contact Info (Campaign)",
-				"shouldShow" => $this->attributes["showCampaignCommunicationDetails"]
+				"shouldShow" => $this->show("campaign_comms"),
+				"show" => $this->attributes['selectedCampaignCommunicationDetails']
 			],
 			[
 				"key" => "comms_other",
 				//"value" => gp_contact_other( 'Other', $this->profile['comms']['other'], $this->attributes['selectedOtherCommunicationDetails'] ),
+				"value" => $this->profile['comms']['other'],
 				"label" => "Contact Info (Campaign)",
-				"shouldShow" => $this->attributes["showOtherCommunicationDetails"]
+				"shouldShow" => $this->show("other_comms"),
+				"show" => $this->attributes['selectedOtherCommunicationDetails']
 			],
 			[
 				"key" => "more_about",

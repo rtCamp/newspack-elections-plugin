@@ -22,7 +22,6 @@ if(empty($profile_data["social"])){
 				continue;
 			}
 
-			
 			?>
 			<li class="wp-block-govpack-profile__social_group">
 				<div class="wp-block-govpack-profile__label"><?php echo esc_html($group['label']);?>:</div>
@@ -30,7 +29,7 @@ if(empty($profile_data["social"])){
 					<?php
 						foreach ( $group['services'] as $service => $link ) {
 
-							if($link === ""){
+							if(!$link){
 								continue;
 							}
 

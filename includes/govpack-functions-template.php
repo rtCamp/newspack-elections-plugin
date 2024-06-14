@@ -461,6 +461,7 @@ function gp_social_media_row( $label, $links = [] ) {
  * @param array $links Data about the profile.
  * @param array $attrs Attributes from the Block.
  */
+/*
 function gp_contact_info( $label, $links, $attrs ) {
 	$outer_template = '
 	<div class="wp-block-govpack-profile__comms">
@@ -540,6 +541,7 @@ function gp_contact_info( $label, $links, $attrs ) {
 
 	return sprintf( $outer_template, $label, $content, $address ); 
 }
+*/
 
 /**
  * Utility Function that Outputs a Profiles's Contact Other
