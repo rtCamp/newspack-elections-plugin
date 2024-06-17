@@ -58,3 +58,10 @@ if ( ! function_exists( 'gp_doing_it_wrong' ) ) {
 		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }
+
+if(!function_exists("gp_deprecated")){
+	function gp_deprecated(string $function_name, string $version) : void {
+		$message = sprintf("The function <code>%s</code> has been deprecated from version <code>%s</code> and will be removed in an upcoming release.", $function, $version);
+		gp_doing_it_wrong( $function_name, $message, $version );
+	}
+}
