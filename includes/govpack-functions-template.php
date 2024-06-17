@@ -328,12 +328,12 @@ if(!function_exists("gp_get_photo_styles")){
 			"height" => (isset($attributes['avatarSize']) ? esc_attr($attributes['avatarSize'] . "px") : false)
 		);
 
-		return gp_style_attr_generator($rules);
+		return gp_style_attribute_generator($rules);
 	}
 }
 
-if(!function_exists("gp_style_attr_generator")){
-	function gp_style_attr_generator($rules){
+if(!function_exists("gp_style_attribute_generator")){
+	function gp_style_attribute_generator($rules){
 		// filter the rules where the getter returns false;
 		$rules = array_filter($rules);
 
