@@ -104,6 +104,7 @@ class Profile extends \Govpack\Core\Abstracts\Block {
 			"capitol_comms" => $this->should_show_comms("capitol"),
 			"district_comms" => $this->should_show_comms("district"),
 			"campaign_comms" => $this->should_show_comms("campaign"),
+			"profile_link" => (isset( $this->attributes['showProfileLink']) && $this->attributes['showProfileLink'])
 		];
 	}
 
@@ -136,7 +137,7 @@ class Profile extends \Govpack\Core\Abstracts\Block {
 		return true;
 	}
 
-	private function should_show_Links(){
+	private function should_show_links(){
 		if(isset($this->attributes['showOtherLinks'])){
 			return $this->attributes['showOtherLinks'];
 		}
@@ -153,6 +154,47 @@ class Profile extends \Govpack\Core\Abstracts\Block {
 		}
 	
 		return false;
+	}
+
+	function get_profile_links(){
+		
+		if(!isset($this->profile['links'])){
+			return [];
+		}
+
+		if(empty($this->profile['links'])){
+			return [];
+		}
+
+		
+		$links = apply_filters("govpack_profile_links", $this->profile['links'] ?? [], $this->profile["id"], $this->profile );
+		foreach($links as &$link){
+
+			$link = apply_filters("govpack_profile_link", $link, $this->profile["id"], $this->profile );
+
+			$link_attrs = array_filter($link, function($value, $key){
+				if(($value === null) || ($value === "")){
+					return false;
+				}
+
+				if(($key === "text") || ($key === "meta")){
+					return false;
+				}
+				
+				if(is_array($value) && (empty($value))){
+					return false;
+				}
+
+				return true;
+
+			}, ARRAY_FILTER_USE_BOTH);
+
+			$link["src"] = sprintf("<a %s>%s</a>", gp_normalise_html_element_args($link_attrs), $link["text"]);
+			
+		}
+
+		return $links;
+
 	}
 
 	public function rows(){
@@ -239,8 +281,8 @@ class Profile extends \Govpack\Core\Abstracts\Block {
 			],
 			[
 				"key" => "more_about",
-				//"value" => gp_maybe_link( sprintf('More About %s', $this->profile['name']['name']), $this->profile['link'], isset($this->attributes['showProfileLink']) && $this->attributes['showProfileLink']),
-				"shouldShow" => (isset($this->attributes['showProfileLink']) && $this->attributes['showProfileLink'])
+				
+				"shouldShow" => $this->show("profile_link")
 			],
 			[
 				"key" => "links",

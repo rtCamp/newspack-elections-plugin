@@ -34,6 +34,15 @@ foreach($profile_block->rows() as $index => $row){
 					case "comms_campaign" :
 						gp_get_block_part("blocks/parts/row", "contact", $attributes, $content, $block, ["row" => $row]);
 						break;
+					case "comms_other" :
+						echo "other";
+						break;
+					case "links" :
+						gp_get_block_part("blocks/parts/row", "links", $attributes, $content, $block, $extra);
+						break;
+					case "more_about" :
+						gp_get_block_part("blocks/parts/row", "more-link", $attributes, $content, $block, $extra);
+						break;
 					default:
 						if(isset($row["value"]) && $row["value"] ){
 							echo $row["value"];
