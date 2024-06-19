@@ -325,3 +325,78 @@ if(!function_exists("gp_social_media_row")){
 		return sprintf( $outer_template, $label, $content ); 
 	}
 }
+
+
+if(!function_exists("gp_the_profile_links")){
+	function gp_the_profile_links($profile_data, $attributes){
+		gp_deprecated("gp_the_profile_links", "1.1");
+		$links = gp_get_profile_links($profile_data, $attributes);
+		foreach($links as $key => &$link){
+			$link["show"] = gp_should_show_link($key, $attributes);
+		}	
+
+		$links = array_filter($links, function($link, $key){
+			return $link["show"];
+		}, ARRAY_FILTER_USE_BOTH );
+
+		if(count($links) <= 0){
+			return "";
+		}
+
+
+		ob_start();
+		?>
+		<ul class="govpack-vertical-list">
+			<?php foreach($links as &$link){ ?>
+				<li><?php echo $link['src']; ?></li>
+			<?php } ?>
+		</ul>
+		<?php
+		return ob_get_clean();
+	}
+}
+
+if(!function_exists("gp_get_profile_links")){
+	function gp_get_profile_links($profile_data, $attributes){
+		
+		gp_deprecated("gp_get_profile_links", 1.1);
+
+		if(!isset($profile_data['links'])){
+			return [];
+		}
+
+		if(empty($profile_data['links'])){
+			return [];
+		}
+
+		
+		$links = apply_filters("govpack_profile_links", $profile_data['links'] ?? [], $profile_data["id"], $profile_data );
+		foreach($links as &$link){
+
+			$link = apply_filters("govpack_profile_link", $link, $profile_data["id"], $profile_data );
+
+			$link_attrs = array_filter($link, function($value, $key){
+				if(($value === null) || ($value === "")){
+					return false;
+				}
+
+				if(($key === "text") || ($key === "meta")){
+					return false;
+				}
+				
+				if(is_array($value) && (empty($value))){
+					return false;
+				}
+
+				return true;
+
+			}, ARRAY_FILTER_USE_BOTH);
+
+			$link["src"] = sprintf("<a %s>%s</a>", gp_normalise_html_element_args($link_attrs), $link["text"]);
+			
+		}
+
+		return $links;
+
+	}
+}

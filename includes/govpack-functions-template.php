@@ -97,24 +97,27 @@ if(!function_exists("gp_line_attributes")){
 	}
 }
 
- function gp_normalise_html_element_args($elm_attributes){
+if(!function_exists("gp_should_show_link")){
+	function gp_should_show_link($key, $attributes ){
+		if(!isset($attributes['showOtherLinks'])){
+			return false;
+		}
 
-	$normalized_attributes = array();
-	foreach ( $elm_attributes as $key => $value ) {
-		$normalized_attributes[] = $key . '="' . esc_attr( $value ) . '"';
+		if(
+			(isset($attributes['selectedLinks'])) &&
+			(isset($attributes['selectedLinks'][$key])) &&
+			($attributes['selectedLinks'][$key] === false)
+		){
+			return false;
+		}
+
+		return true;
+
 	}
+}
 
-	$elm_attributes = implode( ' ', $normalized_attributes );
-
-	return trim($elm_attributes);
- }
-
-
-
-
-
-if ( ! function_exists( 'gp_get_photo_styles' ) ) {
-	function gp_get_photo_styles( $attributes ) {
+if(!function_exists("gp_get_photo_styles")){
+	function gp_get_photo_styles($attributes){
 
 		// CSS props to embed with a value getter or boolean.
 		$rules = [
