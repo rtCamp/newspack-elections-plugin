@@ -14,8 +14,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class ProfileSelf extends \Govpack\Blocks\Profile\Profile {
 
-	public $block_name = "govpack/profile-self";
-	public $template = "profile-self";
+	public $block_name = 'govpack/profile-self';
+	public $template   = 'profile-self';
 
 
 	public function block_build_path() : string {
@@ -35,11 +35,9 @@ class ProfileSelf extends \Govpack\Blocks\Profile\Profile {
 
 		
 		return $this->handle_render( $attributes, $content, $block );
-
 	}
 
-	public function disable_block( $allowed_blocks, $editor_context ){
-		return ($editor_context->post->post_type !== "govpack_profiles");	
+	public function disable_block( $allowed_blocks, $editor_context ) {
+		return ( $editor_context->post->post_type !== 'govpack_profiles' );   
 	}
-
 }   

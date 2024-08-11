@@ -2,36 +2,35 @@
 
 namespace Govpack\Core\Admin;
 
-class Permalink_Settings{
+class Permalink_Settings {
 
 	private $permalinks;
 	private $base_slug;
 
-	private $option_name = "govpack_permalinks";
+	private $option_name = 'govpack_permalinks';
 
-	public function __construct(){
+	public function __construct() {
 		$this->add_permalink_settings_section();
 		$this->handle_save();
 
-		$this->base_slug = "guide";
-		
+		$this->base_slug = 'profile';
 	}
 
-	public static function hooks(){
+	public static function hooks() {
 		new self();
 	}
 
-	public function defaults(){
+	public function defaults() {
 		return [
-			"profile_base" => ''
+			'profile_base' => '',
 		];
 	}
 
-	public function get_permalinks(){
-		return (array) get_option( $this->option_name, $this->defaults());
+	public function get_permalinks() {
+		return (array) get_option( $this->option_name, $this->defaults() );
 	}
 
-	public function update_permalinks(){
+	public function update_permalinks() {
 		update_option( $this->option_name, $this->permalinks );
 	}
 
@@ -42,7 +41,7 @@ class Permalink_Settings{
 	 * 
 	 * Sourced from WooCommerce https://github.com/woocommerce/woocommerce/blob/c8202bc72943acfa2caa78be6337c23768b815cd/plugins/woocommerce/includes/wc-formatting-functions.php#L77
 	 */
-	private static function sanitize_permalink($permalink){
+	private static function sanitize_permalink( $permalink ) {
 		global $wpdb;
 
 		$permalink = $wpdb->strip_invalid_text_for_column( $wpdb->options, 'option_value', $permalink ?? '' );
@@ -69,24 +68,32 @@ class Permalink_Settings{
 			return;
 		}
 
-		if(!isset($_POST, $_POST['govpack_profile_permalink'])){
-			return;
-		}
-		
-		if( ! wp_verify_nonce( wp_unslash( $_POST['govpack-permalinks-nonce'] ), 'govpack-permalinks' )) {
+		if ( ! isset( $_POST, $_POST['govpack_profile_permalink'] ) ) {
 			return;
 		}
 
-		$this->save();
+		if ( ! check_admin_referer( 'govpack-permalinks', 'govpack-permalinks-nonce' ) ) {
+			return;
+		}
+
+
+		$profile_permalink_base = isset( $_POST['govpack_profile_permalink'] ) ? 
+			sanitize_text_field( wp_unslash( $_POST['govpack_profile_permalink'] ) ) :
+			'';
+
+		$profile_permalink_structure = ( ( $profile_permalink_base ) && isset( $_POST['govpack_profile_permalink_structure'] ) ) ? 
+			sanitize_text_field( wp_unslash( $_POST['govpack_profile_permalink_structure'] ) ) :
+			false;
+
+		$this->save(
+			$profile_permalink_base,
+			$profile_permalink_structure
+		);
 	}
 
-	public function save() {
+	public function save( $profile_permalink_base, $profile_permalink_structure = false ) {
 
-		
-		$profile_base = isset( $_POST['govpack_profile_permalink'] ) ? wp_unslash( $_POST['govpack_profile_permalink'] )  : ''; // WPCS: input var ok, sanitization ok.
-
-		if($profile_base === "custom"){
-			if ( isset( $_POST['govpack_profile_permalink_structure'] ) ) { // WPCS: input var ok.
+		if ( ( $profile_permalink_base === 'custom' ) && ( $profile_permalink_structure ) ) {
 				
 				// Taken from WC but with breaking down to understand.
 				// Working form the Inner Most call outwards
@@ -95,94 +102,103 @@ class Permalink_Settings{
 				// str_replace('#'... removes # characters that would cause everything after them to be treated as anchors
 				// preg_replace( '#/+#', '/', '/' .... replaces every forward slash (or group of forward slashes) with a single '/'
 				// eg / => /, // => /, /// => / . Note it adds a / at the start of the string to make sure there is always at least one /
-				$profile_base = preg_replace( '#/+#', '/', '/' . str_replace( '#', '', trim( wp_unslash( $_POST['govpack_profile_permalink_structure'] ) ) ) ); // WPCS: input var ok, sanitization ok.
+				$profile_permalink_base = preg_replace( '#/+#', '/', '/' . str_replace( '#', '', trim( $profile_permalink_structure ) ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		
-			} else {
-				$profile_base = '/';
-			}
-
-		} elseif ( empty( $profile_base ) ) {
-			$profile_base = 'profile';
+		} elseif ( empty( $profile_permalink_base ) ) {
+			$profile_permalink_base = 'profile';
 		}
+		//phpcs:enable WordPress.Security.NonceVerification.Missing
+		
 
-		$this->permalinks = $this->get_permalinks();
-		$this->permalinks['profile_base'] = self::sanitize_permalink($profile_base);
+		$this->permalinks                 = $this->get_permalinks();
+		$this->permalinks['profile_base'] = self::sanitize_permalink( $profile_permalink_base );
+
 
 		$this->update_permalinks();
-
 	}
 
 	
 
 	public function add_permalink_settings_section() {
 
-		$setting_section_id = "govpack-permalink";
+		$setting_section_id = 'govpack-permalink';
 
 		\add_settings_section( 
 			$setting_section_id, 
 			__( 'Govpack Permalinks', 'govpack' ), 
-			array( $this, 'settings' ), 
+			[ $this, 'settings' ], 
 			'permalink' 
 		);
 	}
 
 	public function settings() {
 		wp_nonce_field( 'govpack-permalinks', 'govpack-permalinks-nonce' );
-		echo wp_kses_post( wpautop( sprintf( __( 'You may use a custom base for your Govpack Profile\'s URLs here. For example, using <code>candidate</code> would make your profile links like <code>%scandidate/jo-smith/</code>.', 'govpack' ), esc_url( home_url( '/' ) ) ) ) );
+		echo wp_kses_post( wpautop( sprintf( 'You may use a custom base for your Govpack Profile\'s URLs here. For example, using <code>candidate</code> would make your profile links like <code>%scandidate/jo-smith/</code>.', esc_url( home_url( '/' ) ) ) ) );
 		
 		$this->permalinks = $this->get_permalinks();
-		
-		$structures = array(
-			0 => '',
-			1 => '/' . trailingslashit( $this->base_slug ),
-		);
 
+	
+		$structures = [
+			0 => [
+				'label' => 'Profile Base (Default)',
+				'slug'  => $this->base_slug,
+			],
+			1 => [
+				'label' => 'Guide Base',
+				'slug'  => 'guide',
+			],
+		];
+
+		$current_base = $this->permalinks['profile_base'];
+		$is_custom    = ! in_array( $current_base, wp_list_pluck( $structures, 'slug' ), true );
+		$custom_base  = ( $is_custom ? $current_base : '' );
+
+		// saving the permalinks adds a / at the start, this matches any number of / at the start of the slug and removes it
+		if ( str_starts_with( $custom_base, '/' ) ) {
+			$custom_base = preg_replace( '/^([\/]+)/m', '', trim( $custom_base ) ); 
+		}
 		?>
 		<table class="form-table">
 		<tbody>
+			<?php
+			foreach ( $structures as $structure ) {
+				?>
 			<tr>
 				<th>
 					<label>
-						<input name="govpack_profile_permalink" type="radio" value="<?php echo esc_attr( $structures[0] ); ?>" class="tog" <?php checked( $structures[0], $this->permalinks['profile_base'] ); ?> /> 
-						<?php esc_html_e( 'Default', 'govpack' ); ?>
+						<input 
+							name="govpack_profile_permalink" 
+							type="radio" 
+							value="<?php echo esc_attr( $structure['slug'] ); ?>" class="tog" <?php checked( $structure['slug'], $current_base ); ?> /> 
+						<?php echo esc_html( $structure['label'] ); ?>
 					</label>
 				</th>
 				<td>
 					<code class="default-example">
-						<?php echo esc_html( home_url() ); ?>/profile/jo-smith/
+						<?php echo esc_url( sprintf( '%s/%s/joe-smith', home_url(), $structure['slug'] ) ); ?>
 					</code>
 				</td>
 			</tr>
-
+	<?php } ?>
+			
 			<tr>
 				<th>
 					<label>
-						<input name="govpack_profile_permalink" type="radio" value="<?php echo esc_attr( $structures[1] ); ?>" class="tog" <?php checked( $structures[1], $this->permalinks['profile_base'] ); ?> /> 
-						<?php esc_html_e( 'Guide Base', 'govpack' ); ?>
-					</label>
-				</th>
-				<td>
-					<code class="default-example">
-						<?php echo esc_html( home_url() ); ?>/guide/jo-smith/
-					</code>
-				</td>
-			</tr>
-
-			<tr>
-				<th>
-					<label>
-						<input name="govpack_profile_permalink" type="radio" value="custom" class="tog" <?php checked( in_array( $this->permalinks['profile_base'], $structures, true ), false ); ?> /> 
+						<input name="govpack_profile_permalink" type="radio" value="custom" class="tog" <?php checked( $is_custom, true ); ?> /> 
 						<?php esc_html_e( 'Custom Base', 'govpack' ); ?>
 					</label>
 				</th>
 				<td>
-					<input name="govpack_profile_permalink_structure" id="govpack_profile_permalink_structure" type="text" value="<?php echo esc_attr( $this->permalinks['profile_base'] ? trailingslashit( $this->permalinks['profile_base'] ) : '' ); ?>" class="regular-text code"> <br />
+					<input 
+						name="govpack_profile_permalink_structure" 
+						id="govpack_profile_permalink_structure" 
+						type="text" value="<?php echo esc_attr( $custom_base ); ?>" class="regular-text code"> <br />
 					<span class="description"><?php esc_html_e( 'Enter a custom base to use for GovPack Profiles. If not set the base of profile will be used.', 'govpack' ); ?></span>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 
-	<?php
+		<?php
 	}
 }

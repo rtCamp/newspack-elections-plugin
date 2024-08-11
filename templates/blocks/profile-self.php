@@ -26,23 +26,36 @@ $container_classes = gp_classnames(
 		'wp-block-govpack-profile-self__container--center' => ( 'is-styled-center' === $attributes['className'] )
 	]);
 
+
 ?>
 
-<aside <?php echo get_block_wrapper_attributes([
-	'class' => gp_classnames("", [
-		//( isset( $attributes['align'] ) ? 'align' . $attributes['align'] : false ),
-		"wp-block-govpack-profile--show-labels" => $profile_block->show("labels")
-	] ),
-	'style' => gp_style_attribute_generator([
-		//"max-width" => $available_widths[ $attributes['width'] ?? 'auto' ]['maxWidth']
-	])
-]); ?>>
-	<!-- start block__container -->
+
+
+<aside 
+<?php
+echo get_block_wrapper_attributes(
+	[
+		'class' => gp_classnames(
+			'',
+			[
+				( ( isset( $attributes['showLabels'] ) && ( $attributes['showLabels'] ) ) ? 'wp-block-govpack-profile--show-labels' : false ),
+			] 
+		),
+		'style' => gp_style_attr_generator(
+			[]
+		),
+	]
+);
+?>
+>
+	<!-- start __container -->
 	<div class="<?php echo esc_attr( $container_classes ); ?>">	
-		<?php gp_get_block_part("blocks/parts/profile", "photo", $attributes, $content, $block, $extra);  ?>
-		<dl class="wp-block-govpack-profile__info">
-			<?php gp_get_block_part("blocks/parts/profile", "header", $attributes, $content, $block, $extra);  ?>
-			<?php gp_get_block_part("blocks/parts/profile", "rows", $attributes, $content, $block, $extra);  ?>
+		<?php gp_get_block_part( 'blocks/parts/profile', 'photo', $attributes, $content, $block, $extra ); ?>
+		<dl class="wp-block-govpack-profile__info ">
+			<?php gp_get_block_part( 'blocks/parts/profile', 'header', $attributes, $content, $block, $extra ); ?>
+			<?php gp_get_block_part( 'blocks/parts/profile', 'rows', $attributes, $content, $block, $extra ); ?>
+
+			
 		</dl>
 	</div>
 	<!-- end block__container -->

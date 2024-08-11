@@ -29,12 +29,7 @@ abstract class Abstract_Importer {
 	public static $import_group = null;
 
 	/**
-	 * How Does the importer work?
-	 * 1. Upload the file to the server
-	 * 2. Check the file is a valid wxr
-	 * 3. Split the file up into actions in action scheduler
-	 * 4. request to see how many actions to do
-	 * 5. action scheduker runs
+	 * Returns a new Importer based on the calling class
 	 */
 	public static function make() {
 		return new static();
@@ -65,7 +60,6 @@ abstract class Abstract_Importer {
 		}
 
 		return [ 'status' => 'not_running' ];
-
 	}
 
 	/**

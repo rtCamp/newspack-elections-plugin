@@ -2,7 +2,7 @@ import { PanelRow } from "@wordpress/components";
 import { useDispatch, useSelect } from '@wordpress/data';
 
 import {GovPackSidebarPanel} from "./../../../components/sidebar-panel"
-import {PanelTextControl, PanelDateControl} from "./../Controls"
+import {PanelTextControl, PanelDateControl, PanelTextareaControl} from "./../Controls"
 
 import {usePanel} from './usePanel'
 
@@ -112,6 +112,10 @@ export const AboutPanel = (props) => {
             </PanelRow>
 
 			<PanelRow>
+                <PanelTextareaControl meta={meta} label = "Endorsements" meta_key="endorsements" onChange={setPostMeta} />
+            </PanelRow>
+
+			<PanelRow>
                 <PanelDateControl meta={meta} label = "Date of Birth" meta_key="date_of_birth" onChange={setPostMeta} />
             </PanelRow>
 
@@ -119,11 +123,22 @@ export const AboutPanel = (props) => {
                 <PanelDateControl meta={meta} label = "Date of Death" meta_key="date_of_death" onChange={setPostMeta} />
             </PanelRow>
 
+			
+
+			{/** 
+			<PanelRow>
+                <PanelTaxonomyControl 
+					taxonomy="govpack_party" 
+					label = "Party"
+					onChange = {setSingleTerm}
+				/>
+            </PanelRow>
+
 			<PanelRow>
                 <PanelTextControl meta={meta} label = "District" meta_key="district" onChange={setPostMeta} />
             </PanelRow>
 
-
+				*/}
         </GovPackSidebarPanel>
     )
 }

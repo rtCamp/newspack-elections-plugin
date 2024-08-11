@@ -25,10 +25,36 @@ if(count($links) <= 0){
 }
 
 ?>
-<ul class="govpack-vertical-list">
-	<?php foreach($links as &$link){ ?>
-		<li><?php echo wp_kses_post($link['src']); ?></li>
-	<?php } ?>
-</ul>
+	<div class="wp-block-govpack-profile__comms">
+		<div class="wp-block-govpack-profile__label">Links:</div>
+			<ul class="wp-block-govpack-profile__comms-icons govpack-inline-list">
+			<?php
+				foreach ( $links as &$link ) {
+					
+					if ( ! gp_icon_exists( $link['slug'] ) ) {
+						continue;
+					}
+					
+					$classes = [
+						'wp-block-govpack-profile__contact',
+						'wp-block-govpack-profile__contact--hide-label',
+						"wp-block-govpack-profile__contact--{$link['slug']}",
+					];
+					$classes = join( ' ', $classes );
 
+					?>
+					<li class="<?php echo esc_attr( $classes ); ?>">
+						<a href="<?php echo esc_url( $link['href'] ); ?>" title="Link to <?php echo esc_attr( $link['text'] ); ?>">
+							<span class="wp-block-govpack-profile__contact__icon wp-block-govpack-profile__contact__icon--<?php echo esc_attr( $link['slug'] ); ?>">
+								<?php echo esc_svg( gp_get_icon( $link['slug'] ) ); ?>
+							</span>
+							<span class="wp-block-govpack-profile__contact__label">
+								<?php echo esc_html( $link['text'] ); ?>
+							</span>
+						</a>
+					</li>
+				<?php } ?>
+			</ul>
+		</div>
+<?php
 

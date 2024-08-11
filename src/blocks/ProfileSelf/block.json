@@ -157,6 +157,10 @@
 			"type": "object",
 			"default": {}
 		},
+		"showEndorsements" : {
+			"type": "boolean",
+			"default": true
+		},
 		"selectedLinks": {
 			"type": "object",
 			"default": {

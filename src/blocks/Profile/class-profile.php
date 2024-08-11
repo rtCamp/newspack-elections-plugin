@@ -16,8 +16,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class Profile extends \Govpack\Core\Abstracts\Block {
 
-	public $block_name = "govpack/profile";
-	public $template = "profile";
+	public $block_name = 'govpack/profile';
+	public $template   = 'profile';
 
 	private $show = null;
 	private $profile = null;
@@ -29,7 +29,7 @@ class Profile extends \Govpack\Core\Abstracts\Block {
 		$this->plugin = $plugin;
 	}
 
-	public function disable_block( $allowed_blocks, $editor_context ){
+	public function disable_block( $allowed_blocks, $editor_context ) {
 		return false;
 	}
 
@@ -38,7 +38,7 @@ class Profile extends \Govpack\Core\Abstracts\Block {
 	}
 	
 	/**
-	 * Shortcode handler for [govpack].
+	 * Block render handler for .
 	 *
 	 * @param array  $attributes    Array of shortcode attributes.
 	 * @param string $content Post content.
@@ -67,7 +67,7 @@ class Profile extends \Govpack\Core\Abstracts\Block {
 	 * @param string $content Any HTML or content redurned form the block.
 	 * @param WP_Block $template The filename of the template-part to use.
 	 */
-	public function handle_render(array $attributes, string $content, WP_Block $block ) {
+	public function handle_render( array $attributes, string $content, WP_Block $block ) {
 
 		$this->profile = \Govpack\Core\CPT\Profile::get_data( $attributes['profileId'] );
 	
@@ -307,8 +307,7 @@ class Profile extends \Govpack\Core\Abstracts\Block {
 		return $this->show[$key];
 	}
 
-	public function template() : string {
-		return sprintf("blocks/%s", $this->template);
+	public function template(): string {
+		return sprintf( 'blocks/%s', $this->template );
 	}
-
 }

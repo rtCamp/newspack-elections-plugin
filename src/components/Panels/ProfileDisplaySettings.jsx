@@ -53,7 +53,7 @@ const ProfileDisplaySettings = (props) => {
 			
 		},{
 			label: 'Display Status',
-			attr: "showParty",
+			attr: "showStatus",
 			
 		},{
 			label: 'Display State',
@@ -61,6 +61,9 @@ const ProfileDisplaySettings = (props) => {
 		},{
 			label : 'Display Social',
 			attr : "showSocial"
+		},,{
+			label : 'Display Endorsements',
+			attr : "showEndorsements"
 		},
 		{
 			label : 'Display Capitol Communications',
@@ -86,7 +89,6 @@ const ProfileDisplaySettings = (props) => {
 			shouldDisplay : showLinkControl
 		}
 	]
-
 
 	
 	const controlDefaults = {

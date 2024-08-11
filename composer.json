@@ -3,30 +3,41 @@
   "description": "Govpack",
   "type": "wordpress-plugin",
   "require": {
-	"php":">=8.1.2",
     "pablo-sg-pacheco/wp-namespace-autoloader": "dev-master#b50050f",
-    "woocommerce/action-scheduler": "^3.4",
+    "woocommerce/action-scheduler": "^3.8",
     "gargron/fileupload": "~1.4.0",
     "league/csv": "^9.15.0",
     "zerodahero/address-normalization": "^2.1",
-    "monolog/monolog": "^2.8",
-    "gamajo/template-loader": "^1.3"
+    "gamajo/template-loader": "^1.3",
+	"brianhenryie/strauss": "^0.17.0",
+    "z4kn4fein/php-semver": "^3.0",
+    "nette/php-generator": "^4.1",
+    "monolog/monolog": "^2.9"
   },
   "require-dev": {
-    "automattic/vipwpcs": "^2.2",
-    "wp-coding-standards/wpcs": "^2.3",
-    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+    "automattic/vipwpcs": "^3.0.0",
+    "wp-coding-standards/wpcs": "^3.1.0",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
     "phpcompatibility/phpcompatibility-wp": "^2.1.1",
-    "brianhenryie/strauss": "^0.17.0",
+	"squizlabs/php_codesniffer": "^3.0",
     "php-stubs/wp-cli-stubs": "^2.10",
-    "captainhook/captainhook-phar": "^5.23"
+    "captainhook/captainhook-phar": "^5.23",
+    "vimeo/psalm": "^5.25.0",
+    "humanmade/psalm-plugin-wordpress": "^3.1"
   },
   "license": "GPL-2.0-or-later",
   "autoload": {
     "psr-4": {
 		"Govpack\\" : "includes/",
 		"Govpack\\Blocks\\" : "src/blocks/"
-    }
+    },
+	"files" : [
+		"includes/govpack-functions-template.php",
+		"includes/govpack-functions.php"
+	]
+  },
+  "autoload-dev": {
+	"classmap": ["bin/scripts/"]
   },
   "scripts": {
     "prefix-namespaces": [
@@ -50,12 +61,23 @@
 	"githooks:refresh":[
 		"@githooks:uninstall",
 		"@githooks:install"	
-	]
+	],
+	"qa:psalm":[
+		"psalm"
+	],
+	"qa:cs":[
+		"phpcs"
+	],
+	"qa:cbf":[
+		"phpcbf"
+	],
+	"generate_version": "\\Govpack\\Scripts\\GenerateVersionFileCommand"
   },
   "scripts-descriptions": {
 	"githooks:install" : "Add new hook files to `.git/hooks` without disturbing existing hooks.",
 	"githooks:uninstall" : "Removes all hooks in `.git/hooks`.",
-	"githooks:refresh" : "Removes all hooks from `.git/hooks` then re-installs"
+	"githooks:refresh" : "Removes all hooks from `.git/hooks` then re-installs",
+	"qa:psalm" : "Runs the Psalm Static Analysis as defined in psalm.xml"
   },
   "extra": {
     "strauss": {

@@ -9,6 +9,6 @@ $profile_block = $extra["profile_block"];
 
 
 if ( $profile_block->show('bio') ) {
-	echo $profile_data['bio'];
+	echo wp_kses_post($profile_data['bio']);
 } 
 			
