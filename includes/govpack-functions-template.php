@@ -33,35 +33,36 @@ if ( ! function_exists( 'gp_get_available_widths' ) ) {
 				'maxWidth' => 'none',
 			],
 		];
- }
+	}
 }
 
-if(!function_exists("gp_classnames")){
-	function gp_classnames(string|array $classnames = "", array $candidates = [] ){
+if ( ! function_exists( 'gp_classnames' ) ) {
+	function gp_classnames( string|array $classnames = '', array $candidates = [] ) {
 
-		if(is_array(($classnames))){
-			$classnames = trim(join(" ", $classnames));
+		if ( is_array( ( $classnames ) ) ) {
+			$classnames = trim( join( ' ', $classnames ) );
 		}
 
 		$selection = [];
-		foreach($candidates as $key => $value){
-			if(is_int($key)){
+		foreach ( $candidates as $key => $value ) {
+			if ( is_int( $key ) ) {
 				$selection[] = $value;
 				continue;
 			}
 
-			if($value === true){
+			if ( $value === true ) {
 				$selection[] = $key;
 				continue;
-			}
-			
+			}       
 		}
 		
 
-		return trim($classnames . " ". join(
-			" ",
-			$selection
-		)); 
+		return trim(
+			$classnames . ' ' . join(
+				' ',
+				$selection
+			)
+		); 
 	}
 }
 
@@ -124,9 +125,9 @@ if ( ! function_exists( 'gp_get_show_data' ) ) {
 
 
 
-if(!function_exists("gp_should_show_link")){
-	function gp_should_show_link($key, $attributes ){
-		if(!isset($attributes['showOtherLinks'])){
+if ( ! function_exists( 'gp_should_show_link' ) ) {
+	function gp_should_show_link( $key, $attributes ) {
+		if ( ! isset( $attributes['showOtherLinks'] ) ) {
 			return false;
 		}
 
@@ -183,7 +184,7 @@ if ( ! function_exists( 'gp_style_attr_generator' ) ) {
  * @param string  $url The URL to link to.
  * @param boolean $use_link Condition control, outputs link if true.
  */
-if(!function_exists("gp_maybe_link")){
+if ( ! function_exists( 'gp_maybe_link' ) ) {
 	function gp_maybe_link( $content, $url, $use_link ) {
 
 		if ( ! $use_link ) {
@@ -192,74 +193,6 @@ if(!function_exists("gp_maybe_link")){
 		return '<a href=' . esc_url( $url ) . '>' . $content . '</a>';
 	}
 }
-
-
-
-/*
-if ( ! function_exists( 'gp_the_profile_links' ) ) {
-	function gp_the_profile_links( $profile_data, $attributes ) {
-
-		
-		$links = gp_get_profile_links( $profile_data );
-
-		foreach ( $links as $key => &$link ) {
-			$link['show'] = gp_should_show_link( $key, $attributes );
-		}   
-
-		$links = array_filter(
-			$links,
-			function ( $link ) {
-				return $link['show'];
-			},
-			ARRAY_FILTER_USE_BOTH 
-		);
-
-		if ( count( $links ) <= 0 ) {
-			return '';
-		}
-
-		
-
-		ob_start();
-		?>
-		<div class="wp-block-govpack-profile__comms">
-			<div class="wp-block-govpack-profile__label">Links:</div>
-			<ul class="wp-block-govpack-profile__comms-icons govpack-inline-list">
-				<?php
-				foreach ( $links as &$link ) {
-					
-					if ( ! gp_icon_exists( $link['slug'] ) ) {
-						continue;
-					}
-					
-					$classes = [
-						'wp-block-govpack-profile__contact',
-						'wp-block-govpack-profile__contact--hide-label',
-						"wp-block-govpack-profile__contact--{$link['slug']}",
-					];
-					$classes = join( ' ', $classes );
-
-					?>
-					<li class="<?php echo esc_attr( $classes ); ?>">
-						<a href="<?php echo esc_url( $link['href'] ); ?>" title="Link to <?php echo esc_attr( $link['text'] ); ?>">
-							<span class="wp-block-govpack-profile__contact__icon wp-block-govpack-profile__contact__icon--<?php echo esc_attr( $link['slug'] ); ?>">
-								<?php echo esc_svg( gp_get_icon( $link['slug'] ) ); ?>
-							</span>
-							<span class="wp-block-govpack-profile__contact__label">
-								<?php echo esc_html( $link['text'] ); ?>
-							</span>
-						</a>
-					</li>
-				<?php } ?>
-			</ul>
-		</div>
-		<?php
-
-		return ob_get_clean();
-	}
-}
-*/
-
 
 
 if ( ! function_exists( 'gp_get_icons' ) ) {
@@ -438,7 +371,7 @@ if ( ! function_exists( 'gp_get_the_status_terms_list' ) ) {
 			return false;
 		}
 
-		$tags = array();
+		$tags = [];
 
 		foreach ( $terms as $term ) {
 			$tags[] = gp_get_the_term( $term );
