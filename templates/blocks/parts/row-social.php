@@ -34,21 +34,24 @@ if ( empty( $profile_data['social'] ) ) {
 							continue;
 						}
 
-						$classes = [
-							'wp-block-govpack-profile__contact',
-							'wp-block-govpack-profile__contact--hide-label',
-							"wp-block-govpack-profile__contact--{$service}",
-						];
-						$classes = join( ' ', $classes );
+						$row_classes = gp_classnames(
+							'wp-block-govpack-profile__contact', 
+							[ 
+								'wp-block-govpack-profile__contact--hide-label',
+								"wp-block-govpack-profile__contact--{$service}",
+							]
+						);
+						
 
-						$icon_classes = [
+						$icon_classes = gp_classnames(
 							'wp-block-govpack-profile__contact__icon',
-							"wp-block-govpack-profile__contact__icon--{$service}",
-						];
-
-						$icon_classes = join( ' ', $icon_classes );
+							[
+								"wp-block-govpack-profile__contact__icon--{$service}",
+							]
+						);
+	
 						?>
-							<li class="<?php echo esc_attr( $classes ); ?>">
+							<li class="<?php echo esc_attr( $row_classes ); ?>">
 								<a href="<?php echo esc_url( $social_link ); ?>" class="wp-block-govpack-profile__contact__link">
 									<span class="<?php echo esc_attr( $icon_classes ); ?>"><?php echo esc_svg( gp_get_icon( $service ) ); ?></span>
 									<span class="wp-block-govpack-profile__contact__label"><?php esc_html( $service ); ?></span>

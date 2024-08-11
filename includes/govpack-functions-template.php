@@ -221,6 +221,7 @@ if ( ! function_exists( 'gp_has_icon' ) ) {
  * @param array $links Data about the profile.
  * @param array $attrs Attributes from the Block.
  */
+/*
 if ( ! function_exists( 'gp_contact_info' ) ) {
 	function gp_contact_info( $label, $links, $attrs ) {
 		$outer_template = '
@@ -255,13 +256,14 @@ if ( ! function_exists( 'gp_contact_info' ) ) {
 				continue;
 			}
 
-			$classes = [
-				'wp-block-govpack-profile__contact',
+			$classes = gp_classnames('wp-block-govpack-profile__contact',[
 				'wp-block-govpack-profile__contact--hide-label',
 				"wp-block-govpack-profile__contact--{$service}",
-			];
+			]);
 
-			$classes = join( ' ', $classes );
+			var_dump($classes);
+			die();
+			//$classes = join( ' ', $classes );
 
 			$icon         = '<span class="wp-block-govpack-profile__contact__icon wp-block-govpack-profile__contact__icon--{%s}">%s</span>';
 			$contact_icon = sprintf( $icon, $service, gp_get_icon( $service ) );
@@ -302,7 +304,7 @@ if ( ! function_exists( 'gp_contact_info' ) ) {
 		return sprintf( $outer_template, $label, $content, $address ); 
 	}
 }
-
+*/
 /**
  * Utility Function that Outputs a Profiles's Contact Other
  * 

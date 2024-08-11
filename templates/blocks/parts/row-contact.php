@@ -9,13 +9,21 @@ if ( ! $row['shouldShow'] ) {
 
 $address = '';
 if ( $row['show']['showAddress'] && $row['value']['address'] ) {
-	$classes = [
+	$row_classes = gp_classnames(
 		'wp-block-govpack-profile__contact',
-		'wp-block-govpack-profile__contact--hide-label',
-		'wp-block-govpack-profile__contact--address',
-	];
-	$classes = join( ' ', $classes );   
-	$address = sprintf( '<address class="%s">%s</address>', $classes, $row['value']['address'] );
+		[
+			'wp-block-govpack-profile__contact--hide-label',
+			'wp-block-govpack-profile__contact--address',
+		]
+	);
+
+		ob_start();
+	?>
+		<address class="<?php esc_attr( $row_classes ); ?>">
+			<?php echo wp_kses_post( $row['value']['address'] ); ?>
+		</address>
+		<?php
+		$address = ob_get_clean();
 }
 
 $services = [ 
@@ -39,13 +47,15 @@ foreach ( $services as $service => $attr ) {
 		continue;
 	}
 
-	$classes = [
+	$row_classes = gp_classnames(
 		'wp-block-govpack-profile__contact',
-		'wp-block-govpack-profile__contact--hide-label',
-		"wp-block-govpack-profile__contact--{$service}",
-	];
+		[
+			'wp-block-govpack-profile__contact--hide-label',
+			"wp-block-govpack-profile__contact--{$service}",
+		]
+	);
 
-	$classes = esc_attr( join( ' ', $classes ) );
+	$row_classes = esc_attr( $row_classes );
 
 	$icon         = '<span class="wp-block-govpack-profile__contact__icon wp-block-govpack-profile__contact__icon--{%s}">%s</span>';
 	$contact_icon = sprintf( $icon, esc_attr( $service ), esc_svg( gp_get_icon( $service ) ) );
@@ -59,7 +69,7 @@ foreach ( $services as $service => $attr ) {
 	}
 
 	$content .=  
-		"<li class=\"{$classes} \">
+		"<li class=\"{$row_classes} \">
 			<a href=\"{$protocol}{$row["value"][$service]}\" class=\"wp-block-govpack-profile__contact__link\">
 				{$contact_icon}
 				<span class=\"wp-block-govpack-profile__contact__label\">{$service}</span>

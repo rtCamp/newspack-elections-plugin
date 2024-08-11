@@ -39,15 +39,17 @@ if ( count( $links ) <= 0 ) {
 					continue;
 				}
 					
-				$classes = [
+				$row_classes = gp_classnames(
 					'wp-block-govpack-profile__contact',
-					'wp-block-govpack-profile__contact--hide-label',
-					"wp-block-govpack-profile__contact--{$profile_link['slug']}",
-				];
-				$classes = join( ' ', $classes );
+					[
+						'wp-block-govpack-profile__contact--hide-label',
+						"wp-block-govpack-profile__contact--{$profile_link['slug']}",
+					]
+				);
+				
 
 				?>
-					<li class="<?php echo esc_attr( $classes ); ?>">
+					<li class="<?php echo esc_attr( $row_classes ); ?>">
 						<a href="<?php echo esc_url( $profile_link['href'] ); ?>" title="profile_Link to <?php echo esc_attr( $profile_link['text'] ); ?>">
 							<span class="wp-block-govpack-profile__contact__icon wp-block-govpack-profile__contact__icon--<?php echo esc_attr( $profile_link['slug'] ); ?>">
 							<?php echo esc_svg( gp_get_icon( $profile_link['slug'] ) ); ?>
