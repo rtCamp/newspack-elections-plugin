@@ -7,10 +7,10 @@
  * @param string  $value The value to output.
  * @param boolean $display Override to control if this row will output.
  */
-if(!function_exists("gp_row")){
+if ( ! function_exists( 'gp_row' ) ) {
 	function gp_row( $id, $value, $display ) {
 
-		gp_deprecated("gp_row", "1.1");
+		gp_deprecated( 'gp_row', '1.1' );
 
 		if ( ! $display ) {
 			return null;
@@ -22,101 +22,100 @@ if(!function_exists("gp_row")){
 
 		// No escaping here. $value here needs to handle HTML beyond what wp_kses can realistically handle. Escaping should be done before passing to this function.
 		echo '<div id="govpack-profile-block-' . $id . '" class="wp-block-govpack-profile__line wp-block-govpack-profile__line--' . $id . '">' . $value . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-
 	}
 }
 
 
-if(!function_exists("gp_get_profile_lines")){
-	function gp_get_profile_lines($attributes, $profile_data) {
+if ( ! function_exists( 'gp_get_profile_lines' ) ) {
+	function gp_get_profile_lines( $attributes, $profile_data ) {
 
-		gp_deprecated("gp_row", "1.1");
+		gp_deprecated( 'gp_row', '1.1' );
 
-		$show = gp_get_show_data($profile_data, $attributes);
+		$show  = gp_get_show_data( $profile_data, $attributes );
 		$lines = [ 
 		
 			[
-				"key" => "age",
-				"value" => esc_html($profile_data["age"]),
-				"label" => "Age",
-				"shouldShow" => $attributes["showAge"]
+				'key'        => 'age',
+				'value'      => esc_html( $profile_data['age'] ),
+				'label'      => 'Age',
+				'shouldShow' => $attributes['showAge'],
 			],
 			[
-				"key" => "leg_body",
-				"value" => esc_html($profile_data["legislative_body"]),
-				"label" => "Legislative Body",
-				"shouldShow" => $attributes["showLegislativeBody"]
+				'key'        => 'leg_body',
+				'value'      => esc_html( $profile_data['legislative_body'] ),
+				'label'      => 'Legislative Body',
+				'shouldShow' => $attributes['showLegislativeBody'],
 			],
 			[
-				"key" => "position",
-				"value" => esc_html($profile_data["position"]),
-				"label" => "Position",
-				"shouldShow" => $attributes["showPosition"]
+				'key'        => 'position',
+				'value'      => esc_html( $profile_data['position'] ),
+				'label'      => 'Position',
+				'shouldShow' => $attributes['showPosition'],
 			],
 			[
-				"key" => "party",
-				"value" => esc_html($profile_data["party"]),
-				"label" => "Party",
-				"shouldShow" => $attributes["showParty"]
+				'key'        => 'party',
+				'value'      => esc_html( $profile_data['party'] ),
+				'label'      => 'Party',
+				'shouldShow' => $attributes['showParty'],
 			],
 			[
-				"key" => "district",
-				"value" => esc_html($profile_data["district"]),
-				"label" => "District",
-				"shouldShow" => $attributes["showDistrict"]
+				'key'        => 'district',
+				'value'      => esc_html( $profile_data['district'] ),
+				'label'      => 'District',
+				'shouldShow' => $attributes['showDistrict'],
 			],
 			[
-				"key" => "state",
-				"value" => esc_html($profile_data["state"]),
-				"label" => "State",
-				"shouldShow" => $attributes["showState"]
+				'key'        => 'state',
+				'value'      => esc_html( $profile_data['state'] ),
+				'label'      => 'State',
+				'shouldShow' => $attributes['showState'],
 			],
 			[
-				"key" => "status",
-				"value" => esc_html($profile_data["status"]),
-				"label" => "Status",
-				"shouldShow" => $attributes["showDistrict"]
+				'key'        => 'status',
+				'value'      => esc_html( $profile_data['status'] ),
+				'label'      => 'Status',
+				'shouldShow' => $attributes['showDistrict'],
 			],
 			[
-				"key" => "social",
-				"value" => gp_social_media( $profile_data, $attributes ),
-				"label" => "Social Media",
-				"shouldShow" => $show["social"]
+				'key'        => 'social',
+				'value'      => gp_social_media( $profile_data, $attributes ),
+				'label'      => 'Social Media',
+				'shouldShow' => $show['social'],
 			],
 			[
-				"key" => "comms_capitol",
-				"value" => gp_contact_info( 'Capitol', $profile_data['comms']['capitol'], $attributes['selectedCapitolCommunicationDetails'] ),
-				"label" => "Contact Info (Capitol)",
-				"shouldShow" => $attributes["showCapitolCommunicationDetails"]
+				'key'        => 'comms_capitol',
+				'value'      => gp_contact_info( 'Capitol', $profile_data['comms']['capitol'], $attributes['selectedCapitolCommunicationDetails'] ),
+				'label'      => 'Contact Info (Capitol)',
+				'shouldShow' => $attributes['showCapitolCommunicationDetails'],
 			],
 			[
-				"key" => "comms_district",
-				"value" => gp_contact_info( 'District', $profile_data['comms']['district'], $attributes['selectedDistrictCommunicationDetails'] ),
-				"label" => "Contact Info (District)",
-				"shouldShow" => $attributes["showDistrictCommunicationDetails"]
+				'key'        => 'comms_district',
+				'value'      => gp_contact_info( 'District', $profile_data['comms']['district'], $attributes['selectedDistrictCommunicationDetails'] ),
+				'label'      => 'Contact Info (District)',
+				'shouldShow' => $attributes['showDistrictCommunicationDetails'],
 			],
 			[
-				"key" => "comms_campaign",
-				"value" => gp_contact_info( 'Campaign', $profile_data['comms']['campaign'], $attributes['selectedCampaignCommunicationDetails'] ),
-				"label" => "Contact Info (Campaign)",
-				"shouldShow" => $attributes["showCampaignCommunicationDetails"]
+				'key'        => 'comms_campaign',
+				'value'      => gp_contact_info( 'Campaign', $profile_data['comms']['campaign'], $attributes['selectedCampaignCommunicationDetails'] ),
+				'label'      => 'Contact Info (Campaign)',
+				'shouldShow' => $attributes['showCampaignCommunicationDetails'],
 			],
 			[
-				"key" => "comms_other",
-				"value" => gp_contact_other( 'Other', $profile_data['comms']['other'], $attributes['selectedOtherCommunicationDetails'] ),
-				"label" => "Contact Info (Campaign)",
-				"shouldShow" => $attributes["showOtherCommunicationDetails"]
+				'key'        => 'comms_other',
+				'value'      => gp_contact_other( 'Other', $profile_data['comms']['other'], $attributes['selectedOtherCommunicationDetails'] ),
+				'label'      => 'Contact Info (Campaign)',
+				'shouldShow' => $attributes['showOtherCommunicationDetails'],
 			],
 			[
-				"key" => "more_about",
-				"value" => gp_maybe_link( sprintf('More About %s', $profile_data['name']['name']), $profile_data['link'], isset($attributes['showProfileLink']) && $attributes['showProfileLink']),
-				"shouldShow" => (isset($attributes['showProfileLink']) && $attributes['showProfileLink'])
+				'key'        => 'more_about',
+				'value'      => gp_maybe_link( sprintf( 'More About %s', $profile_data['name']['name'] ), $profile_data['link'], isset( $attributes['showProfileLink'] ) && $attributes['showProfileLink'] ),
+				'shouldShow' => ( isset( $attributes['showProfileLink'] ) && $attributes['showProfileLink'] ),
 			],
 			[
-				"key" => "links",
-				"value" => gp_the_profile_links($profile_data, $attributes),
-				"shouldShow" => shouldShowLinks($profile_data, $attributes)
-			]
+				'key'        => 'links',
+				'value'      => gp_the_profile_links( $profile_data, $attributes ),
+				'shouldShow' => shouldShowLinks( $profile_data, $attributes ),
+			],
 		];
 
 		return $lines;
@@ -124,23 +123,23 @@ if(!function_exists("gp_get_profile_lines")){
 }
 
 
-if(!function_exists("shouldShowLinks")){
-	function shouldShowLinks($profile_data, $attributes){
+if ( ! function_exists( 'shouldShowLinks' ) ) {
+	function shouldShowLinks( $profile_data, $attributes ) {
 
-		gp_deprecated("shouldShowLinks", "1.1");
+		gp_deprecated( 'shouldShowLinks', '1.1' );
 
-		if(isset($attributes['showOtherLinks'])){
+		if ( isset( $attributes['showOtherLinks'] ) ) {
 			return $attributes['showOtherLinks'];
 		}
 
-		if(!isset($profile_data['links']) || empty($profile_data['links'])){
+		if ( ! isset( $profile_data['links'] ) || empty( $profile_data['links'] ) ) {
 			return false;
 		}
 
-		if(
-			(!isset($attributes['selectedLinks'])) ||
-			(empty($profile_data['selectedLinks']))
-		){
+		if (
+			( ! isset( $attributes['selectedLinks'] ) ) ||
+			( empty( $profile_data['selectedLinks'] ) )
+		) {
 			return true;
 		}
 
@@ -154,9 +153,9 @@ if(!function_exists("shouldShowLinks")){
  * @param string  $url The url to link to.
  * @param boolean $title Name of the profile to link to eg More About {$title}.
  */
-if(!function_exists("gp_link")){
+if ( ! function_exists( 'gp_link' ) ) {
 	function gp_link( $url, $title ) {
-		gp_deprecated("gp_link", 1.1);
+		gp_deprecated( 'gp_link', 1.1 );
 		return '<a href=' . esc_url( $url ) . '>More About ' . esc_html( $title ) . '</a>';
 	}
 }
@@ -168,15 +167,15 @@ if(!function_exists("gp_link")){
  * @param array $profile_data Data about the profile.
  * @param array $attributes Attributes from the Block.
  */
-if(!function_exists("gp_contacts")){
+if ( ! function_exists( 'gp_contacts' ) ) {
 	function gp_contacts( $profile_data, $attributes ) {
-		gp_deprecated("gp_contacts", 1.1);
+		gp_deprecated( 'gp_contacts', 1.1 );
 		$icons = gp_get_icons();
 	
 		$icon = '<span class="wp-block-govpack-profile__contact__icon wp-block-govpack-profile__contact__icon--{%s}">%s</span>';
 
 		if ( $attributes['showEmail'] && $profile_data['email'] ) {
-			$email_icon = sprintf( $icon, 'email', gp_get_icon('email') );
+			$email_icon = sprintf( $icon, 'email', gp_get_icon( 'email' ) );
 			$classes    = [
 				'wp-block-govpack-profile__contact--hide-label',
 			];
@@ -213,7 +212,7 @@ if(!function_exists("gp_contacts")){
 				$classes = join( ' ', $classes );
 
 
-				$contact_icon = sprintf( $icon, $service, gp_get_icons($service) );
+				$contact_icon = sprintf( $icon, $service, gp_get_icons( $service ) );
 				$social      .=  
 				"<li class=\"{$classes} \">
 					<a href=\"{$profile_data[$service]}\" class=\"wp-block-govpack-profile__contact__link\">
@@ -245,9 +244,9 @@ if(!function_exists("gp_contacts")){
  * @param array $profile_data Data about the profile.
  * @param array $attributes Attributes from the Block.
  */
-if(!function_exists("gp_social_media")){
+if ( ! function_exists( 'gp_social_media' ) ) {
 	function gp_social_media( $profile_data, $attributes ) {
-		gp_deprecated("gp_social_media", 1.1);
+		gp_deprecated( 'gp_social_media', 1.1 );
 		$template = '<div class="wp-block-govpack-profile__social">
 			<ul class="wp-block-govpack-profile__services govpack-vertical-list">
 			%s
@@ -269,7 +268,6 @@ if(!function_exists("gp_social_media")){
 		}
 
 		return sprintf( $template, $content ); 
-
 	}
 }
 
@@ -279,9 +277,9 @@ if(!function_exists("gp_social_media")){
  * @param string $label Row label to shoe.
  * @param array  $links Links for social media profiles.
  */
-if(!function_exists("gp_social_media_row")){
+if ( ! function_exists( 'gp_social_media_row' ) ) {
 	function gp_social_media_row( $label, $links = [] ) {
-		gp_deprecated("gp_social_media_row", 1.1);
+		gp_deprecated( 'gp_social_media_row', 1.1 );
 
 		$outer_template = 
 			'<li class="wp-block-govpack-profile__social_group">
@@ -310,7 +308,7 @@ if(!function_exists("gp_social_media_row")){
 			$classes = join( ' ', $classes );
 
 			$icon         = '<span class="wp-block-govpack-profile__contact__icon wp-block-govpack-profile__contact__icon--{%s}">%s</span>';
-			$contact_icon = sprintf( $icon, $service, gp_get_icon($service) );
+			$contact_icon = sprintf( $icon, $service, gp_get_icon( $service ) );
 
 			$content .=  
 			"<li class=\"{$classes} \">
@@ -327,27 +325,31 @@ if(!function_exists("gp_social_media_row")){
 }
 
 
-if(!function_exists("gp_the_profile_links")){
-	function gp_the_profile_links($profile_data, $attributes){
-		gp_deprecated("gp_the_profile_links", "1.1");
-		$links = gp_get_profile_links($profile_data, $attributes);
-		foreach($links as $key => &$link){
-			$link["show"] = gp_should_show_link($key, $attributes);
-		}	
+if ( ! function_exists( 'gp_the_profile_links' ) ) {
+	function gp_the_profile_links( $profile_data, $attributes ) {
+		gp_deprecated( 'gp_the_profile_links', '1.1' );
+		$links = gp_get_profile_links( $profile_data, $attributes );
+		foreach ( $links as $key => &$link ) {
+			$link['show'] = gp_should_show_link( $key, $attributes );
+		}   
 
-		$links = array_filter($links, function($link, $key){
-			return $link["show"];
-		}, ARRAY_FILTER_USE_BOTH );
+		$links = array_filter(
+			$links,
+			function ( $link, $key ) {
+				return $link['show'];
+			},
+			ARRAY_FILTER_USE_BOTH 
+		);
 
-		if(count($links) <= 0){
-			return "";
+		if ( count( $links ) <= 0 ) {
+			return '';
 		}
 
 
 		ob_start();
 		?>
 		<ul class="govpack-vertical-list">
-			<?php foreach($links as &$link){ ?>
+			<?php foreach ( $links as &$link ) { ?>
 				<li><?php echo $link['src']; ?></li>
 			<?php } ?>
 		</ul>
@@ -356,47 +358,49 @@ if(!function_exists("gp_the_profile_links")){
 	}
 }
 
-if(!function_exists("gp_get_profile_links")){
-	function gp_get_profile_links($profile_data, $attributes){
+if ( ! function_exists( 'gp_get_profile_links' ) ) {
+	function gp_get_profile_links( $profile_data, $attributes ) {
 		
-		gp_deprecated("gp_get_profile_links", 1.1);
+		gp_deprecated( 'gp_get_profile_links', 1.1 );
 
-		if(!isset($profile_data['links'])){
+		if ( ! isset( $profile_data['links'] ) ) {
 			return [];
 		}
 
-		if(empty($profile_data['links'])){
+		if ( empty( $profile_data['links'] ) ) {
 			return [];
 		}
 
 		
-		$links = apply_filters("govpack_profile_links", $profile_data['links'] ?? [], $profile_data["id"], $profile_data );
-		foreach($links as &$link){
+		$links = apply_filters( 'govpack_profile_links', $profile_data['links'] ?? [], $profile_data['id'], $profile_data );
+		foreach ( $links as &$link ) {
 
-			$link = apply_filters("govpack_profile_link", $link, $profile_data["id"], $profile_data );
+			$link = apply_filters( 'govpack_profile_link', $link, $profile_data['id'], $profile_data );
 
-			$link_attrs = array_filter($link, function($value, $key){
-				if(($value === null) || ($value === "")){
-					return false;
-				}
+			$link_attrs = array_filter(
+				$link,
+				function ( $value, $key ) {
+					if ( ( $value === null ) || ( $value === '' ) ) {
+						return false;
+					}
 
-				if(($key === "text") || ($key === "meta")){
-					return false;
-				}
+					if ( ( $key === 'text' ) || ( $key === 'meta' ) ) {
+						return false;
+					}
 				
-				if(is_array($value) && (empty($value))){
-					return false;
-				}
+					if ( is_array( $value ) && ( empty( $value ) ) ) {
+						return false;
+					}
 
-				return true;
+					return true;
+				},
+				ARRAY_FILTER_USE_BOTH
+			);
 
-			}, ARRAY_FILTER_USE_BOTH);
-
-			$link["src"] = sprintf("<a %s>%s</a>", gp_normalise_html_element_args($link_attrs), $link["text"]);
+			$link['src'] = sprintf( '<a %s>%s</a>', gp_normalise_html_element_args( $link_attrs ), $link['text'] );
 			
 		}
 
 		return $links;
-
 	}
 }

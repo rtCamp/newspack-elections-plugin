@@ -8,9 +8,9 @@
 // $profile_data is defined elsewhere.
 // phpcs:disable VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 
-$profile_block = $extra["profile_block"];
-$profile_data = $extra["profile_data"];
-$block_class = $attributes["className"];
+$profile_block    = $extra['profile_block'];
+$profile_data     = $extra['profile_data'];
+$block_class      = $attributes['className'];
 $available_widths = gp_get_available_widths();
 
 $container_classes = join(
@@ -42,12 +42,12 @@ $container_classes = join(
 	
 		<?php gp_get_block_part( 'blocks/parts/profile', 'photo', $attributes, $content, $block, $extra ); ?>
 		<dl class="wp-block-govpack-profile__info">
-			<?php if ( $profile_block->show('name') || $profile_block->show('status_tag')) { ?>
+			<?php if ( $profile_block->show( 'name' ) || $profile_block->show( 'status_tag' ) ) { ?>
 				<div class="wp-block-govpack-profile__line wp-block-govpack-profile--flex-left">
-				<?php if ( $profile_block->show('name') ) { ?>
+				<?php if ( $profile_block->show( 'name' ) ) { ?>
 					<h3 class="wp-block-govpack-profile__name"> <?php echo GP_Maybe_Link( $profile_data['name']['name'], $profile_data['link'], $attributes['showProfileLink'] );  //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h3>
 				<?php } ?>
-				<?php if ( $profile_block->show('status_tag')) { ?>
+				<?php if ( $profile_block->show( 'status_tag' ) ) { ?>
 					<div class="wp-block-govpack-profile__status-tag">
 							<div class="govpack-termlist">
 								<?php echo gp_get_the_status_terms_list( $profile_data['id'] ); ?>

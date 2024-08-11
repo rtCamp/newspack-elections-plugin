@@ -20,13 +20,12 @@ class Icons {
 		'website',
 	];
 
-	public function __construct($plugin)
-	{
+	public function __construct( $plugin ) {
 		$this->plugin = $plugin;
 	}
 
-	public function icon_dir(){
-		return $this->plugin->path('/src/images');
+	public function icon_dir() {
+		return $this->plugin->path( '/build/icons' );
 	}
 	/**
 	 * Load an SVG icon from disk

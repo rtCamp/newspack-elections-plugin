@@ -853,34 +853,34 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 			],
 			'social'           => [
 				'official' => [
-					'label' => "Official",
+					'label'    => 'Official',
 					'services' => [
 						'x'         => $profile_raw_meta_data['x_official'][0] ?? $profile_raw_meta_data['twitter_official'][0] ?? null,
 						'facebook'  => $profile_raw_meta_data['facebook_official'][0] ?? null,
 						'twitter'   => $profile_raw_meta_data['twitter_official'][0] ?? null,
 						'instagram' => $profile_raw_meta_data['instagram_official'][0] ?? null,
 						'youtube'   => $profile_raw_meta_data['youtube_official'][0] ?? null,
-					]
+					],
 				], 
 				'personal' => [
-					'label' => "Personal",
+					'label'    => 'Personal',
 					'services' => [
 						'x'         => $profile_raw_meta_data['x_personal'][0] ?? $profile_raw_meta_data['twitter_personal'][0] ?? null,
 						'facebook'  => $profile_raw_meta_data['facebook_personal'][0] ?? null,
 						'twitter'   => $profile_raw_meta_data['twitter_personal'][0] ?? null,
 						'instagram' => $profile_raw_meta_data['instagram_personal'][0] ?? null,
 						'youtube'   => $profile_raw_meta_data['youtube_personal'][0] ?? null,
-					]
+					],
 				], 
 				'campaign' => [
-					'label' => "Campaign",
+					'label'    => 'Campaign',
 					'services' => [
 						'x'         => $profile_raw_meta_data['x_campaign'][0] ?? $profile_raw_meta_data['twitter_campaign'][0] ?? null,
 						'facebook'  => $profile_raw_meta_data['facebook_campaign'][0] ?? null,
 						'twitter'   => $profile_raw_meta_data['twitter_campaign'][0] ?? null,
 						'instagram' => $profile_raw_meta_data['instagram_campaign'][0] ?? null,
-						'youtube'   => $profile_raw_meta_data['youtube_campaign'][0] ?? null
-					]
+						'youtube'   => $profile_raw_meta_data['youtube_campaign'][0] ?? null,
+					],
 				],
 			],
 			'comms'            => [

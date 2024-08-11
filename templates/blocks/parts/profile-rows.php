@@ -4,50 +4,57 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$profile_block = $extra["profile_block"];
+$profile_block = $extra['profile_block'];
 
+foreach ( $profile_block->rows() as $index => $row ) {
 
-
-foreach($profile_block->rows() as $index => $row){
-
-	if ( ! $row["shouldShow"] ) {
+	if ( ! $row['shouldShow'] ) {
 		continue;
 	}
 
 	
 	?>
-		<div <?php echo gp_line_attributes($row, $attributes);?>>
-			<?php if(isset($row["label"]) && ($row["label"])){ ?>
+		<div <?php echo gp_line_attributes( $row, $attributes ); ?>>
+			<?php if ( isset( $row['label'] ) && ( $row['label'] ) ) { ?>
 			<dt 
-				class="<?php echo gp_classnames("govpack-line__label", [
-					"govpack-line__label--show" => $profile_block->show("labels"),
-					"govpack-line__label--hide" => !$profile_block->show("labels"),
-				]);?>"
-			><?php esc_html_e($row["label"]);?></dt>
+				class="
+				<?php
+				echo esc_attr(
+					gp_classnames(
+						'govpack-line__label',
+						[
+							'govpack-line__label--show' => $profile_block->show( 'labels' ),
+							'govpack-line__label--hide' => ! $profile_block->show( 'labels' ),
+						]
+					)
+				);
+				?>
+				"
+			><?php esc_html( $row['label'] ); ?></dt>
 			<?php } ?>
 			<dd class="govpack-line__content">
 				<?php
-				switch($row["key"]){
-					case "social" :
-						gp_get_block_part("blocks/parts/row", "social", $attributes, $content, $block, $extra);
+				switch ( $row['key'] ) {
+					case 'social':
+						gp_get_block_part( 'blocks/parts/row', 'social', $attributes, $content, $block, $extra );
 						break;
-					case "comms_capitol" :
-					case "comms_district" :
-					case "comms_campaign" :
-						gp_get_block_part("blocks/parts/row", "contact", $attributes, $content, $block, ["row" => $row]);
+					case 'comms_capitol':
+					case 'comms_district':
+					case 'comms_campaign':
+						gp_get_block_part( 'blocks/parts/row', 'contact', $attributes, $content, $block, [ 'row' => $row ] );
 						break;
-					case "comms_other" :
-						echo "other";
+					case 'comms_other':
+						echo 'other';
 						break;
-					case "links" :
-						gp_get_block_part("blocks/parts/row", "links", $attributes, $content, $block, $extra);
+					case 'links':
+						gp_get_block_part( 'blocks/parts/row', 'links', $attributes, $content, $block, $extra );
 						break;
-					case "more_about" :
-						gp_get_block_part("blocks/parts/row", "more-link", $attributes, $content, $block, $extra);
+					case 'more_about':
+						gp_get_block_part( 'blocks/parts/row', 'more-link', $attributes, $content, $block, $extra );
 						break;
 					default:
-						if(isset($row["value"]) && $row["value"] ){
-							echo $row["value"];
+						if ( isset( $row['value'] ) && $row['value'] ) {
+							echo $row['value']; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						}
 						break;
 				}

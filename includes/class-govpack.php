@@ -47,8 +47,19 @@ class Govpack {
 	}
 
 	public function path( $path ) {
-		return GOVPACK_PLUGIN_PATH . $path; 
+		return GOVPACK_PLUGIN_PATH . $path;
 	}
+
+	public function require( $path ) {
+		return require_once $this->path( $path ); //phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
+	}
+
+	public function build_path( $path ) {
+		return trailingslashit(
+			trailingslashit( $this->path( 'build' ) ) . $path
+		);
+	}
+
 
 	/**
 	 * Action called by the plugin activation hook.
@@ -158,15 +169,15 @@ class Govpack {
 
 	public function icons() {
 
-		if(!isset($this->icons)){
-			$this->icons = new Icons($this);
+		if ( ! isset( $this->icons ) ) {
+			$this->icons = new Icons( $this );
 		}
 		
 		return $this->icons;
 	}
 
-	public function register_blocks(){
-		$this->blocks()->register(new \Govpack\Blocks\Profile\Profile($this));
-		$this->blocks()->register(new \Govpack\Blocks\ProfileSelf\ProfileSelf($this));
+	public function register_blocks() {
+		$this->blocks()->register( new \Govpack\Blocks\Profile\Profile( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileSelf\ProfileSelf( $this ) );
 	}
 }

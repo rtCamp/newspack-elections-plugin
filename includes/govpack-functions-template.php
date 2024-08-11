@@ -33,35 +33,36 @@ if ( ! function_exists( 'gp_get_available_widths' ) ) {
 				'maxWidth' => 'none',
 			],
 		];
- }
+	}
 }
 
-if(!function_exists("gp_classnames")){
-	function gp_classnames(string|array $classnames = "", array $candidates = [] ){
+if ( ! function_exists( 'gp_classnames' ) ) {
+	function gp_classnames( string|array $classnames = '', array $candidates = [] ) {
 
-		if(is_array(($classnames))){
-			$classnames = trim(join(" ", $classnames));
+		if ( is_array( ( $classnames ) ) ) {
+			$classnames = trim( join( ' ', $classnames ) );
 		}
 
 		$selection = [];
-		foreach($candidates as $key => $value){
-			if(is_int($key)){
+		foreach ( $candidates as $key => $value ) {
+			if ( is_int( $key ) ) {
 				$selection[] = $value;
 				continue;
 			}
 
-			if($value === true){
+			if ( $value === true ) {
 				$selection[] = $key;
 				continue;
-			}
-			
+			}       
 		}
 		
 
-		return trim($classnames . " ". join(
-			" ",
-			$selection
-		)); 
+		return trim(
+			$classnames . ' ' . join(
+				' ',
+				$selection
+			)
+		); 
 	}
  }
 
@@ -97,9 +98,14 @@ if(!function_exists("gp_line_attributes")){
 	}
 }
 
-if(!function_exists("gp_should_show_link")){
-	function gp_should_show_link($key, $attributes ){
-		if(!isset($attributes['showOtherLinks'])){
+
+
+
+
+
+if ( ! function_exists( 'gp_should_show_link' ) ) {
+	function gp_should_show_link( $key, $attributes ) {
+		if ( ! isset( $attributes['showOtherLinks'] ) ) {
 			return false;
 		}
 
