@@ -232,11 +232,14 @@ if ( ! function_exists( 'gp_has_icon' ) ) {
  * @param array $attrs Attributes from the Block.
  */
 /*
-function gp_contact_info( $label, $links, $attrs ) {
-	$outer_template = '
-	<div class="wp-block-govpack-profile__comms">
-		<div class="wp-block-govpack-profile__label">%s:</div>
-		<ul class="wp-block-govpack-profile__comms-icons govpack-inline-list">
+if ( ! function_exists( 'gp_contact_info' ) ) {
+	function gp_contact_info( $label, $links, $attrs ) {
+		$outer_template = '
+		<div class="wp-block-govpack-profile__comms">
+			<div class="wp-block-govpack-profile__label">%s:</div>
+			<ul class="wp-block-govpack-profile__comms-icons govpack-inline-list">
+				%s
+			</ul>
 			%s
 		</div>';
 
@@ -263,13 +266,14 @@ function gp_contact_info( $label, $links, $attrs ) {
 				continue;
 			}
 
-			$classes = [
-				'wp-block-govpack-profile__contact',
+			$classes = gp_classnames('wp-block-govpack-profile__contact',[
 				'wp-block-govpack-profile__contact--hide-label',
 				"wp-block-govpack-profile__contact--{$service}",
-			];
+			]);
 
-			$classes = join( ' ', $classes );
+			var_dump($classes);
+			die();
+			//$classes = join( ' ', $classes );
 
 			$icon         = '<span class="wp-block-govpack-profile__contact__icon wp-block-govpack-profile__contact__icon--%s">%s</span>';
 			$contact_icon = sprintf( $icon, $service, gp_get_icon( $service ) );
@@ -311,7 +315,6 @@ function gp_contact_info( $label, $links, $attrs ) {
 	}
 }
 */
-
 /**
  * Utility Function that Outputs a Profiles's Contact Other
  * 
