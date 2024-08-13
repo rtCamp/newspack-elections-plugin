@@ -9,8 +9,6 @@ const ResetProfileToolbar = (props) => {
 
     const {
         setProfile,
-        setAttributes,
-        attributes
     } = props
 
 
@@ -22,7 +20,6 @@ const ResetProfileToolbar = (props) => {
                         icon: <Icon icon={ postAuthor } />,
                         title: __( 'Modify Selection', 'govpack' ),
                         onClick: () => {
-                            setAttributes( { profileId: 0 } );
                             setProfile( null );
                         },
                     },
