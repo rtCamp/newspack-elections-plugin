@@ -58,6 +58,10 @@ class Admin {
 					'slug'  => 'govpack-blocks',
 					'title' => \__( 'Govpack Blocks', 'govpack' ),
 				],
+				[
+					'slug'  => 'govpack',
+					'title' => \__( 'Govpack', 'govpack' ),
+				],
 			]
 		);
 	}
