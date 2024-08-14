@@ -179,6 +179,7 @@ class Govpack {
 	public function register_blocks() {
 		$this->blocks()->register( new \Govpack\Blocks\Profile\Profile( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileSelf\ProfileSelf( $this ) );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileBlockV2\Profile_Block_v2( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileBlockV2\Profile_Block_V2( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileTaxonomy\Profile_Taxonomy( $this ) );
 	}
 }

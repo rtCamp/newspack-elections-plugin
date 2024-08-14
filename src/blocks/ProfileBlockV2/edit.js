@@ -2,13 +2,13 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { InspectorControls, useBlockProps, useInnerBlocksProps,  BlockControls, store as blockEditorStore} from '@wordpress/block-editor';
+import { InspectorControls, useBlockProps, useInnerBlocksProps,  InnerBlocks, BlockControls, store as blockEditorStore} from '@wordpress/block-editor';
 import { useInstanceId } from '@wordpress/compose';
 import { useRef, useEffect} from '@wordpress/element';
 import { ResizableBox, ToolbarButton, ToolbarGroup, Toolbar, Icon } from '@wordpress/components';
 import { addQueryArgs } from '@wordpress/url';
 
-import { useSelect, useDispatch } from "@wordpress/data";
+import { useSelect, useDispatch, select } from "@wordpress/data";
 import { store as coreData } from "@wordpress/core-data"
 
 import { external, postAuthor } from '@wordpress/icons';
@@ -32,23 +32,16 @@ import { useSelectProfile } from "./../../components/SelectProfile.jsx"
 
 
 const TEMPLATE = [
-	[ "core/post-title" ]
+	[ "core/post-featured-image", {}, []],
+	[ "core/post-title", {}, []],
+	[ "core/post-excerpt", {
+		"moreText" : " ",
+		"showMoreOnNewLine": false
+	}, []]
 ]
 
 
 const usePostEditURL = ( postId ) => {
-
-	/*
-	const { url } = useSelect( ( select ) => {
-		const { getEntityRecord } = select( coreStore );
-		const siteData = getEntityRecord( 'root', '__unstableBase' );
-
-		return {
-			url: siteData?.home + '/wp-admin/post.php',
-		};
-	} );
-
-	*/
 
 	if ( ! postId ) {
 		return null;
@@ -64,8 +57,6 @@ const usePostEditURL = ( postId ) => {
 
 
 const ProfileBlockControls = ({ attributes, setAttributes, ...props}) => {
-
-
 	const postEditURL = usePostEditURL(attributes.profileId)
 
 	return (
@@ -96,13 +87,13 @@ const ProfileBlockControls = ({ attributes, setAttributes, ...props}) => {
 
 function Edit( {attributes, setAttributes, isSelected: isSingleSelected, ...props} ) {
 
-    const ref = useRef();
+    const ref = useRef(null);
 	const instanceId = useInstanceId( Edit );
 	const blockProps = useBlockProps( { ref } );
 
 	const { __unstableMarkNextChangeAsNotPersistent } = useDispatch( blockEditorStore );
 
-
+	const currentWidth = ref.current?.offsetWidth
 	const {
 		profileId = 0,
 		queryId,
@@ -111,13 +102,14 @@ function Edit( {attributes, setAttributes, isSelected: isSingleSelected, ...prop
 
 	const {profile, ...query} = useSelectProfile(profileId)
 
-	const {children, ...innerBlockProps} = useInnerBlocksProps({
-		...blockProps,
-		template: TEMPLATE
+	const {children, ...innerBlockProps} = useInnerBlocksProps(blockProps, {
+		template: TEMPLATE,
+		orientation: "vertical",
+		renderAppender : InnerBlocks.DefaultBlockAppender
+
 	})
 
-
-	
+	const showResizeHandle = ((isSingleSelected) && (['left', 'right', 'center'].includes(attributes.align)))
 
 	useEffect( () => {
 		if ( ! Number.isFinite( queryId ) ) {
@@ -125,8 +117,6 @@ function Edit( {attributes, setAttributes, isSelected: isSingleSelected, ...prop
 			setAttributes( { queryId: instanceId } );
 		}
 	}, [ queryId, instanceId ] );
-
-	console.log(attributes)
 
 	const resetProfile = () => {
 		setProfile( 0 )
@@ -161,6 +151,7 @@ function Edit( {attributes, setAttributes, isSelected: isSingleSelected, ...prop
 	const showSpinner = ((query.hasStartedResolution) && (!query.hasFinishedResolution) && (showSelector === false))
 	const showProfile = ((query.hasFinishedResolution) && (profile))
 	
+	console.log("allowedBlocks", select(blockEditorStore).getAllowedBlocks(props.clientId))
 	return (
 		<div { ...blockProps }>
 
@@ -183,30 +174,33 @@ function Edit( {attributes, setAttributes, isSelected: isSingleSelected, ...prop
 						<ProfileResetPanel profileId = {profileId} setProfile = {resetProfile}  />
 					</InspectorControls>
 						<div {...innerBlockProps}>
+						{/* 
 						<ResizableBox
 							enable={ {
-							top: false,
-							right: true,
-							bottom: false,
-							left: false,
-						} }
-						showHandle={ isSingleSelected }
-						style={ {
-							display: 'block'
-						} }
-						size={ {
-							width: attributes.width ?? 'auto',
-							height: 'auto',
-						} }
-						onResizeStop={ ( event, direction, elt ) => {
-							setAttributes( {
-								width: `${ elt.offsetWidth }px`,
-							} );
-						} }
-						
-					>
+								top: false,
+								right: true,
+								bottom: false,
+								left: false,
+							} }
+							showHandle={ showResizeHandle }
+							style={ {
+								display: 'block'
+							} }
+							size={ {
+								width: currentWidth + "px" ?? 'auto',
+								height: 'auto',
+							} }
+							onResizeStop={ ( event, direction, elt ) => {
+								setAttributes( {
+									width: `${ elt.offsetWidth }px`,
+								} );
+							} }
+						>						
+						*/}
 						{ children }
+						{/** 
 					</ResizableBox>
+							*/}
 					</div>
 				</>
 			)}

@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
  */
 abstract class Block {
 
-	protected \WP_Block_Type $block_type;
+	protected bool|\WP_Block_Type $block_type;
 
 	public $block_name;
 
@@ -135,7 +135,7 @@ abstract class Block {
 	public function get_block_attributes_with_default_values( $block_name ) {
 	
 		$block = self::get_block( $block_name );
-	
+
 		$block_attributes = array_merge(
 			...array_map(
 				function ( $key, $value ) {

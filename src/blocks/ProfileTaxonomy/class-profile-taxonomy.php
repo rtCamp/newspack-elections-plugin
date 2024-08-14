@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Blocks\ProfileBlockV2;
+namespace Govpack\Blocks\ProfileTaxonomy;
 
 use WP_Block;
 
@@ -14,9 +14,9 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class Profile_Block_V2 extends \Govpack\Blocks\Profile\Profile {
+class Profile_Taxonomy extends \Govpack\Blocks\Profile\Profile {
 
-	public $block_name = 'govpack/profile-v2';
+	public $block_name = 'govpack/profile-taxonomy';
 	public $template   = 'profile';
 
 	private $show       = null;
@@ -33,7 +33,7 @@ class Profile_Block_V2 extends \Govpack\Blocks\Profile\Profile {
 	}
 
 	public function block_build_path(): string {
-		return $this->plugin->build_path( 'blocks/ProfileBlockV2' );
+		return $this->plugin->build_path( 'blocks/ProfileTaxonomy' );
 	}
 	
 	/**

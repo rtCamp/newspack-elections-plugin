@@ -107,7 +107,7 @@ class Dev_Helpers {
 			return $this->version;
 		}
 
-		$version = $this->plugin->require( "version.php" );
+		$version = include $this->version_file_path();
 
 		$this->version = Version::parse( $version );
 

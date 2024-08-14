@@ -57,8 +57,8 @@ $container_classes = join(
 				</div>
 			<?php } ?>
 
-			<?php  gp_get_block_part("blocks/parts/profile", "bio", $attributes, $content, $block, $extra);  ?>
-			<?php  gp_get_block_part("blocks/parts/profile", "rows", $attributes, $content, $block, $extra);  ?>
+			<?php gp_get_block_part( 'blocks/parts/profile', 'bio', $attributes, $content, $block, $extra ); ?>
+			<?php gp_get_block_part( 'blocks/parts/profile', 'rows', $attributes, $content, $block, $extra ); ?>
 
 		</dl>
 	</div> <!-- end __container -->
