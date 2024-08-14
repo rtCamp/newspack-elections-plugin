@@ -32,6 +32,10 @@ abstract class Block {
 
 	abstract public function block_build_path(): string;
 
+	public function variations(): array {
+		return [];
+	}
+
 	/**
 	 * Registers the block.
 	 *
@@ -39,11 +43,16 @@ abstract class Block {
 	 */
 	public function register() {
 
+		$block_args = [
+			'render_callback'    => [ $this, 'render' ],
+			'variation_callback' => [ $this, 'variations' ],
+		];
+
+	
+
 		$this->block_type = register_block_type(
 			$this->block_build_path() . '/block.json',
-			[
-				'render_callback' => [ $this, 'render' ],
-			]
+			$block_args
 		);
 	}
 
