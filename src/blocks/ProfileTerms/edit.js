@@ -21,7 +21,7 @@ import useProfileTerms from "./use-profile-terms"
 
 
 const useProfileTaxonomies = () => {
-	ReadableStreamDefaultController = useSelect( (select) => {
+	return useSelect( (select) => {
 		return select( coreDataStore ).getTaxonomies( { type: 'govpack_profiles' } );
 	})
 }
