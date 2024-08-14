@@ -31,8 +31,8 @@ class State extends \Govpack\Core\Abstracts\Taxonomy {
 			self::get_taxonomy_post_types(),
 			[
 				'labels'             => [
-					'name'                       => _x( 'States', 'Taxonomy General Name', 'govpack' ),
-					'singular_name'              => _x( 'State', 'Taxonomy Singular Name', 'govpack' ),
+					'name'                       => _x( 'Profile States', 'Taxonomy General Name', 'govpack' ),
+					'singular_name'              => _x( 'Profile State', 'Taxonomy Singular Name', 'govpack' ),
 					'menu_name'                  => __( 'States', 'govpack' ),
 					'all_items'                  => __( 'All States', 'govpack' ),
 					'parent_item'                => __( 'Parent State', 'govpack' ),
@@ -53,7 +53,7 @@ class State extends \Govpack\Core\Abstracts\Taxonomy {
 					'items_list_navigation'      => __( 'States list navigation', 'govpack' ),
 				],
 				'public'             => true,
-				'hierarchical'       => true,
+				'hierarchical'       => false,
 				'rewrite'            => [
 					'slug'         => self::SLUG,
 					'with_front'   => false,

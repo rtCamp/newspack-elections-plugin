@@ -31,8 +31,8 @@ class LegislativeBody extends \Govpack\Core\Abstracts\Taxonomy {
 			self::get_taxonomy_post_types(),
 			[
 				'labels'             => [
-					'name'                       => _x( 'Offices', 'Taxonomy General Name', 'govpack' ),
-					'singular_name'              => _x( 'Office', 'Taxonomy Singular Name', 'govpack' ),
+					'name'                       => _x( 'Profile Offices', 'Taxonomy General Name', 'govpack' ),
+					'singular_name'              => _x( 'Profile Office', 'Taxonomy Singular Name', 'govpack' ),
 					'menu_name'                  => __( 'Offices', 'govpack' ),
 					'all_items'                  => __( 'All Offices', 'govpack' ),
 					'parent_item'                => __( 'Parent Office', 'govpack' ),

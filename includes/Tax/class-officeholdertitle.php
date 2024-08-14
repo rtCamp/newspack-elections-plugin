@@ -31,8 +31,8 @@ class OfficeHolderTitle extends \Govpack\Core\Abstracts\Taxonomy {
 			self::get_taxonomy_post_types(),
 			[
 				'labels'            => [
-					'name'                       => _x( 'Titles', 'Taxonomy General Name', 'govpack' ),
-					'singular_name'              => _x( 'Title', 'Taxonomy Singular Name', 'govpack' ),
+					'name'                       => _x( 'Profile Office Titles', 'Taxonomy General Name', 'govpack' ),
+					'singular_name'              => _x( 'Profile Office Title', 'Taxonomy Singular Name', 'govpack' ),
 					'menu_name'                  => __( 'Titles', 'govpack' ),
 					'all_items'                  => __( 'All Titles', 'govpack' ),
 					'parent_item'                => __( 'Parent Title', 'govpack' ),

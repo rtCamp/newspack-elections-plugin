@@ -31,8 +31,8 @@ class Party extends \Govpack\Core\Abstracts\Taxonomy {
 			self::get_taxonomy_post_types(),
 			[
 				'labels'             => [
-					'name'                       => _x( 'Parties', 'Taxonomy General Name', 'govpack' ),
-					'singular_name'              => _x( 'Party', 'Taxonomy Singular Name', 'govpack' ),
+					'name'                       => _x( 'Profile Parties', 'Taxonomy General Name', 'govpack' ),
+					'singular_name'              => _x( 'Profile Party', 'Taxonomy Singular Name', 'govpack' ),
 					'menu_name'                  => __( 'Parties', 'govpack' ),
 					'all_items'                  => __( 'All Parties', 'govpack' ),
 					'parent_item'                => __( 'Parent Party', 'govpack' ),
