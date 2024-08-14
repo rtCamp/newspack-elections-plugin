@@ -140,10 +140,10 @@ function Edit( {attributes, setAttributes, isSelected: isSingleSelected, ...prop
 			return
 		}
 
-		setAttributes({"metadata" : {
-			...attributes.metadata,
-			name: `Govpack Profile : ${profile.meta.name}`
-		}})
+		//setAttributes({"metadata" : {
+		//	...attributes.metadata,
+		//	name: `Govpack Profile : ${profile.meta.name}`
+		//}})
 
 	}, [profile])
 
