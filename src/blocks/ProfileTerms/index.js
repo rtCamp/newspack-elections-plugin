@@ -1,5 +1,5 @@
 import { registerBlockType } from '@wordpress/blocks';
-
+import { postCategories as icon } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
@@ -14,14 +14,14 @@ import './view.scss';
 
 
 
-const { attributes, category } = metadata;
+const { attributes, category, title } = metadata;
 
 registerBlockType( metadata.name, {
 	apiVersion: 3,
-	title: 'GovPack Profile Taxonomy',
+	title,
     category,
     attributes,
-	icon: 'groups',
+	icon,
 	keywords: [ 'govpack' ],
     styles: [
 	],
