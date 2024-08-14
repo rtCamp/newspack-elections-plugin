@@ -10,16 +10,26 @@ import { decodeEntities } from '@wordpress/html-entities';
 
 import useProfileTerms from "./use-profile-terms"
 
+/**
+ * TODO:
+ * 1. Move useProfileTaxonomies to its own, reusable hook
+ * 2. Stop Profile Terms outputting clickable links
+ * 3. Handle having no terms available
+ * 4. Add Inspector Controls to limit how many terms are shown and the seperator used
+ */
+
+
+
 const useProfileTaxonomies = () => {
-	const config = useSelect( (select) => {
+	ReadableStreamDefaultController = useSelect( (select) => {
 		return select( coreDataStore ).getTaxonomies( { type: 'govpack_profiles' } );
 	})
-
-	return config
 }
 
+
+
 const ProfileTerms = ({terms}) => {
-	console.log(terms)
+
 	return (<>
 	{terms.map( ( postTerm ) => (
 		<a
@@ -43,15 +53,17 @@ const ProfileTerms = ({terms}) => {
 
 function Edit( {attributes, setAttributes, context, ...props} ) {
 	const blockProps = useBlockProps();
-	console.log("a");
+	
 	const { 
 		'govpack/profileId' : profileId, 
 		postType = false
 	} = context
 
-	const tax = "govpack_officeholder_status"
-	
+	const { 
+		'taxonomy' : tax, 
+	} = attributes
 
+	
 	const taxonomies = useProfileTaxonomies();
 	const taxonomy = taxonomies?.find( (t) => {
 		return t.slug === tax
@@ -60,7 +72,6 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 	const { profileTerms, hasProfileTerms, isLoading } = useProfileTerms( profileId, taxonomy)
 	const hasProfile = (profileId && postType);
 
-	console.log( profileTerms, isLoading, hasProfile)
     return (
 		<div {...blockProps}>
 			{ isLoading && hasProfile && <Spinner /> }
