@@ -46,6 +46,6 @@ psalm.xml
 webpack.config.js
 webpack.config.prod.js
 
-/vendor/bin/*
-/vendor/brianhenryie/strauss/*
+/vendor
+/vendor/*
 /vendor-prefixed/brianhenryie/strauss/*
