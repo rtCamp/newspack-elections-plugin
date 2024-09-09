@@ -9,9 +9,12 @@ namespace Govpack\Core;
 
 class Blocks {
 
+	use Plugin_Aware;
+
 	private array $blocks = [];
 
-	public function __construct() {
+	public function __construct( Govpack $plugin ) {
+		$this->plugin( $plugin );
 	}
 
 	public function hooks() {

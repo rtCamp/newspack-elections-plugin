@@ -60,7 +60,6 @@ class Govpack {
 		);
 	}
 
-
 	/**
 	 * Action called by the plugin activation hook.
 	 * Causes rewrite rules to be regenerated so permalinks will work
@@ -68,16 +67,6 @@ class Govpack {
 	public static function activation() {
 		\Govpack\Core\CPT\Profile::register_post_type();
 		flush_rewrite_rules( false ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.flush_rewrite_rules_flush_rewrite_rules
-	}
-
-	public function build_path( $path ) {
-		return trailingslashit(
-			trailingslashit( $this->path( 'build' ) ) . $path 
-		);
-	}
-
-	public function require( $path ) {
-		return require_once $this->path( $path ); //phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
 	}
 
 	public function url( $path ) {
@@ -160,7 +149,7 @@ class Govpack {
 	public function blocks() {
 
 		if ( ! isset( $this->blocks ) ) {
-			$this->blocks = new Blocks();
+			$this->blocks = new Blocks( $this );
 			$this->blocks->hooks();
 		}
 		
@@ -181,5 +170,6 @@ class Govpack {
 		$this->blocks()->register( new \Govpack\Blocks\ProfileSelf\ProfileSelf( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileBlockV2\Profile_Block_V2( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileTerms\Profile_Terms( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileMeta\Profile_Meta( $this ) );
 	}
 }

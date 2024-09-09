@@ -4,7 +4,7 @@ namespace Govpack\Core;
 
 class Icons {
 
-	private Govpack $plugin;
+	use Plugin_Aware;
 
 	private array $cache = [];
 
@@ -21,11 +21,11 @@ class Icons {
 	];
 
 	public function __construct( $plugin ) {
-		$this->plugin = $plugin;
+		$this->plugin( $plugin );
 	}
 
 	public function icon_dir() {
-		return $this->plugin->path( '/build/icons' );
+		return $this->plugin()->path( '/build/icons' );
 	}
 	/**
 	 * Load an SVG icon from disk

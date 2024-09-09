@@ -1,7 +1,8 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "govpack/profile-v2",
+	"name": "govpack/profile-meta",
+	"title": "Profile Meta",
     "editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./index.css",
@@ -20,7 +21,12 @@
 			"link": true,
 			"text": true	
 		},
-		"layout" : true,
+		"layout" : {
+			"allowSwitching": false,
+			"default" : {
+				"type" : "flex"
+			}
+		},
 		"shadow": true, 
 		"spacing": {
 			"margin": true,  
@@ -34,27 +40,10 @@
 		}
 	},
 	"attributes": {
-		"queryId": {
-			"type": "number"
-		},
-		"profileId": {
-			"type": "number",
-			"default": 0
-		},
-		"postType": {
-			"type": "string",
-			"default": "govpack_profiles"
-		},
-		"width": {
+		"label" : {
 			"type": "string"
 		}
 	},
-	"allowedBlocks": [ 
-		"core/post-title", "core/post-excerpt", "core/spacer", "core/post-featured-image", "core/group", "core/paragraph", "core/image", "core/heading", "govpack/profile-terms", "govpack/profile-meta" ],
-	"providesContext": {
-		"govpack/profileId" : "profileId",
-		"postId" : "profileId",
-		"postType" : "postType",
-		"queryId": "queryId"
-	}
+	"ancestor": [ "govpack/profile-v2" ],
+	"usesContext": ["govpack/profileId", "postType"]
 }
