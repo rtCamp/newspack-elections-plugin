@@ -7,9 +7,9 @@
 
 namespace Govpack\Core;
 
+
 defined( 'ABSPATH' ) || exit;
 
-define( 'GOVPACK_VERSION', '1.2.0' );
 
 /**
  * Main Govpack Class.
@@ -30,6 +30,7 @@ class Govpack {
 	private Admin\Admin $admin;
 	private Blocks $blocks;
 	private Icons $icons;
+	private Version $version;
 
 	/**
 	 * Inits the class and registeres the hooks call.
@@ -44,6 +45,9 @@ class Govpack {
 			$this->dev = new \Govpack\Core\Dev_Helpers( $this );
 			$this->dev->hooks();
 		}
+
+		$this->version = new Version($this);
+		
 	}
 
 	public function path( $path ) {
@@ -112,12 +116,9 @@ class Govpack {
 
 	public function setup() {
 
-
 		// Custom Post Types & taxonomies.
 		self::post_types();
 		self::taxonomies();
-
-		
 
 		if ( defined( 'WP_CLI' ) && \WP_CLI ) {
 			\Govpack\Core\CLI::init();
@@ -176,4 +177,6 @@ class Govpack {
 		$this->blocks()->register( new \Govpack\Blocks\Profile\Profile() );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileSelf\ProfileSelf() );
 	}
+
+	
 }
