@@ -32,6 +32,13 @@ class Version {
 	 */
 	private string $version;
 
+	/**
+	 * Version File Exists
+	 * 
+	 * @access private
+	 * @var bool Cache checked if the version file exists
+	 */
+	private bool $version_file_exists;
 
 	public function __construct(Govpack $plugin) {
 		$this->plugin = $plugin;
@@ -53,7 +60,14 @@ class Version {
 	}
 
 	public function has_version_file() : bool {
-		return file_exists( $this->version_file_path() );
+		
+		if(isset($this->version_file_exists)){
+			$this->version_file_exists;
+		}
+
+		$this->version_file_exists = file_exists( $this->version_file_path() );
+
+		return $this->version_file_exists;
 	}
 
 	public function version_file_path() : string  {

@@ -9,15 +9,15 @@ class Dev_Helpers {
 	private Govpack $plugin;
 
 	private bool $is_git;
-	private bool $has_version_file;
 	private string $branch;
 	private string $commit;
 	private string $build_number;
 	private string $release_label;
-	private Version $version;
+	public Version $version;
 
 	public function __construct( Govpack $plugin ) {
 		$this->plugin = $plugin;
+		$this->version = $plugin->version->get_semvar();
 	}
 
 
@@ -80,7 +80,7 @@ class Dev_Helpers {
 		}
 		return $ref;
 	}
-	
+
 	public function is_composer() {
 		
 		return file_exists( $this->plugin->path( 'composer.lock' ) );
@@ -91,7 +91,7 @@ class Dev_Helpers {
 			return $this->build_number;
 		}
 
-		if ( ! $this->has_version_file() ) {
+		if ( ! $this->plugin->version->has_version_file() ) {
 			return '';
 		}
 
@@ -121,7 +121,7 @@ class Dev_Helpers {
 			return $this->release_label;
 		}
 
-		if ( ! $this->has_version_file() ) {
+		if ( ! $this->plugin->version->has_version_file() ) {
 			return '';
 		}
 
@@ -134,13 +134,6 @@ class Dev_Helpers {
 		}
 	}
 
-	public function version_file_path() {
-		return $this->plugin->path( 'version.php' );
-	}
-
-	public function has_version_file() {
-		return file_exists( $this->version_file_path() );
-	}
 
 	public function is_git_repo() {
 		if ( isset( $this->is_git ) ) {
