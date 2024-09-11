@@ -80,7 +80,7 @@ class Dev_Helpers {
 		}
 		return $ref;
 	}
-
+	
 	public function is_composer() {
 		
 		return file_exists( $this->plugin->path( 'composer.lock' ) );
