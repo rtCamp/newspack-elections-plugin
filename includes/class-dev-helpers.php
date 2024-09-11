@@ -9,14 +9,15 @@ class Dev_Helpers {
 	private Govpack $plugin;
 
 	private bool $is_git;
-	private bool $has_version_file;
 	private string $branch;
+	private string $commit;
 	private string $build_number;
 	private string $release_label;
-	private Version $version;
+	public Version $version;
 
 	public function __construct( Govpack $plugin ) {
 		$this->plugin = $plugin;
+		$this->version = $plugin->version->get_semvar();
 	}
 
 
@@ -79,6 +80,7 @@ class Dev_Helpers {
 		}
 		return $ref;
 	}
+
 	public function is_composer() {
 		
 		return file_exists( $this->plugin->path( 'composer.lock' ) );
@@ -89,7 +91,7 @@ class Dev_Helpers {
 			return $this->build_number;
 		}
 
-		if ( ! $this->has_version_file() ) {
+		if ( ! $this->plugin->version->has_version_file() ) {
 			return '';
 		}
 
@@ -119,7 +121,7 @@ class Dev_Helpers {
 			return $this->release_label;
 		}
 
-		if ( ! $this->has_version_file() ) {
+		if ( ! $this->plugin->version->has_version_file() ) {
 			return '';
 		}
 
@@ -132,13 +134,6 @@ class Dev_Helpers {
 		}
 	}
 
-	public function version_file_path() {
-		return $this->plugin->path( 'version.php' );
-	}
-
-	public function has_version_file() {
-		return file_exists( $this->version_file_path() );
-	}
 
 	public function is_git_repo() {
 		if ( isset( $this->is_git ) ) {
@@ -175,6 +170,35 @@ class Dev_Helpers {
 			$git_head_file = file_get_contents( $this->plugin->path( '.git/HEAD' ), true );
 			$ref           = explode( '/', $git_head_file, 3 );
 			$this->branch  = rtrim( $ref[2] );
+			return $this->branch;
+
+		} catch ( \Exception $e ) {
+			return '';
+		}
+	}
+
+	public function get_current_commit(): string {
+		
+		if ( isset( $this->commit ) ) {
+			return $this->commit;
+		}
+
+		// this might get called accidentally, make sure it doesn't
+		if ( ! $this->is_git_repo() ) {
+			return '';
+		}
+
+		if ( ! $this->get_git_branch() ) {
+			return '';
+		}
+
+		
+		try {
+
+			$git_head_file = '.git/refs/heads/' . $this->get_git_branch();
+			$commit = file_get_contents( $this->plugin->path( $git_head_file  ), true );
+			$this->commit = explode( '/', $git_head_file, 3 );
+			$this->commit  = rtrim( $ref[2] );
 			return $this->branch;
 
 		} catch ( \Exception $e ) {

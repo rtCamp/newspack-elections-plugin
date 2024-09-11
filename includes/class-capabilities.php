@@ -15,6 +15,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Capabilities {
 
+	use \Govpack\Core\Instance;
 
 	const CAN_IMPORT = 'govpack_import';
 	const CAN_EXPORT = 'govpack_export';
@@ -22,8 +23,7 @@ class Capabilities {
 	 * Set up actions and filters.
 	 */
 	public static function hooks() {
-		add_action( 'init', [ __CLASS__, 'add_capabilities' ] );
-		add_action( 'init', [ __CLASS__, 'test_capabilities' ] );
+		
 	}
 
 	/**
@@ -33,6 +33,12 @@ class Capabilities {
 		$admin = get_role( 'administrator' );
 		$admin->add_cap( self::CAN_IMPORT, true );
 		$admin->add_cap( self::CAN_EXPORT, true );
+	}
+
+	public static function remove_capabilities() {
+		$admin = get_role( 'administrator' );
+		$admin->remove_cap( self::CAN_IMPORT );
+		$admin->remove_cap( self::CAN_EXPORT );
 	}
 
 	/**

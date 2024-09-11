@@ -54,8 +54,10 @@ if ( ! is_dir( GOVPACK_PLUGIN_PATH . 'build' ) ) {
 require_once GOVPACK_PLUGIN_PATH . 'autoloader.php';
 
 
+
 // Include the main Govpack class.
 if ( class_exists( '\Govpack\Core\Govpack' ) ) {
 	$GLOBALS['govpack'] = \Govpack\Core\Govpack::instance();
 	register_activation_hook( __FILE__, [ $GLOBALS['govpack'], 'activation' ] );
+	register_deactivation_hook( __FILE__, [ $GLOBALS['govpack'], 'deactivation' ] );
 }

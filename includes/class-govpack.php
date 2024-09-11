@@ -7,9 +7,9 @@
 
 namespace Govpack\Core;
 
+
 defined( 'ABSPATH' ) || exit;
 
-define( 'GOVPACK_VERSION', '1.1.0' );
 
 /**
  * Main Govpack Class.
@@ -30,6 +30,8 @@ class Govpack {
 	private Admin\Admin $admin;
 	private Blocks $blocks;
 	private Icons $icons;
+	
+	public Version $version;
 
 	/**
 	 * Inits the class and registeres the hooks call.
@@ -40,10 +42,15 @@ class Govpack {
 		$this->require( 'includes/govpack-functions.php' );
 		$this->require( 'includes/govpack-functions-template.php' );
 
+		$this->version = new Version($this);
+
 		if ( class_exists( '\Govpack\Core\Dev_Helpers' ) ) {
 			$this->dev = new \Govpack\Core\Dev_Helpers( $this );
 			$this->dev->hooks();
 		}
+
+		
+		
 	}
 
 	public function path( $path ) {
@@ -67,6 +74,15 @@ class Govpack {
 	public static function activation() {
 		\Govpack\Core\CPT\Profile::register_post_type();
 		flush_rewrite_rules( false ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.flush_rewrite_rules_flush_rewrite_rules
+
+		// get capabilities setup first.
+		\Govpack\Core\Capabilities::instance()->add_capabilities();
+	}
+
+	public static function deactivation() {
+		
+		// get capabilities setup first.
+		\Govpack\Core\Capabilities::instance()->remove_capabilities();
 	}
 
 	public function url( $path ) {
@@ -104,13 +120,9 @@ class Govpack {
 
 	public function setup() {
 
-
 		// Custom Post Types & taxonomies.
 		self::post_types();
 		self::taxonomies();
-
-		// get capabilities setup first.
-		\Govpack\Core\Capabilities::hooks();
 
 		if ( defined( 'WP_CLI' ) && \WP_CLI ) {
 			\Govpack\Core\CLI::init();
@@ -172,4 +184,6 @@ class Govpack {
 		$this->blocks()->register( new \Govpack\Blocks\ProfileTerms\Profile_Terms( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileMeta\Profile_Meta( $this ) );
 	}
+
+	
 }
