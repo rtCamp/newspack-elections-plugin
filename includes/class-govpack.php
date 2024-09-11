@@ -30,7 +30,8 @@ class Govpack {
 	private Admin\Admin $admin;
 	private Blocks $blocks;
 	private Icons $icons;
-	private Version $version;
+	
+	public Version $version;
 
 	/**
 	 * Inits the class and registeres the hooks call.
@@ -41,12 +42,14 @@ class Govpack {
 		$this->require( 'includes/govpack-functions.php' );
 		$this->require( 'includes/govpack-functions-template.php' );
 
+		$this->version = new Version($this);
+
 		if ( class_exists( '\Govpack\Core\Dev_Helpers' ) ) {
 			$this->dev = new \Govpack\Core\Dev_Helpers( $this );
 			$this->dev->hooks();
 		}
 
-		$this->version = new Version($this);
+		
 		
 	}
 
