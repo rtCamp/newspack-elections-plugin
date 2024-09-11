@@ -57,6 +57,15 @@ class Govpack {
 	public static function activation() {
 		\Govpack\Core\CPT\Profile::register_post_type();
 		flush_rewrite_rules( false ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.flush_rewrite_rules_flush_rewrite_rules
+
+		// get capabilities setup first.
+		\Govpack\Core\Capabilities::instance()->add_capabilities();
+	}
+
+	public static function deactivation() {
+		
+		// get capabilities setup first.
+		\Govpack\Core\Capabilities::instance()->remove_capabilities();
 	}
 
 	public function build_path( $path ) {
@@ -108,8 +117,7 @@ class Govpack {
 		self::post_types();
 		self::taxonomies();
 
-		// get capabilities setup first.
-		\Govpack\Core\Capabilities::hooks();
+		
 
 		if ( defined( 'WP_CLI' ) && \WP_CLI ) {
 			\Govpack\Core\CLI::init();
