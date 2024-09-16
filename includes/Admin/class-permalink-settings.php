@@ -4,33 +4,30 @@ namespace Govpack\Core\Admin;
 
 class Permalink_Settings {
 
-	private $permalinks;
-	private $base_slug;
-
-	private $option_name = 'govpack_permalinks';
+	private array $permalinks;
+	private string $base_slug = "profile";
+	private string $option_name = 'govpack_permalinks';
 
 	public function __construct() {
 		$this->add_permalink_settings_section();
 		$this->handle_save();
-
-		$this->base_slug = 'profile';
 	}
 
 	public static function hooks() {
 		new self();
 	}
 
-	public function defaults() {
+	public function defaults() : array {
 		return [
 			'profile_base' => '',
 		];
 	}
 
-	public function get_permalinks() {
+	public function get_permalinks()  : array {
 		return (array) get_option( $this->option_name, $this->defaults() );
 	}
 
-	public function update_permalinks() {
+	public function update_permalinks() : void  {
 		update_option( $this->option_name, $this->permalinks );
 	}
 
@@ -41,7 +38,7 @@ class Permalink_Settings {
 	 * 
 	 * Sourced from WooCommerce https://github.com/woocommerce/woocommerce/blob/c8202bc72943acfa2caa78be6337c23768b815cd/plugins/woocommerce/includes/wc-formatting-functions.php#L77
 	 */
-	private static function sanitize_permalink( $permalink ) {
+	private static function sanitize_permalink( string $permalink ) : string  {
 		global $wpdb;
 
 		$permalink = $wpdb->strip_invalid_text_for_column( $wpdb->options, 'option_value', $permalink ?? '' );
@@ -62,7 +59,7 @@ class Permalink_Settings {
 	 * Handles nonce verification for CSRF 
 	 * Passes off to the actual save logic
 	 */
-	public function handle_save() {
+	public function handle_save() : void {
 		
 		if ( ! is_admin() ) {
 			return;
@@ -91,7 +88,7 @@ class Permalink_Settings {
 		);
 	}
 
-	public function save( $profile_permalink_base, $profile_permalink_structure = false ) {
+	public function save( string $profile_permalink_base, bool $profile_permalink_structure = false ) : void  {
 
 		if ( ( $profile_permalink_base === 'custom' ) && ( $profile_permalink_structure ) ) {
 				
@@ -119,7 +116,7 @@ class Permalink_Settings {
 
 	
 
-	public function add_permalink_settings_section() {
+	public function add_permalink_settings_section() : void {
 
 		$setting_section_id = 'govpack-permalink';
 
@@ -131,7 +128,7 @@ class Permalink_Settings {
 		);
 	}
 
-	public function settings() {
+	public function settings() : void {
 		wp_nonce_field( 'govpack-permalinks', 'govpack-permalinks-nonce' );
 		echo wp_kses_post( wpautop( sprintf( 'You may use a custom base for your Govpack Profile\'s URLs here. For example, using <code>candidate</code> would make your profile links like <code>%scandidate/jo-smith/</code>.', esc_url( home_url( '/' ) ) ) ) );
 		

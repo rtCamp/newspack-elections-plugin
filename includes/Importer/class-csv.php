@@ -22,7 +22,7 @@ class CSV extends \Govpack\Core\Importer\Abstracts\Abstract_Importer {
 	 * @param string $file  path of the JSON file.
 	 * @throws Exception Could Not Open File to Parse.
 	 */
-	public static function create_reader( $file ) {
+	public static function create_reader( string $file ) {
 
 		try {
 			$reader = Reader::createFromPath( $file );
@@ -55,7 +55,7 @@ class CSV extends \Govpack\Core\Importer\Abstracts\Abstract_Importer {
 	 * @param array $header array containeing the CSV colum headers.
 	 * @throws Exception Exception around the CSV missing a required column.
 	 */
-	public static function has_required_columns( $header ) {
+	public static function has_required_columns( array $header ) : bool {
 
 		$required = apply_filters(
 			'govpack_importer_required_columns',
@@ -88,7 +88,7 @@ class CSV extends \Govpack\Core\Importer\Abstracts\Abstract_Importer {
 	 * @param Reader $reader  path of the JSON file.
 	 * @param Array     $extra  Extra params used for the import.
 	 */
-	public static function process( $reader, $extra ) {
+	public static function process( $reader, array $extra ) : void {
 
 		update_option( 'govpack_import_group', self::import_group() );
 

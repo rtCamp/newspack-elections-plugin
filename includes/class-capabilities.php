@@ -29,13 +29,13 @@ class Capabilities {
 	/**
 	 * Adds Capabilities To the Admin Users for Govpack
 	 */
-	public static function add_capabilities() {
+	public static function add_capabilities() : void {
 		$admin = get_role( 'administrator' );
 		$admin->add_cap( self::CAN_IMPORT, true );
 		$admin->add_cap( self::CAN_EXPORT, true );
 	}
 
-	public static function remove_capabilities() {
+	public static function remove_capabilities() : void {
 		$admin = get_role( 'administrator' );
 		$admin->remove_cap( self::CAN_IMPORT );
 		$admin->remove_cap( self::CAN_EXPORT );
@@ -44,8 +44,8 @@ class Capabilities {
 	/**
 	 * Test for if capabilites are working
 	 */
-	public static function test_capabilities() {
-		current_user_can( 'govpack_import' );
+	public static function test_capabilities() : bool {
+		return current_user_can( 'govpack_import' );
 	}
 
 	/**
@@ -54,7 +54,7 @@ class Capabilities {
 	 * @param string $singular singular name for the post type, used to create capabilities.
 	 * @param string $plural plural name for the post type, used to create capabilities. If unset/null the will default to the singular with an 's' postfixed.
 	 */
-	public static function compile_post_type_capabilities( $singular = 'post', $plural = null ) {
+	public static function compile_post_type_capabilities( $singular = 'post', $plural = null ) : array {
 
 		// no plural? use signular with an s.
 		if ( ! $plural ) {

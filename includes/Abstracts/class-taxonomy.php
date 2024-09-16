@@ -16,7 +16,7 @@ abstract class Taxonomy {
 	/**
 	 * WordPress Hooks
 	 */
-	public static function hooks() {
+	public static function hooks() : void {
 		add_action( 'init', [ get_called_class(), 'register_taxonomy' ] );
 	}
 
@@ -25,9 +25,8 @@ abstract class Taxonomy {
 	 *
 	 * @return array
 	 */
-	protected static function get_taxonomy_post_types() {
+	protected static function get_taxonomy_post_types() : array {
 		return [ Profile::CPT_SLUG ];
 	}
-
 
 }

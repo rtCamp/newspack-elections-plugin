@@ -18,26 +18,24 @@ class Menu {
 	 * 
 	 * @var page_title 
 	 */ 
-	protected $page_title; 
+	protected string $page_title; 
 
 	/**
 	 * Title in the Menu
 	 * 
 	 * @var menu_title 
 	 */
-	protected $menu_title; 
+	protected string $menu_title; 
 
 	/**
 	 * Unique ID for the menu in urls etc
 	 * 
-	 * @var menu_slug 
 	 */
-	protected $menu_slug;
+	protected string $menu_slug;
 	
 	/** 
 	 * Call back to render the page
 	 * 
-	 * @var function 
 	 */ 
 	protected $function; 
 
@@ -46,28 +44,28 @@ class Menu {
 	 * 
 	 * @var page_title 
 	 */ 
-	protected $capability = 'manage_options'; 
+	protected string $capability = 'manage_options'; 
 	
 	/** 
 	 * Where in the menu will our item be located
 	 * 
 	 * @var position 
 	 */ 
-	protected $position = 30; 
+	protected int $position = 30; 
 
 	/** 
 	 *  URL for icon placement
 	 * 
 	 * @var icon_url 
 	 */ 
-	protected $icon_url = ''; 
+	protected  string $icon_url = ''; 
 	
 	/** 
 	 * Array of children to include in the menu
 	 * 
 	 *  @var items 
 	 */  
-	protected $items = []; 
+	protected array $items = []; 
 
 	/** 
 	 * Generic set and return so we can use a fluent style
@@ -75,7 +73,7 @@ class Menu {
 	 *  @param string $key string of object property to set.
 	 *  @param string $value caluw to set the property.
 	 */  
-	public function set( $key, $value ) {
+	public function set( string $key, mixed $value ) {
 		$this->$key = $value;
 		return $this;
 	}
@@ -85,7 +83,7 @@ class Menu {
 	 * 
 	 *  @param string $value value to set page title.
 	 */ 
-	public function set_page_title( $value ) {
+	public function set_page_title( string $value ) {
 		return $this->set( 'page_title', $value );
 	}
 
@@ -94,7 +92,7 @@ class Menu {
 		 * 
 		 *  @param string $value value to set page title.
 		 */ 
-	public function set_menu_title( $value ) {
+	public function set_menu_title( string $value ) {
 		return $this->set( 'menu_title', $value );
 	}
 	/** 
@@ -102,7 +100,7 @@ class Menu {
 	 * 
 	 *  @param string $value value to set menu title.
 	 */ 
-	public function set_menu_slug( $value ) {
+	public function set_menu_slug( string $value ) {
 		return $this->set( 'menu_slug', $value );
 	}
 	/** 
@@ -110,7 +108,7 @@ class Menu {
 	 * 
 	 *  @param string $value value to set capability.
 	 */ 
-	public function set_capability( $value ) {
+	public function set_capability(string  $value ) {
 		return $this->set( 'capability', $value );
 	}
 	/** 
@@ -118,7 +116,7 @@ class Menu {
 	 * 
 	 *  @param string $value value to set position to use in menu.
 	 */ 
-	public function set_position( $value ) {
+	public function set_position( int $value ) {
 		return $this->set( 'position', $value );
 	}
 	/** 
@@ -126,7 +124,7 @@ class Menu {
 	 * 
 	 *  @param string $value value to set icon url.
 	 */ 
-	public function set_icon( $value ) {
+	public function set_icon( string $value ) {
 		return $this->set( 'icon_url', $value );
 	}
 	/** 
@@ -134,7 +132,7 @@ class Menu {
 	 * 
 	 *  @param string $value value to set callback function.
 	 */ 
-	public function set_callback( $value ) {
+	public function set_callback( callable $value ) {
 		return $this->set( 'function', $value );
 	}
 	/** 
@@ -142,7 +140,7 @@ class Menu {
 	 * 
 	 *  @param Menu_Item $item Submemnu Item.
 	 */ 
-	public function add_item( $item ) {
+	public function add_item( Menu_Item $item ) {
 
 		$this->items[] = $item->set_parent_slug( $this->menu_slug );
 	}
@@ -154,7 +152,7 @@ class Menu {
 	 *  @throws Exception Required property Missing.
 	 *  @throws Exception Required property is an empty string.
 	 */ 
-	public function check_required( $required ) {
+	public function check_required( array $required ) : bool {
 		
 		foreach ( $required as $key ) {
 
@@ -166,6 +164,8 @@ class Menu {
 				throw new Exception( 'Required Menu Property ' . $key . ' is an empty string and much have a value' ); //phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 			}
 		}
+
+		return true;
 	}
 
 	/** 

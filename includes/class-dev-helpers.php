@@ -21,14 +21,14 @@ class Dev_Helpers {
 	}
 
 
-	public function hooks() {
+	public function hooks() : void {
 		add_filter( 'plugins_list', [ $this, 'filter_version' ] );
 	}
 
 	/*
 	Filter the version number the plugin shows in the Plugin Table
 	*/
-	public function filter_version( $plugins ) {
+	public function filter_version( array $plugins ) : array {
 
 		$plugin_file = 'govpack/govpack.php';
 	
@@ -47,7 +47,7 @@ class Dev_Helpers {
 	 * of `get_version_suffix`. Usually a build number, git branch name or version 
 	 * tag
 	 */
-	public function generate_version_string( $current_version ) {
+	public function generate_version_string( $current_version ) : string {
 		$suffix = $this->get_version_suffix();
 		if ( ! $suffix ) {
 			return $current_version;
@@ -58,7 +58,7 @@ class Dev_Helpers {
 	/**
 	 * Get the version suffix
 	 */
-	public function get_version_suffix(): ?string {
+	public function get_version_suffix(): null | string {
 
 		if ( $this->label() !== '' ) {
 			return $this->label();
@@ -80,8 +80,8 @@ class Dev_Helpers {
 		}
 		return $ref;
 	}
-	
-	public function is_composer() {
+
+	public function is_composer() : bool {
 		
 		return file_exists( $this->plugin->path( 'composer.lock' ) );
 	}
@@ -135,7 +135,7 @@ class Dev_Helpers {
 	}
 
 
-	public function is_git_repo() {
+	public function is_git_repo() : bool {
 		if ( isset( $this->is_git ) ) {
 			return $this->is_git;
 		}

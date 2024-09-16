@@ -55,7 +55,7 @@ class Actions {
 	/**
 	 * Adds Actions to Hooks 
 	 */
-	public static function hooks() {
+	public static function hooks() : void  {
 		\add_action( 'govpack_import_category', [ self::instance(), 'make_term' ] );
 		\add_action( 'govpack_import_tag', [ self::instance(), 'make_term' ] );
 		\add_action( 'govpack_import_term', [ self::instance(), 'make_term' ] );
@@ -74,7 +74,7 @@ class Actions {
 	 * 
 	 * @param string $list string of items from openstates.
 	 */
-	public static function explode_openstates_list( $os_list ) {
+	public static function explode_openstates_list( $os_list ) : array {
 		return explode( ';', $os_list );
 	}
 
@@ -83,7 +83,7 @@ class Actions {
 	 * 
 	 * @param array $args Args passed from Action Scheduler.
 	 */
-	public function make_term( $args ) {
+	public function make_term( $args ) : void {
 		$this->process_term( $args, null );
 	}
 
@@ -92,7 +92,7 @@ class Actions {
 	 * 
 	 * @param array $content content from the imported.
 	 */
-	public static function inject_block_in_content( $content = null ) {
+	public static function inject_block_in_content( $content = null ) : string {
 
 		// phpcs:ignore content is "" false null or nil.
 		if ( ! $content ) {
@@ -111,7 +111,7 @@ class Actions {
 	 * 
 	 * @param array $content content from the imported.
 	 */
-	public static function wrap_content_in_block_grammar( $content = null ) {
+	public static function wrap_content_in_block_grammar( $content = null ) : string {
 		
 		// phpcs:ignore content is "" false null or nil.
 		if ( ! $content ) {
@@ -143,7 +143,7 @@ class Actions {
 	 * @param array $data Term data to check against.
 	 * @return int|bool Existing term ID if it exists, false otherwise.
 	 */
-	protected function term_exists( $data ) {
+	protected function term_exists( $data ) : bool {
 
 		// Still nothing, try comment_exists, and cache it.
 		$exists = term_exists( $data['slug'], $data['taxonomy'] ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.term_exists_term_exists
@@ -161,7 +161,7 @@ class Actions {
 	 *
 	 * @param array $data Term data. (Return empty to skip.).
 	 */
-	protected function process_term( $data ) {
+	protected function process_term( $data ) : bool {
 	
 		if ( empty( $data ) ) {
 			return false;
@@ -200,6 +200,8 @@ class Actions {
 		$term_id = $result['term_id'];
 
 		do_action( 'wp_import_insert_term', $term_id, $data );
+
+		return true;
 	}
 
 	/**
@@ -207,7 +209,7 @@ class Actions {
 	 * 
 	 * @param string $address address to be split up.
 	 */
-	public static function get_address_from_open_states_data( $address ) {
+	public static function get_address_from_open_states_data( $address ) : array {
 		if ( ! $address ) {
 			return [];
 		}
@@ -239,7 +241,7 @@ class Actions {
 	 * 
 	 * @param array $data_input Data passed from Action Scheduler.
 	 */
-	public static function make_profile_from_csv( $data_input ) {
+	public static function make_profile_from_csv( $data_input ) : bool {
 		
 		
 
@@ -315,7 +317,7 @@ class Actions {
 		self::$log->debug( sprintf( 'Created profile %d', $resp ), $post, $resp );
 
 		if ( \is_wp_error( $resp ) ) {
-			return; 
+			return false; 
 		}
 
 		foreach ( $tax as $taxonomy => $tags ) {
@@ -344,7 +346,7 @@ class Actions {
 	 * @param array $post Data passed from Importer.
 	 * @return int|WP_Error returns the post id if the change went through or a WP_Error if not.
 	 */
-	public static function create_or_update( $post ) {
+	public static function create_or_update( $post ) : int | \WP_Error {
 		
 		if ( self::is_profile_update( $post ) ) {
 			self::$log->info( 'Update existing profile' );
@@ -365,7 +367,7 @@ class Actions {
 	 * @param array $post Data passed from Importer.
 	 * @return bool true if the post exists, false if not
 	 */
-	public static function is_profile_update( $post ) {
+	public static function is_profile_update( $post ) : bool {
 		if (
 			( isset( $post['ID'] ) ) && 
 			( $post['ID'] ) && 
@@ -389,7 +391,7 @@ class Actions {
 	 * @return   bool          True if the post exists; otherwise, false.
 	 * @since    1.0.0
 	 */
-	public static function post_exists( $id ) {
+	public static function post_exists( $id ) : bool {
 		return is_string( get_post_status( $id ) );
 	}
 
@@ -400,7 +402,7 @@ class Actions {
 	 * @param string $term_name The Name of the term to find or create.
 	 * @param string $taxonomy the taxonomy to look/create in.
 	 */
-	public static function assign_term_to_obj( $object_id, $term_name, $taxonomy ) {
+	public static function assign_term_to_obj( $object_id, $term_name, $taxonomy ) : void {
 		$term = self::find_or_create_term( $term_name, $taxonomy );
 		if ( ! \is_wp_error( $term ) ) {
 			\wp_set_object_terms( $object_id, [ $term->term_id ], $taxonomy );
@@ -413,7 +415,7 @@ class Actions {
 	 * @param string $term_name The Name of the term to find or create.
 	 * @param string $taxonomy the taxonomy to look/create in.
 	 */
-	public static function find_or_create_term( $term_name = null, $taxonomy = null ) {
+	public static function find_or_create_term( $term_name = null, $taxonomy = null ) : \WP_Term {
 
 		require_once ABSPATH . 'wp-admin/includes/taxonomy.php';
 
@@ -442,7 +444,7 @@ class Actions {
 	/**
 	 * Run a Cleanup  
 	 */
-	public static function cleanup_import() {
+	public static function cleanup_import() : void {
 		\Govpack\Core\Importer\Importer::clean();
 	}
 }

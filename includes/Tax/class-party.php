@@ -25,7 +25,7 @@ class Party extends \Govpack\Core\Abstracts\Taxonomy {
 	/**
 	 * Register this taxonomy for profiles.
 	 */
-	public static function register_taxonomy() {
+	public static function register_taxonomy() : void {
 		register_taxonomy(
 			self::TAX_SLUG,
 			self::get_taxonomy_post_types(),

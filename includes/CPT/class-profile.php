@@ -10,8 +10,8 @@ namespace Govpack\Core\CPT;
 use Govpack\Core\Capabilities;
 use Govpack\Core\Profile_Links;
 use Govpack\Core\Profile_Link_Services;
-
-
+use WP_Screen;
+use WP_Post_Type;
 
 /**
  * Register and handle the "Profile" Custom Post Type
@@ -32,7 +32,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	/**
 	 * WordPress Hooks
 	 */
-	public static function hooks() {
+	public static function hooks() : void {
 		parent::hooks();
 		\add_action( 'init', [ __CLASS__, 'register_post_meta' ] );
 		
@@ -57,7 +57,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_x_meta_fields_to_twitter' ], 10, 5 );
 	}
 
-	public static function fallback_x_meta_fields_to_twitter( $value, $object_id, $meta_key, $single, $meta_type ) {
+	public static function fallback_x_meta_fields_to_twitter( mixed $value, int $object_id, string $meta_key, bool $single, string $meta_type ) : mixed {
 
 		// check for an empty string if we expect a string, exit otherwise
 		if ( $single && $value !== '' ) {
@@ -85,7 +85,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 		return get_metadata( $meta_type, $object_id, $fallback_key, $single );
 	}
 
-	public static function add_rest_fields() {
+	public static function add_rest_fields() : void {
 		register_rest_field(
 			self::CPT_SLUG,
 			'profile_links',
@@ -144,7 +144,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 * @param string $doaction Bulk action we're doing.
 	 * @param array  $post_ids Array fof post IDs to publish.
 	 */
-	public static function handle_bulk_publish( $sendback, $doaction, $post_ids ) {
+	public static function handle_bulk_publish(  string $sendback, string $doaction, array $post_ids ) : string {
 
 		$published = 0;
 
@@ -172,7 +172,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 * 
 	 * @param array $actions Bulk actions to filter.
 	 */
-	public static function filter_bulk_actions( $actions ) {
+	public static function filter_bulk_actions( array $actions ) : array {
 		$actions['publish'] = 'Publish';
 		return $actions;
 	}
@@ -183,7 +183,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 * @param string  $post_type Slug of the post type being viewed in the admin.
 	 * @return boolean
 	 */
-	public static function disable_months_dropdown( $disable, $post_type ) {
+	public static function disable_months_dropdown( bool $disable, string $post_type ) : bool {
 
 		if ( self::CPT_SLUG === $post_type ) {
 			return true;
@@ -199,7 +199,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 * @param object $screen WP_Screen Object of the currently view.
 	 * @return array
 	 */
-	public static function hidden_columns( $hidden, $screen ) {
+	public static function hidden_columns( array $hidden,  WP_Screen $screen ) : array {
 
 		if ( 'edit-govpack_profiles' === $screen->id ) {
 			$hidden[] = 'email';
@@ -214,7 +214,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 *
 	 * @return object|WP_Error
 	 */
-	public static function register_post_type() {
+	public static function register_post_type() : WP_Post_Type  {
 
 		$permalinks          = gp_get_permalink_structure();
 		$permalink_structure = ( isset( $permalinks['profile_base'] ) ? $permalinks['profile_base'] : 'profile' );
@@ -265,7 +265,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 *
 	 * @return array
 	 */
-	public static function get_import_model() {
+	public static function get_import_model() : array {
 
 		$model = [];
 
@@ -319,7 +319,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 *
 	 * @return array
 	 */
-	public static function get_export_model() {
+	public static function get_export_model() : array  {
 
 		$model = self::get_import_model();
 
@@ -345,7 +345,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	/**
 	 * Get all the meta keys we use 
 	 */
-	public static function get_meta_keys() {
+	public static function get_meta_keys() : array {
 
 		$meta_keys = [
 			// About Panel.
@@ -451,7 +451,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	/**
 	 * Register Meta data for the post in the REST API 
 	 */
-	public static function register_post_meta() {
+	public static function register_post_meta() : void {
 
 		foreach ( self::get_meta_keys() as $key ) {
 			self::register_meta( $key );
@@ -464,7 +464,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 * @param string $slug name of the meta_field to register.
 	 * @param array  $args extra arguments the meta_field may take.
 	 */
-	public static function register_meta( string $slug, array $args = [] ) {
+	public static function register_meta( string $slug, array $args = [] ) : void  {
 
 
 		$args = apply_filters(
@@ -486,7 +486,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 		register_post_meta( self::CPT_SLUG, $slug, $args );
 	}
 
-	public static function filter_meta_registration_for_links( $args = [], $slug = '' ) {
+	public static function filter_meta_registration_for_links( array $args = [], string $slug = '' ) : array {
 		if ( $slug !== 'links' ) {
 			return $args;
 		}
@@ -500,7 +500,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 * Print out the post title where the normal title field would be. This post type does not
 	 * `supports` the title field; it is constructed from the profile data.
 	 */
-	public static function show_profile_title() {
+	public static function show_profile_title() : void {
 		global $typenow, $pagenow;
 		if ( self::CPT_SLUG === $typenow && 'post.php' === $pagenow ) {
 			echo '<h1>' . esc_html( get_the_title() ) . '</h1>';
@@ -512,7 +512,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 *
 	 * @param array $sortable_columns An array of sortable columns.
 	 */
-	public static function sortable_columns( $sortable_columns ) {
+	public static function sortable_columns( array $sortable_columns ) : array  {
 		$sortable_columns[ 'taxonomy-' . \Govpack\Core\Tax\State::TAX_SLUG ]              = 'State';
 		$sortable_columns[ 'taxonomy-' . \Govpack\Core\Tax\Party::TAX_SLUG ]              = 'Party';
 		$sortable_columns[ 'taxonomy-' . \Govpack\Core\Tax\LegislativeBody::TAX_SLUG ]    = 'Legislative Body';
@@ -527,7 +527,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 *
 	 * @param array $columns An array of columns.
 	 */
-	public static function custom_columns( $columns ) {
+	public static function custom_columns( array $columns ) : array {
 		
 
 		// I want the image between the checkbox and the title so we have to slice up the columns array.
@@ -557,7 +557,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 * @param string $post_type slug of the post type we want add the dropdowns to.
 	 * @param string $which unknown, kept fo it triggers the cirrect function from the filter call.
 	 */
-	public static function post_table_filters( $post_type, $which ) {
+	public static function post_table_filters( string $post_type, $which ) : void {
 		
 		self::taxonomy_dropdown( \Govpack\Core\Tax\LegislativeBody::TAX_SLUG, $post_type );
 		self::taxonomy_dropdown( \Govpack\Core\Tax\State::TAX_SLUG, $post_type );
@@ -577,7 +577,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 * @param string $taxonomy Taxonomy slug.
 	 * @param string $post_type Post type slug.
 	 */
-	public static function taxonomy_dropdown( $taxonomy, $post_type ) {
+	public static function taxonomy_dropdown( string $taxonomy, string $post_type ) : void {
 
 		if ( isset( $_REQUEST[ $taxonomy ] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$current = sanitize_key( wp_unslash( $_REQUEST[ $taxonomy ] ) ); //phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -630,10 +630,8 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 * @param string $column_key the key of the column used in WP_List_Table.
 	 * @param int    $post_id id of the post being displayed in the row.
 	 */
-	public static function custom_columns_content( $column_key, $post_id ) {
+	public static function custom_columns_content( string $column_key, int $post_id ) : void {
 
-		
-		
 		if ( 'image' === $column_key ) {
 			if ( has_post_thumbnail( $post_id ) ) {
 				echo get_the_post_thumbnail( $post_id, [ 90, 90 ] );
@@ -664,10 +662,8 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 
 	/**
 	 * Set the post title based on the profile data (first and last name);
-
-	 * @return array
 	 */
-	public static function set_profile_title( $post_id, $post, $update, $post_before ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+	public static function set_profile_title( string|int $post_id, \WP_Post $post, $update, $post_before ) : void { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
 		
 		
 		if ( $post->post_type !== self::CPT_SLUG ) {
@@ -723,7 +719,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 * @param string $seperator     String used to seperate the address items returned in the output string.
 	 * @return string
 	 */
-	public static function formatAddress( $profile_data, $type = 'main', $seperator = ',' ) {
+	public static function formatAddress( array $profile_data, string $type = 'main', string $seperator = ',' ) : null | string  {
 
 		// BUild an arry of address items that we can connect with a join(", ") to get nice formatting.
 		$address   = [];
@@ -756,7 +752,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 		return ( empty( $address ) ? null : join( $seperator, $address ) );
 	}
 
-	public static function age_from_epoc( $dob ) {
+	public static function age_from_epoc( string|int $dob ) : string {
 		
 		if ( $dob === '' ) {
 			return '';
@@ -785,21 +781,21 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 *
 	 * @return array Profile data
 	 */
-	public static function get_data( $profile_id ) {
+	public static function get_data( string|int $profile_id ) : array|null {
 		$profile_id = absint( $profile_id );
 		if ( ! $profile_id ) {
-			return;
+			return null;
 		}
 
 		$profile_raw_data = get_post( $profile_id );
 		if ( ! $profile_raw_data ) {
-			return;
+			return null;
 		}
 
 
 		$profile_raw_meta_data = get_post_meta( $profile_id );
 		if ( ! $profile_raw_meta_data ) {
-			return;
+			return null;
 		}
 
 		$term_objects = wp_get_post_terms(
@@ -950,7 +946,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 		return apply_filters( 'govpack_profile_data', $profile_data );
 	}
 
-	public static function generate_name_for_profile( int $profile_id ): array {
+	public static function generate_name_for_profile( string|int $profile_id ): array {
 
 		$name_parts = [
 			'prefix' => get_post_meta( $profile_id, 'name_prefix', true ) ?? null,
@@ -976,13 +972,13 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 		return $name_data;
 	}
 
-	public static function generate_links_for_profile( $profile_id ) {
+	public static function generate_links_for_profile( string|int $profile_id ) : array {
 		$pl = new Profile_Links( $profile_id );
 		$pl->generate();
 		return $pl->to_array();
 	}
 
-	public static function generate_link_services() {
+	public static function generate_link_services() : array {
 		$services = new Profile_Link_Services();
 		return $services->to_array();
 	}
@@ -993,7 +989,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 * 
 	 * The default block string for a profile.  Usually injected into the profile import before any content 
 	 */
-	public static function default_profile_content() {
+	public static function default_profile_content() : string {
 		return '<!-- wp:govpack/profile-self {"showName":true} /-->';
 	}
 }

@@ -32,7 +32,7 @@ class Permalinks {
 	}
 
 
-	public function permalinks() {
+	public function permalinks() : array{
 		if ( empty( $this->permalinks ) ) {
 			$this->permalinks = $this->get_permalinks();
 		}
@@ -40,18 +40,18 @@ class Permalinks {
 		return $this->permalinks;
 	}
 
-	private function defaults() {
+	private function defaults() : array {
 		return [
 			'profile_base' => '',
 		];
 	}
 
-	public function get_permalinks() {
+	public function get_permalinks() : array {
 		return (array) get_option( $this->option_name, $this->defaults() );
 	}
 
 	
-	public function update_permalinks() {
+	public function update_permalinks() : void {
 		update_option( $this->option_name, $this->permalinks );
 	}
 }
