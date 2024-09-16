@@ -38,8 +38,12 @@ if ( ! defined( 'GOVPACK_PLUGIN_BUILD_URL' ) ) {
 
 if( !class_exists( 'Govpack_Bootstrap_Helper' ) ){
 	require_once __DIR__ . '/includes/class-bootstrap-helper.php';
-} else {
+} elseif(method_exists("Govpack_Bootstrap_Helper", "notice_double_install")) {
 	add_action( 'all_admin_notices', 'Govpack_Bootstrap_Helper::notice_double_install' );
+	return;
+} else {
+	require_once __DIR__ . '/includes/class-npe-bootstrap-helper.php';
+	add_action( 'all_admin_notices', 'NPE_Bootstrap_Helper::notice_double_install' );
 	return;
 }
 
