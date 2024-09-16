@@ -10,8 +10,7 @@ namespace Govpack\Core\CPT;
 use Govpack\Core\Capabilities;
 use Govpack\Core\Profile_Links;
 use Govpack\Core\Profile_Link_Services;
-
-
+use Govpack\Core\Rest_Field;
 
 /**
  * Register and handle the "Profile" Custom Post Type
@@ -51,9 +50,9 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 		add_filter( 'handle_bulk_actions-edit-' . self::CPT_SLUG, [ __CLASS__, 'handle_bulk_publish' ], 10, 3 );
 
 		add_filter( 'govpack_profile_register_meta_field_args', [ __CLASS__, 'filter_meta_registration_for_links' ], 10, 2 );
-
-		add_action( 'rest_api_init', [ __CLASS__, 'add_rest_fields' ] );
-
+		
+		add_action( 'init', [ __CLASS__, 'add_rest_fields' ] );
+		
 		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_x_meta_fields_to_twitter' ], 10, 5 );
 	}
 
@@ -86,6 +85,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	}
 
 	public static function add_rest_fields() {
+		
 		register_rest_field(
 			self::CPT_SLUG,
 			'profile_links',
@@ -135,6 +135,9 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 				],
 			] 
 		);
+
+		$rf = new Rest_Field();
+		$rf->type( 'type' )->attribute( 'profile_fields' )->register();
 	}
 
 	/**
@@ -814,8 +817,8 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 		);
 
 		
-		$term_data    = array_reduce(
-			is_wp_error($term_objects) ? [] : $term_objects,
+		$term_data = array_reduce(
+			is_wp_error( $term_objects ) ? [] : $term_objects,
 			function ( $carry, $item ) {
 				$carry[ $item->taxonomy ] = $item->name;
 				return $carry;
@@ -934,27 +937,33 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 
 		
 		// array filter via map to remove the inner empty values, the directly to remove the outer
-		$profile_data['social']      = array_map( 'array_filter', $profile_data['social'] );
-		$profile_data['social']      = array_filter( $profile_data['social'] );
+		$profile_data['social'] = array_map( 'array_filter', $profile_data['social'] );
+		$profile_data['social'] = array_filter( $profile_data['social'] );
 
 		// force all social media links to have a protocal in the url
-		$profile_data['social'] = array_map( function ($social_set) {
-			return array_map( function($service) {
-				if(gp_is_url_valid($service)){
-					return $service;
-				}
+		$profile_data['social'] = array_map(
+			function ( $social_set ) {
+				return array_map(
+					function ( $service ) {
+						if ( gp_is_url_valid( $service ) ) {
+								return $service;
+						}
 
-				if( str_starts_with($service, "http://") || str_starts_with($service, "https://")){
-					return $service;
-				}
+						if ( str_starts_with( $service, 'http://' ) || str_starts_with( $service, 'https://' ) ) {
+							return $service;
+						}
 
-				return set_url_scheme("//" . $service, "https");
-			}, $social_set );
-		}, $profile_data['social']);
+						return set_url_scheme( '//' . $service, 'https' );
+					},
+					$social_set 
+				);
+			},
+			$profile_data['social']
+		);
 
 
 		
-		$profile_data['hasSocial']   = ! ( empty( $profile_data['social']['official'] ) && empty( $profile_data['social']['personal'] ) && empty( $profile_data['social']['campaign'] ) ?? false );
+		$profile_data['hasSocial'] = ! ( empty( $profile_data['social']['official'] ) && empty( $profile_data['social']['personal'] ) && empty( $profile_data['social']['campaign'] ) ?? false );
 		
 		return apply_filters( 'govpack_profile_data', $profile_data );
 	}
