@@ -6,7 +6,6 @@ require_once GOVPACK_PLUGIN_FILE . 'vendor-prefixed/autoload.php'; // phpcs:igno
 //require_once GOVPACK_PLUGIN_FILE . 'vendor/autoload.php'; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingCustomConstant
 
 
-
 $autoloader = new WP_Namespace_Autoloader(
 	[
 		'directory'         => __DIR__,       // Directory of your project. It can be your theme or plugin. Defaults to __DIR__ (probably your best bet).

@@ -10,7 +10,7 @@ namespace Govpack\Core;
 use Govpack\Core\FrontEnd\FrontEnd;
 use Govpack\Core\Admin\Admin;
 
-defined( 'ABSPATH' ) || exit;
+
 
 
 /**
