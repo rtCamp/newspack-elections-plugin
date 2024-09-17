@@ -11,13 +11,13 @@ use Exception;
 use Govpack\Vendor\League\Csv\Reader;
 
 /**
- * Register and handle the "USIO" Importer
+ * Register and handle the "CSV" Importer
  */
 class CSV extends \Govpack\Core\Importer\Abstracts\Abstract_Importer {
 
 
 	/**
-	 * Creates and returns the XML reader for the Import File
+	 * Creates and returns the CSV reader for the Import File
 	 *
 	 * @param string $file  path of the JSON file.
 	 * @throws Exception Could Not Open File to Parse.
@@ -82,10 +82,10 @@ class CSV extends \Govpack\Core\Importer\Abstracts\Abstract_Importer {
 	}
 
 	/**
-	 * Process Loop over WML file
+	 * Process Loop over CSV file
 	 * calls  read_x functions for elements it finds
 	 *
-	 * @param XMLReader $reader  path of the JSON file.
+	 * @param Reader $reader  path of the JSON file.
 	 * @param Array     $extra  Extra params used for the import.
 	 */
 	public static function process( $reader, $extra ) {
