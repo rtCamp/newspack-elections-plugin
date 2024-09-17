@@ -1,7 +1,7 @@
 <?php
-namespace Govpack\Core\ProfileLinks;
+namespace Govpack\ProfileLinks;
 
-class VoteSmart extends \Govpack\Core\ProfileLinks\ProfileLink {
+class VoteSmart extends \Govpack\ProfileLinks\ProfileLink {
 
 	protected $slug = 'votesmart';
 

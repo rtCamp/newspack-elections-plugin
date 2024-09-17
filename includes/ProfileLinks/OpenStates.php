@@ -1,7 +1,7 @@
 <?php
-namespace Govpack\Core\ProfileLinks;
+namespace Govpack\ProfileLinks;
 
-class OpenStates extends \Govpack\Core\ProfileLinks\ProfileLink {
+class OpenStates extends \Govpack\ProfileLinks\ProfileLink {
 
 	protected $slug = 'openstates';
 

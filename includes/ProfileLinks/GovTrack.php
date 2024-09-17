@@ -1,7 +1,7 @@
 <?php
-namespace Govpack\Core\ProfileLinks;
+namespace Govpack\ProfileLinks;
 
-class Govtrack extends \Govpack\Core\ProfileLinks\ProfileLink {
+class GovTrack extends \Govpack\ProfileLinks\ProfileLink {
 
 	protected $slug = 'govtrack';
 

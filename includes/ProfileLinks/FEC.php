@@ -1,7 +1,7 @@
 <?php
-namespace Govpack\Core\ProfileLinks;
+namespace Govpack\ProfileLinks;
 
-class Fec extends \Govpack\Core\ProfileLinks\ProfileLink {
+class Fec extends \Govpack\ProfileLinks\ProfileLink {
 
 	protected $slug = 'fec';
 

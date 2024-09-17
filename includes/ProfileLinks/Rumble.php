@@ -1,7 +1,7 @@
 <?php
-namespace Govpack\Core\ProfileLinks;
+namespace Govpack\ProfileLinks;
 
-class Rumble extends \Govpack\Core\ProfileLinks\ProfileLink {
+class Rumble extends \Govpack\ProfileLinks\ProfileLink {
 
 	protected $slug = 'rumble';
 

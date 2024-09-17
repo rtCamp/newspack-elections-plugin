@@ -1,7 +1,7 @@
 <?php
-namespace Govpack\Core\ProfileLinks;
+namespace Govpack\ProfileLinks;
 
-class WikiPedia extends \Govpack\Core\ProfileLinks\ProfileLink {
+class WikiPedia extends \Govpack\ProfileLinks\ProfileLink {
 
 	protected $slug = 'wikipedia';
 

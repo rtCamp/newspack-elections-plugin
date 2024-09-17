@@ -1,7 +1,7 @@
 <?php
-namespace Govpack\Core\ProfileLinks;
+namespace Govpack\ProfileLinks;
 
-class Gab extends \Govpack\Core\ProfileLinks\ProfileLink {
+class Gab extends \Govpack\ProfileLinks\ProfileLink {
 
 	protected $slug = 'gab';
 

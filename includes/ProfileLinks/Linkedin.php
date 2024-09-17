@@ -1,7 +1,7 @@
 <?php
-namespace Govpack\Core\ProfileLinks;
+namespace Govpack\ProfileLinks;
 
-class Linkedin extends \Govpack\Core\ProfileLinks\ProfileLink {
+class Linkedin extends \Govpack\ProfileLinks\ProfileLink {
 
 	protected $slug = 'linkedin';
 

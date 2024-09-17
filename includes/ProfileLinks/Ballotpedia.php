@@ -1,7 +1,7 @@
 <?php
-namespace Govpack\Core\ProfileLinks;
+namespace Govpack\ProfileLinks;
 
-class BallotPedia extends \Govpack\Core\ProfileLinks\ProfileLink {
+class BallotPedia extends \Govpack\ProfileLinks\ProfileLink {
 
 	protected $slug = 'ballotpedia';
 

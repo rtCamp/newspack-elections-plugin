@@ -1,5 +1,5 @@
 <?php
-namespace Govpack\Core\ProfileLinks;
+namespace Govpack\ProfileLinks;
 
 abstract class ProfileLink {
 	protected $label;

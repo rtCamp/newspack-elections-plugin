@@ -1,7 +1,7 @@
 <?php
-namespace Govpack\Core\ProfileLinks;
+namespace Govpack\ProfileLinks;
 
-class Google extends \Govpack\Core\ProfileLinks\ProfileLink {
+class Google extends \Govpack\ProfileLinks\ProfileLink {
 
 	protected $slug = 'google';
 
