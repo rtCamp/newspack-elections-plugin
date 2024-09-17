@@ -12,7 +12,7 @@ use Govpack\Core\CPT\Profile;
 use Govpack\Core\Logger;
 
 /**
- * Register and handle the "USIO" Importer
+ * Register and handle the Actions used by the importer.
  */
 class Actions {
 
