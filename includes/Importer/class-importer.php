@@ -203,8 +203,6 @@ class Importer {
 			$file_type = self::filetype( $file );
 			if ( 'csv' === $file_type ) {
 				return CSV::make();
-			} elseif ( 'xml' === $file_type ) {
-				return XML::make();
 			} else {
 				return false;
 			}       
