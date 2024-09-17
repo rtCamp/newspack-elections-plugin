@@ -32,7 +32,7 @@ class Govpack {
 	private Admin $admin;
 	private Blocks $blocks;
 	private Icons $icons;
-	private Version $version;
+	public Version $version;
 
 	/**
 	 * Inits the class and registeres the hooks call.
