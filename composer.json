@@ -4,7 +4,7 @@
   "description": "Govpack",
   "type": "wordpress-plugin",
   "require": {
-    "pablo-sg-pacheco/wp-namespace-autoloader": "dev-master#b50050f",
+  
     "woocommerce/action-scheduler": "^3.8",
     "gargron/fileupload": "~1.4.0",
     "league/csv": "^9.15.0",

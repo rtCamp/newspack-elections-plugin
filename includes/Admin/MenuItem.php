@@ -5,14 +5,14 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Admin;
+namespace Govpack\Admin;
 
 use Exception;
 
 /**
  * Create an Admin menu
  */
-class Menu_Item extends Menu {
+class MenuItem extends Menu {
 
 	/**
 	 * Parent Slug, i.e, which menu this menu item is added to

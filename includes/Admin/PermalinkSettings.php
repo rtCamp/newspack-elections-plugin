@@ -1,6 +1,6 @@
 <?php
 
-namespace Govpack\Core\Admin;
+namespace Govpack\Admin;
 
 class Permalink_Settings {
 

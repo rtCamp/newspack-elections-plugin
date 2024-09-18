@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Importer;
+namespace Govpack\Importer;
 
 use Exception;
 use Govpack\Vendor\League\Csv\Reader;
@@ -13,7 +13,7 @@ use Govpack\Vendor\League\Csv\Reader;
 /**
  * Register and handle the "CSV" Importer
  */
-class CSV extends \Govpack\Core\Importer\Abstracts\Abstract_Importer {
+class CSV extends \Govpack\Importer\Abstracts\AbstractImporter {
 
 
 	/**
@@ -88,7 +88,7 @@ class CSV extends \Govpack\Core\Importer\Abstracts\Abstract_Importer {
 	 * @param Reader $reader  path of the JSON file.
 	 * @param Array     $extra  Extra params used for the import.
 	 */
-	public static function process( $reader, array $extra ) : void {
+	public static function process( $reader, array|bool $extra ) : void {
 
 		update_option( 'govpack_import_group', self::import_group() );
 

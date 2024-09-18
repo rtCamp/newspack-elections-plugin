@@ -5,10 +5,10 @@
  * @package Govpack
  */
 
-namespace Govpack\Core;
+namespace Govpack;
 
-use Govpack\Core\FrontEnd\FrontEnd;
-use Govpack\Core\Admin\Admin;
+use Govpack\FrontEnd\FrontEnd;
+use Govpack\Admin\Admin;
 
 
 
@@ -18,7 +18,7 @@ use Govpack\Core\Admin\Admin;
  */
 class Govpack {
 
-	use \Govpack\Core\Instance;
+	use \Govpack\Instance;
 
 	/**
 	 * Reference to REST API Prefix for consistency.
@@ -45,8 +45,8 @@ class Govpack {
 
 		$this->version = new Version($this);
 
-		if ( class_exists( '\Govpack\Core\Dev_Helpers' ) ) {
-			$this->dev = new \Govpack\Core\Dev_Helpers( $this );
+		if ( class_exists( '\Govpack\Dev_Helpers' ) ) {
+			$this->dev = new \Govpack\Dev_Helpers( $this );
 			$this->dev->hooks();
 		}
 
@@ -63,17 +63,17 @@ class Govpack {
 	 * Causes rewrite rules to be regenerated so permalinks will work
 	 */
 	public static function activation() {
-		\Govpack\Core\CPT\Profile::register_post_type();
+		\Govpack\CPT\Profile::register_post_type();
 		flush_rewrite_rules( false ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.flush_rewrite_rules_flush_rewrite_rules
 
 		// get capabilities setup first.
-		\Govpack\Core\Capabilities::instance()->add_capabilities();
+		\Govpack\Capabilities::instance()->add_capabilities();
 	}
 
 	public static function deactivation() {
 		
 		// get capabilities setup first.
-		\Govpack\Core\Capabilities::instance()->remove_capabilities();
+		\Govpack\Capabilities::instance()->remove_capabilities();
 	}
 
 	public function build_path( string $path ) : string {
@@ -92,7 +92,7 @@ class Govpack {
 
 	public function hooks() {
 		\add_action( 'after_setup_theme', [ $this, 'setup' ] );
-		\add_action( 'plugins_loaded', [ '\Govpack\Core\ActionScheduler\ActionScheduler', 'hooks' ], 0 );
+		\add_action( 'plugins_loaded', [ '\Govpack\ActionScheduler\ActionScheduler', 'hooks' ], 0 );
 		\add_action( 'init', [ $this, 'register_blocks' ] );
 	}
 
@@ -102,7 +102,7 @@ class Govpack {
 	 */
 	public static function post_types() : void {
 		// Custom Post Types.
-		\Govpack\Core\CPT\Profile::hooks();
+		\Govpack\CPT\Profile::hooks();
 	}
 
 	/**
@@ -110,11 +110,11 @@ class Govpack {
 	 */
 	public static function taxonomies()  : void  {
 		// Custom Post Types.
-		\Govpack\Core\Tax\LegislativeBody::hooks();
-		\Govpack\Core\Tax\OfficeHolderStatus::hooks();
-		\Govpack\Core\Tax\OfficeHolderTitle::hooks();
-		\Govpack\Core\Tax\Party::hooks();
-		\Govpack\Core\Tax\State::hooks();
+		\Govpack\Tax\LegislativeBody::hooks();
+		\Govpack\Tax\OfficeHolderStatus::hooks();
+		\Govpack\Tax\OfficeHolderTitle::hooks();
+		\Govpack\Tax\Party::hooks();
+		\Govpack\Tax\State::hooks();
 	}
 	
 
@@ -125,11 +125,13 @@ class Govpack {
 		self::taxonomies();
 
 		if ( defined( 'WP_CLI' ) && \WP_CLI ) {
-			\Govpack\Core\CLI::init();
+			\Govpack\CLI::init();
 		}
 
-		\Govpack\Core\Importer\Importer::hooks();
-		\Govpack\Core\Widgets::hooks();
+		\Govpack\Importer\Importer::hooks();
+		\Govpack\Admin\Export::hooks(); 
+		
+		\Govpack\Widgets::hooks();
 
 		if ( is_admin() ) {
 			$this->admin();

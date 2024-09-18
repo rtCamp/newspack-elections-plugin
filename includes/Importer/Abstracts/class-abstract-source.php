@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Importer\Abstracts;
+namespace Govpack\Importer\Abstracts;
 
 use Exception;
 

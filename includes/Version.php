@@ -1,12 +1,12 @@
 <?php
 
-namespace Govpack\Core;
+namespace Govpack;
 
 use Govpack\Vendor\z4kn4fein\SemVer\Version as SemVar;
 
 class Version {
 
-	use \Govpack\Core\Instance;
+	use \Govpack\Instance;
 
 	/**
 	 * Reference to Parent Plugin.

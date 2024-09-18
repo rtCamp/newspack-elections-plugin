@@ -8,15 +8,12 @@
     findUnusedBaselineEntry="true"
     findUnusedCode="false"
 	autoloader="./bin/psalm/bootstrap.php"
-
 >	
 	<stubs>
 		<file name="./bin/psalm/bootstrap.php"/>
 	</stubs>
     <projectFiles>
-        <directory name="./includes/Admin"/>
-        <ignoreFiles>
-			<directory name="vendor"/>
-        </ignoreFiles>
+        <directory name="./includes"/>
+        
     </projectFiles>
 <plugins><pluginClass class="PsalmWordPress\Plugin"/></plugins></psalm>

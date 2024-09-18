@@ -5,11 +5,11 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Importer;
+namespace Govpack\Importer;
 
 use Exception;
-use Govpack\Core\CPT\Profile;
-use Govpack\Core\Logger;
+use Govpack\CPT\Profile;
+use Govpack\Logger;
 
 /**
  * Register and handle the Actions used by the importer.

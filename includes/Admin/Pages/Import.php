@@ -5,9 +5,9 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Admin\Pages;
+namespace Govpack\Admin\Pages;
 
-use Govpack\Core\CPT\Profile;
+use Govpack\CPT\Profile;
 
 /**
  * GovPack Class to Handle Import
@@ -20,7 +20,7 @@ class Import {
 	 */
 	public static function view() : void  {
 
-		\Govpack\Core\Importer\Importer::check_for_stuck_import();
+		\Govpack\Importer\Importer::check_for_stuck_import();
 
 		wp_enqueue_script( 'govpack-importer' );
 		wp_enqueue_style( 'wp-components' );

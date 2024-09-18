@@ -5,14 +5,14 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Abstracts;
+namespace Govpack\Abstracts;
 
 use Govpack\Helpers;
 
 /**
  * Abstract class for registering and handling of custom post types.
  */
-abstract class Post_Type {
+abstract class PostType {
 
 	/**
 	 * WordPress Hooks

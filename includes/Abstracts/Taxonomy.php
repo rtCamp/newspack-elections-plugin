@@ -5,9 +5,9 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Abstracts;
+namespace Govpack\Abstracts;
 
-use Govpack\Core\CPT\Profile;
+use Govpack\CPT\Profile;
 
 /**
  * Register and handle the "Profile" Custom Post Type

@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Core;
+namespace Govpack;
 
 use Govpack\Core\Importer;
 use WP_CLI;

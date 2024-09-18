@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Abstracts;
+namespace Govpack\Abstracts;
 
 use WP_Block_Type;
 
@@ -66,7 +66,7 @@ abstract class Block {
 		}
 	}
 
-	public function handle_disable_block( bool|array $allowed_blocks, \WP_Block_Editor_Context $editor_context ) : array {
+	public function handle_disable_block( bool|array $allowed_blocks, \WP_Block_Editor_Context $editor_context ) : array|bool {
 
 		if ( ! $this->disable_block( $allowed_blocks, $editor_context ) ) {
 			return $allowed_blocks;

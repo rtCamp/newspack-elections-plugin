@@ -5,13 +5,11 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Admin;
+namespace Govpack\Admin;
 
-use Exception;
-use Govpack\Core\Govpack;
-use Govpack\Core\Capabilities;
-use Govpack\Core\CPT\Profile;
-use Govpack\League\Csv\Writer;
+use Govpack\Govpack;
+use Govpack\CPT\Profile;
+use Govpack\Vendor\League\Csv\Writer;
 
 /**
  * GovPack Export
@@ -22,6 +20,7 @@ class Export {
 	 * Adds Hooks used for exporting  
 	 */
 	public static function hooks() : void  {
+		
 		\add_action( 'rest_api_init', [ __CLASS__, 'register_rest_endpoints' ] );
 		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'register_scripts' ] );
 	}
@@ -52,6 +51,7 @@ class Export {
 	 * Register the REST Routes 
 	 */
 	public static function register_rest_endpoints() : void {
+
 
 		\register_rest_route(
 			Govpack::REST_PREFIX,

@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Admin;
+namespace Govpack\Admin;
 
 use Exception;
 
@@ -132,7 +132,7 @@ class Menu {
 	 * 
 	 *  @param string $value value to set callback function.
 	 */ 
-	public function set_callback( callable $value ) {
+	public function set_callback( array|callable $value ) {
 		return $this->set( 'function', $value );
 	}
 	/** 
@@ -140,7 +140,7 @@ class Menu {
 	 * 
 	 *  @param Menu_Item $item Submemnu Item.
 	 */ 
-	public function add_item( Menu_Item $item ) {
+	public function add_item( MenuItem $item ) {
 
 		$this->items[] = $item->set_parent_slug( $this->menu_slug );
 	}

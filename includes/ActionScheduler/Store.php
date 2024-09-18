@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\ActionScheduler;
+namespace Govpack\ActionScheduler;
 
 /**
  * Extends The normal action scheduler Schema to increase the length of the extended_args allowed

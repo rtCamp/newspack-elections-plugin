@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class Profile extends \Govpack\Core\Abstracts\Block {
+class Profile extends \Govpack\Abstracts\Block {
 
 	public string $block_name = 'govpack/profile';
 	public $template   = 'profile';
@@ -65,7 +65,7 @@ class Profile extends \Govpack\Core\Abstracts\Block {
 
 		
 		
-		$profile = \Govpack\Core\CPT\Profile::get_data( $attributes['profileId'] );
+		$profile = \Govpack\CPT\Profile::get_data( $attributes['profileId'] );
 	
 		if ( ! $profile ) {
 			return;

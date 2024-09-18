@@ -2,7 +2,7 @@
 
 if ( ! function_exists( 'gp' ) ) {
 	function gp() {
-		return Govpack\Core\Govpack::instance();
+		return Govpack\Govpack::instance();
 	}
 }
 
@@ -26,7 +26,7 @@ if ( ! function_exists( 'gp_get_block_part' ) ) {
 
 if ( ! function_exists( 'gp_get_permalink_structure' ) ) {
 	function gp_get_permalink_structure() {
-		return Govpack\Core\Permalinks::instance()->permalinks();
+		return Govpack\Permalinks::instance()->permalinks();
 	}
 }
 

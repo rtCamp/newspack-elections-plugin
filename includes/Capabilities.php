@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Core;
+namespace Govpack;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Capabilities {
 
-	use \Govpack\Core\Instance;
+	use \Govpack\Instance;
 
 	const CAN_IMPORT = 'govpack_import';
 	const CAN_EXPORT = 'govpack_export';

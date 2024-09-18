@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Core;
+namespace Govpack;
 
 class TemplateLoader extends \Govpack_Vendor_Gamajo_Template_Loader {
 

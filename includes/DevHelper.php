@@ -1,6 +1,6 @@
 <?php
 
-namespace Govpack\Core;
+namespace Govpack;
 
 use Govpack\Vendor\z4kn4fein\SemVer\Version;
 

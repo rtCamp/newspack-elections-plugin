@@ -5,12 +5,12 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Tax;
+namespace Govpack\Tax;
 
 /**
  * Register and handle the "Party" Taxonomy.
  */
-class Party extends \Govpack\Core\Abstracts\Taxonomy {
+class Party extends \Govpack\Abstracts\Taxonomy {
 
 	/**
 	 * Post Type slug. Used when registering and referencing

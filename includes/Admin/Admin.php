@@ -5,11 +5,11 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Admin;
+namespace Govpack\Admin;
 
-use Govpack\Core\Capabilities;
-use Govpack\Core\CPT\Profile;
-use \Govpack\Core\Govpack;
+use \Govpack\Capabilities;
+use \Govpack\CPT\Profile;
+use \Govpack\Govpack;
 
 use Exception;
 
@@ -18,7 +18,7 @@ use Exception;
  */
 class Admin {
 
-	use \Govpack\Core\Instance;
+	use \Govpack\Instance;
 
 	private Govpack $plugin;
 
@@ -29,14 +29,15 @@ class Admin {
 	 * Register Hooks for usage in wp-admin.
 	 */
 	public function hooks() : void {
-		\add_action( 'admin_menu', [ '\Govpack\Core\Admin\Menu', 'add_taxonomy_submenus' ], 10, 1 );
+		\add_action( 'admin_menu', [ '\Govpack\Admin\Menu', 'add_taxonomy_submenus' ], 10, 1 );
 		\add_action( 'admin_menu', [ $this, 'create_menus' ], 1, 1 );
 		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'register_assets' ], 100, 1 );
 		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'load_assets' ], 101, 1 );
 		\add_action( 'block_categories_all', [ __CLASS__, 'block_categories' ], 10, 2 );                
 		\add_action( 'enqueue_block_editor_assets', [ __CLASS__, 'enqueue_block_editor_assets' ] );
 		\add_action( 'current_screen', [ __CLASS__, 'conditional_hooks' ] );
-		\add_action( 'after_setup_theme', [ '\Govpack\Core\Admin\Export', 'hooks' ], 11, 1 );
+	
+		\add_action( 'after_setup_theme', [ '\Govpack\Admin\Export', 'hooks' ], 11, 1 );
 	}
 
 
@@ -119,22 +120,22 @@ class Admin {
 				}
 			);
 
-		$item = new Menu_Item();
+		$item = new MenuItem();
 		$menu->add_item(
 			$item->set_page_title( 'Import' )
 				->set_menu_title( 'Import' )
 				->set_menu_slug( 'govpack_import' )
 				->set_capability( Capabilities::CAN_IMPORT )
-				->set_callback( [ '\Govpack\Core\Admin\Pages\Import', 'view' ] ) 
+				->set_callback( [ '\Govpack\Admin\Pages\Import', 'view' ] ) 
 		);
 
-		$item = new Menu_Item();
+		$item = new MenuItem();
 		$menu->add_item(
 			$item->set_page_title( 'Export' )
 				->set_menu_title( 'Export' )
 				->set_menu_slug( 'govpack_export' )
 				->set_capability( Capabilities::CAN_EXPORT )
-				->set_callback( [ '\Govpack\Core\Admin\Pages\Export', 'view' ] ) 
+				->set_callback( [ '\Govpack\Admin\Pages\Export', 'view' ] ) 
 		);
 
 		$menu->create();

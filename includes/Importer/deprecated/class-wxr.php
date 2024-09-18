@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Importer;
+namespace Govpack\Importer;
 
 use Exception, XMLReader, DOMNode;
 use Govpack\Core\Govpack;

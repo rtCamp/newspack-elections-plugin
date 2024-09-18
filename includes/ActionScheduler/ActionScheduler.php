@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\ActionScheduler;
+namespace Govpack\ActionScheduler;
 
 /**
  * GovPack action Scheduler extension that modifies it for our needs
@@ -39,7 +39,7 @@ class ActionScheduler {
 	 */
 	public static function replace_store( $current_store ) { //phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
 		remove_filter( 'action_scheduler_store_class', [ 'ActionScheduler_DataController', 'set_store_class' ], 100 );
-		return '\Govpack\Core\ActionScheduler\Store';
+		return '\Govpack\ActionScheduler\Store';
 	}
 
 	/**

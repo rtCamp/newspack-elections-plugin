@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Core;
+namespace Govpack;
 
 class Blocks {
 

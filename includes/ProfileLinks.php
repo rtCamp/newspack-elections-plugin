@@ -1,8 +1,8 @@
 <?php
 
-namespace Govpack\Core;
+namespace Govpack;
 
-class Profile_Links extends Profile_Link_Services {
+class ProfileLinks extends ProfileLinkServices {
 
 	/**
 	 * Post ID of the govpack profile this will generate links for

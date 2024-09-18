@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Admin\Pages;
+namespace Govpack\Admin\Pages;
 
 /**
  * GovPack Class to Handle Export

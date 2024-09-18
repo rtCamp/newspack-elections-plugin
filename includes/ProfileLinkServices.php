@@ -1,10 +1,8 @@
 <?php
 
-namespace Govpack\Core;
+namespace Govpack;
 
-use PO;
-
-class Profile_Link_Services {
+class ProfileLinkServices {
 
 	
 

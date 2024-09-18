@@ -5,18 +5,18 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\CPT;
+namespace Govpack\CPT;
 
-use Govpack\Core\Capabilities;
-use Govpack\Core\Profile_Links;
-use Govpack\Core\Profile_Link_Services;
+use Govpack\Capabilities;
+use Govpack\ProfileLinks;
+use Govpack\ProfileLinkServices;
 use WP_Screen;
 use WP_Post_Type;
 
 /**
  * Register and handle the "Profile" Custom Post Type
  */
-class Profile extends \Govpack\Core\Abstracts\Post_Type {
+class Profile extends \Govpack\Abstracts\PostType {
 
 	/**
 	 * Post Type slug. Used when registering and referencing
@@ -513,11 +513,11 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 * @param array $sortable_columns An array of sortable columns.
 	 */
 	public static function sortable_columns( array $sortable_columns ) : array  {
-		$sortable_columns[ 'taxonomy-' . \Govpack\Core\Tax\State::TAX_SLUG ]              = 'State';
-		$sortable_columns[ 'taxonomy-' . \Govpack\Core\Tax\Party::TAX_SLUG ]              = 'Party';
-		$sortable_columns[ 'taxonomy-' . \Govpack\Core\Tax\LegislativeBody::TAX_SLUG ]    = 'Legislative Body';
-		$sortable_columns[ 'taxonomy-' . \Govpack\Core\Tax\OfficeHolderStatus::TAX_SLUG ] = 'Office Holder Status';
-		$sortable_columns[ 'taxonomy-' . \Govpack\Core\Tax\OfficeHolderTitle::TAX_SLUG ]  = 'Office Holder Title';
+		$sortable_columns[ 'taxonomy-' . \Govpack\Tax\State::TAX_SLUG ]              = 'State';
+		$sortable_columns[ 'taxonomy-' . \Govpack\Tax\Party::TAX_SLUG ]              = 'Party';
+		$sortable_columns[ 'taxonomy-' . \Govpack\Tax\LegislativeBody::TAX_SLUG ]    = 'Legislative Body';
+		$sortable_columns[ 'taxonomy-' . \Govpack\Tax\OfficeHolderStatus::TAX_SLUG ] = 'Office Holder Status';
+		$sortable_columns[ 'taxonomy-' . \Govpack\Tax\OfficeHolderTitle::TAX_SLUG ]  = 'Office Holder Title';
 	
 		return $sortable_columns;
 	}
@@ -559,11 +559,11 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	 */
 	public static function post_table_filters( string $post_type, $which ) : void {
 		
-		self::taxonomy_dropdown( \Govpack\Core\Tax\LegislativeBody::TAX_SLUG, $post_type );
-		self::taxonomy_dropdown( \Govpack\Core\Tax\State::TAX_SLUG, $post_type );
-		self::taxonomy_dropdown( \Govpack\Core\Tax\Party::TAX_SLUG, $post_type );
-		self::taxonomy_dropdown( \Govpack\Core\Tax\OfficeHolderStatus::TAX_SLUG, $post_type );
-		self::taxonomy_dropdown( \Govpack\Core\Tax\OfficeHolderTitle::TAX_SLUG, $post_type );
+		self::taxonomy_dropdown( \Govpack\Tax\LegislativeBody::TAX_SLUG, $post_type );
+		self::taxonomy_dropdown( \Govpack\Tax\State::TAX_SLUG, $post_type );
+		self::taxonomy_dropdown( \Govpack\Tax\Party::TAX_SLUG, $post_type );
+		self::taxonomy_dropdown( \Govpack\Tax\OfficeHolderStatus::TAX_SLUG, $post_type );
+		self::taxonomy_dropdown( \Govpack\Tax\OfficeHolderTitle::TAX_SLUG, $post_type );
 	}
 
 
@@ -801,11 +801,11 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 		$term_objects = wp_get_post_terms(
 			$profile_id,
 			[ 
-				\Govpack\Core\Tax\Party::TAX_SLUG, 
-				\Govpack\Core\Tax\State::TAX_SLUG,
-				\Govpack\Core\Tax\LegislativeBody::TAX_SLUG,
-				\Govpack\Core\Tax\OfficeHolderTitle::TAX_SLUG,
-				\Govpack\Core\Tax\OfficeHolderStatus::TAX_SLUG,
+				\Govpack\Tax\Party::TAX_SLUG, 
+				\Govpack\Tax\State::TAX_SLUG,
+				\Govpack\Tax\LegislativeBody::TAX_SLUG,
+				\Govpack\Tax\OfficeHolderTitle::TAX_SLUG,
+				\Govpack\Tax\OfficeHolderStatus::TAX_SLUG,
 			] 
 		);
 
@@ -835,11 +835,11 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 			'endorsements'     => $profile_raw_meta_data['endorsements'][0] ?? '',
 			'age'              => self::age_from_epoc( $profile_raw_meta_data['date_of_birth'][0] ?? false ),
 
-			'party'            => $term_data[ \Govpack\Core\Tax\Party::TAX_SLUG ] ?? '',
-			'state'            => $term_data[ \Govpack\Core\Tax\State::TAX_SLUG ] ?? '',
-			'legislative_body' => $term_data[ \Govpack\Core\Tax\LegislativeBody::TAX_SLUG ] ?? '',
-			'position'         => $term_data[ \Govpack\Core\Tax\OfficeHolderTitle::TAX_SLUG ] ?? '',
-			'status'           => $term_data[ \Govpack\Core\Tax\OfficeHolderStatus::TAX_SLUG ] ?? '',
+			'party'            => $term_data[ \Govpack\Tax\Party::TAX_SLUG ] ?? '',
+			'state'            => $term_data[ \Govpack\Tax\State::TAX_SLUG ] ?? '',
+			'legislative_body' => $term_data[ \Govpack\Tax\LegislativeBody::TAX_SLUG ] ?? '',
+			'position'         => $term_data[ \Govpack\Tax\OfficeHolderTitle::TAX_SLUG ] ?? '',
+			'status'           => $term_data[ \Govpack\Tax\OfficeHolderStatus::TAX_SLUG ] ?? '',
 
 			'bio'              => get_the_excerpt( $profile_raw_data ) ?? '',
 			'link'             => get_permalink( $profile_id ),
@@ -973,13 +973,13 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 	}
 
 	public static function generate_links_for_profile( string|int $profile_id ) : array {
-		$pl = new Profile_Links( $profile_id );
+		$pl = new ProfileLinks( $profile_id );
 		$pl->generate();
 		return $pl->to_array();
 	}
 
 	public static function generate_link_services() : array {
-		$services = new Profile_Link_Services();
+		$services = new ProfileLinkServices();
 		return $services->to_array();
 	}
 

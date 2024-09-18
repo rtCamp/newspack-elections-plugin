@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Importer\Abstracts;
+namespace Govpack\Importer\Abstracts;
 
 use Exception;
 
@@ -14,7 +14,7 @@ use Exception;
 /**
  * Register and handle the "USIO" Importer
  */
-abstract class Abstract_Importer {
+abstract class AbstractImporter {
 
 	const IMPORT_NOT_RUNNING = 0;
 	const IMPORT_RUNNING     = 1;
@@ -84,7 +84,7 @@ abstract class Abstract_Importer {
 		update_option( self::IMPORT_TEST_KEY, self::IMPORT_RUNNING );
 		
 
-		$file = \Govpack\Core\Importer\Importer::check_file( $file );
+		$file = \Govpack\Importer\Importer::check_file( $file );
 
 		try {
 			$reader = static::create_reader( $file );
@@ -121,7 +121,7 @@ abstract class Abstract_Importer {
 	 * @param XMLReader $reader  path of the JSON file.
 	 * @param array     $extra Array of extra import configuration passed to the importer.
 	 */
-	abstract public static function process( $reader, array $extra ) : void;
+	abstract public static function process( $reader, array|bool $extra ) : void;
 
 	/**
 	 * Creates a group for the import that is passed to ActionScheduler.

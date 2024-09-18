@@ -5,10 +5,10 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\FrontEnd;
+namespace Govpack\FrontEnd;
 
 use Exception;
-use \Govpack\Core\TemplateLoader;
+use \Govpack\TemplateLoader;
 /**
  * GovPack FrontEnd Hooks
  */

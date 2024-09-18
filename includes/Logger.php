@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Core;
+namespace Govpack;
 
 use Govpack\Vendor\Monolog\Logger as MonoLog;
 use Govpack\Vendor\Monolog\Handler\StreamHandler;

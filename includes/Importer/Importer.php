@@ -5,12 +5,12 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Importer;
+namespace Govpack\Importer;
 
 use Exception;
-use Govpack\Core\Govpack;
-use Govpack\Core\Capabilities;
-use Govpack\Core\Importer\Abstracts\Abstract_Importer;
+use Govpack\Govpack;
+use Govpack\Capabilities;
+use Govpack\Importer\Abstracts\AbstractImporter;
 
 /**
  * Register and handle the "USIO" Importer
@@ -24,7 +24,7 @@ class Importer {
 
 		\add_action( 'rest_api_init', [ __CLASS__, 'register_rest_endpoints' ] );
 		
-		Chunked_Upload::hooks();
+		ChunkedUpload::hooks();
 		Actions::hooks();
 
 		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'register_scripts' ] );
@@ -113,7 +113,7 @@ class Importer {
 	 * Called By The REST API to Check the status of an ongoing import
 	 */
 	public static function status() {
-		return Abstract_Importer::status();
+		return AbstractImporter::status();
 	}
 
 	

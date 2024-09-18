@@ -34,7 +34,7 @@ if ( ! defined( 'GOVPACK_PLUGIN_BUILD_URL' ) ) {
 	define( 'GOVPACK_PLUGIN_BUILD_URL', trailingslashit( GOVPACK_PLUGIN_URL . 'build' ) );
 }
 
-require_once __DIR__ . '/includes/class-bootstrap-helper.php';
+require_once __DIR__ . '/includes/BootstrapHelper.php';
 
 if ( ! file_exists( GOVPACK_PLUGIN_PATH . 'vendor/autoload.php' ) ) {
 	add_action( 'all_admin_notices', 'Govpack_Bootstrap_Helper::notice_vendor_missing' );
@@ -51,13 +51,16 @@ if ( ! is_dir( GOVPACK_PLUGIN_PATH . 'build' ) ) {
 	return;
 }
 
-require_once GOVPACK_PLUGIN_PATH . 'autoloader.php';
+#require_once GOVPACK_PLUGIN_PATH . 'autoloader.php';
+require_once GOVPACK_PLUGIN_FILE . 'vendor/autoload.php';
+require_once GOVPACK_PLUGIN_FILE . 'vendor-prefixed/autoload.php';
 
 
 
 // Include the main Govpack class.
-if ( class_exists( '\Govpack\Core\Govpack' ) ) {
-	$GLOBALS['govpack'] = \Govpack\Core\Govpack::instance();
+if ( class_exists( '\Govpack\Govpack' ) ) {
+
+	$GLOBALS['govpack'] = \Govpack\Govpack::instance();
 	register_activation_hook( __FILE__, [ $GLOBALS['govpack'], 'activation' ] );
 	register_deactivation_hook( __FILE__, [ $GLOBALS['govpack'], 'deactivation' ] );
 }

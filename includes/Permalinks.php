@@ -1,6 +1,6 @@
 <?php
 
-namespace Govpack\Core;
+namespace Govpack;
 
 class Permalinks {
 

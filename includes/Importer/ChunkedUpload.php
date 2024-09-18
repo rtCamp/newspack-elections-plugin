@@ -5,18 +5,18 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Importer;
+namespace Govpack\Importer;
 
 use Exception;
 use WP_Error;
-use Govpack\Core\Govpack;
-use Govpack\Core\Capabilities;
+use Govpack\Govpack;
+use Govpack\Capabilities;
 use Govpack\Vendor\FileUpload;
 
 /**
  * Handles Chunked Uploading via a REST Endpoint
  */
-class Chunked_Upload {
+class ChunkedUpload {
 
 	/**
 	 * Instance
