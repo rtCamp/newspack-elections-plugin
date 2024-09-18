@@ -3,14 +3,14 @@ namespace Govpack\ProfileLinks;
 
 class GovTrack extends \Govpack\ProfileLinks\ProfileLink {
 
-	protected $slug = 'govtrack';
+	protected string $slug = 'govtrack';
 
 	/**
 	 * @return string
 	 *
 	 * @psalm-return 'govtrack_id'
 	 */
-	public function meta_key() {
+	public function meta_key() : string {
 		return 'govtrack_id';
 	}
 
@@ -19,7 +19,7 @@ class GovTrack extends \Govpack\ProfileLinks\ProfileLink {
 	 *
 	 * @psalm-return 'GovTrack'
 	 */
-	public function label() {
+	public function label() : string {
 		return 'GovTrack';
 	}
 
@@ -28,7 +28,7 @@ class GovTrack extends \Govpack\ProfileLinks\ProfileLink {
 	 *
 	 * @psalm-return 'https://www.govtrack.us/congress/members/{govtrack_id}/'
 	 */
-	public function url_template() {
+	public function url_template() : string {
 		return 'https://www.govtrack.us/congress/members/{govtrack_id}/';
 	}
 }

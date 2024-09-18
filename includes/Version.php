@@ -44,12 +44,12 @@ class Version {
 	/**
 	 * Get the version string from the database. Returns null if missing
 	 */
-	public function get_db_version() : null|string {
+	public function get_db_version() : mixed {
 		return get_option("govpack_db_version", null);
 	}
 
-	public function set_db_version(string $version) : null|string {
-		return update_option("govpack_db_version", $version, true);
+	public function set_db_version(string $version) : void {
+		 update_option("govpack_db_version", $version, true);
 	}
 
 	public function has_version_file() : bool {

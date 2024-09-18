@@ -23,10 +23,10 @@ class MenuItem extends Menu {
    
 	/**
 	 * Set Parent Slug, so we know the menu to use
-	 * 
+	 *
 	 * @param string $value value to set the parent slug.
 	 */
-	public function set_parent_slug( string $value ) {
+	public function set_parent_slug( string $value ): Menu&static {
 		return $this->set( 'parent_slug', $value );
 	}
 

@@ -69,10 +69,10 @@ class Logger {
 	 * Example: Entire website down, database unavailable, etc. This should
 	 * trigger the SMS alerts and wake you up.
 	 *
-	 * @param Object $error Error object to test.
+
 	 * @return string
 	 */
-	public static function maybe_extract_wp_error( $error ) {
+	public static function maybe_extract_wp_error( \WP_Error | string $error ) {
 		if ( is_wp_error( $error ) ) {
 			return $error->get_error_message();
 		}

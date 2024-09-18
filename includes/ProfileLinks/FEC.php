@@ -3,14 +3,14 @@ namespace Govpack\ProfileLinks;
 
 class Fec extends \Govpack\ProfileLinks\ProfileLink {
 
-	protected $slug = 'fec';
+	protected string $slug = 'fec';
 
 	/**
 	 * @return string
 	 *
 	 * @psalm-return 'fec_id'
 	 */
-	public function meta_key() {
+	public function meta_key() : string {
 		return 'fec_id';
 	}
 
@@ -19,14 +19,12 @@ class Fec extends \Govpack\ProfileLinks\ProfileLink {
 	 *
 	 * @psalm-return 'Federal Election Comission'
 	 */
-	public function label() {
+	public function label() : string {
 		return 'Federal Election Comission';
 	}
 
-	/**
-	 * @return false
-	 */
-	public function enabled() {
+
+	public function enabled() : bool {
 		return false;
 	}
 
@@ -35,7 +33,7 @@ class Fec extends \Govpack\ProfileLinks\ProfileLink {
 	 *
 	 * @psalm-return 'https://www.fec.gov/data/candidate/{fec_id}/'
 	 */
-	public function url_template() {
+	public function url_template() : string {
 		return 'https://www.fec.gov/data/candidate/{fec_id}/';
 	}
 }

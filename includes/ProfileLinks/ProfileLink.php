@@ -1,37 +1,37 @@
 <?php
 namespace Govpack\ProfileLinks;
 
+use \Govpack\ProfileLinks as Profile;
 abstract class ProfileLink {
-	protected $label;
-	protected $slug = false;
-	protected $post_meta;
-	protected $profile;
 
-	abstract public function meta_key();
-	abstract public function label();
-	/**
-	 * @return string
-	 *
-	 * @psalm-return ''
-	 */
-	public function url_template() {
+	protected string $label;
+
+	protected string $slug;
+	protected mixed $post_meta;
+	protected Profile $profile;
+
+	abstract public function meta_key() : string;
+	abstract public function label() : string;
+
+
+	public function url_template() : string {
 		return '';
 	}
 
-	public function __construct( $profile ) {
+	public function __construct( Profile $profile ) {
 		$this->profile = $profile;
 	}
 
 	public function test(): bool {
 		
-		if ( ! $this->profile_has_meta_key( $this->profile->profile_id ) ) {
+		if ( ! $this->profile_has_meta_key(  ) ) {
 			return false;
 		}
 
 		return true;
 	}
 
-	public function get_slug() {
+	public function get_slug() : string {
 
 		if ( ! $this->slug ) {
 			die( 'No Slug In Linkable' );
@@ -41,6 +41,10 @@ abstract class ProfileLink {
 	}
 
 	public function profile_has_meta_key(): bool {
+
+		/**
+		 * @psalm-suppress MixedAssignment
+		 */
 		$post_meta = $this->meta_value();
 		
 		if ( ! $post_meta ) {
@@ -54,7 +58,7 @@ abstract class ProfileLink {
 		return true;
 	}
 
-	public function meta_value() {
+	public function meta_value() : mixed {
 		if ( isset( $this->post_meta ) ) {
 			return $this->post_meta;
 		}
@@ -63,14 +67,12 @@ abstract class ProfileLink {
 		return $this->post_meta;
 	}
 
-	public function prep_meta_value( $meta_value ) {
+	public function prep_meta_value( mixed $meta_value ) : mixed{
 		return $meta_value;
 	}
 
-	/**
-	 * @return true
-	 */
-	public function enabled() {
+
+	public function enabled() : bool {
 		return true;
 	}
 
@@ -109,7 +111,7 @@ abstract class ProfileLink {
 		$template          = $this->url_template();
 		$tag               = '{' . $this->meta_key() . '}';
 		$with_placeholders = str_replace( $tag, '%s', $template );
-		return sprintf( $with_placeholders, $this->prep_meta_value( $this->meta_value() ) );
+		return sprintf( $with_placeholders, (string) $this->prep_meta_value( $this->meta_value() ) );
 	}
 
 	public function is_url_valid( string $url ): bool {
@@ -119,10 +121,10 @@ abstract class ProfileLink {
 
 		return true;
 	}
-	public function href() {
+	public function href() : bool | string {
 
-		if ( $this->is_url_valid( $this->meta_value() ) ) {
-			return $this->meta_value();
+		if ( $this->is_url_valid( (string) $this->meta_value() ) ) {
+			return (string) $this->meta_value();
 		}
 		
 		$new_url = $this->generate_url();

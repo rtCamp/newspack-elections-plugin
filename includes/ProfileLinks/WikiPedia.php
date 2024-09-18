@@ -3,14 +3,14 @@ namespace Govpack\ProfileLinks;
 
 class WikiPedia extends \Govpack\ProfileLinks\ProfileLink {
 
-	protected $slug = 'wikipedia';
+	protected string $slug = 'wikipedia';
 
 	/**
 	 * @return string
 	 *
 	 * @psalm-return 'wikipedia_id'
 	 */
-	public function meta_key() {
+	public function meta_key() : string {
 		return 'wikipedia_id';
 	}
 
@@ -19,7 +19,7 @@ class WikiPedia extends \Govpack\ProfileLinks\ProfileLink {
 	 *
 	 * @psalm-return 'WikiPedia'
 	 */
-	public function label() {
+	public function label() : string {
 		return 'WikiPedia';
 	}
 
@@ -28,7 +28,7 @@ class WikiPedia extends \Govpack\ProfileLinks\ProfileLink {
 	 *
 	 * @psalm-return 'https://wikipedia.org/wiki/{wikipedia_id}/'
 	 */
-	public function url_template() {
+	public function url_template() : string {
 		return 'https://wikipedia.org/wiki/{wikipedia_id}/';
 	} 
 }

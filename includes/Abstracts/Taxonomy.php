@@ -17,7 +17,10 @@ abstract class Taxonomy {
 	 * WordPress Hooks
 	 */
 	public static function hooks() : void {
-		add_action( 'init', [ get_called_class(), 'register_taxonomy' ] );
+		/**
+		 * @psalm-suppress InvalidArgument
+		 */
+		add_action( 'init', [ get_called_class(), 'register_taxonomy' ], 10, 0 );
 	}
 
 	/**

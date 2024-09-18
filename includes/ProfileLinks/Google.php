@@ -3,14 +3,14 @@ namespace Govpack\ProfileLinks;
 
 class Google extends \Govpack\ProfileLinks\ProfileLink {
 
-	protected $slug = 'google';
+	protected string $slug = 'google';
 
 	/**
 	 * @return string
 	 *
 	 * @psalm-return 'google_entity_id'
 	 */
-	public function meta_key() {
+	public function meta_key() : string {
 		return 'google_entity_id';
 	}
 
@@ -19,15 +19,15 @@ class Google extends \Govpack\ProfileLinks\ProfileLink {
 	 *
 	 * @psalm-return 'Google Trends'
 	 */
-	public function label() {
+	public function label() : string {
 		return 'Google Trends';
 	}
 
 	/**
 	 * @return string
 	 */
-	public function prep_meta_value( $meta_value ) {
-		return rawurlencode( $meta_value );
+	public function prep_meta_value( mixed $meta_value ) : mixed {
+		return rawurlencode( (string) $meta_value );
 	}
 
 	/**
@@ -35,7 +35,7 @@ class Google extends \Govpack\ProfileLinks\ProfileLink {
 	 *
 	 * @psalm-return 'https://trends.google.com/trends/explore?date=all&q={google_entity_id}'
 	 */
-	public function url_template() {
+	public function url_template() : string {
 		///m/01rbs3 = %2Fm%2F01rbs3
 		return 'https://trends.google.com/trends/explore?date=all&q={google_entity_id}';
 	} 

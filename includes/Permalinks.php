@@ -12,9 +12,9 @@ class Permalinks {
 	 */
 	protected static $instance = null;
 
-	private $option_name = 'govpack_permalinks';
+	private string $option_name = 'govpack_permalinks';
 
-	private $permalinks = [];
+	private array $permalinks = [];
 
 	public function __construct() {
 	}

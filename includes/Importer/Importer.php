@@ -111,8 +111,12 @@ class Importer {
 
 	/**
 	 * Called By The REST API to Check the status of an ongoing import
+	 *
+	 * @return string[]
+	 *
+	 * @psalm-return array{status: 'done'|'not_running'|'running'}
 	 */
-	public static function status() {
+	public static function status(): array {
 		return AbstractImporter::status();
 	}
 
@@ -120,15 +124,21 @@ class Importer {
 
 	/**
 	 * Called By The REST API to Check the progress of an ongoing import
+	 *
+	 * @psalm-return array{total?: mixed, done?: mixed, todo?: mixed, failed?: mixed}
 	 */
-	public static function progress() {
+	public static function progress(): array {
 		return self::progress_check();
 	}
 
 	/**
 	 * Called By The REST API to Kickoff an Import and check its process
+	 *
+	 * @return (mixed|string)[]|\WP_Error
+	 *
+	 * @psalm-return \WP_Error|array{status: 'done'|'running', import_group?: mixed}
 	 */
-	public static function import() {
+	public static function import(): array|\WP_Error {
 
 		$file  = get_option( 'govpack_import_path', false );
 		$extra = get_option( 'govpack_import_extra_args', false );
@@ -196,9 +206,10 @@ class Importer {
 	 * Create the importer based on the filetype passed in
 	 *
 	 * @param string $file Path of the file to import.
+	 *
 	 * @throws \Exception File Not Found.
 	 */
-	public static function make( $file ) {
+	public static function make( $file ): CSV|false {
 		
 		try {
 			self::check_file( $file );
@@ -314,7 +325,7 @@ class Importer {
 	 * @return void
 	 */
 	public static function clear() {
-		Abstract_Importer::cancel();
+		AbstractImporter::cancel();
 		delete_option( 'govpack_import_path' );
 
 		if ( ! \ActionScheduler::is_initialized( __FUNCTION__ ) ) {
@@ -332,10 +343,10 @@ class Importer {
 	 */
 	public static function clean(): void {
 		// delete the options cached for the import.
-		\delete_option( 'govpack_import_extra_args', null );
-		\delete_option( 'govpack_import_path', null );
-		\delete_option( 'govpack_import_processing', null );
-		\delete_option( 'govpack_import_group', null );
+		\delete_option( 'govpack_import_extra_args' );
+		\delete_option( 'govpack_import_path' );
+		\delete_option( 'govpack_import_processing' );
+		\delete_option( 'govpack_import_group' );
 	}
 
 

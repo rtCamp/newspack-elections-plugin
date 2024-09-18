@@ -27,7 +27,7 @@ class TemplateLoader extends \Govpack_Vendor_Gamajo_Template_Loader {
 		 *
 		 * @var string
 		 */
-		protected $theme_template_directory = 'govpack';
+		protected  $theme_template_directory = 'govpack';
 
 		/**
 		 * Reference to the root directory path of this plugin.
@@ -42,11 +42,11 @@ class TemplateLoader extends \Govpack_Vendor_Gamajo_Template_Loader {
 		 */
 		protected $plugin_directory = GOVPACK_PLUGIN_PATH;
 
-	public function hooks() {
+	public function hooks() : void {
 		add_filter( 'template_include', [ $this, 'template_include' ] );
 	}
 
-	public function template_include( $template ) {
+	public function template_include( string $template ) : string {
 
 		if ( is_embed() ) {
 			return $template;
@@ -56,25 +56,29 @@ class TemplateLoader extends \Govpack_Vendor_Gamajo_Template_Loader {
 			return $template;
 		}
 
-		if ( is_singular( \Govpack\Core\CPT\Profile::CPT_SLUG ) ) {
-			return $this->locate_template( \Govpack\Core\CPT\Profile::TEMPLATE_NAME );
+		if ( is_singular( \Govpack\CPT\Profile::CPT_SLUG ) ) {
+			return $this->locate_template( \Govpack\CPT\Profile::TEMPLATE_NAME );
 		}
 
 		return $template;
 	}
 
-	private function do_render( $template, $attributes = [], $content = '', $block = null, $extra = null ) {
+	private function do_render( string $template, array $attributes = [], string $content = '', mixed $block = null, mixed $extra = null ) : string {
 		ob_start();
+		/**
+		 * @psalm-suppress UnresolvableInclude
+		 */
 		require $template; //phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
 		$html = ob_get_clean();
 		return $html;
 	}
-	public function render_block( $slug, $attributes = [], $content = '', $block = null, $extra = null ) {
+
+	public function render_block( string $slug, array $attributes = [], string $content = '', mixed  $block = null, mixed  $extra = null ) : string {
 		$template = $this->get_template_part( $slug, null, false );
 		return $this->do_render( $template, $attributes, $content, $block, $extra );
 	}
 
-	public function get_block_part( $slug, $name = null, $attributes = [], $content = '', $block = null, $extra = null ) {
+	public function get_block_part( string $slug, null|string $name = null, array $attributes = [],  string $content = '', mixed $block = null, mixed $extra = null ) : void {
 		// Directly echoing HTML here, this comes from a template, so not escapable. Escaping shoulld be handled in the actual template.
 		echo $this->do_render( $this->get_template_part( $slug, $name, false ), $attributes, $content, $block, $extra );//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}

@@ -14,24 +14,30 @@ class InstallExtendedArgs {
 
 	/**
 	 * Current Version of the Migration Schema (ie, what is represented in this file)
-	 * 
-	 * @var $current_version
+	 *
+	 * @var int
+	 *
+	 * @psalm-var 1
 	 */
-	private static $current_version = 1;
+	private static int $current_version = 1;
 
 	/**
 	 * The version is stored in the options table, where is it stored?
-	 * 
-	 * @var $version_options_key
+	 *
+	 * @var string
+	 *
+	 * @psalm-var 'extended_args_version'
 	 */
-	private static $version_options_key = 'extended_args_version';
+	private static string $version_options_key = 'extended_args_version';
 
 	/**
 	 * Table we are creating here
-	 * 
-	 * @var $table_name
+	 *
+	 * @var string
+	 *
+	 * @psalm-var 'actionscheduler_actions_extended'
 	 */
-	private static $table_name = 'actionscheduler_actions_extended';
+	private static string $table_name = 'actionscheduler_actions_extended';
 
 	/**
 	 * Run Migrations.

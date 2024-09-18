@@ -8,12 +8,27 @@
     findUnusedBaselineEntry="true"
     findUnusedCode="false"
 	autoloader="./bin/psalm/bootstrap.php"
+	phpVersion="8.1"
 >	
-	<stubs>
-		<file name="./bin/psalm/bootstrap.php"/>
-	</stubs>
+	
     <projectFiles>
         <directory name="./includes"/>
-        
+		 <ignoreFiles>
+			<file name="./includes/govpack-functions-template.php" />
+			<directory name="./includes/deprecated" />
+			<directory name="./includes/Importer/deprecated" />
+			<directory name="./includes/Tax" />
+
+		</ignoreFiles>
     </projectFiles>
-<plugins><pluginClass class="PsalmWordPress\Plugin"/></plugins></psalm>
+	<plugins>
+		<pluginClass class="PsalmWordPress\Plugin">
+			<requireAllParams value="false" />
+		</pluginClass>
+	</plugins>
+	<issueHandlers>
+		<PropertyNotSetInConstructor errorLevel="suppress" />
+		<RedundantPropertyInitializationCheck errorLevel="suppress" />
+		<PluginIssue name="HookNotFound" errorLevel="suppress" />
+	</issueHandlers>
+</psalm>

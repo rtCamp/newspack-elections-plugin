@@ -3,14 +3,14 @@ namespace Govpack\ProfileLinks;
 
 class OpenStates extends \Govpack\ProfileLinks\ProfileLink {
 
-	protected $slug = 'openstates';
+	protected string $slug = 'openstates';
 
 	/**
 	 * @return string
 	 *
 	 * @psalm-return 'openstates_id'
 	 */
-	public function meta_key() {
+	public function meta_key() : string {
 		return 'openstates_id';
 	}
 
@@ -19,14 +19,14 @@ class OpenStates extends \Govpack\ProfileLinks\ProfileLink {
 	 *
 	 * @psalm-return 'OpenStates'
 	 */
-	public function label() {
+	public function label() : string {
 		return 'OpenStates';
 	}
 
 	/**
 	 * @return false
 	 */
-	public function enabled() {
+	public function enabled() : bool {
 		return false;
 	}
 }

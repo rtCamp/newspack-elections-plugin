@@ -18,9 +18,9 @@ class FrontEnd {
 	 * Stores static instance of class.
 	 *
 	 * @access protected
-	 * @var Govpack\Govpack The single instance of the class
+	 * @var self The single instance of the class
 	 */
-	protected static $instance = null;
+	protected static object|null $instance = null;
 
 	/**
 	 * Returns static instance of class.
@@ -38,7 +38,7 @@ class FrontEnd {
 	 * Stores  instance of TemplateLoader.
 	 *
 	 * @access protected
-	 * @var \Govpack\Core\TemplateLoader The single instance of the class
+	 * @var \Govpack\TemplateLoader The single instance of the class
 	 */
 
 	private TemplateLoader $template_loader;
@@ -48,7 +48,7 @@ class FrontEnd {
 	 */
 	public function hooks() : void {
 		add_filter( 'newspack_can_show_post_thumbnail', [ __CLASS__, 'newspack_can_show_post_thumbnail' ], 10, 1 );
-		add_action( 'enqueue_block_assets', [ __CLASS__, 'enqueue_front_end_style' ] );
+		add_action( 'enqueue_block_assets', [ __CLASS__, 'enqueue_front_end_style' ], 10, 0 );
 
 		add_action( 'govpack_before_main_content', [ $this, 'output_wrapper_start' ] );
 		add_action( 'govpack_after_main_content', [ $this, 'output_wrapper_end' ] );
@@ -88,7 +88,7 @@ class FrontEnd {
 			'govpack-block-styles',
 			GOVPACK_PLUGIN_BUILD_URL . 'frontend.css',
 			[],
-			1.00,
+			"1.00",
 			'screen'
 		);
 		wp_enqueue_style( 'govpack-block-styles' );
@@ -101,6 +101,7 @@ class FrontEnd {
 	 * @param boolean $use_post_thumbnail Value to filter.
 	 */
 	public static function newspack_can_show_post_thumbnail( $use_post_thumbnail ) : bool  {
+		/** @var \WP_Post */
 		global $post;
 
 		if ( 'govpack_profiles' === $post->post_type ) {
@@ -121,6 +122,6 @@ class FrontEnd {
 			return $the_content;
 		}
 	
-		return \Govpack\Core\CPT\Profile::default_profile_content();
+		return \Govpack\CPT\Profile::default_profile_content();
 	}
 }

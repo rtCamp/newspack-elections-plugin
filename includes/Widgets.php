@@ -5,7 +5,7 @@ namespace Govpack;
 class Widgets {
 
 	public static function hooks() : void {
-		add_action( 'widgets_init', [ __CLASS__, 'register_widget_area' ] );
+		add_action( 'widgets_init', [ __CLASS__, 'register_widget_area' ], 10, 0 );
 	}
 
 	public static function register_widget_area() : void {

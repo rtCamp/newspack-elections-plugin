@@ -78,61 +78,61 @@ class Menu {
 		return $this;
 	}
 
-	/** 
+	/**
 	 * Set page title
-	 * 
-	 *  @param string $value value to set page title.
-	 */ 
-	public function set_page_title( string $value ) {
+	 *
+	 * @param string $value value to set page title.
+	 */
+	public function set_page_title( string $value ): static {
 		return $this->set( 'page_title', $value );
 	}
 
-		/** 
-		 * Set page title
-		 * 
-		 *  @param string $value value to set page title.
-		 */ 
-	public function set_menu_title( string $value ) {
+		/**
+	 * Set page title
+	 *
+	 * @param string $value value to set page title.
+	 */
+	public function set_menu_title( string $value ): static {
 		return $this->set( 'menu_title', $value );
 	}
-	/** 
+	/**
 	 * Set menu title
-	 * 
-	 *  @param string $value value to set menu title.
-	 */ 
-	public function set_menu_slug( string $value ) {
+	 *
+	 * @param string $value value to set menu title.
+	 */
+	public function set_menu_slug( string $value ): static {
 		return $this->set( 'menu_slug', $value );
 	}
-	/** 
+	/**
 	 * Set capability
-	 * 
-	 *  @param string $value value to set capability.
-	 */ 
-	public function set_capability(string  $value ) {
+	 *
+	 * @param string $value value to set capability.
+	 */
+	public function set_capability(string  $value ): static {
 		return $this->set( 'capability', $value );
 	}
-	/** 
+	/**
 	 * Set position to use in menu
-	 * 
-	 *  @param string $value value to set position to use in menu.
-	 */ 
-	public function set_position( int $value ) {
+	 *
+	 * @param string $value value to set position to use in menu.
+	 */
+	public function set_position( int $value ): static {
 		return $this->set( 'position', $value );
 	}
-	/** 
+	/**
 	 * Set icon url
-	 * 
-	 *  @param string $value value to set icon url.
-	 */ 
-	public function set_icon( string $value ) {
+	 *
+	 * @param string $value value to set icon url.
+	 */
+	public function set_icon( string $value ): static {
 		return $this->set( 'icon_url', $value );
 	}
-	/** 
+	/**
 	 * Set callback function
-	 * 
-	 *  @param string $value value to set callback function.
-	 */ 
-	public function set_callback( array|callable $value ) {
+	 *
+	 * @param string $value value to set callback function.
+	 */
+	public function set_callback( array|callable $value ): static {
 		return $this->set( 'function', $value );
 	}
 	/**

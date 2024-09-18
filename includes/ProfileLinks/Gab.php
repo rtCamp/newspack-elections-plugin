@@ -3,14 +3,14 @@ namespace Govpack\ProfileLinks;
 
 class Gab extends \Govpack\ProfileLinks\ProfileLink {
 
-	protected $slug = 'gab';
+	protected string $slug = 'gab';
 
 	/**
 	 * @return string
 	 *
 	 * @psalm-return 'gab'
 	 */
-	public function meta_key() {
+	public function meta_key() : string {
 		return 'gab';
 	}
 
@@ -19,7 +19,7 @@ class Gab extends \Govpack\ProfileLinks\ProfileLink {
 	 *
 	 * @psalm-return 'Gab'
 	 */
-	public function label() {
+	public function label() : string {
 		return 'Gab';
 	}
 
@@ -28,7 +28,7 @@ class Gab extends \Govpack\ProfileLinks\ProfileLink {
 	 *
 	 * @psalm-return 'https://gab.com/{gab}/'
 	 */
-	public function url_template() {
+	public function url_template() : string {
 		return 'https://gab.com/{gab}/';
 	}
 }

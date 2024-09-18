@@ -31,7 +31,6 @@
 		"Govpack\\Blocks\\" : "src/blocks/"
     },
 	"files" : [
-		"includes/govpack-functions-template.php",
 		"includes/govpack-functions.php"
 	]
   },

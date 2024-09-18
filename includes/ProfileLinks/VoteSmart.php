@@ -3,14 +3,14 @@ namespace Govpack\ProfileLinks;
 
 class VoteSmart extends \Govpack\ProfileLinks\ProfileLink {
 
-	protected $slug = 'votesmart';
+	protected string $slug = 'votesmart';
 
 	/**
 	 * @return string
 	 *
 	 * @psalm-return 'votesmart_id'
 	 */
-	public function meta_key() {
+	public function meta_key() : string {
 		return 'votesmart_id';
 	}
 
@@ -19,7 +19,7 @@ class VoteSmart extends \Govpack\ProfileLinks\ProfileLink {
 	 *
 	 * @psalm-return 'VoteSmart'
 	 */
-	public function label() {
+	public function label() : string {
 		return 'VoteSmart';
 	}
 
@@ -28,7 +28,7 @@ class VoteSmart extends \Govpack\ProfileLinks\ProfileLink {
 	 *
 	 * @psalm-return 'https://justfacts.votesmart.org/candidate/biography/{votesmart_id}/'
 	 */
-	public function url_template() {
+	public function url_template() : string {
 		return 'https://justfacts.votesmart.org/candidate/biography/{votesmart_id}/';
 	} 
 }

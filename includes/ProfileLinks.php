@@ -7,25 +7,30 @@ class ProfileLinks extends ProfileLinkServices {
 	/**
 	 * Post ID of the govpack profile this will generate links for
 	 */
-	public $profile_id;
+	public int $profile_id;
 
 	/**
 	 * Array that stores the test results for each link service
 	 */
-	private $tests = [];
+	private array $tests = [];
 
 	/**
 	 * Array that stores the generated link objects for each service
+	 * 
+	 * @var array<string,ProfileLinks\ProfileLink>
 	 */
-	private $links = [];
+	private array $links = [];
 
-	public function __construct( $profile_id ) {
+	public function __construct( int $profile_id ) {
 		$this->profile_id = $profile_id;
 	}
 
 
 	public function generate(): void {
 		foreach ( $this->get_linkable() as $class ) {
+			/**
+			 * @var ProfileLinks\ProfileLink
+			 */
 			$linkable = new $class( $this );
 
 			if ( ! $linkable->enabled() ) {
@@ -42,14 +47,14 @@ class ProfileLinks extends ProfileLinkServices {
 		}
 	}
 
-	public function get_meta( $key ) {
+	public function get_meta( string $key ) : mixed {
 		return get_post_meta( $this->profile_id, $key, true );
 	}
 
 	/**
 	 * @return array
 	 */
-	public function to_array() {
+	public function to_array() : array {
 		return array_map(
 			function ( $link ) {
 				return $link->to_array();

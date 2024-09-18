@@ -3,14 +3,14 @@ namespace Govpack\ProfileLinks;
 
 class Linkedin extends \Govpack\ProfileLinks\ProfileLink {
 
-	protected $slug = 'linkedin';
+	protected string $slug = 'linkedin';
 
 	/**
 	 * @return string
 	 *
 	 * @psalm-return 'linkedin'
 	 */
-	public function meta_key() {
+	public function meta_key() : string {
 		return 'linkedin';
 	}
 
@@ -19,7 +19,7 @@ class Linkedin extends \Govpack\ProfileLinks\ProfileLink {
 	 *
 	 * @psalm-return 'LinkedIn'
 	 */
-	public function label() {
+	public function label() : string {
 		return 'LinkedIn';
 	}
 
@@ -28,7 +28,7 @@ class Linkedin extends \Govpack\ProfileLinks\ProfileLink {
 	 *
 	 * @psalm-return 'https://www.linkedin.com/in/{linkedin}/'
 	 */
-	public function url_template() {
+	public function url_template() : string {
 		return 'https://www.linkedin.com/in/{linkedin}/';
 	}
 }

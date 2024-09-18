@@ -8,8 +8,11 @@ class ProfileLinkServices {
 
 	/**
 	 * Array that stores the generated link objects for each service
+
+	 *
+	 * @psalm-var array<string,ProfileLinks\ProfileLink>
 	 */
-	private $services;
+	private array $services;
 
 	public function __construct() {
 	}
@@ -60,7 +63,10 @@ class ProfileLinkServices {
 		return $classes;
 	}
 
-	public function get_services() {
+	/**
+	 * @psalm-return array<string,ProfileLinks\ProfileLink>
+	 */
+	public function get_services() : array {
 		
 		if ( isset( $this->services ) ) {
 			return $this->services;
@@ -69,6 +75,9 @@ class ProfileLinkServices {
 		$this->services = [];
 		
 		foreach ( $this->get_linkable() as $class ) {
+			/**
+			 * @var \Govpack\ProfileLinks\ProfileLink
+			 */
 			$linkable                                = new $class( $this );
 			$this->services[ $linkable->get_slug() ] = $linkable;
 		}
