@@ -18,9 +18,9 @@ use Govpack\Importer\Abstracts\AbstractImporter;
 class Importer {
 
 	/**
-	 * Adds Actions to Hooks 
+	 * Adds Actions to Hooks
 	 */
-	public static function hooks() {
+	public static function hooks(): void {
 
 		\add_action( 'rest_api_init', [ __CLASS__, 'register_rest_endpoints' ] );
 		
@@ -31,9 +31,9 @@ class Importer {
 	}
 
 	/**
-	 * Adds ASSETS used for importing  
+	 * Adds ASSETS used for importing
 	 */
-	public static function register_scripts() {
+	public static function register_scripts(): void {
 
 		$file = GOVPACK_PLUGIN_BUILD_PATH . 'importer.asset.php';
 		if ( file_exists( $file ) ) {
@@ -56,9 +56,9 @@ class Importer {
 	}
 
 	/**
-	 * Register the REST Routes 
+	 * Register the REST Routes
 	 */
-	public static function register_rest_endpoints() {
+	public static function register_rest_endpoints(): void {
 
 		\register_rest_route(
 			Govpack::REST_PREFIX,
@@ -147,9 +147,10 @@ class Importer {
 	 * Checks the file exists in the Govpack uploads folder
 	 *
 	 * @param string $file  Name of the JSON file.
+	 *
 	 * @throws \Exception File Not Found.
 	 */
-	public static function check_file( $file ) {
+	public static function check_file( $file ): string {
 
 		if ( file_exists( $file ) ) {
 			return $file;
@@ -169,9 +170,10 @@ class Importer {
 	 * Checks the file exists in the Govpack uploads folder
 	 *
 	 * @param string $file  Name of the JSON file.
+	 *
 	 * @throws \Exception File Not Found.
 	 */
-	public static function filetype( $file ) {
+	public static function filetype( $file ): string {
 
 	
 		if ( file_exists( $file ) ) {
@@ -215,8 +217,10 @@ class Importer {
 	 * Custom function that gets counts of Action Scheduler actions
 	 *
 	 * @param array $args XML node being processed.
+	 *
+	 * @psalm-return array<never, never>|int<min, max>
 	 */
-	public static function as_count_scheduled_actions( $args = [] ) {
+	public static function as_count_scheduled_actions( $args = [] ): array|int {
 		if ( ! \ActionScheduler::is_initialized( __FUNCTION__ ) ) {
 			return [];
 		}
@@ -241,8 +245,10 @@ class Importer {
 
 	/**
 	 * Call the Import/Action Scheduler backend and see progress
+	 *
+	 * @psalm-return array{total?: mixed, done?: mixed, todo?: mixed, failed?: mixed}
 	 */
-	public static function progress_check() {
+	public static function progress_check(): array {
 
 		$import_group = get_option( 'govpack_import_group', false );
 
@@ -279,6 +285,8 @@ class Importer {
 
 	/**
 	 * Removes stored options from the last import
+	 *
+	 * @return void
 	 */
 	public static function check_for_stuck_import() {
 
@@ -302,6 +310,8 @@ class Importer {
 
 	/**
 	 * Reset all Import Funcions to empty
+	 *
+	 * @return void
 	 */
 	public static function clear() {
 		Abstract_Importer::cancel();
@@ -320,7 +330,7 @@ class Importer {
 	/**
 	 * Removes stored options from the last import
 	 */
-	public static function clean() {
+	public static function clean(): void {
 		// delete the options cached for the import.
 		\delete_option( 'govpack_import_extra_args', null );
 		\delete_option( 'govpack_import_path', null );
@@ -331,12 +341,15 @@ class Importer {
 
 	/**
 	 * For a Given Post ID, look for the image meta value, sideload it and save it as the post thumbnail
-	 * 
+	 *
 	 * @param integer $id Post ID to lookup and sideload.
 	 * @param string  $meta_key key used to find a sideload url.
+	 *
 	 * @throws \Exception Profile errors.
+	 *
+	 * @return true
 	 */
-	public static function sideload( $id = null, $meta_key = 'photo' ) {
+	public static function sideload( $id = null, $meta_key = 'photo' ): bool {
 
 	
 		if ( ! $id ) {

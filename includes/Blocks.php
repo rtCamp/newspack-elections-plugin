@@ -28,7 +28,7 @@ class Blocks {
 		return ( did_action( 'gp_register_blocks' ) > 0 );
 	}
 
-	public function register( Abstracts\Block $block ) {
+	public function register( Abstracts\Block $block ): void {
 		$this->blocks[ $block->block_name ] = $block;
 
 		if ( $this->is_late_block_registration() ) {

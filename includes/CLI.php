@@ -33,6 +33,8 @@ class CLI extends \WP_CLI_Command {
 	 *
 	 * @param array $args        Array of command-line arguments.
 	 * @param array $assoc_args  Associative array of arguments.
+	 *
+	 * @return void
 	 */
 	public function import( $args, $assoc_args ) {
 
@@ -53,13 +55,13 @@ class CLI extends \WP_CLI_Command {
 
 	/**
 	 * Gets Progess from ongoing import
-	 * 
+	 *
 	 * @subcommand progress
 	 *
 	 * @param array $args        Array of command-line arguments.
 	 * @param array $assoc_args  Associative array of arguments.
 	 */
-	public function progress( $args, $assoc_args ) {
+	public function progress( $args, $assoc_args ): void {
 		
 		WP_CLI::line( Importer\Abstract_Importer::progress() );
 	}
@@ -72,13 +74,13 @@ class CLI extends \WP_CLI_Command {
 	 * @param array $args        Array of command-line arguments.
 	 * @param array $assoc_args  Associative array of arguments.
 	 */
-	public function clear( $args, $assoc_args ) {
+	public function clear( $args, $assoc_args ): void {
 		WP_CLI::line( \Govpack\Core\Importer\Importer::clear() );
 	}
 
 	/**
 	 * Sideload an Image in a profile
-	 * 
+	 *
 	 * ## OPTIONS
 	 * <profile_id>...
 	 * : The ID of the profile
@@ -87,6 +89,8 @@ class CLI extends \WP_CLI_Command {
 	 *
 	 * @param array $args        Array of command-line arguments.
 	 * @param array $assoc_args  Associative array of arguments.
+	 *
+	 * @return void
 	 */
 	public function sideload( $args, $assoc_args ) {
 
@@ -107,7 +111,7 @@ class CLI extends \WP_CLI_Command {
 	/**
 	 * Add CLI command.
 	 */
-	public static function init() {
+	public static function init(): void {
 		WP_CLI::add_command( 'govpack import', '\Govpack\Core\CLI' );
 		WP_CLI::add_command( 'govpack purge', [ '\Govpack\Core\CLI', 'purge' ] );
 		WP_CLI::add_command( 'govpack migrate', [ '\Govpack\Core\CLI', 'migrate' ] );
@@ -122,7 +126,7 @@ class CLI extends \WP_CLI_Command {
 	 * @param array $args        Array of command-line arguments.
 	 * @param array $assoc_args  Associative array of arguments.
 	 */
-	public function purge( $args, $assoc_args ) {
+	public function purge( $args, $assoc_args ): void {
 
 		// turn of term counts when post status changes.
 		remove_action( 'transition_post_status', '_update_term_count_on_transition_post_status', 10, 3 );
@@ -204,7 +208,7 @@ class CLI extends \WP_CLI_Command {
 	 * @param array $args        Array of command-line arguments.
 	 * @param array $assoc_args  Associative array of arguments.
 	 */
-	public function clean( $args, $assoc_args ) {
+	public function clean( $args, $assoc_args ): void {
 		WP_CLI::line( \Govpack\Core\Importer\Importer::clean() );
 	}
 
@@ -216,7 +220,7 @@ class CLI extends \WP_CLI_Command {
 	 * @param array $args        Array of command-line arguments.
 	 * @param array $assoc_args  Associative array of arguments.
 	 */
-	public function migrate( $args, $assoc_args ) {
+	public function migrate( $args, $assoc_args ): void {
 		
 		global $wpdb;
 

@@ -36,7 +36,7 @@ class InstallExtendedArgs {
 	/**
 	 * Run Migrations.
 	 */
-	public static function do() {
+	public static function do(): void {
 		self::register_table();
 		if ( self::needs_migration() ) {
 			self::run_migrations();
@@ -45,10 +45,10 @@ class InstallExtendedArgs {
 
 	/**
 	 * Create the Table name from what we are using and the prefix.
-	 * 
+	 *
 	 * @param string $table table name we are creating.
 	 */
-	public static function get_full_table_name( $table ) {
+	public static function get_full_table_name( $table ): string {
 		return $GLOBALS['wpdb']->prefix . $table;
 	}
 
@@ -56,7 +56,7 @@ class InstallExtendedArgs {
 	/**
 	 * Make wpdb aware that the extended table exists.
 	 */
-	public static function register_table() {
+	public static function register_table(): void {
 		global $wpdb;
 		$table_name        = self::$table_name;
 		$wpdb->tables[]    = $table_name;
@@ -67,7 +67,7 @@ class InstallExtendedArgs {
 	/**
 	 * Test the versions and detemin if we need to run migrations
 	 */
-	public static function needs_migration() {
+	public static function needs_migration(): bool {
 		$installed_version = \get_option( self::$version_options_key, 0 );
 
 		if ( $installed_version >= self::$current_version ) {
@@ -81,6 +81,8 @@ class InstallExtendedArgs {
 	
 	/**
 	 * Run the Migrations.
+	 *
+	 * @return void
 	 */
 	public static function run_migrations() {
 
@@ -112,7 +114,7 @@ class InstallExtendedArgs {
 	/**
 	 * Migrations version 1
 	 */
-	public static function migrate_v_1() {
+	public static function migrate_v_1(): void {
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		$table = self::get_table_definition();
@@ -122,7 +124,7 @@ class InstallExtendedArgs {
 	/**
 	 * Create the Table for extended args.
 	 */
-	private static function get_table_definition() {    
+	private static function get_table_definition(): string {    
 		global $wpdb;
 
 		$table_name      = self::$table_name;

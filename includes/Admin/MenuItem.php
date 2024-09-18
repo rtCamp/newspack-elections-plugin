@@ -32,6 +32,8 @@ class MenuItem extends Menu {
 
 	/**
 	 * Create the Menu Item to include in Menu.
+	 *
+	 * @return void
 	 */
 	public function create() {
 

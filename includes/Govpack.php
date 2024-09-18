@@ -62,7 +62,7 @@ class Govpack {
 	 * Action called by the plugin activation hook.
 	 * Causes rewrite rules to be regenerated so permalinks will work
 	 */
-	public static function activation() {
+	public static function activation(): void {
 		\Govpack\CPT\Profile::register_post_type();
 		flush_rewrite_rules( false ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.flush_rewrite_rules_flush_rewrite_rules
 
@@ -70,7 +70,7 @@ class Govpack {
 		\Govpack\Capabilities::instance()->add_capabilities();
 	}
 
-	public static function deactivation() {
+	public static function deactivation(): void {
 		
 		// get capabilities setup first.
 		\Govpack\Capabilities::instance()->remove_capabilities();
@@ -90,7 +90,7 @@ class Govpack {
 		return trailingslashit( GOVPACK_PLUGIN_URL ) . $path;
 	}
 
-	public function hooks() {
+	public function hooks(): void {
 		\add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		\add_action( 'plugins_loaded', [ '\Govpack\ActionScheduler\ActionScheduler', 'hooks' ], 0 );
 		\add_action( 'init', [ $this, 'register_blocks' ] );
@@ -181,7 +181,7 @@ class Govpack {
 		return $this->icons;
 	}
 
-	public function register_blocks() {
+	public function register_blocks(): void {
 		$this->blocks()->register( new \Govpack\Blocks\Profile\Profile() );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileSelf\ProfileSelf() );
 	}

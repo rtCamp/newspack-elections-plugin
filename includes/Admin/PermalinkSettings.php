@@ -13,7 +13,7 @@ class Permalink_Settings {
 		$this->handle_save();
 	}
 
-	public static function hooks() {
+	public static function hooks(): void {
 		new self();
 	}
 

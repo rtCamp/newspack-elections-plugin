@@ -9,6 +9,11 @@ abstract class ProfileLink {
 
 	abstract public function meta_key();
 	abstract public function label();
+	/**
+	 * @return string
+	 *
+	 * @psalm-return ''
+	 */
 	public function url_template() {
 		return '';
 	}
@@ -17,7 +22,7 @@ abstract class ProfileLink {
 		$this->profile = $profile;
 	}
 
-	public function test() {
+	public function test(): bool {
 		
 		if ( ! $this->profile_has_meta_key( $this->profile->profile_id ) ) {
 			return false;
@@ -35,7 +40,7 @@ abstract class ProfileLink {
 		return $this->slug;
 	}
 
-	public function profile_has_meta_key() {
+	public function profile_has_meta_key(): bool {
 		$post_meta = $this->meta_value();
 		
 		if ( ! $post_meta ) {
@@ -62,11 +67,17 @@ abstract class ProfileLink {
 		return $meta_value;
 	}
 
+	/**
+	 * @return true
+	 */
 	public function enabled() {
 		return true;
 	}
 
-	public function get_service() {
+	/**
+	 * @psalm-return array{slug: mixed, label: mixed, enabled: mixed, meta_key: mixed, template: mixed}
+	 */
+	public function get_service(): array {
 		return [
 			'slug'     => $this->get_slug(),
 			'label'    => $this->label(),
@@ -76,7 +87,12 @@ abstract class ProfileLink {
 		];
 	}
 
-	public function to_array() {
+	/**
+	 * @return (array|mixed|null|string)[]
+	 *
+	 * @psalm-return array{meta: mixed, target: '_blank', href: mixed, text: mixed, slug: mixed, id: null, rel: null, class: array<never, never>}
+	 */
+	public function to_array(): array {
 		return [
 			'meta'   => $this->meta_value(),
 			'target' => '_blank',
@@ -89,14 +105,14 @@ abstract class ProfileLink {
 		];
 	}
 
-	public function generate_url() {
+	public function generate_url(): string {
 		$template          = $this->url_template();
 		$tag               = '{' . $this->meta_key() . '}';
 		$with_placeholders = str_replace( $tag, '%s', $template );
 		return sprintf( $with_placeholders, $this->prep_meta_value( $this->meta_value() ) );
 	}
 
-	public function is_url_valid( $url ) {
+	public function is_url_valid( string $url ): bool {
 		if ( ! filter_var( $url, FILTER_VALIDATE_URL ) ) {
 			return false;
 		}

@@ -44,7 +44,7 @@ class Admin {
 	/**
 	 * Register Block Assets.
 	 */
-	public static function enqueue_block_editor_assets() {
+	public static function enqueue_block_editor_assets(): void {
 	}
 
 	/**
@@ -99,7 +99,7 @@ class Admin {
 </svg>';
 	}
 
-	public function create_menu_svg() {
+	public function create_menu_svg(): string {
 		return sprintf( 'data:image/svg+xml;base64,%s', base64_encode( $this->get_menu_svg() ) );
 	}
 	/**

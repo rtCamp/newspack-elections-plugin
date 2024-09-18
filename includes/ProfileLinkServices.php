@@ -14,7 +14,12 @@ class ProfileLinkServices {
 	public function __construct() {
 	}
 
-	public function get_linkable() {
+	/**
+	 * @return class-string[]
+	 *
+	 * @psalm-return array<int<0, 11>, class-string>
+	 */
+	public function get_linkable(): array {
 
 		// a list of known classes
 		$linkable = [
@@ -71,6 +76,9 @@ class ProfileLinkServices {
 		return $this->services;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function to_array() {
 		return array_map(
 			function ( $link ) {

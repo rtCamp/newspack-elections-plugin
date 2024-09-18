@@ -172,6 +172,8 @@ class Helpers {
 	 * Log data to file.
 	 *
 	 * @param string $data Data to log.
+	 *
+	 * @return void
 	 */
 	public static function log( $data ) {
 		if ( defined( 'WP_ENVIRONMENT_TYPE' ) && 'production' === 'WP_ENVIRONMENT_TYPE' ) {

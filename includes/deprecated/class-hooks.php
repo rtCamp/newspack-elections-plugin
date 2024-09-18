@@ -14,7 +14,7 @@ class Hooks {
 	/**
 	 * Set up actions and filters.
 	 */
-	public static function setup_hooks() {
+	public static function setup_hooks(): void {
 
 
 		add_action( 'wp_enqueue_scripts', [ __CLASS__, 'wp_enqueue_scripts' ] );
@@ -31,7 +31,7 @@ class Hooks {
 	/**
 	 * Enqueue frontend scripts and styles.
 	 */
-	public static function wp_enqueue_scripts() {
+	public static function wp_enqueue_scripts(): void {
 		$type = ( defined( 'SCRIPT_DEBUG' ) && true === SCRIPT_DEBUG ) ? 'src' : 'min';
 
 		wp_enqueue_script( 'main', plugins_url( "assets/js/main.{$type}.js", __DIR__ ), [], GOVPACK_VERSION, true );
@@ -43,7 +43,7 @@ class Hooks {
 	 *
 	 * @param string $hook The current admin page.
 	 */
-	public static function admin_enqueue_scripts( $hook ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+	public static function admin_enqueue_scripts( $hook ): void { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
 		$type = ( defined( 'SCRIPT_DEBUG' ) && true === SCRIPT_DEBUG ) ? 'src' : 'min';
 
 		wp_enqueue_style( 'admin', plugins_url( "assets/css/admin.{$type}.css", __DIR__ ), [], GOVPACK_VERSION );
@@ -53,7 +53,7 @@ class Hooks {
 	/**
 	 * Add custom image sizes for this theme.
 	 */
-	public static function set_image_sizes() {
+	public static function set_image_sizes(): void {
 		add_image_size( 'govpack-square', 140, 140, true );
 	}
 
@@ -62,7 +62,7 @@ class Hooks {
 	 *
 	 * @param string $template The current template path.
 	 */
-	public static function single_template( $template ) {
+	public static function single_template( $template ): string {
 		global $post;
 
 		$slugs = [
@@ -81,7 +81,7 @@ class Hooks {
 	 *
 	 * @param array $post_types Post types registered with Yoast SEO.
 	 */
-	public static function wpseo_accessible_post_types( $post_types ) {
+	public static function wpseo_accessible_post_types( $post_types ): array {
 		unset( $post_types[ \Govpack\Core\CPT\Profile::CPT_SLUG ] );
 		return $post_types;
 	}
@@ -89,7 +89,7 @@ class Hooks {
 	/**
 	 * Register Sidebars
 	 */
-	public static function register_sidebars() {
+	public static function register_sidebars(): void {
 		$sidebars = [
 			\Govpack\Core\CPT\Profile::CPT_SLUG => 'Govpack Profile',
 		];

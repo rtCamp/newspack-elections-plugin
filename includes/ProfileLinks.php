@@ -24,7 +24,7 @@ class ProfileLinks extends ProfileLinkServices {
 	}
 
 
-	public function generate() {
+	public function generate(): void {
 		foreach ( $this->get_linkable() as $class ) {
 			$linkable = new $class( $this );
 
@@ -46,6 +46,9 @@ class ProfileLinks extends ProfileLinkServices {
 		return get_post_meta( $this->profile_id, $key, true );
 	}
 
+	/**
+	 * @return array
+	 */
 	public function to_array() {
 		return array_map(
 			function ( $link ) {

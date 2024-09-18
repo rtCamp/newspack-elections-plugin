@@ -67,13 +67,13 @@ class Menu {
 	 */  
 	protected array $items = []; 
 
-	/** 
+	/**
 	 * Generic set and return so we can use a fluent style
-	 * 
-	 *  @param string $key string of object property to set.
-	 *  @param string $value caluw to set the property.
-	 */  
-	public function set( string $key, mixed $value ) {
+	 *
+	 * @param string $key string of object property to set.
+	 * @param string $value caluw to set the property.
+	 */
+	public function set( string $key, mixed $value ): static {
 		$this->$key = $value;
 		return $this;
 	}
@@ -135,12 +135,12 @@ class Menu {
 	public function set_callback( array|callable $value ) {
 		return $this->set( 'function', $value );
 	}
-	/** 
-	 * Add a submenu item 
-	 * 
-	 *  @param Menu_Item $item Submemnu Item.
-	 */ 
-	public function add_item( MenuItem $item ) {
+	/**
+	 * Add a submenu item
+	 *
+	 * @param Menu_Item $item Submemnu Item.
+	 */
+	public function add_item( MenuItem $item ): void {
 
 		$this->items[] = $item->set_parent_slug( $this->menu_slug );
 	}
@@ -168,9 +168,11 @@ class Menu {
 		return true;
 	}
 
-	/** 
+	/**
 	 * Creates The menu and calls main WP menthods to do it.
-	 */ 
+	 *
+	 * @return void
+	 */
 	public function create() {
 		try {
 			
@@ -214,9 +216,10 @@ class Menu {
 	 * Add submenus for post types.
 	 *
 	 * @access private
+	 *
 	 * @since 3.1.0
 	 */
-	public static function add_taxonomy_submenus() {
+	public static function add_taxonomy_submenus(): void {
 		
 		
 		foreach ( \get_taxonomies( [ 'show_ui' => true ], 'objects' ) as $tax ) {

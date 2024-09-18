@@ -25,13 +25,13 @@ if ( ! function_exists( 'gp_get_block_part' ) ) {
 }
 
 if ( ! function_exists( 'gp_get_permalink_structure' ) ) {
-	function gp_get_permalink_structure() {
+	function gp_get_permalink_structure(): array {
 		return Govpack\Permalinks::instance()->permalinks();
 	}
 }
 
 if ( ! function_exists( 'gp_is_url_valid' ) ) {
-	function gp_is_url_valid( $url ) {
+	function gp_is_url_valid( $url ): bool {
 		if ( ! filter_var( $url, FILTER_VALIDATE_URL ) ) {
 			return false;
 		}

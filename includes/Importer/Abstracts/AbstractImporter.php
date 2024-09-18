@@ -31,22 +31,26 @@ abstract class AbstractImporter {
 	/**
 	 * Returns a new Importer based on the calling class
 	 */
-	public static function make() {
+	public static function make(): static {
 		return new static();
 	}
 
 	/**
 	 * Should we need to cancel the import the quickest way to to delete the keys storing how it runs.
 	 */
-	public static function cancel() {
+	public static function cancel(): void {
 		delete_option( self::IMPORT_TEST_KEY );
 	}
 
 		
 	/**
 	 * Checks if an import is already running
+	 *
+	 * @return string[]
+	 *
+	 * @psalm-return array{status: 'done'|'not_running'|'running'}
 	 */
-	public static function status() {
+	public static function status(): array {
 
 
 		$import_processing_running = get_option( self::IMPORT_TEST_KEY, self::IMPORT_NOT_RUNNING );
@@ -67,8 +71,12 @@ abstract class AbstractImporter {
 	 *
 	 * @param string $file  Name of the JSON file.
 	 * @param array  $extra Array of extra import configuration passed to the importer.
+	 *
+	 * @return (mixed|string)[]|\WP_Error
+	 *
+	 * @psalm-return \WP_Error|array{status: 'done'|'running', import_group?: mixed}
 	 */
-	public static function import( $file, $extra ) {
+	public static function import( $file, $extra ): array|\WP_Error {
 
 		$import_group              = get_option( 'govpack_import_group', false );
 		$import_processing_running = get_option( self::IMPORT_TEST_KEY, self::IMPORT_NOT_RUNNING );
@@ -125,10 +133,10 @@ abstract class AbstractImporter {
 
 	/**
 	 * Creates a group for the import that is passed to ActionScheduler.
-	 * 
+	 *
 	 * The Action Scheduler group is used to package the items in this import together.
 	 */
-	public static function import_group() {
+	public static function import_group(): string {
 
 		if ( self::$import_group ) {
 			return self::$import_group;

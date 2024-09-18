@@ -22,7 +22,7 @@ class Capabilities {
 	/**
 	 * Set up actions and filters.
 	 */
-	public static function hooks() {
+	public static function hooks(): void {
 		
 	}
 

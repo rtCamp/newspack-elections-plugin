@@ -30,7 +30,7 @@ abstract class Block {
 		add_filter( 'allowed_block_types_all', [ $this, 'handle_disable_block' ], 99, 2 );
 	}
 
-	abstract public function disable_block( $allowed_blocks, $editor_context ) : bool;
+	abstract public function disable_block( array|bool $allowed_blocks, \WP_Block_Editor_Context $editor_context ) : bool;
 
 	abstract public function block_build_path(): string;
 
