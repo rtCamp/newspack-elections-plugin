@@ -17,16 +17,15 @@ class MenuItem extends Menu {
 	/**
 	 * Parent Slug, i.e, which menu this menu item is added to
 	 * 
-	 * @var parent_slug
 	 */
-	public $parent_slug;
+	public string $parent_slug;
    
 	/**
 	 * Set Parent Slug, so we know the menu to use
 	 *
 	 * @param string $value value to set the parent slug.
 	 */
-	public function set_parent_slug( string $value ): Menu&static {
+	public function set_parent_slug( string $value ): Menu {
 		return $this->set( 'parent_slug', $value );
 	}
 

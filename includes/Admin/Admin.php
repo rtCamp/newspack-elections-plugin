@@ -18,7 +18,7 @@ use Exception;
  */
 class Admin {
 
-	use \Govpack\Instance;
+	//use \Govpack\Instance;
 
 	private Govpack $plugin;
 
@@ -172,6 +172,7 @@ class Admin {
 		$file = GOVPACK_PLUGIN_BUILD_PATH . 'editor.asset.php';
 
 		if ( file_exists( $file ) ) {
+		
 			$asset_data = require_once $file; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
 		}
 
@@ -185,7 +186,7 @@ class Admin {
 		wp_register_style(
 			'govpack-editor-style',
 			GOVPACK_PLUGIN_BUILD_URL . 'editor.css',
-			$asset_data['version'] ?? '',
+			$asset_data['dependencies'] ?? [],
 			true
 		);
 	}
@@ -197,6 +198,10 @@ class Admin {
 		\wp_enqueue_style( 'govpack-admin-style' );
 		
 		$screen = get_current_screen();
+
+		if($screen === null){
+			return;
+		}
 
 		if ( true === $screen->is_block_editor() && 'govpack_profiles' === $screen->post_type ) {
 			

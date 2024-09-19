@@ -1,7 +1,7 @@
 <?php
 namespace Govpack\ProfileLinks;
 
-use \Govpack\ProfileLinks as Profile;
+use \Govpack\ProfileLinkServices as Profile;
 abstract class ProfileLink {
 
 	protected string $label;

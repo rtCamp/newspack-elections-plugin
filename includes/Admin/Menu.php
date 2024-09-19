@@ -16,14 +16,12 @@ class Menu {
 	/** 
 	 * Title added to broser bag, eg <title> 
 	 * 
-	 * @var page_title 
 	 */ 
 	protected string $page_title; 
 
 	/**
 	 * Title in the Menu
 	 * 
-	 * @var menu_title 
 	 */
 	protected string $menu_title; 
 
@@ -37,33 +35,30 @@ class Menu {
 	 * Call back to render the page
 	 * 
 	 */ 
-	protected $function; 
+	protected mixed $function; 
 
 	/** 
 	 * WP_capability required or you'll get an error
 	 * 
-	 * @var page_title 
 	 */ 
 	protected string $capability = 'manage_options'; 
 	
 	/** 
 	 * Where in the menu will our item be located
 	 * 
-	 * @var position 
 	 */ 
 	protected int $position = 30; 
 
 	/** 
 	 *  URL for icon placement
 	 * 
-	 * @var icon_url 
 	 */ 
 	protected  string $icon_url = ''; 
 	
 	/** 
 	 * Array of children to include in the menu
 	 * 
-	 *  @var items 
+	 * @var array<int, MenuItem>
 	 */  
 	protected array $items = []; 
 
@@ -71,7 +66,7 @@ class Menu {
 	 * Generic set and return so we can use a fluent style
 	 *
 	 * @param string $key string of object property to set.
-	 * @param string $value caluw to set the property.
+	 * @param mixed $value caluw to set the property.
 	 */
 	public function set( string $key, mixed $value ): static {
 		$this->$key = $value;
@@ -114,7 +109,7 @@ class Menu {
 	/**
 	 * Set position to use in menu
 	 *
-	 * @param string $value value to set position to use in menu.
+	 * @param int $value value to set position to use in menu.
 	 */
 	public function set_position( int $value ): static {
 		return $this->set( 'position', $value );
@@ -130,7 +125,7 @@ class Menu {
 	/**
 	 * Set callback function
 	 *
-	 * @param string $value value to set callback function.
+	 * @param array|callable $value value to set callback function.
 	 */
 	public function set_callback( array|callable $value ): static {
 		return $this->set( 'function', $value );
@@ -138,7 +133,7 @@ class Menu {
 	/**
 	 * Add a submenu item
 	 *
-	 * @param Menu_Item $item Submemnu Item.
+	 * @param MenuItem $item Submemnu Item.
 	 */
 	public function add_item( MenuItem $item ): void {
 
@@ -148,14 +143,16 @@ class Menu {
 	/** 
 	 * Checks that the required items are included.
 	 * 
-	 *  @param array $required Require properties.
+	 *  @param array<int, string> $required Require properties.
 	 *  @throws Exception Required property Missing.
 	 *  @throws Exception Required property is an empty string.
 	 */ 
 	public function check_required( array $required ) : bool {
 		
 		foreach ( $required as $key ) {
-
+			/**
+			 * @var string $key
+			 */
 			if ( null === $this->$key ) {
 				throw new Exception( 'Required Menu Property ' . $key . ' is unset' ); //phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 			}
@@ -195,7 +192,7 @@ class Menu {
 						$this->menu_title, 
 						$this->capability, //phpcs:ignore WordPress.WP.Capabilities.Undetermined
 						$this->menu_slug,
-						$this->function,
+						function () : mixed { return $this->function; },
 						$this->icon_url,
 						$this->position 
 					);
@@ -222,6 +219,9 @@ class Menu {
 	public static function add_taxonomy_submenus(): void {
 		
 		
+		/**
+		 * @var \WP_Taxonomy $tax 
+		 */
 		foreach ( \get_taxonomies( [ 'show_ui' => true ], 'objects' ) as $tax ) {
 			
 			if ( ! isset( $tax->show_in_which_menu ) ) {
@@ -237,9 +237,9 @@ class Menu {
 
 			\add_submenu_page( 
 				$tax->show_in_which_menu, 
-				$tax->labels->name, 
-				$tax->labels->name, 
-				$tax->cap->manage_terms, //phpcs:ignore WordPress.WP.Capabilities.Undetermined
+				(string) $tax->labels->name, 
+				(string) $tax->labels->name, 
+				(string) $tax->cap->manage_terms, //phpcs:ignore WordPress.WP.Capabilities.Undetermined
 				'edit-tags.php?taxonomy=' . $tax->name . '&post_type=govpack_profiles' 
 			);
 		}
