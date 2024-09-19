@@ -29,7 +29,7 @@ class Dev_Helpers {
 	*/
 	public function filter_version( $plugins ) {
 
-		$plugin_file = 'govpack/govpack.php';
+		$plugin_file = 'newspack-elections/newspack-elections.php';
 	
 		foreach ( $plugins as $group_key => $group ) {
 			if ( ! isset( $plugins[ $group_key ][ $plugin_file ] ) ) {
