@@ -48,12 +48,12 @@ abstract class Block {
 			'variation_callback' => [ $this, 'variations' ],
 		];
 
-	
-
 		$this->block_type = register_block_type(
 			$this->block_build_path() . '/block.json',
 			$block_args
 		);
+
+
 	}
 
 	public function needs_view_assets_enqueued(): bool {

@@ -8,9 +8,12 @@
 namespace Govpack\Core\CPT;
 
 use Govpack\Core\Capabilities;
+use Govpack\Core\Profile_Fields_Endpoint;
 use Govpack\Core\Profile_Links;
 use Govpack\Core\Profile_Link_Services;
 use Govpack\Core\Rest_Field;
+use Govpack\Core\Rest_Route;
+use Govpack\Core\Abstracts\Rest_Endpoint;
 
 /**
  * Register and handle the "Profile" Custom Post Type
@@ -52,6 +55,7 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 		add_filter( 'govpack_profile_register_meta_field_args', [ __CLASS__, 'filter_meta_registration_for_links' ], 10, 2 );
 		
 		add_action( 'init', [ __CLASS__, 'add_rest_fields' ] );
+		add_action( 'rest_api_init', [ __CLASS__, 'register_rest_endpoint' ]);
 		
 		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_x_meta_fields_to_twitter' ], 10, 5 );
 	}
@@ -91,7 +95,6 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 			'profile_links',
 			[
 				'get_callback'    => function ( $request ) {
-				
 					return self::generate_links_for_profile( $request['id'] );
 				},
 				'update_callback' => false,
@@ -136,8 +139,12 @@ class Profile extends \Govpack\Core\Abstracts\Post_Type {
 			] 
 		);
 
-		$rf = new Rest_Field();
-		$rf->type( 'type' )->attribute( 'profile_fields' )->register();
+	}
+
+	public static function register_rest_endpoint() {
+		(new Rest_Route("profile"))->endpoint(
+			(new Profile_Fields_Endpoint())->readable()
+		)->register();
 	}
 
 	/**
