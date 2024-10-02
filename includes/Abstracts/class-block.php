@@ -7,6 +7,8 @@
 
 namespace Govpack\Core\Abstracts;
 
+use WP_Block_Type;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -16,19 +18,19 @@ abstract class Block {
 
 	protected \WP_Block_Type $block_type;
 
-	public $block_name;
+	public string $block_name;
 
 	/**
 	 * WordPress Hooks
 	 */
-	public function hooks() {
+	public function hooks() : void {
 		
 		add_action( 'init', [ $this, 'register_script' ], 11 );
 		add_action( 'wp_print_styles', [ $this, 'remove_view_styles' ], 10 );
 		add_filter( 'allowed_block_types_all', [ $this, 'handle_disable_block' ], 99, 2 );
 	}
 
-	abstract public function disable_block( $allowed_blocks, $editor_context );
+	abstract public function disable_block( $allowed_blocks, $editor_context ) : bool;
 
 	abstract public function block_build_path(): string;
 
@@ -37,7 +39,7 @@ abstract class Block {
 	 *
 	 * @return void
 	 */
-	public function register() {
+	public function register() : void {
 
 		$this->block_type = register_block_type(
 			$this->block_build_path() . '/block.json',
@@ -51,7 +53,7 @@ abstract class Block {
 		return wp_is_block_theme();
 	}
 
-	public function remove_view_styles() {   
+	public function remove_view_styles() : void {   
 
 		if ( ! isset( $this->block_type ) ) {
 			return;
@@ -64,7 +66,7 @@ abstract class Block {
 		}
 	}
 
-	public function handle_disable_block( $allowed_blocks, $editor_context ) {
+	public function handle_disable_block( bool|array $allowed_blocks, \WP_Block_Editor_Context $editor_context ) : array {
 
 		if ( ! $this->disable_block( $allowed_blocks, $editor_context ) ) {
 			return $allowed_blocks;
@@ -79,7 +81,7 @@ abstract class Block {
 		return array_keys( $allowed_blocks );
 	}
 
-	public function enqueue_view_assets() {
+	public function enqueue_view_assets() : void {
 
 		if ( ! $this->needs_view_assets_enqueued() ) {
 			return;
@@ -108,7 +110,7 @@ abstract class Block {
 	 * @param string $block_name Name of the block to get.
 	 * @return \WP_Block
 	 */
-	public function get_block( $block_name ) {
+	public function get_block( string $block_name ) : WP_Block_Type {
 		$block_registry = \WP_Block_Type_Registry::get_instance();
 		$block          = $block_registry->get_registered( $block_name );
 		return $block;
@@ -120,7 +122,7 @@ abstract class Block {
 	 * @param string $block_name Name of the block whos attributes to get.
 	 * @return array
 	 */
-	public function get_block_attributes( $block_name ) {
+	public function get_block_attributes( string $block_name ) : array {
 	
 		$block = $this->get_block( $block_name );
 		return $block->attributes;
@@ -132,7 +134,7 @@ abstract class Block {
 	 * @param string $block_name Name of the block whos attributes to get.
 	 * @return array
 	 */
-	public function get_block_attributes_with_default_values( $block_name ) {
+	public function get_block_attributes_with_default_values( string $block_name ) : array {
 	
 		$block = self::get_block( $block_name );
 	
@@ -159,7 +161,7 @@ abstract class Block {
 	 * @param array  $attributes Array of attributes from the blocks instance.
 	 * @return array
 	 */
-	public function merge_attributes_with_block_defaults( $block_name, $attributes ) {
+	public function merge_attributes_with_block_defaults( string $block_name, array $attributes ) : array  {
 		$block_attributes = self::get_block_attributes_with_default_values( $block_name );
 		return array_merge( $block_attributes, $attributes );
 	}

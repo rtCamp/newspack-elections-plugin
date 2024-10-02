@@ -25,7 +25,7 @@ class OfficeHolderStatus extends \Govpack\Core\Abstracts\Taxonomy {
 	/**
 	 * Register this taxonomy for profiles.
 	 */
-	public static function register_taxonomy() {
+	public static function register_taxonomy() : void {
 
 	  
 		register_taxonomy(

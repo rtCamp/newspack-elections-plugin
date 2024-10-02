@@ -8,8 +8,7 @@
 namespace Govpack\Core\FrontEnd;
 
 use Exception;
-use Govpack\Core\TemplateLoader;
-
+use \Govpack\Core\TemplateLoader;
 /**
  * GovPack FrontEnd Hooks
  */
@@ -39,7 +38,7 @@ class FrontEnd {
 	 * Stores  instance of TemplateLoader.
 	 *
 	 * @access protected
-	 * @var Govpack\TemplateLoader The single instance of the class
+	 * @var \Govpack\Core\TemplateLoader The single instance of the class
 	 */
 
 	private TemplateLoader $template_loader;
@@ -47,7 +46,7 @@ class FrontEnd {
 	/**
 	 * Adds Hooks Specifically for the Frontend display
 	 */
-	public function hooks() {
+	public function hooks() : void {
 		add_filter( 'newspack_can_show_post_thumbnail', [ __CLASS__, 'newspack_can_show_post_thumbnail' ], 10, 1 );
 		add_action( 'enqueue_block_assets', [ __CLASS__, 'enqueue_front_end_style' ] );
 
@@ -56,19 +55,19 @@ class FrontEnd {
 		add_action( 'govpack_sidebar', [ $this, 'output_sidebar' ] );
 	}
 
-	public function output_sidebar() {
+	public function output_sidebar() : string {
 		return gp_get_template_part( 'global/sidebar' );
 	}
 
-	public function output_wrapper_start() {
+	public function output_wrapper_start() : string {
 		return gp_get_template_part( 'global/wrapper-start' );
 	}
 
-	public function output_wrapper_end() {
+	public function output_wrapper_end()  : string {
 		return gp_get_template_part( 'global/wrapper-end' );
 	}
 
-	public function template_loader() {
+	public function template_loader() : TemplateLoader {
 
 		if ( ! isset( $this->template_loader ) ) {
 			$this->template_loader = new TemplateLoader();
@@ -83,7 +82,7 @@ class FrontEnd {
 	/**
 	 * Enqueue Front End Style
 	 */
-	public static function enqueue_front_end_style() {
+	public static function enqueue_front_end_style() : void {
 
 		wp_register_style(
 			'govpack-block-styles',
@@ -101,7 +100,7 @@ class FrontEnd {
 	 * 
 	 * @param boolean $use_post_thumbnail Value to filter.
 	 */
-	public static function newspack_can_show_post_thumbnail( $use_post_thumbnail ) {
+	public static function newspack_can_show_post_thumbnail( $use_post_thumbnail ) : bool  {
 		global $post;
 
 		if ( 'govpack_profiles' === $post->post_type ) {
@@ -116,7 +115,7 @@ class FrontEnd {
 	 * 
 	 * @param string $the_content profile Content to filter.
 	 */
-	public static function maybe_inject_profile_block( $the_content ) {
+	public static function maybe_inject_profile_block( string $the_content ) : string {
 		
 		if ( '' !== $the_content ) {
 			return $the_content;

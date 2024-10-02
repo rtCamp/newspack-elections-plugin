@@ -16,11 +16,11 @@ defined( 'ABSPATH' ) || exit;
  */
 class Profile extends \Govpack\Core\Abstracts\Block {
 
-	public $block_name = 'govpack/profile';
+	public string $block_name = 'govpack/profile';
 	public $template   = 'profile';
 
 
-	public function disable_block( $allowed_blocks, $editor_context ) {
+	public function disable_block( $allowed_blocks, $editor_context ) : bool {
 		return false;
 	}
 

@@ -18,7 +18,7 @@ class Import {
 	/**
 	 * Handle View for the Import Form
 	 */
-	public static function view() {
+	public static function view() : void  {
 
 		\Govpack\Core\Importer\Importer::check_for_stuck_import();
 

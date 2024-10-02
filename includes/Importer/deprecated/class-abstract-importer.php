@@ -112,7 +112,7 @@ abstract class Abstract_Importer {
 	 * @param string $file  path of the JSON file.
 	 * @throws Exception Could Not Open File to Parse.
 	 */
-	abstract public static function create_reader( $file );
+	abstract public static function create_reader( string $file );
 
 	/**
 	 * Process Loop over WML file
@@ -121,7 +121,7 @@ abstract class Abstract_Importer {
 	 * @param XMLReader $reader  path of the JSON file.
 	 * @param array     $extra Array of extra import configuration passed to the importer.
 	 */
-	abstract public static function process( $reader, $extra );
+	abstract public static function process( $reader, array $extra ) : void;
 
 	/**
 	 * Creates a group for the import that is passed to ActionScheduler.

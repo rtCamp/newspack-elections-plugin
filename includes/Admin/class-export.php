@@ -21,7 +21,7 @@ class Export {
 	/**
 	 * Adds Hooks used for exporting  
 	 */
-	public static function hooks() {
+	public static function hooks() : void  {
 		\add_action( 'rest_api_init', [ __CLASS__, 'register_rest_endpoints' ] );
 		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'register_scripts' ] );
 	}
@@ -30,9 +30,7 @@ class Export {
 	/**
 	 * Adds ASSETS used for importing  
 	 */
-	public static function register_scripts() {
-
-		
+	public static function register_scripts() : void {
 
 		$file = GOVPACK_PLUGIN_BUILD_PATH . 'exporter.asset.php';
 		if ( file_exists( $file ) ) {
@@ -53,7 +51,7 @@ class Export {
 	/**
 	 * Register the REST Routes 
 	 */
-	public static function register_rest_endpoints() {
+	public static function register_rest_endpoints() : void {
 
 		\register_rest_route(
 			Govpack::REST_PREFIX,
@@ -75,7 +73,7 @@ class Export {
 	/**
 	 *  Generate the csv
 	 */
-	public static function run_export() {
+	public static function run_export() : string {
 
 		$csv    = Writer::createFromString();
 		$model  = Profile::get_export_model();

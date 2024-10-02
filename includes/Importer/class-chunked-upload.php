@@ -40,14 +40,14 @@ class Chunked_Upload {
 	/**
 	 * Adds Actions to Hooks 
 	 */
-	public static function hooks() {
+	public static function hooks() : void {
 		add_action( 'rest_api_init', [ __CLASS__, 'register_rest_endpoints' ] );
 	}
 
 	/**
 	 * Adds rest endpoints for Importer Upload a file and combine
 	 */
-	public static function register_rest_endpoints() {
+	public static function register_rest_endpoints() : void {
 		\register_rest_route(
 			Govpack::REST_PREFIX,
 			'/upload/',
@@ -69,7 +69,7 @@ class Chunked_Upload {
 	 * 
 	 * @param string $slug path of the uploads older to create.
 	 */
-	public static function get_upload_path( $slug ) {
+	public static function get_upload_path( string $slug ) : string {
 		$upload     = wp_upload_dir();
 		$upload_dir = $upload['basedir'];
 		$upload_dir = $upload_dir . '/' . $slug;
@@ -81,7 +81,7 @@ class Chunked_Upload {
 	 * 
 	 * @param string $slug path of the uploads older to create.
 	 */
-	public static function create_upload_directory( $slug = 'govpack' ) {
+	public static function create_upload_directory( string $slug = 'govpack' ) : void {
 		
 		$upload     = wp_upload_dir();
 		$upload_dir = $upload['basedir'];
@@ -96,7 +96,7 @@ class Chunked_Upload {
 	 * 
 	 * @param \WP_REST_Request $request REST Request Data.
 	 */
-	public static function upload( \WP_REST_Request $request ) {
+	public static function upload( \WP_REST_Request $request ) : array {
 
 		$file_params = $request->get_file_params();
 		

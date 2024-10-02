@@ -15,7 +15,7 @@ use Exception;
 class Menu_Item extends Menu {
 
 	/**
-	 * Paren Slug, i.e, which menu this menu item is added to
+	 * Parent Slug, i.e, which menu this menu item is added to
 	 * 
 	 * @var parent_slug
 	 */
@@ -26,7 +26,7 @@ class Menu_Item extends Menu {
 	 * 
 	 * @param string $value value to set the parent slug.
 	 */
-	public function set_parent_slug( $value ) {
+	public function set_parent_slug( string $value ) {
 		return $this->set( 'parent_slug', $value );
 	}
 

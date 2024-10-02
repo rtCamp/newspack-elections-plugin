@@ -9,6 +9,7 @@ namespace Govpack\Core\Admin;
 
 use Govpack\Core\Capabilities;
 use Govpack\Core\CPT\Profile;
+use \Govpack\Core\Govpack;
 
 use Exception;
 
@@ -19,15 +20,15 @@ class Admin {
 
 	use \Govpack\Core\Instance;
 
-	private $plugin;
+	private Govpack $plugin;
 
-	public function __construct( $plugin ) {
+	public function __construct(Govpack $plugin ) {
 		$this->plugin = $plugin;
 	}
 	/**
 	 * Register Hooks for usage in wp-admin.
 	 */
-	public function hooks() {
+	public function hooks() : void {
 		\add_action( 'admin_menu', [ '\Govpack\Core\Admin\Menu', 'add_taxonomy_submenus' ], 10, 1 );
 		\add_action( 'admin_menu', [ $this, 'create_menus' ], 1, 1 );
 		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'register_assets' ], 100, 1 );
@@ -50,7 +51,7 @@ class Admin {
 	 * 
 	 * @param array $categories The existing Block Categories.
 	 */
-	public static function block_categories( $categories ) {
+	public static function block_categories( array $categories ) : array {
 		return array_merge(
 			$categories,
 			[
@@ -65,7 +66,7 @@ class Admin {
 	/**
 	 * Utility Function that redirects to Profiles archive.
 	 */
-	public static function redirect_to_profiles() {
+	public static function redirect_to_profiles() : void {
 		wp_safe_redirect( admin_url( 'edit.php?post_type=' . Profile::CPT_SLUG ), 302 );
 		exit;
 	}
@@ -73,7 +74,7 @@ class Admin {
 	/**
 	 * Used to check if we're loaing the main "Govpack" page, redirect to the profile stable is we are.
 	 */
-	public static function conditional_hooks() {
+	public static function conditional_hooks() : void {
 		$screen = get_current_screen();
 		
 
@@ -91,7 +92,7 @@ class Admin {
 		}
 	}
 
-	public function get_menu_svg() {
+	public function get_menu_svg() : string {
 		return '<svg width="153" height="213" viewBox="0 0 153 213" xmlns="http://www.w3.org/2000/svg">
 	<path fill="rgba(240, 246, 252, 0.6)" clip-rule="evenodd" d="M68.6875 148.556C18.0258 148.556 0.4375 110.963 0.4375 76.2125C0.4375 26.4625 37.5625 0.400024 76.8125 0.400024C90.6717 0.400024 107.693 3.21878 116.562 10.5563V4.55628H152.563V156.556C152.563 166 139.438 212.713 76.5625 212.713C11.4332 212.713 4.5625 163.963 4.5625 160.556H48.5625C48.5625 165.9 59.6875 174.338 77.4375 174.338C98.1875 174.338 110.562 158.088 110.562 146.556V130.556C110.562 130.556 96.38 148.556 68.6875 148.556ZM82.4425 54.9375L63.255 24.6875L60.4425 62.9375L24.4425 72.9375L58.4425 86.9375V124.938C62.4884 120.213 83.6925 95.5 83.6925 95.5L118.442 108.938C118.442 108.938 103.546 86.0825 98.4425 78.9375V74.9375C98.0675 74.9375 120.442 46.9375 120.442 46.9375L82.4425 54.9375Z"/>
 </svg>';
@@ -103,7 +104,7 @@ class Admin {
 	/**
 	 * Creates the Govpack Menu in the Dashboard Navigation
 	 */
-	public function create_menus() {
+	public function create_menus() : void {
 
 	
 		$menu = new Menu();
@@ -142,7 +143,7 @@ class Admin {
 	/**
 	 * Register Govpack JS/CSS Assets for wp-admin 
 	 */
-	public static function register_assets() {
+	public static function register_assets() : void {
 
 		$file = GOVPACK_PLUGIN_BUILD_PATH . 'admin.asset.php';
 
@@ -191,7 +192,7 @@ class Admin {
 	/**
 	 * Conditionally Enqueue JS/CSS Assets depending on wp_screen
 	 */
-	public static function load_assets() {
+	public static function load_assets() : void  {
 		\wp_enqueue_style( 'govpack-admin-style' );
 		
 		$screen = get_current_screen();
