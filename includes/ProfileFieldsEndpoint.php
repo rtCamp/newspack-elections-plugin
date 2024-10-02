@@ -5,7 +5,7 @@ use WP_Error;
 use WP_REST_Request;
 
 
-class Profile_Fields_Endpoint extends \Govpack\Abstracts\RestEndpoint {
+class ProfileFieldsEndpoint extends \Govpack\Abstracts\RestEndpoint {
 
 
 	public function schema(): array|null {

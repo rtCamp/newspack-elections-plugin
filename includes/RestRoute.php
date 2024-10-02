@@ -6,7 +6,7 @@ use WP_REST_Server;
 
 use Govpack\Abstracts\RestEndpoint;
 
-class Rest_Route {
+class RestRoute {
 
 	public string $namespace;
 	public string $route;

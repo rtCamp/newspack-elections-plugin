@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Core\Importer\Abstracts;
+namespace Govpack\Importer\Abstracts;
 
 use Exception;
 
@@ -72,7 +72,7 @@ abstract class Abstract_Source {
 	/**
 	 * Merges and returns urls for the source
 	 */
-	public static function flattened_urls() {
+	public static function flattened_urls(): array {
 		$source = static::urls(); 
 		$urls   = [];
 		foreach ( $source as $key => $value ) {
@@ -104,10 +104,14 @@ abstract class Abstract_Source {
 
 	/**
 	 * Callback that adds XML as an allowed type to uploads
-	 * 
+	 *
 	 * @param array $mime_types Existsing Mimetypes.
+	 *
+	 * @return (mixed|string)[]
+	 *
+	 * @psalm-return array{xml: 'text/xml',...}
 	 */
-	public static function extra_upload_mimes( $mime_types ) {
+	public static function extra_upload_mimes( $mime_types ): array {
 		$mime_types['xml'] = 'text/xml'; // Adding svg extension.
 		return $mime_types;
 	}
@@ -115,12 +119,12 @@ abstract class Abstract_Source {
    
 	/**
 	 * Downloads the selected source file amnd saves it to the govpack directory.
-	 * 
+	 *
 	 * @param array $source Existsing Mimetypes.
-	 * 
+	 *
 	 * @throws \Exception Could Not Download File.
 	 */
-	public static function sideload( $source ) {
+	public static function sideload( $source ): array {
 		require_once ABSPATH . 'wp-admin/includes/file.php';
 		$temp_file = download_url( $source['url'], 5 );
 
@@ -166,10 +170,12 @@ abstract class Abstract_Source {
 
 	/**
 	 * Downloads the selected source file amnd saves it to the govpack directory.
-	 * 
+	 *
 	 * @param string $dir Upload directory definition.
+	 *
+	 * @return float|int
 	 */
-	public static function change_upload_dir( $dir ) {
+	public static function change_upload_dir( $dir ): int|float {
 		return [
 			'path'   => $dir['basedir'] . '/govpack',
 			'url'    => $dir['baseurl'] . '/govpack',
@@ -179,10 +185,14 @@ abstract class Abstract_Source {
 
 	/**
 	 * Downloads the selected source filem saves it to the govpack directory and stores a reference for the importer to use.
-	 * 
+	 *
 	 * @param \WP_REST_Request $request REST Request Definition.
+	 *
+	 * @return \WP_Error|string[]
+	 *
+	 * @psalm-return \WP_Error|array{status: 'done'}
 	 */
-	public static function download( \WP_REST_Request $request ) {
+	public static function download( \WP_REST_Request $request ): array|\WP_Error {
 
 		if ( ! $request->has_param( 'source_file' ) ) {
 			return new \WP_Error( 'NO SOURCE FILE SET' );

@@ -1,37 +1,37 @@
 <?php
 
 if ( ! function_exists( 'gp' ) ) {
-	function gp() {
-		return Govpack\Core\Govpack::instance();
+	function gp(): \Govpack\Govpack {
+		return \Govpack\Govpack::instance();
 	}
 }
 
 if ( ! function_exists( 'gp_template_loader' ) ) {
-	function gp_template_loader() {
+	function gp_template_loader(): \Govpack\TemplateLoader {
 		return gp()->front_end()->template_loader();
 	}
 }
 
 if ( ! function_exists( 'gp_get_template_part' ) ) {
-	function gp_get_template_part( $slug, $name = '', $data = [] ) {
-		return gp_template_loader()->get_template_part( $slug, $name, true, $data );
+	function gp_get_template_part( string $slug, string $name = '', array $data = [] ): string {
+		return gp_template_loader()->get_template_part( $slug, $name, true );
 	}
 }
 
 if ( ! function_exists( 'gp_get_block_part' ) ) {
-	function gp_get_block_part( $slug, $name = '', $attributes = [], $content = '', $block = null, $extra = null ) {
-		return gp_template_loader()->get_block_part( $slug, $name, $attributes, $content, $block, $extra );
+	function gp_get_block_part( string $slug, string $name = '', array $attributes = [], string $content = '', string|null $block = null, string|null $extra = null ): void {
+		gp_template_loader()->get_block_part( $slug, $name, $attributes, $content, $block, $extra );
 	}
 }
 
 if ( ! function_exists( 'gp_get_permalink_structure' ) ) {
-	function gp_get_permalink_structure() {
-		return Govpack\Core\Permalinks::instance()->permalinks();
+	function gp_get_permalink_structure(): array {
+		return Govpack\Permalinks::instance()->permalinks();
 	}
 }
 
 if ( ! function_exists( 'gp_is_url_valid' ) ) {
-	function gp_is_url_valid( $url ) {
+	function gp_is_url_valid( string $url ): bool {
 		if ( ! filter_var( $url, FILTER_VALIDATE_URL ) ) {
 			return false;
 		}

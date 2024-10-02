@@ -5,7 +5,12 @@
  * @package Govpack
  */
 if ( ! function_exists( 'gp_get_available_widths' ) ) {
-	function gp_get_available_widths() {
+	/**
+	 * @return string[][]
+	 *
+	 * @psalm-return array{small: array{label: 'Small', value: 'small', maxWidth: '300px'}, medium: array{label: 'Medium', value: 'medium', maxWidth: '400px'}, large: array{label: 'Large', value: 'large', maxWidth: '600px'}, full: array{label: 'Full', value: 'full', maxWidth: '100%'}, auto: array{label: 'Auto', value: 'auto', maxWidth: 'none'}}
+	 */
+	function gp_get_available_widths(): array {
 		return [
 			'small'  => [
 				'label'    => 'Small',
@@ -64,37 +69,42 @@ if ( ! function_exists( 'gp_classnames' ) ) {
 			)
 		); 
 	}
- }
+}
 
 
-if(!function_exists("gp_normalise_html_element_args")){
-	function gp_normalise_html_element_args($elm_attributes){
+if ( ! function_exists( 'gp_normalise_html_element_args' ) ) {
+	function gp_normalise_html_element_args( $elm_attributes ) {
 
-		$normalized_attributes = array();
+		$normalized_attributes = [];
 		foreach ( $elm_attributes as $key => $value ) {
 			$normalized_attributes[] = $key . '="' . esc_attr( $value ) . '"';
 		}
 
 		$elm_attributes = implode( ' ', $normalized_attributes );
 
-		return trim($elm_attributes);
+		return trim( $elm_attributes );
 	}
- }
+}
 
 
-if(!function_exists("gp_line_attributes")){
-	function gp_line_attributes($line, $attributes){
+if ( ! function_exists( 'gp_line_attributes' ) ) {
+	function gp_line_attributes( $line, $attributes ) {
 		
 		$elm_attributes = [
-			"id" => esc_attr(sprintf("govpack-profile-block-%s", $line["key"])),
-			"class" =>  esc_attr(gp_classnames("wp-block-govpack-profile__line", [
-				"wp-block-govpack-profile__line--" . $line["key"],
-				"govpack-line",
-				"govpack-line--labels-" . ($attributes["labelsAbove"] ? "above" : "beside"),
-			]))
+			'id'    => esc_attr( sprintf( 'govpack-profile-block-%s', $line['key'] ) ),
+			'class' => esc_attr(
+				gp_classnames(
+					'wp-block-govpack-profile__line',
+					[
+						'wp-block-govpack-profile__line--' . $line['key'],
+						'govpack-line',
+						'govpack-line--labels-' . ( $attributes['labelsAbove'] ? 'above' : 'beside' ),
+					]
+				)
+			),
 		];
 
-		return gp_normalise_html_element_args($elm_attributes);
+		return gp_normalise_html_element_args( $elm_attributes );
 	}
 }
 
@@ -104,26 +114,25 @@ if(!function_exists("gp_line_attributes")){
 
 
 if ( ! function_exists( 'gp_should_show_link' ) ) {
-	function gp_should_show_link( $key, $attributes ) {
+	function gp_should_show_link( string $key, array $attributes ): bool {
 		if ( ! isset( $attributes['showOtherLinks'] ) ) {
 			return false;
 		}
 
-		if(
-			(isset($attributes['selectedLinks'])) &&
-			(isset($attributes['selectedLinks'][$key])) &&
-			($attributes['selectedLinks'][$key] === false)
-		){
+		if (
+			( isset( $attributes['selectedLinks'] ) ) &&
+			( isset( $attributes['selectedLinks'][ $key ] ) ) &&
+			( $attributes['selectedLinks'][ $key ] === false )
+		) {
 			return false;
 		}
 
 		return true;
-
 	}
 }
 
-if(!function_exists("gp_get_photo_styles")){
-	function gp_get_photo_styles($attributes){
+if ( ! function_exists( 'gp_get_photo_styles' ) ) {
+	function gp_get_photo_styles( $attributes ) {
 
 		// CSS props to embed with a value getter or boolean.
 		$rules = [
@@ -132,23 +141,23 @@ if(!function_exists("gp_get_photo_styles")){
 			'height'        => ( isset( $attributes['avatarSize'] ) ? esc_attr( $attributes['avatarSize'] . 'px' ) : false ),
 		];
 
-		return gp_style_attribute_generator($rules);
+		return gp_style_attribute_generator( $rules );
 	}
 }
 
-if(!function_exists("gp_style_attribute_generator")){
-	function gp_style_attribute_generator($rules){
+if ( ! function_exists( 'gp_style_attribute_generator' ) ) {
+	function gp_style_attribute_generator( $rules ) {
 		// filter the rules where the getter returns false;
-		$rules = array_filter($rules);
+		$rules = array_filter( $rules );
 
 		// normalise the rules into css syntax;
-		$normalized_rules = array();
+		$normalized_rules = [];
 		foreach ( $rules as $property => $rule ) {
-			$normalized_rules[] = sprintf("%s: %s;", $property, $rule);
+			$normalized_rules[] = sprintf( '%s: %s;', $property, $rule );
 		}
 
 		// join all the normalsed rules and trim any excess whitespace
-		return trim(join(" ", $normalized_rules));
+		return trim( join( ' ', $normalized_rules ) );
 	}
 }
 
@@ -162,7 +171,7 @@ if(!function_exists("gp_style_attribute_generator")){
  * @param boolean $use_link Condition control, outputs link if true.
  */
 if ( ! function_exists( 'gp_maybe_link' ) ) {
-	function gp_maybe_link( $content, $url, $use_link ) {
+	function gp_maybe_link( string $content, string $url, bool $use_link ) {
 
 		if ( ! $use_link ) {
 			return $content;
@@ -178,7 +187,7 @@ if ( ! function_exists( 'gp_maybe_link' ) ) {
  * @param array $websites Data about websites from the profile.
  */
 if ( ! function_exists( 'gp_websites' ) ) {
-	function gp_websites( $websites ) {
+	function gp_websites( array $websites ): string {
 
 		$campaign    = '';
 		$legislative = '';
@@ -205,20 +214,20 @@ if ( ! function_exists( 'gp_websites' ) ) {
 	}
 }
 
-if(!function_exists("gp_get_icons")){
-	function gp_get_icons(){
+if ( ! function_exists( 'gp_get_icons' ) ) {
+	function gp_get_icons() {
 		return gp()->icons()->all();
 	}
 }
 
 if ( ! function_exists( 'gp_get_icon' ) ) {
-	function gp_get_icon( $key ) {
+	function gp_get_icon( string $key ): string {
 		return gp()->icons()->get( $key );
 	}
 }
 
 if ( ! function_exists( 'gp_has_icon' ) ) {
-	function gp_icon_exists( $key ) {
+	function gp_icon_exists( string $key ): bool {
 		return gp()->icons()->exists( $key );
 	}
 }
@@ -233,7 +242,7 @@ if ( ! function_exists( 'gp_has_icon' ) ) {
  */
 /*
 if ( ! function_exists( 'gp_contact_info' ) ) {
-	function gp_contact_info( $label, $links, $attrs ) {
+	function gp_contact_info( string $label, array $links, array $attrs ): string|null {
 		$outer_template = '
 		<div class="wp-block-govpack-profile__comms">
 			<div class="wp-block-govpack-profile__label">%s:</div>
@@ -323,7 +332,7 @@ if ( ! function_exists( 'gp_contact_info' ) ) {
  * @param array $attrs Attributes from the Block.
  */
 if ( ! function_exists( 'gp_contact_other' ) ) {
-	function gp_contact_other( $label, $links, $attrs ) {
+	function gp_contact_other( string $label, array $links, array $attrs ): string|null {
 		$outer_template = '
 		<div class="wp-block-govpack-profile__comms-other">
 			<div class="wp-block-govpack-profile__label">%s:</div>
@@ -348,10 +357,16 @@ if ( ! function_exists( 'gp_contact_other' ) ) {
 }
 
 if ( ! function_exists( 'gp_get_the_term' ) ) {
-	function gp_get_the_term( $term ) {
+	function gp_get_the_term( \WP_Term|int $term_id ): string {
 
-		if ( ! is_a( $term, '\WP_Term' ) ) {
-			$term = get_term( $term );
+		if ( is_a( $term_id, '\WP_Term' ) ) {
+			$term = $term_id;
+		} else {
+			$term = get_term( $term_id );
+		}
+
+		if ( ( $term === null ) || is_wp_error( $term ) ) {
+			return '';
 		}
 
 		$classnames = [
@@ -368,7 +383,10 @@ if ( ! function_exists( 'gp_get_the_term' ) ) {
 }
 
 if ( ! function_exists( 'gp_get_the_status_terms_list' ) ) {
-	function gp_get_the_status_terms_list( $post_id, $before = '', $sep = '', $after = '' ) {
+	/**
+	 * @return WP_Error|false|string
+	 */
+	function gp_get_the_status_terms_list( int $post_id, string $before = '', string $sep = '', string $after = '' ): string|WP_Error|false {
 		$taxonomy = 'govpack_officeholder_status';
 		$terms    = get_the_terms( $post_id, $taxonomy );
 
@@ -376,7 +394,7 @@ if ( ! function_exists( 'gp_get_the_status_terms_list' ) ) {
 			return $terms;
 		}
 
-		if ( empty( $terms ) ) {
+		if ( $terms === false ) {
 			return false;
 		}
 
@@ -391,7 +409,7 @@ if ( ! function_exists( 'gp_get_the_status_terms_list' ) ) {
 }
 
 if ( ! function_exists( 'esc_svg' ) ) {
-	function esc_svg( $svg_string ) {
+	function esc_svg( string $svg_string ): string {
 		return wp_kses(
 			$svg_string,
 			[
