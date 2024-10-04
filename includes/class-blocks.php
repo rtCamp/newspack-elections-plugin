@@ -46,4 +46,6 @@ class Blocks {
 		$block->hooks();
 		$block->register();
 	}
+
+	
 }

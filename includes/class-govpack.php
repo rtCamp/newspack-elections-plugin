@@ -29,6 +29,7 @@ class Govpack {
 	private FrontEnd\FrontEnd $front_end;
 	private Admin\Admin $admin;
 	private Blocks $blocks;
+	private Block_Editor $block_editor;
 	private Icons $icons;
 
 	/**
@@ -125,6 +126,9 @@ class Govpack {
 		if ( ! is_admin() ) {
 			$this->front_end();
 		}
+
+		$this->block_editor()->block_categories()->add("govpack-blocks", "Newspack Elections");
+		$this->block_editor()->pattern_categories()->add("newspack-elections", "Newspack Elections");
 	}
 
 	public function admin() {
@@ -154,6 +158,18 @@ class Govpack {
 		
 		return $this->blocks;
 	}
+
+	public function block_editor() : Block_Editor {
+
+		if ( ! isset( $this->blockeditor ) ) {
+			$this->block_editor = new Block_Editor();
+			$this->block_editor->hooks();
+		}
+		
+		return $this->block_editor;
+	}
+
+
 
 	public function icons() {
 
