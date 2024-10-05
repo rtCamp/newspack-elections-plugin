@@ -9,7 +9,7 @@ namespace Govpack;
 
 class Blocks {
 
-	use Plugin_Aware;
+	use PluginAware;
 
 	private array $blocks = [];
 

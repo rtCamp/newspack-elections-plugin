@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Blocks\ProfileMeta;
+namespace Govpack\Blocks\ProfileBlockV2;
 
 use WP_Block;
 
@@ -14,9 +14,9 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class Profile_Meta extends \Govpack\Blocks\Profile\Profile {
+class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 
-	public $block_name = 'govpack/profile-meta';
+	public string $block_name = 'govpack/profile-v2';
 	public $template   = 'profile';
 
 	private $show       = null;
@@ -24,20 +24,18 @@ class Profile_Meta extends \Govpack\Blocks\Profile\Profile {
 	private $attributes = [];
 	protected $plugin;
 
-	private string $default_variation;
-
 	public function __construct( $plugin ) {
 		$this->plugin = $plugin;
 	}
 
-	public function disable_block( $allowed_blocks, $editor_context ) {
+	public function disable_block( $allowed_blocks, $editor_context ) : bool {
 		return false;
 	}
 
 	public function block_build_path(): string {
-		return $this->plugin->build_path( 'blocks/ProfileMeta' );
+		return $this->plugin->build_path( 'blocks/ProfileBlockV2' );
 	}
-
+	
 	/**
 	 * Block render handler for .
 	 *
@@ -48,6 +46,17 @@ class Profile_Meta extends \Govpack\Blocks\Profile\Profile {
 	 * @return string HTML for the block.
 	 */
 	public function render( array $attributes, ?string $content = null, ?WP_Block $block = null ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+
+		if ( ! $attributes['profileId'] ) {
+			return;
+		}
+
+		if ( \is_admin() ) {
+			return false;
+		}
+
+
+		return $this->handle_render( $attributes, $content, $block );
 	}
 
 	/**
@@ -58,6 +67,27 @@ class Profile_Meta extends \Govpack\Blocks\Profile\Profile {
 	 * @param WP_Block $template The filename of the template-part to use.
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
+
+		$this->profile = \Govpack\CPT\Profile::get_data( $attributes['profileId'] );
+	
+		if ( ! $this->profile ) {
+			return;
+		}
+
+		$this->enqueue_view_assets();
+
+		$this->attributes = self::merge_attributes_with_block_defaults( $this->block_name, $attributes );
+
+		return gp_template_loader()->render_block(
+			$this->template(),
+			$this->attributes, 
+			$content, 
+			$block, 
+			[
+				'profile_block' => $this,
+				'profile_data'  => $this->profile,
+			] 
+		);
 	}   
 
 	
