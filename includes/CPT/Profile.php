@@ -675,7 +675,6 @@ class Profile extends \Govpack\Abstracts\PostType {
 				'hide_if_empty'   => true,
 			];
 
-			
 			?>
 			<label class="screen-reader-text" for="cat">
 				<?php echo esc_html( get_taxonomy( $taxonomy )->labels->filter_by_item ); ?>

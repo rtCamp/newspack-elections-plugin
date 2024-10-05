@@ -20,6 +20,28 @@ class Blocks {
 	public function hooks(): void {
 		add_action( 'init', [ $this, 'provide_register_blocks_hook' ], 99 );
 		add_action( 'gp_register_blocks', [ $this, 'register_blocks' ] );
+		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_editor_assets' ] );
+	}
+
+	/**
+	 * Register Block Assets.
+	 */
+	public function enqueue_block_editor_assets(): void {
+		$file = GOVPACK_PLUGIN_BUILD_PATH . 'block-editor.asset.php';
+
+		if ( file_exists( $file ) ) {
+			$asset_data = require_once $file; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
+		}
+
+		wp_register_script(
+			'govpack-block-editor',
+			GOVPACK_PLUGIN_BUILD_URL . 'block-editor.js',
+			$asset_data['dependencies'] ?? '',
+			$asset_data['version'] ?? '',
+			true
+		);
+
+		wp_enqueue_script('govpack-block-editor');
 	}
 
 	public function provide_register_blocks_hook(): void {
