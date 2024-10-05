@@ -279,12 +279,11 @@ class Profile extends \Govpack\Abstracts\Block {
 			],
 			[
 				'key'        => 'links',
-				'value'      => gp_the_profile_links( $this->profile, $this->attributes ),
+				'value'      => $this->get_profile_links(),
 				'shouldShow' => $this->show( 'links' ),
 			],
 			[
 				'key'        => 'more_about',
-				
 				'shouldShow' => $this->show( 'profile_link' ),
 			],
 			

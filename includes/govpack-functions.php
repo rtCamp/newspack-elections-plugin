@@ -19,7 +19,7 @@ if ( ! function_exists( 'gp_get_template_part' ) ) {
 }
 
 if ( ! function_exists( 'gp_get_block_part' ) ) {
-	function gp_get_block_part( string $slug, string $name = '', array $attributes = [], string $content = '', string|null $block = null, string|null $extra = null ): void {
+	function gp_get_block_part( string $slug, string $name = '', array $attributes = [], string $content = '', string|WP_Block|null $block = null, string|null|array $extra = null ): void {
 		gp_template_loader()->get_block_part( $slug, $name, $attributes, $content, $block, $extra );
 	}
 }
