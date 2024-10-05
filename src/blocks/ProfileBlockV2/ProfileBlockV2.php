@@ -77,7 +77,6 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 		$this->enqueue_view_assets();
 
 		$this->attributes = self::merge_attributes_with_block_defaults( $this->block_name, $attributes );
-
 		return gp_template_loader()->render_block(
 			$this->template(),
 			$this->attributes, 

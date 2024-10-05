@@ -162,7 +162,6 @@ if ( ! function_exists( 'gp_style_attribute_generator' ) ) {
 }
 
 
-
 /**
  * Utility Function that conditionally Outputs a link to a profile around some other content
  * 
@@ -177,40 +176,6 @@ if ( ! function_exists( 'gp_maybe_link' ) ) {
 			return $content;
 		}
 		return '<a href=' . esc_url( $url ) . '>' . $content . '</a>';
-	}
-}
-/**
- * Utility Function that Outputs a links to the profile's websites.
- * 
- * Currently only supports the campaign & legislative websites
- * 
- * @param array $websites Data about websites from the profile.
- */
-if ( ! function_exists( 'gp_websites' ) ) {
-	function gp_websites( array $websites ): string {
-
-		$campaign    = '';
-		$legislative = '';
-		$li          = '<li><a href="%s">%s</a></li>';
-
-		if ( $websites['campaign'] ) {
-			$campaign = sprintf( $li, esc_url( $websites['campaign'] ), 'Campaign Website' );
-		}
-
-		if ( $websites['legislative'] ) {
-			$legislative = sprintf( $li, esc_url( $websites['legislative'] ), 'Legislative Website' );
-		}
-
-		return sprintf(
-			'<div class="wp-block-govpack-profile__contacts">
-					<ul>
-						%s
-						%s
-					</ul>
-				</div>',
-			$campaign ?? '',
-			$legislative ?? '',
-		);
 	}
 }
 
@@ -348,6 +313,9 @@ if ( ! function_exists( 'gp_contact_other' ) ) {
 			}
 		}
 
+		if ( ! $content ) {
+			return null;
+		}
 		if ( ! $content ) {
 			return null;
 		}

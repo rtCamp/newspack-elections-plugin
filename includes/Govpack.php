@@ -55,6 +55,20 @@ class Govpack {
 		return GOVPACK_PLUGIN_PATH . $path;
 	}
 
+	public function require( string $path ): string {
+		return require_once $this->path( $path ); //phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
+	}
+
+	public function build_path( string $path ): string {
+		return trailingslashit(
+			trailingslashit( $this->path( 'build' ) ) . $path 
+		);
+	}
+
+	public function url( string $path ): string {
+		return trailingslashit( GOVPACK_PLUGIN_URL ) . $path;
+	}
+
 	/**
 	 * Action called by the plugin activation hook.
 	 * Causes rewrite rules to be regenerated so permalinks will work
@@ -71,20 +85,6 @@ class Govpack {
 		
 		// get capabilities setup first.
 		\Govpack\Capabilities::instance()->remove_capabilities();
-	}
-
-	public function build_path( string $path ): string {
-		return trailingslashit(
-			trailingslashit( $this->path( 'build' ) ) . $path 
-		);
-	}
-
-	public function require( string $path ): string {
-		return require_once $this->path( $path ); //phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
-	}
-
-	public function url( string $path ): string {
-		return trailingslashit( GOVPACK_PLUGIN_URL ) . $path;
 	}
 
 	public function hooks(): void {

@@ -28,6 +28,32 @@ $container_classes = gp_classnames(
 	]
 );
 
+
+?>
+
+
+
+<aside 
+<?php
+echo get_block_wrapper_attributes(
+	[
+		'wp-block-govpack-profile-self__container--right'  => ( isset( $attributes['avatarAlignment'] ) && ( 'right' === $attributes['avatarAlignment'] ) ),
+		'wp-block-govpack-profile-self__container--left'   => ( isset( $attributes['avatarAlignment'] ) && ( 'left' === $attributes['avatarAlignment'] ) ),
+		'wp-block-govpack-profile-self__container--align-right' => ( isset( $attributes['align'] ) && ( 'right' === $attributes['align'] ) ),
+		'wp-block-govpack-profile-self__container--align-left' => ( isset( $attributes['align'] ) && ( 'left' === $attributes['align'] ) ),
+		'wp-block-govpack-profile-self__container--align-center' => ( isset( $attributes['align'] ) && ( 'center' === $attributes['align'] ) ),
+		'wp-block-govpack-profile-self__container--center' => ( 'is-styled-center' === $attributes['className'] ),
+	]
+);
+?>
+>
+	<!-- start __container -->
+	<div class="<?php echo esc_attr( $container_classes ); ?>">	
+		<?php gp_get_block_part( 'blocks/parts/profile', 'photo', $attributes, $content, $block, $extra ); ?>
+		<dl class="wp-block-govpack-profile__info ">
+			<?php gp_get_block_part( 'blocks/parts/profile', 'header', $attributes, $content, $block, $extra ); ?>
+			<?php gp_get_block_part( 'blocks/parts/profile', 'rows', $attributes, $content, $block, $extra ); ?>
+
 ?>
 
 <aside <?php echo get_block_wrapper_attributes([

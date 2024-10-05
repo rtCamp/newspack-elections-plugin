@@ -404,3 +404,39 @@ if ( ! function_exists( 'gp_get_profile_links' ) ) {
 		return $links;
 	}
 }
+
+
+/**
+ * Utility Function that Outputs a links to the profile's websites.
+ * 
+ * Currently only supports the campaign & legislative websites
+ * 
+ * @param array $websites Data about websites from the profile.
+ */
+if ( ! function_exists( 'gp_websites' ) ) {
+	function gp_websites( $websites ) {
+
+		$campaign    = '';
+		$legislative = '';
+		$li          = '<li><a href="%s">%s</a></li>';
+
+		if ( $websites['campaign'] ) {
+			$campaign = sprintf( $li, esc_url( $websites['campaign'] ), 'Campaign Website' );
+		}
+
+		if ( $websites['legislative'] ) {
+			$legislative = sprintf( $li, esc_url( $websites['legislative'] ), 'Legislative Website' );
+		}
+
+		return sprintf(
+			'<div class="wp-block-govpack-profile__contacts">
+					<ul>
+						%s
+						%s
+					</ul>
+				</div>',
+			$campaign ?? '',
+			$legislative ?? '',
+		);
+	}
+}

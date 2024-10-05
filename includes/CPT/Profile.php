@@ -958,13 +958,9 @@ class Profile extends \Govpack\Abstracts\PostType {
 							return $service;
 						}
 
-						return set_url_scheme( '//' . $service, 'https' );
-					},
-					$social_set 
-				);
-			},
-			$profile_data['social']
-		);
+				return set_url_scheme("//" . $service, "https");
+			}, $social_set["services"] );
+		}, $profile_data['social']);
 
 
 		
