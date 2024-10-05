@@ -4,6 +4,8 @@ namespace Govpack\Core;
 
 class Icons {
 
+	private Govpack $plugin;
+
 	private array $cache = [];
 
 	private array $pre_known = [
@@ -18,8 +20,12 @@ class Icons {
 		'website',
 	];
 
+	public function __construct( $plugin ) {
+		$this->plugin = $plugin;
+	}
+
 	public function icon_dir() : string {
-		return GOVPACK_PLUGIN_BUILD_PATH . '/icons';
+		return $this->plugin->path( '/build/icons' );
 	}
 	/**
 	 * Load an SVG icon from disk

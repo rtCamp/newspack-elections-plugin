@@ -92,4 +92,5 @@
 	<exclude-pattern>*/cmb2/*</exclude-pattern>
 	<exclude-pattern>version.php</exclude-pattern>
 	<exclude-pattern>*/includes/deprecated/*</exclude-pattern>
+	<exclude-pattern>*/includes/govpack-functions-template-deprecated.php</exclude-pattern>
 </ruleset>

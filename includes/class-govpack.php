@@ -54,9 +54,21 @@ class Govpack {
 		
 	}
 
-	public function path( string $path ) : string {
-		return GOVPACK_PLUGIN_PATH . $path; 
+
+	public function path( $path ) {
+		return GOVPACK_PLUGIN_PATH . $path;
 	}
+
+	public function require( $path ) {
+		return require_once $this->path( $path ); //phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
+	}
+
+	public function build_path( $path ) {
+		return trailingslashit(
+			trailingslashit( $this->path( 'build' ) ) . $path
+		);
+	}
+
 
 	/**
 	 * Action called by the plugin activation hook.
@@ -70,21 +82,6 @@ class Govpack {
 		\Govpack\Core\Capabilities::instance()->add_capabilities();
 	}
 
-	public static function deactivation() {
-		
-		// get capabilities setup first.
-		\Govpack\Core\Capabilities::instance()->remove_capabilities();
-	}
-
-	public function build_path( string $path ) : string {
-		return trailingslashit(
-			trailingslashit( $this->path( 'build' ) ) . $path 
-		);
-	}
-
-	public function require( string $path ) : string {
-		return require_once $this->path( $path ); //phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
-	}
 
 	public function url( string $path ) : string {
 		return trailingslashit( GOVPACK_PLUGIN_URL ) . $path;
@@ -173,15 +170,15 @@ class Govpack {
 	public function icons() : Icons {
 
 		if ( ! isset( $this->icons ) ) {
-			$this->icons = new Icons();
+			$this->icons = new Icons( $this );
 		}
 		
 		return $this->icons;
 	}
 
 	public function register_blocks() {
-		$this->blocks()->register( new \Govpack\Blocks\Profile\Profile() );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileSelf\ProfileSelf() );
+		$this->blocks()->register( new \Govpack\Blocks\Profile\Profile( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileSelf\ProfileSelf( $this ) );
 	}
 
 	

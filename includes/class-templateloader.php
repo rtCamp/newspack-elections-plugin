@@ -74,6 +74,7 @@ class TemplateLoader extends \Govpack_Vendor_Gamajo_Template_Loader {
 		return $this->do_render( $template, $attributes, $content, $block, $extra );
 	}
 
+
 	public function get_block_part( $slug, $name = null, $attributes = [], $content = '', $block = null, $extra = null ) {
 		// Directly echoing HTML here, this comes from a template, so not escapable. Escaping shoulld be handled in the actual template.
 		echo $this->do_render( $this->get_template_part( $slug, $name, false ), $attributes, $content, $block, $extra );//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
