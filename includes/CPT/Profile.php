@@ -8,12 +8,15 @@
 namespace Govpack\CPT;
 
 use Govpack\ProfileFieldsEndpoint;
+use Govpack\ProfileField;
+use Govpack\ProfileTaxonomyField;
 use Govpack\RestField;
 use Govpack\RestRoute;
 use Govpack\Abstracts\Rest_Endpoint;
 
 
 use Govpack\Capabilities;
+use Govpack\ProfileFieldsManager;
 use Govpack\ProfileLinks;
 use Govpack\ProfileLinkServices;
 use WP_Screen;
@@ -23,6 +26,8 @@ use WP_Post_Type;
  * Register and handle the "Profile" Custom Post Type
  */
 class Profile extends \Govpack\Abstracts\PostType {
+
+	use \Govpack\Instance;
 
 	/**
 	 * Post Type slug. Used when registering and referencing
@@ -34,6 +39,23 @@ class Profile extends \Govpack\Abstracts\PostType {
 	 */
 	const TEMPLATE_NAME = 'single-govpack-profiles.php';
 
+	/**
+	 * Fields used for the profile
+	 */
+	static ProfileFieldsManager $fields;
+
+	/**
+	 * Groups in which fields may appear;
+	 */
+	static $field_groups = [];
+
+	/**
+	 * Initalise a Profile Post Type
+	 */
+	public static function init(){
+		$pt = self::instance();
+		self::register_profile_fields();
+	}
 
 	/**
 	 * WordPress Hooks
@@ -63,6 +85,127 @@ class Profile extends \Govpack\Abstracts\PostType {
 		
 		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_x_meta_fields_to_twitter' ], 10, 5 );
 	}
+
+	public static function fields() {
+		if(empty(self::$fields)){
+			self::register_profile_fields();
+		}
+
+		return self::$fields;
+	}
+
+	public static function register_profile_fields(){
+
+		self::$fields = new ProfileFieldsManager();
+
+		self::$fields->add_fields([
+			(new ProfileField("name", "Name"))
+				->group(ProfileFieldsManager::GROUPS["ABOUT"]),
+			(new ProfileField("name_prefix", "Prefix"))
+				->group(ProfileFieldsManager::GROUPS["ABOUT"]),
+			(new ProfileField("name_first", "First Name"))
+				->group(ProfileFieldsManager::GROUPS["ABOUT"]),
+			(new ProfileField("name_middle", "Middle Name(s)"))
+				->group(ProfileFieldsManager::GROUPS["ABOUT"]),
+			(new ProfileField("name_last", "Last Name"))
+				->group(ProfileFieldsManager::GROUPS["ABOUT"]),
+			(new ProfileField("name_suffix", "Suffix"))
+				->group(ProfileFieldsManager::GROUPS["ABOUT"]),
+			(new ProfileField("nickname", "Nickname"))
+				->group(ProfileFieldsManager::GROUPS["ABOUT"]),
+			(new ProfileField("occupation", "Occupation"))
+				->group(ProfileFieldsManager::GROUPS["ABOUT"]),
+			(new ProfileField("education", "Education"))
+				->group(ProfileFieldsManager::GROUPS["ABOUT"]),
+			(new ProfileField("gender", "Gender"))
+				->group(ProfileFieldsManager::GROUPS["ABOUT"]),
+			(new ProfileField("race", "Race"))
+				->group(ProfileFieldsManager::GROUPS["ABOUT"]),
+			(new ProfileField("ethnicity", "Ethnicity"))
+				->group(ProfileFieldsManager::GROUPS["ABOUT"]),
+			(new ProfileField("date_of_birth", "Date of Birth", "date"))
+				->group(ProfileFieldsManager::GROUPS["ABOUT"]),
+			(new ProfileField("date_of_death", "Date of Death", "date"))
+				->group(ProfileFieldsManager::GROUPS["ABOUT"]),
+			(new ProfileField("district", "District"))
+				->group(ProfileFieldsManager::GROUPS["ABOUT"]),
+			(new ProfileField("endorsements", "Endorsements", "textarea"))
+				->group(ProfileFieldsManager::GROUPS["ABOUT"]),
+
+			new ProfileField("contact_form_url", "Contact Form URL", "url"),
+			new ProfileField("date_assumed_office", "Date Assumed Office", "date"),
+			new ProfileField("appointed_by", "Appointed By"),
+			new ProfileField("appointed_date", "Appointed On", "date"),
+			new ProfileField("confirmed_date", "Confirmed On", "date"),
+			new ProfileField("term_end_date", "Term Ended/Ends On", "date"),
+			new ProfileField("congress_year", "Congressional Year"),
+
+			new ProfileField("email_official", "Official Email Address"),
+			new ProfileField("email_legislative", "Legislative Email Address"),
+			new ProfileField("email_other", "Other Email Address"),
+
+			new ProfileField("email_capitol", "Capitol Email Address"),
+			new ProfileField("email_district", "District Email Address"),
+			new ProfileField("email_campaign", "Campaign Email Address"),
+			
+			new ProfileField("address_capitol","Capitol Address"),
+			new ProfileField("address_district","District Address"),
+			new ProfileField("address_campaign","Campaign Address"),
+
+			new ProfileField("phone_capitol","Capitol Phone Number"),
+			new ProfileField("phone_district","District Phone Number"),
+			new ProfileField("phone_campaign","Campaign Phone Number"),
+
+			new ProfileField("fax_capitol","Capitol Fax Number"),
+			new ProfileField("fax_district","Capitol Fax Number"),
+			new ProfileField("fax_campaign","Capitol Fax Number"),
+
+			new ProfileField("website_personal","Personal Website URL"),
+			new ProfileField("website_campaign","Campaign Website URL"),
+			new ProfileField("website_district","District Website URL"),
+			new ProfileField("website_capitol","Capitol Website URL"),
+			new ProfileField("rss","RSS Feed URL"),
+
+			new ProfileField("linkedin", "Linkedin URL"),
+			new ProfileField("wikipedia", "Wikipedia ID"),
+			new ProfileField("google_entity_id", "Google Entity ID"),
+			new ProfileField("gab", "Gab"),
+			new ProfileField("rumble", "Rumble"),
+
+			new ProfileField("opensecrets_id", "Open Secrets"),
+			new ProfileField("balletpedia_id", "BallotPedia"),
+			new ProfileField("openstates_id", "OpenStates"),
+			new ProfileField("fec_id", "FEC ID"),
+			new ProfileField("govtrack_id", "GovTrack ID"),
+			new ProfileField("votesmart_id", "VoteSmart ID"),
+			new ProfileField("usio_id", "BioGuide"),
+			new ProfileField("icpsr_id", "Voteview"),
+
+			new ProfileTaxonomyField("party", "Party", \Govpack\Tax\Party::TAX_SLUG),
+			new ProfileTaxonomyField("state", "State", \Govpack\Tax\State::TAX_SLUG),
+			new ProfileTaxonomyField("legislative_body", "Legislative Body",  \Govpack\Tax\LegislativeBody::TAX_SLUG),
+			new ProfileTaxonomyField("position", "Office Title",  \Govpack\Tax\OfficeHolderTitle::TAX_SLUG),
+			new ProfileTaxonomyField("status", "Office Status",  \Govpack\Tax\OfficeHolderStatus::TAX_SLUG),
+
+		]);
+
+		// Social Panel.
+		$groups = [ 'facebook', 'twitter', 'instagram', 'youtube', 'x' ];
+		$keys   = [ 'official', 'campaign', 'personal' ];
+
+		foreach ( $groups as $group ) {
+			foreach ( $keys as $key ) {
+				$slug        = sprintf( '%s_%s', $group, $key );
+				$label        = sprintf( '%s %s', ucfirst($key), ucfirst($group) );
+
+				self::$fields->add(new ProfileField($slug, $label));
+			}
+		}
+
+		
+	}
+
+	
 
 	public static function fallback_x_meta_fields_to_twitter( mixed $value, int $object_id, string $meta_key, bool $single, string $meta_type ): mixed {
 
