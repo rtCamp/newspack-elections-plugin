@@ -99,7 +99,7 @@ class Govpack {
 	 */
 	public static function post_types(): void {
 		// Custom Post Types.
-		\Govpack\CPT\Profile::hooks();
+		\Govpack\CPT\Profile::init();
 	}
 
 	/**

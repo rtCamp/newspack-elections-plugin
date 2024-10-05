@@ -18,10 +18,6 @@ class ProfileFieldsManager {
 	 */
 	public array $fields = [];
 
-	public function __construct(){
-		
-	}
-	
 
 	public function add_fields(ProfileField|array $fields_input){
 		if(is_array($fields_input)){
@@ -58,4 +54,12 @@ class ProfileFieldsManager {
 
 		return $arr;
 	}
+
+	public function get_by_source(string $source) : array {
+		return array_filter($this->fields, function($field) use ($source) {
+			return $field->source === $source;
+		});
+	}
+
+	
 }

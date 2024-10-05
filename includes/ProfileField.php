@@ -81,13 +81,10 @@ class ProfileField {
 
 		foreach($this->to_array as $key){
 			if(property_exists($this, $key )){
-
 				if(empty($this->$key)){
 					continue;
 				}
-
 				$val[$key] = $this->$key;
-
 			}
 		}
 

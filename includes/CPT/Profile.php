@@ -54,6 +54,7 @@ class Profile extends \Govpack\Abstracts\PostType {
 	 */
 	public static function init(){
 		$pt = self::instance();
+		self::hooks();
 		self::register_profile_fields();
 	}
 
@@ -89,13 +90,14 @@ class Profile extends \Govpack\Abstracts\PostType {
 	public static function fields() {
 		if(empty(self::$fields)){
 			self::register_profile_fields();
+
 		}
 
 		return self::$fields;
 	}
 
 	public static function register_profile_fields(){
-
+		
 		self::$fields = new ProfileFieldsManager();
 
 		self::$fields->add_fields([
@@ -202,6 +204,7 @@ class Profile extends \Govpack\Abstracts\PostType {
 			}
 		}
 
+		
 		
 	}
 
@@ -502,104 +505,9 @@ class Profile extends \Govpack\Abstracts\PostType {
 	 */
 	public static function get_meta_keys(): array {
 
-		$meta_keys = [
-			// About Panel.
-			'name',
-			'name_prefix',
-			'name_first',
-			'name_middle',
-			'name_last',
-			'name_suffix',
-			'nickname',
-			'occupation',
-			'education',
-			'gender',
-			'race',
-			'ethnicity',
-			'date_of_birth',
-			'date_of_death',
-			'district',
-			'endorsements',
+		$fields = self::fields()->get_by_source("meta");
+		$meta_keys = wp_list_pluck($fields, "slug");
 
-			// office panel.
-			'contact_form_url',
-			'date_assumed_office',
-			'appointed_by',
-			'appointed_date',
-			'confirmed_date',
-			'term_end_date',
-			'congress_year',
-
-			// communications panel.
-			'email_official',
-			'email_campaign',
-			'email_other',
-			'email_district',
-			'email_legislative',
-			'email_capitol',
-			
-			'address_capitol',
-			'address_district',
-			'address_campaign',
-
-			'phone_capitol',
-			'phone_district',
-			'phone_campaign',
-
-			'fax_capitol',
-			'fax_district',
-			'fax_campaign',
-
-			'website_personal',
-			'website_campaign',
-			'website_district',
-			'website_capitol',
-			'rss',
-
-			// got svgs
-			'linkedin',
-			'wikipedia_id',
-			'google_entity_id',
-			'gab',
-
-			// have favicons
-			'rumble',
-			'opensecrets_id',
-			'balletpedia_id',
-			'openstates_id',
-			'fec_id',
-			'govtrack_id',
-			'votesmart_id',
-			'usio_id', // bio guide
-			'icpsr_id', // voteview
-
-			// meta and ID's panel.
-			'thomas_id', // cant access
-			'cspan_id', // icon too big
-		
-			// no longer accessable 
-			'washington_post_id',
-			
-			// na
-			'govpack_id', // us
-			'district_ocd_id', // not linkable
-			'lis_id', // cant link to
-			'committee_id', //fernando made this up
-
-			'links', // will contain an object with links
-		];
-
-		// Social Panel.
-		$groups = [ 'facebook', 'twitter', 'instagram', 'youtube', 'x' ];
-		$keys   = [ 'official', 'campaign', 'personal' ];
-
-		foreach ( $groups as $group ) {
-			foreach ( $keys as $key ) {
-				$slug        = sprintf( '%s_%s', $group, $key );
-				$meta_keys[] = $slug;
-			}
-		}
-		
 		return apply_filters( 'govpack_profile_meta_keys', $meta_keys );
 	}
 
@@ -620,7 +528,6 @@ class Profile extends \Govpack\Abstracts\PostType {
 	 * @param array  $args extra arguments the meta_field may take.
 	 */
 	public static function register_meta( string $slug, array $args = [] ): void {
-
 
 		$args = apply_filters(
 			'govpack_profile_register_meta_field_args',
@@ -741,7 +648,7 @@ class Profile extends \Govpack\Abstracts\PostType {
 			$current = false;
 		}
 
-
+		
 		/**
 		 * Filters whether to remove the 'Categories' drop-down from the post list table.
 		 *
@@ -765,8 +672,10 @@ class Profile extends \Govpack\Abstracts\PostType {
 				'taxonomy'        => $taxonomy,
 				'name'            => $taxonomy,
 				'value_field'     => 'slug',
+				'hide_if_empty'   => true,
 			];
 
+			
 			?>
 			<label class="screen-reader-text" for="cat">
 				<?php echo esc_html( get_taxonomy( $taxonomy )->labels->filter_by_item ); ?>
