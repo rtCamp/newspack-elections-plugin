@@ -153,7 +153,7 @@ function Edit( {attributes, setAttributes, isSelected: isSingleSelected, ...prop
 	
 	console.log("allowedBlocks", select(blockEditorStore).getAllowedBlocks(props.clientId))
 	return (
-		<div { ...blockProps }>
+		<div { ...innerBlockProps }>
 
 			{ showSelector && (
 				<ProfileSelector setProfile = {setProfile} />
@@ -173,7 +173,7 @@ function Edit( {attributes, setAttributes, isSelected: isSingleSelected, ...prop
 					<InspectorControls>
 						<ProfileResetPanel profileId = {profileId} setProfile = {resetProfile}  />
 					</InspectorControls>
-						<div {...innerBlockProps}>
+						
 						{/* 
 						<ResizableBox
 							enable={ {
@@ -201,7 +201,7 @@ function Edit( {attributes, setAttributes, isSelected: isSingleSelected, ...prop
 						{/** 
 					</ResizableBox>
 							*/}
-					</div>
+					
 				</>
 			)}
 		</div>

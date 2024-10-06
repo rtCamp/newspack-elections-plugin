@@ -50,7 +50,7 @@ abstract class RestEndpoint {
 		$args = [
 			'methods'             => $this->methods,
 			'callback'            => $this->callbacks( 'callback' ),
-			'permission_callback' => $this->callbacks( 'permissions' ),
+			'permission_callback' => $this->callbacks( 'permission' ),
 			'validate_callback'   => $this->callbacks( 'validate' ),
 			'sanitize_callback'   => $this->callbacks( 'sanitize' ),
 		];

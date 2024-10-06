@@ -20,7 +20,13 @@
 			"link": true,
 			"text": true	
 		},
-		"layout" : true,
+		"layout" : {
+			"allowSwitching": false,
+			"allowVerticalAlignment": true,
+			"default" : {
+				"type" : "flex"
+			}
+		},
 		"shadow": true, 
 		"spacing": {
 			"margin": true,  
@@ -31,6 +37,12 @@
 			"fontSize": true,
 			"lineHeight": true,
 			"textAlign": true
+		},
+		"__experimentalBorder": {
+			"color" : true,
+			"radius" : true,
+			"width" : true,
+			"style" : true
 		}
 	},
 	"attributes": {
@@ -50,7 +62,7 @@
 		}
 	},
 	"allowedBlocks": [ 
-		"core/post-title", "core/post-excerpt", "core/spacer", "core/post-featured-image", "core/group", "core/paragraph", "core/image", "core/heading", "govpack/profile-terms", "govpack/profile-meta" ],
+		"core/post-title", "core/post-excerpt", "core/spacer", "core/post-featured-image", "core/group", "core/paragraph", "core/image", "core/heading", "govpack/profile-terms", "govpack/profile-row" , "govpack/profile-row-group" ],
 	"providesContext": {
 		"govpack/profileId" : "profileId",
 		"postId" : "profileId",

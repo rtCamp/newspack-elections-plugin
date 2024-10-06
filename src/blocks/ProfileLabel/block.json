@@ -1,8 +1,8 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "govpack/profile-meta",
-	"title": "Profile Meta",
+	"name": "govpack/profile-label",
+	"title": "Label",
     "editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./index.css",
@@ -42,11 +42,8 @@
 	"attributes": {
 		"label" : {
 			"type": "string"
-		},
-		"meta_key" : {
-			"type": "string"
 		}
 	},
-	"ancestor": [ "govpack/profile-v2" ],
+	"ancestor": [ "govpack/profile-row" ],
 	"usesContext": ["govpack/profileId", "postType"]
 }
