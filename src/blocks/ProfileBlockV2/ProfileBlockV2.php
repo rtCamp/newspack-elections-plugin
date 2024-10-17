@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
 class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 
 	public string $block_name = 'govpack/profile-v2';
-	public $template   = 'profile';
+	public $template          = 'profile';
 
 	private $show       = null;
 	private $profile    = null;
@@ -28,7 +28,7 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 		$this->plugin = $plugin;
 	}
 
-	public function disable_block( $allowed_blocks, $editor_context ) : bool {
+	public function disable_block( $allowed_blocks, $editor_context ): bool {
 		return false;
 	}
 
@@ -77,6 +77,7 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 		$this->enqueue_view_assets();
 
 		$this->attributes = self::merge_attributes_with_block_defaults( $this->block_name, $attributes );
+		/*
 		return gp_template_loader()->render_block(
 			$this->template(),
 			$this->attributes, 
@@ -87,6 +88,7 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 				'profile_data'  => $this->profile,
 			] 
 		);
+		*/
 	}   
 
 	

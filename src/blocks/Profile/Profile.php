@@ -92,7 +92,10 @@ class Profile extends \Govpack\Abstracts\Block {
 
 	public function populate_show() {
 		return [
-			'photo'             => ( has_post_thumbnail( $this->profile['id'] ) && $this->attributes['showAvatar'] ),
+			'photo'             => ( has_post_thumbnail( $this->profile['id'] ) && 
+										isset( $this->attributes['showAvatar'] ) && 
+										$this->attributes['showAvatar']  
+									),
 			'name'              => ( isset( $this->profile['name'] ) && $this->attributes['showName'] ),
 			'status_tag'        => ( isset( $this->profile['status'] ) && $this->attributes['showStatusTag'] ),
 			'secondary_address' => ( isset( $this->profile['address']['secondary'] ) && ( $this->profile['address']['secondary'] !== $this->profile['address']['default'] ) ),
