@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Blocks\ProfileRow;
+namespace Govpack\Blocks\ProfileField;
 
 use WP_Block;
 
@@ -14,10 +14,10 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class ProfileRow extends \Govpack\Blocks\Profile\Profile {
+class ProfileField extends \Govpack\Blocks\Profile\Profile {
 
-	public string $block_name = 'govpack/profile-row';
-	public $template   = 'profile';
+	public string $block_name = 'govpack/profile-field';
+	public $template          = 'profile';
 
 	private $show       = null;
 	private $profile    = null;
@@ -30,12 +30,12 @@ class ProfileRow extends \Govpack\Blocks\Profile\Profile {
 		$this->plugin = $plugin;
 	}
 
-	public function disable_block( $allowed_blocks, $editor_context ) :bool {
+	public function disable_block( $allowed_blocks, $editor_context ): bool {
 		return false;
 	}
 
 	public function block_build_path(): string {
-		return $this->plugin->build_path( 'blocks/ProfileRow' );
+		return $this->plugin->build_path( 'blocks/ProfileField' );
 	}
 
 	/**

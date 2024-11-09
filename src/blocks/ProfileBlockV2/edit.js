@@ -2,34 +2,26 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { InspectorControls, useBlockProps, useInnerBlocksProps,  InnerBlocks, BlockControls, store as blockEditorStore} from '@wordpress/block-editor';
+import { 
+	InspectorControls, useBlockProps, useInnerBlocksProps,  InnerBlocks, BlockControls, store as blockEditorStore,
+	__experimentalUseMultipleOriginColorsAndGradients as useMultipleOriginColorsAndGradients, withColors, useSettings
+} from '@wordpress/block-editor';
 import { useInstanceId } from '@wordpress/compose';
 import { useRef, useEffect} from '@wordpress/element';
 import { ResizableBox, ToolbarButton, ToolbarGroup, Toolbar, Icon } from '@wordpress/components';
 import { addQueryArgs } from '@wordpress/url';
 
-import { useSelect, useDispatch, select } from "@wordpress/data";
-import { store as coreData } from "@wordpress/core-data"
+import { useDispatch } from "@wordpress/data";
 
 import { external, postAuthor } from '@wordpress/icons';
-
-import ProfileDisplaySettings from '../../components/Panels/ProfileDisplaySettings.jsx'
-import ProfileAvatarPanel from '../../components/Panels/ProfileAvatarPanel';
-import ProfileCommsPanel from '../../components/Panels/ProfileCommsPanel'
-import ProfileCommsOtherPanel from '../../components/Panels/ProfileCommsOtherPanel'
-import ProfileCommsSocialPanel from '../../components/Panels/ProfileCommsSocialPanel'
-import {ProfileLinksPanel} from '../../components/Panels/ProfileLinksPanel.jsx'
-import AvatarAlignmentToolBar from '../../components/Toolbars/AvatarAlignment.jsx';
-import BlockSizeAlignmentToolbar from '../../components/Toolbars/BlockSizeAlignmentToolbar.jsx';
-import ResetProfileToolbar from '../../components/Toolbars/ResetProfileToolbar.jsx';
 import {ProfileResetPanel} from '../../components/Panels/ProfileResetPanel.jsx';
 
-import SingleProfile from "./../../components/single-profile"
 
 import { Spinner } from './../../components/Spinner.jsx';
 import { ProfileSelector } from "./../../components/ProfileSelector.jsx"
 import { useSelectProfile } from "./../../components/SelectProfile.jsx"
 
+import { addFilter } from '@wordpress/hooks';
 
 const TEMPLATE = [
 	[ "core/post-featured-image", {}, []],
@@ -40,6 +32,23 @@ const TEMPLATE = [
 	}, []]
 ]
 
+
+
+
+/*
+addFilter(
+	'blockEditor.useSetting.before',
+	'govpack/useSetting.before',
+	( settingValue, settingName, clientId, blockName ) => {
+		if(blockName !== "govpack/profile-v2"){
+			return settingValue;
+		}
+		console.log(settingName, settingValue)
+		return settingValue;
+	}
+);
+
+*/
 
 const usePostEditURL = ( postId ) => {
 
@@ -91,7 +100,35 @@ function Edit( {attributes, setAttributes, isSelected: isSingleSelected, ...prop
 	const instanceId = useInstanceId( Edit );
 	const blockProps = useBlockProps( { ref } );
 
+	//console.log(useSettings("madeup.setting.path"))
+	//console.log("getting all pallete", useSettings("color.palette"))
 	const { __unstableMarkNextChangeAsNotPersistent } = useDispatch( blockEditorStore );
+
+	/*
+	let colorGradientSettings = useMultipleOriginColorsAndGradients();
+	colorGradientSettings.colors = [
+		...colorGradientSettings.colors,
+		...[
+			{
+				"name" : "Elections",
+				"colors" : [
+					{
+						"color": "#ff0000",
+						"slug": "election-1",
+						"label": "Election Red"
+					},
+					{
+						"color": "#0000ff",
+						"slug": "election-2",
+						"label": "Election Blue"
+					}
+				]
+			}
+		]
+	]
+	*/
+
+	//console.log(colorGradientSettings);
 
 	const currentWidth = ref.current?.offsetWidth
 	const {
@@ -150,8 +187,7 @@ function Edit( {attributes, setAttributes, isSelected: isSingleSelected, ...prop
 	const showSelector = (profileId === 0)
 	const showSpinner = ((query.hasStartedResolution) && (!query.hasFinishedResolution) && (showSelector === false))
 	const showProfile = ((query.hasFinishedResolution) && (profile))
-	
-	console.log("allowedBlocks", select(blockEditorStore).getAllowedBlocks(props.clientId))
+
 	return (
 		<div { ...innerBlockProps }>
 
@@ -170,6 +206,7 @@ function Edit( {attributes, setAttributes, isSelected: isSingleSelected, ...prop
 						setAttributes = {setAttributes} 
 						setProfile = {setProfile}
 					/>
+					
 					<InspectorControls>
 						<ProfileResetPanel profileId = {profileId} setProfile = {resetProfile}  />
 					</InspectorControls>
@@ -208,5 +245,6 @@ function Edit( {attributes, setAttributes, isSelected: isSingleSelected, ...prop
 	);
 }
 
-export {Edit}
 export default Edit
+export {Edit}
+

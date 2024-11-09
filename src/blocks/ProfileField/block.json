@@ -1,7 +1,8 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "govpack/profile-v2",
+	"name": "govpack/profile-field",
+	"title": "Profile Field",
     "editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./index.css",
@@ -22,7 +23,6 @@
 		},
 		"layout" : {
 			"allowSwitching": false,
-			"allowVerticalAlignment": true,
 			"default" : {
 				"type" : "flex"
 			}
@@ -37,36 +37,27 @@
 			"fontSize": true,
 			"lineHeight": true,
 			"textAlign": true
-		},
-		"__experimentalBorder": {
-			"color" : true,
-			"radius" : true,
-			"width" : true,
-			"style" : true
 		}
 	},
 	"attributes": {
-		"queryId": {
-			"type": "number"
+		"showLabel" : {
+			"type": "boolean",
+			"default" : true
 		},
-		"profileId": {
-			"type": "number",
-			"default": 0
+		"hideFieldIfEmpty" : {
+			"type": "boolean",
+			"default" : true
 		},
-		"postType": {
-			"type": "string",
-			"default": "govpack_profiles"
+		"label" : {
+			"type": "string"
 		},
-		"width": {
+		"meta_key" : {
 			"type": "string"
 		}
 	},
-	"allowedBlocks": [ 
-		"core/post-title", "core/post-excerpt", "core/spacer", "core/post-featured-image", "core/group", "core/paragraph", "core/image", "core/heading", "govpack/profile-terms" , "govpack/profile-row-group" ],
+	"ancestor": [ "govpack/profile-v2" ],
+	"usesContext": ["govpack/profileId", "postType"],
 	"providesContext": {
-		"govpack/profileId" : "profileId",
-		"postId" : "profileId",
-		"postType" : "postType",
-		"queryId": "queryId"
+		"govpack/profileField": "meta_key"
 	}
 }

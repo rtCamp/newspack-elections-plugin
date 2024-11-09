@@ -44,6 +44,6 @@
 			"type": "string"
 		}
 	},
-	"ancestor": [ "govpack/profile-row" ],
-	"usesContext": ["govpack/profileId", "postType"]
+	"ancestor": [ "govpack/profile-row", "govpack/profile-field" ],
+	"usesContext": ["govpack/profileId", "postType", "govpack/profileField"]
 }

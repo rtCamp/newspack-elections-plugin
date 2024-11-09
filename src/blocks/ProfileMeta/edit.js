@@ -39,7 +39,6 @@ const MetaInspectorControl = ({
 
 	const fields = useProfileFields()
 
-	console.log(fields)
 
 	return(
 		<InspectorControls>
@@ -73,7 +72,6 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 		postType = false
 	} = context
 
-	console.log("attributes", attributes);
 
 	const { 
 		label = null,
@@ -92,7 +90,7 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 		return field.slug === meta_key
 	})[0];
 
-	console.log("field", field)
+
 	const value = profile?.meta[meta_key];
 	const displayLabel = (label ? label : field?.label ?? "")
 	

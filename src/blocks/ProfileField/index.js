@@ -1,5 +1,5 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { row as icon } from '@wordpress/icons';
+import { postCategories as icon } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
