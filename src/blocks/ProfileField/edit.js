@@ -18,6 +18,7 @@ import { decodeEntities } from '@wordpress/html-entities';
 
 import {Panel, PanelBody, PanelRow, ToggleControl, BaseControl, ButtonGroup, Button, Spinner,SelectControl} from '@wordpress/components';
 
+import {getProfile, useProfileField, useProfileFields} from "./../../components/Profile"
 
 const useProfile = () => {
 	return useSelect( (select) => {
@@ -25,13 +26,7 @@ const useProfile = () => {
 	})
 }
 
-export const useProfileFields = () => {
-	const fields = useSelect( ( select ) => {
-		return select( 'core' ).getEntityRecords( 'govpack', 'fields', { per_page: '-1' } ) ?? [];
-	} );
 
-	return fields ;
-};
 
 
 const MetaInspectorControl = ({
@@ -114,6 +109,10 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 		hideFieldIfEmpty
 	} = attributes
 
+	const {
+		record : profile
+	} = getProfile(profileId)
+
 	/**
 	 * Get Data From The Editor
 	 */
@@ -122,7 +121,7 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 		template : [
 			['govpack/profile-label', {}],
 			['core/paragraph', {
-				"placeholder" : " ",
+				"placeholder" : " ", // Include the space here or we get the default "start typing or select a block" when the meta data has no content
 				"metadata": {
 					"bindings":{
 						"content":{
@@ -165,7 +164,6 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 			return
 		}
 
-		console.log("contentBlock", contentBlock)
 		updateBlock(contentBlock.clientId, {
 			attributes : {
 				...contentBlock.attributes,
@@ -184,12 +182,12 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 
 	}, [meta_key])
 
-	const profile = useEntityRecord("postType", "govpack_profiles", profileId).record
-
-	const fields = useProfileFields()
-	const field = fields.filter( (field) => {
-		return field.slug === meta_key
-	})[0];
+	
+	
+	const field = useProfileField(meta_key)
+	//const field = fields.filter( (field) => {
+	//	return field.slug === meta_key
+	//})[0];
 
 
 	const value = profile?.meta[meta_key];
