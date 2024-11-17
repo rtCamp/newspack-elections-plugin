@@ -2,16 +2,10 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText, InspectorControls } from "@wordpress/block-editor"
-import { useSelect, } from '@wordpress/data';
+import { useBlockProps, RichText } from "@wordpress/block-editor"
 
-export const useProfileFields = () => {
-	const fields = useSelect( ( select ) => {
-		return select( 'core' ).getEntityRecords( 'govpack', 'fields', { per_page: '-1' } ) ?? [];
-	} );
 
-	return fields ;
-};
+import { useProfileField } from "./../../components/Profile"
 
 function Edit( {attributes, setAttributes, context, ...props} ) {
 	const blockProps = useBlockProps();
@@ -33,11 +27,7 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 		})
 	}
 	
-
-	const fields = useProfileFields()
-	const field = fields.filter( (field) => {
-		return field.slug === profileFieldKey
-	})[0];
+	const field = useProfileField(profileFieldKey)
 
 	let calculatedLabel;
 	if(!label && field){

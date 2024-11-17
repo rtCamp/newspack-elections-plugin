@@ -8,24 +8,13 @@ import clsx from 'clsx';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText, InspectorControls, useInnerBlocksProps, store as blockEditorStore} from "@wordpress/block-editor"
+import { useBlockProps, InspectorControls, useInnerBlocksProps, store as blockEditorStore} from "@wordpress/block-editor"
 import { store as editorStore } from "@wordpress/editor"
-import { store as coreDataStore, useEntityRecord} from '@wordpress/core-data';
 import { useSelect, useDispatch} from '@wordpress/data';
 import {useEffect} from "@wordpress/element"
 
-import { decodeEntities } from '@wordpress/html-entities';
-
-import {Panel, PanelBody, PanelRow, ToggleControl, BaseControl, ButtonGroup, Button, Spinner,SelectControl} from '@wordpress/components';
-
+import {Panel, PanelBody, PanelRow, ToggleControl, SelectControl} from '@wordpress/components';
 import {getProfile, useProfileField, useProfileFields} from "./../../components/Profile"
-
-const useProfile = () => {
-	return useSelect( (select) => {
-		return select(editorStore).getCurrentPost()
-	})
-}
-
 
 
 

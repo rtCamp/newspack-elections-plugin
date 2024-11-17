@@ -2,30 +2,13 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText, InspectorControls } from "@wordpress/block-editor"
+import { useBlockProps, InspectorControls } from "@wordpress/block-editor"
 import { store as editorSore } from "@wordpress/editor"
-import { store as coreDataStore, useEntityRecord} from '@wordpress/core-data';
+import { useEntityRecord} from '@wordpress/core-data';
 import { useSelect, } from '@wordpress/data';
+import { Panel, PanelBody, PanelRow, SelectControl } from '@wordpress/components';
 
-import { decodeEntities } from '@wordpress/html-entities';
-
-import {Panel, PanelBody, PanelRow, ToggleControl, BaseControl, ButtonGroup, Button, Spinner,SelectControl} from '@wordpress/components';
-
-const useProfile = () => {
-	return useSelect( (select) => {
-		return select(editorSore).getCurrentPost()
-	})
-}
-
-
-
-export const useProfileFields = () => {
-	const fields = useSelect( ( select ) => {
-		return select( 'core' ).getEntityRecords( 'govpack', 'fields', { per_page: '-1' } ) ?? [];
-	} );
-
-	return fields ;
-};
+import { useProfileFields } from "./../../components/Profile"
 
 
 const MetaInspectorControl = ({
@@ -38,7 +21,6 @@ const MetaInspectorControl = ({
 	})
 
 	const fields = useProfileFields()
-
 
 	return(
 		<InspectorControls>
@@ -85,10 +67,7 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 	}
 
 
-	const fields = useProfileFields()
-	const field = fields.filter( (field) => {
-		return field.slug === meta_key
-	})[0];
+	const field = useProfileFields(meta_key)
 
 
 	const value = profile?.meta[meta_key];
