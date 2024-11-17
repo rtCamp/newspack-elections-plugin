@@ -22,7 +22,8 @@ const MetaInspectorControl = ({
 	meta,
 	setAttributes,
 	showLabel,
-	hideFieldIfEmpty
+	hideFieldIfEmpty,
+	fieldType = "text"
 }) => {
 
 	const blockProps = useBlockProps();
@@ -31,8 +32,9 @@ const MetaInspectorControl = ({
 		return select(editorStore).getCurrentPostType()
 	})
 
+	console.log("field Type", fieldType)
 
-	const fields = useProfileFields()
+	const fields = useProfileFields(fieldType)
 
 	return(
 		<InspectorControls>
@@ -95,7 +97,8 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 		label = null,
 		meta_key = "",
 		showLabel,
-		hideFieldIfEmpty
+		hideFieldIfEmpty,
+		fieldType = "text"
 	} = attributes
 
 	const {
@@ -188,7 +191,7 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	const shouldDimField = (hideFieldIfEmpty && value === "" && (!isBlockSelected) && (!hasSelectedInnerBlock) )
 	className = clsx(className, {"gp-dim-field" : shouldDimField })
 
-	console.log("contentBlock", contentBlock)
+
 
     return (
 		<>
@@ -197,6 +200,7 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 				setAttributes = {setAttributes}
 				showLabel = {showLabel}
 				hideFieldIfEmpty = {hideFieldIfEmpty}
+				fieldType = {fieldType}
 			/>
 
 			

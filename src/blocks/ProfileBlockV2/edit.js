@@ -167,7 +167,7 @@ function Edit( {attributes, setAttributes, isSelected: isSingleSelected, ...prop
 	}
 
 	useEffect( () => {
-		console.log("useEffect", profile, attributes)
+		
 
 		if(!profile){
 			return

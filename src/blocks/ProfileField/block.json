@@ -53,6 +53,10 @@
 		},
 		"meta_key" : {
 			"type": "string"
+		},
+		"fieldType" : {
+			"type": "string",
+			"default" : "text"
 		}
 	},
 	"ancestor": [ "govpack/profile-v2" ],

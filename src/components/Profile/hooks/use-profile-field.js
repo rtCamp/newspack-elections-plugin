@@ -15,7 +15,7 @@ export const useProfileField = (fieldName = null) => {
 			return field.slug === fieldName
 	})[0];
 
-	console.log("field", field)
+	
 
 	return field ;
 };

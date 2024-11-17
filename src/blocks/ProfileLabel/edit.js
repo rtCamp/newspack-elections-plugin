@@ -36,7 +36,7 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 		calculatedLabel = label;
 	}
 
-	console.log("profileFieldKey", profileFieldKey, field)
+	
 
     return (
 
