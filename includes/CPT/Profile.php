@@ -207,6 +207,9 @@ class Profile extends \Govpack\Abstracts\PostType {
 		}
 	}
 
+	public static function get_field_types() : array {
+		return self::$fields->get_types();
+	}
 	
 
 	public static function fallback_x_meta_fields_to_twitter( mixed $value, int $object_id, string $meta_key, bool $single, string $meta_type ): mixed {

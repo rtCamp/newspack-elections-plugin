@@ -19,6 +19,8 @@ import './view.scss';
 
 const { attributes, category, title } = metadata;
 
+console.log(metadata)
+
 registerBlockType( metadata.name, {
 	apiVersion: 3,
 	title,
@@ -30,6 +32,7 @@ registerBlockType( metadata.name, {
 	],
 	edit : Edit,
 	save: Save,
+	/*
 	variations : [
 		{
 			name: 'profile-field-test',
@@ -47,5 +50,5 @@ registerBlockType( metadata.name, {
 				fieldType: 'date' 
 			},
 		}
-	]
+	]*/
 } );

@@ -64,6 +64,10 @@ class Admin {
 					'slug'  => 'govpack',
 					'title' => \__( 'Govpack', 'govpack' ),
 				],
+				[
+					'slug'  => 'govpack-profile-fields',
+					'title' => \__( 'Govpack Profile Fields', 'govpack' ),
+				],
 			]
 		);
 	}

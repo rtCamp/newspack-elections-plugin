@@ -40,6 +40,10 @@
 		}
 	},
 	"attributes": {
+		"align": {
+			"type": "string",
+			"default": "full"
+		},
 		"showLabel" : {
 			"type": "boolean",
 			"default" : true

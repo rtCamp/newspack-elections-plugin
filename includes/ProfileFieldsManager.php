@@ -61,5 +61,21 @@ class ProfileFieldsManager {
 		});
 	}
 
+	public function get_types() : array {
+
+		$types = [];
+
+		foreach($this->fields as $field){
+			$type = $field->type;
+
+			if(in_array($type, $types)){
+				continue;
+			}
+
+			$types[] = $type;
+		}
+
+		return $types;
+	}
 	
 }

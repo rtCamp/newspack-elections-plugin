@@ -23,6 +23,7 @@
 		"layout" : {
 			"allowSwitching": false,
 			"allowVerticalAlignment": true,
+			"allowSizingOnChildren": true,
 			"default" : {
 				"type" : "flex"
 			}

@@ -8,8 +8,12 @@
 	"style": "file:./index.css",
 	"category": "govpack",
 	"supports" : {
+		"align" : true,
+		"align-wide": true,
 		"layout" : {
 			"allowSwitching": false,
+			"allowJustification": true,
+			"allowEditing": true,
 			"default" : {
 				"type" : "flex"
 			}
@@ -24,5 +28,6 @@
 		
 	},
 	"ancestor": [ "govpack/profile-v2" ],
-	"usesContext": ["govpack/profileId", "postType"]
+	"usesContext": ["govpack/profileId", "postType"],
+	"allowedBlocks": ["govpack/profile-field"]
 }
