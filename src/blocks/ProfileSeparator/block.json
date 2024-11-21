@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "govpack/profile-separator",
+	"title": "Profile Separator",
+    "editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./index.css",
+	"category": "govpack",
+	"supports" : {
+		"anchor": true,
+		"align": true,
+		"align-wide": true,
+		"aria-label": true,
+		"color" : {
+			"background" : true	
+		},
+		"shadow": true, 
+		"spacing": {
+			"margin": true,  
+			"padding": true, 
+			"blockGap": true
+		}
+	},
+	"attributes": {
+	},
+	"ancestor": [ "govpack/profile-row-group" ],
+	"usesContext": ["govpack/profileId", "postType", "govpack/profileField"],
+	"blockHooks": {
+		"govpack/profile-field" : "after"
+	}
+}

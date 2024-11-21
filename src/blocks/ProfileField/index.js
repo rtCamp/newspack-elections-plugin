@@ -19,7 +19,7 @@ import './view.scss';
 
 const { attributes, category, title } = metadata;
 
-console.log(metadata)
+
 
 registerBlockType( metadata.name, {
 	apiVersion: 3,
@@ -52,3 +52,5 @@ registerBlockType( metadata.name, {
 		}
 	]*/
 } );
+
+

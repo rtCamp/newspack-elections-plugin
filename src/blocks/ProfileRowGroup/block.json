@@ -29,5 +29,5 @@
 	},
 	"ancestor": [ "govpack/profile-v2" ],
 	"usesContext": ["govpack/profileId", "postType"],
-	"allowedBlocks": ["govpack/profile-field"]
+	"allowedBlocks": ["govpack/profile-field", "govpack/profile-separator"]
 }
