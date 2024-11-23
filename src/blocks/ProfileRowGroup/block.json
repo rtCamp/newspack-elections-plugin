@@ -20,12 +20,14 @@
 		},
 		"spacing": {
 			"margin": true,  
-			"padding": true, 
-			"blockGap": true
+			"padding": true
 		}
 	},
 	"attributes": {
-		
+		"showSeparator" : {
+			"type" : "boolean",
+			"default" : true
+		}
 	},
 	"ancestor": [ "govpack/profile-v2" ],
 	"usesContext": ["govpack/profileId", "postType"],

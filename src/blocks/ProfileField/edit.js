@@ -12,6 +12,7 @@ import { useBlockProps, InspectorControls, useInnerBlocksProps, store as blockEd
 import { store as editorStore } from "@wordpress/editor"
 import { useSelect, useDispatch} from '@wordpress/data';
 import {useEffect} from "@wordpress/element"
+import { createBlock } from "@wordpress/blocks"
 
 import {Panel, PanelBody, PanelRow, ToggleControl, SelectControl} from '@wordpress/components';
 import {getProfile, useProfileField, useProfileFields} from "./../../components/Profile"
@@ -32,7 +33,7 @@ const MetaInspectorControl = ({
 		return select(editorStore).getCurrentPostType()
 	})
 
-	console.log("field Type", fieldType)
+
 
 	const fields = useProfileFields(fieldType)
 
@@ -131,14 +132,16 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	} );
 
 	// Select Block Store Data
-	const {isBlockSelected, hasSelectedInnerBlock, contentBlock } = useSelect( (select) => {
+	const {isBlockSelected, hasSelectedInnerBlock, contentBlock, wasBlockJustInserted, parentBlockClientId, currentBlock, currentBlockIndex } = useSelect( (select) => {
 		return {
 			isBlockSelected : select(blockEditorStore).isBlockSelected(clientId),
 			hasSelectedInnerBlock : select(blockEditorStore).hasSelectedInnerBlock(clientId),
 			currentBlock : select(blockEditorStore).getBlock(clientId),
 			currentInnerBlocks : select(blockEditorStore).getBlock(clientId).innerBlocks,
-			contentBlock : select(blockEditorStore).getBlock(clientId).innerBlocks.filter( (block) => block?.attributes?.metadata?.bindings !== undefined )[0]
-		
+			contentBlock : select(blockEditorStore).getBlock(clientId).innerBlocks.filter( (block) => block?.attributes?.metadata?.bindings !== undefined )[0],
+			wasBlockJustInserted: select(blockEditorStore).wasBlockJustInserted(clientId) ?? false,
+			parentBlockClientId: select(blockEditorStore).getBlockRootClientId(clientId),
+			currentBlockIndex: select(blockEditorStore).getBlockIndex(clientId),
 		}
 	} )
 
@@ -148,7 +151,7 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	/**
 	 * Get methods to update data elsewhere 
 	 */
-	const {updateBlock} = useDispatch(blockEditorStore)
+	const { updateBlock, insertBlock } = useDispatch(blockEditorStore)
 
 	useEffect( () => {
 
@@ -174,12 +177,19 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 
 	}, [meta_key])
 
-	
+	useEffect( () => {
+		if(!wasBlockJustInserted){
+			return;
+		}
+
+		let insertAt = (currentBlockIndex + 1)
+		let block = createBlock("govpack/profile-separator")
+		insertBlock(block, insertAt, parentBlockClientId )
+
+	}, [wasBlockJustInserted])
+
 	
 	const field = useProfileField(meta_key)
-	//const field = fields.filter( (field) => {
-	//	return field.slug === meta_key
-	//})[0];
 
 
 	const value = profile?.meta[meta_key];

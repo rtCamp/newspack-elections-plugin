@@ -63,7 +63,7 @@
 		}
 	},
 	"allowedBlocks": [ 
-		"core/post-title", "core/post-excerpt", "core/spacer", "core/post-featured-image", "core/group", "core/paragraph", "core/image", "core/heading", "govpack/profile-terms" , "govpack/profile-row-group" ],
+		"core/post-title", "core/post-excerpt", "core/spacer", "core/post-featured-image", "core/group", "core/paragraph", "core/image", "core/heading", "govpack/profile-terms" , "govpack/profile-row-group", "govpack/profile-separator" ],
 	"providesContext": {
 		"govpack/profileId" : "profileId",
 		"postId" : "profileId",
