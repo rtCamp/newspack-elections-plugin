@@ -19,12 +19,17 @@ import { separator } from '@wordpress/icons';
 
 function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 
+	console.log("Group", attributes)
 	
 	const {
 		showSeparator = true,
-		separatorHeight,
-		separatorMargin
+		separatorStyles = {}
 	} = attributes
+
+	const {
+		spacing,
+		height
+	} = separatorStyles
 
 	const { isBlockSelected, hasSelectedInnerBlock } = useSelect( (select) => {
 		return {
@@ -46,9 +51,16 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 		'rem',
 		'vw',
 	];
+
+	const setSeperatorStyles = ( newStyles ) => {
+		
+		setAttributes({separatorStyles : {
+			...attributes.separatorStyles,
+			...newStyles
+		}})
+	}
+
 	
-	const [ margin, setMargin ] = useState();
-	const [ height, setHeight ] = useState();
 
     return (
 		<>
@@ -70,11 +82,15 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 
 			<InspectorControls group="styles">
 				<ToolsPanel label={ __( 'Separator Dimensions', 'govpack' ) }>
-					<ToolsPanelItem label="Margin" isShownByDefault={true}  hasValue={ () => !! separatorMargin }>
+					<ToolsPanelItem label="Margin" isShownByDefault={true}  hasValue={ () => !! spacing }>
 						<SpacingSizesControl
-							values={ separatorMargin }
+							values={ spacing?.margin }
 							onChange={ (nextMargin) => 
-								setAttributes({ "separatorMargin" : nextMargin}) 
+								setSeperatorStyles({ 
+									spacing : {
+										margin : nextMargin 
+									}
+								}) 
 							}
 							minimumCustomValue={ -Infinity }
 							label={ __( 'Separator Margin' ) }
@@ -87,12 +103,12 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 						 
 					</ToolsPanelItem>
 
-					<ToolsPanelItem isShownByDefault={true} label="Seperator"  hasValue={ () => !! separatorHeight }>
+					<ToolsPanelItem isShownByDefault={true} label="Seperator"  hasValue={ () => !! height }>
 						<DimensionInput
 							label={ __( 'Separator Height' ) }
-							value={ separatorHeight }
+							value={ height }
 							onChange={ ( nextHeight ) =>
-								setAttributes( { separatorHeight: nextHeight } )
+								setSeperatorStyles( { height: nextHeight } )
 							}
 						/>
 					</ToolsPanelItem>

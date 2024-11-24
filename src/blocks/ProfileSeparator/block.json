@@ -35,6 +35,7 @@
 		"postType", 
 		"govpack/profileField", 
 		"govpack/separatorHeight",
-		"govpack/separatorMargin"
+		"govpack/separatorMargin",
+		"govpack/separatorStyle"
 	]
 }

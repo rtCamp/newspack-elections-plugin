@@ -12,13 +12,14 @@ import { HorizontalRule } from '@wordpress/components';
 import { 
 	useBlockProps,
 	getColorClassName,
+	withColors,
 	__experimentalUseColorProps as useColorProps,
 	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles
 } from "@wordpress/block-editor"
 
 import SpacerControls from './controls'
 
-function Edit( {attributes, setAttributes, context, ...props} ) {
+function SeperatorEdit( {attributes, setAttributes, context, ...props} ) {
 
 	const {
 		styles : originalStyles = {}, 
@@ -27,8 +28,9 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 
 	let styles = {...originalStyles}
 
-	console.log("Seperator", blockProps, props, attributes, context)
+	//console.log("Seperator", blockProps, props, attributes, context)
 
+	//console.log(props.setSeparatorColor)
 	const { 
 		backgroundColor, 
 		opacity, 
@@ -37,10 +39,12 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 	} = attributes;
 
 	const { 
-		'govpack/separatorHeight' : parentHeight = false,
-		'govpack/separatorMargin' : parentMargin = false
+		'govpack/separatorStyle' : inheritedStyle = {}
 	} = context;
 
+	const { 
+		height : parentHeight = false
+	} = inheritedStyle;
 	
 	/**
 	 * Use the blocks height from its Attribute, fallback to parent if not set
@@ -53,25 +57,16 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 		borderTopWidth : height
 	}
 
-	if(parentMargin && ! style?.spacing?.margin){
+	if(inheritedStyle && ! style?.spacing?.margin){
 
-		console.log("insert new styles");
-
-		const fakeAttrs = {
-			style : {
-				spacing: {
-					margin : parentMargin
-				}
-			}
-		}
-
-		let fakeBlockProps = getSpacingClassesAndStyles(fakeAttrs)
+		let fakeBlockProps = getSpacingClassesAndStyles({
+			style : inheritedStyle
+		})
 	
 		styles = {
 			...styles,
 			...fakeBlockProps?.style ?? {}
 		}
-
 	}
 
 	const colorProps = useColorProps( attributes );
@@ -117,6 +112,12 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 		</>
 	)
 }
+
+const seperatorColorAttributes = {
+	separatorColor: 'separator-color',
+}
+
+const Edit = withColors( seperatorColorAttributes )( SeperatorEdit );
 
 export {Edit}
 export default Edit

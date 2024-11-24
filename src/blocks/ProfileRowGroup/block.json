@@ -34,13 +34,18 @@
 		},
 		"separatorMargin": {
 			"type": "object"
+		},
+		"separatorStyles" : {
+			"type": "object",
+			"default" : {}
 		}
 	},
 	"ancestor": [ "govpack/profile-v2" ],
 	"usesContext": ["govpack/profileId", "postType"],
 	"providesContext": {
 		"govpack/separatorHeight" : "separatorHeight",
-		"govpack/separatorMargin" : "separatorMargin"
+		"govpack/separatorMargin" : "separatorMargin",
+		"govpack/separatorStyle" : "separatorStyles"
 	},
 	"allowedBlocks": ["govpack/profile-field", "govpack/profile-separator"]
 }
