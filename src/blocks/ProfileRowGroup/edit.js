@@ -5,8 +5,6 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, useInnerBlocksProps, InnerBlocks, store as blockEditorStore, InspectorControls, __experimentalSpacingSizesControl as SpacingSizesControl} from "@wordpress/block-editor"
 import {useSelect} from "@wordpress/data";
 
-import "./edit.scss"
-
 import {
 	Panel, PanelBody, PanelRow, ToggleControl,
 	__experimentalToolsPanel as ToolsPanel, 
@@ -15,10 +13,17 @@ import {
 
 import {useState} from "@wordpress/element"
 
+import "./edit.scss"
+import DimensionInput from "./../../components/Controls/DimensionInput"
+import { separator } from '@wordpress/icons';
+
 function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 
+	
 	const {
-		showSeparator = true
+		showSeparator = true,
+		separatorHeight,
+		separatorMargin
 	} = attributes
 
 	const { isBlockSelected, hasSelectedInnerBlock } = useSelect( (select) => {
@@ -43,6 +48,8 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	];
 	
 	const [ margin, setMargin ] = useState();
+	const [ height, setHeight ] = useState();
+
     return (
 		<>
 			<InspectorControls>
@@ -62,15 +69,16 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 			</InspectorControls>
 
 			<InspectorControls group="styles">
-				<ToolsPanel label={ __( 'Separator Spacing', 'govpack' ) }>
-					<ToolsPanelItem label="Margin"  hasValue={ () => !! margin }>
-					
+				<ToolsPanel label={ __( 'Separator Dimensions', 'govpack' ) }>
+					<ToolsPanelItem label="Margin" isShownByDefault={true}  hasValue={ () => !! separatorMargin }>
 						<SpacingSizesControl
-							values={ margin }
-							onChange={ setMargin }
+							values={ separatorMargin }
+							onChange={ (nextMargin) => 
+								setAttributes({ "separatorMargin" : nextMargin}) 
+							}
 							minimumCustomValue={ -Infinity }
 							label={ __( 'Separator Margin' ) }
-							//sides={ marginSides }
+							sides={["vertical"]}
 							units={ units }
 							allowReset={ false }
 							//onMouseOver={ onMouseOverMargin }
@@ -78,6 +86,17 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 						/>
 						 
 					</ToolsPanelItem>
+
+					<ToolsPanelItem isShownByDefault={true} label="Seperator"  hasValue={ () => !! separatorHeight }>
+						<DimensionInput
+							label={ __( 'Separator Height' ) }
+							value={ separatorHeight }
+							onChange={ ( nextHeight ) =>
+								setAttributes( { separatorHeight: nextHeight } )
+							}
+						/>
+					</ToolsPanelItem>
+
 				</ToolsPanel>
 			</InspectorControls>
 

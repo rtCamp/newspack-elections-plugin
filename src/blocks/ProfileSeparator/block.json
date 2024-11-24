@@ -22,10 +22,19 @@
 		}
 	},
 	"attributes": {
+		"height": {
+			"type": "string"
+		},
+		"width": {
+			"type": "string"
+		}
 	},
 	"ancestor": [ "govpack/profile-row-group" ],
-	"usesContext": ["govpack/profileId", "postType", "govpack/profileField"],
-	"blockHooks": {
-		"govpack/profile-field" : "after"
-	}
+	"usesContext": [
+		"govpack/profileId", 
+		"postType", 
+		"govpack/profileField", 
+		"govpack/separatorHeight",
+		"govpack/separatorMargin"
+	]
 }

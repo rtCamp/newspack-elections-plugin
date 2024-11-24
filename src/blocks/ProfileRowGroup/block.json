@@ -27,9 +27,20 @@
 		"showSeparator" : {
 			"type" : "boolean",
 			"default" : true
+		},
+		"separatorHeight": {
+			"type": "string",
+			"default": "1px"
+		},
+		"separatorMargin": {
+			"type": "object"
 		}
 	},
 	"ancestor": [ "govpack/profile-v2" ],
 	"usesContext": ["govpack/profileId", "postType"],
+	"providesContext": {
+		"govpack/separatorHeight" : "separatorHeight",
+		"govpack/separatorMargin" : "separatorMargin"
+	},
 	"allowedBlocks": ["govpack/profile-field", "govpack/profile-separator"]
 }
