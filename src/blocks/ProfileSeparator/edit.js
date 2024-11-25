@@ -13,11 +13,47 @@ import {
 	useBlockProps,
 	getColorClassName,
 	withColors,
+	useSettings,
 	__experimentalUseColorProps as useColorProps,
-	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles
+	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
+	getColorObjectByAttributeValues,
+	__experimentalUseMultipleOriginColorsAndGradients as useMultipleOriginColorsAndGradients,
 } from "@wordpress/block-editor"
 
+
+import {useMemo} from "@wordpress/element"
+
 import SpacerControls from './controls'
+
+const useAllColors = () => {
+
+	const [
+		userPalette,
+		themePalette,
+		defaultPalette,
+		userGradients,
+		themeGradients,
+		defaultGradients,
+	] = useSettings(
+		'color.palette.custom',
+		'color.palette.theme',
+		'color.palette.default',
+		'color.gradients.custom',
+		'color.gradients.theme',
+		'color.gradients.default'
+	);
+
+	const colors = useMemo(
+		() => [
+			...( userPalette || [] ),
+			...( themePalette || [] ),
+			...( defaultPalette || [] ),
+		],
+		[ userPalette, themePalette, defaultPalette ]
+	);
+
+	return colors
+}
 
 function SeperatorEdit( {attributes, setAttributes, context, ...props} ) {
 
@@ -26,26 +62,36 @@ function SeperatorEdit( {attributes, setAttributes, context, ...props} ) {
 		...blockProps
 	} = useBlockProps();
 
-	let styles = {...originalStyles}
+	const { 
+		separatorColor, 
+		setSeparatorColor,
+	} = props
 
-	//console.log("Seperator", blockProps, props, attributes, context)
 
-	//console.log(props.setSeparatorColor)
 	const { 
 		backgroundColor, 
 		opacity, 
 		style = {},
-		height : ownHeight = false
+		height : ownHeight = false,
+		
 	} = attributes;
 
-	const { 
-		'govpack/separatorStyle' : inheritedStyle = {}
+	let { 
+		'govpack/separatorStyle' : inheritedStyle = {},
+		'govpack/separatorColor' : inheritedSeperatorColor = {}
 	} = context;
 
+	
 	const { 
 		height : parentHeight = false
 	} = inheritedStyle;
 	
+
+	/**
+	 * Copy the Original Styles into a new variable so we can modify it safely
+	 */
+	let styles = {...originalStyles}
+
 	/**
 	 * Use the blocks height from its Attribute, fallback to parent if not set
 	 * This lets the block override the passed context
@@ -69,20 +115,37 @@ function SeperatorEdit( {attributes, setAttributes, context, ...props} ) {
 		}
 	}
 
-	const colorProps = useColorProps( attributes );
-	const currentColor = colorProps?.style?.backgroundColor;
-	const hasCustomColor = !! style?.color?.background;
-	const colorClass = getColorClassName( 'color', backgroundColor );
+	/**
+	 * Get a color from the Context and create a color object. Used to fallback if no own color is set
+	 */
+	
+	inheritedSeperatorColor = getColorObjectByAttributeValues(useAllColors(), inheritedSeperatorColor)
+
+
+	/**
+	 * We need to look at the value of color on the color object to see which of these is valid
+	 * Prefer the seperatorColor, ie the one which was chosen for this block. Fallback to the 
+	 * parent context shared color.
+	 */
+	let currentColor = {}
+	if( separatorColor?.color ){
+		currentColor = separatorColor
+	} else if( inheritedSeperatorColor?.color ) {
+		currentColor = inheritedSeperatorColor
+	}
+
+	const hasCustomColor = currentColor.slug === undefined ;
+	const colorClass = getColorClassName( 'color', currentColor.slug );
 
 
 	const className = clsx(
 		{
-			'has-text-color': backgroundColor || currentColor,
+			'has-text-color': backgroundColor || currentColor.slug ,
 			[ colorClass ]: colorClass,
 			'has-css-opacity': opacity === 'css',
 			'has-alpha-channel-opacity': opacity === 'alpha-channel',
 		},
-		colorProps.className
+		currentColor.class ?? false
 	);
 
 	
@@ -90,8 +153,8 @@ function SeperatorEdit( {attributes, setAttributes, context, ...props} ) {
 	if(hasCustomColor){
 		styles = {
 			...styles,
-			color: currentColor,
-			backgroundColor: currentColor
+			color: currentColor.color,
+			backgroundColor: currentColor.color
 		}
 	};
 
@@ -103,6 +166,8 @@ function SeperatorEdit( {attributes, setAttributes, context, ...props} ) {
 				height = {height}
 				setAttributes={setAttributes}
 				isResizing={false}
+				separatorColor={separatorColor}
+				setSeparatorColor = {setSeparatorColor}
 			/>
 			<HorizontalRule { ...useBlockProps({
 				className,
@@ -113,11 +178,11 @@ function SeperatorEdit( {attributes, setAttributes, context, ...props} ) {
 	)
 }
 
-const seperatorColorAttributes = {
+const separatorColorAttributes = {
 	separatorColor: 'separator-color',
 }
 
-const Edit = withColors( seperatorColorAttributes )( SeperatorEdit );
+const Edit = withColors( separatorColorAttributes )( SeperatorEdit );
 
 export {Edit}
 export default Edit

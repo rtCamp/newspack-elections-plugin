@@ -31,12 +31,20 @@
 		"separatorStyles" : {
 			"type": "object",
 			"default" : {}
+		},
+		"separatorColor" : {
+			"type": "string"
+		},
+		"separatorCustomColor" : {
+			"type": "string"
 		}
 	},
 	"ancestor": [ "govpack/profile-v2" ],
 	"usesContext": ["govpack/profileId", "postType"],
 	"providesContext": {
-		"govpack/separatorStyle" : "separatorStyles"
+		"govpack/separatorStyle" : "separatorStyles",
+		"govpack/separatorColor" : "separatorColor",
+		"govpack/separatorCustomColor" : "separatorCustomColor"
 	},
 	"allowedBlocks": ["govpack/profile-field", "govpack/profile-separator"]
 }

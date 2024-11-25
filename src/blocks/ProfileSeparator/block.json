@@ -13,7 +13,7 @@
 		"align-wide": true,
 		"aria-label": true,
 		"color" : {
-			"background" : true,
+			"background" : false,
 			"text": false
 		},
 		"shadow": true, 
@@ -27,6 +27,12 @@
 		},
 		"width": {
 			"type": "string"
+		},
+		"separatorColor" : {
+			"type" : "string"
+		},
+		"customSeparatorColor" : {
+			"type" : "string"
 		}
 	},
 	"ancestor": [ "govpack/profile-row-group" ],
@@ -36,6 +42,8 @@
 		"govpack/profileField", 
 		"govpack/separatorHeight",
 		"govpack/separatorMargin",
-		"govpack/separatorStyle"
+		"govpack/separatorStyle",
+		"govpack/separatorColor",
+		"govpack/separatorCustomColor"
 	]
 }

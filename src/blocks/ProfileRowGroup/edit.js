@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, useInnerBlocksProps, InnerBlocks, store as blockEditorStore, InspectorControls, __experimentalSpacingSizesControl as SpacingSizesControl} from "@wordpress/block-editor"
+import { useBlockProps, useInnerBlocksProps, InnerBlocks, store as blockEditorStore, InspectorControls, __experimentalSpacingSizesControl as SpacingSizesControl, withColors} from "@wordpress/block-editor"
 import {useSelect} from "@wordpress/data";
 
 import {
@@ -15,11 +15,18 @@ import {useState} from "@wordpress/element"
 
 import "./edit.scss"
 import DimensionInput from "./../../components/Controls/DimensionInput"
+import SeparatorColor from "./../../components/Controls/SeparatorColor"
+
 import { separator } from '@wordpress/icons';
 
-function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
+const GroupEdit = ( {attributes, setAttributes, context, clientId, ...props} ) => {
 
 	console.log("Group", attributes)
+
+	const {
+		separatorColor, 
+		setSeparatorColor
+	} = props
 	
 	const {
 		showSeparator = true,
@@ -63,7 +70,15 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	
 
     return (
-		<>
+		<>	
+			<InspectorControls group="color">
+				<SeparatorColor
+					colorValue = {separatorColor?.color}
+					onColorChange = { ( value ) => {
+						setSeparatorColor( value );
+					}}
+				/>
+			</InspectorControls>
 			<InspectorControls>
 				<Panel>
 					<PanelBody title={ __( 'Field Separators', 'govpack' ) }>
@@ -120,6 +135,12 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 		</>
 	)
 }
+
+const separatorColorAttributes = {
+	separatorColor: 'separator-color',
+}
+
+const Edit = withColors( separatorColorAttributes )( GroupEdit );
 
 export {Edit}
 export default Edit

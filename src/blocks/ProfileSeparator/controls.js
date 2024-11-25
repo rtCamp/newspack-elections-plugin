@@ -1,8 +1,10 @@
-import { InspectorControls } from "@wordpress/block-editor"
+import {  InspectorControls } from "@wordpress/block-editor"
+
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 import DimensionInput from "./../../components/Controls/DimensionInput"
+import SeparatorColor from "./../../components/Controls/SeparatorColor"
 
 export default function SpacerControls( {
 	setAttributes,
@@ -10,8 +12,19 @@ export default function SpacerControls( {
 	height,
 	width,
 	isResizing,
+	separatorColor,
+	setSeparatorColor
 } ) {
 	return (
+		<>
+		<InspectorControls group="color">
+			<SeparatorColor
+				colorValue = {separatorColor?.color}
+				onColorChange = { ( value ) => {
+					setSeparatorColor( value );
+				}}
+			/>
+		</InspectorControls>
 		<InspectorControls>
 			<PanelBody title={ __( 'Settings' ) }>
 				{ orientation === 'horizontal' && (
@@ -34,5 +47,6 @@ export default function SpacerControls( {
 				) }
 			</PanelBody>
 		</InspectorControls>
+		</>
 	);
 }
