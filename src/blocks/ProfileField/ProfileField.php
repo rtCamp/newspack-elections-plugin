@@ -67,21 +67,21 @@ class ProfileField extends \Govpack\Blocks\Profile\Profile {
 
 	public function variations(): array {
 
-		$types = $this->create_field_type_variations();
+		$types  = $this->create_field_type_variations();
 		$fields = $this->create_field_variations();
 
-		return array_merge($types, $fields);
+		return array_merge( $types, $fields );
 	}
 
-	public function create_field_variations() : array {
+	public function create_field_variations(): array {
 
 		$variations = [];
-		$fields = \Govpack\CPT\Profile::fields()->fields;
+		$fields     = \Govpack\CPT\Profile::fields()->fields;
 
-		foreach($fields as $field){
+		foreach ( $fields as $field ) {
 			$variation = [
-				'category' => "govpack-profile-fields",
-				'name'        => sprintf("profile-field-%s", $field->slug),
+				'category'    => 'govpack-profile-fields',
+				'name'        => sprintf( 'profile-field-%s', $field->slug ),
 				'title'       => $field->label,
 				'description' => sprintf(
 					/* translators: %s: taxonomy's label */
@@ -90,11 +90,12 @@ class ProfileField extends \Govpack\Blocks\Profile\Profile {
 				),
 				'attributes'  => [
 					'fieldType' => $field->type,
-					'meta_key' => $field->slug,
+					'meta_key'  => $field->slug,
 				],
 				'isActive'    => [ 'meta_key' ],
 				'scope'       => [ 'inserter', 'transform' ],
-				'icon' => $this->get_variation_icon($field->type)
+				'icon'        => $this->get_variation_icon( $field->type ),
+				
 			];
 
 			$variations[] = $variation;
@@ -105,40 +106,39 @@ class ProfileField extends \Govpack\Blocks\Profile\Profile {
 
 	public function get_icon_map() {
 		return [
-			"text" => "text",
-			"textarea" => "text",
-			"date" => "calendar",
-			"url" => "admin-links"
+			'text'     => 'text',
+			'textarea' => 'text',
+			'date'     => 'calendar',
+			'url'      => 'admin-links',
 		];
 	}
 
-	public function get_variation_icon($type){
+	public function get_variation_icon( $type ) {
 		$icon_map = $this->get_icon_map();
-		return $icon_map[$type];
+		return $icon_map[ $type ];
 	}
 
-	public function create_field_type_variations() : array {
-		$types = \Govpack\CPT\Profile::get_field_types();
+	public function create_field_type_variations(): array {
+		$types      = \Govpack\CPT\Profile::get_field_types();
 		$variations = [];
 
-	
-
-		foreach($types as $type){
+		foreach ( $types as $type ) {
 			$variation = [
-				'category' => "govpack-profile-fields",
-				'name'        => sprintf("profile-field-%s", $type),
-				'title'       => sprintf("Profile %s Field", ucfirst($type)),
+				'category'    => 'govpack-profile-fields',
+				'name'        => sprintf( 'profile-field-%s', $type->slug ),
+				'title'       => sprintf( 'Profile %s Field', ucfirst( $type->label ) ),
 				'description' => sprintf(
 					/* translators: %s: taxonomy's label */
 					__( 'Display a profile field of type: %s' ),
-					$type
+					$type->label
 				),
 				'attributes'  => [
-					'fieldType' => $type,
+					'fieldType' => $type->slug,
 				],
 				'isActive'    => [ 'fieldType' ],
 				'scope'       => [ 'inserter', 'transform' ],
-				'icon' => $this->get_variation_icon($type)
+				'icon'        => $type->variation_icon(),
+				'innerBlocks' => $type->get_variation_inner_blocks(),
 			];
 
 			$variations[] = $variation;

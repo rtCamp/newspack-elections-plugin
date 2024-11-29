@@ -15,7 +15,7 @@ import './view.scss';
 
 const { attributes, category } = metadata;
 
-registerBlockType( 'govpack/profile-legacy', {
+registerBlockType( 'govpack/profile', {
 	apiVersion: 2,
 	title: 'GovPack Profile',
     category,

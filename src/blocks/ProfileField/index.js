@@ -31,26 +31,7 @@ registerBlockType( metadata.name, {
     styles: [
 	],
 	edit : Edit,
-	save: Save,
-	/*
-	variations : [
-		{
-			name: 'profile-field-test',
-        	title: 'Profile Field (Text)',
-        	description: __( 'Embed a Profile Field as Text' ),
-        	attributes: { 
-				fieldType: 'text' 
-			},
-		},
-		{
-			name: 'profile-field-date',
-        	title: 'Profile Field (Date)',
-        	description: __( 'Embed a Profile Field as a Date' ),
-        	attributes: { 
-				fieldType: 'date' 
-			},
-		}
-	]*/
+	save: Save
 } );
 
 

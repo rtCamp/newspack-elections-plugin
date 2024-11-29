@@ -135,7 +135,7 @@ class Profile extends \Govpack\Abstracts\PostType {
 				( new ProfileField( 'endorsements', 'Endorsements', 'textarea' ) )
 					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
 
-				new ProfileField( 'contact_form_url', 'Contact Form URL', 'url' ),
+				new ProfileField( 'contact_form_url', 'Contact Form URL', 'link' ),
 				new ProfileField( 'date_assumed_office', 'Date Assumed Office', 'date' ),
 				new ProfileField( 'appointed_by', 'Appointed By' ),
 				new ProfileField( 'appointed_date', 'Appointed On', 'date' ),
@@ -163,14 +163,14 @@ class Profile extends \Govpack\Abstracts\PostType {
 				new ProfileField( 'fax_district', 'Capitol Fax Number' ),
 				new ProfileField( 'fax_campaign', 'Capitol Fax Number' ),
 
-				new ProfileField( 'website_personal', 'Personal Website URL' ),
-				new ProfileField( 'website_campaign', 'Campaign Website URL' ),
-				new ProfileField( 'website_district', 'District Website URL' ),
-				new ProfileField( 'website_capitol', 'Capitol Website URL' ),
-				new ProfileField( 'rss', 'RSS Feed URL' ),
+				new ProfileField( 'website_personal', 'Personal Website URL', 'link' ),
+				new ProfileField( 'website_campaign', 'Campaign Website URL', 'link' ),
+				new ProfileField( 'website_district', 'District Website URL', 'link' ),
+				new ProfileField( 'website_capitol', 'Capitol Website URL', 'link' ),
+				new ProfileField( 'rss', 'RSS Feed URL', 'link' ),
 
-				new ProfileField( 'linkedin', 'Linkedin URL' ),
-				new ProfileField( 'wikipedia', 'Wikipedia ID' ),
+				new ProfileField( 'linkedin', 'Linkedin URL', 'link' ),
+				new ProfileField( 'wikipedia', 'Wikipedia ID', 'link' ),
 				new ProfileField( 'google_entity_id', 'Google Entity ID' ),
 				new ProfileField( 'gab', 'Gab' ),
 				new ProfileField( 'rumble', 'Rumble' ),
@@ -207,7 +207,7 @@ class Profile extends \Govpack\Abstracts\PostType {
 		}
 	}
 
-	public static function get_field_types() : array {
+	public static function get_field_types(): array {
 		return self::$fields->get_types();
 	}
 	

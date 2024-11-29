@@ -12,7 +12,8 @@ import { useBlockProps, InspectorControls, useInnerBlocksProps, store as blockEd
 import { store as editorStore } from "@wordpress/editor"
 import { useSelect, useDispatch} from '@wordpress/data';
 import {useEffect} from "@wordpress/element"
-import { createBlock } from "@wordpress/blocks"
+import { createBlock, store as blocksStore } from "@wordpress/blocks"
+
 
 import {Panel, PanelBody, PanelRow, ToggleControl, SelectControl} from '@wordpress/components';
 import {getProfile, useProfileField, useProfileFields} from "./../../components/Profile"
@@ -81,6 +82,43 @@ const MetaInspectorControl = ({
 }
 
 
+function useConditionalTemplate(clientId){
+
+	const defaultTemplate = [
+		['govpack/profile-label', {}]
+	]
+	const { block, variation } = useSelect( (select) => {
+
+		const block = select(blockEditorStore).getBlock(clientId)
+		return {
+			block,
+			variation: select(blocksStore).getActiveBlockVariation(block.name, block.attributes),
+		}
+	} )
+
+	console.log("clientId", variation.innerBlocks)
+
+	return variation.innerBlocks ?? []
+	/*
+	return [
+		...defaultTemplate,
+		['core/paragraph', {
+			"placeholder" : " ", // Include the space here or we get the default "start typing or select a block" when the meta data has no content
+			"metadata": {
+				"bindings":{
+					"content":{
+						"source":"core/post-meta",
+						"args":{
+							"key": "first_name"
+						}
+					}
+				}
+			}
+		}]
+	]
+	*/
+}
+
 function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 
 	/**
@@ -111,22 +149,7 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	 */
 	const blockProps = useBlockProps();
 	const {children, ...innerBlocksProps } = useInnerBlocksProps(blockProps, {
-		template : [
-			['govpack/profile-label', {}],
-			['core/paragraph', {
-				"placeholder" : " ", // Include the space here or we get the default "start typing or select a block" when the meta data has no content
-				"metadata": {
-					"bindings":{
-						"content":{
-							"source":"core/post-meta",
-							"args":{
-								"key": meta_key
-							}
-						}
-					}
-				}
-			}]
-		],
+		template : useConditionalTemplate(clientId),
 		renderAppender : false,
 		templateLock: "all"
 	} );
@@ -177,6 +200,7 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 
 	}, [meta_key])
 
+	/*
 	useEffect( () => {
 		if(!wasBlockJustInserted){
 			return;
@@ -187,7 +211,7 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 		insertBlock(block, insertAt, parentBlockClientId )
 
 	}, [wasBlockJustInserted])
-
+	*/
 	
 	const field = useProfileField(meta_key)
 

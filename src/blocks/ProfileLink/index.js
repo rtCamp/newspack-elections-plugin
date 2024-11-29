@@ -1,9 +1,10 @@
 import { registerBlockType } from '@wordpress/blocks';
-
+import { typography as icon } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
  import Edit from './edit';
+ import Save from './save';
  import metadata from './block.json';
 
  /**
@@ -13,22 +14,17 @@ import './view.scss';
 
 
 
-const { attributes, category } = metadata;
+const { attributes, category, title } = metadata;
 
-registerBlockType( 'govpack/profile-legacy', {
-	apiVersion: 2,
-	title: 'GovPack Profile',
+registerBlockType( metadata.name, {
+	apiVersion: 3,
+	title,
     category,
     attributes,
-	icon: 'groups',
+	icon,
 	keywords: [ 'govpack' ],
     styles: [
-		{ name: 'default', label:  'Default', isDefault: true },
-        { name: 'boxed', label:  'Boxed' }
 	],
 	edit : Edit,
-	save() {
-		return null;
-	},
-
+	save: Save,
 } );
