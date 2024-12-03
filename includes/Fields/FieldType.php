@@ -2,7 +2,10 @@
 
 namespace Govpack\Fields;
 
-abstract class FieldType {
+use Govpack\Interfaces\Collectable as CollectableInterface;
+use Govpack\Abstracts\Collectable;
+
+abstract class FieldType extends Collectable implements CollectableInterface {
 
 	/**
 	 * Type Slug
@@ -27,4 +30,8 @@ abstract class FieldType {
 	}
 
 	abstract public function variation_icon(): string;
+
+	public function value($value){
+		return $value;
+	}
 }

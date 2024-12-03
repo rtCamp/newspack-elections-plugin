@@ -1,8 +1,8 @@
 <?php
 
-namespace Govpack;
+namespace Govpack\Fields;
 
-class ProfileTaxonomyField extends ProfileField {
+class TaxonomyField extends Field {
 
 
 	/**

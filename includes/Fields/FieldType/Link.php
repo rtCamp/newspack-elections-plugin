@@ -29,4 +29,8 @@ class Link extends \Govpack\Fields\FieldType {
 	public function variation_icon(): string {
 		return 'admin-links';
 	}
+
+	public function value($value) {
+		return $value;
+	}
 }

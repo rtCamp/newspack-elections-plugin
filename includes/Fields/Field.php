@@ -1,10 +1,12 @@
 <?php
 
-namespace Govpack;
+namespace Govpack\Fields;
 
-class ProfileField {
+use Govpack\Fields\FieldType;
+use Govpack\Fields\FieldTypes;
+use Govpack\CPT\Model;
 
-
+class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interfaces\Collectable {
 
 	/**
 	 * Field Slug
@@ -25,7 +27,7 @@ class ProfileField {
 	 * 
 	 * Type of field. Used for determining the input view and what blocks can output this field.
 	 */
-	public string $type = 'text';
+	public FieldType $type;
 
 	/**
 	 * Field Group
@@ -65,11 +67,26 @@ class ProfileField {
 	/**
 	 * Construct the profile field
 	 */
-	public function __construct( string $slug, string $label, string $type = 'text' ) {
+	public function __construct( string $slug, string $label, FieldType|string|null $type = null ) {
 		$this->slug     = $slug;
 		$this->label    = $label;
-		$this->type     = $type;
 		$this->meta_key = $this->slug;
+
+		$this->set_type($type);
+	}
+
+	public function set_type(FieldType|string|null $type){
+
+		if( is_a($type, "\Govpack\Field\FieldType")){
+			$this->type = $type;
+		} elseif( is_string($type)){
+			$this->type = FieldTypes::instance()->get($type);
+		}
+
+		if(!isset($this->type)){
+			$this->type = FieldTypes::instance()->get("text");
+		}
+
 	}
 
 	public function group( string $group ): self {
@@ -96,5 +113,18 @@ class ProfileField {
 		}
 
 		return $val;
+	}
+
+	public function value() {
+		return $this->type->value("foo");
+	}
+
+	public function get_model_value(Model $model) {
+
+		if($this->source === "meta"){
+			return $model->post->__get($this->meta_key);
+		}
+		
+		return "taxonomy";
 	}
 }

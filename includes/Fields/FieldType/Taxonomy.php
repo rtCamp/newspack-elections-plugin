@@ -2,7 +2,7 @@
 
 namespace Govpack\Fields\FieldType;
 
-class Text extends \Govpack\Fields\FieldType {
+class Taxonomy extends \Govpack\Fields\FieldType {
 
 	/**
 	 * Type Slug
@@ -27,5 +27,7 @@ class Text extends \Govpack\Fields\FieldType {
 		return 'text';
 	}
 
-
+	public function get_value_for_model(){
+		
+	}
 }

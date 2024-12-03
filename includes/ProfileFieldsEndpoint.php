@@ -31,9 +31,11 @@ class ProfileFieldsEndpoint extends \Govpack\Abstracts\RestEndpoint {
 	}
 
 	public function callback( \WP_REST_Request $request ): \WP_REST_Response {	
+
 		return rest_ensure_response( array_map(function($item){
 			return array_merge($item, [
-				"id" => $item['slug']
+				"id" => $item['slug'],
+				"type" => $item["type"]->slug
 			]);
 		}, CPT\Profile::fields()->to_array() ) );
 	}

@@ -1,0 +1,15 @@
+<?php
+
+namespace Govpack\Interfaces;
+
+interface Collection {
+
+	public function get(string $item) : Collectable|bool;
+
+	public function register(Collectable $item);
+
+	public function exists(string $item);
+
+	public function all();
+
+}

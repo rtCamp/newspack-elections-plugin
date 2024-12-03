@@ -7,16 +7,21 @@
 
 namespace Govpack\CPT;
 
+
 use Govpack\ProfileFieldsEndpoint;
-use Govpack\ProfileField;
-use Govpack\ProfileTaxonomyField;
+
+
 use Govpack\RestField;
 use Govpack\RestRoute;
 use Govpack\Abstracts\Rest_Endpoint;
-
-
 use Govpack\Capabilities;
-use Govpack\ProfileFieldsManager;
+
+
+use Govpack\Fields\FieldTypes;
+use Govpack\Fields\FieldManager;
+use Govpack\Fields\Field;
+use Govpack\Fields\TaxonomyField;
+
 use Govpack\ProfileLinks;
 use Govpack\ProfileLinkServices;
 use WP_Screen;
@@ -42,7 +47,12 @@ class Profile extends \Govpack\Abstracts\PostType {
 	/**
 	 * Fields used for the profile
 	 */
-	public static ProfileFieldsManager $fields;
+	public static FieldManager $fields;
+
+	/**
+	 * Fields used for the profile
+	 */
+	public static FieldTypes $field_types;
 
 	/**
 	 * Groups in which fields may appear;
@@ -90,7 +100,6 @@ class Profile extends \Govpack\Abstracts\PostType {
 	public static function fields() {
 		if ( empty( self::$fields ) ) {
 			self::register_profile_fields();
-
 		}
 
 		return self::$fields;
@@ -98,97 +107,99 @@ class Profile extends \Govpack\Abstracts\PostType {
 
 	public static function register_profile_fields() {
 		
-		self::$fields = new ProfileFieldsManager();
+		self::$field_types = new FieldTypes();
+		self::$fields = new FieldManager(self::$field_types);
+		
 
-		self::$fields->add_fields(
+		self::$fields->register_fields(
 			[
-				( new ProfileField( 'name', 'Name' ) )
-					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
-				( new ProfileField( 'name_prefix', 'Prefix' ) )
-					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
-				( new ProfileField( 'name_first', 'First Name' ) )
-					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
-				( new ProfileField( 'name_middle', 'Middle Name(s)' ) )
-					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
-				( new ProfileField( 'name_last', 'Last Name' ) )
-					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
-				( new ProfileField( 'name_suffix', 'Suffix' ) )
-					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
-				( new ProfileField( 'nickname', 'Nickname' ) )
-					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
-				( new ProfileField( 'occupation', 'Occupation' ) )
-					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
-				( new ProfileField( 'education', 'Education' ) )
-					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
-				( new ProfileField( 'gender', 'Gender' ) )
-					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
-				( new ProfileField( 'race', 'Race' ) )
-					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
-				( new ProfileField( 'ethnicity', 'Ethnicity' ) )
-					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
-				( new ProfileField( 'date_of_birth', 'Date of Birth', 'date' ) )
-					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
-				( new ProfileField( 'date_of_death', 'Date of Death', 'date' ) )
-					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
-				( new ProfileField( 'district', 'District' ) )
-					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
-				( new ProfileField( 'endorsements', 'Endorsements', 'textarea' ) )
-					->group( ProfileFieldsManager::GROUPS['ABOUT'] ),
+				( new Field( 'name', 'Name' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new Field( 'name_prefix', 'Prefix' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new Field( 'name_first', 'First Name' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new Field( 'name_middle', 'Middle Name(s)' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new Field( 'name_last', 'Last Name' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new Field( 'name_suffix', 'Suffix' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new Field( 'nickname', 'Nickname' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new Field( 'occupation', 'Occupation' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new Field( 'education', 'Education' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new Field( 'gender', 'Gender' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new Field( 'race', 'Race' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new Field( 'ethnicity', 'Ethnicity' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new Field( 'date_of_birth', 'Date of Birth', 'date') )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new Field( 'date_of_death', 'Date of Death', 'date') )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new Field( 'district', 'District' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new Field( 'endorsements', 'Endorsements') )
+					->group( FieldManager::GROUPS['ABOUT'] ),
 
-				new ProfileField( 'contact_form_url', 'Contact Form URL', 'link' ),
-				new ProfileField( 'date_assumed_office', 'Date Assumed Office', 'date' ),
-				new ProfileField( 'appointed_by', 'Appointed By' ),
-				new ProfileField( 'appointed_date', 'Appointed On', 'date' ),
-				new ProfileField( 'confirmed_date', 'Confirmed On', 'date' ),
-				new ProfileField( 'term_end_date', 'Term Ended/Ends On', 'date' ),
-				new ProfileField( 'congress_year', 'Congressional Year' ),
+				new Field( 'contact_form_url', 'Contact Form URL', 'link' ),
+				new Field( 'date_assumed_office', 'Date Assumed Office', 'date'),
+				new Field( 'appointed_by', 'Appointed By', 'date' ),
+				new Field( 'appointed_date', 'Appointed On', 'date'),
+				new Field( 'confirmed_date', 'Confirmed On', 'date'),
+				new Field( 'term_end_date', 'Term Ended/Ends On', 'date'),
+				new Field( 'congress_year', 'Congressional Year', 'date' ),
 
-				new ProfileField( 'email_official', 'Official Email Address' ),
-				new ProfileField( 'email_legislative', 'Legislative Email Address' ),
-				new ProfileField( 'email_other', 'Other Email Address' ),
+				new Field( 'email_official', 'Official Email Address' ),
+				new Field( 'email_legislative', 'Legislative Email Address' ),
+				new Field( 'email_other', 'Other Email Address' ),
 
-				new ProfileField( 'email_capitol', 'Capitol Email Address' ),
-				new ProfileField( 'email_district', 'District Email Address' ),
-				new ProfileField( 'email_campaign', 'Campaign Email Address' ),
+				new Field( 'email_capitol', 'Capitol Email Address' ),
+				new Field( 'email_district', 'District Email Address' ),
+				new Field( 'email_campaign', 'Campaign Email Address' ),
 			
-				new ProfileField( 'address_capitol', 'Capitol Address' ),
-				new ProfileField( 'address_district', 'District Address' ),
-				new ProfileField( 'address_campaign', 'Campaign Address' ),
+				new Field( 'address_capitol', 'Capitol Address' ),
+				new Field( 'address_district', 'District Address' ),
+				new Field( 'address_campaign', 'Campaign Address' ),
 
-				new ProfileField( 'phone_capitol', 'Capitol Phone Number' ),
-				new ProfileField( 'phone_district', 'District Phone Number' ),
-				new ProfileField( 'phone_campaign', 'Campaign Phone Number' ),
+				new Field( 'phone_capitol', 'Capitol Phone Number' ),
+				new Field( 'phone_district', 'District Phone Number' ),
+				new Field( 'phone_campaign', 'Campaign Phone Number' ),
 
-				new ProfileField( 'fax_capitol', 'Capitol Fax Number' ),
-				new ProfileField( 'fax_district', 'Capitol Fax Number' ),
-				new ProfileField( 'fax_campaign', 'Capitol Fax Number' ),
+				new Field( 'fax_capitol', 'Capitol Fax Number' ),
+				new Field( 'fax_district', 'Capitol Fax Number' ),
+				new Field( 'fax_campaign', 'Capitol Fax Number' ),
 
-				new ProfileField( 'website_personal', 'Personal Website URL', 'link' ),
-				new ProfileField( 'website_campaign', 'Campaign Website URL', 'link' ),
-				new ProfileField( 'website_district', 'District Website URL', 'link' ),
-				new ProfileField( 'website_capitol', 'Capitol Website URL', 'link' ),
-				new ProfileField( 'rss', 'RSS Feed URL', 'link' ),
+				new Field( 'website_personal', 'Personal Website URL', 'link' ),
+				new Field( 'website_campaign', 'Campaign Website URL', 'link' ),
+				new Field( 'website_district', 'District Website URL', 'link' ),
+				new Field( 'website_capitol', 'Capitol Website URL', 'link' ),
+				new Field( 'rss', 'RSS Feed URL', 'link' ),
 
-				new ProfileField( 'linkedin', 'Linkedin URL', 'link' ),
-				new ProfileField( 'wikipedia', 'Wikipedia ID', 'link' ),
-				new ProfileField( 'google_entity_id', 'Google Entity ID' ),
-				new ProfileField( 'gab', 'Gab' ),
-				new ProfileField( 'rumble', 'Rumble' ),
+				new Field( 'linkedin', 'Linkedin URL', 'link' ),
+				new Field( 'wikipedia', 'Wikipedia ID' ),
+				new Field( 'google_entity_id', 'Google Entity ID' ),
+				new Field( 'gab', 'Gab', 'link' ),
+				new Field( 'rumble', 'Rumble', 'link' ),
 
-				new ProfileField( 'opensecrets_id', 'Open Secrets' ),
-				new ProfileField( 'balletpedia_id', 'BallotPedia' ),
-				new ProfileField( 'openstates_id', 'OpenStates' ),
-				new ProfileField( 'fec_id', 'FEC ID' ),
-				new ProfileField( 'govtrack_id', 'GovTrack ID' ),
-				new ProfileField( 'votesmart_id', 'VoteSmart ID' ),
-				new ProfileField( 'usio_id', 'BioGuide' ),
-				new ProfileField( 'icpsr_id', 'Voteview' ),
+				new Field( 'opensecrets_id', 'Open Secrets' ),
+				new Field( 'balletpedia_id', 'BallotPedia' ),
+				new Field( 'openstates_id', 'OpenStates' ),
+				new Field( 'fec_id', 'FEC ID' ),
+				new Field( 'govtrack_id', 'GovTrack ID' ),
+				new Field( 'votesmart_id', 'VoteSmart ID' ),
+				new Field( 'usio_id', 'BioGuide' ),
+				new Field( 'icpsr_id', 'Voteview' ),
 
-				new ProfileTaxonomyField( 'party', 'Party', \Govpack\Tax\Party::TAX_SLUG ),
-				new ProfileTaxonomyField( 'state', 'State', \Govpack\Tax\State::TAX_SLUG ),
-				new ProfileTaxonomyField( 'legislative_body', 'Legislative Body', \Govpack\Tax\LegislativeBody::TAX_SLUG ),
-				new ProfileTaxonomyField( 'position', 'Office Title', \Govpack\Tax\OfficeHolderTitle::TAX_SLUG ),
-				new ProfileTaxonomyField( 'status', 'Office Status', \Govpack\Tax\OfficeHolderStatus::TAX_SLUG ),
+				new TaxonomyField( 'party', 'Party', \Govpack\Tax\Party::TAX_SLUG ),
+				new TaxonomyField( 'state', 'State', \Govpack\Tax\State::TAX_SLUG ),
+				new TaxonomyField( 'legislative_body', 'Legislative Body', \Govpack\Tax\LegislativeBody::TAX_SLUG ),
+				new TaxonomyField( 'position', 'Office Title', \Govpack\Tax\OfficeHolderTitle::TAX_SLUG ),
+				new TaxonomyField( 'status', 'Office Status', \Govpack\Tax\OfficeHolderStatus::TAX_SLUG ),
 
 			]
 		);
@@ -202,7 +213,7 @@ class Profile extends \Govpack\Abstracts\PostType {
 				$slug  = sprintf( '%s_%s', $group, $key );
 				$label = sprintf( '%s %s', ucfirst( $key ), ucfirst( $group ) );
 
-				self::$fields->add( new ProfileField( $slug, $label ) );
+				self::$fields->register( new Field( $slug, $label ) );
 			}
 		}
 	}
@@ -289,6 +300,36 @@ class Profile extends \Govpack\Abstracts\PostType {
 				],
 			] 
 		);
+
+		register_rest_field(
+			self::CPT_SLUG,
+			'profile',
+			[
+				'get_callback'    => function ( $request ) {
+
+					$model = Model::get($request["id"]);
+					return $model->data();
+				},
+				'update_callback' => false,
+				'schema'          => [
+					'description' => 'Gets the computed profile model',
+					'type'        => 'array',
+					
+					'context'     => [ 'edit', 'view' ],
+					'readonly'    => true,
+				],
+			] 
+		);
+	}
+
+	public static function populate_values() : array {
+
+		$data = [];
+		foreach(self::$fields->all() as $field){
+			$data[$field->slug()] = $field->value();
+		}
+
+		return $data;
 	}
 
 	public static function register_rest_endpoint() {

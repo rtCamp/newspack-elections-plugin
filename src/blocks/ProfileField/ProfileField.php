@@ -76,9 +76,8 @@ class ProfileField extends \Govpack\Blocks\Profile\Profile {
 	public function create_field_variations(): array {
 
 		$variations = [];
-		$fields     = \Govpack\CPT\Profile::fields()->fields;
-
-		foreach ( $fields as $field ) {
+		
+		foreach ( \Govpack\CPT\Profile::fields()->all() as $field ) {
 			$variation = [
 				'category'    => 'govpack-profile-fields',
 				'name'        => sprintf( 'profile-field-%s', $field->slug ),
@@ -89,13 +88,12 @@ class ProfileField extends \Govpack\Blocks\Profile\Profile {
 					$field->label
 				),
 				'attributes'  => [
-					'fieldType' => $field->type,
+					'fieldType' => $field->type->slug,
 					'meta_key'  => $field->slug,
 				],
 				'isActive'    => [ 'meta_key' ],
 				'scope'       => [ 'inserter', 'transform' ],
-				'icon'        => $this->get_variation_icon( $field->type ),
-				
+				'icon'        => $field->type->variation_icon(),
 			];
 
 			$variations[] = $variation;
