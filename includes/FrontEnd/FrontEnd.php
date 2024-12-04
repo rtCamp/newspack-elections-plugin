@@ -122,6 +122,6 @@ class FrontEnd {
 			return $the_content;
 		}
 	
-		return \Govpack\CPT\Profile::default_profile_content();
+		return \Govpack\Profile\CPT::default_profile_content();
 	}
 }

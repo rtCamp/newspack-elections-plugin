@@ -4,7 +4,7 @@ namespace Govpack\Fields;
 
 use Govpack\Fields\FieldType;
 use Govpack\Fields\FieldTypes;
-use Govpack\CPT\Model;
+use Govpack\Profile\Profile;
 
 class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interfaces\Collectable {
 
@@ -72,21 +72,20 @@ class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interface
 		$this->label    = $label;
 		$this->meta_key = $this->slug;
 
-		$this->set_type($type);
+		$this->set_type( $type );
 	}
 
-	public function set_type(FieldType|string|null $type){
+	public function set_type( FieldType|string|null $type ) {
 
-		if( is_a($type, "\Govpack\Field\FieldType")){
+		if ( is_a( $type, '\Govpack\Field\FieldType' ) ) {
 			$this->type = $type;
-		} elseif( is_string($type)){
-			$this->type = FieldTypes::instance()->get($type);
+		} elseif ( is_string( $type ) ) {
+			$this->type = FieldTypes::instance()->get( $type );
 		}
 
-		if(!isset($this->type)){
-			$this->type = FieldTypes::instance()->get("text");
+		if ( ! isset( $this->type ) ) {
+			$this->type = FieldTypes::instance()->get( 'text' );
 		}
-
 	}
 
 	public function group( string $group ): self {
@@ -115,16 +114,21 @@ class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interface
 		return $val;
 	}
 
-	public function value() {
-		return $this->type->value("foo");
+	
+	public function format($raw_value){
+		return $raw_value;
 	}
 
-	public function get_model_value(Model $model) {
+	public function raw( Profile $model ) {
 
-		if($this->source === "meta"){
-			return $model->post->__get($this->meta_key);
+		if ( $this->source === 'meta' ) {
+			return $model->post->__get( $this->meta_key );
 		}
 		
-		return "taxonomy";
+		return 'taxonomy';
+	}
+
+	public function value( Profile $model ) {
+		return $this->format($this->raw($model));
 	}
 }

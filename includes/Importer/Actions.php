@@ -8,7 +8,7 @@
 namespace Govpack\Importer;
 
 use Exception;
-use Govpack\CPT\Profile;
+use Govpack\Profile\CPT as Profile;
 use Govpack\Logger;
 
 /**

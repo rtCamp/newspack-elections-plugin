@@ -68,7 +68,7 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
 
-		$this->profile = \Govpack\CPT\Profile::get_data( $attributes['profileId'] );
+		$this->profile = \Govpack\Profile\CPT::get_data( $attributes['profileId'] );
 	
 		if ( ! $this->profile ) {
 			return;

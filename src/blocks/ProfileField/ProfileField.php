@@ -77,7 +77,7 @@ class ProfileField extends \Govpack\Blocks\Profile\Profile {
 
 		$variations = [];
 		
-		foreach ( \Govpack\CPT\Profile::fields()->all() as $field ) {
+		foreach ( \Govpack\Profile\CPT::fields()->all() as $field ) {
 			$variation = [
 				'category'    => 'govpack-profile-fields',
 				'name'        => sprintf( 'profile-field-%s', $field->slug ),
@@ -117,7 +117,7 @@ class ProfileField extends \Govpack\Blocks\Profile\Profile {
 	}
 
 	public function create_field_type_variations(): array {
-		$types      = \Govpack\CPT\Profile::get_field_types();
+		$types      = \Govpack\Profile\CPT::get_field_types();
 		$variations = [];
 
 		foreach ( $types as $type ) {

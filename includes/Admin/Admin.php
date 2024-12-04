@@ -8,7 +8,7 @@
 namespace Govpack\Admin;
 
 use Govpack\Capabilities;
-use Govpack\CPT\Profile;
+use Govpack\Profile\CPT as Profile;
 use Govpack\Govpack;
 
 use Exception;

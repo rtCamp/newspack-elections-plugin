@@ -56,8 +56,8 @@ class TemplateLoader extends \Govpack_Vendor_Gamajo_Template_Loader {
 			return $template;
 		}
 
-		if ( is_singular( \Govpack\CPT\Profile::CPT_SLUG ) ) {
-			return $this->locate_template( \Govpack\CPT\Profile::TEMPLATE_NAME );
+		if ( is_singular( \Govpack\Profile\CPT::CPT_SLUG ) ) {
+			return $this->locate_template( \Govpack\Profile\CPT::TEMPLATE_NAME );
 		}
 
 		return $template;

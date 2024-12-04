@@ -5,8 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\CPT;
-
+namespace Govpack\Profile;
 
 use Govpack\ProfileFieldsEndpoint;
 
@@ -20,6 +19,7 @@ use Govpack\Capabilities;
 use Govpack\Fields\FieldTypes;
 use Govpack\Fields\FieldManager;
 use Govpack\Fields\Field;
+use Govpack\Fields\LinkField;
 use Govpack\Fields\TaxonomyField;
 
 use Govpack\ProfileLinks;
@@ -30,7 +30,7 @@ use WP_Post_Type;
 /**
  * Register and handle the "Profile" Custom Post Type
  */
-class Profile extends \Govpack\Abstracts\PostType {
+class CPT extends \Govpack\Abstracts\PostType {
 
 	use \Govpack\Instance;
 
@@ -108,7 +108,7 @@ class Profile extends \Govpack\Abstracts\PostType {
 	public static function register_profile_fields() {
 		
 		self::$field_types = new FieldTypes();
-		self::$fields = new FieldManager(self::$field_types);
+		self::$fields      = new FieldManager( self::$field_types );
 		
 
 		self::$fields->register_fields(
@@ -137,21 +137,21 @@ class Profile extends \Govpack\Abstracts\PostType {
 					->group( FieldManager::GROUPS['ABOUT'] ),
 				( new Field( 'ethnicity', 'Ethnicity' ) )
 					->group( FieldManager::GROUPS['ABOUT'] ),
-				( new Field( 'date_of_birth', 'Date of Birth', 'date') )
+				( new Field( 'date_of_birth', 'Date of Birth', 'date' ) )
 					->group( FieldManager::GROUPS['ABOUT'] ),
-				( new Field( 'date_of_death', 'Date of Death', 'date') )
+				( new Field( 'date_of_death', 'Date of Death', 'date' ) )
 					->group( FieldManager::GROUPS['ABOUT'] ),
 				( new Field( 'district', 'District' ) )
 					->group( FieldManager::GROUPS['ABOUT'] ),
-				( new Field( 'endorsements', 'Endorsements') )
+				( new Field( 'endorsements', 'Endorsements' ) )
 					->group( FieldManager::GROUPS['ABOUT'] ),
 
-				new Field( 'contact_form_url', 'Contact Form URL', 'link' ),
-				new Field( 'date_assumed_office', 'Date Assumed Office', 'date'),
+				( new LinkField( 'contact_form_url', 'Contact Form URL', 'link' ) )->link_text( 'Contact Form' ),
+				new Field( 'date_assumed_office', 'Date Assumed Office', 'date' ),
 				new Field( 'appointed_by', 'Appointed By', 'date' ),
-				new Field( 'appointed_date', 'Appointed On', 'date'),
-				new Field( 'confirmed_date', 'Confirmed On', 'date'),
-				new Field( 'term_end_date', 'Term Ended/Ends On', 'date'),
+				new Field( 'appointed_date', 'Appointed On', 'date' ),
+				new Field( 'confirmed_date', 'Confirmed On', 'date' ),
+				new Field( 'term_end_date', 'Term Ended/Ends On', 'date' ),
 				new Field( 'congress_year', 'Congressional Year', 'date' ),
 
 				new Field( 'email_official', 'Official Email Address' ),
@@ -174,17 +174,17 @@ class Profile extends \Govpack\Abstracts\PostType {
 				new Field( 'fax_district', 'Capitol Fax Number' ),
 				new Field( 'fax_campaign', 'Capitol Fax Number' ),
 
-				new Field( 'website_personal', 'Personal Website URL', 'link' ),
-				new Field( 'website_campaign', 'Campaign Website URL', 'link' ),
-				new Field( 'website_district', 'District Website URL', 'link' ),
-				new Field( 'website_capitol', 'Capitol Website URL', 'link' ),
-				new Field( 'rss', 'RSS Feed URL', 'link' ),
-
-				new Field( 'linkedin', 'Linkedin URL', 'link' ),
+				(new LinkField( 'website_personal', 'Personal Website URL', 'link' ))->link_text("Personal Website"),
+				(new LinkField( 'website_campaign', 'Campaign Website URL', 'link' ))->link_text("Campaign Website"),
+				(new LinkField( 'website_district', 'District Website URL', 'link' ))->link_text("District Website"),
+				(new LinkField( 'website_capitol', 'Capitol Website URL', 'link' ))->link_text("Capitol Website"),
+				(new LinkField( 'rss', 'RSS Feed URL', 'link' ))->link_text("RSS Feed"),
+				(new LinkField( 'linkedin', 'Linkedin URL', 'link' ))->link_text("LinkedIn Profile"),
+				
 				new Field( 'wikipedia', 'Wikipedia ID' ),
 				new Field( 'google_entity_id', 'Google Entity ID' ),
-				new Field( 'gab', 'Gab', 'link' ),
-				new Field( 'rumble', 'Rumble', 'link' ),
+				new LinkField( 'gab', 'Gab', 'link' ),
+				new LinkField( 'rumble', 'Rumble', 'link' ),
 
 				new Field( 'opensecrets_id', 'Open Secrets' ),
 				new Field( 'balletpedia_id', 'BallotPedia' ),
@@ -307,8 +307,8 @@ class Profile extends \Govpack\Abstracts\PostType {
 			[
 				'get_callback'    => function ( $request ) {
 
-					$model = Model::get($request["id"]);
-					return $model->data();
+					$model = Profile::get( $request['id'] );
+					return $model->values();
 				},
 				'update_callback' => false,
 				'schema'          => [
@@ -322,11 +322,11 @@ class Profile extends \Govpack\Abstracts\PostType {
 		);
 	}
 
-	public static function populate_values() : array {
+	public static function populate_values(): array {
 
 		$data = [];
-		foreach(self::$fields->all() as $field){
-			$data[$field->slug()] = $field->value();
+		foreach ( self::$fields->all() as $field ) {
+			$data[ $field->slug() ] = $field->value();
 		}
 
 		return $data;

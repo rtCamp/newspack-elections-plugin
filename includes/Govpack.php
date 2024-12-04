@@ -74,7 +74,7 @@ class Govpack {
 	 * Causes rewrite rules to be regenerated so permalinks will work
 	 */
 	public static function activation(): void {
-		\Govpack\CPT\Profile::register_post_type();
+		\Govpack\Profile\CPT::register_post_type();
 		flush_rewrite_rules( false ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.flush_rewrite_rules_flush_rewrite_rules
 
 		// get capabilities setup first.
@@ -99,7 +99,7 @@ class Govpack {
 	 */
 	public static function post_types(): void {
 		// Custom Post Types.
-		\Govpack\CPT\Profile::init();
+		\Govpack\Profile\CPT::init();
 	}
 
 	/**

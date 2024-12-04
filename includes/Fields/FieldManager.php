@@ -2,8 +2,6 @@
 
 namespace Govpack\Fields;
 
-
-
 class FieldManager extends \Govpack\Abstracts\Collection implements \Govpack\Interfaces\Collection {
 
 	/**
@@ -20,10 +18,13 @@ class FieldManager extends \Govpack\Abstracts\Collection implements \Govpack\Int
 	 */
 	public FieldTypes $types;
 
+	public function get( string $item ): Field {
+		return parent::get( $item );
+	}
 
-	public function __construct(FieldTypes $types) {
+	public function __construct( FieldTypes $types ) {
 		$this->types = $types;
-	}	
+	}   
 
 	
 	public function register_fields( Field|array $fields_input ) {

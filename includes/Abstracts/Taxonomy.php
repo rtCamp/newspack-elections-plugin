@@ -7,7 +7,7 @@
 
 namespace Govpack\Abstracts;
 
-use Govpack\CPT\Profile;
+use Govpack\Profile\CPT;
 
 /**
  * Register and handle the "Profile" Custom Post Type
@@ -29,6 +29,6 @@ abstract class Taxonomy {
 	 * @return array
 	 */
 	protected static function get_taxonomy_post_types(): array {
-		return [ Profile::CPT_SLUG ];
+		return [ CPT::CPT_SLUG ];
 	}
 }

@@ -69,7 +69,7 @@ class Profile extends \Govpack\Abstracts\Block {
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
 
 	
-		$this->profile = \Govpack\CPT\Profile::get_data( $attributes['profileId'] );
+		$this->profile = \Govpack\Profile\CPT::get_data( $attributes['profileId'] );
 	
 		if ( ! $this->profile ) {
 			return;

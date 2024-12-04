@@ -7,7 +7,7 @@
 
 namespace Govpack\Admin\Pages;
 
-use Govpack\CPT\Profile;
+use Govpack\Profile\CPT as Profile;
 
 /**
  * GovPack Class to Handle Import
