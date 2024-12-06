@@ -1,7 +1,11 @@
-import { useProfileFields } from "./use-profile-fields";
+import { getProfileFields } from "./profile-fields";
 
 export const useProfileField = (fieldName = null) => {
-	const fields = useProfileFields();
+	return getProfileField(fieldName);
+};
+
+export const getProfileField = (fieldName = null) => {
+	const fields = getProfileFields();
 
 	if(fields.length === 0){
 		return new Object()

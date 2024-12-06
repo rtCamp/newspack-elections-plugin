@@ -37,21 +37,21 @@ class LinkField extends Field {
 		return $this;
 	}
 
-	public function format($raw_value){
+	public function format( $raw_value ) {
 
-		if(!$this->is_value_valid($raw_value)){
+		if ( ! $this->is_value_valid( $raw_value ) ) {
 			return [];
 		}
 		
 		return [
-			"url" => $raw_value,
-			"linkText" => $this->link_text
+			'url'      => $raw_value,
+			'linkText' => $this->link_text ?? $raw_value,
 		];
 	}
 
-	public function is_value_valid($raw_value){
+	public function is_value_valid( $raw_value ) {
 
-		if($raw_value === ""){
+		if ( $raw_value === '' ) {
 			return false;
 		}
 

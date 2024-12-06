@@ -38,6 +38,7 @@ const MetaInspectorControl = ({
 
 	const fields = useProfileFields(fieldType)
 
+
 	return(
 		<InspectorControls>
 			<Panel>
@@ -96,7 +97,7 @@ function useConditionalTemplate(clientId){
 		}
 	} )
 
-	console.log("clientId", variation.innerBlocks)
+
 
 	return variation.innerBlocks ?? []
 	/*
@@ -190,7 +191,8 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 						content: {
 							...contentBlock.attributes.metadata.bindings.content,
 							args : {
-								key : meta_key
+								key : meta_key,
+								...contentBlock.attributes.metadata.bindings.content.args,
 							}
 						}
 					}

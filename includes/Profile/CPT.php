@@ -174,12 +174,12 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new Field( 'fax_district', 'Capitol Fax Number' ),
 				new Field( 'fax_campaign', 'Capitol Fax Number' ),
 
-				(new LinkField( 'website_personal', 'Personal Website URL', 'link' ))->link_text("Personal Website"),
-				(new LinkField( 'website_campaign', 'Campaign Website URL', 'link' ))->link_text("Campaign Website"),
-				(new LinkField( 'website_district', 'District Website URL', 'link' ))->link_text("District Website"),
-				(new LinkField( 'website_capitol', 'Capitol Website URL', 'link' ))->link_text("Capitol Website"),
-				(new LinkField( 'rss', 'RSS Feed URL', 'link' ))->link_text("RSS Feed"),
-				(new LinkField( 'linkedin', 'Linkedin URL', 'link' ))->link_text("LinkedIn Profile"),
+				( new LinkField( 'website_personal', 'Personal Website URL', 'link' ) ),
+				( new LinkField( 'website_campaign', 'Campaign Website URL', 'link' ) ),
+				( new LinkField( 'website_district', 'District Website URL', 'link' ) )->link_text( 'District Website' ),
+				( new LinkField( 'website_capitol', 'Capitol Website URL', 'link' ) )->link_text( 'Capitol Website' ),
+				( new LinkField( 'rss', 'RSS Feed URL', 'link' ) )->link_text( 'RSS Feed' ),
+				( new LinkField( 'linkedin', 'Linkedin URL', 'link' ) )->link_text( 'LinkedIn Profile' ),
 				
 				new Field( 'wikipedia', 'Wikipedia ID' ),
 				new Field( 'google_entity_id', 'Google Entity ID' ),

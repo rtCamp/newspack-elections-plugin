@@ -20,7 +20,8 @@
 		},
 		"spacing": {
 			"margin": true,  
-			"padding": true
+			"padding": true,
+			"blockGap" : true
 		}
 	},
 	"attributes": {
@@ -46,5 +47,5 @@
 		"govpack/separatorColor" : "separatorColor",
 		"govpack/separatorCustomColor" : "separatorCustomColor"
 	},
-	"allowedBlocks": ["govpack/profile-field", "govpack/profile-separator"]
+	"allowedBlocks": ["govpack/profile-row", "govpack/profile-separator"]
 }

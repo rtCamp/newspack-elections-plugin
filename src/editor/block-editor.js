@@ -1,4 +1,9 @@
+
+
 import { dispatch } from "@wordpress/data"
+import { getBlockBindingsSources } from '@wordpress/blocks';
+
+import { registerProfileBindingSource } from "./block-bindings"
 
 dispatch( 'core' ).addEntities( [ {
 	baseURL: '/govpack/v1/profile',
@@ -8,3 +13,6 @@ dispatch( 'core' ).addEntities( [ {
 	name: 'fields',
 	label: 'Govpack Profile Fields',
 } ] );
+
+registerProfileBindingSource()
+

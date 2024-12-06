@@ -16,7 +16,7 @@
     "start": "wp-scripts start",
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js",
-	"lint:cpd": "jscpd ."
+    "lint:cpd": "jscpd ."
   },
   "repository": {
     "type": "git",
@@ -27,28 +27,35 @@
     "url": "https://github.com/govpack-wp/govpack-plugin/issues"
   },
   "dependencies": {
+    "@emotion/styled": "^11.13.5",
     "@wordpress/icons": "^10.9.0",
     "axios": "^0.24.0",
-    "react-input-mask": "^2.0.4",
-	"classnames" : "^2.5.1"
+    "classnames": "^2.5.1",
+    "react-input-mask": "^2.0.4"
   },
   "devDependencies": {
     "@wordpress/scripts": "^30.1.0",
-	"jscpd": "^3.5.10"
+    "jscpd": "^3.5.10"
   },
   "config": {
     "entrypoints": {
       "editor": "./src/editor/index.js",
-	  "block-editor": "./src/editor/block-editor.js",
+      "block-editor": "./src/editor/block-editor.js",
       "admin": "./src/admin/index.js",
       "importer": "./src/importer/index.js",
       "frontend": "./src/frontend/index.js",
-	  "exporter": "./src/admin/exporter/index.js"
+      "exporter": "./src/admin/exporter/index.js"
     }
   },
   "jscpd": {
-    "reporters": ["console"],
-    "ignore": ["**/.github/**", "**/deprecated/**", "**/block.json"],
+    "reporters": [
+      "console"
+    ],
+    "ignore": [
+      "**/.github/**",
+      "**/deprecated/**",
+      "**/block.json"
+    ],
     "absolute": true,
     "gitignore": true
   }

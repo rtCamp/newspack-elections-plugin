@@ -43,7 +43,7 @@ class ProfileFieldsEndpoint extends \Govpack\Abstracts\RestEndpoint {
 						]
 					);
 				},
-				CPT\Profile::fields()->to_array() 
+				Profile\CPT::fields()->to_array() 
 			) 
 		);
 	}

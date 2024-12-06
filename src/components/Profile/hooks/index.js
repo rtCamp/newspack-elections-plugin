@@ -1,4 +1,4 @@
 export * from "./get-profile"
-export * from "./use-profile-fields"
-export * from "./use-profile-field"
+export * from "./profile-fields"
+export * from "./profile-field"
 

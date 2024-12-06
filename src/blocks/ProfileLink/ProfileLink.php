@@ -64,4 +64,32 @@ class ProfileLink extends \Govpack\Blocks\Profile\Profile {
 	public function template(): string {
 		return sprintf( 'blocks/%s', $this->template );
 	}
+
+	public function variations(): array {
+
+		$formats = [ 'url', 'link', 'icon', 'button' ];
+
+		$variations = [];
+
+		foreach ( $formats as $format ) {
+			$variations[] = [
+				'category'    => 'govpack-profile-fields',
+				'name'        => sprintf( 'profile-field-link-%s', $format ),
+				'title'       => sprintf( 'Profile Link (%s)', \ucfirst( $format ) ),
+				'description' => sprintf(
+					/* translators: %s: taxonomy's label */
+					__( 'Display Profile Links: %s' ),
+					\ucfirst( $format )
+				),
+				'attributes'  => [
+					'linkFormat' => $format,
+				],
+				'isActive'    => [ 'linkFormat' ],
+				'scope'       => [ 'inserter', 'transform' ],
+				'icon'        => 'admin-links',
+			];
+		}
+
+		return $variations;
+	}
 }

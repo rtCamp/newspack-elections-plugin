@@ -1,8 +1,8 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "govpack/profile-field",
-	"title": "Profile Field",
+	"name": "govpack/profile-field-text",
+	"title": "Profile Field Text",
     "editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./index.css",
@@ -40,22 +40,8 @@
 		}
 	},
 	"attributes": {
-		"align": {
-			"type": "string",
-			"default": "full"
-		},
-		"showLabel" : {
-			"type": "boolean",
-			"default" : true
-		},
-		"hideFieldIfEmpty" : {
-			"type": "boolean",
-			"default" : true
-		},
-		"label" : {
-			"type": "string"
-		},
-		"meta_key" : {
+		
+		"fieldKey" : {
 			"type": "string"
 		},
 		"fieldType" : {
@@ -64,8 +50,6 @@
 		}
 	},
 	"ancestor": [ "govpack/profile-v2" ],
-	"usesContext": ["govpack/profileId", "postType"],
-	"providesContext": {
-		"govpack/profileField": "meta_key"
-	}
+	"usesContext": ["govpack/profileId", "postType", "postId"]
+	
 }

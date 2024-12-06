@@ -125,6 +125,8 @@ class Govpack {
 			\Govpack\CLI::init();
 		}
 
+		( new ProfileBindingSource() )->register();
+
 		\Govpack\Importer\Importer::hooks();
 		\Govpack\Admin\Export::hooks(); 
 		
@@ -178,13 +180,17 @@ class Govpack {
 		return $this->icons;
 	}
 
+	
+		
+
 	public function register_blocks() {
 		$this->blocks()->register( new \Govpack\Blocks\Profile\Profile( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileSelf\ProfileSelf( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileBlockV2\ProfileBlockV2( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileTerms\ProfileTerms( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileMeta\ProfileMeta( $this ) );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileField\ProfileField( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileRow\ProfileRow( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldText\ProfileFieldText( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileLink\ProfileLink( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileLabel\ProfileLabel( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileRowGroup\ProfileRowGroup( $this ) );

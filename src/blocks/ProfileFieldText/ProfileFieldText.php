@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Blocks\ProfileField;
+namespace Govpack\Blocks\ProfileFieldText;
 
 use WP_Block;
 
@@ -14,9 +14,9 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class ProfileField extends \Govpack\Blocks\Profile\Profile {
+class ProfileFieldText extends \Govpack\Blocks\Profile\Profile {
 
-	public string $block_name = 'govpack/profile-field';
+	public string $block_name = 'govpack/profile-field-text';
 	public $template          = 'profile';
 
 	private $show       = null;
@@ -35,7 +35,7 @@ class ProfileField extends \Govpack\Blocks\Profile\Profile {
 	}
 
 	public function block_build_path(): string {
-		return $this->plugin->build_path( 'blocks/ProfileField' );
+		return $this->plugin->build_path( 'blocks/ProfileFieldText' );
 	}
 
 	/**
