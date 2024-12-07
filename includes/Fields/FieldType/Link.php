@@ -21,7 +21,7 @@ class Link extends \Govpack\Fields\FieldType {
 	public function get_variation_inner_blocks(): array {
 		return [
 			[ 'govpack/profile-label', [] ],
-			[ 'govpack/profile-link', [] ],
+			[ 'govpack/profile-field-text', [ 'fieldType' => 'link' ] ],
 		];
 	}
 
@@ -30,7 +30,7 @@ class Link extends \Govpack\Fields\FieldType {
 		return 'admin-links';
 	}
 
-	public function value($value) {
+	public function value( $value ) {
 		return $value;
 	}
 }

@@ -12,7 +12,8 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 
 	const { 
 		'govpack/profileId' : profileId, 
-		'govpack/profileField' : profileFieldKey, 
+		'govpack/fieldKey' : profileFieldKey, 
+		'govpack/showLabel' : showLabel = true, 
 		postType = false
 	} = context
 
@@ -36,7 +37,9 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 		calculatedLabel = label;
 	}
 
-	
+	if( ! showLabel ) {
+		return null;
+	}
 
     return (
 

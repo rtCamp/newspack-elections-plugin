@@ -35,7 +35,7 @@ class ProfileRow extends \Govpack\Blocks\Profile\Profile {
 	}
 
 	public function block_build_path(): string {
-		return $this->plugin->build_path( 'blocks/ProfileField' );
+		return $this->plugin->build_path( 'blocks/ProfileRow' );
 	}
 
 	/**
@@ -67,10 +67,12 @@ class ProfileRow extends \Govpack\Blocks\Profile\Profile {
 
 	public function variations(): array {
 
-		$types  = $this->create_field_type_variations();
-		$fields = $this->create_field_variations();
+		$types = $this->create_field_type_variations();
+		//$fields = $this->create_field_variations();
 
-		return array_merge( $types, $fields );
+		//return array_merge( $types, $fields );
+
+		return $types;
 	}
 
 	public function create_field_variations(): array {
@@ -124,10 +126,10 @@ class ProfileRow extends \Govpack\Blocks\Profile\Profile {
 			$variation = [
 				'category'    => 'govpack-profile-fields',
 				'name'        => sprintf( 'profile-field-%s', $type->slug ),
-				'title'       => sprintf( 'Profile %s Field', ucfirst( $type->label ) ),
+				'title'       => sprintf( 'Profile %s Row', ucfirst( $type->label ) ),
 				'description' => sprintf(
 					/* translators: %s: taxonomy's label */
-					__( 'Display a profile field of type: %s' ),
+					__( 'Display a profile row of type: %s' ),
 					$type->label
 				),
 				'attributes'  => [

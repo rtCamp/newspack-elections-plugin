@@ -45,5 +45,10 @@
 		}
 	},
 	"ancestor": [ "govpack/profile-row", "govpack/profile-field" ],
-	"usesContext": ["govpack/profileId", "postType", "govpack/profileField"]
+	"usesContext": [
+		"govpack/profileId", 
+		"govpack/showLabel", 
+		"govpack/fieldKey",
+		"postType"
+	]
 }

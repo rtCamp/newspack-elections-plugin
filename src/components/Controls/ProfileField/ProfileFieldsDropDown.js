@@ -15,8 +15,10 @@ export default function ProfileFieldsDropDown( {
 } ) {
 
 	const selectedOptions = fields.map( (f) => ({
-		...f,
-		disabled : (!f.info ? true : false)
+		label : f.label,
+		value : f.slug,
+		info: f.value,
+		disabled : (!f.value ? true : false)
 	}))
 
 	return (

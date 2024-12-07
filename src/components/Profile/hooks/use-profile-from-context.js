@@ -23,8 +23,8 @@ export const useProfileFromContext = ( context ) => {
 	}
 
 	// if using a postType the postId must be set 
-	if((postType === "govpack_profiles") && !postId){
-		console.log("Must have a postId if using the context postType")
+	if((postType === "govpack_profiles") && !postId && !profileId){
+		//console.log("Must have a postId if using the context postType")
 		return false;
 	}
 	

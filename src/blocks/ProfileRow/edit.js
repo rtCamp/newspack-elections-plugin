@@ -16,12 +16,12 @@ import { createBlock, store as blocksStore } from "@wordpress/blocks"
 
 
 import {Panel, PanelBody, PanelRow, ToggleControl, SelectControl} from '@wordpress/components';
-import {getProfile, useProfileField, useProfileFields} from "./../../components/Profile"
+import {getProfile, useProfileField, useProfileFields, useProfileFromContext, useProfileData} from "./../../components/Profile"
 
-
+import { ProfileFieldsInspectorControl } from '../../components/Controls/ProfileField';
 
 const MetaInspectorControl = ({
-	meta,
+	fieldKey,
 	setAttributes,
 	showLabel,
 	hideFieldIfEmpty,
@@ -42,22 +42,7 @@ const MetaInspectorControl = ({
 	return(
 		<InspectorControls>
 			<Panel>
-				<PanelBody title={ __( 'Profile Field', 'govpack' ) }>
-					<PanelRow>
-						<SelectControl 
-							label = "Field Value"
-							help = "Select a piece of profile data to display."
-							value={ meta } // e.g: value = 'a'
-							onChange={ ( selection ) => { setAttributes({"meta_key" : selection}) } }
-							options = {fields.map( ( field ) => {
-								return {
-									"value" : field.slug,
-									"label" : field.label
-								}
-							})}
-							__nextHasNoMarginBottom
-						/>
-					</PanelRow>
+				<PanelBody title={ __( 'Profile Label Controls', 'govpack' ) }>
 					<PanelRow>
 						<ToggleControl 
 							label = "Show the field label?"
@@ -86,8 +71,13 @@ const MetaInspectorControl = ({
 function useConditionalTemplate(clientId){
 
 	const defaultTemplate = [
-		['govpack/profile-label', {}]
+		['govpack/profile-label', {}],
+		['core/paragraph', {
+			"placeholder" : "Profile Value..."
+		}]
 	]
+
+	
 	const { block, variation } = useSelect( (select) => {
 
 		const block = select(blockEditorStore).getBlock(clientId)
@@ -96,10 +86,9 @@ function useConditionalTemplate(clientId){
 			variation: select(blocksStore).getActiveBlockVariation(block.name, block.attributes),
 		}
 	} )
+	
 
-
-
-	return variation.innerBlocks ?? []
+	//variation.innerBlocks ?? []
 	/*
 	return [
 		...defaultTemplate,
@@ -118,7 +107,11 @@ function useConditionalTemplate(clientId){
 		}]
 	]
 	*/
+	return variation.innerBlocks ?? defaultTemplate 
 }
+
+
+
 
 function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 
@@ -135,15 +128,15 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	 */
 	const { 
 		label = null,
-		meta_key = "",
+		fieldKey = "",
 		showLabel,
 		hideFieldIfEmpty,
 		fieldType = "text"
 	} = attributes
 
-	const {
-		record : profile
-	} = getProfile(profileId)
+	
+	const {profile, fields} = useProfileData(context)
+	const field = useProfileField(fieldKey)
 
 	/**
 	 * Get Data From The Editor
@@ -177,6 +170,7 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	 */
 	const { updateBlock, insertBlock } = useDispatch(blockEditorStore)
 
+	/*
 	useEffect( () => {
 
 		if(!contentBlock){
@@ -201,6 +195,7 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 		})
 
 	}, [meta_key])
+	*/
 
 	/*
 	useEffect( () => {
@@ -215,10 +210,10 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	}, [wasBlockJustInserted])
 	*/
 	
-	const field = useProfileField(meta_key)
+	
 
 
-	const value = profile?.meta[meta_key];
+	const value = profile?.profile?.[fieldKey];
 	const displayLabel = (label ? label : field?.label ?? "")
 
 	
@@ -227,18 +222,27 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	const shouldDimField = (hideFieldIfEmpty && value === "" && (!isBlockSelected) && (!hasSelectedInnerBlock) )
 	className = clsx(className, {"gp-dim-field" : shouldDimField })
 
+	const setFieldKey = (newKey) => {
+		setAttributes({"fieldKey" : newKey})
+	}
 
 
     return (
 		<>
 			<MetaInspectorControl
-				meta = {meta_key}
+				fieldKey = {fieldKey}
 				setAttributes = {setAttributes}
 				showLabel = {showLabel}
 				hideFieldIfEmpty = {hideFieldIfEmpty}
 				fieldType = {fieldType}
 			/>
 
+			<ProfileFieldsInspectorControl
+				fieldKey = {fieldKey}
+				setFieldKey = {setFieldKey}
+				fieldType = {fieldType}
+				fields = { fields.filter( (f) => f.type === fieldType) }
+			/>
 			
 			<div {...innerBlocksProps} className={className}>
 				{ children }
