@@ -14,12 +14,12 @@ import { addQueryArgs } from '@wordpress/url';
 import { useDispatch } from "@wordpress/data";
 
 import { external, postAuthor } from '@wordpress/icons';
-import {ProfileResetPanel} from '../../components/Panels/ProfileResetPanel.jsx';
+import {ProfileResetPanel} from '../../../components/Panels/ProfileResetPanel.jsx';
 
 
-import { Spinner } from './../../components/Spinner.jsx';
-import { ProfileSelector } from "./../../components/ProfileSelector.jsx"
-import { useSelectProfile } from "./../../components/SelectProfile.jsx"
+import { Spinner } from './../../../components/Spinner.jsx';
+import { ProfileSelector } from "./../../../components/ProfileSelector.jsx"
+import { useSelectProfile } from "./../../../components/SelectProfile.jsx"
 
 import { addFilter } from '@wordpress/hooks';
 
@@ -94,10 +94,10 @@ const ProfileBlockControls = ({ attributes, setAttributes, ...props}) => {
 	)
 }
 
-function Edit( {attributes, setAttributes, isSelected: isSingleSelected, ...props} ) {
+function ProfileBlockEdit( {attributes, setAttributes, isSelected: isSingleSelected, ...props} ) {
 
     const ref = useRef(null);
-	const instanceId = useInstanceId( Edit );
+	const instanceId = useInstanceId( ProfileBlockEdit );
 	const blockProps = useBlockProps( { ref } );
 
 	//console.log(useSettings("madeup.setting.path"))
@@ -245,6 +245,6 @@ function Edit( {attributes, setAttributes, isSelected: isSingleSelected, ...prop
 	);
 }
 
-export default Edit
-export {Edit}
+export default ProfileBlockEdit
+export {ProfileBlockEdit}
 

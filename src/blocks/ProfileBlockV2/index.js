@@ -3,7 +3,7 @@ import { registerBlockType } from '@wordpress/blocks';
 /**
  * Internal dependencies
  */
- import {Edit} from './edit';
+ import {ProfileEdit as Edit} from './edit/index';
  import Save from './save';
  import metadata from './block.json';
 

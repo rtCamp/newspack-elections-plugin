@@ -51,8 +51,7 @@
 			"type": "number"
 		},
 		"profileId": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"postType": {
 			"type": "string",
