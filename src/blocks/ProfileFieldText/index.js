@@ -20,7 +20,6 @@ import './view.scss';
 const { attributes, category, title } = metadata;
 
 
-
 registerBlockType( metadata.name, {
 	apiVersion: 3,
 	title,
@@ -31,7 +30,7 @@ registerBlockType( metadata.name, {
     styles: [
 	],
 	edit : Edit,
-	save: Save
+	save: Save,
 } );
 
 

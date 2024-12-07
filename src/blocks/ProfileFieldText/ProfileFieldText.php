@@ -68,9 +68,9 @@ class ProfileFieldText extends \Govpack\Blocks\Profile\Profile {
 	public function variations(): array {
 
 		$types  = $this->create_field_type_variations();
-		$fields = $this->create_field_variations();
+		//$fields = $this->create_field_variations();
 
-		return array_merge( $types, $fields );
+		return array_merge( $types, [] );
 	}
 
 	public function create_field_variations(): array {
@@ -89,7 +89,7 @@ class ProfileFieldText extends \Govpack\Blocks\Profile\Profile {
 				),
 				'attributes'  => [
 					'fieldType' => $field->type->slug,
-					'meta_key'  => $field->slug,
+					'fieldKey'  => $field->slug,
 				],
 				'isActive'    => [ 'meta_key' ],
 				'scope'       => [ 'inserter', 'transform' ],
@@ -122,7 +122,7 @@ class ProfileFieldText extends \Govpack\Blocks\Profile\Profile {
 
 		foreach ( $types as $type ) {
 			$variation = [
-				'category'    => 'govpack-profile-fields',
+				'category'    => 'govpack-profile-field',
 				'name'        => sprintf( 'profile-field-%s', $type->slug ),
 				'title'       => sprintf( 'Profile %s Field', ucfirst( $type->label ) ),
 				'description' => sprintf(
@@ -135,8 +135,7 @@ class ProfileFieldText extends \Govpack\Blocks\Profile\Profile {
 				],
 				'isActive'    => [ 'fieldType' ],
 				'scope'       => [ 'inserter', 'transform' ],
-				'icon'        => $type->variation_icon(),
-				'innerBlocks' => $type->get_variation_inner_blocks(),
+				'icon'        => $type->variation_icon()
 			];
 
 			$variations[] = $variation;
