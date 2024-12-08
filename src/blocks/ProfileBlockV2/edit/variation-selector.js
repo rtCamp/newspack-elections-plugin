@@ -1,20 +1,53 @@
 
-import { useSelect } from '@wordpress/data';
+import { useSelect, useDispatch } from '@wordpress/data';
 import {
-	__experimentalBlockVariationPicker as BlockVariationPicker
+	__experimentalBlockVariationPicker as BlockVariationPicker,
+	store as blockEditorStore
 } from '@wordpress/block-editor';
-import { store as blocksStore } from '@wordpress/blocks';
+import { store as blocksStore, synchronizeBlocksWithTemplate } from '@wordpress/blocks';
 
 
-export const ProfileVariationSelector = ({ blockName } ) => {
-	const variations = useSelect(
+import { DEFAULT_TEMPLATE } from './default-template';
+
+export const ProfileVariationSelector = ({ name, clientId, setAttributes } ) => {
+	const {variations, getSelectedBlocksInitialCaretPosition, isBlockSelected} = useSelect(
 		( select ) => {
-			const { getBlockVariations } = select( blocksStore );
-			return getBlockVariations( blockName, 'block' ) ?? [];
+			return {
+				variations : select( blocksStore ).getBlockVariations( name, 'block' ) ?? [],
+				getSelectedBlocksInitialCaretPosition: select( blockEditorStore ).getSelectedBlocksInitialCaretPosition,
+				isBlockSelected: select(blockEditorStore).isBlockSelected
+			}
 		},
-		[ blockName ]
+		[ name ]
 	);
-	return <BlockVariationPicker variations={ variations } />;
+
+	console.log(variations)
+
+	const { replaceInnerBlocks, __unstableMarkNextChangeAsNotPersistent } =
+		useDispatch( blockEditorStore );
+
+	const selectVariation = ( nextVariation ) => {
+		console.log(nextVariation)
+		setAttributes( nextVariation.attributes );
+		const nextBlocks = synchronizeBlocksWithTemplate([], nextVariation.innerBlocks ?? DEFAULT_TEMPLATE)
+
+		__unstableMarkNextChangeAsNotPersistent();
+		replaceInnerBlocks(
+			clientId,
+			nextBlocks,
+			(nextBlocks.length !== 0 && isBlockSelected( clientId )),
+			// This ensures the "initialPosition" doesn't change when applying the template
+			// If we're supposed to focus the block, we'll focus the first inner block
+			// otherwise, we won't apply any auto-focus.
+			// This ensures for instance that the focus stays in the inserter when inserting the "buttons" block.
+			getSelectedBlocksInitialCaretPosition()
+		);
+	};
+	
+	return <BlockVariationPicker 
+		variations={ variations } 
+		onSelect = { selectVariation }
+	/>;
 }
 
 

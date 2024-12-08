@@ -1,5 +1,6 @@
 import {useSelect} from "@wordpress/data"
 import {store as blockEditorStore} from "@wordpress/block-editor"
+import { store as blocksStore } from '@wordpress/blocks';
 
 import { ProfileBlockEdit } from "./edit"
 import { ProfileVariationSelector } from "./variation-selector"
@@ -13,29 +14,32 @@ import { ProfileSelector } from "./profile-selector"
 */
 export const ProfileEdit = ( props ) => {
 
-	const { clientId, attributes } = props
+	const { clientId, attributes, name } = props
+	
 
 	// Once a Profile Has Inner Blocks we can't re-choose the variation
-	const hasInnerBlocks = useSelect(
-		( select ) =>
-			!! select( blockEditorStore ).getBlocks( clientId ).length,
-		[ clientId ]
+	const { hasInnerBlocks, hasVariations } = useSelect( ( select ) => ({
+			hasInnerBlocks : select( blockEditorStore ).getBlocks( clientId ).length,
+			hasVariations : select( blocksStore ).getBlockVariations( name ).length ,
+		}),
+		[ clientId, name ]
 	);
 
+	
 	// If we have a profileId then dont show the selector
 	const hasSelectedProfile = attributes.profileId ?? false
 
-	const showVariationSelector = !hasInnerBlocks;
+	const showVariationSelector = !hasInnerBlocks && hasVariations;
 	const showProfileSelector = !hasSelectedProfile;
 	const showEdit = hasInnerBlocks && hasSelectedProfile;
 
 	let Component
-	if(showEdit){
-		Component = ProfileBlockEdit
-	} else if (showProfileSelector) {
+	if(showProfileSelector){
 		Component = ProfileSelector
-	} else {
+	} else if (showVariationSelector) {
 		Component = ProfileVariationSelector
+	} else {
+		Component = ProfileBlockEdit
 	}
 
 

@@ -34,8 +34,8 @@ abstract class Block {
 
 	abstract public function block_build_path(): string;
 
-	public function variations(): array {
-		return [];
+	public function variations(): null|array {
+		return null;
 	}
 
 	/**

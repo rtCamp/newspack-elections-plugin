@@ -23,14 +23,7 @@ import { useSelectProfile } from "./../../../components/SelectProfile.jsx"
 
 import { addFilter } from '@wordpress/hooks';
 
-const TEMPLATE = [
-	[ "core/post-featured-image", {}, []],
-	[ "core/post-title", {}, []],
-	[ "core/post-excerpt", {
-		"moreText" : " ",
-		"showMoreOnNewLine": false
-	}, []]
-]
+import { DEFAULT_TEMPLATE } from './default-template.js';
 
 
 
@@ -140,7 +133,7 @@ function ProfileBlockEdit( {attributes, setAttributes, isSelected: isSingleSelec
 	const {profile, ...query} = useSelectProfile(profileId)
 
 	const {children, ...innerBlockProps} = useInnerBlocksProps(blockProps, {
-		template: TEMPLATE,
+		template: DEFAULT_TEMPLATE,
 		orientation: "vertical",
 		renderAppender : InnerBlocks.DefaultBlockAppender
 

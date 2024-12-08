@@ -21,9 +21,10 @@
 			"text": true	
 		},
 		"layout" : {
-			"allowSwitching": false,
+			"allowSwitching": true,
 			"allowVerticalAlignment": true,
 			"allowSizingOnChildren": true,
+			"allowEditing": true,
 			"default" : {
 				"type" : "flex"
 			}
