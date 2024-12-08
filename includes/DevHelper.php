@@ -30,7 +30,7 @@ class Dev_Helpers {
 	*/
 	public function filter_version( array $plugins ): array {
 
-		$plugin_file = 'govpack/govpack.php';
+		$plugin_file = 'newspack-elections/newspack-elections.php';
 	
 		foreach ( $plugins as $group_key => $group ) {
 			if ( ! isset( $plugins[ $group_key ][ $plugin_file ] ) ) {
@@ -109,7 +109,7 @@ class Dev_Helpers {
 			return $this->version;
 		}
 
-		$version = include $this->version_file_path();
+		$version = $this->plugin->require( 'version.php' );
 
 		$this->version = Version::parse( $version );
 

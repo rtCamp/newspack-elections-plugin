@@ -18,7 +18,7 @@ const ResetProfileToolbar = (props) => {
                 controls={ [
                     {
                         icon: <Icon icon={ postAuthor } />,
-                        title: __( 'Modify Selection', 'govpack' ),
+                        title: __( 'Modify Selection', 'newspack-elections' ),
                         onClick: () => {
                             setProfile( null );
                         },
