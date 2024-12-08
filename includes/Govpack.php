@@ -115,8 +115,14 @@ class Govpack {
 		\Govpack\Tax\State::hooks();
 	}
 	
+	public function text_domain() {
+		load_plugin_textdomain( 'newspack-elections', false, $this->path( 'languages' ) );
+	}
 
 	public function setup(): void {
+
+
+		$this->text_domain();
 
 		// Custom Post Types & taxonomies.
 		self::post_types();

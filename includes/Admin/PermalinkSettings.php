@@ -5,7 +5,7 @@ namespace Govpack\Admin;
 class Permalink_Settings {
 
 	private array $permalinks;
-	private string $base_slug = "profile";
+	private string $base_slug   = 'profile';
 	private string $option_name = 'govpack_permalinks';
 
 	public function __construct() {
@@ -17,17 +17,17 @@ class Permalink_Settings {
 		new self();
 	}
 
-	public function defaults() : array {
+	public function defaults(): array {
 		return [
 			'profile_base' => '',
 		];
 	}
 
-	public function get_permalinks()  : array {
+	public function get_permalinks(): array {
 		return (array) get_option( $this->option_name, $this->defaults() );
 	}
 
-	public function update_permalinks() : void  {
+	public function update_permalinks(): void {
 		update_option( $this->option_name, $this->permalinks );
 	}
 
@@ -38,7 +38,7 @@ class Permalink_Settings {
 	 * 
 	 * Sourced from WooCommerce https://github.com/woocommerce/woocommerce/blob/c8202bc72943acfa2caa78be6337c23768b815cd/plugins/woocommerce/includes/wc-formatting-functions.php#L77
 	 */
-	private static function sanitize_permalink( string $permalink ) : string  {
+	private static function sanitize_permalink( string $permalink ): string {
 		global $wpdb;
 
 		$permalink = $wpdb->strip_invalid_text_for_column( $wpdb->options, 'option_value', $permalink ?? '' );
@@ -59,7 +59,7 @@ class Permalink_Settings {
 	 * Handles nonce verification for CSRF 
 	 * Passes off to the actual save logic
 	 */
-	public function handle_save() : void {
+	public function handle_save(): void {
 		
 		if ( ! is_admin() ) {
 			return;
@@ -88,7 +88,7 @@ class Permalink_Settings {
 		);
 	}
 
-	public function save( string $profile_permalink_base, bool $profile_permalink_structure = false ) : void  {
+	public function save( string $profile_permalink_base, bool $profile_permalink_structure = false ): void {
 
 		if ( ( $profile_permalink_base === 'custom' ) && ( $profile_permalink_structure ) ) {
 				
@@ -116,32 +116,32 @@ class Permalink_Settings {
 
 	
 
-	public function add_permalink_settings_section() : void {
+	public function add_permalink_settings_section(): void {
 
 		$setting_section_id = 'govpack-permalink';
 
 		\add_settings_section( 
 			$setting_section_id, 
-			__( 'Govpack Permalinks', 'govpack' ), 
+			__( 'Newspack Elections Permalinks', 'newspack-elections' ), 
 			[ $this, 'settings' ], 
 			'permalink' 
 		);
 	}
 
-	public function settings() : void {
+	public function settings(): void {
 		wp_nonce_field( 'govpack-permalinks', 'govpack-permalinks-nonce' );
-		echo wp_kses_post( wpautop( sprintf( 'You may use a custom base for your Govpack Profile\'s URLs here. For example, using <code>candidate</code> would make your profile links like <code>%scandidate/jo-smith/</code>.', esc_url( home_url( '/' ) ) ) ) );
+		echo wp_kses_post( wpautop( sprintf( 'You may use a custom base for your Newspack Elections Profile\'s URLs here. For example, using <code>candidate</code> would make your profile links like <code>%scandidate/jo-smith/</code>.', esc_url( home_url( '/' ) ) ) ) );
 		
 		$this->permalinks = $this->get_permalinks();
 
 	
 		$structures = [
 			0 => [
-				'label' => 'Profile Base (Default)',
+				'label' => __( 'Profile Base (Default)', 'newspack-elections' ),
 				'slug'  => $this->base_slug,
 			],
 			1 => [
-				'label' => 'Guide Base',
+				'label' => __( 'Guide Base', 'newspack-elections' ),
 				'slug'  => 'guide',
 			],
 		];
@@ -182,7 +182,7 @@ class Permalink_Settings {
 				<th>
 					<label>
 						<input name="govpack_profile_permalink" type="radio" value="custom" class="tog" <?php checked( $is_custom, true ); ?> /> 
-						<?php esc_html_e( 'Custom Base', 'govpack' ); ?>
+						<?php esc_html_e( 'Custom Base', 'newspack-elections' ); ?>
 					</label>
 				</th>
 				<td>
@@ -190,7 +190,7 @@ class Permalink_Settings {
 						name="govpack_profile_permalink_structure" 
 						id="govpack_profile_permalink_structure" 
 						type="text" value="<?php echo esc_attr( $custom_base ); ?>" class="regular-text code"> <br />
-					<span class="description"><?php esc_html_e( 'Enter a custom base to use for GovPack Profiles. If not set the base of profile will be used.', 'govpack' ); ?></span>
+					<span class="description"><?php esc_html_e( 'Enter a custom base to use for Newspack Election Profiles. If not set the base of profile will be used.', 'newspack-elections' ); ?></span>
 				</td>
 			</tr>
 		</tbody>

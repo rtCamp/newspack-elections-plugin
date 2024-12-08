@@ -1,18 +1,20 @@
 <?php
 /**
- * Plugin Name:       Govpack
- * Plugin URI:        https://govpack.org/
- * Description:       Govpack
- * Author:            Govpack, poweredbycoffee, thefuturewasnow
- * Text Domain:       govpack
+ * Plugin Name:       Newspack Elections
+ * Plugin URI:        https://newspack.org/
+ * Description:       Newspack Elections
+ * Author:            Automattic, poweredbycoffee, thefuturewasnow
+ * Author URI:        https://automattic.com/
+ * Text Domain:       newspack-elections
  * Domain Path:       /languages
  * Version:           1.2.0
  * Requires at least: 6.4 
  *
- * @package         Govpack
+ * @package         Newspack_Elections
  */
 
 defined( 'ABSPATH' ) || exit;
+
 
 
 // Define GOVPACK_PLUGIN_FILE.
@@ -34,7 +36,16 @@ if ( ! defined( 'GOVPACK_PLUGIN_BUILD_URL' ) ) {
 	define( 'GOVPACK_PLUGIN_BUILD_URL', trailingslashit( GOVPACK_PLUGIN_URL . 'build' ) );
 }
 
-require_once __DIR__ . '/includes/BootstrapHelper.php';
+if ( ! class_exists( 'Govpack_Bootstrap_Helper' ) ) {
+	require_once __DIR__ . '/includes/class-bootstrap-helper.php';
+} elseif ( method_exists( 'Govpack_Bootstrap_Helper', 'notice_double_install' ) ) {
+	add_action( 'all_admin_notices', 'Govpack_Bootstrap_Helper::notice_double_install' );
+	return;
+} else {
+	require_once __DIR__ . '/includes/class-npe-bootstrap-helper.php';
+	add_action( 'all_admin_notices', 'NPE_Bootstrap_Helper::notice_double_install' );
+	return;
+}
 
 if ( ! file_exists( GOVPACK_PLUGIN_PATH . 'vendor/autoload.php' ) ) {
 	add_action( 'all_admin_notices', 'Govpack_Bootstrap_Helper::notice_vendor_missing' );
@@ -42,8 +53,8 @@ if ( ! file_exists( GOVPACK_PLUGIN_PATH . 'vendor/autoload.php' ) ) {
 }
 
 #if ( Govpack_Bootstrap_Helper::is_dir_empty( GOVPACK_PLUGIN_PATH . 'vendor-prefixed' ) ) {
-#	add_action( 'all_admin_notices', 'Govpack_Bootstrap_Helper::notice_prefixed_vendor_missing' );
-#	return;
+#   add_action( 'all_admin_notices', 'Govpack_Bootstrap_Helper::notice_prefixed_vendor_missing' );
+#   return;
 #}
 
 if ( ! is_dir( GOVPACK_PLUGIN_PATH . 'build' ) ) {

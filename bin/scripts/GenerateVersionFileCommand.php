@@ -63,7 +63,7 @@ class GenerateVersionFileCommand extends Command {
 			return $this->plugin_headers;
 		}
 		
-		$file = 'govpack.php';
+		$file = 'newspack-elections.php';
 
 		$default_headers = [
 			'Name'            => 'Plugin Name',

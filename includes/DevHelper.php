@@ -16,21 +16,21 @@ class Dev_Helpers {
 	public Version $version;
 
 	public function __construct( Govpack $plugin ) {
-		$this->plugin = $plugin;
+		$this->plugin  = $plugin;
 		$this->version = $plugin->version->get_semvar();
 	}
 
 
-	public function hooks() : void {
+	public function hooks(): void {
 		add_filter( 'plugins_list', [ $this, 'filter_version' ] );
 	}
 
 	/*
 	Filter the version number the plugin shows in the Plugin Table
 	*/
-	public function filter_version( array $plugins ) : array {
+	public function filter_version( array $plugins ): array {
 
-		$plugin_file = 'govpack/govpack.php';
+		$plugin_file = 'newspack-elections/newspack-elections.php';
 	
 		foreach ( $plugins as $group_key => $group ) {
 			if ( ! isset( $plugins[ $group_key ][ $plugin_file ] ) ) {
@@ -47,7 +47,7 @@ class Dev_Helpers {
 	 * of `get_version_suffix`. Usually a build number, git branch name or version 
 	 * tag
 	 */
-	public function generate_version_string( $current_version ) : string {
+	public function generate_version_string( $current_version ): string {
 		$suffix = $this->get_version_suffix();
 		if ( ! $suffix ) {
 			return $current_version;
@@ -58,7 +58,7 @@ class Dev_Helpers {
 	/**
 	 * Get the version suffix
 	 */
-	public function get_version_suffix(): null | string {
+	public function get_version_suffix(): null|string {
 
 		if ( $this->label() !== '' ) {
 			return $this->label();
@@ -81,7 +81,7 @@ class Dev_Helpers {
 		return $ref;
 	}
 
-	public function is_composer() : bool {
+	public function is_composer(): bool {
 		
 		return file_exists( $this->plugin->path( 'composer.lock' ) );
 	}
@@ -109,7 +109,7 @@ class Dev_Helpers {
 			return $this->version;
 		}
 
-		$version = $this->plugin->require( "version.php" );
+		$version = $this->plugin->require( 'version.php' );
 
 		$this->version = Version::parse( $version );
 
@@ -135,7 +135,7 @@ class Dev_Helpers {
 	}
 
 
-	public function is_git_repo() : bool {
+	public function is_git_repo(): bool {
 		if ( isset( $this->is_git ) ) {
 			return $this->is_git;
 		}
@@ -196,8 +196,8 @@ class Dev_Helpers {
 		try {
 
 			$git_head_file = '.git/refs/heads/' . $this->get_git_branch();
-			$commit = file_get_contents( $this->plugin->path( $git_head_file  ), true );
-			$this->commit = explode( '/', $git_head_file, 3 );
+			$commit        = file_get_contents( $this->plugin->path( $git_head_file ), true );
+			$this->commit  = explode( '/', $git_head_file, 3 );
 			$this->commit  = rtrim( $ref[2] );
 			return $this->branch;
 
