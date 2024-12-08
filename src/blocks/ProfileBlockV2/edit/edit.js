@@ -11,7 +11,7 @@ import { useRef, useEffect} from '@wordpress/element';
 import { ToolbarGroup, Toolbar, Icon } from '@wordpress/components';
 
 import { addQueryArgs } from '@wordpress/url';
-import { useDispatch } from "@wordpress/data";
+import { useDispatch, useSelect } from "@wordpress/data";
 import { external, postAuthor } from '@wordpress/icons';
 
 import { ProfileResetPanel } from '../../../components/Panels/ProfileResetPanel.jsx';
@@ -67,7 +67,7 @@ const ProfileBlockControls = ({ attributes, setAttributes, ...props}) => {
 	)
 }
 
-function ProfileBlockEdit( {attributes, setAttributes, isSelected: isSingleSelected, ...props} ) {
+function ProfileBlockEdit( {attributes, setAttributes, isSelected: isSingleSelected, clientId, ...props} ) {
 
     const ref = useRef(null);
 	const instanceId = useInstanceId( ProfileBlockEdit );
@@ -87,6 +87,12 @@ function ProfileBlockEdit( {attributes, setAttributes, isSelected: isSingleSelec
 		orientation: "vertical",
 		renderAppender : InnerBlocks.DefaultBlockAppender
 	})
+
+	const allowedBlocks = useSelect( (select) => {
+		return select(blockEditorStore).getAllowedBlocks(clientId)
+	}, [clientId] )
+
+	console.log("allowedBlocks", allowedBlocks)
 
 	useEffect( () => {
 		if ( ! Number.isFinite( queryId ) ) {

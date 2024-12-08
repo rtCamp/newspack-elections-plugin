@@ -1,4 +1,5 @@
 import { registerBlockCollection, registerBlockType, registerBlockVariation } from '@wordpress/blocks';
+import { addFilter } from "@wordpress/hooks"
 
 /**
  * Internal dependencies
@@ -11,12 +12,17 @@ import { registerBlockCollection, registerBlockType, registerBlockVariation } fr
  * Style dependencies - will load in editor
  */
 import './view.scss';
-
-
 import { variations } from './variations';
-
+import {withRestrictedAllowedBlocks} from "./edit/restrict-allowed-blocks"
 const { attributes, category } = metadata;
 
+
+// Add the filter
+addFilter(
+    'editor.BlockEdit',
+    'govpack/restrict-allowed-blocks',
+    withRestrictedAllowedBlocks
+);
 
 
 registerBlockType( metadata.name, {
@@ -32,6 +38,15 @@ registerBlockType( metadata.name, {
 	save: Save,
 	
 } );
+
+
+// Our filter function
+function lockParagraphs( blockAttributes, blockType, innerHTML, attributes  ) {
+    if('core/paragraph' === blockType.name) {
+        blockAttributes['lock'] = {move: true}
+    }
+    return blockAttributes;
+}
 
 
 
