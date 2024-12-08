@@ -161,7 +161,6 @@ if ( ! function_exists( 'gp_style_attribute_generator' ) ) {
 	}
 }
 
-
 /**
  * Utility Function that conditionally Outputs a link to a profile around some other content
  * 
@@ -180,7 +179,7 @@ if ( ! function_exists( 'gp_maybe_link' ) ) {
 }
 
 if ( ! function_exists( 'gp_get_icons' ) ) {
-	function gp_get_icons() {
+	function gp_get_icons(): array {
 		return gp()->icons()->all();
 	}
 }
