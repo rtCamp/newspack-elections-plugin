@@ -1,5 +1,5 @@
 import {useSelect} from "@wordpress/data"
-import {store as blockEditorStore} from "@wordpress/block-editor"
+import {store as blockEditorStore, useInnerBlocksProps, useBlockProps} from "@wordpress/block-editor"
 import { store as blocksStore } from '@wordpress/blocks';
 
 import { ProfileBlockEdit } from "./edit"
@@ -15,7 +15,8 @@ import { ProfileSelector } from "./profile-selector"
 export const ProfileEdit = ( props ) => {
 
 	const { clientId, attributes, name } = props
-	
+	const blockProps = useBlockProps()
+	const innerBlockProps = useInnerBlocksProps(blockProps)
 
 	// Once a Profile Has Inner Blocks we can't re-choose the variation
 	const { hasInnerBlocks, hasVariations } = useSelect( ( select ) => ({
@@ -44,6 +45,8 @@ export const ProfileEdit = ( props ) => {
 
 
 	return (
-		<Component  {...props} />
+		<div {...innerBlockProps}>
+			<Component  {...props} />
+		</div>
 	)
 }

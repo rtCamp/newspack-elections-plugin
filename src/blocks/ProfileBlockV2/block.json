@@ -21,13 +21,16 @@
 			"text": true	
 		},
 		"layout" : {
-			"allowSwitching": true,
+			"allowSwitching": false,
 			"allowVerticalAlignment": true,
 			"allowSizingOnChildren": true,
 			"allowEditing": true,
 			"default" : {
 				"type" : "flex"
 			}
+		},
+		"dimensions": {
+			"minHeight": true
 		},
 		"shadow": true, 
 		"spacing": {
@@ -60,6 +63,9 @@
 		},
 		"width": {
 			"type": "string"
+		},
+		"style": {
+			"type": "object"
 		}
 	},
 	"allowedBlocks": [ 

@@ -9,7 +9,10 @@ import { store as blocksStore, synchronizeBlocksWithTemplate } from '@wordpress/
 
 import { DEFAULT_TEMPLATE } from './default-template';
 
-export const ProfileVariationSelector = ({ name, clientId, setAttributes } ) => {
+export const ProfileVariationSelector = ( props ) => {
+
+	const { name, clientId, setAttributes } = props
+	
 	const {variations, getSelectedBlocksInitialCaretPosition, isBlockSelected} = useSelect(
 		( select ) => {
 			return {
@@ -45,6 +48,7 @@ export const ProfileVariationSelector = ({ name, clientId, setAttributes } ) => 
 	};
 	
 	return <BlockVariationPicker 
+		{...props}
 		variations={ variations } 
 		onSelect = { selectVariation }
 	/>;

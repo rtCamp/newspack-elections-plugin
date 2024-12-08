@@ -3,45 +3,25 @@
  */
 import { __ } from '@wordpress/i18n';
 import { 
-	InspectorControls, useBlockProps, useInnerBlocksProps,  InnerBlocks, BlockControls, store as blockEditorStore,
-	__experimentalUseMultipleOriginColorsAndGradients as useMultipleOriginColorsAndGradients, withColors, useSettings
+	InspectorControls, useBlockProps, useInnerBlocksProps, InnerBlocks, BlockControls, store as blockEditorStore,
 } from '@wordpress/block-editor';
+
 import { useInstanceId } from '@wordpress/compose';
 import { useRef, useEffect} from '@wordpress/element';
-import { ResizableBox, ToolbarButton, ToolbarGroup, Toolbar, Icon } from '@wordpress/components';
+import { ToolbarGroup, Toolbar, Icon } from '@wordpress/components';
+
 import { addQueryArgs } from '@wordpress/url';
-
 import { useDispatch } from "@wordpress/data";
-
 import { external, postAuthor } from '@wordpress/icons';
-import {ProfileResetPanel} from '../../../components/Panels/ProfileResetPanel.jsx';
 
-
+import { ProfileResetPanel } from '../../../components/Panels/ProfileResetPanel.jsx';
 import { Spinner } from './../../../components/Spinner.jsx';
-import { ProfileSelector } from "./../../../components/ProfileSelector.jsx"
 import { useSelectProfile } from "./../../../components/SelectProfile.jsx"
 
-import { addFilter } from '@wordpress/hooks';
+
 
 import { DEFAULT_TEMPLATE } from './default-template.js';
 
-
-
-
-/*
-addFilter(
-	'blockEditor.useSetting.before',
-	'govpack/useSetting.before',
-	( settingValue, settingName, clientId, blockName ) => {
-		if(blockName !== "govpack/profile-v2"){
-			return settingValue;
-		}
-		console.log(settingName, settingValue)
-		return settingValue;
-	}
-);
-
-*/
 
 const usePostEditURL = ( postId ) => {
 
@@ -93,41 +73,11 @@ function ProfileBlockEdit( {attributes, setAttributes, isSelected: isSingleSelec
 	const instanceId = useInstanceId( ProfileBlockEdit );
 	const blockProps = useBlockProps( { ref } );
 
-	//console.log(useSettings("madeup.setting.path"))
-	//console.log("getting all pallete", useSettings("color.palette"))
 	const { __unstableMarkNextChangeAsNotPersistent } = useDispatch( blockEditorStore );
 
-	/*
-	let colorGradientSettings = useMultipleOriginColorsAndGradients();
-	colorGradientSettings.colors = [
-		...colorGradientSettings.colors,
-		...[
-			{
-				"name" : "Elections",
-				"colors" : [
-					{
-						"color": "#ff0000",
-						"slug": "election-1",
-						"label": "Election Red"
-					},
-					{
-						"color": "#0000ff",
-						"slug": "election-2",
-						"label": "Election Blue"
-					}
-				]
-			}
-		]
-	]
-	*/
-
-	//console.log(colorGradientSettings);
-
-	const currentWidth = ref.current?.offsetWidth
 	const {
 		profileId = 0,
 		queryId,
-        showAvatar
 	} = attributes;
 
 	const {profile, ...query} = useSelectProfile(profileId)
@@ -136,10 +86,7 @@ function ProfileBlockEdit( {attributes, setAttributes, isSelected: isSingleSelec
 		template: DEFAULT_TEMPLATE,
 		orientation: "vertical",
 		renderAppender : InnerBlocks.DefaultBlockAppender
-
 	})
-
-	const showResizeHandle = ((isSingleSelected) && (['left', 'right', 'center'].includes(attributes.align)))
 
 	useEffect( () => {
 		if ( ! Number.isFinite( queryId ) ) {
@@ -151,6 +98,7 @@ function ProfileBlockEdit( {attributes, setAttributes, isSelected: isSingleSelec
 	const resetProfile = () => {
 		setProfile( 0 )
 	}
+
 	const setProfile = (newProfileId = 0) => {
 
 		if(newProfileId === null){
@@ -182,11 +130,7 @@ function ProfileBlockEdit( {attributes, setAttributes, isSelected: isSingleSelec
 	const showProfile = ((query.hasFinishedResolution) && (profile))
 
 	return (
-		<div { ...innerBlockProps }>
-
-			{ showSelector && (
-				<ProfileSelector setProfile = {setProfile} />
-			) }
+		<>
 
 			{ showSpinner && (
 				<Spinner />
@@ -204,37 +148,10 @@ function ProfileBlockEdit( {attributes, setAttributes, isSelected: isSingleSelec
 						<ProfileResetPanel profileId = {profileId} setProfile = {resetProfile}  />
 					</InspectorControls>
 						
-						{/* 
-						<ResizableBox
-							enable={ {
-								top: false,
-								right: true,
-								bottom: false,
-								left: false,
-							} }
-							showHandle={ showResizeHandle }
-							style={ {
-								display: 'block'
-							} }
-							size={ {
-								width: currentWidth + "px" ?? 'auto',
-								height: 'auto',
-							} }
-							onResizeStop={ ( event, direction, elt ) => {
-								setAttributes( {
-									width: `${ elt.offsetWidth }px`,
-								} );
-							} }
-						>						
-						*/}
-						{ children }
-						{/** 
-					</ResizableBox>
-							*/}
-					
+					{ children }
 				</>
 			)}
-		</div>
+		</>
 	);
 }
 
