@@ -186,7 +186,7 @@ class Govpack {
 	}
 
 	public function register_blocks(): void {
-		$this->blocks()->register( new \Govpack\Blocks\Profile\Profile() );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileSelf\ProfileSelf() );
+		$this->blocks()->register( new \Govpack\Blocks\Profile\Profile( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileSelf\ProfileSelf( $this ) );
 	}
 }

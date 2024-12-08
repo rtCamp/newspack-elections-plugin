@@ -17,7 +17,7 @@ class NPE_Bootstrap_Helper extends Govpack_Bootstrap_Helper {
 	 * 
 	 * @since 1.2
 	 */
-	public static function notice_double_install() {
+	public static function notice_double_install(): void {
 
 		\wp_admin_notice(
 			__( 'Newspack Elections: Plugin installed twice. Possibly under different names. Please check and disable unwanted versions.', 'newspack-elections' ),
