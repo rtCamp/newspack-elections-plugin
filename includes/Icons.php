@@ -4,6 +4,8 @@ namespace Govpack;
 
 class Icons {
 
+	private Govpack $plugin;
+
 	private array $cache = [];
 
 	private array $pre_known = [
@@ -18,13 +20,17 @@ class Icons {
 		'website',
 	];
 
-	public function icon_dir() : string {
-		return GOVPACK_PLUGIN_BUILD_PATH . '/icons';
+	public function __construct( $plugin ) {
+		$this->plugin = $plugin;
+	}
+
+	public function icon_dir(): string {
+		return $this->plugin->path( '/build/icons' );
 	}
 	/**
 	 * Load an SVG icon from disk
 	 */
-	private function load( string $icon ) : bool | string {
+	private function load( string $icon ): bool|string {
 		$filepath = sprintf( '%s/%s.svg', $this->icon_dir(), $icon );
 
 		// never load a remote file
@@ -60,7 +66,7 @@ class Icons {
 	/**
 	 * Provides an array of all icons that are pre-known and have been added to the cache since
 	 */
-	public function all() : array {
+	public function all(): array {
 		
 		foreach ( $this->pre_known as $icon ) {
 			$this->get( $icon );
@@ -72,7 +78,7 @@ class Icons {
 	/**
 	 * Gets an Icon, either from Cache or disk 
 	 */
-	public function get( string $icon ) : string {
+	public function get( string $icon ): string {
 
 		if ( ! $this->cached( $icon ) ) {
 			$value = $this->load( $icon );
@@ -89,18 +95,18 @@ class Icons {
 	/**
 	 * Looks for an icon in the icon cache 
 	 */
-	public function cached( string $icon ) : bool {
+	public function cached( string $icon ): bool {
 		return isset( $this->cache[ $icon ] );
 	}
 
 	/**
 	 * Puts an icon in the cache
 	 */
-	public function cache( string $key, string $value ) : void  {
+	public function cache( string $key, string $value ): void {
 		$this->cache[ $key ] = $value;
 	}
 
-	public function exists( string $key ) : bool{
+	public function exists( string $key ): bool {
 		
 		$found = $this->get( $key );
 

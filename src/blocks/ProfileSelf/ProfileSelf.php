@@ -15,10 +15,11 @@ defined( 'ABSPATH' ) || exit;
 class ProfileSelf extends \Govpack\Blocks\Profile\Profile {
 
 	public string $block_name = 'govpack/profile-self';
-	public $template   = 'profile-self';
+	public $template          = 'profile-self';
+
 
 	public function block_build_path(): string {
-		return trailingslashit( GOVPACK_PLUGIN_BUILD_PATH . 'blocks/ProfileSelf' );
+		return $this->plugin->build_path( 'blocks/ProfileSelf' );
 	}
 
 	/**
@@ -36,7 +37,7 @@ class ProfileSelf extends \Govpack\Blocks\Profile\Profile {
 		return $this->handle_render( $attributes, $content, $block );
 	}
 
-	public function disable_block( $allowed_blocks, $editor_context ) : bool {
+	public function disable_block( $allowed_blocks, $editor_context ): bool {
 		return false;
 	}
 }   

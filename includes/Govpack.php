@@ -43,20 +43,18 @@ class Govpack {
 		$this->require( 'includes/govpack-functions.php' );
 		$this->require( 'includes/govpack-functions-template.php' );
 
-		$this->version = new Version($this);
+		$this->version = new Version( $this );
 
 		if ( class_exists( '\Govpack\Dev_Helpers' ) ) {
 			$this->dev = new \Govpack\Dev_Helpers( $this );
 			$this->dev->hooks();
 		}
-
-		
-		
 	}
 
-	public function path( string $path ) : string {
-		return GOVPACK_PLUGIN_PATH . $path; 
+	public function path( $path ) {
+		return GOVPACK_PLUGIN_PATH . $path;
 	}
+
 
 	/**
 	 * Action called by the plugin activation hook.
@@ -76,17 +74,17 @@ class Govpack {
 		\Govpack\Capabilities::instance()->remove_capabilities();
 	}
 
-	public function build_path( string $path ) : string {
+	public function build_path( string $path ): string {
 		return trailingslashit(
 			trailingslashit( $this->path( 'build' ) ) . $path 
 		);
 	}
 
-	public function require( string $path ) : string {
+	public function require( string $path ): string {
 		return require_once $this->path( $path ); //phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
 	}
 
-	public function url( string $path ) : string {
+	public function url( string $path ): string {
 		return trailingslashit( GOVPACK_PLUGIN_URL ) . $path;
 	}
 
@@ -100,7 +98,7 @@ class Govpack {
 	/**
 	 * Registers Plugin Post Types
 	 */
-	public static function post_types() : void {
+	public static function post_types(): void {
 		// Custom Post Types.
 		\Govpack\CPT\Profile::hooks();
 	}
@@ -108,7 +106,7 @@ class Govpack {
 	/**
 	 * Registers Plugin Taxonomies
 	 */
-	public static function taxonomies()  : void  {
+	public static function taxonomies(): void {
 		// Custom Post Types.
 		\Govpack\Tax\LegislativeBody::hooks();
 		\Govpack\Tax\OfficeHolderStatus::hooks();
@@ -118,7 +116,7 @@ class Govpack {
 	}
 	
 
-	public function setup()  : void {
+	public function setup(): void {
 
 		// Custom Post Types & taxonomies.
 		self::post_types();
@@ -142,7 +140,7 @@ class Govpack {
 		}
 	}
 
-	public function admin()  : Admin {
+	public function admin(): Admin {
 		if ( ! isset( $this->admin ) ) {
 			$this->admin = new Admin( $this );
 			$this->admin->hooks();
@@ -151,7 +149,7 @@ class Govpack {
 		return $this->admin;
 	}
 
-	public function front_end()  : FrontEnd {
+	public function front_end(): FrontEnd {
 
 		if ( ! isset( $this->front_end ) ) {
 			$this->front_end = FrontEnd::instance();
@@ -162,7 +160,7 @@ class Govpack {
 		return $this->front_end;
 	}
 
-	public function blocks() : Blocks {
+	public function blocks(): Blocks {
 
 		if ( ! isset( $this->blocks ) ) {
 			$this->blocks = new Blocks();
@@ -172,10 +170,10 @@ class Govpack {
 		return $this->blocks;
 	}
 
-	public function icons() : Icons {
+	public function icons(): Icons {
 
 		if ( ! isset( $this->icons ) ) {
-			$this->icons = new Icons();
+			$this->icons = new Icons( $this );
 		}
 		
 		return $this->icons;
@@ -185,6 +183,4 @@ class Govpack {
 		$this->blocks()->register( new \Govpack\Blocks\Profile\Profile() );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileSelf\ProfileSelf() );
 	}
-
-	
 }

@@ -14,6 +14,12 @@
                 "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting"
             },
 			{
+				"action": "./bin/hooks/phpcbf.sh {$STAGED_FILES|of-type:php}"
+            },
+            {
+				"action": "./bin/hooks/phpcs.sh {$STAGED_FILES|of-type:php}"
+            },
+			{
                 "action": "\\CaptainHook\\App\\Hook\\Composer\\Action\\CheckLockFile"
             }
         ]

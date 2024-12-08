@@ -1,25 +1,25 @@
 <?php
 
 if ( ! function_exists( 'gp' ) ) {
-	function gp() : \Govpack\Govpack {
+	function gp(): \Govpack\Govpack {
 		return \Govpack\Govpack::instance();
 	}
 }
 
 if ( ! function_exists( 'gp_template_loader' ) ) {
-	function gp_template_loader() : \Govpack\TemplateLoader {
+	function gp_template_loader(): \Govpack\TemplateLoader {
 		return gp()->front_end()->template_loader();
 	}
 }
 
 if ( ! function_exists( 'gp_get_template_part' ) ) {
-	function gp_get_template_part( string $slug, string $name = '', array $data = [] ) : string {
-		return gp_template_loader()->get_template_part( $slug, $name, true);
+	function gp_get_template_part( string $slug, string $name = '', array $data = [] ): string {
+		return gp_template_loader()->get_template_part( $slug, $name, true );
 	}
 }
 
 if ( ! function_exists( 'gp_get_block_part' ) ) {
-	function gp_get_block_part( string $slug, string $name = '', array $attributes = [], string $content = '', string|null $block = null, string|null $extra = null ) : void {
+	function gp_get_block_part( string $slug, string $name = '', array $attributes = [], string $content = '', string|null $block = null, string|null $extra = null ): void {
 		gp_template_loader()->get_block_part( $slug, $name, $attributes, $content, $block, $extra );
 	}
 }
@@ -56,5 +56,13 @@ if ( ! function_exists( 'gp_doing_it_wrong' ) ) {
 		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 		_doing_it_wrong( $function_name, $message, $version );
 		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
+	}
+}
+
+
+if ( ! function_exists( 'gp_deprecated' ) ) {
+	function gp_deprecated( string $function_name, string $version ): void {
+		$message = sprintf( 'The function <code>%s</code> has been deprecated from version <code>%s</code> and will be removed in an upcoming release.', $function_name, $version );
+		gp_doing_it_wrong( $function_name, $message, $version );
 	}
 }

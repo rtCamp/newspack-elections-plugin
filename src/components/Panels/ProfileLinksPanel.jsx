@@ -19,7 +19,7 @@ export const ProfileLinksPanel = (props) => {
 
 	const setSubAttributes = (attrs) => {
 
-		console.log("setSubAttributes", attrs)
+		
 		const newAttrs = {
 			...attributes[parentAttributeKey],
 			...attrs
@@ -85,7 +85,7 @@ export const ProfileLinksPanel = (props) => {
 	
 	
 
-	console.log(attributes[parentAttributeKey])
+	
 
 	if( isNil(profile) || isNil(profile.link_services)){
 		return null;

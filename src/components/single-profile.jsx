@@ -478,7 +478,7 @@ const SingleProfile = (props) => {
 		let found = false
 
 		for(const key in testObj){
-			
+				
 			if (typeof testObj[key] === "object") {
 				found = hasSocial(testObj[key])
 			} else if(testObj[key] !== ""){
