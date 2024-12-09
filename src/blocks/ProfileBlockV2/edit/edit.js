@@ -67,7 +67,7 @@ const ProfileBlockControls = ({ attributes, setAttributes, ...props}) => {
 	)
 }
 
-function ProfileBlockEdit( {attributes, setAttributes, isSelected: isSingleSelected, clientId, ...props} ) {
+function ProfileBlockEdit( {attributes, setAttributes, isSelected: isSingleSelected, clientId,  ...props} ) {
 
     const ref = useRef(null);
 	const instanceId = useInstanceId( ProfileBlockEdit );
@@ -92,8 +92,9 @@ function ProfileBlockEdit( {attributes, setAttributes, isSelected: isSingleSelec
 		return select(blockEditorStore).getAllowedBlocks(clientId)
 	}, [clientId] )
 
-	console.log("allowedBlocks", allowedBlocks)
 
+	console.log(attributes);
+	
 	useEffect( () => {
 		if ( ! Number.isFinite( queryId ) ) {
 			__unstableMarkNextChangeAsNotPersistent();

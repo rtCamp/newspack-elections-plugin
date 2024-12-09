@@ -27,13 +27,70 @@ export const variations = [
 		'title' : "Mini Profile",
 		isDefault : false,
 		icon : justifyLeft,
+		example : {
+			attributes : {
+				"preview" : true,
+				"width" : "wide",
+				"align": "left",
+				"backgroundColor":"accent",
+				"verticalAlignment":"center",
+				"fontSize":"medium",
+				"textColor":"base-2",
+				"style":{
+					"spacing":{
+						"padding":{
+							"top":"0.5rem","bottom":"0.5rem","left":"0.5rem","right":"0.5rem"}
+					},
+					"typography":{ "textAlign":"left" },
+					"dimensions" : { "minHeight" : "10rem" }
+				},
+				"layout":{
+					"type":"flex",
+					"verticalAlignment":"middle",
+					"justifyContent":"left",
+					"flexWrap":"nowrap"
+				},
+			},
+			innerBlocks : [
+				{
+					name : "core/post-featured-image", 
+					attributes :{"style":{"layout":{"selfStretch":"fixed","flexSize":"130px"},"border":{"radius":"100px"}}}
+				},
+				{
+					name : "core/group", 
+					attributes : {"style":{"spacing":{"blockGap":"0.2rem"},"layout":{"selfStretch":"fill","flexSize":null}},"layout":{"type":"constrained"}} , 
+					innerBlocks: [
+						{
+							name : "core/post-title", 
+							attributes : {"style":{"typography":{"fontStyle":"normal","fontWeight":"1000","fontSize":"1.4rem"},"spacing":{"padding":{"bottom":"0.5rem"}}}}, 
+							innerBlocks : []
+						},
+						{
+							name :"govpack/profile-terms", 
+							attributes :{"taxonomy":"govpack_legislative_body","fontSize":"small"}, 
+							innerBlocks : []
+						},
+						{
+							name :"govpack/profile-terms", 
+							attributes :{"taxonomy":"govpack_party","fontSize":"small"}, 
+							innerBlocks :[]
+						},
+						{
+							name :"govpack/profile-terms", 
+							attributes :{"taxonomy":"govpack_officeholder_status","fontSize":"small"}, 
+							innerBlocks :[]
+						}
+					]
+				}
+			]
+		},
 		attributes : {
 			"width" : "wide",
 			"align": "left",
 			"backgroundColor":"accent",
 			"verticalAlignment":"center",
-			"backgroundColor":"accent",
 			"fontSize":"medium",
+			"textColor":"base-2",
 			"style":{
 				"spacing":{
 					"padding":{
@@ -48,7 +105,7 @@ export const variations = [
 				"justifyContent":"left",
 				"flexWrap":"nowrap"
 			},
-			"textColor":"base-2"
+			
 		},
 		innerBlocks : [
 			[

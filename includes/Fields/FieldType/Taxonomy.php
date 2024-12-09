@@ -9,14 +9,14 @@ class Taxonomy extends \Govpack\Fields\FieldType {
 	 * 
 	 * Machine readable name to reference the field
 	 */
-	public string $slug = 'text';
+	public string $slug = 'taxonomy';
 
 	/**
 	 * Type Label
 	 * 
 	 * Human readable label for types
 	 */
-	public string $label = 'Text';
+	public string $label = 'Taxonomy';
 
 	/**
 	 * Type Icon
@@ -24,10 +24,17 @@ class Taxonomy extends \Govpack\Fields\FieldType {
 	 * An Icon to use for the Variation
 	 */
 	public function variation_icon(): string {
-		return 'text';
+		return 'tag';
 	}
 
 	public function get_value_for_model(){
 		
+	}
+
+	public function get_variation_inner_blocks(): array {
+		return [
+			[ 'govpack/profile-label', [] ],
+			[ 'govpack/profile-terms', [] ],
+		];
 	}
 }

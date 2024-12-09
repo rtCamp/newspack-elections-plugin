@@ -27,6 +27,7 @@ class TaxonomyField extends Field {
 		$this->taxonomy = $taxonomy;
 		$this->meta_key = null;
 		$this->source = "term";
+		$this->set_type( 'taxonomy' );
 	}
 	
 }

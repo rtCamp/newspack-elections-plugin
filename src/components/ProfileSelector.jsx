@@ -15,6 +15,7 @@ export const ProfileSelector = ( {
 	...props
 } ) => {
 
+	console.log("Selector")
 	const [ isLoading, setIsLoading ] = useState( false );
 	const [ maxItemsToSuggest, setMaxItemsToSuggest ] = useState( 10 )
 
@@ -72,6 +73,7 @@ export const ProfileSelector = ( {
                     } }
 					maxItemsToSuggest={ maxItemsToSuggest }
 					onChange={ (items) => {
+						console.log("onChange")
 						let profileId = parseInt( items[ 0 ].value );
 						setProfile(profileId)
 					}}

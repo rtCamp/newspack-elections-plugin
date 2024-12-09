@@ -7,12 +7,16 @@ import {
 	DropdownMenu
 } from '@wordpress/components';
 
+import { useProfileField } from "./../../Profile"
+
 export default function ProfileFieldsDropDown( {
 	className,
 	onSelectField,
 	selectedValue,
 	fields
 } ) {
+
+	const CurrentField = useProfileField(selectedValue)
 
 	const selectedOptions = fields.map( (f) => ({
 		label : f.label,
@@ -21,17 +25,21 @@ export default function ProfileFieldsDropDown( {
 		disabled : (!f.value ? true : false)
 	}))
 
+	console.log("selectedValue", selectedValue, CurrentField)
+
 	return (
 		<DropdownMenu
 			className={ className }
-			label={ __( 'Profile Field' ) }
-			text={ __( 'Profile Field' ) }
+			label={ __( 'Profile Field Selector' ) }
+			text={ CurrentField.label }
 			popoverProps={ {
 				position: 'bottom center',
 				className: `${ className }__popover`,
 			} }
 			icon={ chevronDown }
-			toggleProps={ { iconPosition: 'right' } }
+			toggleProps={ { 
+				iconPosition: 'right'
+			} }
 		>
 			{ () => (
 				<div className={ `${ className }__container` }>

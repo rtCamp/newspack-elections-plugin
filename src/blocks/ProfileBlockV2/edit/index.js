@@ -14,9 +14,14 @@ import { ProfileSelector } from "./profile-selector"
 */
 export const ProfileEdit = ( props ) => {
 
+	console.log("ProfileEdit");
+
 	const { clientId, attributes, name } = props
 	const blockProps = useBlockProps()
 	const innerBlockProps = useInnerBlocksProps(blockProps)
+	const isPreview = attributes.preview ?? true
+
+	console.log(isPreview)
 
 	// Once a Profile Has Inner Blocks we can't re-choose the variation
 	const { hasInnerBlocks, hasVariations } = useSelect( ( select ) => ({
@@ -31,7 +36,7 @@ export const ProfileEdit = ( props ) => {
 	const hasSelectedProfile = attributes.profileId ?? false
 
 	const showVariationSelector = !hasInnerBlocks && hasVariations;
-	const showProfileSelector = !hasSelectedProfile;
+	const showProfileSelector = !hasSelectedProfile && !isPreview;
 	const showEdit = hasInnerBlocks && hasSelectedProfile;
 
 	let Component

@@ -41,8 +41,11 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 		fieldType = "text"
 	} = attributes
 
+	console.log("localFieldKey", localFieldKey)
 	console.log("inheritedFieldKey", inheritedFieldKey)
 	const fieldKey = localFieldKey ?? inheritedFieldKey ?? "name"
+
+	console.log("fieldKey", fieldKey)
 
 	const setFieldKey = (newKey) => {
 		setAttributes({"fieldKey" : newKey})

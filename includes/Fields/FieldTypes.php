@@ -21,6 +21,7 @@ class FieldTypes extends Collection implements CollectionInterface {
 		$this->register( new FieldType\Text() );
 		$this->register( new FieldType\Date() );
 		$this->register( new FieldType\Link() );
+		$this->register( new FieldType\Taxonomy() );
 	}
 
 	

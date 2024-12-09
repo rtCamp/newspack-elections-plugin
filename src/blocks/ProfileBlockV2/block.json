@@ -51,6 +51,10 @@
 		}
 	},
 	"attributes": {
+		"preview" : {
+			"type": "boolean",
+			"default": false
+		},
 		"queryId": {
 			"type": "number"
 		},

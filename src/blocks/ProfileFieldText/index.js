@@ -1,4 +1,4 @@
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockType, createBlock } from '@wordpress/blocks';
 import { postCategories as icon } from '@wordpress/icons';
 import { __ } from "@wordpress/i18n"
 
@@ -31,7 +31,26 @@ registerBlockType( metadata.name, {
 	],
 	edit : Edit,
 	save: Save,
+	transforms: {
+		"to" : [
+			{
+				type: 'block',
+				blocks: [ 'govpack/profile-row' ],
+				transform: ( attributes  ) => {
+					return createBlock( 'govpack/profile-row', attributes );
+				},
+			}
+		],
+		"from" : [
+			{
+				type: 'block',
+				blocks: [ 'govpack/profile-row' ],
+				transform: ( attributes  ) => {
+					return createBlock( 'govpack/profile-field-text', attributes );
+				},
+			}
+		]
+	}
 } );
 
 
-console.log("register profile-field-text")

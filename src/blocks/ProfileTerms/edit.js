@@ -10,6 +10,8 @@ import { decodeEntities } from '@wordpress/html-entities';
 
 import useProfileTerms from "./use-profile-terms"
 
+import { useProfileField } from '../../components/Profile';
+
 /**
  * TODO:
  * 1. Move useProfileTaxonomies to its own, reusable hook
@@ -55,20 +57,27 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 	const blockProps = useBlockProps();
 	
 	const { 
-		'govpack/profileId' : profileId, 
+		'govpack/profileId' : profileId,
+		'govpack/fieldKey' : fieldKey, 
 		postType = false
 	} = context
 
 	const { 
-		'taxonomy' : tax, 
+		'taxonomy' : localFieldKey, 
 	} = attributes
 
+	const Field = useProfileField(fieldKey)
+
+	const tax = Field?.taxonomy ?? localFieldKey  ?? null
 	
+	
+
 	const taxonomies = useProfileTaxonomies();
 	const taxonomy = taxonomies?.find( (t) => {
 		return t.slug === tax
 	})
 	
+	console.log("taxonomy", taxonomy)
 	const { profileTerms, hasProfileTerms, isLoading } = useProfileTerms( profileId, taxonomy)
 	const hasProfile = (profileId && postType);
 
