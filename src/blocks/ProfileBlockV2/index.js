@@ -18,13 +18,14 @@ const { attributes, category } = metadata;
 
 
 // Add the filter
+/*
 addFilter(
     'editor.BlockEdit',
     'govpack/restrict-allowed-blocks',
     withRestrictedAllowedBlocks
 );
 
-
+*/
 registerBlockType( metadata.name, {
 	apiVersion: 3,
 	title: 'GovPack Profile v2',

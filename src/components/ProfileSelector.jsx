@@ -72,6 +72,7 @@ export const ProfileSelector = ( {
                     } }
 					maxItemsToSuggest={ maxItemsToSuggest }
 					onChange={ (items) => {
+						console.log("Hit", items)
 						let profileId = parseInt( items[ 0 ].value );
 						setProfile(profileId)
 					}}

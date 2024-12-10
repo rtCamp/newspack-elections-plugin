@@ -10,6 +10,6 @@ export const ProfileSelector = ( props ) => {
 	}
 
 	return (
-		<ProfileSelectorPlaceholder setProfile = {setProfile} {...props}/>
+		<ProfileSelectorPlaceholder setProfile = {setProfile} />
 	)
 }
