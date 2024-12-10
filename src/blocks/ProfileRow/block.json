@@ -6,12 +6,12 @@
     "editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./index.css",
-	"category": "govpack",
+	"category": "newspack-elections",
 	"supports" : {
 		"anchor": true,
 		"align": true,
-		"align-wide": true,
-		"aria-label": true,
+		"alignWide": true,
+		"ariaLabel": true,
 		"color" : {
 			"background" : true,
 			"button": true,
@@ -23,6 +23,7 @@
 		},
 		"layout" : {
 			"allowSwitching": false,
+			"allowSizingOnChildren": true,
 			"default" : {
 				"type" : "flex"
 			}
@@ -40,6 +41,23 @@
 		}
 	},
 	"attributes": {
+		"style" : {
+			"type" : "object",
+			"default" : {
+				"layout" : {
+					"selfStretch":"fill",
+					"flexSize":null
+				}
+			}
+		},
+		"layout":{
+			"type" : "object",
+			"default" : {
+				"type":"flex",
+				"flexWrap":"no-wrap",
+				"justifyContent":"space-between"
+			}
+		},
 		"align": {
 			"type": "string",
 			"default": "full"
@@ -69,4 +87,5 @@
 		"govpack/fieldKey": "fieldKey",
 		"govpack/showLabel": "showLabel"
 	}
+	
 }

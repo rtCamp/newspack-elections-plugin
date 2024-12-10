@@ -6,6 +6,8 @@ import { ProfileBlockEdit } from "./edit"
 import { ProfileVariationSelector } from "./variation-selector"
 import { ProfileSelector } from "./profile-selector"
 
+import { ProfileSelector as ProfileSelectorPlaceholder } from "./../../../components/ProfileSelector.jsx"
+
 /**
  * The ProfileEdit Component's only job is to show the correct sub-component
  * 1. The Profile Selection UI
@@ -14,44 +16,52 @@ import { ProfileSelector } from "./profile-selector"
 */
 export const ProfileEdit = ( props ) => {
 
-	console.log("ProfileEdit");
-
-	const { clientId, attributes, name } = props
+	const { clientId, attributes, name, setAttributes } = props
 	const blockProps = useBlockProps()
 	const innerBlockProps = useInnerBlocksProps(blockProps)
 	const isPreview = attributes.preview ?? true
 
-	console.log(isPreview)
 
 	// Once a Profile Has Inner Blocks we can't re-choose the variation
-	const { hasInnerBlocks, hasVariations } = useSelect( ( select ) => ({
-			hasInnerBlocks : select( blockEditorStore ).getBlocks( clientId ).length,
-			hasVariations : select( blocksStore ).getBlockVariations( name ).length ,
-		}),
-		[ clientId, name ]
+	const hasInnerBlocks = useSelect( ( select ) => {
+			return{
+				hasInnerBlocks : select( blockEditorStore ).getBlocks( clientId ),
+			}
+		}, [ clientId ]
 	);
 
+	const hasVariations = useSelect( ( select ) => {
+			return{
+				hasVariations : select( blocksStore ).getBlockVariations( name ) ,
+			}
+		}, [ name ]
+	);
+	
+	const setProfile = (newProfileId) => {
+		setAttributes({"profileId" : newProfileId})
+	}
+	
 	
 	// If we have a profileId then dont show the selector
 	const hasSelectedProfile = attributes.profileId ?? false
-
-	const showVariationSelector = !hasInnerBlocks && hasVariations;
-	const showProfileSelector = !hasSelectedProfile && !isPreview;
+	const showVariationSelector = (hasInnerBlocks.length === 0) && (hasVariations.length > 0);
+	const showProfileSelector = !hasSelectedProfile;
 	const showEdit = hasInnerBlocks && hasSelectedProfile;
 
+	
 	let Component
 	if(showProfileSelector){
-		Component = ProfileSelector
+		Component = ProfileSelectorPlaceholder
 	} else if (showVariationSelector) {
 		Component = ProfileVariationSelector
 	} else {
 		Component = ProfileBlockEdit
 	}
-
-
+	
 	return (
+		
 		<div {...innerBlockProps}>
-			<Component  {...props} />
+			<Component  {...props} setProfile = {setProfile} />
 		</div>
 	)
 }

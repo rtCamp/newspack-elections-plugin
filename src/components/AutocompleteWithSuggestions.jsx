@@ -209,7 +209,10 @@ const AutocompleteWithSuggestions = (props) => {
 	 const renderSuggestion = suggestion => {
 		
 		return (
-			<Button isLink key={ suggestion.value } onClick={ () => handleOnChange( [ suggestion ] ) }>
+			<Button  key={ suggestion.value } onClick={ () => {
+				console.log("handle on change")
+				handleOnChange( [ suggestion ] ) }
+			}>
 				{ suggestion.label }
 			</Button>
 		);

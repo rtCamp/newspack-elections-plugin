@@ -31,7 +31,7 @@ export default function ProfileFieldsDropDown( {
 		<DropdownMenu
 			className={ className }
 			label={ __( 'Profile Field Selector' ) }
-			text={ CurrentField.label }
+			text={ CurrentField?.label ?? "Select a Profile Field" }
 			popoverProps={ {
 				position: 'bottom center',
 				className: `${ className }__popover`,

@@ -6,13 +6,14 @@
     "editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./index.css",
-	"category": "govpack",
+	"category": "newspack-elections",
 	"supports" : {
 		"align" : true,
-		"align-wide": true,
+		"alignWide": true,
 		"layout" : {
 			"allowSwitching": false,
 			"allowJustification": true,
+			"allowSizingOnChildren": true,
 			"allowEditing": true,
 			"default" : {
 				"type" : "flex"
@@ -25,6 +26,14 @@
 		}
 	},
 	"attributes": {
+		"layout":{
+			"type" : "object",
+			"default" : {
+				"type":"flex",
+				"orientation":"vertical",
+				"justifyContent":"stretch"
+			}
+		},
 		"showSeparator" : {
 			"type" : "boolean",
 			"default" : true

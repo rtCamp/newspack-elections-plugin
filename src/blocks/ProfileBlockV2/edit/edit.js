@@ -84,8 +84,7 @@ function ProfileBlockEdit( {attributes, setAttributes, isSelected: isSingleSelec
 
 	const {children, ...innerBlockProps} = useInnerBlocksProps(blockProps, {
 		template: DEFAULT_TEMPLATE,
-		orientation: "vertical",
-		renderAppender : InnerBlocks.DefaultBlockAppender
+		renderAppender : InnerBlocks.ButtonBlockAppender
 	})
 
 	const allowedBlocks = useSelect( (select) => {
@@ -93,7 +92,6 @@ function ProfileBlockEdit( {attributes, setAttributes, isSelected: isSingleSelec
 	}, [clientId] )
 
 
-	console.log(attributes);
 	
 	useEffect( () => {
 		if ( ! Number.isFinite( queryId ) ) {

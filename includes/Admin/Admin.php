@@ -62,11 +62,23 @@ class Admin {
 				],
 				[
 					'slug'  => 'govpack',
-					'title' => \__( 'Govpack', 'govpack' ),
+					'title' => \__( 'Newspack Election', 'newspack-elections' ),
 				],
 				[
-					'slug'  => 'govpack-profile-fields',
-					'title' => \__( 'Govpack Profile Fields', 'govpack' ),
+					'slug'  => 'newspack-elections-profile-row',
+					'title' => \__( 'Newspack Election Profile Rows', 'newspack-elections' ),
+				],
+				[
+					'slug'  => 'newspack-elections-profile-row-type',
+					'title' => \__( 'Newspack Election Profile Row Types', 'newspack-elections' ),
+				],
+				[
+					'slug'  => 'newspack-elections-profile-rows',
+					'title' => \__( 'Newspack Election Profile Rows', 'newspack-elections' ),
+				],
+				[
+					'slug'  => 'newspack-elections-profile-fields',
+					'title' => \__( 'Newspack Election Profile Fields', 'newspack-elections' ),
 				],
 			]
 		);
