@@ -67,12 +67,10 @@ class ProfileRow extends \Govpack\Blocks\Profile\Profile {
 
 	public function variations(): array {
 
-		$types = $this->create_field_type_variations();
-		//$fields = $this->create_field_variations();
+		$types  = $this->create_field_type_variations();
+		$fields = $this->create_field_variations();
 
-		//return array_merge( $types, $fields );
-
-		return $types;
+		return array_merge( $types, $fields );
 	}
 
 	public function create_field_variations(): array {
@@ -81,7 +79,7 @@ class ProfileRow extends \Govpack\Blocks\Profile\Profile {
 		
 		foreach ( \Govpack\Profile\CPT::fields()->all() as $field ) {
 			$variation = [
-				'category'    => 'govpack-profile-fields',
+				'category'    => 'newspack-elections-profile-rows',
 				'name'        => sprintf( 'profile-field-%s', $field->slug ),
 				'title'       => $field->label,
 				'description' => sprintf(
@@ -91,7 +89,7 @@ class ProfileRow extends \Govpack\Blocks\Profile\Profile {
 				),
 				'attributes'  => [
 					'fieldType' => $field->type->slug,
-					'meta_key'  => $field->slug,
+					'fieldKey'  => $field->slug,
 				],
 				'isActive'    => [ 'meta_key' ],
 				'scope'       => [ 'inserter', 'transform' ],
@@ -124,7 +122,7 @@ class ProfileRow extends \Govpack\Blocks\Profile\Profile {
 
 		foreach ( $types as $type ) {
 			$variation = [
-				'category'    => 'govpack-profile-fields',
+				'category'    => 'newspack-elections-profile-row-type',
 				'name'        => sprintf( 'profile-field-%s', $type->slug ),
 				'title'       => sprintf( 'Profile %s Row', ucfirst( $type->label ) ),
 				'description' => sprintf(

@@ -5,7 +5,7 @@
     "editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./index.css",
-	"category": "govpack",
+	"category": "newspack-elections",
 	"supports" : {
 		"anchor": true,
 		"align": true,
