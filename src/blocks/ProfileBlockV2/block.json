@@ -18,7 +18,8 @@
 			"gradients": true,
 			"heading": true,
 			"link": true,
-			"text": true	
+			"text": true,
+			"__experimentalSkipSerialization": ["background"]
 		},
 		"layout" : {
 			"allowSwitching": false,
@@ -27,7 +28,8 @@
 			"allowEditing": true,
 			"default" : {
 				"type" : "flex"
-			}
+			},
+			"__experimentalSkipSerialization": true
 		},
 		"dimensions": {
 			"minHeight": true
@@ -36,7 +38,8 @@
 		"spacing": {
 			"margin": true,  
 			"padding": true, 
-			"blockGap": true
+			"blockGap": true,
+			"__experimentalSkipSerialization": ["padding"]
 		},
 		"typography": {
 			"fontSize": true,
@@ -47,7 +50,8 @@
 			"color" : true,
 			"radius" : true,
 			"width" : true,
-			"style" : true
+			"style" : true,
+			"__experimentalSkipSerialization": true
 		}
 	},
 	"attributes": {
@@ -68,6 +72,10 @@
 		"width": {
 			"type": "string"
 		},
+		"customWidth": {
+			"type": "string",
+			"default": "250px"
+		},
 		"style": {
 			"type": "object"
 		}
@@ -87,6 +95,11 @@
 		"govpack/profile-separator", 
 		"govpack/profile-field-text",
 		"govpack/profile-field-link"
+	],
+	"usesContext": [
+		"postType",
+		"postId",
+		"queryId"
 	],
 	"providesContext": {
 		"govpack/profileId" : "profileId",

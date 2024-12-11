@@ -96,14 +96,14 @@ class Actions {
 
 		// phpcs:ignore content is "" false null or nil.
 		if ( ! $content ) {
-			return \Govpack\Core\CPT\Profile::default_profile_content();
+			return \Govpack\Profile\CPT::default_profile_content();
 		}
 
 		if ( has_block( 'govpack/profile-self', $content ) ) {
 			return $content;
 		}
 		// inject it at the start.
-		return \Govpack\Core\CPT\Profile::default_profile_content() . $content;
+		return \Govpack\Profile\CPT::default_profile_content() . $content;
 	}
 
 	/**
@@ -415,7 +415,7 @@ class Actions {
 	 * @param string $term_name The Name of the term to find or create.
 	 * @param string $taxonomy the taxonomy to look/create in.
 	 */
-	public static function find_or_create_term( $term_name = null, $taxonomy = null ): \WP_Term {
+	public static function find_or_create_term( $term_name = null, $taxonomy = null ): \WP_Term|\WP_Error {
 
 		require_once ABSPATH . 'wp-admin/includes/taxonomy.php';
 
@@ -445,6 +445,6 @@ class Actions {
 	 * Run a Cleanup  
 	 */
 	public static function cleanup_import(): void {
-		\Govpack\Core\Importer\Importer::clean();
+		\Govpack\Importer\Importer::clean();
 	}
 }

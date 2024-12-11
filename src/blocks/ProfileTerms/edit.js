@@ -77,7 +77,7 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 		return t.slug === tax
 	})
 	
-	console.log("taxonomy", taxonomy)
+
 	const { profileTerms, hasProfileTerms, isLoading } = useProfileTerms( profileId, taxonomy)
 	const hasProfile = (profileId && postType);
 

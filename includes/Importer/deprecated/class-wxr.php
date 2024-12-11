@@ -8,11 +8,11 @@
 namespace Govpack\Importer;
 
 use Exception, XMLReader, DOMNode;
-use Govpack\Core\Govpack;
+use Govpack\Govpack;
 /**
  * Register and handle the "USIO" Importer
  */
-class WXR extends \Govpack\Core\Importer\Abstracts\Abstract_Importer {
+class WXR extends \Govpack\Importer\Abstracts\Abstract_Importer {
 
 
 	/**

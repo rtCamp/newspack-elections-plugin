@@ -1,6 +1,24 @@
 
 .wp-block-govpack-profile-v2{
+
+	.profile-inner {
+		overflow:hidden;
+	}
+	/*
 	overflow:hidden;
+	&.aligncenter,
+	.aligncenter
+	&.alignleft, 
+	.alignleft, 
+	&.alignright,
+	.alignright {
+		display: table;
+	}
+		*/
+
+	.wp-block-post-featured-image {
+		overflow: hidden;
+	}
 }
 
 .gp-dim-field{

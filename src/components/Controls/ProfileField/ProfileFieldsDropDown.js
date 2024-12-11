@@ -9,23 +9,47 @@ import {
 
 import { useProfileField } from "./../../Profile"
 
-export default function ProfileFieldsDropDown( {
-	className,
+export function ProfileFieldsDropDownMenu({
 	onSelectField,
+	fields,
 	selectedValue,
-	fields
-} ) {
+	showFieldsWithEmptyValues = true
+} = props){
 
-	const CurrentField = useProfileField(selectedValue)
-
-	const selectedOptions = fields.map( (f) => ({
+	let selectedOptions = fields.map( (f) => ({
 		label : f.label,
 		value : f.slug,
 		info: f.value,
-		disabled : (!f.value ? true : false)
+		disabled : ((!f.value || f.value === "") ? true : false)
 	}))
 
-	console.log("selectedValue", selectedValue, CurrentField)
+	if(!showFieldsWithEmptyValues){
+		selectedOptions = selectedOptions.filter( (f) => !f.disabled)
+	}
+
+	return (
+		<MenuGroup>
+			<MenuItemsChoice
+				choices={ selectedOptions }
+				value={ selectedValue }
+				onSelect={ (v) => {
+					onSelectField(v) 
+				}}
+			/>
+		</MenuGroup>
+	)
+}
+
+export default function ProfileFieldsDropDown( props ) {
+
+	const {
+		className,
+		onSelectField,
+		selectedValue,
+		fields
+	} = props
+
+	const CurrentField = useProfileField(selectedValue)
 
 	return (
 		<DropdownMenu
@@ -43,16 +67,7 @@ export default function ProfileFieldsDropDown( {
 		>
 			{ () => (
 				<div className={ `${ className }__container` }>
-					<MenuGroup>
-						<MenuItemsChoice
-							choices={ selectedOptions }
-							value={ selectedValue }
-							onSelect={ (v) => {
-								console.log(v)
-								onSelectField(v) 
-							}}
-						/>
-					</MenuGroup>
+					<ProfileFieldsDropDownMenu 	{...props} />
 				</div>
 			) }
 		</DropdownMenu>

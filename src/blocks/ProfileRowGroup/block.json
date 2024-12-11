@@ -56,5 +56,5 @@
 		"govpack/separatorColor" : "separatorColor",
 		"govpack/separatorCustomColor" : "separatorCustomColor"
 	},
-	"allowedBlocks": ["govpack/profile-row", "govpack/profile-separator"]
+	"allowedBlocks": ["govpack/profile-row", "govpack/profile-separator", "core/post-title", "core/post-featured-image", "core/post-excerpt"]
 }

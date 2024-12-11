@@ -15,6 +15,11 @@ export const useProfileData = (context) => {
 			val = profile?.profile?.[field.slug] || false
 		}
 		
+		
+		if(val){
+			val = val.trim()
+		}
+
 		return {
 			...field,
 			'value' : val

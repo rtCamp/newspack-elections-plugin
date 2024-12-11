@@ -28,7 +28,7 @@ addFilter(
 */
 registerBlockType( metadata.name, {
 	apiVersion: 3,
-	title: 'GovPack Profile v2',
+	title: 'Newspack Elections Profile v2',
     category,
     attributes,
 	icon: 'groups',

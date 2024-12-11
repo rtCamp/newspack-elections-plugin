@@ -7,7 +7,7 @@
 
 namespace Govpack;
 
-use Govpack\Core\Importer;
+use Govpack\Importer;
 use WP_CLI;
 
 /**
@@ -44,7 +44,7 @@ class CLI extends \WP_CLI_Command {
 			
 			try {
 
-				$importer = \Govpack\Core\Importer\Importer::make( $file );
+				$importer = \Govpack\Importer\Importer::make( $file );
 				$importer::import( $file, $dry_run );
 
 			} catch ( \Exception $e ) {
@@ -75,7 +75,7 @@ class CLI extends \WP_CLI_Command {
 	 * @param array $assoc_args  Associative array of arguments.
 	 */
 	public function clear( $args, $assoc_args ): void {
-		WP_CLI::line( \Govpack\Core\Importer\Importer::clear() );
+		WP_CLI::line( \Govpack\Importer\Importer::clear() );
 	}
 
 	/**
@@ -99,7 +99,7 @@ class CLI extends \WP_CLI_Command {
 		$id = $args[0];
 
 		try {
-			\Govpack\Core\Importer\Importer::sideload( $id );
+			\Govpack\Importer\Importer::sideload( $id );
 			WP_CLI::line( sprintf( 'Sideloaded Image for profile %s', $id ) );
 
 		} catch ( \Exception $e ) {
@@ -112,9 +112,16 @@ class CLI extends \WP_CLI_Command {
 	 * Add CLI command.
 	 */
 	public static function init(): void {
-		WP_CLI::add_command( 'govpack import', '\Govpack\Core\CLI' );
-		WP_CLI::add_command( 'govpack purge', [ '\Govpack\Core\CLI', 'purge' ] );
-		WP_CLI::add_command( 'govpack migrate', [ '\Govpack\Core\CLI', 'migrate' ] );
+		WP_CLI::add_command( 'govpack import', '\Govpack\CLI' );
+		WP_CLI::add_command( 'govpack purge', [ '\Govpack\CLI', 'purge' ] );
+		WP_CLI::add_command(
+			'govpack migrate',
+			[
+				'\Govpack
+		\CLI',
+				'migrate',
+			] 
+		);
 	}
 
 	
@@ -209,7 +216,7 @@ class CLI extends \WP_CLI_Command {
 	 * @param array $assoc_args  Associative array of arguments.
 	 */
 	public function clean( $args, $assoc_args ): void {
-		WP_CLI::line( \Govpack\Core\Importer\Importer::clean() );
+		WP_CLI::line( \Govpack\Importer\Importer::clean() );
 	}
 
 	/**

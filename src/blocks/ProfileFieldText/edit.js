@@ -8,7 +8,7 @@ import { useBlockProps } from "@wordpress/block-editor"
 
 
 import { useProfileFields, useProfileFromContext, useProfileField, useProfileData} from "./../../components/Profile"
-import {ProfileFieldsInspectorControl} from "../../components/Controls/ProfileField"
+import {ProfileFieldsInspectorControl, ProfileFieldsToolBar} from "../../components/Controls/ProfileField"
 
 /**
  * Returns a collection of stuff the block might need
@@ -20,6 +20,9 @@ const useGPProfile = () => {
 
 
 }
+
+
+
 
 function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 
@@ -83,10 +86,16 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 				fieldKey = {fieldKey}
 				setFieldKey = {setFieldKey}
 				fieldType = {fieldType}
-				fields = { fields }
+				fields = { fields.filter( (f) => f.type === fieldType) }
 			/>
 
-			
+			<ProfileFieldsToolBar 
+				fieldKey = {fieldKey}
+				setFieldKey = {setFieldKey}
+				fieldType = {fieldType}
+				fields = { fields.filter( (f) => f.type === fieldType) }
+			/>
+
 			<div {...blockProps}>
 				{FieldValue}
 			</div>
