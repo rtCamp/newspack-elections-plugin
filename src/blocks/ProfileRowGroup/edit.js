@@ -22,7 +22,6 @@ import { separator } from '@wordpress/icons';
 const GroupEdit = ( {attributes, setAttributes, context, clientId, ...props} ) => {
 
 
-
 	const {
 		separatorColor, 
 		setSeparatorColor
@@ -30,6 +29,7 @@ const GroupEdit = ( {attributes, setAttributes, context, clientId, ...props} ) =
 	
 	const {
 		showSeparator = true,
+		showLabels = true,
 		separatorStyles = {}
 	} = attributes
 
@@ -41,7 +41,7 @@ const GroupEdit = ( {attributes, setAttributes, context, clientId, ...props} ) =
 	const { isBlockSelected, hasSelectedInnerBlock } = useSelect( (select) => {
 		return {
 			isBlockSelected : select(blockEditorStore).isBlockSelected(clientId),
-			hasSelectedInnerBlock : select(blockEditorStore).hasSelectedInnerBlock(clientId),
+			hasSelectedInnerBlock : select(blockEditorStore).hasSelectedInnerBlock(clientId, true),
 		}
 	});
 
@@ -88,6 +88,22 @@ const GroupEdit = ( {attributes, setAttributes, context, clientId, ...props} ) =
 							help = "Enable or Disable showing separator."
 							checked = {showSeparator}
 							onChange={ ( value ) => { setAttributes({"showSeparator" : value}) } }
+							__nextHasNoMarginBottom
+						/>
+					</PanelRow>
+					</PanelBody>
+				</Panel>
+			</InspectorControls>
+
+			<InspectorControls>
+				<Panel>
+					<PanelBody title={ __( 'Field Labels', 'govpack' ) }>
+					<PanelRow>
+						<ToggleControl 
+							label = "Show Field Labels?"
+							help = "Enable or Disable showing labels."
+							checked = {showLabels}
+							onChange={ ( value ) => { setAttributes({"showLabels" : value}) } }
 							__nextHasNoMarginBottom
 						/>
 					</PanelRow>

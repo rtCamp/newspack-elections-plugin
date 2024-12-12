@@ -13,13 +13,17 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 	const { 
 		'govpack/profileId' : profileId, 
 		'govpack/fieldKey' : profileFieldKey, 
-		'govpack/showLabel' : showLabel = true, 
+		'govpack/showLabel' : RowShowLabel = null,
+		'govpack/showLabels' : GroupShowLabels = null,
 		postType = false
 	} = context
 
 	const { 
 		label = null,
 	} = attributes
+
+	const showLabel = (RowShowLabel !== null) ? RowShowLabel : GroupShowLabels ?? true
+
 
 	const updateLabel = (label) => {
 		setAttributes({

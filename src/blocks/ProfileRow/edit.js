@@ -18,7 +18,7 @@ import { createBlock, store as blocksStore } from "@wordpress/blocks"
 import {Panel, PanelBody, PanelRow, ToggleControl, SelectControl} from '@wordpress/components';
 import {getProfile, useProfileField, useProfileFields, useProfileFromContext, useProfileData} from "./../../components/Profile"
 
-import { ProfileFieldsInspectorControl } from '../../components/Controls/ProfileField';
+import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from '../../components/Controls/ProfileField';
 
 const MetaInspectorControl = ({
 	fieldKey,
@@ -120,6 +120,7 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	 */
 	const { 
 		'govpack/profileId' : profileId, 
+		'govpack/showLabels' : ContextShowLabels = null, 
 		postType = false
 	} = context
 
@@ -226,13 +227,13 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 		setAttributes({"fieldKey" : newKey})
 	}
 
-
+	const fieldsOfType = fields.filter( (f) => f.type === fieldType) 
     return (
 		<>
 			<MetaInspectorControl
 				fieldKey = {fieldKey}
 				setAttributes = {setAttributes}
-				showLabel = {showLabel}
+				showLabel = {showLabel ?? false}
 				hideFieldIfEmpty = {hideFieldIfEmpty}
 				fieldType = {fieldType}
 			/>
@@ -241,9 +242,17 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 				fieldKey = {fieldKey}
 				setFieldKey = {setFieldKey}
 				fieldType = {fieldType}
-				fields = { fields.filter( (f) => f.type === fieldType) }
+				fields = { fieldsOfType }
 			/>
 			
+			<ProfileFieldsToolBar 
+				fieldKey = {fieldKey}
+				setFieldKey = {setFieldKey}
+				fieldType = {fieldType}
+				fields = { fieldsOfType }
+			/>
+
+
 			<div {...innerBlocksProps} className={className}>
 				{ children }
 			</div>

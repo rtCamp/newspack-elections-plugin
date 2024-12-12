@@ -63,8 +63,7 @@
 			"default": "full"
 		},
 		"showLabel" : {
-			"type": "boolean",
-			"default" : true
+			"type": "boolean"
 		},
 		"hideFieldIfEmpty" : {
 			"type": "boolean",
@@ -82,7 +81,11 @@
 		}
 	},
 	"ancestor": [ "govpack/profile-v2" ],
-	"usesContext": ["govpack/profileId", "postType"],
+	"usesContext": [
+		"govpack/profileId", 
+		"govpack/showLabels", 
+		"postType"
+	],
 	"providesContext": {
 		"govpack/fieldKey": "fieldKey",
 		"govpack/showLabel": "showLabel"

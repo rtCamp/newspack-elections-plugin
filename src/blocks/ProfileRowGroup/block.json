@@ -23,6 +23,11 @@
 			"margin": true,  
 			"padding": true,
 			"blockGap" : true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"textAlign": true
 		}
 	},
 	"attributes": {
@@ -35,6 +40,10 @@
 			}
 		},
 		"showSeparator" : {
+			"type" : "boolean",
+			"default" : true
+		},
+		"showLabels" : {
 			"type" : "boolean",
 			"default" : true
 		},
@@ -54,7 +63,8 @@
 	"providesContext": {
 		"govpack/separatorStyle" : "separatorStyles",
 		"govpack/separatorColor" : "separatorColor",
-		"govpack/separatorCustomColor" : "separatorCustomColor"
+		"govpack/separatorCustomColor" : "separatorCustomColor",
+		"govpack/showLabels" : "showLabels"
 	},
-	"allowedBlocks": ["govpack/profile-row", "govpack/profile-separator", "core/post-title", "core/post-featured-image", "core/post-excerpt"]
+	"allowedBlocks": ["govpack/profile-row", "govpack/profile-separator", "core/post-title", "core/post-featured-image", "core/post-excerpt", "core/heading"]
 }

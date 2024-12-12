@@ -73,7 +73,7 @@ class Admin {
 					'title' => \__( 'Newspack Election Profile Row Types', 'newspack-elections' ),
 				],
 				[
-					'slug'  => 'newspack-elections-profile-rows',
+					'slug'  => 'newspack-elections-profile-row-fields',
 					'title' => \__( 'Newspack Election Profile Rows', 'newspack-elections' ),
 				],
 				[

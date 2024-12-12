@@ -32,7 +32,7 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	 */
 	const { 
 		'govpack/profileId' : profileId, 
-		'govpack/fieldKey' : inheritedFieldKey, 
+		'govpack/fieldKey' : inheritedFieldKey = null, 
 		postType = false
 	} = context
 
@@ -44,8 +44,8 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 		fieldType = "text"
 	} = attributes
 
-
-	const fieldKey = localFieldKey ?? inheritedFieldKey ?? "name"
+	const isControlledByContext = inheritedFieldKey ? true : false;
+	const fieldKey = isControlledByContext ? inheritedFieldKey : localFieldKey
 
 	const setFieldKey = (newKey) => {
 		setAttributes({"fieldKey" : newKey})
@@ -79,22 +79,26 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	}
 
 	const FieldValue = profileValue(fieldKey)
-
+	const fieldsofType = fields.filter( (f) => f.type === fieldType)
     return (
 		<>
-			<ProfileFieldsInspectorControl
-				fieldKey = {fieldKey}
-				setFieldKey = {setFieldKey}
-				fieldType = {fieldType}
-				fields = { fields.filter( (f) => f.type === fieldType) }
-			/>
+			{!isControlledByContext && (
+				<ProfileFieldsInspectorControl
+					fieldKey = {fieldKey}
+					setFieldKey = {setFieldKey}
+					fieldType = {fieldType}
+					fields = { fieldsofType }
+				/>
+			)}
 
-			<ProfileFieldsToolBar 
-				fieldKey = {fieldKey}
-				setFieldKey = {setFieldKey}
-				fieldType = {fieldType}
-				fields = { fields.filter( (f) => f.type === fieldType) }
-			/>
+			{!isControlledByContext && (
+				<ProfileFieldsToolBar 
+					fieldKey = {fieldKey}
+					setFieldKey = {setFieldKey}
+					fieldType = {fieldType}
+					fields = { fieldsofType }
+				/>
+			)}
 
 			<div {...blockProps}>
 				{FieldValue}

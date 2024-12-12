@@ -79,8 +79,8 @@ class ProfileRow extends \Govpack\Blocks\Profile\Profile {
 		
 		foreach ( \Govpack\Profile\CPT::fields()->all() as $field ) {
 			$variation = [
-				'category'    => 'newspack-elections-profile-rows',
-				'name'        => sprintf( 'profile-field-%s', $field->slug ),
+				'category'    => 'newspack-elections-profile-row-fields',
+				'name'        => sprintf( 'profile-field-row-%s', $field->slug ),
 				'title'       => $field->label,
 				'description' => sprintf(
 					/* translators: %s: taxonomy's label */
@@ -91,8 +91,8 @@ class ProfileRow extends \Govpack\Blocks\Profile\Profile {
 					'fieldType' => $field->type->slug,
 					'fieldKey'  => $field->slug,
 				],
-				'isActive'    => [ 'meta_key' ],
-				'scope'       => [ 'inserter', 'transform' ],
+				'isActive'    => [ 'fieldKey' ],
+				'scope'       => [ 'inserter', 'block' ],
 				'icon'        => $field->type->variation_icon(),
 			];
 

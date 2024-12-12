@@ -159,7 +159,7 @@ const ProfileWrapper = ({children, attributes}) => {
 	const borderProps = useBorderProps( attributes );
 	const spacingStyles = getSpacingClassesAndStyles(attributes)
 	const colorProps = useColorProps(attributes)
-	console.log(colorProps)
+
 
 	const wrapperProps = {
 		className : clsx("profile-inner", borderProps.className,  colorProps.className),
@@ -177,9 +177,6 @@ const ProfileWrapper = ({children, attributes}) => {
 
 function ProfileBlockEdit( props ) {
 
-	console.log("attrs", props.attributes)
-
-	console.log("BEC", useBlockEditContext())
 	const {attributes, setAttributes, isSelected: isSingleSelected, clientId, context} = props
 	const resizeProps = useResizeProps(props);
 
@@ -215,7 +212,6 @@ function ProfileBlockEdit( props ) {
 		template: DEFAULT_TEMPLATE,
 	})
 
-	console.log(innerBlockProps)
 
 	const allowedBlocks = useSelect( (select) => {
 		return select(blockEditorStore).getAllowedBlocks(clientId)
