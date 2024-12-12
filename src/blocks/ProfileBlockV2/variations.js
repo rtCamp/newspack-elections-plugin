@@ -5,11 +5,11 @@ export const variations = [
 		'name' : "gp-profile-full",
 		'title' : "Full Profile",
 		'description' : "Profile",
-		isDefault : false,
+		isDefault : true,
 		icon : layout,
 		attributes : {
 			width : "wide",
-			align: "wide"
+			"backgroundColor":"base-2"
 		}
 	},
 	{
