@@ -10,19 +10,30 @@ import { useBlockProps } from "@wordpress/block-editor"
 import { useProfileFields, useProfileFromContext, useProfileField, useProfileData} from "./../../components/Profile"
 import {ProfileFieldsInspectorControl, ProfileFieldsToolBar} from "../../components/Controls/ProfileField"
 
+import { compose, createHigherOrderComponent } from '@wordpress/compose';
+
 /**
  * Returns a collection of stuff the block might need
  * 
  * The Profile Entity/Post Type
  * The Profile Field Schema/Types
  */
-const useGPProfile = () => {
 
-
+const useFieldsOfType = (fieldType) => {
+	const {fields} = useProfileData(context)
+	const fieldsofType = fields.filter( (f) => f.type === fieldType)
+	return fieldsofType
 }
 
-
-
+const useProfileFieldData = (fieldKey) => {
+	let fields = useProfileFields()
+	let field = useProfileField(fieldKey)
+	return {
+		fields,
+		field
+		
+	}
+}
 
 function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 
@@ -56,7 +67,7 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	const {profile, fields} = useProfileData(context)
 
 
-
+	console.log("useProfileFieldData", useProfileFieldData(fieldKey))
 
 	/**
 	 * Get Data From The Editor
@@ -106,6 +117,8 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 		</>
 	)
 }
+
+
 
 export {Edit}
 export default Edit

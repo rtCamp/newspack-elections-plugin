@@ -193,11 +193,11 @@ class Govpack {
 		$this->blocks()->register( new \Govpack\Blocks\Profile\Profile( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileSelf\ProfileSelf( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileBlockV2\ProfileBlockV2( $this ) );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileTerms\ProfileTerms( $this ) );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileMeta\ProfileMeta( $this ) );
+
 		$this->blocks()->register( new \Govpack\Blocks\ProfileRow\ProfileRow( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldText\ProfileFieldText( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldLink\ProfileFieldLink( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldTerm\ProfileFieldTerm( $this ) );
 		//$this->blocks()->register( new \Govpack\Blocks\ProfileLink\ProfileLink( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileLabel\ProfileLabel( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileRowGroup\ProfileRowGroup( $this ) );

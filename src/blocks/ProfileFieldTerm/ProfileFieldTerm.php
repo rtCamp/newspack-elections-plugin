@@ -37,7 +37,7 @@ class ProfileFieldTerm extends \Govpack\Blocks\Profile\Profile {
 	}
 
 	public function block_build_path(): string {
-		return $this->plugin->build_path( 'blocks/ProfileTerms' );
+		return $this->plugin->build_path( 'blocks/ProfileFieldTerm' );
 	}
 
 	public function variations(): array {
