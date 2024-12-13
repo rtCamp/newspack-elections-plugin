@@ -124,17 +124,17 @@ export const variations = [
 							innerBlocks : []
 						},
 						{
-							name :"govpack/profile-terms", 
+							name :"govpack/profile-field-term", 
 							attributes :{"taxonomy":"govpack_legislative_body","fontSize":"small"}, 
 							innerBlocks : []
 						},
 						{
-							name :"govpack/profile-terms", 
+							name :"govpack/profile-field-term", 
 							attributes :{"taxonomy":"govpack_party","fontSize":"small"}, 
 							innerBlocks :[]
 						},
 						{
-							name :"govpack/profile-terms", 
+							name :"govpack/profile-field-term", 
 							attributes :{"taxonomy":"govpack_officeholder_status","fontSize":"small"}, 
 							innerBlocks :[]
 						}
@@ -175,9 +175,9 @@ export const variations = [
 				{"style":{"spacing":{"blockGap":"0.2rem"},"layout":{"selfStretch":"fill","flexSize":null}},"layout":{"type":"constrained"}} , 
 				[
 					["core/post-title", {"style":{"typography":{"fontStyle":"normal","fontWeight":"1000","fontSize":"1.4rem"},"spacing":{"padding":{"bottom":"0.5rem"}}}}, []],
-					["govpack/profile-terms", {"taxonomy":"govpack_legislative_body","fontSize":"small"}, []],
-					["govpack/profile-terms", {"taxonomy":"govpack_party","fontSize":"small"}, []],
-					["govpack/profile-terms", {"taxonomy":"govpack_officeholder_status","fontSize":"small"}, []]
+					["govpack/profile-field-term", {"taxonomy":"govpack_legislative_body","fontSize":"small"}, []],
+					["govpack/profile-field-term", {"taxonomy":"govpack_party","fontSize":"small"}, []],
+					["govpack/profile-field-term", {"taxonomy":"govpack_officeholder_status","fontSize":"small"}, []]
 				]
 			]
 		]

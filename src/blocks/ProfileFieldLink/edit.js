@@ -36,8 +36,8 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	 * Get Data From This Blocks
 	 */
 	const { 
-		fieldKey = "name",
-		fieldType = "text"
+		fieldKey = "more",
+		fieldType = "link"
 	} = attributes
 
 	const setFieldKey = (newKey) => {
@@ -50,7 +50,6 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	const profile = useProfileFromContext(context) ?? {}
 	const fields = 	useProfileFields(fieldType)
 
-	console.log(fields)
 	const enhancedFields = fields.map( ( { slug, label, ...field } ) => {
 		let val = profile?.[field.source]?.[slug] || false
 		return {
@@ -61,6 +60,7 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	}
 	);
 
+	
 
 	/**
 	 * Get Data From The Editor
@@ -68,9 +68,12 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	const blockProps = useBlockProps();
 
 	const FieldType = useProfileField(fieldKey)
-	const FieldValue = profile?.[FieldType.source]?.[fieldKey] || "[[" + fieldKey + "]]" ;
+	const FieldValue = profile?.profile?.[fieldKey] || {} ;
 
-	
+	console.log(FieldValue)	
+	const href =  FieldValue?.url ?? false
+	const label =  FieldValue?.linkText ?? false
+	console.log(href, label)	
 
     return (
 		<>
@@ -83,7 +86,7 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 
 			
 			<div {...blockProps}>
-				{FieldValue}
+				<a href={href}>{label}</a>
 			</div>
 			
 		</>

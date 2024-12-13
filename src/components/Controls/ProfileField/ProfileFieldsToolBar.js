@@ -17,8 +17,8 @@ export const ProfileFieldsToolBar = (props) => {
 	} = props
 	
 	return (
-		<BlockControls >
-			<ToolbarGroup>
+		<BlockControls group="parent">
+		
            		<ToolbarDropdownMenu icon = {connectionIcon}>
 				   { () => (
 				   <ProfileFieldsDropDownMenu 
@@ -30,7 +30,7 @@ export const ProfileFieldsToolBar = (props) => {
 				   />
 				   )}
 		  		</ToolbarDropdownMenu>
-			</ToolbarGroup>
+			
 		</BlockControls>
     );
 }

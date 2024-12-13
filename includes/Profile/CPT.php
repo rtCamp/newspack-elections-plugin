@@ -186,6 +186,8 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new LinkField( 'gab', 'Gab', 'link' ),
 				new LinkField( 'rumble', 'Rumble', 'link' ),
 
+				( new LinkField( 'more', 'more', 'link' ) )->link_text( 'More About' ),
+
 				new Field( 'opensecrets_id', 'Open Secrets' ),
 				new Field( 'balletpedia_id', 'BallotPedia' ),
 				new Field( 'openstates_id', 'OpenStates' ),

@@ -26,7 +26,6 @@ const useGPProfile = () => {
 
 function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 
-
 	/**
 	 * Get Data From Parent Blocks
 	 */

@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Blocks\ProfileTerms;
+namespace Govpack\Blocks\ProfileFieldTerm;
 
 use WP_Block;
 
@@ -14,10 +14,10 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class ProfileTerms extends \Govpack\Blocks\Profile\Profile {
+class ProfileFieldTerm extends \Govpack\Blocks\Profile\Profile {
 
-	public string $block_name = 'govpack/profile-terms';
-	public $template   = 'profile';
+	public string $block_name = 'govpack/profile-field-term';
+	public $template          = 'profile';
 
 	private $show       = null;
 	private $profile    = null;
@@ -32,7 +32,7 @@ class ProfileTerms extends \Govpack\Blocks\Profile\Profile {
 		$this->default_variation = 'govpack_officeholder_status'; // TODO: reference the const from the taxonomy file.
 	}
 
-	public function disable_block( $allowed_blocks, $editor_context ) : bool {
+	public function disable_block( $allowed_blocks, $editor_context ): bool {
 		return false;
 	}
 

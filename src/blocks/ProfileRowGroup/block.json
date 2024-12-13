@@ -66,5 +66,14 @@
 		"govpack/separatorCustomColor" : "separatorCustomColor",
 		"govpack/showLabels" : "showLabels"
 	},
-	"allowedBlocks": ["govpack/profile-row", "govpack/profile-separator", "core/post-title", "core/post-featured-image", "core/post-excerpt", "core/heading"]
+	"allowedBlocks": [
+		"govpack/profile-row", 
+		"govpack/profile-field-link",
+		"govpack/profile-field-text", 
+		"govpack/profile-separator", 
+		"core/post-title", 
+		"core/post-featured-image", 
+		"core/post-excerpt", 
+		"core/heading"
+	]
 }

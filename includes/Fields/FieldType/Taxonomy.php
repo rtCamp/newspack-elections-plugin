@@ -27,14 +27,13 @@ class Taxonomy extends \Govpack\Fields\FieldType {
 		return 'tag';
 	}
 
-	public function get_value_for_model(){
-		
+	public function get_value_for_model() {
 	}
 
 	public function get_variation_inner_blocks(): array {
 		return [
 			[ 'govpack/profile-label', [] ],
-			[ 'govpack/profile-terms', [] ],
+			[ 'govpack/profile-field-term', [] ],
 		];
 	}
 }

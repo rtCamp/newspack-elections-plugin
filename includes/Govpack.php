@@ -197,7 +197,7 @@ class Govpack {
 		$this->blocks()->register( new \Govpack\Blocks\ProfileMeta\ProfileMeta( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileRow\ProfileRow( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldText\ProfileFieldText( $this ) );
-		//$this->blocks()->register( new \Govpack\Blocks\ProfileFieldLink\ProfileFieldLink( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldLink\ProfileFieldLink( $this ) );
 		//$this->blocks()->register( new \Govpack\Blocks\ProfileLink\ProfileLink( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileLabel\ProfileLabel( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileRowGroup\ProfileRowGroup( $this ) );
