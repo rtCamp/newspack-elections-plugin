@@ -1,9 +1,9 @@
 import { useSelect } from "@wordpress/data";
 import { store as coreStore } from "@wordpress/core-data";
 
-export const useProfileFields = (type = null) => {
-	return getProfileFields(type) ;
-};
+//export const useProfileFields = (type = null) => {
+//	return getProfileFields(type) ;
+//};
 
 export const getProfileFields = (type = null) => {
 	

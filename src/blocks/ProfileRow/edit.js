@@ -28,17 +28,6 @@ const MetaInspectorControl = ({
 	fieldType = "text"
 }) => {
 
-	const blockProps = useBlockProps();
-	
-	const postType = useSelect( (select) => {
-		return select(editorStore).getCurrentPostType()
-	})
-
-
-
-	const fields = useProfileFields(fieldType)
-
-
 	return(
 		<InspectorControls>
 			<Panel>

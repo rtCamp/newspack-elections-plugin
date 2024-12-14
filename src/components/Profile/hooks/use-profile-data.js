@@ -1,4 +1,4 @@
-import { useProfileFromContext } from "./use-profile-from-context";
+import { useProfileFromContext } from "./profile";
 import { useProfileFields } from "./get-profile-fields"
 
 export const useProfileData = (context) => {
