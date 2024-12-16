@@ -8,9 +8,10 @@ import { useSelect } from '@wordpress/data';
 import { Spinner } from "@wordpress/components";
 import { decodeEntities } from '@wordpress/html-entities';
 
-import useProfileTerms from "./use-profile-terms"
+import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from "../../components/Controls/ProfileField"
+import { useProfileFieldAttributes, useFieldsOfType } from "./../../components/Profile"
 
-import { useProfileField } from '../../components/Profile';
+import useProfileTerms from "./use-profile-terms"
 
 /**
  * TODO:
@@ -53,41 +54,50 @@ const ProfileTerms = ({terms}) => {
 	) ) } </> )
 }
 
-function Edit( {attributes, setAttributes, context, ...props} ) {
+function Edit( props ) {
+	
 	const blockProps = useBlockProps();
-	
-	const { 
-		'govpack/profileId' : profileId,
-		'govpack/fieldKey' : fieldKey, 
-		postType = false
-	} = context
-
-	const { 
-		'taxonomy' : localFieldKey, 
-	} = attributes
-
-	const Field = useProfileField(fieldKey)
-
-	const tax = Field?.taxonomy ?? localFieldKey  ?? null
-	
+	const { profileId, setFieldKey, fieldKey, fieldType, isControlledByContext, value, field } =  useProfileFieldAttributes(props) 
+	const fieldsofType = useFieldsOfType(props, fieldType)
 	
 
+	const taxonomySlug = field?.taxonomy ?? null
+	
 	const taxonomies = useProfileTaxonomies();
-	const taxonomy = taxonomies?.find( (t) => {
-		return t.slug === tax
+	const selectedTaxonomy = taxonomies?.find( (t) => {
+		return t.slug === taxonomySlug
 	})
 	
-
-	const { profileTerms, hasProfileTerms, isLoading } = useProfileTerms( profileId, taxonomy)
-	const hasProfile = (profileId && postType);
+	const { profileTerms, hasProfileTerms, isLoading } = useProfileTerms( profileId, selectedTaxonomy )
+	const hasProfile = (profileId);
 
     return (
+		<>
+		{!isControlledByContext && (
+			<>
+				<ProfileFieldsInspectorControl
+					fieldKey = {fieldKey}
+					setFieldKey = {setFieldKey}
+					fieldType = {fieldType}
+					fields = { fieldsofType }
+				/>
+
+				<ProfileFieldsToolBar 
+					fieldKey = {fieldKey}
+					setFieldKey = {setFieldKey}
+					fieldType = {fieldType}
+					fields = { fieldsofType }
+				/>
+			</>
+		)}
+
 		<div {...blockProps}>
 			{ isLoading && hasProfile && <Spinner /> }
 			{ !isLoading && hasProfile && hasProfileTerms && 
 				<ProfileTerms terms={profileTerms} />
 		 }
 		</div>
+		</>
 	)
 }
 

@@ -30,6 +30,6 @@ export const useProfileFromContext = ( context ) => {
 	
 	return useSelect( (select) => {
 		return select(coreDataStore).getEntityRecord("postType", "govpack_profiles", profileId ) ?? {}
-	})
+	}, [profileId])
 
 }

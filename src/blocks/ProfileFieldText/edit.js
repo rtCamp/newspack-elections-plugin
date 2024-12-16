@@ -6,13 +6,10 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from "@wordpress/block-editor"
 
-
-import { useProfileFromContext, useProfileField} from "./../../components/Profile"
-import {ProfileFieldsInspectorControl, ProfileFieldsToolBar} from "../../components/Controls/ProfileField"
-
-import { compose, createHigherOrderComponent } from '@wordpress/compose';
-
-
+/**
+ * Internal dependencies
+ */
+import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from "../../components/Controls/ProfileField"
 import { useFieldsOfType, useProfileFieldAttributes } from './../../components/Profile';
 
 
@@ -23,10 +20,6 @@ function Edit( props ) {
 	const { setFieldKey, fieldKey, fieldType, isControlledByContext, profile, value, field } =  useProfileFieldAttributes(props) 
 	const fieldsofType = useFieldsOfType(props, fieldType)
 
-	/**
-	 * Get Data From The Editor
-	 */
-	
 	const profileValue = () => {
 
 		

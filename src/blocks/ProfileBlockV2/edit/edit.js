@@ -13,9 +13,10 @@ import {
 	__experimentalUseBorderProps as useBorderProps,
 	__experimentalUseColorProps as useColorProps,
 	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
-
 	useBlockEditContext
 } from '@wordpress/block-editor';
+
+import {select} from "@wordpress/data"
 
 import { useInstanceId } from '@wordpress/compose';
 import { useRef, useEffect} from '@wordpress/element';
@@ -175,11 +176,81 @@ const ProfileWrapper = ({children, attributes}) => {
 	)
 }
 
+
+const useProfileId = (props) => {
+
+	const { context } = props
+
+	const { 
+		postType = null
+	} = context
+
+	// Get the profileId from context, falling back to attributes then null if needed.
+	// do the same with postId
+
+	const [profileId, isProfileControlledByContext, isProfileControlledByAttr] = useContextOverAttribute(props, "govpack/profileId", "profileId")
+	const [postId, isPostControlledByContext, isPostControlledByAttr] = useContextOverAttribute(props, "postId", "postId")
+	
+
+	// postId will be invalid for a profile unless the postType is profiles
+	const canUsePostID = (postType === "govpack_profiles")
+
+	// set the value to the profileId, falling back to the postId if postid can be used
+	const value = profileId ?? (canUsePostID ? postId : null)
+	
+	const isControlledByContext = isProfileControlledByContext ?? (canUsePostID ? isPostControlledByContext : null)
+	const isControlledByAttribute = isProfileControlledByAttr ?? (canUsePostID ? isPostControlledByAttr : null)
+
+	return {
+		profileId : value,
+		isControlledByAttribute,
+		isControlledByContext
+	}
+}
+
+const useContextOverAttribute = (props, contextKey = null, attributeKey = null, defaultValue = null) => {
+	
+	const {attributes, context} = props
+
+	const attrValue = attributes?.[attributeKey] ?? null
+	const contextValue = attributes?.[contextKey] ?? null
+
+	const value = contextValue ?? attrValue ?? defaultValue ?? null
+	const isControlledByContext = (contextValue !== null)
+	const isControlledByAttribute = ((isControlledByContext === false) && (attrValue !== null))
+
+	return [value, isControlledByContext, isControlledByAttribute]
+}
+
+const useProfileAttributes = ( props ) => {
+
+	const { setAttributes, attributes } = props
+
+	const resetProfile = () => {
+		setProfile( 0 )
+	}
+
+	const setProfile = (newProfileId = 0) => {
+
+		if(newProfileId === null){
+			newProfileId = 0
+		}
+		setAttributes({"profileId" : newProfileId})
+	}
+
+	const profileId = useProfileId(props)?.profileId
+
+	const {profile, ...profileQuery} = useSelectProfile(profileId)
+
+	
+	return {setProfile, resetProfile, profileId, profile, profileQuery}
+}
+
 function ProfileBlockEdit( props ) {
 
 	const {attributes, setAttributes, isSelected: isSingleSelected, clientId, context} = props
 	const resizeProps = useResizeProps(props);
-
+	const {setProfile, resetProfile, profileId, profile, profileQuery} = useProfileAttributes(props)
     const ref = useRef(null);
 	const instanceId = useInstanceId( ProfileBlockEdit );
 	const blockProps = useBlockProps( { ref } );
@@ -187,31 +258,13 @@ function ProfileBlockEdit( props ) {
 	const { __unstableMarkNextChangeAsNotPersistent } = useDispatch( blockEditorStore );
 
 	const {
-		profileId = 0,
-		queryId ,
+		queryId,
 	} = attributes;
 
-	const {
-		postType,
-		postId,
-		queryId : remoteQueryId = null
-	} = context;
-
-
-	let selectedProfileId
-	if(remoteQueryId && postId && (postType === "govpack_profiles")){
-		selectedProfileId = postId
-	} else {
-		selectedProfileId = profileId
-	}
-
-
-	const {profile, ...query} = useSelectProfile(selectedProfileId)
 
 	const innerBlockProps = useInnerBlocksProps(blockProps, {
 		template: DEFAULT_TEMPLATE,
 	})
-
 
 	const allowedBlocks = useSelect( (select) => {
 		return select(blockEditorStore).getAllowedBlocks(clientId)
@@ -227,17 +280,7 @@ function ProfileBlockEdit( props ) {
 		}
 	}, [ queryId, instanceId ] );
 
-	const resetProfile = () => {
-		setProfile( 0 )
-	}
-
-	const setProfile = (newProfileId = 0) => {
-
-		if(newProfileId === null){
-			newProfileId = 0
-		}
-		setAttributes({"profileId" : newProfileId})
-	}
+	
 
 	useEffect( () => {
 		
@@ -258,8 +301,8 @@ function ProfileBlockEdit( props ) {
 	}, [profile])
 
 	const showSelector = (profileId === 0)
-	const showSpinner = ((query.hasStartedResolution) && (!query.hasFinishedResolution) && (showSelector === false))
-	const showProfile = ((query.hasFinishedResolution) && (profile))
+	const showSpinner = ((profileQuery.hasStartedResolution) && (!profileQuery.hasFinishedResolution) && (showSelector === false))
+	const showProfile = ((profileQuery.hasFinishedResolution) && (profile))
 
 
 	

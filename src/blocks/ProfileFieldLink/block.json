@@ -46,7 +46,7 @@
 		},
 		"fieldType" : {
 			"type": "string",
-			"default" : "text"
+			"default" : "link"
 		}
 	},
 	"ancestor": [ "govpack/profile-v2" ],

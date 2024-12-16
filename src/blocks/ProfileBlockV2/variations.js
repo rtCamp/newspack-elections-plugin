@@ -37,38 +37,40 @@ export const variations = [
 				{"isLink":true,"aspectRatio":"2/3","style":{"layout":{"selfStretch":"fit","flexSize":null},"border":{"radius":"0px"}}}
 			],
 			[
-				"core/group",
-				{"style":{"spacing":{"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10","left":"var:preset|spacing|10","right":"var:preset|spacing|10"}}},"layout":{"type":"constrained"}},
-				[
+				
+				"govpack/profile-row-group",
+				{
+					"separatorStyles":{"height":"1px","spacing":{"margin":{"top":"0","bottom":"0"}}},
+					"style":{"layout":{"selfStretch":"fill","flexSize":null},
+					"spacing":{
+						"blockGap":"7px",
+						"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10","left":"var:preset|spacing|10","right":"var:preset|spacing|10"}
+					}}
+				},
+				[ 	
 					[
 						"core/post-title",
 						{"isLink":true},
 						[]
 					],
 					[
-						"govpack/profile-row-group",
-						{"separatorStyles":{"height":"1px","spacing":{"margin":{"top":"0","bottom":"0"}}},"style":{"layout":{"selfStretch":"fill","flexSize":null},"spacing":{"blockGap":"7px"}}},
-						[ 
-							[
-								"govpack/profile-row",
-								{"fieldKey":"legislative_body","fieldType":"taxonomy"}
-							],
-							[
-								"govpack/profile-separator"
-							],
-							[
-								"govpack/profile-row", 
-								{"fieldKey":"party","fieldType":"taxonomy"}
-							],
-							[
-								"govpack/profile-separator", {}
-							],
-							[	
-								"govpack/profile-row",
-								{"fieldKey":"endorsements","fieldType":"text"},
-								[]
-							]
-						]
+						"govpack/profile-row",
+						{"fieldKey":"legislative_body","fieldType":"taxonomy"}
+					],
+					[
+						"govpack/profile-separator"
+					],
+					[
+						"govpack/profile-row", 
+						{"fieldKey":"party","fieldType":"taxonomy"}
+					],
+					[
+						"govpack/profile-separator", {}
+					],
+					[	
+						"govpack/profile-row",
+						{"fieldKey":"endorsements","fieldType":"text"},
+						[]
 					],
 					[
 						"core/post-excerpt",

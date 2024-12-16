@@ -47,5 +47,5 @@ export const useSelectProfile = (profileId = null) => {
 			isLoading : (hasStartedResolution && !hasFinishedResolution),
 
 		}
-	})
+	}, [profileId])
 }

@@ -9,14 +9,13 @@ import clsx from 'clsx';
  */
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls, useInnerBlocksProps, store as blockEditorStore} from "@wordpress/block-editor"
-import { store as editorStore } from "@wordpress/editor"
-import { useSelect, useDispatch} from '@wordpress/data';
-import {useEffect} from "@wordpress/element"
-import { createBlock, store as blocksStore } from "@wordpress/blocks"
+
+import { useSelect} from '@wordpress/data';
+import { store as blocksStore } from "@wordpress/blocks"
 
 
-import {Panel, PanelBody, PanelRow, ToggleControl, SelectControl} from '@wordpress/components';
-import {getProfile, useProfileField, useProfileFields, useProfileFromContext, useProfileData} from "./../../components/Profile"
+import {Panel, PanelBody, PanelRow, ToggleControl} from '@wordpress/components';
+import {useProfileFieldAttributes, useFieldsOfType} from "./../../components/Profile"
 
 import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from '../../components/Controls/ProfileField';
 
@@ -68,7 +67,6 @@ function useConditionalTemplate(clientId){
 
 	
 	const { block, variation } = useSelect( (select) => {
-
 		const block = select(blockEditorStore).getBlock(clientId)
 		return {
 			block,
@@ -76,41 +74,24 @@ function useConditionalTemplate(clientId){
 		}
 	} )
 	
-
-	//variation.innerBlocks ?? []
-	/*
-	return [
-		...defaultTemplate,
-		['core/paragraph', {
-			"placeholder" : " ", // Include the space here or we get the default "start typing or select a block" when the meta data has no content
-			"metadata": {
-				"bindings":{
-					"content":{
-						"source":"core/post-meta",
-						"args":{
-							"key": "first_name"
-						}
-					}
-				}
-			}
-		}]
-	]
-	*/
 	return variation.innerBlocks ?? defaultTemplate 
 }
 
 
 
 
-function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
+function Edit( props ) {
 
+	const {attributes, setAttributes, context, clientId} = props  
+
+	const blockProps = useBlockProps();
+	const { setFieldKey, fieldKey, fieldType, isControlledByContext, value, field } =  useProfileFieldAttributes(props) 
+	const fieldsofType = useFieldsOfType(props, fieldType)
 	/**
 	 * Get Data From Parent Blocks
 	 */
 	const { 
-		'govpack/profileId' : profileId, 
 		'govpack/showLabels' : ContextShowLabels = null, 
-		postType = false
 	} = context
 
 	/**
@@ -118,20 +99,14 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	 */
 	const { 
 		label = null,
-		fieldKey = "",
 		showLabel,
 		hideFieldIfEmpty,
-		fieldType = "text"
 	} = attributes
-
-	
-	const {profile, fields} = useProfileData(context)
-	const field = useProfileField(fieldKey)
 
 	/**
 	 * Get Data From The Editor
 	 */
-	const blockProps = useBlockProps();
+
 	const {children, ...innerBlocksProps } = useInnerBlocksProps(blockProps, {
 		template : useConditionalTemplate(clientId),
 		renderAppender : false,
@@ -139,16 +114,16 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	} );
 
 	// Select Block Store Data
-	const {isBlockSelected, hasSelectedInnerBlock, contentBlock, wasBlockJustInserted, parentBlockClientId, currentBlock, currentBlockIndex } = useSelect( (select) => {
+	const {isBlockSelected, hasSelectedInnerBlock} = useSelect( (select) => {
 		return {
 			isBlockSelected : select(blockEditorStore).isBlockSelected(clientId),
 			hasSelectedInnerBlock : select(blockEditorStore).hasSelectedInnerBlock(clientId),
-			currentBlock : select(blockEditorStore).getBlock(clientId),
-			currentInnerBlocks : select(blockEditorStore).getBlock(clientId).innerBlocks,
-			contentBlock : select(blockEditorStore).getBlock(clientId).innerBlocks.filter( (block) => block?.attributes?.metadata?.bindings !== undefined )[0],
-			wasBlockJustInserted: select(blockEditorStore).wasBlockJustInserted(clientId) ?? false,
-			parentBlockClientId: select(blockEditorStore).getBlockRootClientId(clientId),
-			currentBlockIndex: select(blockEditorStore).getBlockIndex(clientId),
+			//currentBlock : select(blockEditorStore).getBlock(clientId),
+			//currentInnerBlocks : select(blockEditorStore).getBlock(clientId).innerBlocks,
+			//contentBlock : select(blockEditorStore).getBlock(clientId).innerBlocks.filter( (block) => block?.attributes?.metadata?.bindings !== undefined )[0],
+			//wasBlockJustInserted: select(blockEditorStore).wasBlockJustInserted(clientId) ?? false,
+			//parentBlockClientId: select(blockEditorStore).getBlockRootClientId(clientId),
+			//currentBlockIndex: select(blockEditorStore).getBlockIndex(clientId),
 		}
 	} )
 
@@ -158,7 +133,7 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	/**
 	 * Get methods to update data elsewhere 
 	 */
-	const { updateBlock, insertBlock } = useDispatch(blockEditorStore)
+	//const { updateBlock, insertBlock } = useDispatch(blockEditorStore)
 
 	/*
 	useEffect( () => {
@@ -203,7 +178,6 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	
 
 
-	const value = profile?.profile?.[fieldKey];
 	const displayLabel = (label ? label : field?.label ?? "")
 
 	
@@ -212,11 +186,9 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 	const shouldDimField = (hideFieldIfEmpty && value === "" && (!isBlockSelected) && (!hasSelectedInnerBlock) )
 	className = clsx(className, {"gp-dim-field" : shouldDimField })
 
-	const setFieldKey = (newKey) => {
-		setAttributes({"fieldKey" : newKey})
-	}
 
-	const fieldsOfType = fields.filter( (f) => f.type === fieldType) 
+
+	
     return (
 		<>
 			<MetaInspectorControl
@@ -231,14 +203,14 @@ function Edit( {attributes, setAttributes, context, clientId, ...props} ) {
 				fieldKey = {fieldKey}
 				setFieldKey = {setFieldKey}
 				fieldType = {fieldType}
-				fields = { fieldsOfType }
+				fields = { fieldsofType }
 			/>
 			
 			<ProfileFieldsToolBar 
 				fieldKey = {fieldKey}
 				setFieldKey = {setFieldKey}
 				fieldType = {fieldType}
-				fields = { fieldsOfType }
+				fields = { fieldsofType }
 			/>
 
 
