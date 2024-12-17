@@ -1,7 +1,7 @@
 import { store as coreData} from "@wordpress/core-data"
 import { useSelect } from "@wordpress/data"
 
-export const useSelectProfile = (profileId = null) => {
+ const useSelectProfile = (profileId = null) => {
 	return  useSelect( (select) => {
 
 

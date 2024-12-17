@@ -11,13 +11,14 @@ import {Panel, PanelBody, PanelRow,
 } from '@wordpress/components';
 import { useMemo } from "@wordpress/element"
 
-import { useSelectProfile } from '../SelectProfile';
+import { useProfile } from './../Profile';
 
 import { Spinner } from '../Spinner';
 import { useMedia } from '../useMedia';
+
 export const ProfileResetPanel = ({profileId, ...props}) => {
 
-	const {profile, isLoading, ...query} = useSelectProfile(profileId)
+	const {profile, isLoading, ...query} = useProfile(profileId)
 	const {media = {}} = useMedia(profile?.featured_media)
 	const hasThumbnail = (media?.media_details?.sizes?.thumbnail?.source_url ?? false)
 	

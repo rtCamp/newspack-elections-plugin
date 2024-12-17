@@ -1,10 +1,10 @@
 import { getProfileFields } from "./profile-fields";
 
-export const useProfileField = (fieldName = null) => {
+ const useProfileField = (fieldName = null) => {
 	return getProfileField(fieldName);
 };
 
-export const getProfileField = (fieldName = null) => {
+ const getProfileField = (fieldName = null) => {
 	const fields = getProfileFields();
 
 	if(fields.length === 0){

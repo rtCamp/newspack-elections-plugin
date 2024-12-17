@@ -12,28 +12,25 @@ import {
 	InspectorControls, useBlockProps, useInnerBlocksProps, InnerBlocks, BlockControls, store as blockEditorStore,
 	__experimentalUseBorderProps as useBorderProps,
 	__experimentalUseColorProps as useColorProps,
-	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
-	useBlockEditContext
+	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles
 } from '@wordpress/block-editor';
 
-import {select} from "@wordpress/data"
+
 
 import { useInstanceId } from '@wordpress/compose';
 import { useRef, useEffect} from '@wordpress/element';
 import { ToolbarGroup, Toolbar, Icon, ResizableBox } from '@wordpress/components';
 
 import { addQueryArgs } from '@wordpress/url';
-import { useDispatch, useSelect } from "@wordpress/data";
+import { useDispatch } from "@wordpress/data";
 import { external, postAuthor } from '@wordpress/icons';
 
 import { ProfileResetPanel } from '../../../components/Panels/ProfileResetPanel.jsx';
 import { Spinner } from './../../../components/Spinner.jsx';
-import { useSelectProfile } from "./../../../components/SelectProfile.jsx"
-
-
 
 import { DEFAULT_TEMPLATE } from './default-template.js';
 
+import { useProfileAttributes } from '../../../components/Profile';
 
 const usePostEditURL = ( postId ) => {
 
@@ -177,74 +174,7 @@ const ProfileWrapper = ({children, attributes}) => {
 }
 
 
-const useProfileId = (props) => {
 
-	const { context } = props
-
-	const { 
-		postType = null
-	} = context
-
-	// Get the profileId from context, falling back to attributes then null if needed.
-	// do the same with postId
-
-	const [profileId, isProfileControlledByContext, isProfileControlledByAttr] = useContextOverAttribute(props, "govpack/profileId", "profileId")
-	const [postId, isPostControlledByContext, isPostControlledByAttr] = useContextOverAttribute(props, "postId", "postId")
-	
-
-	// postId will be invalid for a profile unless the postType is profiles
-	const canUsePostID = (postType === "govpack_profiles")
-
-	// set the value to the profileId, falling back to the postId if postid can be used
-	const value = profileId ?? (canUsePostID ? postId : null)
-	
-	const isControlledByContext = isProfileControlledByContext ?? (canUsePostID ? isPostControlledByContext : null)
-	const isControlledByAttribute = isProfileControlledByAttr ?? (canUsePostID ? isPostControlledByAttr : null)
-
-	return {
-		profileId : value,
-		isControlledByAttribute,
-		isControlledByContext
-	}
-}
-
-const useContextOverAttribute = (props, contextKey = null, attributeKey = null, defaultValue = null) => {
-	
-	const {attributes, context} = props
-
-	const attrValue = attributes?.[attributeKey] ?? null
-	const contextValue = attributes?.[contextKey] ?? null
-
-	const value = contextValue ?? attrValue ?? defaultValue ?? null
-	const isControlledByContext = (contextValue !== null)
-	const isControlledByAttribute = ((isControlledByContext === false) && (attrValue !== null))
-
-	return [value, isControlledByContext, isControlledByAttribute]
-}
-
-const useProfileAttributes = ( props ) => {
-
-	const { setAttributes, attributes } = props
-
-	const resetProfile = () => {
-		setProfile( 0 )
-	}
-
-	const setProfile = (newProfileId = 0) => {
-
-		if(newProfileId === null){
-			newProfileId = 0
-		}
-		setAttributes({"profileId" : newProfileId})
-	}
-
-	const profileId = useProfileId(props)?.profileId
-
-	const {profile, ...profileQuery} = useSelectProfile(profileId)
-
-	
-	return {setProfile, resetProfile, profileId, profile, profileQuery}
-}
 
 function ProfileBlockEdit( props ) {
 
@@ -261,18 +191,6 @@ function ProfileBlockEdit( props ) {
 		queryId,
 	} = attributes;
 
-
-	const innerBlockProps = useInnerBlocksProps(blockProps, {
-		template: DEFAULT_TEMPLATE,
-	})
-
-	const allowedBlocks = useSelect( (select) => {
-		return select(blockEditorStore).getAllowedBlocks(clientId)
-	}, [clientId] )
-
-
-	
-
 	useEffect( () => {
 		if ( ! Number.isFinite( queryId ) ) {
 			__unstableMarkNextChangeAsNotPersistent();
@@ -280,7 +198,6 @@ function ProfileBlockEdit( props ) {
 		}
 	}, [ queryId, instanceId ] );
 
-	
 
 	useEffect( () => {
 		
@@ -300,14 +217,10 @@ function ProfileBlockEdit( props ) {
 
 	}, [profile])
 
-	const showSelector = (profileId === 0)
-	const showSpinner = ((profileQuery.hasStartedResolution) && (!profileQuery.hasFinishedResolution) && (showSelector === false))
-	const showProfile = ((profileQuery.hasFinishedResolution) && (profile))
 
+	const showSpinner = profileQuery.isLoading
+	const showProfile = ((profileQuery.hasLoaded) && (profile))
 
-	
-	
-	
 	return (
 		<>
 

@@ -12,34 +12,15 @@ import { useBlockProps } from "@wordpress/block-editor"
 import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from "../../components/Controls/ProfileField"
 import { useFieldsOfType, useProfileFieldAttributes } from './../../components/Profile';
 
-
-function Edit( props ) {
+const FieldBlockEdit = (props) => {
 
 	const blockProps = useBlockProps();
-	
-	const { setFieldKey, fieldKey, fieldType, isControlledByContext, profile, value, field } =  useProfileFieldAttributes(props) 
+	const { setFieldKey, fieldKey, fieldType, isControlledByContext } =  useProfileFieldAttributes(props) 
 	const fieldsofType = useFieldsOfType(props, fieldType)
+	const { children } = props
 
-	const profileValue = () => {
-
-		
-		if(field.type === "link"){
-			let url = value?.url;
-			return (<a href={ url }>{ url }</a>)
-		}
-
-		if(typeof value === "object"){
-			return ""
-		}
-
-		return value.trim()
-	}
-
-	const FieldValue = profileValue(fieldKey)
-
-    return (
-		<>
-		
+	return (
+		<div {...blockProps}>
 
 			{!isControlledByContext && (
 				<>
@@ -59,10 +40,37 @@ function Edit( props ) {
 				</>
 			)}
 
-			<div {...blockProps}>
+			{children}
+
+		</div>
+	)
+}
+
+function Edit( props ) {
+
+	const { fieldKey, value, field } =  useProfileFieldAttributes(props) 
+
+	const profileValue = () => {
+
+		if(field.type === "link"){
+			let url = value?.url;
+			return (<a href={ url }>{ url }</a>)
+		}
+
+		if(typeof value === "object"){
+			return ""
+		}
+
+		return value.trim()
+	}
+
+	const FieldValue = profileValue(fieldKey)
+
+    return (
+		<>
+			<FieldBlockEdit {...props} >
 				{FieldValue}
-			</div>
-			
+			</FieldBlockEdit>
 		</>
 	)
 }
