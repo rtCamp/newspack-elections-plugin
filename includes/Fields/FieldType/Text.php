@@ -19,6 +19,13 @@ class Text extends \Govpack\Fields\FieldType {
 	public string $label = 'Text';
 
 	/**
+	 * Output Formats
+	 * 
+	 * Formats the field can be output as
+	 */
+	public array $formats = [ 'text' ];
+
+	/**
 	 * Type Icon
 	 * 
 	 * An Icon to use for the Variation

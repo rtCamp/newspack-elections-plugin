@@ -18,6 +18,14 @@ class Link extends \Govpack\Fields\FieldType {
 	 */
 	public string $label = 'Link';
 
+	/**
+	 * Output Formats
+	 * 
+	 * Formats the field can be output as
+	 */
+	public array $formats = [ 'text', 'link' ];
+
+
 	public function get_variation_inner_blocks(): array {
 		return [
 			[ 'govpack/profile-label', [] ],

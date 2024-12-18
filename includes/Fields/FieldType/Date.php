@@ -18,6 +18,13 @@ class Date extends Text {
 	 */
 	public string $label = 'Date';
 
+	/**
+	 * Output Formats
+	 * 
+	 * Formats the field can be output as
+	 */
+	public array $formats = [ 'text', 'date' ];
+
 	
 	public function variation_icon(): string {
 		return 'calendar';

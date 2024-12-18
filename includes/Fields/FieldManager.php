@@ -69,4 +69,13 @@ class FieldManager extends \Govpack\Abstracts\Collection implements \Govpack\Int
 			}
 		);
 	}
+
+	public function of_format( $format ): array {
+		return array_filter(
+			$this->collection,
+			function ( $field ) use ( $format ) {
+				return in_array( $format, $field->type->formats );
+			}
+		);
+	}
 }

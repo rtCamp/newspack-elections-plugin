@@ -19,6 +19,13 @@ class Taxonomy extends \Govpack\Fields\FieldType {
 	public string $label = 'Taxonomy';
 
 	/**
+	 * Output Formats
+	 * 
+	 * Formats the field can be output as
+	 */
+	public array $formats = [ 'text', 'term' ];
+
+	/**
 	 * Type Icon
 	 * 
 	 * An Icon to use for the Variation

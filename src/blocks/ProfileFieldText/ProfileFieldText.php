@@ -18,6 +18,7 @@ class ProfileFieldText extends \Govpack\Blocks\Profile\Profile {
 
 	public string $block_name = 'govpack/profile-field-text';
 	public $template          = 'profile';
+	public $field_type        = 'text';
 
 	private $show       = null;
 	private $profile    = null;
@@ -67,17 +68,17 @@ class ProfileFieldText extends \Govpack\Blocks\Profile\Profile {
 
 	public function variations(): array {
 
-		$types  = $this->create_field_type_variations();
+		//$types  = $this->create_field_type_variations();
 		$fields = $this->create_field_variations();
 
-		return array_merge( $types, $fields );
+		return array_merge( [], $fields );
 	}
 
 	public function create_field_variations(): array {
 
 		$variations = [];
 		
-		foreach ( \Govpack\Profile\CPT::fields()->all() as $field ) {
+		foreach ( \Govpack\Profile\CPT::fields()->of_format( $this->field_type ) as $field ) {
 			$variation = [
 				'category'    => 'govpack-profile-fields',
 				'name'        => sprintf( 'profile-field-%s', $field->slug ),
