@@ -60,11 +60,7 @@ function Edit( props ) {
 	
 
 	const { profileId, field } =  useProfileFieldAttributes(props) 
-
-	
-
 	const taxonomySlug = field?.taxonomy ?? null
-	
 	const taxonomies = useProfileTaxonomies();
 	const selectedTaxonomy = taxonomies?.find( (t) => {
 		return t.slug === taxonomySlug

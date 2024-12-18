@@ -1,3 +1,4 @@
+import {isEmpty} from "lodash"
 import { useBlockProps } from "@wordpress/block-editor"
 import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from "../../components/Controls/ProfileField"
 import { useFieldsOfType, useProfileFieldAttributes } from './../../components/Profile';
@@ -7,8 +8,13 @@ export const FieldBlockEdit = (props) => {
 	const blockProps = useBlockProps();
 	const { setFieldKey, fieldKey, fieldType, isControlledByContext } =  useProfileFieldAttributes(props) 
 	const fieldsofType = useFieldsOfType(props, fieldType)
-	const { children } = props
+	const { 
+		children = [],
+		defaultValue = "N/A",
+		hasValue = false
+	} = props
 
+	const hasChildren = (children.length > 0)
 	return (
 		<div {...blockProps}>
 
@@ -30,7 +36,8 @@ export const FieldBlockEdit = (props) => {
 				</>
 			)}
 
-			{children}
+			{hasChildren && hasValue && (<>{children}</>)}
+			{(!hasValue || !hasChildren) && (<span>{defaultValue}</span>)}
 
 		</div>
 	)

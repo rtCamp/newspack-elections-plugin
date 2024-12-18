@@ -1,4 +1,4 @@
-
+import {isEmpty} from "lodash"
 
 /**
  * WordPress dependencies
@@ -33,10 +33,15 @@ function Edit( props ) {
 	}
 
 	const FieldValue = profileValue(fieldKey)
+	const hasValue = !isEmpty(FieldValue)
 
     return (
 		<>
-			<FieldBlockEdit {...props} >
+			<FieldBlockEdit 
+				{...props} 
+				defaultValue = "{{No Field Value}}"
+				hasValue = {hasValue}
+			>
 				{FieldValue}
 			</FieldBlockEdit>
 		</>

@@ -2,7 +2,7 @@
  * External dependencies
  */
 import clsx from 'clsx';
-
+import {isEmpty} from "lodash"
 
 /**
  * WordPress dependencies
@@ -29,7 +29,7 @@ const MetaInspectorControl = ({
 
 	return(
 		<InspectorControls>
-			<Panel>
+			
 				<PanelBody title={ __( 'Profile Label Controls', 'govpack' ) }>
 					<PanelRow>
 						<ToggleControl 
@@ -50,7 +50,7 @@ const MetaInspectorControl = ({
 						/>
 					</PanelRow>
 				</PanelBody>
-			</Panel>
+			
 		</InspectorControls>
 	)
 }
@@ -65,7 +65,6 @@ function useConditionalTemplate(clientId){
 		}]
 	]
 
-	
 	const { block, variation } = useSelect( (select) => {
 		const block = select(blockEditorStore).getBlock(clientId)
 		return {
@@ -85,8 +84,11 @@ function Edit( props ) {
 	const {attributes, setAttributes, context, clientId} = props  
 
 	const blockProps = useBlockProps();
-	const { setFieldKey, fieldKey, fieldType, isControlledByContext, value, field } =  useProfileFieldAttributes(props) 
+	const { setFieldKey, fieldKey, fieldType, value, field, profile } =  useProfileFieldAttributes(props) 
 	const fieldsofType = useFieldsOfType(props, fieldType)
+
+	console.log(profile)
+	const hasValue = isEmpty(value)
 	/**
 	 * Get Data From Parent Blocks
 	 */
@@ -113,6 +115,8 @@ function Edit( props ) {
 		templateLock: "all"
 	} );
 
+	let {className} = innerBlocksProps
+
 	// Select Block Store Data
 	const {isBlockSelected, hasSelectedInnerBlock} = useSelect( (select) => {
 		return {
@@ -127,13 +131,6 @@ function Edit( props ) {
 		}
 	} )
 
-	// Get classes as a variable so we can update it
-	let {className} = innerBlocksProps
-	
-	/**
-	 * Get methods to update data elsewhere 
-	 */
-	//const { updateBlock, insertBlock } = useDispatch(blockEditorStore)
 
 	/*
 	useEffect( () => {
@@ -175,20 +172,14 @@ function Edit( props ) {
 	}, [wasBlockJustInserted])
 	*/
 	
-	
-
 
 	const displayLabel = (label ? label : field?.label ?? "")
 
-	
 	// Should we output the UI to show that a field is hidden?
 	// Add a class to the blockProps if so
-	const shouldDimField = (hideFieldIfEmpty && value === "" && (!isBlockSelected) && (!hasSelectedInnerBlock) )
+	const shouldDimField = (hideFieldIfEmpty && (!hasValue) && (!isBlockSelected) && (!hasSelectedInnerBlock) )
 	className = clsx(className, {"gp-dim-field" : shouldDimField })
 
-
-
-	
     return (
 		<>
 			<MetaInspectorControl

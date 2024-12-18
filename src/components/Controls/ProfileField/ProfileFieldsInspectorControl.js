@@ -9,6 +9,9 @@ import styled from '@emotion/styled';
 import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
+	Panel,
+	PanelBody,
+	PanelRow
 } from '@wordpress/components';
 import { useViewportMatch } from '@wordpress/compose';
 import { InspectorControls} from "@wordpress/block-editor"
@@ -46,28 +49,19 @@ export const ProfileFieldsInspectorControl = ({
 	const isMobile = useViewportMatch( 'medium', '<' );
 
 	return(
-		<InspectorControls>
-			<ToolsPanel
-				label={ __( 'Profile Fields' ) }
-				dropdownMenuProps={ dropdownMenuProps }
-			>
-				
-					<ToolsPanelItemWide
-						isShownByDefault = {true}
-						key={ "field" }
-						hasValue={ () => !! fieldKey }
-						label={ "Profile Field" }
-					>
-						
+		<InspectorControls group="settings">
+		
+				<PanelBody title={ __( 'Profile Field', 'govpack' ) }>
+					<PanelRow>
 						<ProfileFieldsDropDown 
 							className={ 'govpack-profile-field-select' }
 							onSelectField={ setFieldKey }
 							selectedValue={ fieldKey }
 							fields={ fields }
 						/>
-					</ToolsPanelItemWide>
-	
-			</ToolsPanel>
+					</PanelRow>
+				</PanelBody>
+			
 		</InspectorControls>
 	)
 }

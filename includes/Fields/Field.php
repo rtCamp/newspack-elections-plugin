@@ -115,20 +115,20 @@ class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interface
 	}
 
 	
-	public function format($raw_value){
+	public function format( $raw_value ) {
 		return $raw_value;
 	}
 
 	public function raw( Profile $model ) {
 
 		if ( $this->source === 'meta' ) {
-			return $model->post->__get( $this->meta_key );
+			return trim( $model->post->__get( $this->meta_key ) );
 		}
 		
 		return 'taxonomy';
 	}
 
 	public function value( Profile $model ) {
-		return $this->format($this->raw($model));
+		return $this->format( $this->raw( $model ) );
 	}
 }
