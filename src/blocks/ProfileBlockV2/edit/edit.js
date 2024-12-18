@@ -14,16 +14,12 @@ import {
 	__experimentalUseColorProps as useColorProps,
 	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles
 } from '@wordpress/block-editor';
-
-
-
 import { useInstanceId } from '@wordpress/compose';
 import { useRef, useEffect} from '@wordpress/element';
 import { ToolbarGroup, Toolbar, Icon, ResizableBox } from '@wordpress/components';
-
-import { addQueryArgs } from '@wordpress/url';
 import { useDispatch } from "@wordpress/data";
 import { external, postAuthor } from '@wordpress/icons';
+
 
 import { ProfileResetPanel } from '../../../components/Panels/ProfileResetPanel.jsx';
 import { Spinner } from './../../../components/Spinner.jsx';
@@ -31,20 +27,8 @@ import { Spinner } from './../../../components/Spinner.jsx';
 import { DEFAULT_TEMPLATE } from './default-template.js';
 
 import { useProfileAttributes } from '../../../components/Profile';
+import { usePostEditURL } from '../../../components/post-edit-url';
 
-const usePostEditURL = ( postId ) => {
-
-	if ( ! postId ) {
-		return null;
-	}
-
-	const editURL = addQueryArgs( 'post.php' , {
-		post: postId,
-		action: 'edit',
-	} );
-
-	return editURL;
-};
 
 
 const ProfileBlockControls = ({ attributes, setAttributes, ...props}) => {

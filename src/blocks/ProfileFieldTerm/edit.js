@@ -13,6 +13,8 @@ import { useProfileFieldAttributes, useFieldsOfType } from "./../../components/P
 
 import useProfileTerms from "./use-profile-terms"
 
+import { FieldBlockEdit } from '../../components/field-block-edit';
+
 /**
  * TODO:
  * 1. Move useProfileTaxonomies to its own, reusable hook
@@ -56,9 +58,9 @@ const ProfileTerms = ({terms}) => {
 
 function Edit( props ) {
 	
-	const blockProps = useBlockProps();
-	const { profileId, setFieldKey, fieldKey, fieldType, isControlledByContext, value, field } =  useProfileFieldAttributes(props) 
-	const fieldsofType = useFieldsOfType(props, fieldType)
+
+	const { profileId, field } =  useProfileFieldAttributes(props) 
+
 	
 
 	const taxonomySlug = field?.taxonomy ?? null
@@ -72,32 +74,12 @@ function Edit( props ) {
 	const hasProfile = (profileId);
 
     return (
-		<>
-		{!isControlledByContext && (
-			<>
-				<ProfileFieldsInspectorControl
-					fieldKey = {fieldKey}
-					setFieldKey = {setFieldKey}
-					fieldType = {fieldType}
-					fields = { fieldsofType }
-				/>
-
-				<ProfileFieldsToolBar 
-					fieldKey = {fieldKey}
-					setFieldKey = {setFieldKey}
-					fieldType = {fieldType}
-					fields = { fieldsofType }
-				/>
-			</>
-		)}
-
-		<div {...blockProps}>
+		<FieldBlockEdit {...props}>
 			{ isLoading && hasProfile && <Spinner /> }
 			{ !isLoading && hasProfile && hasProfileTerms && 
 				<ProfileTerms terms={profileTerms} />
 		 }
-		</div>
-		</>
+		</FieldBlockEdit>
 	)
 }
 
