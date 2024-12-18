@@ -87,8 +87,7 @@ function Edit( props ) {
 	const { setFieldKey, fieldKey, fieldType, value, field, profile } =  useProfileFieldAttributes(props) 
 	const fieldsofType = useFieldsOfType(props, fieldType)
 
-	console.log(profile)
-	const hasValue = isEmpty(value)
+	const hasValue = !isEmpty(value)
 	/**
 	 * Get Data From Parent Blocks
 	 */
@@ -179,6 +178,7 @@ function Edit( props ) {
 	// Add a class to the blockProps if so
 	const shouldDimField = (hideFieldIfEmpty && (!hasValue) && (!isBlockSelected) && (!hasSelectedInnerBlock) )
 	className = clsx(className, {"gp-dim-field" : shouldDimField })
+
 
     return (
 		<>

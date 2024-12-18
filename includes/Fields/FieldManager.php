@@ -60,4 +60,13 @@ class FieldManager extends \Govpack\Abstracts\Collection implements \Govpack\Int
 	public function get_types(): array {
 		return $this->types->all();
 	}
+
+	public function of_type( $type ): array {
+		return array_filter(
+			$this->collection,
+			function ( $field ) use ( $type ) {
+				return $field->type->slug === $type;
+			}
+		);
+	}
 }

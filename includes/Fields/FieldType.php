@@ -31,7 +31,11 @@ abstract class FieldType extends Collectable implements CollectableInterface {
 
 	abstract public function variation_icon(): string;
 
-	public function value($value){
+	public function value( $value ) {
 		return $value;
+	}
+
+	public function __toString() {
+		return $this->slug;
 	}
 }

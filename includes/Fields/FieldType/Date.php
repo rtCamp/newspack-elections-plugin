@@ -2,7 +2,7 @@
 
 namespace Govpack\Fields\FieldType;
 
-class Date extends \Govpack\Fields\FieldType {
+class Date extends Text {
 
 	/**
 	 * Type Slug

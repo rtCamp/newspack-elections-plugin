@@ -5,12 +5,13 @@ import {isEmpty} from "lodash"
  */
 import { __ } from '@wordpress/i18n';
 
-
 /**
  * Internal dependencies
  */
 import { FieldBlockEdit } from '../../components/field-block-edit';
 import { useProfileFieldAttributes } from './../../components/Profile';
+
+
 
 
 
@@ -37,6 +38,7 @@ function Edit( props ) {
 
     return (
 		<>
+			
 			<FieldBlockEdit 
 				{...props} 
 				defaultValue = "{{No Field Value}}"
