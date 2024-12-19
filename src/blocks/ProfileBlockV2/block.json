@@ -9,8 +9,8 @@
 	"supports" : {
 		"anchor": true,
 		"align": true,
-		"align-wide": true,
-		"aria-label": true,
+		"alignWide": true,
+		"ariaLabel": true,
 		"color" : {
 			"background" : true,
 			"button": true,
@@ -78,6 +78,10 @@
 		},
 		"style": {
 			"type": "object"
+		},
+		"tagName": {
+			"type": "string",
+			"default" : "div"
 		}
 	},
 	"allowedBlocks": [ 

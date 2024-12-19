@@ -16,7 +16,7 @@ import {
 } from '@wordpress/block-editor';
 import { useInstanceId } from '@wordpress/compose';
 import { useRef, useEffect} from '@wordpress/element';
-import { ToolbarGroup, Toolbar, Icon, ResizableBox } from '@wordpress/components';
+import { ToolbarGroup, Toolbar, Icon, ResizableBox, SelectControl } from '@wordpress/components';
 import { useDispatch } from "@wordpress/data";
 import { external, postAuthor } from '@wordpress/icons';
 
@@ -158,7 +158,50 @@ const ProfileWrapper = ({children, attributes}) => {
 }
 
 
+const BlockHTMLElementControl = (props) => {	
 
+	const {
+		tagName,
+		onSelectTagName
+	} = props
+
+	const htmlElementMessages = {
+		
+		main: __(
+			'The <main> element should be used for the primary content of your document only.'
+		),
+		section: __(
+			"The <section> element should represent a standalone portion of the document that can't be better represented by another element."
+		),
+		article: __(
+			'The <article> element should represent a self-contained, syndicatable portion of the document.'
+		),
+		aside: __(
+			"The <aside> element should represent a portion of a document whose content is only indirectly related to the document's main content."
+		)
+		
+	};
+
+	return (
+		<InspectorControls group="advanced">
+			<SelectControl
+				__nextHasNoMarginBottom
+				__next40pxDefaultSize
+				label={ __( 'HTML element' ) }
+				options={ [
+					{ label: __( 'Default (<div>)' ), value: 'div' },
+					{ label: '<main>', value: 'main' },
+					{ label: '<section>', value: 'section' },
+					{ label: '<article>', value: 'article' },
+					{ label: '<aside>', value: 'aside' },
+				] }
+				value={ tagName }
+				onChange={ onSelectTagName }
+				help={ htmlElementMessages[ tagName ] }
+			/>
+		</InspectorControls>
+	)
+}
 
 function ProfileBlockEdit( props ) {
 
@@ -173,6 +216,7 @@ function ProfileBlockEdit( props ) {
 
 	const {
 		queryId,
+		tagName : TagName = 'div',
 	} = attributes;
 
 	useEffect( () => {
@@ -182,6 +226,9 @@ function ProfileBlockEdit( props ) {
 		}
 	}, [ queryId, instanceId ] );
 
+	const setTagName = ( nextTagValue ) => {
+		setAttributes( { tagName: nextTagValue } )
+	}
 
 	useEffect( () => {
 		
@@ -205,6 +252,8 @@ function ProfileBlockEdit( props ) {
 	const showSpinner = profileQuery.isLoading
 	const showProfile = ((profileQuery.hasLoaded) && (profile))
 
+	
+
 	return (
 		<>
 
@@ -213,7 +262,7 @@ function ProfileBlockEdit( props ) {
 			) }
 			
 			{ showProfile && (
-				<>
+				<TagName {...blockProps}>
 					<ProfileBlockControls 
 						attributes = {attributes} 
 						setAttributes = {setAttributes} 
@@ -224,15 +273,18 @@ function ProfileBlockEdit( props ) {
 						<ProfileResetPanel profileId = {profileId} setProfile = {resetProfile}  />
 					</InspectorControls>
 					
+					<BlockHTMLElementControl
+						tagName = {TagName}
+						onSelectTagName = {setTagName}
+					/>
 
-					<div {...blockProps}>
+					
 					<ResizableBox {...resizeProps} >
 						<ProfileWrapper {...props}>
 							<InnerBlocks {...props}/>
 						</ProfileWrapper>
 					</ResizableBox>
-					</div>
-				</>
+				</TagName>
 			)}
 		</>
 	);
