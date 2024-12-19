@@ -1,9 +1,17 @@
+/**
+ * WordPress dependencies
+ */
 import { registerBlockType, createBlock } from '@wordpress/blocks';
 import { postCategories as icon } from '@wordpress/icons';
 import { __ } from "@wordpress/i18n"
 
 /**
- * Internal dependencies
+ * Plugin dependencies
+ */
+import { FieldToRow, createRowToFieldTransform } from '../../block-transforms';
+
+/**
+ * Internal Block dependencies
  */
 import Edit from './edit';
 import Save from './save';
@@ -15,6 +23,7 @@ import metadata from './block.json';
  * Style dependencies - will load in editor
  */
 import './view.scss';
+
 
 
 const { attributes, category, title } = metadata;
@@ -33,22 +42,10 @@ registerBlockType( metadata.name, {
 	save: Save,
 	transforms: {
 		"to" : [
-			{
-				type: 'block',
-				blocks: [ 'govpack/profile-row' ],
-				transform: ( attributes  ) => {
-					return createBlock( 'govpack/profile-row', attributes );
-				},
-			}
+			FieldToRow
 		],
 		"from" : [
-			{
-				type: 'block',
-				blocks: [ 'govpack/profile-row' ],
-				transform: ( attributes  ) => {
-					return createBlock( 'govpack/profile-field-text', attributes );
-				},
-			}
+			createRowToFieldTransform(metadata.name)
 		]
 	}
 } );
