@@ -5,7 +5,7 @@ export const variations = [
 		'name' : "gp-profile-full",
 		'title' : "Full Profile",
 		'description' : "Profile",
-		isDefault : true,
+		isDefault : false,
 		icon : layout,
 		attributes : {
 			width : "wide",
