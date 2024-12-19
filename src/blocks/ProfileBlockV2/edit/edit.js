@@ -139,7 +139,16 @@ const useResizeProps = (props ) => {
 const ProfileWrapper = ({children, attributes}) => {
 
 	const borderProps = useBorderProps( attributes );
-	const spacingStyles = getSpacingClassesAndStyles(attributes)
+	const {
+		style : {
+			spacing : {
+				padding : paddingAttributes = {},
+				margin : marginAttributes = {},
+			}
+		}
+	} = attributes
+
+	const spacingStyles = getSpacingClassesAndStyles({style:{spacing:{padding:paddingAttributes}}})
 	const colorProps = useColorProps(attributes)
 
 
