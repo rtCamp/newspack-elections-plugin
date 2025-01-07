@@ -66,3 +66,22 @@ if ( ! function_exists( 'gp_deprecated' ) ) {
 		gp_doing_it_wrong( $function_name, $message, $version );
 	}
 }
+
+
+
+if ( ! function_exists( 'gp_dump' ) ) {
+	function gp_dump( ...$args ): void {
+
+		echo "<pre>";
+
+		foreach($args as $index => $arg){
+			var_dump($arg);
+
+			if($index !== count($args)){
+				echo "<hr />";
+			}
+		}
+
+		echo "</pre>";
+	}
+}

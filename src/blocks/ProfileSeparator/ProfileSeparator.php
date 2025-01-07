@@ -14,14 +14,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class ProfileSeparator extends \Govpack\Blocks\Profile\Profile {
+class ProfileSeparator extends \Govpack\Blocks\ProfileRow\ProfileRow {
 
 	public string $block_name = 'govpack/profile-separator';
-	public $template   = 'profile';
+	
 
 	private $show       = null;
 	private $profile    = null;
-	private $attributes = [];
+	
 	protected $plugin;
 
 	private string $default_variation;
@@ -30,9 +30,7 @@ class ProfileSeparator extends \Govpack\Blocks\Profile\Profile {
 		$this->plugin = $plugin;
 	}
 
-	public function disable_block( $allowed_blocks, $editor_context ) :bool {
-		return false;
-	}
+
 
 	public function block_build_path(): string {
 		return $this->plugin->build_path( 'blocks/ProfileSeparator' );
@@ -58,10 +56,5 @@ class ProfileSeparator extends \Govpack\Blocks\Profile\Profile {
 	 * @param WP_Block $template The filename of the template-part to use.
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
-	}   
-
-	
-	public function template(): string {
-		return sprintf( 'blocks/%s', $this->template );
 	}
 }

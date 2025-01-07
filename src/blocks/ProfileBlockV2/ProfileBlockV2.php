@@ -21,7 +21,7 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 
 	private $show       = null;
 	private $profile    = null;
-	private $attributes = [];
+	protected $attributes = [];
 	protected $plugin;
 
 	public function __construct( $plugin ) {
@@ -55,8 +55,18 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 			return false;
 		}
 
+		$this->profile = \Govpack\Profile\CPT::get_data( $attributes['profileId'] );
 
-		return $this->handle_render( $attributes, $content, $block );
+		if ( ! $this->profile ) {
+			return;
+		}
+
+		$this->attributes = self::merge_attributes_with_block_defaults( $this->block_name, $attributes );
+		$this->enqueue_view_assets();
+
+		ob_start();
+		$this->handle_render( $attributes, $content, $block );
+		return \ob_get_clean();
 	}
 
 	/**
@@ -67,29 +77,19 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 	 * @param WP_Block $template The filename of the template-part to use.
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
+		
+		$tagName = $this->attributes["tagName"] ?? "div";
+		
 
-		$this->profile = \Govpack\Profile\CPT::get_data( $attributes['profileId'] );
-	
-		if ( ! $this->profile ) {
-			return;
-		}
-
-		$this->enqueue_view_assets();
-
-		$this->attributes = self::merge_attributes_with_block_defaults( $this->block_name, $attributes );
-		/*
-		return gp_template_loader()->render_block(
-			$this->template(),
-			$this->attributes, 
-			$content, 
-			$block, 
-			[
-				'profile_block' => $this,
-				'profile_data'  => $this->profile,
-			] 
+		$block_html = sprintf("<%s %s>%s</%s>", 
+			$tagName,
+			get_block_wrapper_attributes(),
+			$content,
+			$tagName
 		);
-		*/
-	}   
+		
+		echo $block_html;
+	}
 
 	
 	public function template(): string {

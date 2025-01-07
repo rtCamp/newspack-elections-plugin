@@ -14,8 +14,11 @@ import { addFilter } from "@wordpress/hooks"
 import './view.scss';
 import { variations } from './variations';
 import {withRestrictedAllowedBlocks} from "./edit/restrict-allowed-blocks"
-const { attributes, category } = metadata;
+const { attributes, category, supports } = metadata;
 
+
+
+supports.color.__experimentalSkipSerialization = ["background"]
 
 // Add the filter
 /*
@@ -31,6 +34,7 @@ registerBlockType( metadata.name, {
 	title: 'Newspack Elections Profile v2',
     category,
     attributes,
+	supports,
 	icon: 'groups',
 	keywords: [ 'govpack' ],
     styles: [

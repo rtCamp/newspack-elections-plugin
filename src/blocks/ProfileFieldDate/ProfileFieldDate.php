@@ -22,7 +22,7 @@ class ProfileFieldDate extends \Govpack\Blocks\ProfileFieldText\ProfileFieldText
 	public $field_type  = 'date';
 	private $show       = null;
 	private $profile    = null;
-	private $attributes = [];
+
 	protected $plugin;
 	private string $default_variation;
 
@@ -32,7 +32,13 @@ class ProfileFieldDate extends \Govpack\Blocks\ProfileFieldText\ProfileFieldText
 	}
 
 	
-
+	public function handle_render( array $attributes, string $content, WP_Block $block ) {
+		?>
+		<div <?php echo get_block_wrapper_attributes(); ?>>
+			Date Field
+		</div>
+		<?php
+	}
 	public function variations(): array {
 
 		//$types  = $this->create_field_type_variations();

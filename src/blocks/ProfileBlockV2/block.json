@@ -18,8 +18,7 @@
 			"gradients": true,
 			"heading": true,
 			"link": true,
-			"text": true,
-			"__experimentalSkipSerialization": ["background"]
+			"text": true
 		},
 		"layout" : {
 			"allowSwitching": false,

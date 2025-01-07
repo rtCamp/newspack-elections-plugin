@@ -21,7 +21,7 @@ class Profile extends \Govpack\Abstracts\Block {
 
 	private $show       = null;
 	private $profile    = null;
-	private $attributes = [];
+	protected $attributes = [];
 	protected $plugin;
 
 	public function __construct( $plugin ) {

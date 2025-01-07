@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class ProfileFieldText extends \Govpack\Blocks\Profile\Profile {
+class ProfileFieldText extends \Govpack\Blocks\ProfileRow\ProfileRow {
 
 	public string $block_name = 'govpack/profile-field-text';
 	public $template          = 'profile';
@@ -22,18 +22,8 @@ class ProfileFieldText extends \Govpack\Blocks\Profile\Profile {
 
 	private $show       = null;
 	private $profile    = null;
-	private $attributes = [];
-	protected $plugin;
 
 	private string $default_variation;
-
-	public function __construct( $plugin ) {
-		$this->plugin = $plugin;
-	}
-
-	public function disable_block( $allowed_blocks, $editor_context ): bool {
-		return false;
-	}
 
 	public function block_build_path(): string {
 		return $this->plugin->build_path( 'blocks/ProfileFieldText' );
@@ -49,6 +39,9 @@ class ProfileFieldText extends \Govpack\Blocks\Profile\Profile {
 	 * @return string HTML for the block.
 	 */
 	public function render( array $attributes, ?string $content = null, ?WP_Block $block = null ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+		ob_start();
+		$this->handle_render( $attributes, $content, $block );
+		return \ob_get_clean();
 	}
 
 	/**
@@ -59,12 +52,14 @@ class ProfileFieldText extends \Govpack\Blocks\Profile\Profile {
 	 * @param WP_Block $template The filename of the template-part to use.
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
-	}   
-
-	
-	public function template(): string {
-		return sprintf( 'blocks/%s', $this->template );
+		?>
+		<div <?php echo get_block_wrapper_attributes(); ?>>
+			Text Field
+		</div>
+		<?php
 	}
+
+
 
 	public function variations(): array {
 

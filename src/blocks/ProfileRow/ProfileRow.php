@@ -21,7 +21,8 @@ class ProfileRow extends \Govpack\Blocks\Profile\Profile {
 
 	private $show       = null;
 	private $profile    = null;
-	private $attributes = [];
+	protected $attributes = [];
+	protected $context = [];
 	protected $plugin;
 
 	private string $default_variation;
@@ -48,6 +49,22 @@ class ProfileRow extends \Govpack\Blocks\Profile\Profile {
 	 * @return string HTML for the block.
 	 */
 	public function render( array $attributes, ?string $content = null, ?WP_Block $block = null ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+
+		$this->attributes = self::merge_attributes_with_block_defaults( $this->block_name, $attributes );
+		$this->context = $block->context;
+
+
+		if(!$this->show_block()){
+			return null;
+		}
+
+		ob_start();
+		$this->handle_render( $attributes, $content, $block );
+		return \ob_get_clean();
+	}
+
+	public function show_block() : bool {
+		return true;
 	}
 
 	/**
@@ -58,13 +75,14 @@ class ProfileRow extends \Govpack\Blocks\Profile\Profile {
 	 * @param WP_Block $template The filename of the template-part to use.
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
-	}   
-
-	
-	public function template(): string {
-		return sprintf( 'blocks/%s', $this->template );
+		?>
+		<div <?php echo get_block_wrapper_attributes(); ?>>
+			<?php echo $content; ?>
+		</div>
+		<?php
 	}
 
+	
 	public function variations(): array {
 
 		$types  = $this->create_field_type_variations();

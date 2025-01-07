@@ -14,41 +14,22 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class ProfileFieldLink extends \Govpack\Blocks\Profile\Profile {
+class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText\ProfileFieldText {
 
 	public string $block_name = 'govpack/profile-field-link';
 	public $template          = 'profile';
 
 	private $show       = null;
 	private $profile    = null;
-	private $attributes = [];
 	protected $plugin;
 
 	private string $default_variation;
-
-	public function __construct( $plugin ) {
-		$this->plugin = $plugin;
-	}
-
-	public function disable_block( $allowed_blocks, $editor_context ): bool {
-		return false;
-	}
 
 	public function block_build_path(): string {
 		return $this->plugin->build_path( 'blocks/ProfileFieldLink' );
 	}
 
-	/**
-	 * Block render handler for .
-	 *
-	 * @param array  $attributes    Array of shortcode attributes.
-	 * @param string $content Post content.
-	 * @param WP_Block $block Reference to the block being rendered .
-	 *
-	 * @return string HTML for the block.
-	 */
-	public function render( array $attributes, ?string $content = null, ?WP_Block $block = null ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
-	}
+	
 
 	/**
 	 * Loads a block from display on the frontend/via render.
@@ -58,15 +39,15 @@ class ProfileFieldLink extends \Govpack\Blocks\Profile\Profile {
 	 * @param WP_Block $template The filename of the template-part to use.
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
-	}   
+		?>
+		<div <?php echo get_block_wrapper_attributes(); ?>>
+			Link Field
+		</div>
+		<?php
+	}  
 
-	
-	public function template(): string {
-		return sprintf( 'blocks/%s', $this->template );
-	}
 
 	public function variations(): array {
-
 		return $this->create_field_variations();
 	}
 
