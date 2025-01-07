@@ -19,6 +19,9 @@ const { attributes, category, supports } = metadata;
 
 
 supports.color.__experimentalSkipSerialization = ["background"]
+supports.layout.__experimentalSkipSerialization = true
+supports.spacing.__experimentalSkipSerialization = ["padding"]
+supports.__experimentalBorder.__experimentalSkipSerialization = true
 
 // Add the filter
 /*
