@@ -17,16 +17,9 @@ defined( 'ABSPATH' ) || exit;
 class ProfileFieldDate extends \Govpack\Blocks\ProfileFieldText\ProfileFieldText {
 
 	public string $block_name = 'govpack/profile-field-date';
-	public $template          = 'profile';
 
-	public $field_type  = 'date';
-	private $show       = null;
-	private $profile    = null;
+	public $field_type = 'date';
 
-	protected $plugin;
-	private string $default_variation;
-
-	
 	public function block_build_path(): string {
 		return $this->plugin->build_path( 'blocks/ProfileFieldDate' );
 	}
@@ -40,11 +33,7 @@ class ProfileFieldDate extends \Govpack\Blocks\ProfileFieldText\ProfileFieldText
 		<?php
 	}
 	public function variations(): array {
-
-		//$types  = $this->create_field_type_variations();
-		$fields = $this->create_field_variations();
-
-		return array_merge( [], $fields );
+		return $this->create_field_variations();
 	}
 
 	

@@ -14,25 +14,15 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class ProfileFieldTerm extends \Govpack\Blocks\ProfileFieldText\ProfileFieldText {
+class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 
 	public string $block_name = 'govpack/profile-field-term';
-
-
-	private $show       = null;
-	private $profile    = null;
-
-	protected $plugin;
-
 	private string $default_variation;
 
 	public function __construct( $plugin ) {
-
 		$this->plugin            = $plugin;
 		$this->default_variation = 'govpack_officeholder_status'; // TODO: reference the const from the taxonomy file.
 	}
-
-
 
 	public function block_build_path(): string {
 		return $this->plugin->build_path( 'blocks/ProfileFieldTerm' );
@@ -99,6 +89,4 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileFieldText\ProfileFieldText
 		</div>
 		<?php
 	}
-
-
 }

@@ -14,17 +14,10 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText\ProfileFieldText {
+class ProfileFieldLink extends \Govpack\Blocks\ProfileField {
 
 	public string $block_name = 'govpack/profile-field-link';
-	public $template          = 'profile';
-
-	private $show       = null;
-	private $profile    = null;
-	protected $plugin;
-
-	private string $default_variation;
-
+	
 	public function block_build_path(): string {
 		return $this->plugin->build_path( 'blocks/ProfileFieldLink' );
 	}
@@ -78,19 +71,5 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText\ProfileFieldText
 		}
 
 		return $variations;
-	}
-
-	public function get_icon_map() {
-		return [
-			'text'     => 'text',
-			'textarea' => 'text',
-			'date'     => 'calendar',
-			'url'      => 'admin-links',
-		];
-	}
-
-	public function get_variation_icon( $type ) {
-		$icon_map = $this->get_icon_map();
-		return $icon_map[ $type ];
 	}
 }

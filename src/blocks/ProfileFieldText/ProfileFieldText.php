@@ -14,34 +14,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class ProfileFieldText extends \Govpack\Blocks\ProfileRow\ProfileRow {
+class ProfileFieldText extends \Govpack\Blocks\ProfileField {
 
 	public string $block_name = 'govpack/profile-field-text';
-	public $template          = 'profile';
 	public $field_type        = 'text';
-
-	private $show       = null;
-	private $profile    = null;
-
-	private string $default_variation;
+	
 
 	public function block_build_path(): string {
 		return $this->plugin->build_path( 'blocks/ProfileFieldText' );
-	}
-
-	/**
-	 * Block render handler for .
-	 *
-	 * @param array  $attributes    Array of shortcode attributes.
-	 * @param string $content Post content.
-	 * @param WP_Block $block Reference to the block being rendered .
-	 *
-	 * @return string HTML for the block.
-	 */
-	public function render( array $attributes, ?string $content = null, ?WP_Block $block = null ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
-		ob_start();
-		$this->handle_render( $attributes, $content, $block );
-		return \ob_get_clean();
 	}
 
 	/**
@@ -52,21 +32,18 @@ class ProfileFieldText extends \Govpack\Blocks\ProfileRow\ProfileRow {
 	 * @param WP_Block $template The filename of the template-part to use.
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
+	
 		?>
 		<div <?php echo get_block_wrapper_attributes(); ?>>
-			Text Field
+			Text Field ?
 		</div>
 		<?php
 	}
 
-
-
+	
+	
 	public function variations(): array {
-
-		//$types  = $this->create_field_type_variations();
-		$fields = $this->create_field_variations();
-
-		return array_merge( [], $fields );
+		return $this->create_field_variations();
 	}
 
 	public function create_field_variations(): array {
@@ -90,48 +67,6 @@ class ProfileFieldText extends \Govpack\Blocks\ProfileRow\ProfileRow {
 				'isActive'    => [ 'meta_key' ],
 				'scope'       => [ 'inserter' ],
 				'icon'        => $field->type->variation_icon(),
-			];
-
-			$variations[] = $variation;
-		}
-
-		return $variations;
-	}
-
-	public function get_icon_map() {
-		return [
-			'text'     => 'text',
-			'textarea' => 'text',
-			'date'     => 'calendar',
-			'url'      => 'admin-links',
-		];
-	}
-
-	public function get_variation_icon( $type ) {
-		$icon_map = $this->get_icon_map();
-		return $icon_map[ $type ];
-	}
-
-	public function create_field_type_variations(): array {
-		$types      = \Govpack\Profile\CPT::get_field_types();
-		$variations = [];
-
-		foreach ( $types as $type ) {
-			$variation = [
-				'category'    => 'govpack-profile-field',
-				'name'        => sprintf( 'profile-field-%s', $type->slug ),
-				'title'       => sprintf( 'Profile %s Field', ucfirst( $type->label ) ),
-				'description' => sprintf(
-					/* translators: %s: taxonomy's label */
-					__( 'Display a profile field of type: %s' ),
-					$type->label
-				),
-				'attributes'  => [
-					'fieldType' => $type->slug,
-				],
-				'isActive'    => [ 'fieldType' ],
-				'scope'       => [ 'inserter', 'transform' ],
-				'icon'        => $type->variation_icon(),
 			];
 
 			$variations[] = $variation;
