@@ -55,9 +55,33 @@ abstract class ProfileField extends \Govpack\Abstracts\Block {
 		return true;
 	}
 
+	public function attribute( string $key ): mixed {
+		return $this->attributes[ $key ];
+	}
+
+	public function has_attribute( string $key ): mixed {
+		return isset( $this->attributes[ $key ] );
+	}
+
 	/**
 	 * These could be moved to a Trait - BlockContextAware
 	 */
+
+	public function context( $key ): mixed {
+		return $this->get_from_context( $key );
+	}
+
+	public function has_context( string $key ): mixed {
+		return $this->has_context_value( $key ) || $this->has_prefixed_context_value( $key );
+	}
+
+	public function has_context_value( $key ): bool {
+		return isset( $this->context[ $key ] );
+	}
+
+	public function has_prefixed_context_value( $key ): bool {
+		return isset( $this->context[ $this->get_prefixed_context_key( $key ) ] );
+	}
 
 	public function get_from_context( $key ): mixed {
 		if ( isset( $this->context[ $key ] ) ) {
@@ -68,7 +92,8 @@ abstract class ProfileField extends \Govpack\Abstracts\Block {
 	}
 
 	public function get_prefixed_value_from_context( string $key ): mixed {
-		if ( isset( $this->context[ $this->get_prefixed_context_key( $key ) ] ) ) {
+
+		if ( $this->has_prefixed_context_value( $key ) ) {
 			return $this->context[ $this->get_prefixed_context_key( $key ) ];
 		}
 
@@ -100,5 +125,9 @@ abstract class ProfileField extends \Govpack\Abstracts\Block {
 
 	public function get_field() {
 		return \Govpack\Profile\CPT::fields()->get( $this->get_field_key() );
+	}
+
+	public function has_field(): bool {
+		return $this->get_field_key() ? true : false;
 	}
 }

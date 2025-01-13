@@ -31,45 +31,53 @@ class ProfileLabel extends \Govpack\Blocks\ProfileField {
 	 * @param WP_Block $template The filename of the template-part to use.
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
-		gp_dump( $this->get_field() );
+		
 		?>
 		<div <?php echo get_block_wrapper_attributes(); ?>>
-			Label
+			<?php echo $this->get_value(); ?>
 		</div>
 		<?php
 	}
 
+
+	public function get_value(): string {
+
+		
+		if ( $this->has_label_from_attributes() ) {
+			return $this->attribute( 'label' );
+		} 
+		
+		if ( $this->has_field() ) {
+			return $this->get_field()->label;
+		}
+
+		return '';
+	}
+
 	public function show_block(): bool {
-		return true;
-		return $this->show_label() && $this->has_label();
+		
+		return ( $this->show_label() && $this->has_label() );
 	}
 
 	public function show_label(): bool {
-		$showLabel = ( isset( $this->context['govpack/showLabel'] ) 
-			? $this->context['govpack/showLabel'] 
-			: $this->context['govpack/showLabels']
-		) ?? true;
+		$rowShowLabel   = ( $this->has_context( 'showLabel' ) ? $this->context( 'showLabel' ) : null );
+		$groupShowLabel = ( $this->has_context( 'showLabels' ) ? $this->context( 'showLabels' ) : null );
 
+		$showLabel = $rowShowLabel ?? $groupShowLabel ?? true;
 		return $showLabel;
 	}
 
 	public function has_label(): bool {
-		if (
-			( $this->attributes['label'] === false ) ||
-			( $this->attributes['label'] === '' ) ||
-			( $this->attributes['label'] === null )
-		) {
-			return false;
-		}
-
 		return $this->has_label_from_attributes() || $this->has_label_from_context();
 	}
 
 	private function has_label_from_attributes(): bool {
+		
 		if (
-			( $this->attributes['label'] === false ) ||
-			( $this->attributes['label'] === '' ) ||
-			( $this->attributes['label'] === null )
+			! $this->has_attribute( 'label' ) ||
+			( $this->attribute( 'label' ) === '' ) ||
+			( $this->attribute( 'label' ) === false ) ||
+			( $this->attribute( 'label' ) === null )
 		) {
 			return false;
 		}
@@ -78,6 +86,7 @@ class ProfileLabel extends \Govpack\Blocks\ProfileField {
 	}
 
 	private function has_label_from_context(): bool {
+		gp_dump( 'has la' );
 		return true;
 	}
 }
