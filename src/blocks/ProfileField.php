@@ -119,6 +119,30 @@ abstract class ProfileField extends \Govpack\Abstracts\Block {
 		return \Govpack\Profile\Profile::get( $this->get_profile_id() );
 	}
 
+	public function has_profile_id(): bool {
+		$profileId = $this->get_profile_id();
+
+		if ( ( $profileId === false ) || ( $profileId === null ) || ( $profileId === '' ) ) {
+			return false;
+		} 
+
+		return true;
+	}
+
+	public function has_profile(): bool {
+		
+		if ( ! $this->has_profile_id() ) {
+			return false;
+		}
+
+		$profile = $this->get_profile();
+		if ( ( $profile === null ) || ( $profile === false ) ) {
+			return false;
+		}
+
+		return true;
+	}
+	
 	public function get_field_key() {
 		return $this->get_from_context( 'fieldKey' ) ?? $this->attributes['fieldKey'] ?? false;
 	}

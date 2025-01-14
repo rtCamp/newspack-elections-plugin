@@ -24,19 +24,22 @@ class ProfileFieldDate extends \Govpack\Blocks\ProfileFieldText\ProfileFieldText
 		return $this->plugin->build_path( 'blocks/ProfileFieldDate' );
 	}
 
-	
-	public function handle_render( array $attributes, string $content, WP_Block $block ) {
-		?>
-		<div <?php echo get_block_wrapper_attributes(); ?>>
-			Date Field
-		</div>
-		<?php
+	public function get_value(): string {
+		return date( $this->get_date_format(), parent::get_value() );
 	}
+
+	public function get_date_format(): string {
+
+		$format = $this->attribute( 'dateFormat' );
+
+		$format = ! empty( $format ) ? $format : get_option( 'date_format' );
+
+		return $format;
+	}
+
 	public function variations(): array {
 		return $this->create_field_variations();
 	}
-
-	
 
 	public function create_field_type_variations(): array {
 		$types      = \Govpack\Profile\CPT::get_field_types();

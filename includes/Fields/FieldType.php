@@ -35,6 +35,10 @@ abstract class FieldType extends Collectable implements CollectableInterface {
 		return $value;
 	}
 
+	public function format( $value ) {
+		return $value;
+	}
+
 	public function __toString() {
 		return $this->slug;
 	}

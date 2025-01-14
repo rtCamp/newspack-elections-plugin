@@ -116,7 +116,7 @@ class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interface
 
 	
 	public function format( $raw_value ) {
-		return $raw_value;
+		return $this->type->format( $raw_value );
 	}
 
 	public function raw( Profile $model ) {
