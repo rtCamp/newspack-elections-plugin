@@ -37,8 +37,8 @@ export const useProfileFields = (props) => {
 			val = profile?.profile?.[field.slug] || false
 		}
 		
-		
-		if(val){
+
+		if(val && (typeof val === "string")){
 			val = val.trim()
 		}
 

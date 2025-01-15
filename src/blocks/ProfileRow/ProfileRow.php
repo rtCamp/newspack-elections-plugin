@@ -14,57 +14,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class ProfileRow extends \Govpack\Blocks\Profile\Profile {
+class ProfileRow extends \Govpack\Blocks\ProfileField {
 
 	public string $block_name = 'govpack/profile-row';
-	public $template          = 'profile';
 
-	private $show       = null;
-	private $profile    = null;
-	protected $attributes = [];
-	protected $context = [];
-	protected $plugin;
-
-	private string $default_variation;
-
-	public function __construct( $plugin ) {
-		$this->plugin = $plugin;
-	}
-
-	public function disable_block( $allowed_blocks, $editor_context ): bool {
-		return false;
-	}
 
 	public function block_build_path(): string {
 		return $this->plugin->build_path( 'blocks/ProfileRow' );
-	}
-
-	/**
-	 * Block render handler for .
-	 *
-	 * @param array  $attributes    Array of shortcode attributes.
-	 * @param string $content Post content.
-	 * @param WP_Block $block Reference to the block being rendered .
-	 *
-	 * @return string HTML for the block.
-	 */
-	public function render( array $attributes, ?string $content = null, ?WP_Block $block = null ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
-
-		$this->attributes = self::merge_attributes_with_block_defaults( $this->block_name, $attributes );
-		$this->context = $block->context;
-
-
-		if(!$this->show_block()){
-			return null;
-		}
-
-		ob_start();
-		$this->handle_render( $attributes, $content, $block );
-		return \ob_get_clean();
-	}
-
-	public function show_block() : bool {
-		return true;
 	}
 
 	/**
@@ -74,7 +30,8 @@ class ProfileRow extends \Govpack\Blocks\Profile\Profile {
 	 * @param string $content Any HTML or content redurned form the block.
 	 * @param WP_Block $template The filename of the template-part to use.
 	 */
-	public function handle_render( array $attributes, string $content, WP_Block $block ) {
+	public function handle_render( array $attributes, string $content, \WP_Block $block ) {
+		
 		?>
 		<div <?php echo get_block_wrapper_attributes(); ?>>
 			<?php echo $content; ?>
@@ -82,7 +39,32 @@ class ProfileRow extends \Govpack\Blocks\Profile\Profile {
 		<?php
 	}
 
+	public function show_block(): bool {
 	
+		if ( $this->should_hide_if_empty() && ( ! $this->has_field() || $this->get_value() ) ) {
+			return false;
+		}
+	
+		return true;
+	}
+
+	public function get_value(): string {
+
+		if ( ! $this->has_field() ) {
+			return '';
+		}
+
+		if ( ! $this->has_profile() ) {
+			return '';
+		}
+
+		return $this->get_profile()->value( $this->get_field()->slug() );
+	}
+
+	public function should_hide_if_empty(): bool {
+		return $this->attribute( 'hideFieldIfEmpty' );
+	}
+
 	public function variations(): array {
 
 		$types  = $this->create_field_type_variations();
@@ -120,19 +102,6 @@ class ProfileRow extends \Govpack\Blocks\Profile\Profile {
 		return $variations;
 	}
 
-	public function get_icon_map() {
-		return [
-			'text'     => 'text',
-			'textarea' => 'text',
-			'date'     => 'calendar',
-			'url'      => 'admin-links',
-		];
-	}
-
-	public function get_variation_icon( $type ) {
-		$icon_map = $this->get_icon_map();
-		return $icon_map[ $type ];
-	}
 
 	public function create_field_type_variations(): array {
 		$types      = \Govpack\Profile\CPT::get_field_types();

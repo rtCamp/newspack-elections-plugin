@@ -106,9 +106,6 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 
 		$this->profile = \Govpack\Profile\CPT::get_data( $attributes['profileId'] );
 		
-
-		//gp_dump($post);
-
 		if ( ! $this->profile ) {
 			return;
 		}

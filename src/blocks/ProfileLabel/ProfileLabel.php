@@ -86,7 +86,6 @@ class ProfileLabel extends \Govpack\Blocks\ProfileField {
 	}
 
 	private function has_label_from_context(): bool {
-		gp_dump( 'has la' );
 		return true;
 	}
 }

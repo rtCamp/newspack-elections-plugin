@@ -33,7 +33,7 @@ abstract class ProfileField extends \Govpack\Abstracts\Block {
 		if ( ! $this->show_block() ) {
 			return null;
 		}
-
+		
 		ob_start();
 		$this->handle_render( $attributes, $content, $block );
 		return \ob_get_clean();
