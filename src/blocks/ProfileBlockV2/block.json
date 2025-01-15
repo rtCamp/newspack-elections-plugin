@@ -61,6 +61,9 @@
 		"profileId": {
 			"type": "number"
 		},
+		"postId": {
+			"type": "number"
+		},
 		"postType": {
 			"type": "string",
 			"default": "govpack_profiles"

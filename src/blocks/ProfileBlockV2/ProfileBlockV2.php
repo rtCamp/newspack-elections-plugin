@@ -19,13 +19,60 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 	public string $block_name = 'govpack/profile-v2';
 	public $template          = 'profile';
 
-	private $show       = null;
-	private $profile    = null;
+	private $show         = null;
+	private $profile      = null;
 	protected $attributes = [];
 	protected $plugin;
 
 	public function __construct( $plugin ) {
 		$this->plugin = $plugin;
+		//add_filter( 'render_block_context', [$this, 'modify_context'], 10, 3);
+		//add_filter( 'render_block_data', [$this, 'modify_block_data'], 10, 3);
+		add_filter( 'pre_render_block', [ $this, 'pre_render_block' ], 10, 3 ); 
+	}
+
+	public function pre_render_block( $pre_render, $parsed_block, $parent_block ) {
+		global $post;
+
+		if ( is_null( $pre_render ) && ( isset( $parsed_block['attrs']['profileId'] ) ) ) {
+			$post = get_post( $parsed_block['attrs']['profileId'] );
+		}
+
+		return $pre_render;
+	}
+
+	public function modify_block_data( $parsed_block, $source_block, $parent_block ) {
+
+		if ( $parsed_block['blockName'] !== $this->block_name ) {
+			return $parsed_block;
+		}
+
+		if ( ! isset( $parsed_block['attrs'] ) || empty( $parsed_block['attrs'] ) ) {
+			return $parsed_block;
+		}
+
+		if ( ! isset( $parsed_block['attrs']['profileId'] ) || empty( $parsed_block['attrs']['profileId'] ) ) {
+			return $parsed_block;
+		}
+
+		if ( isset( $parsed_block['attrs']['postId'] ) ) {
+			return $parsed_block;
+		}
+
+		$parsed_block['attrs']['postId'] = $parsed_block['attrs']['profileId'];
+		
+
+		return $parsed_block;
+	}
+
+	public function modify_context( $context, $parsed_block, $parent ) {
+
+		if ( $parsed_block['blockName'] !== $this->block_name ) {
+			return $context;
+		}
+
+		//  gp_dump($context);
+		return $context;
 	}
 
 	public function disable_block( $allowed_blocks, $editor_context ): bool {
@@ -47,6 +94,8 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 	 */
 	public function render( array $attributes, ?string $content = null, ?WP_Block $block = null ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
 
+		global $post;
+
 		if ( ! $attributes['profileId'] ) {
 			return;
 		}
@@ -56,6 +105,9 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 		}
 
 		$this->profile = \Govpack\Profile\CPT::get_data( $attributes['profileId'] );
+		
+
+		//gp_dump($post);
 
 		if ( ! $this->profile ) {
 			return;
@@ -66,6 +118,7 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 
 		ob_start();
 		$this->handle_render( $attributes, $content, $block );
+		wp_reset_postdata();
 		return \ob_get_clean();
 	}
 
@@ -78,12 +131,14 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
 		
-		$tagName = $this->attributes["tagName"] ?? "div";
+		$tagName = $this->attributes['tagName'] ?? 'div';
 		
-
-		$block_html = sprintf("<%s %s>%s</%s>", 
+		$block_html = sprintf(
+			'<%s %s>%s</%s>', 
 			$tagName,
-			get_block_wrapper_attributes(),
+			get_block_wrapper_attributes(
+				$this->get_new_block_wrapper_attributes()
+			),
 			$content,
 			$tagName
 		);
@@ -94,5 +149,32 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 	
 	public function template(): string {
 		return sprintf( 'blocks/%s', $this->template );
+	}
+
+	public function get_new_block_wrapper_attributes(): array {
+		$new_attrs = [];
+
+		$styles = [];
+
+		if ( $this->attributes['customWidth'] ) {
+			$styles['max-width'] = $this->attributes['customWidth'];
+		}
+
+		if ( ! empty( $styles ) ) {
+			$new_attrs['style'] = trim(
+				implode(
+					' ', 
+					array_map(
+						function ( $rule, $value ) {
+							return sprintf( '%s: %s;', $rule, $value );
+						}, 
+						array_keys( $styles ), 
+						array_values( $styles )
+					)
+				)
+			);
+		}
+
+		return $new_attrs;
 	}
 }
