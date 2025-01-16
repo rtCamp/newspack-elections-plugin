@@ -15,6 +15,9 @@ export const FieldBlockEdit = (props) => {
 	} = props
 
 	const hasChildren = (children.length > 0)
+
+	console.log(hasChildren, hasValue)
+	
 	return (
 		<div {...blockProps}>
 

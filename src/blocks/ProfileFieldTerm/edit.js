@@ -34,16 +34,16 @@ const useProfileTaxonomies = () => {
 
 
 const ProfileTerms = ({terms}) => {
-
+	console.log("render ProfileTerms")
 	return (<>
 	{terms.map( ( postTerm ) => (
-		<a
+		<span
 			key={ postTerm.id }
-			href={ postTerm.link }
-			onClick={ ( event ) => event.preventDefault() }
+			//href={ postTerm.link }
+			//onClick={ ( event ) => event.preventDefault() }
 		>
 			{ decodeEntities( postTerm.name ) }
-		</a>
+		</span>
 	) )
 	.reduce( ( prev, curr ) => (
 		<>
@@ -69,12 +69,15 @@ function Edit( props ) {
 	const { profileTerms, hasProfileTerms, isLoading } = useProfileTerms( profileId, selectedTaxonomy )
 	const hasProfile = (profileId);
 
+	
+	console.log("Field term Edit", !isLoading, hasProfile, hasProfileTerms, profileTerms);
+
     return (
-		<FieldBlockEdit {...props}>
+		<FieldBlockEdit {...props} hasValue={hasProfileTerms} >
 			{ isLoading && hasProfile && <Spinner /> }
 			{ !isLoading && hasProfile && hasProfileTerms && 
 				<ProfileTerms terms={profileTerms} />
-		 }
+		 	}
 		</FieldBlockEdit>
 	)
 }

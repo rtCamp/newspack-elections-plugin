@@ -14,14 +14,11 @@
 		"aria-label": true,
 		"color" : {
 			"background" : true,
-			"button": true,
 			"enableContrastChecker": true,
 			"gradients": true,
-			"heading": true,
-			"link": true,
 			"text": true	
 		},
-		"layout" : true,
+		"layout" : false,
 		"shadow": true, 
 		"spacing": {
 			"margin": true,  
