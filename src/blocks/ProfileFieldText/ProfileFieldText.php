@@ -41,7 +41,7 @@ class ProfileFieldText extends \Govpack\Blocks\ProfileField {
 	}
 
 	
-	public function get_value(): string {
+	public function _get_value(): mixed {
 
 		if ( ! $this->has_field() ) {
 			return '';
@@ -52,6 +52,10 @@ class ProfileFieldText extends \Govpack\Blocks\ProfileField {
 		}
 
 		return $this->get_profile()->value( $this->get_field()->slug() );
+	}
+
+	public function get_value(): string {
+		return (string) $this->_get_value();
 	}
 	
 	public function variations(): array {

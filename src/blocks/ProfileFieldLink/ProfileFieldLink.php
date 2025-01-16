@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class ProfileFieldLink extends \Govpack\Blocks\ProfileField {
+class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText\ProfileFieldText {
 
 	public string $block_name = 'govpack/profile-field-link';
 	
@@ -24,20 +24,11 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileField {
 
 	
 
-	/**
-	 * Loads a block from display on the frontend/via render.
-	 *
-	 * @param array  $attributes array of block attributes.
-	 * @param string $content Any HTML or content redurned form the block.
-	 * @param WP_Block $template The filename of the template-part to use.
-	 */
-	public function handle_render( array $attributes, string $content, WP_Block $block ) {
-		?>
-		<div <?php echo get_block_wrapper_attributes(); ?>>
-			Link Field
-		</div>
-		<?php
-	}  
+	public function get_value(): string {
+
+		$link = $this->_get_value();
+		return sprintf( '<a href="%s">%s</a>', $link['url'], $link['linkText'] );
+	}
 
 
 	public function variations(): array {
