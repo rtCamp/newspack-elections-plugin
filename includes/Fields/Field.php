@@ -124,8 +124,9 @@ class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interface
 		if ( $this->source === 'meta' ) {
 			return trim( $model->post->__get( $this->meta_key ) );
 		}
-		
-		return 'taxonomy';
+
+
+		return 'unknown source';
 	}
 
 	public function value( Profile $model ) {

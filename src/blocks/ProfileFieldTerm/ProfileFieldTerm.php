@@ -82,13 +82,6 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	 * @param string $content Any HTML or content redurned form the block.
 	 * @param WP_Block $template The filename of the template-part to use.
 	 */
-	/**
-	 * Loads a block from display on the frontend/via render.
-	 *
-	 * @param array  $attributes array of block attributes.
-	 * @param string $content Any HTML or content redurned form the block.
-	 * @param WP_Block $template The filename of the template-part to use.
-	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
 	
 		?>
@@ -101,14 +94,20 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	
 	public function get_value(): string {
 
-		if ( ! $this->has_field() ) {
+		$terms     = $this->_get_value();
+		$output    = [];
+		$separator = ' ';
+
+		if ( empty( $terms ) ) {
 			return '';
 		}
 
-		if ( ! $this->has_profile() ) {
-			return '';
+		foreach ( $terms as $term ) {
+			$output[] = $term->name;
 		}
 
-		return $this->get_profile()->value( $this->get_field()->slug() );
+		$output = implode( $separator, $output );
+
+		return $output;
 	}
 }

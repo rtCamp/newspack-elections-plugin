@@ -48,17 +48,9 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 		return true;
 	}
 
-	public function get_value(): string {
+	public function get_value(): mixed {
 
-		if ( ! $this->has_field() ) {
-			return '';
-		}
-
-		if ( ! $this->has_profile() ) {
-			return '';
-		}
-
-		return $this->get_profile()->value( $this->get_field()->slug() );
+		return $this->_get_value();
 	}
 
 	public function should_hide_if_empty(): bool {

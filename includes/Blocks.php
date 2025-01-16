@@ -27,21 +27,40 @@ class Blocks {
 	 * Register Block Assets.
 	 */
 	public function enqueue_block_editor_assets(): void {
-		$file = GOVPACK_PLUGIN_BUILD_PATH . 'block-editor.asset.php';
+	
+		$this->register_script( 'govpack-block-editor', 'block-editor' );
+		wp_enqueue_script( 'govpack-block-editor' );
+
+		$this->register_script( 'govpack-blocks-editor', 'editor-blocks' );
+		wp_enqueue_script( 'govpack-blocks-editor' );
+
+		$this->register_style( 'govpack-blocks-editor', 'editor-blocks' );
+		wp_enqueue_style( 'govpack-blocks-editor' );
+	}
+
+	public function register_style( $handle, $asset_name ) {
+		wp_enqueue_style(
+			$handle,
+			GOVPACK_PLUGIN_BUILD_URL . $asset_name . '.css',
+			[],
+			1
+		);
+	}
+
+	public function register_script( $handle, $asset_name ) {
+		$file = GOVPACK_PLUGIN_BUILD_PATH . $asset_name . '.asset.php';
 
 		if ( file_exists( $file ) ) {
 			$asset_data = require_once $file; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
 		}
 
 		wp_register_script(
-			'govpack-block-editor',
-			GOVPACK_PLUGIN_BUILD_URL . 'block-editor.js',
+			$handle,
+			GOVPACK_PLUGIN_BUILD_URL . $asset_name . '.js',
 			$asset_data['dependencies'] ?? '',
 			$asset_data['version'] ?? '',
 			true
 		);
-
-		wp_enqueue_script('govpack-block-editor');
 	}
 
 	public function provide_register_blocks_hook(): void {
@@ -67,8 +86,18 @@ class Blocks {
 		}
 	}
 
+	public static function filter_server_side_block_meta_data( $settings, $metadata ) {
+		unset( $settings['editor_script_handles'] );
+		return $settings;
+	}
+
 	public function handle_block_registration( Abstracts\Block $block ): void {
+
+		add_filter( 'block_type_metadata_settings', [ __CLASS__, 'filter_server_side_block_meta_data' ], 10, 2 );
+
 		$block->hooks();
 		$block->register();
+		
+		remove_filter( 'block_type_metadata_settings', [ __CLASS__, 'filter_server_side_block_meta_data' ], 10, 2 );
 	}
 }
