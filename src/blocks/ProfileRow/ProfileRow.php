@@ -59,10 +59,14 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 
 	public function variations(): array {
 
-		$types  = $this->create_field_type_variations();
-		$fields = $this->create_field_variations();
+	
+		
+		$types     = $this->create_field_type_variations();
+		$fields    = $this->create_field_variations();
+		$free_text = $this->create_free_type_variations();
+		//$fields = [];
 
-		return array_merge( $types, $fields );
+		return array_merge( $types, $fields, $free_text );
 	}
 
 	public function create_field_variations(): array {
@@ -121,6 +125,40 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 			$variations[] = $variation;
 		}
 
+		return $variations;
+	}
+
+	public function create_free_type_variations(): array {
+		
+		$variations = [];
+	
+		$variation = [
+			'category'    => 'newspack-elections-profile-row-type',
+			'name'        => sprintf( 'profile-field-%s', 'free-text' ),
+			'title'       => sprintf( 'Profile %s Row', 'Free Text' ),
+			'description' => sprintf(
+				/* translators: %s: taxonomy's label */
+				__( 'Display a profile row of type: %s' ),
+				'Free Text'
+			),
+			'attributes'  => [
+				'fieldType' => 'free-text',
+			],
+			'isActive'    => [ 'fieldType' ],
+			'scope'       => [ 'inserter', 'transform' ],
+			'icon'        => 'text',
+			'innerBlocks' => [
+				[ 'govpack/profile-label', [] ],
+				[
+					'core/paragraph',
+					[
+						'placeholder' => 'Add a custom value',
+					],
+				],
+			],
+		];
+
+		$variations[] = $variation;
 		return $variations;
 	}
 }

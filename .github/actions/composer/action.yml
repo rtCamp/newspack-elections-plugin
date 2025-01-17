@@ -11,6 +11,12 @@ runs:
       key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
       restore-keys: |
         ${{ runner.os }}-php-
+  - name: Install Strauss
+    run: |
+        wget https://github.com/BrianHenryIE/strauss/releases/latest/download/strauss.phar
+        chmod +x strauss.phar
+        sudo mv strauss.phar ./bin/strauss.phar
+    shell: bash
   - name: Install Composer Dependencies
     run: composer install --no-dev --prefer-dist --no-progress
     shell: bash

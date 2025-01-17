@@ -14,13 +14,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class ProfileSeparator extends \Govpack\Blocks\ProfileRow\ProfileRow {
+class ProfileSeparator extends \Govpack\Blocks\ProfileField {
 
 	public string $block_name = 'govpack/profile-separator';
 	
 
-	private $show       = null;
-	private $profile    = null;
+	private $show    = null;
+	private $profile = null;
 	
 	protected $plugin;
 

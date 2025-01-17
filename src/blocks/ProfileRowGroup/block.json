@@ -74,6 +74,7 @@
 		"core/post-title", 
 		"core/post-featured-image", 
 		"core/post-excerpt", 
-		"core/heading"
+		"core/heading",
+		"core/paragraph"
 	]
 }
