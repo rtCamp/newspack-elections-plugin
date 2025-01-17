@@ -39,6 +39,19 @@ abstract class ProfileField extends \Govpack\Abstracts\Block {
 		return \ob_get_clean();
 	}
 
+	public function _get_value(): mixed {
+
+		if ( ! $this->has_field() ) {
+			return '';
+		}
+
+		if ( ! $this->has_profile() ) {
+			return '';
+		}
+
+		return $this->get_profile()->value( $this->get_field()->slug() );
+	}
+	
 	/**
 	 * Loads a block from display on the frontend/via render.
 	 *

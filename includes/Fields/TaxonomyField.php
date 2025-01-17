@@ -2,6 +2,7 @@
 
 namespace Govpack\Fields;
 
+use Govpack\Profile\Profile;
 class TaxonomyField extends Field {
 
 
@@ -17,17 +18,25 @@ class TaxonomyField extends Field {
 	 * 
 	 * Array of property names that will be included when transformed to an array
 	 */
-	protected array $to_array = ["slug", "label", "type", "group", "taxonomy", "source"];
+	protected array $to_array = [ 'slug', 'label', 'type', 'group', 'taxonomy', 'source' ];
 
 	/**
 	 * Construct the profile field
 	 */
-	public function __construct(string $slug, string $label, string $taxonomy, string $type = "text"){
-		parent::__construct($slug, $label, $type);
+	public function __construct( string $slug, string $label, string $taxonomy, string $type = 'text' ) {
+		parent::__construct( $slug, $label, $type );
 		$this->taxonomy = $taxonomy;
 		$this->meta_key = null;
-		$this->source = "term";
+		$this->source   = 'taxonomy';
 		$this->set_type( 'taxonomy' );
 	}
 	
+	public function raw( Profile $model ) {
+
+		if ( $this->source === 'taxonomy' ) {
+			return $model->terms( $this->taxonomy );
+		}
+		
+		return [];
+	}
 }

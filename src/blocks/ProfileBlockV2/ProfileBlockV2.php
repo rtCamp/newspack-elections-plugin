@@ -151,7 +151,8 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 	public function get_new_block_wrapper_attributes(): array {
 		$new_attrs = [];
 
-		$styles = [];
+		$styles  = [];
+		$classes = [];
 
 		if ( $this->attributes['customWidth'] ) {
 			$styles['max-width'] = $this->attributes['customWidth'];
@@ -172,6 +173,20 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
 			);
 		}
 
+		$classes = apply_filters( 'newspack_elections_profile_block_classes', $this->get_wrapper_classes() );
+		
+		if ( ! empty( $classes ) ) {
+			$new_attrs['class'] = trim( implode( ' ', $classes ) );
+		}
+		
 		return $new_attrs;
+	}
+
+	public function get_wrapper_classes(): array {
+
+		$classes   = [];
+		$classes[] = sprintf( 'profile-%s', $this->attributes['profileId'] );
+
+		return $classes;
 	}
 }

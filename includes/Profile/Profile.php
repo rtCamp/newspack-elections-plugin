@@ -7,17 +7,25 @@ use WP_Post;
 class Profile {
 
 	public WP_Post $post;
+	public int $id;
+	public int $ID;
 
 	public array $data;
 	public array $values;
 
 	public function __construct( WP_Post $post ) {
-		$this->post = $post;
+		$this->post   = $post;
 		$this->values = [];
+		$this->id     = $this->ID = $this->post->ID;
 	}
 
 	public static function get( $id ) {
 		return new self( get_post( $id ) );
+	}
+
+	public function terms( $taxonomy ): array {
+		$terms = wp_get_post_terms( $this->ID, $taxonomy );
+		return $terms;
 	}
 
 	public function data() {
@@ -34,9 +42,7 @@ class Profile {
 		$data = [];
 	
 		foreach ( CPT::fields()->all() as $field ) {
-
 			$data[ $field->slug() ] = $this->raw_val( $field->slug() );
-			
 		}
 
 		return $data;
@@ -50,17 +56,17 @@ class Profile {
 		return $this->data[ $key ];
 	}
 
-	public function value(string $key){
+	public function value( string $key ) {
 
-		if(!isset($this->values[ $key ])){
-			$field = CPT::fields()->get( $key );
-			$this->values[ $field->slug() ] =  $field->value( $this );
+		if ( ! isset( $this->values[ $key ] ) ) {
+			$field                          = CPT::fields()->get( $key );
+			$this->values[ $field->slug() ] = $field->value( $this );
 		}
 
 		return $this->values[ $key ];
 	}
 
-	public function values() : array {
+	public function values(): array {
 
 		foreach ( CPT::fields()->all() as $field ) {
 			$this->values[ $field->slug() ] = $this->value( $field->slug() );

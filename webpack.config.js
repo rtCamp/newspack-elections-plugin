@@ -1,6 +1,9 @@
+const path = require( 'path' );
+const fs = require( 'fs' );
+
 let defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 const { getWebpackEntryPoints, getPackageProp, hasPackageProp,getWordPressSrcDirectory } = require("@wordpress/scripts/utils")
-const { basename } = require( 'path' );
+
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { optimize } = require('svgo');
 const TerserPlugin = require( 'terser-webpack-plugin' );
@@ -12,14 +15,14 @@ function getEntryPoints(){
 	}
 }
 
-function pathToEntry(path){
-	const entryName = basename( path, '.js' );
+function pathToEntry(filePath){
+	const entryName = path.basename( filePath, '.js' );
 
-	if ( ! path.startsWith( './' ) ) {
-		path = './' + path;
+	if ( ! filePath.startsWith( './' ) ) {
+		filePath = './' + filePath;
 	}
 
-	return [ entryName, path ];
+	return [ entryName, filePath ];
 };
 
 const terserOptions = {
@@ -78,6 +81,21 @@ function getEntryPointsFromPackage(){
 
 }
 
+
+function blockScripts( type, inputDir, blocks ) {
+	return blocks
+		.map( block => path.join( inputDir, 'blocks', block, `${ type }.js` ) )
+		.filter( fs.existsSync );
+}
+
+const blocksDir = path.join( __dirname, 'src', 'blocks' );
+const blocks = fs.readdirSync( blocksDir )
+	.filter( block => fs.existsSync( path.join( __dirname, 'src', 'blocks', block, 'index.js' ) ) );
+
+
+
+
+
 defaultConfig = {
 	...defaultConfig,
 	optimization : {
@@ -106,7 +124,27 @@ defaultConfig = {
 	]
 }
 
+function getBlockEditorScripts(){
+
+	const blocksDir = path.join( __dirname, 'src', 'blocks' );
+	const blocks = fs.readdirSync( blocksDir ).filter( block => fs.existsSync( path.join( __dirname, 'src', 'blocks', block, 'index.js' ) ) );
+
+	return {
+		"editor-blocks" : blockScripts( 'index', path.join( __dirname, 'src' ), blocks )
+	}
+}
+
+function getEntryPointsv2(){
+
+	return {
+		...getBlockEditorScripts(),
+		...getEntryPointsFromPackage()
+	}
+	
+}
+
+console.log(getEntryPointsv2())
 module.exports = {
     ...defaultConfig,
-	"entry": getEntryPoints
+	"entry": getEntryPointsv2
 };  
