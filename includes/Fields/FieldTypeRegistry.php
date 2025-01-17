@@ -2,17 +2,18 @@
 
 
 namespace Govpack\Fields;
+
 use Govpack\Fields\FieldType;
 
 use Govpack\Abstracts\Collection;
 use Govpack\Interfaces\Collection as CollectionInterface;
 use Govpack\Interfaces\Collectable;
 
-class FieldTypes extends Collection implements CollectionInterface {
+class FieldTypeRegistry extends Collection implements CollectionInterface {
 
 	use \Govpack\Instance;
 
-	public function __construct(){
+	public function __construct() {
 		$this->collection = [];
 		$this->create_types();
 	}
@@ -23,6 +24,4 @@ class FieldTypes extends Collection implements CollectionInterface {
 		$this->register( new FieldType\Link() );
 		$this->register( new FieldType\Taxonomy() );
 	}
-
-	
 }

@@ -3,7 +3,7 @@
 namespace Govpack\Fields;
 
 use Govpack\Fields\FieldType;
-use Govpack\Fields\FieldTypes;
+use Govpack\Fields\FieldTypeRegistry;
 use Govpack\Profile\Profile;
 
 class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interfaces\Collectable {
@@ -80,11 +80,11 @@ class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interface
 		if ( is_a( $type, '\Govpack\Field\FieldType' ) ) {
 			$this->type = $type;
 		} elseif ( is_string( $type ) ) {
-			$this->type = FieldTypes::instance()->get( $type );
+			$this->type = FieldTypeRegistry::instance()->get( $type );
 		}
 
 		if ( ! isset( $this->type ) ) {
-			$this->type = FieldTypes::instance()->get( 'text' );
+			$this->type = FieldTypeRegistry::instance()->get( 'text' );
 		}
 	}
 

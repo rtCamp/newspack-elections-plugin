@@ -16,7 +16,7 @@ use Govpack\Abstracts\Rest_Endpoint;
 use Govpack\Capabilities;
 
 
-use Govpack\Fields\FieldTypes;
+use Govpack\Fields\FieldTypeRegistry;
 use Govpack\Fields\FieldManager;
 use Govpack\Fields\Field;
 use Govpack\Fields\LinkField;
@@ -52,7 +52,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 	/**
 	 * Fields used for the profile
 	 */
-	public static FieldTypes $field_types;
+	public static FieldTypeRegistry $field_types;
 
 	/**
 	 * Groups in which fields may appear;
@@ -107,7 +107,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 
 	public static function register_profile_fields() {
 		
-		self::$field_types = new FieldTypes();
+		self::$field_types = new FieldTypeRegistry();
 		self::$fields      = new FieldManager( self::$field_types );
 		
 

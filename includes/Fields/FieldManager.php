@@ -16,13 +16,13 @@ class FieldManager extends \Govpack\Abstracts\Collection implements \Govpack\Int
 	/**
 	 * Collection of types used by fields;
 	 */
-	public FieldTypes $types;
+	public FieldTypeRegistry $types;
 
 	public function get( string $item ): Field {
 		return parent::get( $item );
 	}
 
-	public function __construct( FieldTypes $types ) {
+	public function __construct( FieldTypeRegistry $types ) {
 		$this->types = $types;
 	}   
 
