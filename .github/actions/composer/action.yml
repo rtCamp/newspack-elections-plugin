@@ -21,7 +21,7 @@ runs:
     run: composer install --no-dev --prefer-dist --no-progress
     shell: bash
   - name: Prefix Dependencies
-    run: vendor/bin/strauss
+    run: composer prefix-namespaces
     shell: bash
   - name: Generate Autoloader
     run: composer dump-autoload --no-scripts
