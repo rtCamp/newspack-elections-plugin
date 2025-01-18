@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Blocks\ProfileFieldLink;
+namespace Govpack\Blocks;
 
 use WP_Block;
 
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText\ProfileFieldText {
+class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 
 	public string $block_name = 'govpack/profile-field-link';
 	

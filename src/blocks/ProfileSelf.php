@@ -5,14 +5,14 @@
  * @package Govpack
  */
 
-namespace Govpack\Blocks\ProfileSelf;
+namespace Govpack\Blocks;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Register and handle the block.
  */
-class ProfileSelf extends \Govpack\Blocks\Profile\Profile {
+class ProfileSelf extends \Govpack\Blocks\Profile {
 
 	public string $block_name = 'govpack/profile-self';
 	public $template          = 'profile-self';

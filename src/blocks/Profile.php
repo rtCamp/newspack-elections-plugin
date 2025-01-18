@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Blocks\Profile;
+namespace Govpack\Blocks;
 
 use WP_Block;
 

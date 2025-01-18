@@ -191,19 +191,19 @@ class Govpack {
 
 	public function register_blocks() {
 		
-		$this->blocks()->register( new \Govpack\Blocks\Profile\Profile( $this ) );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileSelf\ProfileSelf( $this ) );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileBlockV2\ProfileBlockV2( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\Profile( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileSelf( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileBlockV2( $this ) );
 		
-		$this->blocks()->register( new \Govpack\Blocks\ProfileRow\ProfileRow( $this ) );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileRowGroup\ProfileRowGroup( $this ) );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileLabel\ProfileLabel( $this ) );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileSeparator\ProfileSeparator( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileRow( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileRowGroup( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileLabel( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileSeparator( $this ) );
 
-		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldText\ProfileFieldText( $this ) );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldLink\ProfileFieldLink( $this ) );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldTerm\ProfileFieldTerm( $this ) );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldDate\ProfileFieldDate( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldText( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldLink( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldTerm( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldDate( $this ) );
 	
 	}
 }

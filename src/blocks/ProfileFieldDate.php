@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Blocks\ProfileFieldDate;
+namespace Govpack\Blocks;
 
 use WP_Block;
 
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class ProfileFieldDate extends \Govpack\Blocks\ProfileFieldText\ProfileFieldText {
+class ProfileFieldDate extends \Govpack\Blocks\ProfileFieldText {
 
 	public string $block_name = 'govpack/profile-field-date';
 

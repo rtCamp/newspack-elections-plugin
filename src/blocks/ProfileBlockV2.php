@@ -5,7 +5,7 @@
  * @package Govpack
  */
 
-namespace Govpack\Blocks\ProfileBlockV2;
+namespace Govpack\Blocks;
 
 use WP_Block;
 
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class ProfileBlockV2 extends \Govpack\Blocks\Profile\Profile {
+class ProfileBlockV2 extends \Govpack\Blocks\Profile {
 
 	public string $block_name = 'govpack/profile-v2';
 	public $template          = 'profile';
