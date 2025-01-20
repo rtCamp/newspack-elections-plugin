@@ -17,8 +17,7 @@ defined( 'ABSPATH' ) || exit;
 class ProfileFieldDate extends \Govpack\Blocks\ProfileFieldText {
 
 	public string $block_name = 'govpack/profile-field-date';
-
-	public $field_type = 'date';
+	public $field_type        = 'date';
 
 	public function block_build_path(): string {
 		return $this->plugin->build_path( 'blocks/ProfileFieldDate' );

@@ -21,7 +21,7 @@ use Govpack\Fields\FieldManager;
 use Govpack\Fields\Field;
 use Govpack\Fields\LinkField;
 use Govpack\Fields\TaxonomyField;
-use Govpack\Fields\BiographyField;
+use Govpack\Fields\PostField;
 
 use Govpack\ProfileLinks;
 use Govpack\ProfileLinkServices;
@@ -198,7 +198,8 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new Field( 'usio_id', 'BioGuide' ),
 				new Field( 'icpsr_id', 'Voteview' ),
 
-				new BiographyField( 'bio', 'Biography' ),
+				( new PostField( 'bio', 'Biography' ) )->key( 'post_excerpt' ),
+				( new PostField( 'postname', 'Name' ) )->key( 'post_title' ),
 
 				new TaxonomyField( 'party', 'Party', \Govpack\Tax\Party::TAX_SLUG ),
 				new TaxonomyField( 'state', 'State', \Govpack\Tax\State::TAX_SLUG ),

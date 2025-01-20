@@ -17,6 +17,7 @@ defined( 'ABSPATH' ) || exit;
 class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 
 	public string $block_name = 'govpack/profile-field-link';
+	public $field_type        = 'link';
 	
 	public function block_build_path(): string {
 		return $this->plugin->build_path( 'blocks/ProfileFieldLink' );
@@ -27,6 +28,10 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 	public function output(): string {
 
 		$link = $this->get_value();
+		if ( ! is_array( $link ) ) {
+			return '';
+		}
+
 		return sprintf( '<a href="%s">%s</a>', $link['url'], $link['linkText'] );
 	}
 
@@ -39,7 +44,7 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 
 		$variations = [];
 		
-		foreach ( \Govpack\Profile\CPT::fields()->all() as $field ) {
+		foreach ( \Govpack\Profile\CPT::fields()->of_format( $this->field_type ) as $field ) {
 			$variation = [
 				'category'    => 'govpack-profile-fields',
 				'name'        => sprintf( 'profile-field-%s', $field->slug ),

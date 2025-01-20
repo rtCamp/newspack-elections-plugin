@@ -76,7 +76,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 			$variation = [
 				'category'    => 'newspack-elections-profile-row-fields',
 				'name'        => sprintf( 'profile-field-row-%s', $field->slug ),
-				'title'       => $field->label,
+				'title'       => $field->label . ' Row',
 				'description' => sprintf(
 					/* translators: %s: taxonomy's label */
 					__( 'Display Profile Field: %s' ),

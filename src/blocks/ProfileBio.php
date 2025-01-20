@@ -40,4 +40,7 @@ class ProfileBio extends \Govpack\Blocks\ProfileFieldText {
 		<?php
 	}
 
+	public function variations(): array {
+		return [];
+	}
 }
