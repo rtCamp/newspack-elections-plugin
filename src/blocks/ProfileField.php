@@ -2,7 +2,7 @@
 
 namespace Govpack\Blocks;
 
-abstract class ProfileField extends \Govpack\Abstracts\Block {
+abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileFieldInterface {
 
 	protected $plugin;
 	protected $attributes = [];
@@ -39,7 +39,8 @@ abstract class ProfileField extends \Govpack\Abstracts\Block {
 		return \ob_get_clean();
 	}
 
-	public function _get_value(): mixed {
+	
+	public function get_value(): mixed {
 
 		if ( ! $this->has_field() ) {
 			return '';

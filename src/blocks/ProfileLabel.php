@@ -34,13 +34,13 @@ class ProfileLabel extends \Govpack\Blocks\ProfileField {
 		
 		?>
 		<div <?php echo get_block_wrapper_attributes(); ?>>
-			<?php echo $this->get_value(); ?>
+			<?php echo $this->output(); ?>
 		</div>
 		<?php
 	}
 
 
-	public function get_value(): string {
+	public function output(): string {
 
 		
 		if ( $this->has_label_from_attributes() ) {

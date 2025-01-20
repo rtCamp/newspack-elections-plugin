@@ -24,9 +24,9 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 
 	
 
-	public function get_value(): string {
+	public function output(): string {
 
-		$link = $this->_get_value();
+		$link = $this->get_value();
 		return sprintf( '<a href="%s">%s</a>', $link['url'], $link['linkText'] );
 	}
 

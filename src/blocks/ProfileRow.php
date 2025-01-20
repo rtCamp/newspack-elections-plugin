@@ -41,7 +41,6 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 
 	public function show_block(): bool {
 		
-	
 		if ( $this->should_hide_if_empty() && ( ! $this->has_field() || ! $this->get_value() ) ) {
 			return false;
 		}
@@ -49,9 +48,8 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 		return true;
 	}
 
-	public function get_value(): mixed {
-
-		return $this->_get_value();
+	public function output(): mixed {
+		return $this->get_value();
 	}
 
 	public function should_hide_if_empty(): bool {

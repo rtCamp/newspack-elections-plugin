@@ -38,4 +38,8 @@ class ProfileRowGroup extends \Govpack\Blocks\ProfileField {
 		</div>
 		<?php
 	}
+
+	public function output(): string {
+		return '';
+	}
 }

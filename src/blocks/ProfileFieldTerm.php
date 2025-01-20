@@ -86,15 +86,15 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	
 		?>
 		<div <?php echo get_block_wrapper_attributes(); ?>>
-			<?php echo $this->get_value(); ?>
+			<?php echo $this->output(); ?>
 		</div>
 		<?php
 	}
 
 	
-	public function get_value(): string {
+	public function output(): string {
 
-		$terms = $this->_get_value();
+		$terms = $this->get_value();
 		
 		$output        = [];
 		$separator     = $this->attribute( 'separator' );

@@ -35,16 +35,13 @@ class ProfileFieldText extends \Govpack\Blocks\ProfileField {
 	
 		?>
 		<div <?php echo get_block_wrapper_attributes(); ?>>
-			<?php echo $this->get_value(); ?>
+			<?php echo $this->output(); ?>
 		</div>
 		<?php
 	}
 
-	
-	
-
-	public function get_value(): string {
-		return (string) $this->_get_value();
+	public function output(): string {
+		return (string) $this->get_value();
 	}
 	
 	public function variations(): array {
