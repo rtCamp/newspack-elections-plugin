@@ -25,6 +25,7 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile {
 	protected $plugin;
 
 	public function __construct( $plugin ) {
+		
 		$this->plugin = $plugin;
 		//add_filter( 'render_block_context', [$this, 'modify_context'], 10, 3);
 		//add_filter( 'render_block_data', [$this, 'modify_block_data'], 10, 3);

@@ -41,6 +41,18 @@
 	"attributes": {
 		"taxonomy": {
 			"type": "string"
+		},
+		"separator": {
+			"type": "string",
+			"default": ", "
+		},
+		"displayLinks" : {
+			"type": "boolean",
+			"default" : false
+		},
+		"termLimit" : {
+			"type": "number",
+			"default" : 1
 		}
 	},
 	"ancestor": [ "govpack/profile-v2" ],

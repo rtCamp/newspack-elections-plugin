@@ -94,20 +94,33 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	
 	public function get_value(): string {
 
-		$terms     = $this->_get_value();
-		$output    = [];
-		$separator = ' ';
+		$terms = $this->_get_value();
+		
+		$output        = [];
+		$separator     = $this->attribute( 'separator' );
+		$term_limit    = $this->attribute( 'termLimit' );
+		$display_links = $this->attribute( 'displayLinks' );
 
 		if ( empty( $terms ) ) {
 			return '';
 		}
 
+		$terms = array_slice( $terms, 0, $term_limit );
+
 		foreach ( $terms as $term ) {
-			$output[] = $term->name;
+			$output[] = $display_links ? $this->term_span( $term ) : $this->term_link( $term );
 		}
 
 		$output = implode( $separator, $output );
 
 		return $output;
+	}
+
+	public function term_span( $term ): string {
+		return $term->name;
+	}
+
+	public function term_link( $term ): string {
+		return sprintf( '<a href="%s">%s</a>', get_term_link( $term ), $term->name );
 	}
 }
