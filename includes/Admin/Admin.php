@@ -211,7 +211,7 @@ class Admin {
 		wp_register_style(
 			'govpack-editor-style',
 			GOVPACK_PLUGIN_BUILD_URL . 'editor.css',
-			$asset_data['dependencies'] ?? [],
+			[],
 			true
 		);
 	}

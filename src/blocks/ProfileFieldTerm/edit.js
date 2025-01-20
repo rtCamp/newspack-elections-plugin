@@ -34,7 +34,7 @@ const useProfileTaxonomies = () => {
 
 
 const ProfileTerms = ({terms}) => {
-	console.log("render ProfileTerms")
+	
 	return (<>
 	{terms.map( ( postTerm ) => (
 		<span
@@ -70,8 +70,6 @@ function Edit( props ) {
 	const hasProfile = (profileId);
 
 	
-	console.log("Field term Edit", !isLoading, hasProfile, hasProfileTerms, profileTerms);
-
     return (
 		<FieldBlockEdit {...props} hasValue={hasProfileTerms} >
 			{ isLoading && hasProfile && <Spinner /> }

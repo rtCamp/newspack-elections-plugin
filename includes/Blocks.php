@@ -34,8 +34,8 @@ class Blocks {
 		$this->register_script( 'govpack-blocks-editor', 'editor-blocks' );
 		wp_enqueue_script( 'govpack-blocks-editor' );
 
-		$this->register_style( 'govpack-blocks-editor', 'editor-blocks' );
-		wp_enqueue_style( 'govpack-blocks-editor' );
+		$this->register_style( 'govpack-blocks-editor-style', 'editor-blocks' );
+		wp_enqueue_style( 'govpack-blocks-editor-style' );
 	}
 
 	public function register_style( $handle, $asset_name ) {

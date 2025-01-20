@@ -74,4 +74,14 @@ class Profile {
 
 		return $this->values;
 	}
+
+	public function values_for_rest(): array {
+
+		$vals = [];
+		foreach ( CPT::fields()->all() as $field ) {
+			$vals[ $field->slug() ] = $field->value_for_rest($this);
+		}
+
+		return $vals;
+	}
 }

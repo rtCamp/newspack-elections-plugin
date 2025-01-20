@@ -1,0 +1,68 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "govpack/profile-bio",
+	"title": "Profile Bio",
+    "editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./index.css",
+	"category": "newspack-elections",
+	"example" : {
+		"attributes" : {
+			"fieldType" : "text",
+			"fieldKey" : "bio"
+		}
+	},
+	"supports" : {
+		"anchor": true,
+		"align": true,
+		"align-wide": true,
+		"aria-label": true,
+		"color" : {
+			"background" : true,
+			"button": true,
+			"enableContrastChecker": true,
+			"gradients": true,
+			"heading": true,
+			"link": true,
+			"text": true	
+		},
+		"layout" : {
+			"allowSwitching": false,
+			"default" : {
+				"type" : "flex"
+			}
+		},
+		"shadow": true, 
+		"spacing": {
+			"margin": true,  
+			"padding": true, 
+			"blockGap": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"textAlign": true
+		}
+	},
+	"attributes": {
+		"fieldKey" : {
+			"type": "string",
+			"default": "bio"
+		},
+		"fieldType" : {
+			"type": "string",
+			"default" : "text"
+		}
+	},
+	"ancestor": [ "govpack/profile-v2" ],
+	"usesContext": [
+		"govpack/profileId",
+		"govpack/fieldKey",
+		"govpack/fieldType",
+		"govpack/showLabels",
+		"postType", 
+		"postId"
+	]
+	
+}

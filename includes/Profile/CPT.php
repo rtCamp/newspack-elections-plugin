@@ -21,6 +21,7 @@ use Govpack\Fields\FieldManager;
 use Govpack\Fields\Field;
 use Govpack\Fields\LinkField;
 use Govpack\Fields\TaxonomyField;
+use Govpack\Fields\BiographyField;
 
 use Govpack\ProfileLinks;
 use Govpack\ProfileLinkServices;
@@ -197,6 +198,8 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new Field( 'usio_id', 'BioGuide' ),
 				new Field( 'icpsr_id', 'Voteview' ),
 
+				new BiographyField( 'bio', 'Biography' ),
+
 				new TaxonomyField( 'party', 'Party', \Govpack\Tax\Party::TAX_SLUG ),
 				new TaxonomyField( 'state', 'State', \Govpack\Tax\State::TAX_SLUG ),
 				new TaxonomyField( 'legislative_body', 'Legislative Body', \Govpack\Tax\LegislativeBody::TAX_SLUG ),
@@ -310,7 +313,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 				'get_callback'    => function ( $request ) {
 
 					$model = Profile::get( $request['id'] );
-					return $model->values();
+					return $model->values_for_rest();
 				},
 				'update_callback' => false,
 				'schema'          => [
@@ -447,7 +450,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 					'show_in_rest' => true,
 					'show_ui'      => true,
 					'show_in_menu' => 'govpack',
-					'supports'     => [ 'revisions', 'thumbnail', 'editor', 'custom-fields', 'title', 'excerpt', 'author' ],
+					'supports'     => [ 'revisions', 'thumbnail', 'editor', 'custom-fields', 'title', 'excerpt' ],
 					'taxonomies'   => [ 'post_tag' ],
 				
 					'menu_icon'    => 'dashicons-groups',

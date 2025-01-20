@@ -125,11 +125,15 @@ class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interface
 			return trim( $model->post->__get( $this->meta_key ) );
 		}
 
-
+	
 		return 'unknown source';
 	}
 
 	public function value( Profile $model ) {
 		return $this->format( $this->raw( $model ) );
+	}
+
+	public function value_for_rest(Profile $model ) {
+		return $this->raw( $model );
 	}
 }

@@ -23,7 +23,7 @@ class Taxonomy extends \Govpack\Fields\FieldType {
 	 * 
 	 * Formats the field can be output as
 	 */
-	public array $formats = [ 'text', 'term' ];
+	public array $formats = [ 'term' ];
 
 	/**
 	 * Type Icon

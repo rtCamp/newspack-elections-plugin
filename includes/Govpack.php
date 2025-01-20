@@ -195,6 +195,7 @@ class Govpack {
 		$this->blocks()->register( new \Govpack\Blocks\ProfileSelf( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileBlockV2( $this ) );
 		
+		$this->blocks()->register( new \Govpack\Blocks\ProfileBio( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileRow( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileRowGroup( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileLabel( $this ) );
