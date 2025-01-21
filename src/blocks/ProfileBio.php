@@ -35,7 +35,7 @@ class ProfileBio extends \Govpack\Blocks\ProfileFieldText {
 	
 		?>
 		<div <?php echo get_block_wrapper_attributes(); ?>>
-			<?php echo $this->get_value(); ?>
+			<?php echo $this->output(); ?>
 		</div>
 		<?php
 	}

@@ -48,8 +48,8 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 		return true;
 	}
 
-	public function output(): mixed {
-		return $this->get_value();
+	public function output(): string {
+		return (string) $this->get_value();
 	}
 
 	public function should_hide_if_empty(): bool {
@@ -57,9 +57,6 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 	}
 
 	public function variations(): array {
-
-	
-		
 		$types     = $this->create_field_type_variations();
 		$fields    = $this->create_field_variations();
 		$free_text = $this->create_free_type_variations();

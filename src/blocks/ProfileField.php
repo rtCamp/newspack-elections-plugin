@@ -39,7 +39,10 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 		return \ob_get_clean();
 	}
 
-	
+	public function output(): string {
+		return (string) $this->get_value();
+	}
+
 	public function get_value(): mixed {
 
 		if ( ! $this->has_field() ) {

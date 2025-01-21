@@ -40,9 +40,7 @@ class ProfileFieldText extends \Govpack\Blocks\ProfileField {
 		<?php
 	}
 
-	public function output(): string {
-		return (string) $this->get_value();
-	}
+
 	
 	public function variations(): array {
 		return $this->create_field_variations();
@@ -50,10 +48,9 @@ class ProfileFieldText extends \Govpack\Blocks\ProfileField {
 
 	public function create_field_variations(): array {
 
-		var_dump( $this->block_name );
 		$variations = [];
 
-		var_dump( \Govpack\Profile\CPT::fields()->of_format( $this->field_type ) );
+
 		
 		foreach ( \Govpack\Profile\CPT::fields()->of_format( $this->field_type ) as $field ) {
 			$variation = [
