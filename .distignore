@@ -45,7 +45,3 @@ phpcs.xml
 psalm.xml
 webpack.config.js
 webpack.config.prod.js
-
-/vendor
-/vendor/*
-/vendor-prefixed/brianhenryie/strauss/*
