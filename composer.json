@@ -51,12 +51,6 @@
 		"mkdir -p ./vendor-prefixed"
 	],
 	
-    "post-install-cmd": [
-        "@prefix-namespaces"
-    ],
-    "post-update-cmd": [
-        "@prefix-namespaces"
-    ],
 	"githooks:install":[
 		"vendor/bin/captainhook install --force --skip-existing"
 	],
