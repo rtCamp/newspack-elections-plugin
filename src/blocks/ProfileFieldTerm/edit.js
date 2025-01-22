@@ -93,10 +93,12 @@ function Edit( props ) {
 		termLimit
 	} = attributes
 
-	console.log(context)
+	
 
-	const { profileId, field, profile } =  useProfileFieldAttributes(props) 
-	console.log(profile)
+	const { profileId, field } =  useProfileFieldAttributes(props) 
+
+	console.log(context)
+	
 	const taxonomySlug = field?.taxonomy ?? attributes.taxonomy ?? null
 	const taxonomies = useProfileTaxonomies();
 	const selectedTaxonomy = taxonomies?.find( (t) => {

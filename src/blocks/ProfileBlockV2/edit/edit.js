@@ -211,9 +211,9 @@ const BlockHTMLElementControl = (props) => {
 function ProfileBlockEdit( props ) {
 
 	const {attributes, setAttributes, isSelected: isSingleSelected, clientId, context} = props
-	console.log(context, attributes)
+
 	const resizeProps = useResizeProps(props);
-	const {setProfile, resetProfile, profileId, profile, profileQuery} = useProfileAttributes(props)
+	const {setProfile, resetProfile, profileId = null, profile, profileQuery} = useProfileAttributes(props)
     const ref = useRef(null);
 	const instanceId = useInstanceId( ProfileBlockEdit );
 	const blockProps = useBlockProps( { ref } );
@@ -221,9 +221,14 @@ function ProfileBlockEdit( props ) {
 	const { __unstableMarkNextChangeAsNotPersistent } = useDispatch( blockEditorStore );
 
 	const {
-		queryId,
+		queryId,	
 		tagName : TagName = 'div',
 	} = attributes;
+
+	const {
+		postId = null
+	} = context;
+	
 
 	useEffect( () => {
 		if ( ! Number.isFinite( queryId ) ) {
@@ -231,6 +236,16 @@ function ProfileBlockEdit( props ) {
 			setAttributes( { queryId: instanceId } );
 		}
 	}, [ queryId, instanceId ] );
+
+	
+	useEffect( () => {
+		console.log("ID Updater effect", postId)
+		if ( (postId !== null) && (!attributes.profileId) ) {
+			__unstableMarkNextChangeAsNotPersistent();
+			setAttributes( { profileId: postId } );
+		}
+	}, [ postId, profileId ] );
+	
 
 	const setTagName = ( nextTagValue ) => {
 		setAttributes( { tagName: nextTagValue } )

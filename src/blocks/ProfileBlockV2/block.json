@@ -108,6 +108,7 @@
 	"providesContext": {
 		"govpack/profileId" : "profileId",
 		"postType" : "postType",
-		"queryId": "queryId"
+		"queryId": "queryId",
+		"postId": "profileId"
 	}
 }

@@ -34,6 +34,12 @@ class PostField extends Field {
 		return $this;
 	}
 
+	public function __construct( string $slug, string $label, FieldType|string|null $type = null ) {
+	
+		parent::__construct( $slug, $label, 'block' );
+	}
+
+
 	public function raw( Profile $model ) {
 
 		if ( $this->source !== 'post' ) {

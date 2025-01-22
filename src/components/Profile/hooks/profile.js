@@ -33,7 +33,7 @@ export const useProfileFromContext = ( context ) => {
 
 	// At least one of profileId or postId exists in context
 	if(!profileId && !postId){
-		console.log("must have a profile id or a postId", profileId, postId, context)
+	//	console.log("must have a profile id or a postId", profileId, postId, context)
 		return false;
 	}
 

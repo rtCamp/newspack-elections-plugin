@@ -43,6 +43,7 @@ class ProfileFieldText extends \Govpack\Blocks\ProfileField {
 
 	
 	public function variations(): array {
+		
 		return $this->create_field_variations();
 	}
 

@@ -18,7 +18,7 @@ export const ProfileEdit = ( props ) => {
 
 	const { clientId, attributes, name, setAttributes, context} = props
 
-	console.log(context, attributes)
+	//console.log(context, attributes)
 	//const blockProps = useBlockProps()
 	//const innerBlockProps = useInnerBlocksProps(blockProps)
 	const isPreview = attributes.preview ?? true
