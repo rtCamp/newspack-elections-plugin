@@ -17,6 +17,7 @@ const useContextOverAttribute = (props, contextKey = null, attributeKey = null, 
 
 export const useProfileFromContext = ( context ) => {
 
+
 	let { 
 		'govpack/profileId' : profileId = null,
 		postId = null,
@@ -25,14 +26,14 @@ export const useProfileFromContext = ( context ) => {
 
 	// Must be within a block that provide a govpack profile context..
 	// Or an actual profile page
-	if(!profileId || postType !== "govpack_profiles"){
+	if(!profileId && postType !== "govpack_profiles"){
 		console.log("no profile id, not profile pt")
 		return false;
 	} 
 
 	// At least one of profileId or postId exists in context
 	if(!profileId && !postId){
-		console.log("must have a profile id or a postId")
+		console.log("must have a profile id or a postId", profileId, postId, context)
 		return false;
 	}
 
@@ -41,6 +42,8 @@ export const useProfileFromContext = ( context ) => {
 		//console.log("Must have a postId if using the context postType")
 		return false;
 	}
+
+	profileId = profileId ?? postId ?? null;
 	
 	return useSelect( (select) => {
 		return select(coreDataStore).getEntityRecord("postType", "govpack_profiles", profileId ) ?? {}

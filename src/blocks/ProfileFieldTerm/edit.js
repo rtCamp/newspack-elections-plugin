@@ -86,21 +86,24 @@ const ProfileTerms = ({terms, displayLinks, separator, termLimit}) => {
 
 function Edit( props ) {
 	
-	const { attributes, setAttributes } = props
+	const { attributes, setAttributes, context } = props
 	const { 
 		displayLinks,
 		separator,
 		termLimit
 	} = attributes
 
-	const { profileId, field } =  useProfileFieldAttributes(props) 
+	console.log(context)
+
+	const { profileId, field, profile } =  useProfileFieldAttributes(props) 
+	console.log(profile)
 	const taxonomySlug = field?.taxonomy ?? attributes.taxonomy ?? null
 	const taxonomies = useProfileTaxonomies();
 	const selectedTaxonomy = taxonomies?.find( (t) => {
 		return t.slug === taxonomySlug
 	})
 
-
+	
 	
 	const { profileTerms, hasProfileTerms, isLoading } = useProfileTerms( profileId, selectedTaxonomy )
 	const hasProfile = (profileId);

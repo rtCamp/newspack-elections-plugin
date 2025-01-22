@@ -59,6 +59,7 @@
 	"usesContext": [
 		"govpack/profileId", 
 		"postType",
+		"postId",
 		"govpack/fieldKey"
 	]
 }

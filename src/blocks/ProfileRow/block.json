@@ -84,7 +84,8 @@
 	"usesContext": [
 		"govpack/profileId", 
 		"govpack/showLabels", 
-		"postType"
+		"postType",
+		"postId"
 	],
 	"providesContext": {
 		"govpack/fieldKey": "fieldKey",
