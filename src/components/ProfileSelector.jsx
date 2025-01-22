@@ -15,7 +15,7 @@ export const ProfileSelector = ( {
 	...props
 } ) => {
 
-	console.log("Selector")
+	
 	const [ isLoading, setIsLoading ] = useState( false );
 	const [ maxItemsToSuggest, setMaxItemsToSuggest ] = useState( 10 )
 

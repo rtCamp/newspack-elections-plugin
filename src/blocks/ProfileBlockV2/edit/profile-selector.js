@@ -7,7 +7,7 @@ export const ProfileSelector = ( props ) => {
 	
 
 	const setProfile = (newProfileId) => {
-		console.log("called")
+	
 		setAttributes({"profileId" : newProfileId})
 	}
 

@@ -17,6 +17,8 @@ import { ProfileSelector as ProfileSelectorPlaceholder } from "./../../../compon
 export const ProfileEdit = ( props ) => {
 
 	const { clientId, attributes, name, setAttributes, context} = props
+
+	console.log(context, attributes)
 	//const blockProps = useBlockProps()
 	//const innerBlockProps = useInnerBlocksProps(blockProps)
 	const isPreview = attributes.preview ?? true
@@ -36,7 +38,8 @@ export const ProfileEdit = ( props ) => {
 		setAttributes({"profileId" : newProfileId})
 	}
 	
-	const hasContextQuery = context.query && context.postId && context.postType === "govpack_profiles"
+	const hasContextQuery = (context.queryId && context.postId && (context.postType === "govpack_profiles"))
+	
 	// If we have a profileId then dont show the selector
 	const hasSelectedProfile = attributes.profileId ?? hasContextQuery ?? false
 	const showVariationSelector = (hasInnerBlocks.length === 0) && (hasVariations.length > 0);
