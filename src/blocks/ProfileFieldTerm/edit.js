@@ -41,7 +41,7 @@ const useProfileTaxonomies = () => {
 }
 
 const ProfileTermSpan = ({postTerm}) => {
-	console.log(postTerm)
+
 	return (
 		<span key={ postTerm.id } >
 			{ decodeEntities( postTerm.name ) }
@@ -97,7 +97,6 @@ function Edit( props ) {
 
 	const { profileId, field } =  useProfileFieldAttributes(props) 
 
-	console.log(context)
 	
 	const taxonomySlug = field?.taxonomy ?? attributes.taxonomy ?? null
 	const taxonomies = useProfileTaxonomies();

@@ -84,8 +84,7 @@
 		}
 	},
 	"allowedBlocks": [ 
-		"core/post-title", 
-		"core/post-excerpt", 
+	
 		"core/spacer", 
 		"core/post-featured-image", 
 		"core/group", 
@@ -94,7 +93,8 @@
 		"core/heading", 
 		"govpack/profile-row-group", 
 		"govpack/profile-row", 
-		"govpack/profile-bio", 
+		"govpack/profile-bio",
+		"govpack/profile-name", 
 		"govpack/profile-separator", 
 		"govpack/profile-field-text",
 		"govpack/profile-field-link",

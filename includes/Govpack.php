@@ -196,6 +196,7 @@ class Govpack {
 		$this->blocks()->register( new \Govpack\Blocks\ProfileBlockV2( $this ) );
 		
 		$this->blocks()->register( new \Govpack\Blocks\ProfileBio( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileName( $this ) ); 
 		$this->blocks()->register( new \Govpack\Blocks\ProfileRow( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileRowGroup( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileLabel( $this ) );
@@ -205,6 +206,5 @@ class Govpack {
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldLink( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldTerm( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldDate( $this ) );
-	
 	}
 }

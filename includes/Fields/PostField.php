@@ -60,4 +60,9 @@ class PostField extends Field {
 		$value = apply_filters( 'the_excerpt', $value );
 		return $value;
 	}
+
+	public function post_title( $value, $model ) {
+		$value = get_the_title( $model->post );
+		return $value;
+	}
 }

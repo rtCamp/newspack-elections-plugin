@@ -49,7 +49,7 @@ export const variations = [
 				},
 				[ 	
 					[
-						"core/post-title",
+						"govpack/profile-name",
 						{"isLink":true},
 						[]
 					],
@@ -73,7 +73,7 @@ export const variations = [
 						[]
 					],
 					[
-						"core/post-excerpt",
+						"govpack/profile-bio",
 						{"moreText":" ","showMoreOnNewLine":false,"excerptLength":27},
 						[]
 					]
@@ -121,7 +121,7 @@ export const variations = [
 					attributes : {"style":{"spacing":{"blockGap":"0.2rem"},"layout":{"selfStretch":"fill","flexSize":null}},"layout":{"type":"constrained"}} , 
 					innerBlocks: [
 						{
-							name : "core/post-title", 
+							name : "govpack/profile-name", 
 							attributes : {"style":{"typography":{"fontStyle":"normal","fontWeight":"1000","fontSize":"1.4rem"},"spacing":{"padding":{"bottom":"0.5rem"}}}}, 
 							innerBlocks : []
 						},
@@ -176,7 +176,7 @@ export const variations = [
 				"core/group", 
 				{"style":{"spacing":{"blockGap":"0.2rem"},"layout":{"selfStretch":"fill","flexSize":null}},"layout":{"type":"constrained"}} , 
 				[
-					["core/post-title", {"style":{"typography":{"fontStyle":"normal","fontWeight":"1000","fontSize":"1.4rem"},"spacing":{"padding":{"bottom":"0.5rem"}}}}, []],
+					["govpack/profile-name", {"style":{"typography":{"fontStyle":"normal","fontWeight":"1000","fontSize":"1.4rem"},"spacing":{"padding":{"bottom":"0.5rem"}}}}, []],
 					["govpack/profile-field-term", {"taxonomy":"govpack_legislative_body","fontSize":"small"}, []],
 					["govpack/profile-field-term", {"taxonomy":"govpack_party","fontSize":"small"}, []],
 					["govpack/profile-field-term", {"taxonomy":"govpack_officeholder_status","fontSize":"small"}, []]
