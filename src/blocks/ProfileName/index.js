@@ -32,7 +32,13 @@ registerBlockType( metadata.name, {
 	edit : Edit,
 	save: Save,
 	transforms: {
-		
+		from : [{
+			type: 'block',
+			blocks: [ 'core/post-title' ],
+			transform: ( attributes ) => {
+				return createBlock( metadata.name, attributes );
+			},
+		}]
 	}
 } );
 

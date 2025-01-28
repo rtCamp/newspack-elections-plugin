@@ -32,24 +32,13 @@ registerBlockType( metadata.name, {
 	edit : Edit,
 	save: Save,
 	transforms: {
-		"to" : [
-			{
-				type: 'block',
-				blocks: [ 'govpack/profile-row' ],
-				transform: ( attributes  ) => {
-					return createBlock( 'govpack/profile-row', attributes );
-				},
-			}
-		],
-		"from" : [
-			{
-				type: 'block',
-				blocks: [ 'govpack/profile-row' ],
-				transform: ( attributes  ) => {
-					return createBlock( 'govpack/profile-field-text', attributes );
-				},
-			}
-		]
+		from : [{
+			type: 'block',
+			blocks: [ 'core/post-excerpt' ],
+			transform: ( attributes ) => {
+				return createBlock( metadata.name, attributes );
+			},
+		}]
 	}
 } );
 
