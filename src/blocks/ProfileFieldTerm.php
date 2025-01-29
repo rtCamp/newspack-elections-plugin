@@ -126,8 +126,6 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 
 		$terms = $this->get_value();
 
-		gp_dump( $this->attributes );
-		
 		$output        = [];
 		$separator     = $this->attribute( 'separator' );
 		$term_limit    = $this->attribute( 'termLimit' );
