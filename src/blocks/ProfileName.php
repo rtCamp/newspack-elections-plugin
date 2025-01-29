@@ -32,12 +32,50 @@ class ProfileName extends \Govpack\Blocks\ProfileFieldText {
 	 * @param WP_Block $template The filename of the template-part to use.
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
+		
+		$tagName = $this->get_wrapper_tag();
+		
+		$block_html = sprintf(
+			'<%s %s>%s</%s>', 
+			$tagName,
+			get_block_wrapper_attributes(),
+			$this->output(),
+			$tagName
+		);
+
+		echo $block_html;
+	}
+
+	public function output(): string {
+
+		// If we're not outputting a link then just use the output as normal
+		if ( ! $this->attribute( 'isLink' ) ) {
+			return parent::output();
+		}
+
+		// Great an array of html attributes for the link
+		$link_attrs = [
+			'target' => $this->attribute( 'linkTarget' ),
+			'href'   => $this->get_profile()->permalink(),
+		];
+
+		if ( $this->attribute( 'rel' ) ) {
+			$link_attrs['rel'] = $this->attribute( 'rel' );
+		}
+
+		return sprintf( '<a %s>%s</a>', self::array_to_html_attributes( $link_attrs ), parent::output() );
+	}
+
 	
-		?>
-		<div <?php echo get_block_wrapper_attributes(); ?>>
-			<?php echo $this->output(); ?>
-		</div>
-		<?php
+
+	public function get_wrapper_tag(): string {
+		$level = $this->attribute( 'level' );
+
+		if ( $level === 0 ) {
+			return 'p';
+		}
+
+		return sprintf( 'h%d', $level );
 	}
 
 	public function variations(): array {

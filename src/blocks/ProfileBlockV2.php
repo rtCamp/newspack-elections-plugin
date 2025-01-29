@@ -145,6 +145,7 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile {
 	}
 
 	
+	
 	public function template(): string {
 		return sprintf( 'blocks/%s', $this->template );
 	}

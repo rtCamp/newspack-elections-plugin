@@ -39,6 +39,13 @@
 		}
 	},
 	"attributes": {
+		"fieldKey" : {
+			"type": "string"
+		},
+		"fieldType" : {
+			"type": "string",
+			"default" : "link"
+		},
 		"taxonomy": {
 			"type": "string"
 		},

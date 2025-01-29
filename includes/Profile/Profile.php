@@ -79,9 +79,13 @@ class Profile {
 
 		$vals = [];
 		foreach ( CPT::fields()->all() as $field ) {
-			$vals[ $field->slug() ] = $field->value_for_rest($this);
+			$vals[ $field->slug() ] = $field->value_for_rest( $this );
 		}
 
 		return $vals;
+	}
+
+	public function permalink(): string {
+		return \get_permalink( $this->post );
 	}
 }

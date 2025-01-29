@@ -24,6 +24,8 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 		$this->default_variation = 'govpack_officeholder_status'; // TODO: reference the const from the taxonomy file.
 	}
 
+	
+
 	public function block_build_path(): string {
 		return $this->plugin->build_path( 'blocks/ProfileFieldTerm' );
 	}
@@ -91,10 +93,40 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 		<?php
 	}
 
-	
+	public function get_field_by_taxonomy( string $tax ) {
+		return \Govpack\Profile\CPT::fields()->find( 'taxonomy', $tax );
+	}
+
+	/**
+	 * Override the `get_field_key` method from ProfileField. At one point the term block used a taxonomy 
+	 * attribute instead of the fieldKey to access terms from a taxonomy.
+	 * 
+	 * This method now attempts to get the fieldKey as normal for current versions of the block. It then falls 
+	 * back to getting a fieldKey from the from the fieldManager by finding a field using the taxonomy
+	 */
+	public function get_field_key() {
+		$field_key = parent::get_field_key();
+
+		/**
+		 * ToDo:
+		 * - Check taxonomy has a value or throw an exception
+		 * - Throw an exception if more than 1 Field returned
+		 * - Throw an exception if no fields are found
+		 */
+		if ( $field_key === false ) {
+			$found_fields = $this->get_field_by_taxonomy( $this->attribute( 'taxonomy' ) );
+			$keys         = array_keys( $found_fields );
+			$field_key    = $keys[0];
+		}
+
+		return $field_key;
+	}
+
 	public function output(): string {
 
 		$terms = $this->get_value();
+
+		gp_dump( $this->attributes );
 		
 		$output        = [];
 		$separator     = $this->attribute( 'separator' );

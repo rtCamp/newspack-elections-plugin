@@ -57,6 +57,18 @@ class FieldManager extends \Govpack\Abstracts\Collection implements \Govpack\Int
 		);
 	}
 
+	public function find( string $prop, mixed $value ): array {
+		return array_filter(
+			$this->collection,
+			function ( $field ) use ( $prop, $value ) {
+				if ( ! isset( $field->$prop ) ) {
+					return false;
+				}
+				return $field->$prop === $value;
+			}
+		);
+	}
+
 	public function get_types(): array {
 		return $this->types->all();
 	}

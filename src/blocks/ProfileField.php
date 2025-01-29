@@ -171,4 +171,23 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 	public function has_field(): bool {
 		return $this->get_field_key() ? true : false;
 	}
+
+	public static function array_to_html_attributes( array $args ): string {
+		
+		$attributes = array_map(
+			function ( $key, $value ) {
+				return sprintf(
+					'%s="%s"', 
+					trim( $key ), 
+					trim( $value )
+				);
+			}, 
+			array_keys( $args ), 
+			array_values( $args )
+		);
+
+		$attributes = join( ' ', $attributes );
+		
+		return $attributes;
+	}
 }
