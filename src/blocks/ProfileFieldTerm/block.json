@@ -46,9 +46,7 @@
 			"type": "string",
 			"default" : "link"
 		},
-		"taxonomy": {
-			"type": "string"
-		},
+		
 		"separator": {
 			"type": "string",
 			"default": ", "

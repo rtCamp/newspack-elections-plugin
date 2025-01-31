@@ -18,7 +18,7 @@ class FieldManager extends \Govpack\Abstracts\Collection implements \Govpack\Int
 	 */
 	public FieldTypeRegistry $types;
 
-	public function get( string $item ): Field {
+	public function get( string $item ): Field|bool {
 		return parent::get( $item );
 	}
 

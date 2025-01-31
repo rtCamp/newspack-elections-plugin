@@ -27,9 +27,7 @@ const WideRangeControl = styled( RangeControl )`
 /**
  * TODO:
  * 1. Move useProfileTaxonomies to its own, reusable hook
- * 2. Stop Profile Terms outputting clickable links
- * 3. Handle having no terms available
- * 4. Add Inspector Controls to limit how many terms are shown and the seperator used
+ * 2. Handle having no terms available
  */
 
 
@@ -92,8 +90,6 @@ function Edit( props ) {
 		separator,
 		termLimit
 	} = attributes
-
-	
 
 	const { profileId, field } =  useProfileFieldAttributes(props) 
 

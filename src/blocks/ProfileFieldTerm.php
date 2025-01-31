@@ -18,6 +18,7 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 
 	public string $block_name = 'govpack/profile-field-term';
 	private string $default_variation;
+	public $field_type = 'taxonomy';
 
 	public function __construct( $plugin ) {
 		$this->plugin            = $plugin;
@@ -31,6 +32,40 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	}
 
 	public function variations(): array {
+		return $this->create_field_variations();
+	}
+
+	public function create_field_variations(): array {
+
+		$variations = [];
+
+		foreach ( \Govpack\Profile\CPT::fields()->of_format( $this->field_type ) as $field ) {
+			$variation = [
+				'category'    => 'govpack-profile-fields',
+				'name'        => sprintf( 'profile-field-%s', $field->slug ),
+				'title'       => $field->label,
+				'description' => sprintf(
+					/* translators: %s: taxonomy's label */
+					__( 'Display Profile Field: %s' ),
+					$field->label
+				),
+				'attributes'  => [
+					'fieldType' => $field->type->slug,
+					'fieldKey'  => $field->slug,
+				],
+				'isActive'    => [ 'meta_key' ],
+				'scope'       => [ 'inserter' ],
+				'icon'        => $field->type->variation_icon(),
+			];
+
+			$variations[] = $variation;
+		}
+
+		return $variations;
+	}
+	
+	public function create_taxonomy_field_variations(): array {
+		die( 'term variations' );
 
 		$taxonomies = get_object_taxonomies(
 			'govpack_profiles', // TODO: reference the const from the post_type file.
@@ -119,13 +154,15 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 			$field_key    = $keys[0];
 		}
 
+		gp_dump( $field_key );
+
 		return $field_key;
 	}
 
 	public function output(): string {
 
 		$terms = $this->get_value();
-
+		gp_dump( $terms );
 		$output        = [];
 		$separator     = $this->attribute( 'separator' );
 		$term_limit    = $this->attribute( 'termLimit' );

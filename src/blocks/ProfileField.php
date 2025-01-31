@@ -168,8 +168,14 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 		return \Govpack\Profile\CPT::fields()->get( $this->get_field_key() );
 	}
 
-	public function has_field(): bool {
+	public function has_field_key(): bool {
 		return $this->get_field_key() ? true : false;
+	}
+
+	public function has_field(): bool {
+		return $this->get_field_key() ? 
+			\Govpack\Profile\CPT::fields()->exists( $this->get_field_key() ) : 
+			false;
 	}
 
 	public static function array_to_html_attributes( array $args ): string {
