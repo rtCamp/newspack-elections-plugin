@@ -1,11 +1,23 @@
 import { InnerBlocks, useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
-import {switchToBlockType}  from '@wordpress/blocks'; 
+import {switchToBlockType, createBlock}  from '@wordpress/blocks'; 
 const targetBlockSwaps = {
 	"core/post-title" : "govpack/profile-name",
 	"core/post-excerpt": "govpack/profile-bio",
 }
 
 const targetBlocks = Object.keys(targetBlockSwaps)
+
+const hasTargetBlock = (blocks) => {
+	console.log("hasTargetBlocks")
+	console.log(blocks)
+
+	return blocks.some( (block) => {
+		return  ( targetBlocks.includes(block.name) ||  // check if this block's name is in the list of targets
+			targetBlocks.includes(block?.attributes?.originalName) || // if the block is of a deactivated type, look for the original name
+			hasTargetBlock(block.innerBlocks) || // try this again on innerblocks
+			false ) // fallback
+	})
+}
 
 const dep0_1 = {
 	"attributes": {
@@ -43,26 +55,38 @@ const dep0_1 = {
 	},
 	supports : {},
 	isEligible: (attributes, innerBlocks, data) => {
-		return innerBlocks.some( (block) => targetBlocks.includes(block.name) )
+		return hasTargetBlock(innerBlocks)
 	},
 	save: () => {
 	},
 	migrate: (attributes, innerBlocks) => {
-		
+
 		// We want to look through each innerblock and transform _some_ of them to a different block type.
 		// the number of blocks returned may not match the innerBlocks being transformed so use reduce instead of map. 
 		// Prefer reduce over foreach to avoid state outside of the loop
 		const newInnerBlocks = innerBlocks?.reduce( (migratedBlocks, block) => {
+			
+			const blockTypeIsMissing = (block.name === "core/missing")
+			const blockName = blockTypeIsMissing ? block.attributes.originalName : block.name
 
+			
 			// Check the block passed to process is in the block targets list, if not return early
-			if(!targetBlocks.includes(block.name)){
+			if( !targetBlocks.includes(blockName)){
 				migratedBlocks.push(block)
 				return migratedBlocks
 			}
 
-			// use block transforms to change the block type.
-			// This returns an array for loop that later on
-			const newBlocks = switchToBlockType(block, targetBlockSwaps[block.name])
+			//if((blockTypeIsMissing)){
+			//	const newBlocks = createBlock(targetBlockSwaps[blockName], attributes, innerBlocks)
+			//} else {
+				// use block transforms to change the block type.
+				// This returns an array for loop that later on
+			//	const newBlocks = switchToBlockType(block, targetBlockSwaps[blockName])
+			//}
+			console.log("blockName", blockName)
+			const newBlocks = blockTypeIsMissing ? 
+				[createBlock(targetBlockSwaps[blockName], attributes, innerBlocks)] : // wrap in array to match switchToBlockType
+				switchToBlockType(block, targetBlockSwaps[blockName])
 			
 			// if the type switch failed, (e.g) no registered transforms, it will return null
 			// add the original block to accumulator and return from the function to avoid looping null
@@ -71,6 +95,7 @@ const dep0_1 = {
 				migratedBlocks.push(block)
 				return migratedBlocks
 			}
+
 
 			// the switchToBlockType returns an array so loop it and add to the accumulator
 			// then exit the migration
