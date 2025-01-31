@@ -16,6 +16,7 @@ export function ProfileFieldsDropDownMenu({
 	showFieldsWithEmptyValues = true
 } = props){
 
+	console.log( fields )
 	let selectedOptions = fields.map( (f) => ({
 		label : f.label,
 		value : f.slug,

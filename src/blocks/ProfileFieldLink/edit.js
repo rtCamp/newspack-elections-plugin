@@ -1,4 +1,4 @@
-
+import {isEmpty} from "lodash"
 
 /**
  * WordPress dependencies
@@ -15,13 +15,14 @@ function Edit( props ) {
 	
 	const {fieldKey, value } =  useProfileFieldAttributes(props) 
 	
-
+	console.log("edit for link block", value, fieldKey)
 	const href =  value?.url ?? false
 	const label =  value?.linkText ?? false
 	const showValue = value !== null
-
+	const hasValue = !isEmpty(value)
+	
     return (
-		<FieldBlockEdit {...props} >
+		<FieldBlockEdit {...props} hasValue={hasValue}>
 			{ (showValue) && (
 				<a href={href}>{label}</a>
 			) }

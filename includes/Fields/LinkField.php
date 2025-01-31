@@ -57,4 +57,8 @@ class LinkField extends Field {
 
 		return true;
 	}
+
+	public function value_for_rest( Profile $model ) {
+		return $this->value( $model );
+	}
 }

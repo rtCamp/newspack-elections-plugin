@@ -154,7 +154,6 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 			$field_key    = $keys[0];
 		}
 
-		gp_dump( $field_key );
 
 		return $field_key;
 	}
@@ -162,7 +161,7 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	public function output(): string {
 
 		$terms = $this->get_value();
-		gp_dump( $terms );
+		
 		$output        = [];
 		$separator     = $this->attribute( 'separator' );
 		$term_limit    = $this->attribute( 'termLimit' );
