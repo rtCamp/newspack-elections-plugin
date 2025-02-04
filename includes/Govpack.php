@@ -170,6 +170,7 @@ class Govpack {
 	public function blocks(): Blocks {
 
 		if ( ! isset( $this->blocks ) ) {
+			$this->register_blocks_supports();
 			$this->blocks = new Blocks( $this );
 			$this->blocks->hooks();
 		}
@@ -187,7 +188,11 @@ class Govpack {
 	}
 
 	
+	public function register_blocks_supports() {
 		
+		BlockSupports\FieldTypeClasses::register();
+		BlockSupports\FieldKeyClasses::register();
+	}
 
 	public function register_blocks() {
 		

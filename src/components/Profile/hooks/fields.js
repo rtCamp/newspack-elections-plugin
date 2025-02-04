@@ -26,7 +26,7 @@ export const useProfileFields = (props) => {
 	const {context} = props
 
 	const profile = useProfileFromContext(context) ?? {}
-	console.log(profile)
+	
 	let fields = useRawFields()
 
 	fields = fields.map( ( field ) => {

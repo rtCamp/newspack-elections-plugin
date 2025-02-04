@@ -32,13 +32,15 @@
 		"spacing": {
 			"margin": true,  
 			"padding": true, 
-			"blockGap": true
+			"blockGap": true 
 		},
 		"typography": {
 			"fontSize": true,
 			"lineHeight": true,
 			"textAlign": true
-		}
+		},
+		"gp/field-type-classes" : true,
+		"gp/field-key-classes" : true
 	},
 	"attributes": {
 		"style" : {

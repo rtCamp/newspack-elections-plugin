@@ -152,9 +152,8 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile {
 
 	public function get_new_block_wrapper_attributes(): array {
 		$new_attrs = [];
-
-		$styles  = [];
-		$classes = [];
+		$styles    = [];
+		$classes   = [];
 
 		if ( $this->attributes['customWidth'] ) {
 			$styles['max-width'] = $this->attributes['customWidth'];
