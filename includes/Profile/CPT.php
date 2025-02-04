@@ -1051,6 +1051,11 @@ class CPT extends \Govpack\Abstracts\PostType {
 			function ( $social_set ) {
 				return array_map(
 					function ( $service ) {
+
+						if ( ! $service ) {
+							return $service;
+						}
+
 						if ( gp_is_url_valid( $service ) ) {
 								return $service;
 						}
