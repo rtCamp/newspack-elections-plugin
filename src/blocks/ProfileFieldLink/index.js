@@ -34,4 +34,3 @@ registerBlockType( metadata.name, {
 } );
 
 
-console.log("register profile-field-text")

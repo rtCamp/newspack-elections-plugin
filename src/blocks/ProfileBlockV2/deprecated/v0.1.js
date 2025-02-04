@@ -8,8 +8,7 @@ const targetBlockSwaps = {
 const targetBlocks = Object.keys(targetBlockSwaps)
 
 const hasTargetBlock = (blocks) => {
-	console.log("hasTargetBlocks")
-	console.log(blocks)
+
 
 	return blocks.some( (block) => {
 		return  ( targetBlocks.includes(block.name) ||  // check if this block's name is in the list of targets
@@ -83,7 +82,7 @@ const dep0_1 = {
 				// This returns an array for loop that later on
 			//	const newBlocks = switchToBlockType(block, targetBlockSwaps[blockName])
 			//}
-			console.log("blockName", blockName)
+
 			const newBlocks = blockTypeIsMissing ? 
 				[createBlock(targetBlockSwaps[blockName], attributes, innerBlocks)] : // wrap in array to match switchToBlockType
 				switchToBlockType(block, targetBlockSwaps[blockName])
@@ -91,7 +90,7 @@ const dep0_1 = {
 			// if the type switch failed, (e.g) no registered transforms, it will return null
 			// add the original block to accumulator and return from the function to avoid looping null
 			if(newBlocks === null){
-				console.warn("No Available Transfrom")
+			
 				migratedBlocks.push(block)
 				return migratedBlocks
 			}

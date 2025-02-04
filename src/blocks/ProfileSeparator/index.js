@@ -27,5 +27,3 @@ registerBlockType( metadata.name, {
 	],
 	edit : Edit
 } );
-
-console.log("register separator")

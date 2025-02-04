@@ -239,7 +239,7 @@ function ProfileBlockEdit( props ) {
 
 	
 	useEffect( () => {
-		console.log("ID Updater effect", postId)
+		
 		if ( (postId !== null) && (!attributes.profileId) ) {
 			__unstableMarkNextChangeAsNotPersistent();
 			setAttributes( { profileId: postId } );

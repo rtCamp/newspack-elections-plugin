@@ -12,10 +12,8 @@ import { useProfileFieldAttributes } from "./../../components/Profile"
 
 function Edit( props ) {
 
-	
 	const {fieldKey, value } =  useProfileFieldAttributes(props) 
 	
-	console.log("edit for link block", value, fieldKey)
 	const href =  value?.url ?? false
 	const label =  value?.linkText ?? false
 	const showValue = value !== null

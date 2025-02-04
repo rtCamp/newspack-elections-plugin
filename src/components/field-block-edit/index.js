@@ -9,7 +9,7 @@ export const FieldBlockEdit = (props) => {
 	const { setFieldKey, fieldKey, fieldType, isControlledByContext } =  useProfileFieldAttributes(props) 
 	const fieldsofType = useFieldsOfType(props, fieldType)
 
-	console.log(fieldsofType)
+
 	const { 
 		children = [],
 		defaultValue = "N/A",
@@ -18,7 +18,6 @@ export const FieldBlockEdit = (props) => {
 
 	const hasChildren = (children.length > 0)
 
-	console.log("hasChildren", hasChildren)
 	
 	return (
 		<div {...blockProps}>

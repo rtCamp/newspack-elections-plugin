@@ -181,7 +181,7 @@ function Edit( props ) {
 
 
     return (
-		<>
+		<div {...innerBlocksProps} className={className}>
 			<MetaInspectorControl
 				fieldKey = {fieldKey}
 				setAttributes = {setAttributes}
@@ -204,12 +204,8 @@ function Edit( props ) {
 				fields = { fieldsofType }
 			/>
 
-
-			<div {...innerBlocksProps} className={className}>
-				{ children }
-			</div>
-			
-		</>
+			{ children }
+		</div>
 	)
 }
 
