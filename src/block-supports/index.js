@@ -56,11 +56,9 @@ export const registerBlockSupports = () => {
 						! hasSupport( props.name ) ||
 						( isMatch && ! isMatch( neededProps ) )
 					) {
-						console.log("do not render")
 						return null;
 					}
 
-					console.log("do render")
 					return (
 						<BlockPropsPure
 							// We can use the index because the array length
@@ -123,7 +121,7 @@ function BlockProps( {
 } ) {
 
 	const wrapperProps = hook( props );
-	console.log("wrapperProps", wrapperProps)
+	
 
 	const setWrapperProps = ( next ) =>
 		setAllWrapperProps( ( prev ) => {

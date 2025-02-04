@@ -12,13 +12,15 @@ import { useProfileFieldAttributes } from "./../../components/Profile"
 
 function Edit( props ) {
 
-	const {fieldKey, value } =  useProfileFieldAttributes(props) 
+	const {fieldKey, value, profile } =  useProfileFieldAttributes(props) 
 	
 	const href =  value?.url ?? false
 	const label =  value?.linkText ?? false
 	const showValue = value !== null
 	const hasValue = !isEmpty(value)
 	
+	console.log("value", value, profile);
+
     return (
 		<FieldBlockEdit {...props} hasValue={hasValue}>
 			{ (showValue) && (

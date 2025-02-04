@@ -45,7 +45,7 @@ class LinkField extends Field {
 		
 		return [
 			'url'      => $raw_value,
-			'linkText' => $this->link_text ?? $raw_value,
+			'linkText' => $this->link_text ?? $this->label ?? $raw_value,
 		];
 	}
 
