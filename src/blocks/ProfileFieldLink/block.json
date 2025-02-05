@@ -37,17 +37,11 @@
 			"fontSize": true,
 			"lineHeight": true,
 			"textAlign": true
-		}
+		},
+		"gp/field-type" : true,
+		"gp/field-key" : true
 	},
 	"attributes": {
-		
-		"fieldKey" : {
-			"type": "string"
-		},
-		"fieldType" : {
-			"type": "string",
-			"default" : "link"
-		},
 		"linkTextOverride" : {
 			"type": "string"
 		}

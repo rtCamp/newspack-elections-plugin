@@ -36,16 +36,12 @@
 			"__experimentalLetterSpacing": true,
 			"__experimentalTextTransform": true,
 			"__experimentalWritingMode": true
-		}
+		},
+		"gp/field-type" : true,
+		"gp/field-key" : true
 	},
 	"attributes": {
-		"fieldKey" : {
-			"type": "string"
-		},
-		"fieldType" : {
-			"type": "string",
-			"default" : "link"
-		},
+		
 		
 		"separator": {
 			"type": "string",
