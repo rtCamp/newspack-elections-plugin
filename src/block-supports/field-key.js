@@ -1,6 +1,20 @@
-import { hasBlockSupport, getBlockDefaultClassName} from '@wordpress/blocks';
-
+/**
+ * External dependencies
+ */
 import clsx from 'clsx';
+
+/**
+ * WordPress dependencies
+ */
+import { hasBlockSupport, getBlockDefaultClassName} from '@wordpress/blocks';
+import { useSelect } from '@wordpress/data';
+import { store as blockEditorStore } from "@wordpress/block-editor"
+
+/**
+ * Internal dependencies
+ */
+import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from "./../components/Controls/ProfileField"
+import { useFieldsOfType, useProfileFieldAttributes } from './../components/Profile';
 
 const featureName = "gp/field-key"
 
@@ -31,8 +45,28 @@ export function addAttribute( settings ) {
 	return settings;
 }
 
+const Edit = (props) => {
+
+	const {clientId} = props
+	const attributes = useSelect( (select) => select( blockEditorStore ).getBlockAttributes( clientId ) || {} )
+
+	
+	const {fieldKey, fieldType} = attributes
+	const { setFieldKey, isControlledByContext } =  useProfileFieldAttributes(props) 
+	const fieldsofType = useFieldsOfType(props, fieldType)
+
+	return (
+		<ProfileFieldsInspectorControl
+			fieldKey = {fieldKey}
+			setFieldKey = {setFieldKey}
+			fieldType = {fieldType}
+			fields = { fieldsofType }
+		/>
+	)
+}
+
 export default {
-	edit: null,
+	edit: Edit,
 	attributeKeys: ["fieldKey"],
 	useBlockProps,
 	addAttribute : addAttribute,

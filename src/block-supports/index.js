@@ -4,7 +4,7 @@
  * Internal dependencies
  */
 
-import {createGPBlockListBlockFilter, createGPBlockRegisterFilter} from "./utils"
+import {createGPBlockListBlockFilter, createGPBlockRegisterFilter, createGPBlockEditFilter} from "./utils"
 
 import fieldType from "./field-type"
 import fieldKey from "./field-key"
@@ -17,7 +17,8 @@ const features = [
 ]
 
 export const registerBlockSupports = () => {
-	//createGPBlockListBlockFilter(features)
+	createGPBlockListBlockFilter(features)
 	createGPBlockRegisterFilter(features)
+	createGPBlockEditFilter(features)
 }
 

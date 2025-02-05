@@ -5,6 +5,7 @@
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { memo, useEffect, useState } from "@wordpress/element"
+import {useBlockEditContext} from "@wordpress/block-editor"
 
 /**
  * External dependencies
@@ -137,8 +138,12 @@ export const createGPBlockListBlockFilter = (features = []) => {
 export const createGPBlockRegisterFilter = (features = []) => {
 
 	const withGPBlockListBlockRegisterHooks = (settings, name) => {
-		//console.log("registerBlock", settings, name)
-		
+
+		/**
+		 * For a list of given block support features, filter down to features that can add attributes to to this block 
+		 * (is support for the current block provided and does the feature have an addAttribute method). Use the passed 
+		 * in "setting" run each addAttribute passing and recieving the settings object
+		 */
 		features
 			.filter(feature => Object.hasOwn(feature, "addAttribute") && feature.hasSupport(name))
 			.reduce( (settings, feature) => feature.addAttribute(settings), settings)
@@ -155,19 +160,19 @@ export const createGPBlockRegisterFilter = (features = []) => {
 }
 
 
-
-
-
 export function createGPBlockEditFilter( features ) {
 	// We don't want block controls to re-render when typing inside a block.
 	// `memo` will prevent re-renders unless props change, so only pass the
 	// needed props and not the whole attributes object.
-	features = features.map( ( settings ) => {
+	// Make sure the feature has an Edit method as well
+	features = features.filter( feature => Object.hasOwn(feature, "edit") && feature.edit ).map( ( settings ) => {
 		return { ...settings, Edit: memo( settings.edit ) };
 	} );
+
 	const withGPBlockEditHooks = createHigherOrderComponent(
 		( OriginalBlockEdit ) => ( props ) => {
 			const context = useBlockEditContext();
+		
 			// CAUTION: code added before this line will be executed for all
 			// blocks, not just those that support the feature! Code added
 			// above this line should be carefully evaluated for its impact on
@@ -180,15 +185,15 @@ export function createGPBlockEditFilter( features ) {
 						attributeKeys = [],
 						shareWithChildBlocks,
 					} = feature;
+
+					/*
 					const shouldDisplayControls =
 						context[ mayDisplayControlsKey ] ||
 						( context[ mayDisplayParentControlsKey ] &&
 							shareWithChildBlocks );
+					*/
 
-					if (
-						! shouldDisplayControls ||
-						! hasSupport( props.name )
-					) {
+					if ( !hasSupport( props.name ) ) {
 						return null;
 					}
 
@@ -211,9 +216,11 @@ export function createGPBlockEditFilter( features ) {
 							__unstableParentLayout={
 								props.__unstableParentLayout
 							}
+							context = { props.context }
 							// This component is pure, so only pass needed
 							// props!!!
-							{ ...neededProps }
+							attributes = { neededProps }
+							
 						/>
 					);
 				} ),

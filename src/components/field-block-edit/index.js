@@ -9,7 +9,7 @@ export const FieldBlockEdit = (props) => {
 	const { setFieldKey, fieldKey, fieldType, isControlledByContext } =  useProfileFieldAttributes(props) 
 	const fieldsofType = useFieldsOfType(props, fieldType)
 
-
+	console.log("blockProps", blockProps)
 	const { 
 		children = [],
 		defaultValue = "N/A",
@@ -24,13 +24,14 @@ export const FieldBlockEdit = (props) => {
 
 			{!isControlledByContext && (
 				<>
+				{/*
 					<ProfileFieldsInspectorControl
 						fieldKey = {fieldKey}
 						setFieldKey = {setFieldKey}
 						fieldType = {fieldType}
 						fields = { fieldsofType }
 					/>
-
+				*/}
 					<ProfileFieldsToolBar 
 						fieldKey = {fieldKey}
 						setFieldKey = {setFieldKey}
