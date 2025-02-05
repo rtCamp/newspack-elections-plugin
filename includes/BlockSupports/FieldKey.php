@@ -12,11 +12,21 @@ class FieldKey extends FieldType {
 		return 'field-key';
 	}
 
+
+	public function get_attribute(): array {
+		return [
+			'fieldKey' => [
+				'type' => 'string',
+			],
+		];
+	}
+
 	/**
 	 * Registers the example attribute for block types that support it.
 	 *
 	 * @param WP_Block_Type $block_type Block Type.
 	 */
+	/*
 	function attributes( WP_Block_Type $block_type ) {
 		
 		if ( ! $this->is_supported_by_block_type( $block_type ) ) {
@@ -33,7 +43,8 @@ class FieldKey extends FieldType {
 			];
 		}
 	}
-
+	*/
+	
 	/**
 	 * Add the example attribute to the output.
 	 *

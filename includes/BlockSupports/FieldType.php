@@ -19,6 +19,21 @@ class FieldType {
 		);
 	}
 
+	public function get_attribute_name(): string {
+		return array_keys( $this->get_attribute() )[0];
+	}
+
+	public function get_attribute(): array {
+		return [
+			'fieldType' => [
+				'type'    => 'string',
+				'default' => 'text',
+			],
+		];
+	}
+
+	
+
 	public function full_name(): string {
 		return sprintf( '%s/%s', $this->prefix(), $this->name() );
 	}
@@ -50,10 +65,8 @@ class FieldType {
 			$block_type->attributes = [];
 		}
 
-		if ( ! array_key_exists( 'fieldType', $block_type->attributes ) ) {
-			$block_type->attributes['fieldType'] = [
-				'type' => 'string',
-			];
+		if ( ! array_key_exists( $this->get_attribute_name(), $block_type->attributes ) ) {
+			$block_type->attributes = array_merge( $block_type->attributes, $this->get_attribute() );
 		}
 	}
 
