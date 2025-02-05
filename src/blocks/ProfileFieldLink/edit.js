@@ -24,7 +24,12 @@ function Edit( props ) {
     return (
 		<FieldBlockEdit {...props} hasValue={hasValue}>
 			{ (showValue) && (
-				<a href={href}>{label}</a>
+				<a 
+					href={ href }
+					onClick={ ( event ) => event.preventDefault() }
+				>
+					{label}
+				</a>
 			) }
 			{ (!fieldKey) && (
 				<span>Please Select a Field </span> 
