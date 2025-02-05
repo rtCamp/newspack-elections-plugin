@@ -32,7 +32,9 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 			return '';
 		}
 
-		return sprintf( '<a href="%s">%s</a>', $link['url'], $link['linkText'] );
+		$link_text = ( $this->has_attribute( 'linkTextOverride' ) && $this->attribute( 'linkTextOverride' ) ) ? $this->attribute( 'linkTextOverride' ) : $link['linkText'];
+		
+		return sprintf( '<a href="%s">%s</a>', $link['url'], $link_text );
 	}
 
 

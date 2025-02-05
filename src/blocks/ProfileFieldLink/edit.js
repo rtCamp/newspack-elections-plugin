@@ -5,6 +5,9 @@ import {isEmpty} from "lodash"
  */
 import { __ } from '@wordpress/i18n';
 
+import { PanelBody, PanelRow, TextControl } from '@wordpress/components';
+import { InspectorControls } from "@wordpress/block-editor"
+
 
 import { FieldBlockEdit } from '../../components/field-block-edit';
 import { useProfileFieldAttributes } from "./../../components/Profile"
@@ -13,28 +16,57 @@ import { useProfileFieldAttributes } from "./../../components/Profile"
 function Edit( props ) {
 
 	const {fieldKey, value, profile } =  useProfileFieldAttributes(props) 
-	
+	const { attributes, setAttributes } = props
+	const { linkTextOverride = "" } = attributes
+	const haslinkTextOverride = (linkTextOverride !== undefined && linkTextOverride !== "")
+
+	const setLinkTextOverride = (newValue) => {
+		setAttributes({linkTextOverride : newValue })
+	}
+
+	console.log("linkTextOverride", linkTextOverride);
+	console.log("haslinkTextOverride", haslinkTextOverride);
+
 	const href =  value?.url ?? false
 	const label =  value?.linkText ?? false
 	const showValue = value !== null
 	const hasValue = !isEmpty(value)
 	
-	console.log("value", value, profile);
+	const linkText = (haslinkTextOverride ? linkTextOverride : value?.linkText)
+
+	console.log("linkText", linkText);
 
     return (
-		<FieldBlockEdit {...props} hasValue={hasValue}>
-			{ (showValue) && (
-				<a 
-					href={ href }
-					onClick={ ( event ) => event.preventDefault() }
-				>
-					{label}
-				</a>
-			) }
-			{ (!fieldKey) && (
-				<span>Please Select a Field </span> 
-			) }
-		</FieldBlockEdit>
+		<>
+			<InspectorControls group="settings">
+					
+					<PanelBody title={ __( 'Link Controls', 'govpack' ) }>
+						<PanelRow>
+							<TextControl 
+								__nextHasNoMarginBottom
+								__next40pxDefaultSize
+								label="Override Link Text"
+								onChange={setLinkTextOverride}
+								value = {linkTextOverride}
+							/>
+						</PanelRow>
+					</PanelBody>
+				
+			</InspectorControls>
+			<FieldBlockEdit {...props} hasValue={hasValue}>
+				{ (showValue) && (
+					<a 
+						href={ href }
+						onClick={ ( event ) => event.preventDefault() }
+					>
+						{linkText}
+					</a>
+				) }
+				{ (!fieldKey) && (
+					<span>Please Select a Field </span> 
+				) }
+			</FieldBlockEdit>
+		</>
 	)
 }
 

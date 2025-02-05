@@ -47,6 +47,9 @@
 		"fieldType" : {
 			"type": "string",
 			"default" : "link"
+		},
+		"linkTextOverride" : {
+			"type": "string"
 		}
 	},
 	"ancestor": [ "govpack/profile-v2" ],
