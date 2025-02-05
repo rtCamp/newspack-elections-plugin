@@ -8,8 +8,8 @@ import { memo, useEffect, useState } from "@wordpress/element"
 /**
  * Internal dependencies
  */
-import fieldType from "./field-type-classname"
-import fieldKey from "./field-key-classname"
+import fieldType from "./field-type"
+import fieldKey from "./field-key"
 /**
  * External dependencies
  */

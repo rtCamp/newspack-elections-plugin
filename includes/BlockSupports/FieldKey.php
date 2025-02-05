@@ -5,11 +5,11 @@ namespace Govpack\BlockSupports;
 use WP_Block_Supports;
 use WP_Block_Type;
 
-class FieldKeyClasses extends FieldTypeClasses {
+class FieldKey extends FieldType {
 
 
 	public function name(): string {
-		return 'field-key-classes';
+		return 'field-key';
 	}
 
 	/**

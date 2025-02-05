@@ -5,7 +5,7 @@ namespace Govpack\BlockSupports;
 use WP_Block_Supports;
 use WP_Block_Type;
 
-class FieldTypeClasses {
+class FieldType {
 
 	public static function register() {
 
@@ -28,7 +28,7 @@ class FieldTypeClasses {
 	}
 
 	public function name(): string {
-		return 'field-type-classes';
+		return 'field-type';
 	}
 
 	public function is_supported_by_block_type( WP_Block_Type $block_type ): bool {
