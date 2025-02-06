@@ -6,10 +6,8 @@ import { useFieldsOfType, useProfileFieldAttributes } from './../../components/P
 export const FieldBlockEdit = (props) => {
 
 	const blockProps = useBlockProps();
-	const { setFieldKey, fieldKey, fieldType, isControlledByContext } =  useProfileFieldAttributes(props) 
-	const fieldsofType = useFieldsOfType(props, fieldType)
+	const { isControlledByContext } =  useProfileFieldAttributes(props) 
 
-	console.log("blockProps", blockProps)
 	const { 
 		children = [],
 		defaultValue = "N/A",
@@ -31,13 +29,14 @@ export const FieldBlockEdit = (props) => {
 						fieldType = {fieldType}
 						fields = { fieldsofType }
 					/>
-				*/}
+			
 					<ProfileFieldsToolBar 
 						fieldKey = {fieldKey}
 						setFieldKey = {setFieldKey}
 						fieldType = {fieldType}
 						fields = { fieldsofType }
 					/>
+				*/}
 				</>
 			)}
 

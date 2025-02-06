@@ -17,7 +17,7 @@ import { store as blocksStore } from "@wordpress/blocks"
 import {Panel, PanelBody, PanelRow, ToggleControl} from '@wordpress/components';
 import {useProfileFieldAttributes, useFieldsOfType} from "./../../components/Profile"
 
-import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from '../../components/Controls/ProfileField';
+
 
 const MetaInspectorControl = ({
 	fieldKey,
@@ -188,20 +188,6 @@ function Edit( props ) {
 				showLabel = {showLabel ?? false}
 				hideFieldIfEmpty = {hideFieldIfEmpty}
 				fieldType = {fieldType}
-			/>
-
-			<ProfileFieldsInspectorControl
-				fieldKey = {fieldKey}
-				setFieldKey = {setFieldKey}
-				fieldType = {fieldType}
-				fields = { fieldsofType }
-			/>
-			
-			<ProfileFieldsToolBar 
-				fieldKey = {fieldKey}
-				setFieldKey = {setFieldKey}
-				fieldType = {fieldType}
-				fields = { fieldsofType }
 			/>
 
 			{ children }

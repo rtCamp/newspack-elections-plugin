@@ -56,12 +56,21 @@ const Edit = (props) => {
 	const fieldsofType = useFieldsOfType(props, fieldType)
 
 	return (
-		<ProfileFieldsInspectorControl
-			fieldKey = {fieldKey}
-			setFieldKey = {setFieldKey}
-			fieldType = {fieldType}
-			fields = { fieldsofType }
-		/>
+		<>
+			<ProfileFieldsInspectorControl
+				fieldKey = {fieldKey}
+				setFieldKey = {setFieldKey}
+				fieldType = {fieldType}
+				fields = { fieldsofType }
+			/>
+
+			<ProfileFieldsToolBar 
+				fieldKey = {fieldKey}
+				setFieldKey = {setFieldKey}
+				fieldType = {fieldType}
+				fields = { fieldsofType }
+			/>
+		</>
 	)
 }
 
