@@ -7,7 +7,7 @@ import clsx from 'clsx';
  * WordPress dependencies
  */
 import { hasBlockSupport, getBlockDefaultClassName} from '@wordpress/blocks';
-import { useSelect } from '@wordpress/data';
+import { useSelect, useDispatch } from '@wordpress/data';
 import { store as blockEditorStore } from "@wordpress/block-editor"
 
 /**
@@ -50,11 +50,34 @@ const Edit = (props) => {
 	const {clientId} = props
 	const attributes = useSelect( (select) => select( blockEditorStore ).getBlockAttributes( clientId ) || {} )
 
+	const {updateBlockAttributes} = useDispatch(blockEditorStore)
 	
-	const {fieldKey, fieldType} = attributes
-	const { setFieldKey, isControlledByContext } =  useProfileFieldAttributes(props) 
+	const { setFieldKey : setFieldKeyAttribute, isControlledByContext, fieldKey, fieldType } =  useProfileFieldAttributes(props) 
 	const fieldsofType = useFieldsOfType(props, fieldType)
 
+	
+
+	const contextProvidingBlock = useSelect( (select) => {
+		const profileRows = select(blockEditorStore).getBlockParentsByBlockName(clientId, "govpack/profile-row")
+		const parentRowClientId = profileRows.at(profileRows.length - 1)
+		return select(blockEditorStore).getBlock(parentRowClientId)
+	} )
+
+	const updateContextProviderAttribute = (attrs) => {
+		updateBlockAttributes(contextProvidingBlock.clientId, attrs )
+	}
+
+
+	const setFieldKeyContext = (newValue) => {
+		updateContextProviderAttribute({"fieldKey" : newValue})
+	}
+
+	const setFieldKey = isControlledByContext ? setFieldKeyContext : setFieldKeyAttribute
+
+
+	if(props.name === "govpack/profile-label"){
+		console.log( props.name, fieldKey, fieldType, fieldsofType)
+	}
 	return (
 		<>
 			<ProfileFieldsInspectorControl
@@ -82,4 +105,5 @@ export default {
 	hasSupport( name ) {
 		return hasBlockSupport( name, featureName, false );
 	},
+	shareWithChildBlocks : true
 };

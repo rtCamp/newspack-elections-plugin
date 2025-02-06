@@ -47,6 +47,7 @@
 		"govpack/showLabel", 
 		"govpack/showLabels", 
 		"govpack/fieldKey",
+		"govpack/fieldType",
 		"postType"
 	]
 }

@@ -24,17 +24,12 @@ function Edit( props ) {
 		setAttributes({linkTextOverride : newValue })
 	}
 
-	console.log("linkTextOverride", linkTextOverride);
-	console.log("haslinkTextOverride", haslinkTextOverride);
-
 	const href =  value?.url ?? false
 	const label =  value?.linkText ?? false
 	const showValue = value !== null
 	const hasValue = !isEmpty(value)
 	
 	const linkText = (haslinkTextOverride ? linkTextOverride : value?.linkText)
-
-	console.log("linkText", linkText);
 
     return (
 		<>

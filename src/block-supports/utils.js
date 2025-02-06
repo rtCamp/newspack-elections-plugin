@@ -186,14 +186,17 @@ export function createGPBlockEditFilter( features ) {
 						shareWithChildBlocks,
 					} = feature;
 
-					/*
-					const shouldDisplayControls =
-						context[ mayDisplayControlsKey ] ||
-						( context[ mayDisplayParentControlsKey ] &&
-							shareWithChildBlocks );
-					*/
+					
+					const shouldDisplayControls = shareWithChildBlocks
+					//	context[ mayDisplayControlsKey ] ||
+					//	( context[ mayDisplayParentControlsKey ] &&
+					//		shareWithChildBlocks );
+					
 
-					if ( !hasSupport( props.name ) ) {
+					if (
+						! shouldDisplayControls &&
+						! hasSupport( props.name )
+					) {
 						return null;
 					}
 
