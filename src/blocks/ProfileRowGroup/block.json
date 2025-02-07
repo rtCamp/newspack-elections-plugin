@@ -73,6 +73,7 @@
 		"govpack/profile-row", 
 		"govpack/profile-field-link",
 		"govpack/profile-field-text", 
+		"govpack/profile-read-more", 
 		"core/read-more", 
 		"govpack/profile-separator", 
 		"govpack/profile-bio",

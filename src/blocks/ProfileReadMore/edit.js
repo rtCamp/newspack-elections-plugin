@@ -4,8 +4,10 @@ import {isEmpty} from "lodash"
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, HeadingLevelDropdown, AlignmentControl, BlockControls, InspectorControls, PlainText} from "@wordpress/block-editor"
+import { useBlockProps, HeadingLevelDropdown, AlignmentControl, BlockControls, InspectorControls, RichText} from "@wordpress/block-editor"
+
 import { store as coreStore, useEntityProp } from '@wordpress/core-data'
+
 import { useSelect } from '@wordpress/data';
 import { useMemo } from "@wordpress/element"
 import { ToggleControl, TextControl, PanelBody } from '@wordpress/components';
@@ -21,13 +23,17 @@ import { useProfileFieldAttributes } from './../../components/Profile';
 
 function Edit( props ) {
 
-	const { fieldKey, field, value, profileId, ...restField } =  useProfileFieldAttributes(props) 
+	const { fieldKey, field, profileId, profile, ...restField } =  useProfileFieldAttributes(props) 
 	const blockProps = useBlockProps()
-
 
 	const { context, attributes, setAttributes } = props
 	const { postType } = context
-	const { level, textAlign, levelOptions, isLink, linkTarget, rel } = attributes
+	const { textAlign, linkTarget, rel, linkText = "", prefixWithName, suffixWithName} = attributes
+
+	const updateLinkText = ( newValue ) => {
+		setAttributes({"linkText" : newValue})
+	}
+
 
 	const postTypeSupportsTitle = useSelect(
 		( select ) => {
@@ -36,25 +42,20 @@ function Edit( props ) {
 		[ postType ]
 	);
 
-	const [ link ] = useEntityProp( 'postType', postType, 'link', profileId );
-	const hasValue = !isEmpty(value)
+	// get the title from 
+	const [postTitle] = useEntityProp( 'postType', postType, 'title', profileId );
+	
+	const profileName = (postTypeSupportsTitle ? 
+		postTitle : 
+		profile?.profile?.name
+	) ?? null
 
-	if(!postTypeSupportsTitle){
-		return null
-	}
-
-	const TagName = level === 0 ? 'p' : `h${ level }`;
+	const separator = " ";
 
     return (
 		<>
 			<BlockControls group="block">
-				<HeadingLevelDropdown
-					value={ level }
-					options={ levelOptions }
-					onChange={ ( newLevel ) =>
-						setAttributes( { level: newLevel } )
-					}
-				/>
+				
 				<AlignmentControl
 					value={ textAlign }
 					onChange={ ( nextAlign ) => {
@@ -67,55 +68,67 @@ function Edit( props ) {
 				<PanelBody title={ __( 'Settings' ) }>
 					<ToggleControl
 						__nextHasNoMarginBottom
-						label={ __( 'Make title a link' ) }
-						onChange={ () =>
-							setAttributes( { isLink: ! isLink } )
+						label={ __( 'Open in new tab' ) }
+						onChange={ ( value ) =>
+							setAttributes( {
+								linkTarget: value
+									? '_blank'
+									: '_self',
+							} )
 						}
-						checked={ isLink }
+						checked={ linkTarget === '_blank' }
 					/>
-					{ isLink && (
-						<>
-							<ToggleControl
-								__nextHasNoMarginBottom
-								label={ __( 'Open in new tab' ) }
-								onChange={ ( value ) =>
-									setAttributes( {
-										linkTarget: value
-											? '_blank'
-											: '_self',
-									} )
-								}
-								checked={ linkTarget === '_blank' }
-							/>
-							<TextControl
-								__next40pxDefaultSize
-								__nextHasNoMarginBottom
-								label={ __( 'Link rel' ) }
-								value={ rel }
-								onChange={ ( newRel ) =>
-									setAttributes( { rel: newRel } )
-								}
-							/>
-						</>
-					) }
+					<TextControl
+						__next40pxDefaultSize
+						__nextHasNoMarginBottom
+						label={ __( 'Link rel' ) }
+						value={ rel }
+						onChange={ ( newRel ) =>
+							setAttributes( { rel: newRel } )
+						}
+					/>
+
+					<ToggleControl
+						__nextHasNoMarginBottom
+						label={ __( 'Include Profile Name Before?' ) }
+						onChange={ ( value ) =>
+							setAttributes( { "prefixWithName": value } )
+						}
+						checked={ prefixWithName }
+					/>
+
+					<ToggleControl
+						__nextHasNoMarginBottom
+						label={ __( 'Include Profile Name After?' ) }
+						onChange={ ( value ) =>
+							setAttributes( { "suffixWithName": value } )
+						}
+						checked={ suffixWithName }
+					/>
+
 				</PanelBody>
 			</InspectorControls>
 
-			<TagName {...blockProps}>
-				{isLink ? (
-					<a
-						href={ link }
-						target={ linkTarget }
-						rel={ rel }
-						onClick={ ( event ) => event.preventDefault() }
-					>
-					{ value }
-					</a>
-				) : (
-					<>{ value }</>
+			<a
+				target={ linkTarget }
+				rel={ rel }
+			>	
+				{prefixWithName && profileName && (
+					<>{profileName}{separator}</>
 				)}
-				
-			</TagName>
+				<RichText
+					identifier = "linkText"
+					tagName="span" // The tag here is the element output and editable in the admin
+					value={ linkText } // Any existing content, either from the database or an attribute default
+					allowedFormats={ [ 'core/bold', 'core/italic' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
+					onChange={ ( newText ) => updateLinkText( newText ) } // Store updated content as a block attribute
+					placeholder={ __( 'Read More' ) } // Display this text before any content has been added by the user
+				/>
+				{suffixWithName && profileName && (
+					<>{separator}{profileName}</>
+				)}
+			</a>
+			
 		</>
 	)
 }

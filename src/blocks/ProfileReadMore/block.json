@@ -81,6 +81,18 @@
 			"type": "string",
 			"default": "_self",
 			"role": "content"
+		},
+		"linkText": {
+			"type": "string",
+			"role": "content"
+		},
+		"prefixWithName": {
+			"type": "boolean",
+			"default" : false
+		},
+		"suffixWithName": {
+			"type": "boolean",
+			"default" : false
 		}
 	},
 	"ancestor": [ "govpack/profile-v2" ],

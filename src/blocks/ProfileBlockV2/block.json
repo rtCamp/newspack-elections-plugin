@@ -82,6 +82,7 @@
 		"core/spacer", 
 		"core/post-featured-image", 
 		"core/read-more", 
+		"core/post-excerpt", 
 		"core/group", 
 		"core/paragraph", 
 		"core/image", 
@@ -90,6 +91,7 @@
 		"govpack/profile-row", 
 		"govpack/profile-bio",
 		"govpack/profile-name", 
+		"govpack/profile-read-more", 
 		"govpack/profile-separator", 
 		"govpack/profile-field-text",
 		"govpack/profile-field-link",
@@ -103,6 +105,5 @@
 	"providesContext": {
 		"postId" : "postId",
 		"postType" : "postType"
-		
 	}
 }

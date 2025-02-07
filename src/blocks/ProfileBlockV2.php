@@ -97,7 +97,7 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile {
 
 		global $post;
 
-		if ( ! $attributes['profileId'] ) {
+		if ( ! $attributes['postId'] ) {
 			return;
 		}
 
@@ -105,7 +105,7 @@ class ProfileBlockV2 extends \Govpack\Blocks\Profile {
 			return false;
 		}
 
-		$this->profile = \Govpack\Profile\CPT::get_data( $attributes['profileId'] );
+		$this->profile = \Govpack\Profile\CPT::get_data( $attributes['postId'] );
 		
 		if ( ! $this->profile ) {
 			return;
