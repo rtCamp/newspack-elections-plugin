@@ -35,13 +35,13 @@ export const ProfileEdit = ( props ) => {
 	);
 	
 	const setProfile = (newProfileId) => {
-		setAttributes({"profileId" : newProfileId})
+		setAttributes({"postId" : newProfileId})
 	}
 	
 	const hasContextQuery = (context.queryId && context.postId && (context.postType === "govpack_profiles"))
 	
-	// If we have a profileId then dont show the selector
-	const hasSelectedProfile = attributes.profileId ?? hasContextQuery ?? false
+	// If we have a postId then dont show the selector
+	const hasSelectedProfile = attributes.postId ?? hasContextQuery ?? false
 	const showVariationSelector = (hasInnerBlocks.length === 0) && (hasVariations.length > 0);
 	const showProfileSelector = !hasSelectedProfile;
 	const showEdit = hasInnerBlocks && hasSelectedProfile;

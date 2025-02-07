@@ -202,10 +202,13 @@ class Govpack {
 		
 		$this->blocks()->register( new \Govpack\Blocks\ProfileBio( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileName( $this ) ); 
-		$this->blocks()->register( new \Govpack\Blocks\ProfileRow( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileReadMore( $this ) ); 
+		
 		$this->blocks()->register( new \Govpack\Blocks\ProfileRowGroup( $this ) );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileLabel( $this ) );
+		
+		$this->blocks()->register( new \Govpack\Blocks\ProfileRow( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileSeparator( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileLabel( $this ) );
 
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldText( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldLink( $this ) );

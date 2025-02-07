@@ -75,9 +75,6 @@ const Edit = (props) => {
 	const setFieldKey = isControlledByContext ? setFieldKeyContext : setFieldKeyAttribute
 
 
-	if(props.name === "govpack/profile-label"){
-		console.log( props.name, fieldKey, fieldType, fieldsofType)
-	}
 	return (
 		<>
 			<ProfileFieldsInspectorControl

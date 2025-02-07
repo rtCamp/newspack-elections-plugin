@@ -18,7 +18,7 @@ const hasTargetBlock = (blocks) => {
 	})
 }
 
-const dep0_1 = {
+const dep0_00 = {
 	"attributes": {
 		"preview" : {
 			"type": "boolean",
@@ -114,4 +114,4 @@ const dep0_1 = {
 	}
 }
 
-export default dep0_1
+export default dep0_00

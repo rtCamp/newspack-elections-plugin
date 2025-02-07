@@ -77,7 +77,6 @@
 	},
 	"ancestor": [ "govpack/profile-v2" ],
 	"usesContext": [
-		"govpack/profileId", 
 		"govpack/showLabels", 
 		"postType",
 		"postId"

@@ -129,7 +129,7 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 	 * Get the profileId from the context
 	 */
 	public function get_profile_id() {
-		return $this->get_from_context( 'profileId' );
+		return $this->get_from_context( 'postId' );
 	}
 
 	public function get_profile() {

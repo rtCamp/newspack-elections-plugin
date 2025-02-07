@@ -43,11 +43,11 @@
 	},
 	"ancestor": [ "govpack/profile-row", "govpack/profile-field" ],
 	"usesContext": [
-		"govpack/profileId", 
 		"govpack/showLabel", 
 		"govpack/showLabels", 
 		"govpack/fieldKey",
 		"govpack/fieldType",
-		"postType"
+		"postType",
+		"postId"
 	]
 }

@@ -24,7 +24,6 @@ function Edit( props ) {
 	const { fieldKey, field, value, profileId, ...restField } =  useProfileFieldAttributes(props) 
 	const blockProps = useBlockProps()
 
-	console.log("profileName", props.context)
 
 	const { context, attributes, setAttributes } = props
 	const { postType } = context

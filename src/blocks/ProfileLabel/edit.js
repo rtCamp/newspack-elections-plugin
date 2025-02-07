@@ -11,7 +11,7 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 	const blockProps = useBlockProps();
 
 	const { 
-		'govpack/profileId' : profileId, 
+		'postId' : profileId, 
 		'govpack/fieldKey' : profileFieldKey, 
 		'govpack/showLabel' : RowShowLabel = null,
 		'govpack/showLabels' : GroupShowLabels = null,

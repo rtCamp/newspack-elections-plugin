@@ -58,7 +58,6 @@
 	},
 	"ancestor": [ "govpack/profile-v2" ],
 	"usesContext": [
-		"govpack/profileId", 
 		"postType",
 		"postId",
 		"govpack/fieldKey"

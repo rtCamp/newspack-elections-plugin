@@ -51,7 +51,6 @@
 	},
 	"ancestor": [ "govpack/profile-v2" ],
 	"usesContext": [
-		"govpack/profileId",
 		"govpack/fieldKey",
 		"govpack/fieldType",
 		"govpack/showLabels",

@@ -8,7 +8,7 @@ export const ProfileSelector = ( props ) => {
 
 	const setProfile = (newProfileId) => {
 	
-		setAttributes({"profileId" : newProfileId})
+		setAttributes({"postId" : newProfileId})
 	}
 
 

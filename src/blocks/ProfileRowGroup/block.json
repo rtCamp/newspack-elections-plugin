@@ -59,7 +59,10 @@
 		}
 	},
 	"ancestor": [ "govpack/profile-v2" ],
-	"usesContext": ["govpack/profileId", "postType"],
+	"usesContext": [
+		"postType",
+		"postId"
+	],
 	"providesContext": {
 		"govpack/separatorStyle" : "separatorStyles",
 		"govpack/separatorColor" : "separatorColor",
@@ -70,6 +73,7 @@
 		"govpack/profile-row", 
 		"govpack/profile-field-link",
 		"govpack/profile-field-text", 
+		"core/read-more", 
 		"govpack/profile-separator", 
 		"govpack/profile-bio",
 		"core/post-title", 

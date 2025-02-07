@@ -32,7 +32,7 @@ import { usePostEditURL } from '../../../components/post-edit-url';
 
 
 const ProfileBlockControls = ({ attributes, setAttributes, ...props}) => {
-	const postEditURL = usePostEditURL(attributes.profileId)
+	const postEditURL = usePostEditURL(attributes.postId)
 
 	return (
 		<BlockControls>
@@ -209,11 +209,13 @@ const BlockHTMLElementControl = (props) => {
 }
 
 function ProfileBlockEdit( props ) {
-
 	const {attributes, setAttributes, isSelected: isSingleSelected, clientId, context} = props
 
 	const resizeProps = useResizeProps(props);
 	const {setProfile, resetProfile, profileId = null, profile, profileQuery} = useProfileAttributes(props)
+
+
+
     const ref = useRef(null);
 	const instanceId = useInstanceId( ProfileBlockEdit );
 	const blockProps = useBlockProps( { ref } );
@@ -237,15 +239,6 @@ function ProfileBlockEdit( props ) {
 		}
 	}, [ queryId, instanceId ] );
 
-	
-	useEffect( () => {
-		
-		if ( (postId !== null) && (!attributes.profileId) ) {
-			__unstableMarkNextChangeAsNotPersistent();
-			setAttributes( { profileId: postId } );
-		}
-	}, [ postId, profileId ] );
-	
 
 	const setTagName = ( nextTagValue ) => {
 		setAttributes( { tagName: nextTagValue } )

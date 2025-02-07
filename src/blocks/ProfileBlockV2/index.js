@@ -14,7 +14,8 @@ import { addFilter } from "@wordpress/hooks"
 import './view.scss';
 import { variations } from './variations';
 import {withRestrictedAllowedBlocks} from "./edit/restrict-allowed-blocks"
-import dep0_1 from './deprecated/v0.1';
+
+import deprecations from './deprecated';
 const { attributes, category, supports } = metadata;
 
 
@@ -44,9 +45,7 @@ registerBlockType( metadata.name, {
 	],
 	edit : Edit,
 	save: Save,
-	deprecated: [
-		dep0_1
-	]
+	deprecated: deprecations
 } );
 
 

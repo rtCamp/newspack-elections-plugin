@@ -1,8 +1,8 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "govpack/profile-name",
-	"title": "Profile Name",
+	"name": "govpack/profile-read-more",
+	"title": "Profile Read More",
     "editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./index.css",
@@ -10,7 +10,7 @@
 	"example" : {
 		"attributes" : {
 			"fieldType" : "block",
-			"fieldKey" : "postname"
+			"fieldKey" : "permalink"
 		}
 	},
 	"supports" : {
@@ -64,27 +64,13 @@
 	"attributes": {
 		"fieldKey" : {
 			"type": "string",
-			"default": "postname"
+			"default": "permalink"
 		},
 		"fieldType" : {
 			"type": "string",
 			"default" : "block"
 		},
-		"textAlign": {
-			"type": "string"
-		},
-		"level": {
-			"type": "number",
-			"default": 2
-		},
-		"levelOptions" : {
-			"type": "array"
-		},
-		"isLink": {
-			"type": "boolean",
-			"default": false,
-			"role": "content"
-		},
+		
 		"rel": {
 			"type": "string",
 			"attribute": "rel",
@@ -99,9 +85,6 @@
 	},
 	"ancestor": [ "govpack/profile-v2" ],
 	"usesContext": [
-		"govpack/fieldKey",
-		"govpack/fieldType",
-		"govpack/showLabels",
 		"postType", 
 		"postId"
 	]

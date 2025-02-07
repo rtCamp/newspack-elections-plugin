@@ -7,10 +7,10 @@ import { store as coreStore } from '@wordpress/core-data';
 function getProfileFields(select, context){
 	const {getEntityRecord} = select(coreStore)
 	const { 
-		'govpack/profileId' : profileId
+		postId
 	} = context
 
-	const record = getEntityRecord("postType", "govpack_profiles", profileId )
+	const record = getEntityRecord("postType", "govpack_profiles", postId )
 
 	return record?.profile || {}
 }

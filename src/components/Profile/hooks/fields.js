@@ -55,12 +55,15 @@ export const useProfileFields = (props) => {
 
 export const useProfileFieldAttributes = (props) => {
 
+	
 	const {context} = props
 	const fieldAttrs  = useFieldAttributes(props)
 	const profile = useProfileFromContext( context )
 	const value = profile?.profile?.[fieldAttrs?.fieldKey] ?? null;
 	const profileId = profile.id
 	
+
+
 	return {
 		profileId,
 		profile,

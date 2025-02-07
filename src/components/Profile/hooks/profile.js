@@ -15,35 +15,44 @@ const useContextOverAttribute = (props, contextKey = null, attributeKey = null, 
 	return [value, isControlledByContext, isControlledByAttribute]
 }
 
+const useAttributeOverContext = (props, contextKey = null, attributeKey = null, defaultValue = null) => {
+	
+	const {attributes, context} = props
+
+	const attrValue = attributes?.[attributeKey] ?? null
+	const contextValue = context?.[contextKey] ?? null
+
+	const value = attrValue ?? contextValue ?? defaultValue ?? null
+	const isControlledByAttribute = ( attrValue !== null)
+	const isControlledByContext = ((isControlledByAttribute === false) && (contextValue !== null))
+
+	return [value, isControlledByContext, isControlledByAttribute]
+}
+
 export const useProfileFromContext = ( context ) => {
 
 
+
 	let { 
-		'govpack/profileId' : profileId = null,
-		postId = null,
+		postId : profileId = null,
 		postType = false
 	} = context
 
 	// Must be within a block that provide a govpack profile context..
 	// Or an actual profile page
 	if(!profileId && postType !== "govpack_profiles"){
-		console.log("no profile id, not profile pt")
+		
 		return false;
 	} 
 
 	// At least one of profileId or postId exists in context
-	if(!profileId && !postId){
+	if(!profileId){
 	//	console.log("must have a profile id or a postId", profileId, postId, context)
 		return false;
 	}
 
-	// if using a postType the postId must be set 
-	if((postType === "govpack_profiles") && !postId && !profileId){
-		//console.log("Must have a postId if using the context postType")
-		return false;
-	}
 
-	profileId = profileId ?? postId ?? null;
+
 	
 	return useSelect( (select) => {
 		return select(coreDataStore).getEntityRecord("postType", "govpack_profiles", profileId ) ?? {}
@@ -56,27 +65,21 @@ export const useProfileId = (props) => {
 	const { context } = props
 
 	const { 
-		postType = null
+		postType = null,
+		queryId = null
 	} = context
 
-	// Get the profileId from context, falling back to attributes then null if needed.
-	// do the same with postId
+	const isQuery = (queryId && postType) ? true : false
+	const contextSource = useContextOverAttribute(props, "postId", "postId")
+	const attrSource = useAttributeOverContext(props, "postId", "postId")
 
-	const [profileId, isProfileControlledByContext, isProfileControlledByAttr] = useContextOverAttribute(props, "govpack/profileId", "profileId")
-	const [postId, isPostControlledByContext, isPostControlledByAttr] = useContextOverAttribute(props, "postId", "postId")
+	// if queryId exists and postType then we're inside a query loop
+	const source = isQuery ? contextSource : attrSource
 	
-
-	// postId will be invalid for a profile unless the postType is profiles
-	const canUsePostID = (postType === "govpack_profiles")
-
-	// set the value to the profileId, falling back to the postId if postid can be used
-	const value = profileId ?? (canUsePostID ? postId : null)
-	
-	const isControlledByContext = isProfileControlledByContext ?? (canUsePostID ? isPostControlledByContext : null)
-	const isControlledByAttribute = isProfileControlledByAttr ?? (canUsePostID ? isPostControlledByAttr : null)
+	const [profileId, isControlledByContext, isControlledByAttribute] = source
 
 	return {
-		profileId : value,
+		profileId,
 		isControlledByAttribute,
 		isControlledByContext
 	}
@@ -127,7 +130,8 @@ export const useProfileAttributes = ( props ) => {
 
 	const { setAttributes, attributes } = props
 
-	const profileId = useProfileId(props)?.profileId
+	const {profileId} = useProfileId(props)
+
 	const {profile, ...profileQuery} = useProfile(profileId)
 
 	const resetProfile = () => {
@@ -139,7 +143,7 @@ export const useProfileAttributes = ( props ) => {
 		if(newProfileId === null){
 			newProfileId = 0
 		}
-		setAttributes({"profileId" : newProfileId})
+		setAttributes({"postId" : newProfileId})
 	}
 
 	return {setProfile, resetProfile, profileId, profile, profileQuery}

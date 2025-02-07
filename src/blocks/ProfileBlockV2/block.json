@@ -55,12 +55,6 @@
 			"type": "boolean",
 			"default": false
 		},
-		"queryId": {
-			"type": "number"
-		},
-		"profileId": {
-			"type": "number"
-		},
 		"postId": {
 			"type": "number"
 		},
@@ -87,6 +81,7 @@
 	
 		"core/spacer", 
 		"core/post-featured-image", 
+		"core/read-more", 
 		"core/group", 
 		"core/paragraph", 
 		"core/image", 
@@ -106,9 +101,8 @@
 		"queryId"
 	],
 	"providesContext": {
-		"govpack/profileId" : "profileId",
-		"postType" : "postType",
-		"queryId": "queryId",
-		"postId": "profileId"
+		"postId" : "postId",
+		"postType" : "postType"
+		
 	}
 }

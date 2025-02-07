@@ -37,7 +37,7 @@
 	},
 	"ancestor": [ "govpack/profile-row-group" ],
 	"usesContext": [
-		"govpack/profileId", 
+		"postId",
 		"postType", 
 		"govpack/profileField", 
 		"govpack/separatorHeight",
