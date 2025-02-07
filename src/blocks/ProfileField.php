@@ -8,6 +8,8 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 	protected $attributes = [];
 	protected $context    = [];
 
+	protected $profile;
+
 	public function __construct( $plugin ) {
 		$this->plugin = $plugin;
 	}
@@ -53,7 +55,9 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 			return '';
 		}
 
-		return $this->get_profile()->value( $this->get_field()->slug() );
+		$value = $this->get_profile()->value( $this->get_field()->slug() );
+
+		return $value;
 	}
 	
 	/**
@@ -133,7 +137,14 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 	}
 
 	public function get_profile() {
-		return \Govpack\Profile\Profile::get( $this->get_profile_id() );
+
+		if ( isset( $this->profile ) ) {
+			return $this->profile;
+		}
+
+		$this->profile = \Govpack\Profile\Profile::get( $this->get_profile_id() );
+
+		return $this->profile;
 	}
 
 	public function has_profile_id(): bool {

@@ -19,8 +19,8 @@ class ProfileSeparator extends \Govpack\Blocks\ProfileField {
 	public string $block_name = 'govpack/profile-separator';
 	
 
-	private $show    = null;
-	private $profile = null;
+	private $show = null;
+
 	
 	protected $plugin;
 

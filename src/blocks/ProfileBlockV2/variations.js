@@ -1,5 +1,7 @@
 import {justifyLeft, layout, mediaAndText} from "@wordpress/icons"
 
+import { DEFAULT_TEMPLATE } from "./edit/default-template"
+
 export const variations = [
 	{
 		'name' : "gp-profile-full",
@@ -10,7 +12,8 @@ export const variations = [
 		attributes : {
 			width : "wide",
 			"backgroundColor":"base-2"
-		}
+		},
+		"innerBlocks": DEFAULT_TEMPLATE
 	},
 	{
 		'name' : "gp-profile-full-inline",

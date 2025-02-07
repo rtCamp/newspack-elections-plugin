@@ -8,6 +8,7 @@
 namespace Govpack\Blocks;
 
 use WP_Block;
+use WP_Term;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -65,7 +66,7 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	}
 	
 	public function create_taxonomy_field_variations(): array {
-		die( 'term variations' );
+
 
 		$taxonomies = get_object_taxonomies(
 			'govpack_profiles', // TODO: reference the const from the post_type file.
@@ -182,11 +183,11 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 		return $output;
 	}
 
-	public function term_span( $term ): string {
+	public function term_span( WP_Term $term ): string {
 		return $term->name;
 	}
 
-	public function term_link( $term ): string {
+	public function term_link( WP_Term $term ): string {
 		return sprintf( '<a href="%s">%s</a>', get_term_link( $term ), $term->name );
 	}
 }

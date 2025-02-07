@@ -24,7 +24,7 @@ export const ProfileVariationSelector = ( props ) => {
 		[ name ]
 	);
 
-	console.log(variations)
+	
 
 	const { replaceInnerBlocks, __unstableMarkNextChangeAsNotPersistent } =
 		useDispatch( blockEditorStore );
