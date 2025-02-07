@@ -1,6 +1,6 @@
 import { decodeEntities } from '@wordpress/html-entities';
 import {isURL} from "@wordpress/url";
-import { isArray, isEmpty, isNil } from 'lodash';
+import { isArray, isEmpty, isNil, isObject } from 'lodash';
 
 export function normalize_profile(profile){
 
@@ -56,7 +56,7 @@ export function normalize_profile(profile){
 		profile.meta?.name_suffix,
 	].join(" ")
 
-    return {
+    return deepTrim({
         title : decodeEntities(profile?.title?.rendered ?? profile?.title),
         featured_image : featured_image,
         featured_image_thumbnail :  featured_image?.source_url ?? null,
@@ -154,7 +154,22 @@ export function normalize_profile(profile){
 		},
 		links : generateLinks(),
 		link_services : profile.link_services ?? {}
-    }
+    })
+
+	function deepTrim(target){
+
+		if(typeof target === "string"){
+			return target.trim()
+		}
+
+		if(isObject(target)){
+			Object.keys(target).map( (key) => {
+				target[key] = deepTrim(target[key])
+			})
+
+			return target;
+		}
+	}
 
 	function generateLinks(){
 

@@ -1025,7 +1025,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 					],
 					'rss'              => [
 						'label' => 'RSS Feed URL',
-						'value' => $profile_raw_meta_data['rss'][0] ?? null,
+						'value' => trim( $profile_raw_meta_data['rss'][0] ) ?? null,
 					], 
 					'contact_form_url' => [
 						'label' => 'Contact Form URL',
