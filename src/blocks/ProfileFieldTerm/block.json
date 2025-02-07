@@ -42,7 +42,10 @@
 	},
 	"attributes": {
 		
-		
+		"fieldType" : {
+			"type": "string",
+			"default" : "taxonomy"
+		},
 		"separator": {
 			"type": "string",
 			"default": ", "

@@ -22,6 +22,7 @@ const dep0_0 = {
 	supports : {},
 	isEligible: (attributes, innerBlocks, data) => {
 
+
 		
 		if(
 			(attributes.fieldType === "taxonomy") ||

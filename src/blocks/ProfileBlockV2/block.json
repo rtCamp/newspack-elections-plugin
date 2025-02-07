@@ -13,7 +13,6 @@
 		"ariaLabel": true,
 		"color" : {
 			"background" : true,
-			"button": true,
 			"enableContrastChecker": true,
 			"gradients": true,
 			"heading": true,

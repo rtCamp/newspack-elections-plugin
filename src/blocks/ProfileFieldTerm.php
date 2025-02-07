@@ -142,18 +142,29 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	 */
 	public function get_field_key() {
 		$field_key = parent::get_field_key();
+		
+		if ( $field_key !== false ) {
+			return $field_key;
+		}
 
-		/**
+		/** 
 		 * ToDo:
 		 * - Check taxonomy has a value or throw an exception
 		 * - Throw an exception if more than 1 Field returned
 		 * - Throw an exception if no fields are found
 		 */
-		if ( $field_key === false ) {
-			$found_fields = $this->get_field_by_taxonomy( $this->attribute( 'taxonomy' ) );
-			$keys         = array_keys( $found_fields );
-			$field_key    = $keys[0];
+		
+		$taxonomy = $this->attribute( 'taxonomy' );
+		if ( ! $taxonomy ) {
+			return false;
 		}
+
+		gp_dump( $taxonomy );
+
+		$found_fields = $this->get_field_by_taxonomy( $taxonomy );
+		$keys         = array_keys( $found_fields );
+		$field_key    = $keys[0];
+		
 
 
 		return $field_key;
