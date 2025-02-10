@@ -10,11 +10,19 @@ export const DEFAULT_TEMPLATE = [
 			}
 		}
 		},[
-			[ "core/post-title", {
+			[ "govpack/profile-name", {
 				"isLink":true
 			}, []],
 			[ "govpack/profile-row", {
 				"fieldKey":"party",
+				"fieldType":"taxonomy"
+			}, []],
+			[ "govpack/profile-row", {
+				"fieldKey":"legislative_body",
+				"fieldType":"taxonomy"
+			}, []],
+			[ "govpack/profile-row", {
+				"fieldKey":"position",
 				"fieldType":"taxonomy"
 			}, []],
 			[ "govpack/profile-row", {

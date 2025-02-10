@@ -219,6 +219,9 @@ function ProfileBlockEdit( props ) {
     const ref = useRef(null);
 	const instanceId = useInstanceId( ProfileBlockEdit );
 	const blockProps = useBlockProps( { ref } );
+	const {children, ...innerBlockProps} = useInnerBlocksProps(blockProps, {
+		template : DEFAULT_TEMPLATE
+	})
 
 	const { __unstableMarkNextChangeAsNotPersistent } = useDispatch( blockEditorStore );
 
@@ -231,6 +234,7 @@ function ProfileBlockEdit( props ) {
 		postId = null
 	} = context;
 	
+	console.log("Profile Edit")
 
 	useEffect( () => {
 		if ( ! Number.isFinite( queryId ) ) {
@@ -264,9 +268,13 @@ function ProfileBlockEdit( props ) {
 
 
 	const showSpinner = profileQuery.isLoading
-	const showProfile = ((profileQuery.hasLoaded) && (profile))
+	const showProfile = profileQuery.hasLoaded === true
 
-	
+	console.log(
+		"showProfile", 
+		showProfile,
+		(profileQuery.hasLoaded && (profile)) 
+	)
 
 	return (
 		<>
@@ -277,6 +285,7 @@ function ProfileBlockEdit( props ) {
 			
 			{ showProfile && (
 				<TagName {...blockProps}>
+					
 					<ProfileBlockControls 
 						attributes = {attributes} 
 						setAttributes = {setAttributes} 
@@ -295,7 +304,7 @@ function ProfileBlockEdit( props ) {
 					
 					<ResizableBox {...resizeProps} >
 						<ProfileWrapper {...props}>
-							<InnerBlocks {...props}/>
+							{ children }
 						</ProfileWrapper>
 					</ResizableBox>
 				</TagName>
