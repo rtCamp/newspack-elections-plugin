@@ -124,10 +124,56 @@ defaultConfig = {
 	]
 }
 
+function getBlockDir(){
+	return path.join( __dirname, 'src', 'blocks' );
+}
+
+/**
+ * gets an array containiung a path for block's folder
+ * 
+ * @returns array
+ */
+
+function getBlocks(){
+	/**
+	 * Reads the whole directory then filters all directory 
+	 * entries by isDirectory. Finally return a path for
+	 * each block.
+	 */
+	const paths = fs.readdirSync( getBlockDir(), {"withFileTypes" : true} )
+		.filter( (dirent) => dirent.isDirectory())
+		.map(dirent => dirent.name )
+	
+	return paths
+}
+
+function getBlockViewScripts(){
+	
+
+	const blocks = getBlocks()
+		.filter( block => fs.existsSync( path.join( getBlockDir(), block, 'view.js' ) ) );
+
+console.log(blocks)
+	const viewBlocksScripts = blocks.reduce( ( viewBlocks, block ) => {
+		viewScriptPath = path.join( getBlockDir(), block, 'view.js' );
+		let fileExists = fs.existsSync( viewScriptPath );
+		if ( !fileExists ) {
+			// Try TS.
+			viewScriptPath = path.join( getBlockDir(), block, 'view.ts' );
+			fileExists = fs.existsSync( viewScriptPath );
+		}
+		if ( fileExists ) {
+			viewBlocks[ 'blocks/' + block + '/view' ] = viewScriptPath;
+		}
+		return viewBlocks;
+	}, {} );
+
+	return viewBlocksScripts
+}
+
 function getBlockEditorScripts(){
 
-	const blocksDir = path.join( __dirname, 'src', 'blocks' );
-	const blocks = fs.readdirSync( blocksDir ).filter( block => fs.existsSync( path.join( __dirname, 'src', 'blocks', block, 'index.js' ) ) );
+	const blocks = fs.readdirSync( getBlockDir() ).filter( block => fs.existsSync( path.join( __dirname, 'src', 'blocks', block, 'index.js' ) ) );
 
 	return {
 		"editor-blocks" : blockScripts( 'index', path.join( __dirname, 'src' ), blocks )
@@ -136,9 +182,11 @@ function getBlockEditorScripts(){
 
 function getEntryPointsv2(){
 
+	//console.log( getBlockViewScripts() )
 	return {
 		...getBlockEditorScripts(),
-		...getEntryPointsFromPackage()
+		...getEntryPointsFromPackage(),
+		...getBlockViewScripts()
 	}
 	
 }
