@@ -12,12 +12,21 @@ import { FieldBlockEdit } from '../../components/field-block-edit';
 import { useProfileFieldAttributes } from './../../components/Profile';
 
 
-
+import { useSelect } from "@wordpress/data";
+import { store as blockEditorStore } from "@wordpress/block-editor"
 
 
 function Edit( props ) {
 
+
+
 	const { fieldKey, value, field } =  useProfileFieldAttributes(props) 
+
+	const isPreviewMode = useSelect( ( select ) => {
+		return select( blockEditorStore ).getSettings().isPreviewMode;
+	}, [] );
+
+
 
 	const profileValue = () => {
 
@@ -41,7 +50,7 @@ function Edit( props ) {
 			
 			<FieldBlockEdit 
 				{...props} 
-				defaultValue = "{{No Field Value}}"
+				defaultValue = "No Field Value"
 				hasValue = {hasValue}
 			>
 				{FieldValue}

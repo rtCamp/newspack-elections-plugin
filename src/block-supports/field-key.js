@@ -47,6 +47,7 @@ export function addAttribute( settings ) {
 
 const Edit = (props) => {
 
+	
 	const {clientId} = props
 	const attributes = useSelect( (select) => select( blockEditorStore ).getBlockAttributes( clientId ) || {} )
 
@@ -89,6 +90,8 @@ const Edit = (props) => {
 				setFieldKey = {setFieldKey}
 				fieldType = {fieldType}
 				fields = { fieldsofType }
+				showFieldsWithEmptyValues = {true}
+				disableEmptyFields = {false}
 			/>
 		</>
 	)
@@ -96,7 +99,7 @@ const Edit = (props) => {
 
 export default {
 	edit: Edit,
-	attributeKeys: ["fieldKey"],
+	attributeKeys: ["fieldKey", "fieldType"],
 	useBlockProps,
 	addAttribute : addAttribute,
 	hasSupport( name ) {

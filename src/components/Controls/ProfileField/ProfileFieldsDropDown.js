@@ -13,7 +13,8 @@ export function ProfileFieldsDropDownMenu({
 	onSelectField,
 	fields,
 	selectedValue,
-	showFieldsWithEmptyValues = true
+	showFieldsWithEmptyValues = true,
+	disableEmptyFields = true
 } = props){
 
 	console.log( fields )
@@ -21,10 +22,10 @@ export function ProfileFieldsDropDownMenu({
 		label : f.label,
 		value : f.slug,
 		info: f.value,
-		disabled : ((!f.value || f.value === "") ? true : false)
+		disabled : ( (disableEmptyFields && (!f.value || f.value === "")) ? true : false)
 	}))
 
-	if(!showFieldsWithEmptyValues){
+	if(showFieldsWithEmptyValues === false && disableEmptyFields === true){
 		selectedOptions = selectedOptions.filter( (f) => !f.disabled)
 	}
 

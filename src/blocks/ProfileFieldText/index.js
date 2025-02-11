@@ -1,5 +1,5 @@
 import { registerBlockType, createBlock } from '@wordpress/blocks';
-import { postCategories as icon } from '@wordpress/icons';
+import { postExcerpt as icon } from '@wordpress/icons';
 import { __ } from "@wordpress/i18n"
 
 /**

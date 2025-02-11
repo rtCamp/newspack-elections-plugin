@@ -6,14 +6,26 @@ import {isEmpty} from "lodash"
 import { __ } from '@wordpress/i18n';
 
 import { PanelBody, PanelRow, TextControl } from '@wordpress/components';
-import { InspectorControls } from "@wordpress/block-editor"
+import { InspectorControls, store as blockEditorStore  } from "@wordpress/block-editor"
 
 
 import { FieldBlockEdit } from '../../components/field-block-edit';
 import { useProfileFieldAttributes } from "./../../components/Profile"
 
 
+import { useSelect } from "@wordpress/data";
+
 function Edit( props ) {
+
+	const isPreviewMode = useSelect( ( select ) => {
+		const { getSettings } = select( blockEditorStore );
+		const { isPreviewMode } = getSettings();
+		return {
+			isPreviewMode,
+		};
+	}, [] );
+
+	
 
 	const {fieldKey, value, profile } =  useProfileFieldAttributes(props) 
 	const { attributes, setAttributes } = props

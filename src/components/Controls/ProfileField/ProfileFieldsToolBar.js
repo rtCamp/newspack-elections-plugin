@@ -13,7 +13,9 @@ export const ProfileFieldsToolBar = (props) => {
 	const {
 		setFieldKey,
 		fieldKey,
-		fields = []
+		fields = [],
+		showFieldsWithEmptyValues = false,
+		disableEmptyFields = true
 	} = props
 	
 	return (
@@ -26,7 +28,8 @@ export const ProfileFieldsToolBar = (props) => {
 						onSelectField={ setFieldKey }
 						selectedValue={ fieldKey }
 						fields={ fields }
-						showFieldsWithEmptyValues = {false}
+						showFieldsWithEmptyValues = {showFieldsWithEmptyValues}
+						disableEmptyFields = {disableEmptyFields}
 				   />
 				   )}
 		  		</ToolbarDropdownMenu>

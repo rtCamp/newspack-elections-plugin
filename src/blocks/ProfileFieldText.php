@@ -67,7 +67,7 @@ class ProfileFieldText extends \Govpack\Blocks\ProfileField {
 					'fieldType' => $field->type->slug,
 					'fieldKey'  => $field->slug,
 				],
-				'isActive'    => [ 'meta_key' ],
+				'isActive'    => [ 'fieldKey' ],
 				'scope'       => [ 'inserter' ],
 				'icon'        => $field->type->variation_icon(),
 			];

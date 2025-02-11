@@ -151,7 +151,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 					'fieldType' => $type->slug,
 				],
 				'isActive'    => [ 'fieldType' ],
-				'scope'       => [ 'inserter', 'transform' ],
+				'scope'       => [],
 				'icon'        => $type->variation_icon(),
 				'innerBlocks' => $type->get_variation_inner_blocks(),
 			];

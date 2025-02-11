@@ -233,8 +233,7 @@ function ProfileBlockEdit( props ) {
 	const {
 		postId = null
 	} = context;
-	
-	console.log("Profile Edit")
+
 
 	useEffect( () => {
 		if ( ! Number.isFinite( queryId ) ) {
@@ -250,7 +249,6 @@ function ProfileBlockEdit( props ) {
 
 	useEffect( () => {
 		
-
 		if(!profile){
 			return
 		}
@@ -259,10 +257,10 @@ function ProfileBlockEdit( props ) {
 			return
 		}
 
-		//setAttributes({"metadata" : {
-		//	...attributes.metadata,
-		//	name: `Govpack Profile : ${profile.meta.name}`
-		//}})
+		setAttributes({"metadata" : {
+			...attributes.metadata,
+			name: `Profile : ${profile.meta.name}`
+		}})
 
 	}, [profile])
 
@@ -270,11 +268,7 @@ function ProfileBlockEdit( props ) {
 	const showSpinner = profileQuery.isLoading
 	const showProfile = profileQuery.hasLoaded === true
 
-	console.log(
-		"showProfile", 
-		showProfile,
-		(profileQuery.hasLoaded && (profile)) 
-	)
+
 
 	return (
 		<>
@@ -284,7 +278,7 @@ function ProfileBlockEdit( props ) {
 			) }
 			
 			{ showProfile && (
-				<TagName {...blockProps}>
+				<TagName {...innerBlockProps}>
 					
 					<ProfileBlockControls 
 						attributes = {attributes} 

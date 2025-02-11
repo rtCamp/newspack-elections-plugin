@@ -7,6 +7,12 @@
 	"editorStyle": "file:./index.css",
 	"style": "file:./index.css",
 	"category": "newspack-elections",
+	"example" : {
+		"attributes": {
+			"fieldType" : "link",
+			"fieldKey" : "campaign_x"
+		}
+	},
 	"supports" : {
 		"anchor": true,
 		"align": true,

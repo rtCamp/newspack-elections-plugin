@@ -23,7 +23,7 @@ class Link extends \Govpack\Fields\FieldType {
 	 * 
 	 * Formats the field can be output as
 	 */
-	public array $formats = [ 'text', 'link' ];
+	public array $formats = [ 'link' ];
 
 
 	public function get_variation_inner_blocks(): array {

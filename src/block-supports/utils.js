@@ -47,7 +47,7 @@ export const createGPBlockListBlockFilter = (features = []) => {
 
 	const withGPBlockListBlockSupportsHooks = createHigherOrderComponent(
 		(OriginalBlockListBlock) => ( props ) => {
-	
+		
 			const [ allWrapperProps, setAllWrapperProps ] = useState(
 				Array( features.length ).fill( undefined )
 			);
@@ -172,7 +172,7 @@ export function createGPBlockEditFilter( features ) {
 	const withGPBlockEditHooks = createHigherOrderComponent(
 		( OriginalBlockEdit ) => ( props ) => {
 			const context = useBlockEditContext();
-		
+			
 			// CAUTION: code added before this line will be executed for all
 			// blocks, not just those that support the feature! Code added
 			// above this line should be carefully evaluated for its impact on
@@ -187,14 +187,13 @@ export function createGPBlockEditFilter( features ) {
 					} = feature;
 
 					
-					const shouldDisplayControls = shareWithChildBlocks
+					//const shouldDisplayControls = shareWithChildBlocks
 					//	context[ mayDisplayControlsKey ] ||
 					//	( context[ mayDisplayParentControlsKey ] &&
 					//		shareWithChildBlocks );
 					
 
 					if (
-						! shouldDisplayControls &&
 						! hasSupport( props.name )
 					) {
 						return null;

@@ -5,7 +5,7 @@
 	"title": "Profile Bio",
     "editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./index.css",
+	"style": "file:./view.scss",
 	"category": "newspack-elections",
 	"example" : {
 		"attributes" : {
@@ -45,6 +45,17 @@
 		"fieldType" : {
 			"type": "string",
 			"default" : "text"
+		},
+		"showMoreOnNewLine" : {
+			"type": "boolean",
+			"default" : true
+		},
+		"bioLength" : {
+			"type": "number",
+			"default" : 55
+		},
+		"moreText" : {
+			"type": "string"
 		}
 	},
 	"ancestor": [ "govpack/profile-v2" ],

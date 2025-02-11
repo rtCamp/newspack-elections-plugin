@@ -172,8 +172,8 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new Field( 'phone_campaign', 'Campaign Phone Number' ),
 
 				new Field( 'fax_capitol', 'Capitol Fax Number' ),
-				new Field( 'fax_district', 'Capitol Fax Number' ),
-				new Field( 'fax_campaign', 'Capitol Fax Number' ),
+				new Field( 'fax_district', 'District Fax Number' ),
+				new Field( 'fax_campaign', 'Campaign Fax Number' ),
 
 				( new LinkField( 'website_personal', 'Personal Website URL', 'link' ) ),
 				( new LinkField( 'website_campaign', 'Campaign Website URL', 'link' ) ),
@@ -184,10 +184,9 @@ class CPT extends \Govpack\Abstracts\PostType {
 				
 				new Field( 'wikipedia', 'Wikipedia ID' ),
 				new Field( 'google_entity_id', 'Google Entity ID' ),
+				
 				new LinkField( 'gab', 'Gab', 'link' ),
 				new LinkField( 'rumble', 'Rumble', 'link' ),
-
-				( new LinkField( 'more', 'more', 'link' ) )->link_text( 'More About' ),
 
 				new Field( 'opensecrets_id', 'Open Secrets' ),
 				new Field( 'balletpedia_id', 'BallotPedia' ),
