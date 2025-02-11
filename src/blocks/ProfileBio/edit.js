@@ -149,7 +149,7 @@ function Edit( props ) {
 	const readMoreLink = (
 		<RichText
 			identifier="moreText"
-			className="wp-block-post-excerpt__more-link"
+			className={`${ blockClassName }__more-link`}
 			tagName="a"
 			aria-label={ __( '“Read more” link text' ) }
 			placeholder={ __( 'Add "read more" link text' ) }
