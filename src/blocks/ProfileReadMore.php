@@ -24,6 +24,9 @@ class ProfileReadMore extends \Govpack\Blocks\ProfileFieldText {
 		return $this->plugin->build_path( 'blocks/ProfileReadMore' );
 	}
 
+	public function show_block(): bool {
+		return true;
+	}
 	/**
 	 * Loads a block from display on the frontend/via render.
 	 *
