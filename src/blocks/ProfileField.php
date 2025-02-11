@@ -73,6 +73,7 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 	 * Determines if a block is shown during render
 	 */
 	public function show_block(): bool {
+		
 		return true;
 	}
 

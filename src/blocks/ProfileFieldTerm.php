@@ -159,14 +159,11 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 			return false;
 		}
 
-		gp_dump( $taxonomy );
 
 		$found_fields = $this->get_field_by_taxonomy( $taxonomy );
 		$keys         = array_keys( $found_fields );
 		$field_key    = $keys[0];
 		
-
-
 		return $field_key;
 	}
 
@@ -186,7 +183,7 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 		$terms = array_slice( $terms, 0, $term_limit );
 
 		foreach ( $terms as $term ) {
-			$output[] = $display_links ? $this->term_span( $term ) : $this->term_link( $term );
+			$output[] = $display_links ? $this->term_link( $term ) : $this->term_span( $term );
 		}
 
 		$output = implode( $separator, $output );

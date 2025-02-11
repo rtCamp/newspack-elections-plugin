@@ -32,12 +32,21 @@ class ProfileFieldText extends \Govpack\Blocks\ProfileField {
 	 * @param WP_Block $template The filename of the template-part to use.
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
-	
+		
 		?>
 		<div <?php echo get_block_wrapper_attributes(); ?>>
 			<?php echo $this->output(); ?>
 		</div>
 		<?php
+	}
+
+	public function show_block(): bool {
+		
+		if ( $this->get_value() === '' ) {
+			return false;
+		}
+
+		return true;
 	}
 
 
