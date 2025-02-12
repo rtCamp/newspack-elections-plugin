@@ -14,9 +14,15 @@ export const usePanel = () => {
 		}
 	} )
 
-	const {editPost} = useDispatch("core/editor");
+	const {editEntityRecord} = useDispatch("core");
 	const setPostMeta = (newMeta) => {
-		editPost( { meta: newMeta } )
+		console.log("setPostMeta", newMeta)
+		const res = editEntityRecord( 'postType', req.postType, req.postId, { meta: {
+			...req.meta,
+			...newMeta 
+		} } )
+
+		console.log("setPostMeta Result", res)
 	}
 
 	const setTerm = async (taxonomy, term ) => {

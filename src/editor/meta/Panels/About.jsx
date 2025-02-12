@@ -114,7 +114,7 @@ export const AboutPanel = (props) => {
 			<PanelRow>
                 <PanelTextareaControl meta={meta} label = "Endorsements" meta_key="endorsements" onChange={setPostMeta} />
             </PanelRow>
-
+			{/** 
 			<PanelRow>
                 <PanelDateControl meta={meta} label = "Date of Birth" meta_key="date_of_birth" onChange={setPostMeta} />
             </PanelRow>
@@ -122,7 +122,7 @@ export const AboutPanel = (props) => {
 			<PanelRow>
                 <PanelDateControl meta={meta} label = "Date of Death" meta_key="date_of_death" onChange={setPostMeta} />
             </PanelRow>
-
+				*/}
 			
 
 			{/** 

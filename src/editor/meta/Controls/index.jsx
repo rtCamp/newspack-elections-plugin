@@ -22,8 +22,10 @@ export const PanelFieldset = ({legend = null, children}) => {
 
 const DefaultControl = (props, Control) => {
 	const {onChange, meta, ...restProps} = props
+
     return (
         <Control
+			__nextHasNoMarginBottom = {true}
             label = {props.label}
             value={ props.meta?.[props.meta_key] ?? "" }
             onChange={ ( value ) => {
