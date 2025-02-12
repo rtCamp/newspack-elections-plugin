@@ -2,7 +2,7 @@ const path = require( 'path' );
 const fs = require( 'fs' );
 
 let defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
-const { getWebpackEntryPoints, getPackageProp, hasPackageProp,getWordPressSrcDirectory } = require("@wordpress/scripts/utils")
+const { getWebpackEntryPoints, getPackageProp, hasPackageProp, getProjectSourcePath} = require("@wordpress/scripts/utils")
 
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { optimize } = require('svgo');
@@ -108,7 +108,7 @@ defaultConfig = {
 		...defaultConfig.plugins,
 		new CopyWebpackPlugin({
 			patterns: [{
-				context: getWordPressSrcDirectory(),
+				context: getProjectSourcePath(),
 				from : "assets/icons/**/*.svg",
 				to : "icons/[name][ext]",
 				transform : {

@@ -2,7 +2,7 @@
  * External dependencies
  */
  import InputMask from '@mona-health/react-input-mask';
- import classnames from 'classnames';
+ import clsx from 'clsx';
 
 
  /**
@@ -36,7 +36,7 @@
 		 onChange( event.target.value );
 	 
 	let inputBaseClassName = 'components-text-control__input'
-	const inputClassName = classnames(
+	const inputClassName = clsx(
 		inputBaseClassName,
 		{
 			[`${inputBaseClassName}--invalid`]: (!props.isValid && props.isTouched)

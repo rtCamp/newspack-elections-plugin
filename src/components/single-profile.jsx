@@ -2,7 +2,7 @@
 /**
  * External dependencies
  */
- import classnames from 'classnames'; 
+ import clsx from 'clsx'; 
 
  /**
  * Internal Dependencies
@@ -193,7 +193,7 @@ const SingleProfile = (props) => {
 			return null
 		}
 		
-		const classes = classnames(`${blockClassName}__line`, {
+		const classes = clsx(`${blockClassName}__line`, {
 			"govpack-line" : true,
 			"govpack-line--labels-above" : labelsAbove,
 			"govpack-line--labels-beside" : !labelsAbove,
@@ -218,7 +218,7 @@ const SingleProfile = (props) => {
 		const href= prependHTTPS(props.href)
 
         return (
-            <li className={classnames(`${blockClassName}__contact`, {
+            <li className={clsx(`${blockClassName}__contact`, {
                 [`${blockClassName}__contact--hide-label`] : true
             })}>
                 <a href={href} className={`${blockClassName}__link`} title={props.tooltip ?? props.label ?? ""}>
@@ -361,7 +361,7 @@ const SingleProfile = (props) => {
 					</ul>
 
 					{ props.data.address && props.show.showAddress && (
-						<address className={classnames(`${blockClassName}__contact`, {
+						<address className={clsx(`${blockClassName}__contact`, {
 							[`${blockClassName}__contact--hide-label`] : true,
 							[`${blockClassName}__contact--address`] : true
 						})}>
@@ -498,7 +498,7 @@ const SingleProfile = (props) => {
 
 		
     return (
-       <div className= {classnames(`${blockClassName}__container`, {
+       <div className= {clsx(`${blockClassName}__container`, {
             [`${blockClassName}__container--right`] : (avatarAlignment === "right"),
             [`${blockClassName}__container--left`] : (avatarAlignment === "left"),
             [`${blockClassName}__container--center`] : (className === "is-styled-center"),
