@@ -1,0 +1,100 @@
+import { PanelRow } from "@wordpress/components";
+
+import {GovPackSidebarPanel} from "./../../../components/sidebar-panel"
+import {PanelTextControl, PanelDateControl, PanelTextareaControl, PanelFieldset, PanelUrlControl} from "./../Controls"
+
+const fieldTypes = {
+	text : PanelTextControl,
+	textarea : PanelTextareaControl,
+	date : PanelDateControl,
+	url : PanelUrlControl,
+}
+
+
+const MetaFieldsPanel = (props) => {
+
+	const { 
+		label,
+		fields = [],
+		groupFields = false
+	 } = props
+
+
+	const fieldsWithComponents = fields.map( (field) => {
+		return {
+			...field,
+			Component : fieldTypes[field.type ?? "text"]
+		}
+	} )
+
+	let renderFields = {grouped : [], ungrouped : []}
+
+	if(groupFields) {
+		renderFields = fieldsWithComponents.reduce( (accumulator, field) => {
+
+			if(!Object.hasOwn(accumulator, "grouped")){
+				accumulator.grouped = []
+			}
+
+			if(!Object.hasOwn(accumulator, "ungrouped")){
+				accumulator.ungrouped = []
+			}
+
+			// No group property on the field save to ungrouped and return out of this loop
+			if(Object.hasOwn(field, "group") === false){
+				accumulator.ungrouped.push(field)
+				return accumulator
+			}
+
+			// create an array of fields for a specific group
+			if(!Object.hasOwn(accumulator.grouped, field.group)){
+				accumulator.grouped[field.group] = []
+			}
+
+			accumulator.grouped[field.group].push(field)
+
+			return accumulator
+
+		}, renderFields )
+	} else {
+		renderFields.ungrouped = fieldsWithComponents
+	}
+
+	console.log("renderFields", renderFields)
+	return (
+        <GovPackSidebarPanel 
+            title={label}
+            name="gov-profile-about"
+        >
+			{(groupFields) && ( <>
+				{ console.log(renderFields.grouped, Object.keys(renderFields.grouped) ) }
+				{ Object.keys(renderFields.grouped).map( (groupKey) => (
+					<PanelFieldset legend={groupKey} key={`gp-panel-fieldset-${groupKey}`}>
+						
+						{ renderFields.grouped[groupKey].map( ({Component, ...field}, index) => (
+							<Component 
+								label = { field["label"] } 
+								meta_key = { field["meta_key"] }
+								onChange = { null } 
+							/>
+						))}
+						
+					</PanelFieldset>
+				)) }
+			</>)}
+			{ !groupFields && fieldsWithComponents.map( ({Component, ...field}, index) => (
+				<PanelRow key = {`gp-panel-field-row-about-${index}`}>
+					<Component 
+						label = { field["label"] } 
+						meta_key = { field["meta_key"] }
+						onChange = { null } 
+					/>
+				</PanelRow>
+			))}
+		</GovPackSidebarPanel>
+    )
+
+}
+
+export { MetaFieldsPanel }
+export default MetaFieldsPanel

@@ -7,7 +7,7 @@ export const usePanel = () => {
 	const {editEntityRecord} = useDispatch("core");
 
 	const {postType, postId} = useSelect( (select) => {
-		console.log("editorStore select")
+
 		return {
 			postType : select( editorStore ).getCurrentPostType(),
 			postId : select( editorStore ).getCurrentPostId()
@@ -15,7 +15,7 @@ export const usePanel = () => {
 	})
 
 	const meta = useSelect( (select) => {
-		console.log("coreStore select", [postId, postType])
+		
 		return select( coreStore ).getEditedEntityRecord('postType', postType, postId)?.meta ?? {}
 	}, [postId, postType] )
 
