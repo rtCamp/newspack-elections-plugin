@@ -96,6 +96,20 @@ class CPT extends \Govpack\Abstracts\PostType {
 		add_action( 'rest_api_init', [ __CLASS__, 'register_rest_endpoint' ] );
 		
 		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_x_meta_fields_to_twitter' ], 10, 5 );
+
+		add_action( 'load-post.php', [ __CLASS__, 'initialize_editor_changes' ] );
+		add_action( 'load-post-new.php', [ __CLASS__, 'initialize_editor_changes' ] );
+	}
+
+	public static function initialize_editor_changes() {
+		// globals
+		global $typenow;
+
+		if ( $typenow !== self::CPT_SLUG ) {
+			return;
+		}
+
+		add_action( 'add_meta_boxes', [ __CLASS__, 'modify_meta_boxes' ], 10, 2 );
 	}
 
 	public static function fields() {
@@ -184,7 +198,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 				
 				new Field( 'wikipedia', 'Wikipedia ID' ),
 				new Field( 'google_entity_id', 'Google Entity ID' ),
-				
+
 				new LinkField( 'gab', 'Gab', 'link' ),
 				new LinkField( 'rumble', 'Rumble', 'link' ),
 
@@ -563,8 +577,9 @@ class CPT extends \Govpack\Abstracts\PostType {
 	 * Register Meta data for the post in the REST API 
 	 */
 	public static function register_post_meta(): void {
-
+		
 		foreach ( self::get_meta_keys() as $key ) {
+			
 			self::register_meta( $key );
 		}
 	}   
@@ -584,7 +599,6 @@ class CPT extends \Govpack\Abstracts\PostType {
 					'show_in_rest'  => true,
 					'single'        => true,
 					'type'          => 'string',
-					'default'       => ' ',
 					'auth_callback' => function () {
 						return current_user_can( 'edit_posts' );
 					},
@@ -1123,6 +1137,14 @@ class CPT extends \Govpack\Abstracts\PostType {
 	 */
 	public static function default_profile_content(): string {
 		return '<!-- wp:govpack/profile-self {"showName":true} /-->';
+	}
+
+	public static function remove_custom_fields_metabox() {
+		remove_meta_box( 'postcustom', false, 'normal' );
+	}
+
+	public static function modify_meta_boxes( $post_type, $post ) {
+		self::remove_custom_fields_metabox();
 	}
 }
 
