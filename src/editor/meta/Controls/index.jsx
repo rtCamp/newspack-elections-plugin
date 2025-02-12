@@ -3,9 +3,12 @@ import Moment from "moment"
 
 import { TextControl, TextareaControl, DatePicker, SelectControl, Spinner, Dropdown, Button } from "@wordpress/components";
 import { compose } from "@wordpress/compose";
-import { withSelect, } from "@wordpress/data";
+import { withSelect, useSelect } from "@wordpress/data";
+import { useEntityId, useEntityProp } from "@wordpress/core-data";
+import {store as editorStore} from "@wordpress/editor"
 import { dateI18n, getSettings } from "@wordpress/date"
 import {MaskedTextControl} from "./MaskedTextControl"
+
 
 
 export const PanelFieldset = ({legend = null, children}) => {
@@ -21,15 +24,20 @@ export const PanelFieldset = ({legend = null, children}) => {
 }
 
 const DefaultControl = (props, Control) => {
-	const {onChange, meta, ...restProps} = props
+	const {onChange = null, value, ...restProps} = props
+
+	//const postId = useEntityId("postType", "govpack_profiles")
+	//const [meta, setMeta] = useEntityProp("postType", "govpack_profiles", "meta", postId)
+	const postId = useEntityId("postType", "govpack_profiles")
+	const [meta, setMeta] = useEntityProp("postType", "govpack_profiles", "meta", postId)
 
     return (
         <Control
 			__nextHasNoMarginBottom = {true}
             label = {props.label}
-            value={ props.meta?.[props.meta_key] ?? "" }
+            value={ meta[props.meta_key] }
             onChange={ ( value ) => {
-                onChange( { [props.meta_key]: value } )
+                setMeta( { [props.meta_key]: value } )
             }}
 			{...restProps}
         />
@@ -48,6 +56,7 @@ export const PanelUrlControl = (props) => {
 }
 
 export const PanelTextControl = (props) => {
+	console.log("render text control", props)
 	return DefaultControl(props, TextControl)
 }
 

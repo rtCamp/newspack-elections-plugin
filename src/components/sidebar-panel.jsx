@@ -1,4 +1,4 @@
-import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
+import { PluginDocumentSettingPanel } from '@wordpress/editor';
 import { Fragment } from "@wordpress/element";
 
 import { compose } from "@wordpress/compose";

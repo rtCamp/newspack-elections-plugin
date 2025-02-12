@@ -6,7 +6,7 @@ import {PanelTextControl, PanelDateControl, PanelTextareaControl} from "./../Con
 
 import {usePanel} from './usePanel'
 
-
+import { useEntityId, useEntityProp } from "@wordpress/core-data";
 
 const changeContributesToName = (change) => {
 
@@ -53,92 +53,91 @@ const assembleName = (pieces) => {
 	return Object.values(pieces).join(" ").trim()
 }
 
+const fieldTypes = {
+	text : PanelTextControl,
+	textarea : PanelTextareaControl,
+	date : PanelDateControl,
+}
 
 export const AboutPanel = (props) => {
 
-	const {meta, setPostMeta} = usePanel()
+
+	const fields = [
+		{
+			label : "Name",
+			meta_key: "name"
+		},{
+			label : "Prefix",
+			meta_key: "name_prefix"
+		},{
+			label: "First Name",
+			meta_key: "name_first"
+		},{
+			label: "Middle Name",
+			meta_key: "name_middle"
+		},{
+			label: "Last Name",
+			meta_key: "name_last"
+		},{
+			label: "Suffix",
+			meta_key: "name_suffix"
+		},{
+			label: "Nickname",
+			meta_key: "nickname"
+		},{
+			label: "Occupation",
+			meta_key: "occupation"
+		},{
+			label: "Education",
+			meta_key: "education"
+		},{
+			label: "Gender",
+			meta_key: "gender"
+		},{
+			label: "Race",
+			meta_key: "race"
+		},{
+			label: "Ethnicity",
+			meta_key: "ethnicity"
+		},{
+			label: "Endorsements",
+			meta_key: "endorsements",
+			type : "textarea"
+		},{
+			label: "District",
+			meta_key: "district"
+		},{
+			label: "Date of Birth",
+			meta_key: "date_of_birth",
+			type : "date"
+		},{
+			label: "Date of Death",
+			meta_key: "date_of_death",
+			type : "date"
+		}
+	]
+
+	const fieldsWithComponents = fields.map( (field) => {
+		return {
+			...field,
+			Component : fieldTypes[field.type ?? "text"]
+		}
+	} )
 
     return (
         <GovPackSidebarPanel 
             title="About"
             name="gov-profile-about"
         >
-			<PanelRow>
-                <PanelTextControl meta={meta} label = "Name" meta_key="name" onChange={setPostMeta} />
-            </PanelRow>
-
-			<PanelRow>
-                <PanelTextControl meta={meta} label = "Prefix" meta_key="name_prefix" onChange={setPostMeta} />
-            </PanelRow>
-
-            <PanelRow>
-                <PanelTextControl meta={meta} label = "First Name" meta_key="name_first" onChange={setPostMeta} />
-            </PanelRow>
-
-			<PanelRow>
-                <PanelTextControl meta={meta} label = "Middle Name" meta_key="name_middle" onChange={setPostMeta} />
-            </PanelRow>
-
-            <PanelRow>
-                <PanelTextControl meta={meta} label = "Last Name" meta_key="name_last" onChange={setPostMeta} />
-            </PanelRow>
-
-			<PanelRow>
-                <PanelTextControl meta={meta} label = "Suffix" meta_key="name_suffix" onChange={setPostMeta} />
-            </PanelRow>
-
-			<PanelRow>
-                <PanelTextControl meta={meta} label = "Nickname" meta_key="nickname" onChange={setPostMeta} />
-            </PanelRow>
-
-			<PanelRow>
-                <PanelTextControl meta={meta} label = "Occupation" meta_key="occupation" onChange={setPostMeta} />
-            </PanelRow>
-
-			<PanelRow>
-                <PanelTextControl meta={meta} label = "Education" meta_key="education" onChange={setPostMeta} />
-            </PanelRow>
-
-			<PanelRow>
-                <PanelTextControl meta={meta} label = "Gender" meta_key="gender" onChange={setPostMeta} />
-            </PanelRow>
-
-			<PanelRow>
-                <PanelTextControl meta={meta} label = "Race" meta_key="race" onChange={setPostMeta} />
-            </PanelRow>
-
-			<PanelRow>
-                <PanelTextControl meta={meta} label = "Ethnicity" meta_key="ethnicity" onChange={setPostMeta} />
-            </PanelRow>
-
-			<PanelRow>
-                <PanelTextareaControl meta={meta} label = "Endorsements" meta_key="endorsements" onChange={setPostMeta} />
-            </PanelRow>
-			{/** 
-			<PanelRow>
-                <PanelDateControl meta={meta} label = "Date of Birth" meta_key="date_of_birth" onChange={setPostMeta} />
-            </PanelRow>
-
-			<PanelRow>
-                <PanelDateControl meta={meta} label = "Date of Death" meta_key="date_of_death" onChange={setPostMeta} />
-            </PanelRow>
-				*/}
-			
-
-			{/** 
-			<PanelRow>
-                <PanelTaxonomyControl 
-					taxonomy="govpack_party" 
-					label = "Party"
-					onChange = {setSingleTerm}
-				/>
-            </PanelRow>
-
-			<PanelRow>
-                <PanelTextControl meta={meta} label = "District" meta_key="district" onChange={setPostMeta} />
-            </PanelRow>
-
-				*/}
-        </GovPackSidebarPanel>
+			{ fieldsWithComponents.map( ({Component, ...field}, index) => (
+				<PanelRow key = {`gp-panel-field-row-about-${index}`}>
+					<Component 
+						label = { field["label"] } 
+						meta_key = { field["meta_key"] }
+						onChange = { null } 
+					/>
+				</PanelRow>
+			))}
+		</GovPackSidebarPanel>
     )
 }

@@ -5,11 +5,14 @@ import "./view.scss"
  
 const GovPackProfileSidebar = () => (
     <>
+		{console.log("Sidebar Render")}
         <AboutPanel />
+		{/** 
         <OfficePanel />
         <CommunicationsPanel />
 		<SocialPanel />
 		<MetadataIdsPanel />
+		*/}
     </>
 )
 

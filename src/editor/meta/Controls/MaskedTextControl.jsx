@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
- import InputMask from 'react-input-mask';
+ import InputMask from '@mona-health/react-input-mask';
  import classnames from 'classnames';
 
 
@@ -45,12 +45,13 @@
 
 	 return (
 		 <BaseControl
-			 label={ label }
-			 hideLabelFromVision={ hideLabelFromVision }
-			 id={ id }
-			 help={ help }
-			 className={ className }
-		 >
+			__nextHasNoMarginBottom = {true}
+			label={ label }
+			hideLabelFromVision={ hideLabelFromVision }
+			id={ id }
+			help={ help }
+			className={ className }
+		>
 			 <InputMask
 			 	
 				className={inputClassName}
@@ -59,7 +60,7 @@
 				value={ value }
 				onChange={ onChangeValue }
 				aria-describedby={ !! help ? id + '__help' : undefined }
-				inputRef={ ref }
+				ref={ ref }
 				{ ...maskProps }
 				{ ...additionalProps }
 
@@ -68,28 +69,7 @@
 	 );
  }
  
- /**
-  * TextControl components let users enter and edit text.
-  *
-  *
-  * @example
-  * ```jsx
-  * import { TextControl } from '@wordpress/components';
-  * import { useState } from '@wordpress/element';
-  *
-  * const MyTextControl = () => {
-  *   const [ className, setClassName ] = useState( '' );
-  *
-  *   return (
-  *     <TextControl
-  *       label="Additional CSS Class"
-  *       value={ className }
-  *       onChange={ ( value ) => setClassName( value ) }
-  *     />
-  *   );
-  * };
-  * ```
-  */
+
  export const MaskedTextControl = forwardRef( UnforwardedTextControl );
- 
+
  export default MaskedTextControl;

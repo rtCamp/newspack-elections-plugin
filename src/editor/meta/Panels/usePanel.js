@@ -4,25 +4,27 @@ import {store as coreStore} from "@wordpress/core-data"
 
 export const usePanel = () => {
 
-	const req = useSelect( (select) => {
-		const postType = select( editorStore ).getCurrentPostType()
-		const postId = select( editorStore ).getCurrentPostId()
-		return { 
-			meta :select( coreStore ).getEditedEntityRecord('postType', postType, postId)?.meta ?? {}, 
-			postId,
-			postType
-		}
-	} )
-
 	const {editEntityRecord} = useDispatch("core");
+
+	const {postType, postId} = useSelect( (select) => {
+		console.log("editorStore select")
+		return {
+			postType : select( editorStore ).getCurrentPostType(),
+			postId : select( editorStore ).getCurrentPostId()
+		}
+	})
+
+	const meta = useSelect( (select) => {
+		console.log("coreStore select", [postId, postType])
+		return select( coreStore ).getEditedEntityRecord('postType', postType, postId)?.meta ?? {}
+	}, [postId, postType] )
+
+	
 	const setPostMeta = (newMeta) => {
-		console.log("setPostMeta", newMeta)
-		const res = editEntityRecord( 'postType', req.postType, req.postId, { meta: {
-			...req.meta,
+		editEntityRecord( 'postType', postType, postId, { meta: {
+			...meta,
 			...newMeta 
 		} } )
-
-		console.log("setPostMeta Result", res)
 	}
 
 	const setTerm = async (taxonomy, term ) => {
@@ -35,9 +37,9 @@ export const usePanel = () => {
 	}
 
 	return {
-		...req,
+		//...req,
 		setPostMeta,
-		setTerm
+		//setTerm
 	}
 }
 
