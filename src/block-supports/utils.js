@@ -52,7 +52,7 @@ export const createGPBlockListBlockFilter = (features = []) => {
 				Array( features.length ).fill( undefined )
 			);
 
-			{ console.log("render OriginalBlockListBlock", props) }
+			
 
 			return [
 				...features.map( ( feature, i ) => {
@@ -82,7 +82,7 @@ export const createGPBlockListBlockFilter = (features = []) => {
 						return null;
 					}
 
-					console.log("neededProps", neededProps)
+					
 					return (
 						<BlockPropsPure
 							// We can use the index because the array length

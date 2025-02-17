@@ -19,7 +19,7 @@ class LinkField extends Field {
 	 * 
 	 * Array of property names that will be included when transformed to an array
 	 */
-	protected array $to_array = [ 'slug', 'label', 'type', 'group', 'meta_key', 'link_text' ];
+	protected array $to_array = [ 'slug', 'label', 'type', 'group', 'meta_key', 'link_text', 'allow_block' ];
 
 	/**
 	 * Construct the profile field

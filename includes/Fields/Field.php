@@ -62,7 +62,7 @@ class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interface
 	 * 
 	 * Array of property names that will be included when transformed to an array
 	 */
-	protected array $to_array = [ 'slug', 'label', 'type', 'group', 'meta_key', 'source' ];
+	protected array $to_array = [ 'slug', 'label', 'type', 'group', 'meta_key', 'source', 'allow_block' ];
 
 	/**
 	 * Allow Block Variation

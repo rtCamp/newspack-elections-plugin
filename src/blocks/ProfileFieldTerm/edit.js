@@ -87,7 +87,7 @@ function EditTermBlock( props ) {
 	const { attributes, setAttributes, context } = props
 	const blockProps = useBlockProps();
 
-	console.log("PROPS", props)
+
 	const { 
 		displayLinks,
 		separator,

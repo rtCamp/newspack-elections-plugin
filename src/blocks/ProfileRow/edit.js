@@ -179,7 +179,6 @@ function Edit( props ) {
 	const shouldDimField = (hideFieldIfEmpty && (!hasValue) && (!isBlockSelected) && (!hasSelectedInnerBlock) )
 	className = clsx(className, {"gp-dim-field" : shouldDimField })
 
-	console.log("innerBlocksProps", innerBlocksProps)
     return (
 		<div {...innerBlocksProps} className={className}>
 			<MetaInspectorControl

@@ -27,7 +27,9 @@ function Edit( props ) {
 
 	
 
-	const {fieldKey, value, profile } =  useProfileFieldAttributes(props) 
+	const {fieldKey, value, profile, field } =  useProfileFieldAttributes(props) 
+
+	console.log("field", field)
 	const { attributes, setAttributes } = props
 	const { linkTextOverride = "" } = attributes
 	const haslinkTextOverride = (linkTextOverride !== undefined && linkTextOverride !== "")
