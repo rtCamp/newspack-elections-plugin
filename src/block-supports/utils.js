@@ -52,6 +52,8 @@ export const createGPBlockListBlockFilter = (features = []) => {
 				Array( features.length ).fill( undefined )
 			);
 
+			{ console.log("render OriginalBlockListBlock", props) }
+
 			return [
 				...features.map( ( feature, i ) => {
 
@@ -80,6 +82,7 @@ export const createGPBlockListBlockFilter = (features = []) => {
 						return null;
 					}
 
+					console.log("neededProps", neededProps)
 					return (
 						<BlockPropsPure
 							// We can use the index because the array length
@@ -101,6 +104,7 @@ export const createGPBlockListBlockFilter = (features = []) => {
 				}),
 				<OriginalBlockListBlock
 					key="edit"
+					
 					{ ...props }
 					wrapperProps={ 
 						allWrapperProps.filter( Boolean )
@@ -127,11 +131,13 @@ export const createGPBlockListBlockFilter = (features = []) => {
 		'withGPBlockListBlockSupportsHooks'
 	) 
 
+	
 	addFilter(
 		'editor.BlockListBlock',
 		'gp/block-supports/blockListBlocks',
 		withGPBlockListBlockSupportsHooks
 	);
+
 }
 
 

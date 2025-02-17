@@ -65,6 +65,14 @@ class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interface
 	protected array $to_array = [ 'slug', 'label', 'type', 'group', 'meta_key', 'source' ];
 
 	/**
+	 * Allow Block Variation
+	 * 
+	 * Boolean that controls of a field can be represented as a block. Eg Twitter fields exist for 
+	 * backwards compatability but shouldn't be used anymore
+	 */
+	protected bool $allow_block = true;
+
+	/**
 	 * Construct the profile field
 	 */
 	public function __construct( string $slug, string $label, FieldType|string|null $type = null ) {
@@ -98,6 +106,12 @@ class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interface
 		return $this;
 	}
 
+	public function disable_block( $disable = true ): self {
+		$this->allow_block = ! $disable;
+		return $this;
+	}
+	
+
 	public function to_array(): array {
 
 		$val = [];
@@ -114,7 +128,6 @@ class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interface
 		return $val;
 	}
 
-	
 	public function format( $raw_value ) {
 		return $this->type->format( $raw_value );
 	}
@@ -133,7 +146,11 @@ class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interface
 		return $this->format( $this->raw( $model ) );
 	}
 
-	public function value_for_rest(Profile $model ) {
+	public function value_for_rest( Profile $model ) {
 		return $this->raw( $model );
+	}
+
+	public function is_block_enabled(): bool {
+		return $this->allow_block;
 	}
 }

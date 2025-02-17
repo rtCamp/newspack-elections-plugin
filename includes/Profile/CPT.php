@@ -232,7 +232,9 @@ class CPT extends \Govpack\Abstracts\PostType {
 				$slug  = sprintf( '%s_%s', $group, $key );
 				$label = sprintf( '%s %s', ucfirst( $key ), ucfirst( $group ) );
 
-				self::$fields->register( new LinkField( $slug, $label ) );
+				self::$fields->register( 
+					( new LinkField( $slug, $label ) )->disable_block( ( $group === 'twitter' ) ) // disable the block if it's for twitter
+				);
 			}
 		}
 	}

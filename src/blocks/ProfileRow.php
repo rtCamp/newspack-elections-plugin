@@ -108,6 +108,11 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 		$variations = [];
 		
 		foreach ( \Govpack\Profile\CPT::fields()->all() as $field ) {
+
+			if ( ! $field->is_block_enabled() ) {
+				continue;
+			}
+			
 			$variation = [
 				'category'    => 'newspack-elections-profile-row-fields',
 				'name'        => sprintf( 'profile-field-row-%s', $field->slug ),

@@ -82,9 +82,12 @@ const ProfileTerms = ({terms, displayLinks, separator, termLimit}) => {
 	) ) } </> )
 }
 
-function Edit( props ) {
+function EditTermBlock( props ) {
 	
 	const { attributes, setAttributes, context } = props
+	const blockProps = useBlockProps();
+
+	console.log("PROPS", props)
 	const { 
 		displayLinks,
 		separator,
@@ -155,7 +158,7 @@ function Edit( props ) {
 			</PanelRow>
 			</PanelBody>
 		</InspectorControls>
-		<FieldBlockEdit {...props} hasValue={hasProfileTerms} >
+		<FieldBlockEdit {...blockProps} {...props} hasValue={hasProfileTerms} >
 			{ isLoading && hasProfile && <Spinner /> }
 			{ !isLoading && hasProfile && hasProfileTerms && 
 				<ProfileTerms 
@@ -170,5 +173,5 @@ function Edit( props ) {
 	)
 }
 
-export {Edit}
-export default Edit
+export {EditTermBlock as Edit}
+export default EditTermBlock

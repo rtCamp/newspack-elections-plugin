@@ -47,6 +47,11 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 		$variations = [];
 		
 		foreach ( \Govpack\Profile\CPT::fields()->of_format( $this->field_type ) as $field ) {
+
+			if ( ! $field->is_block_enabled() ) {
+				continue;
+			}
+
 			$variation = [
 				'category'    => 'govpack-profile-fields',
 				'name'        => sprintf( 'profile-field-%s', $field->slug ),

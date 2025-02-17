@@ -57,12 +57,6 @@ function Edit( props ) {
 		{ rendered: renderedExcerpt, protected: isProtected } = {},
 	] = useEntityProp( 'postType', postType, 'excerpt', profileId );
 
-	console.log("raw", rawExcerpt)
-	console.log("rendered", renderedExcerpt)
-	console.log("protected", isProtected)
-
-
-
 	const postTypeSupportsExcerpts = useSelect(
 		( select ) => {
 			return !! select( coreStore ).getPostType( postType )?.supports?.excerpt;
