@@ -7,7 +7,7 @@ import { postCategories as icon } from '@wordpress/icons';
  import Edit from './edit';
  import Save from './save';
  import metadata from './block.json';
- import dep0_0 from "./deprecated/v.0.0"
+ import deprecated from "./deprecated"
  /**
  * Style dependencies - will load in editor
  */
@@ -26,9 +26,7 @@ registerBlockType( metadata.name, {
 	keywords: [ 'govpack' ],
     styles: [
 	],
-	deprecated: [
-		dep0_0
-	],
+	deprecated,
 	edit : Edit,
 	save: Save,
 } );

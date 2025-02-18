@@ -37,15 +37,9 @@
 			"__experimentalTextTransform": true,
 			"__experimentalWritingMode": true
 		},
-		"gp/field-type" : true,
-		"gp/field-key" : true
+		"gp/field-aware" : true
 	},
 	"attributes": {
-		
-		"fieldType" : {
-			"type": "string",
-			"default" : "taxonomy"
-		},
 		"separator": {
 			"type": "string",
 			"default": ", "
@@ -63,6 +57,7 @@
 	"usesContext": [
 		"postType",
 		"postId",
-		"govpack/fieldKey"
+		"govpack/fieldKey",
+		"govpack/field"
 	]
 }

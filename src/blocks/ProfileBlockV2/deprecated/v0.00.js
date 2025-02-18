@@ -115,3 +115,4 @@ const dep0_00 = {
 }
 
 export default dep0_00
+export { dep0_00 }

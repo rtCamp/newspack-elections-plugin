@@ -13,19 +13,14 @@ import { useProfileFieldAttributes } from './../../components/Profile';
 
 
 import { useSelect } from "@wordpress/data";
-import { store as blockEditorStore } from "@wordpress/block-editor"
+import { store as blockEditorStore, useBlockProps } from "@wordpress/block-editor"
 
 
 function Edit( props ) {
 
 
-
 	const { fieldKey, value, field } =  useProfileFieldAttributes(props) 
-
-	const isPreviewMode = useSelect( ( select ) => {
-		return select( blockEditorStore ).getSettings().isPreviewMode;
-	}, [] );
-
+	const blockProps = useBlockProps()
 
 
 	const profileValue = () => {
@@ -46,16 +41,9 @@ function Edit( props ) {
 	const hasValue = !isEmpty(FieldValue)
 
     return (
-		<>
-			
-			<FieldBlockEdit 
-				{...props} 
-				defaultValue = "No Field Value"
-				hasValue = {hasValue}
-			>
-				{FieldValue}
-			</FieldBlockEdit>
-		</>
+		<div {...blockProps} >
+			{FieldValue}
+		</div>
 	)
 }
 

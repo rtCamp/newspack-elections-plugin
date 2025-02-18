@@ -21,7 +21,6 @@ function BlockProps( {
 
 	const wrapperProps = hook( props );
 	
-
 	const setWrapperProps = ( next ) =>
 		setAllWrapperProps( ( prev ) => {
 			const nextAll = [ ...prev ];
@@ -47,12 +46,10 @@ export const createGPBlockListBlockFilter = (features = []) => {
 
 	const withGPBlockListBlockSupportsHooks = createHigherOrderComponent(
 		(OriginalBlockListBlock) => ( props ) => {
-		
+			
 			const [ allWrapperProps, setAllWrapperProps ] = useState(
 				Array( features.length ).fill( undefined )
 			);
-
-			
 
 			return [
 				...features.map( ( feature, i ) => {
@@ -82,7 +79,7 @@ export const createGPBlockListBlockFilter = (features = []) => {
 						return null;
 					}
 
-					
+				
 					return (
 						<BlockPropsPure
 							// We can use the index because the array length
@@ -94,7 +91,7 @@ export const createGPBlockListBlockFilter = (features = []) => {
 							// function reference.
 							setAllWrapperProps={ setAllWrapperProps }
 							name={ props.name }
-							clientId={ props.clientId }
+							//clientId={ props.clientId }
 							// This component is pure, so only pass needed
 							// props!!!
 							{ ...neededProps }
@@ -104,7 +101,6 @@ export const createGPBlockListBlockFilter = (features = []) => {
 				}),
 				<OriginalBlockListBlock
 					key="edit"
-					
 					{ ...props }
 					wrapperProps={ 
 						allWrapperProps.filter( Boolean )

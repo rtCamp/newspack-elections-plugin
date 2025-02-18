@@ -24,7 +24,7 @@ class ProfileFieldDate extends \Govpack\Blocks\ProfileFieldText {
 	}
 
 	public function get_value(): string {
-		return date( $this->get_date_format(), parent::get_value() );
+		return date( $this->get_date_format(), (int) parent::get_value() );
 	}
 
 	public function get_date_format(): string {

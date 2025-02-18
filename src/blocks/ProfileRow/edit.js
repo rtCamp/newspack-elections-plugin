@@ -73,6 +73,7 @@ function useConditionalTemplate(clientId){
 		}
 	} )
 	
+
 	return variation?.innerBlocks ?? defaultTemplate 
 }
 

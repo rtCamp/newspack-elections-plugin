@@ -123,10 +123,12 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 					$field->label
 				),
 				'attributes'  => [
-					'fieldType' => $field->type->slug,
-					'fieldKey'  => $field->slug,
+					'field' => [ 
+						'type' => $field->type->slug,
+						'key'  => $field->slug,
+					],
 				],
-				'isActive'    => [ 'fieldKey' ],
+				'isActive'    => [ 'field' ],
 				'scope'       => [ 'inserter', 'block' ],
 				'icon'        => $field->type->variation_icon(),
 			];
@@ -153,9 +155,11 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 					$type->label
 				),
 				'attributes'  => [
-					'fieldType' => $type->slug,
+					'field' => [ 
+						'type' => $type->slug,
+					],
 				],
-				'isActive'    => [ 'fieldType' ],
+				'isActive'    => [ 'field' ],
 				'scope'       => [],
 				'icon'        => $type->variation_icon(),
 				'innerBlocks' => $type->get_variation_inner_blocks(),

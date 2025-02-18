@@ -16,7 +16,7 @@ import { FieldToRow, createRowToFieldTransform } from '../../block-transforms';
 import Edit from './edit';
 import Save from './save';
 import metadata from './block.json';
-
+import deprecated from "./deprecated"
 
 
 /**
@@ -47,7 +47,8 @@ registerBlockType( metadata.name, {
 		"from" : [
 			createRowToFieldTransform(metadata.name)
 		]
-	}
+	},
+	deprecated
 } );
 
 

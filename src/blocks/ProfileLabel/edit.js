@@ -13,11 +13,15 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 	const { 
 		'postId' : profileId, 
 		'govpack/fieldKey' : profileFieldKey, 
+		'govpack/field' : profileField, 
 		'govpack/showLabel' : RowShowLabel = null,
 		'govpack/showLabels' : GroupShowLabels = null,
 		postType = false
 	} = context
 
+	
+
+	const fieldKey = profileField?.key ?? profileFieldKey ?? null
 	const { 
 		label = null,
 	} = attributes
@@ -32,7 +36,7 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 		})
 	}
 	
-	const field = useRawField(profileFieldKey)
+	const field = useRawField(fieldKey)
 
 	let calculatedLabel;
 	if(!label && field){

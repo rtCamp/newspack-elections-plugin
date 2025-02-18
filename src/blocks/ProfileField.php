@@ -173,6 +173,13 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 	}
 	
 	public function get_field_key() {
+
+		$field_attr = $this->get_from_context( 'field' ) ?? $this->attributes['field'] ?? false;
+
+		if ( $field_attr !== false ) {
+			return $field_attr['key'];
+		}
+
 		return $this->get_from_context( 'fieldKey' ) ?? $this->attributes['fieldKey'] ?? false;
 	}
 

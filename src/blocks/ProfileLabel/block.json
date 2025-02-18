@@ -47,6 +47,7 @@
 		"govpack/showLabels", 
 		"govpack/fieldKey",
 		"govpack/fieldType",
+		"govpack/field",
 		"postType",
 		"postId"
 	]

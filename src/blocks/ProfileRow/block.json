@@ -37,8 +37,7 @@
 			"lineHeight": true,
 			"textAlign": true
 		},
-		"gp/field-type" : true,
-		"gp/field-key" : true
+		"gp/field-aware" : true
 	},
 	"attributes": {
 		"style" : {
@@ -71,6 +70,12 @@
 		},
 		"label" : {
 			"type": "string"
+		}, 
+		"field" : {
+			"type" : "object",
+			"default" : {
+				"type" : "text"
+			}
 		}
 	},
 	"ancestor": [ "govpack/profile-v2" ],
@@ -82,7 +87,8 @@
 	"providesContext": {
 		"govpack/fieldKey": "fieldKey",
 		"govpack/fieldType": "fieldType",
-		"govpack/showLabel": "showLabel"
+		"govpack/showLabel": "showLabel",
+		"govpack/field": "field"
 	}
 	
 }

@@ -189,9 +189,7 @@ class Govpack {
 
 	
 	public function register_blocks_supports() {
-		
-		BlockSupports\FieldType::register();
-		BlockSupports\FieldKey::register();
+		BlockSupports\FieldAware::register();
 	}
 
 	public function register_blocks() {

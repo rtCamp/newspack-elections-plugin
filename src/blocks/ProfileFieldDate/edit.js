@@ -6,6 +6,7 @@ import {isEmpty} from "lodash"
 import { __ } from '@wordpress/i18n';
 
 import {
+		useBlockProps,
 		InspectorControls, 
 		__experimentalDateFormatPicker as DateFormatPicker
 } from "@wordpress/block-editor"
@@ -18,6 +19,7 @@ import { useEntityProp } from '@wordpress/core-data';
  */
 import { FieldBlockEdit } from '../../components/field-block-edit';
 import { useProfileFieldAttributes } from './../../components/Profile';
+
 
 
 
@@ -59,12 +61,15 @@ const DateFormattingControls = (props) => {
 	)
 }
 
-function Edit( props ) {
+function DateEdit( props ) {
 
 	const { fieldKey, value, field } =  useProfileFieldAttributes(props) 
 	const { attributes } = props
 	const defaultFormat = getSiteDefaultDateFormat()
 	const { dateFormat = defaultFormat } = attributes
+	const blockProps = useBlockProps()
+
+
 
 	const profileValue = () => {
 
@@ -84,20 +89,14 @@ function Edit( props ) {
 	const hasValue = !isEmpty(FieldValue)
 
     return (
-		<>
+		<div {...blockProps}>
 			<DateFormattingControls {...props}/>
-			<FieldBlockEdit 
-				{...props} 
-				defaultValue = "{{No Field Value}}"
-				hasValue = {hasValue}
-			>
-				{FieldValue}
-			</FieldBlockEdit>
-		</>
+			{FieldValue}
+		</div>
 	)
 }
 
 
 
-export {Edit}
-export default Edit
+export {DateEdit as Edit}
+export default DateEdit

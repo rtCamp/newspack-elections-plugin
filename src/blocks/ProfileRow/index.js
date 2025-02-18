@@ -8,8 +8,7 @@ import { __ } from "@wordpress/i18n"
 import Edit from './edit';
 import Save from './save';
 import metadata from './block.json';
-
-
+import deprecated from './deprecated';
 
 /**
  * Style dependencies - will load in editor
@@ -19,7 +18,7 @@ import './view.scss';
 
 const { attributes, category, title } = metadata;
 
-
+console.log(deprecated)
 
 registerBlockType( metadata.name, {
 	apiVersion: 3,
@@ -31,7 +30,8 @@ registerBlockType( metadata.name, {
     styles: [
 	],
 	edit : Edit,
-	save: Save
+	save: Save,
+	deprecated : deprecated
 } );
 
 

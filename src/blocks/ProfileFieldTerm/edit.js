@@ -108,7 +108,7 @@ function EditTermBlock( props ) {
 	const { profileTerms, hasProfileTerms, isLoading } = useProfileTerms( profileId, selectedTaxonomy )
 	const hasProfile = (profileId);
 
-	
+	console.log("blockProps", blockProps);
     return (
 		<>
 		<InspectorControls>
@@ -158,7 +158,7 @@ function EditTermBlock( props ) {
 			</PanelRow>
 			</PanelBody>
 		</InspectorControls>
-		<FieldBlockEdit {...blockProps} {...props} hasValue={hasProfileTerms} >
+		<div {...blockProps}  >
 			{ isLoading && hasProfile && <Spinner /> }
 			{ !isLoading && hasProfile && hasProfileTerms && 
 				<ProfileTerms 
@@ -168,7 +168,7 @@ function EditTermBlock( props ) {
 					termLimit = {termLimit}
 				/>
 		 	}
-		</FieldBlockEdit>
+		</div>
 		</>
 	)
 }

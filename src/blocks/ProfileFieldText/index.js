@@ -8,7 +8,7 @@ import { __ } from "@wordpress/i18n"
 import Edit from './edit';
 import Save from './save';
 import metadata from './block.json';
-
+import deprecated from './deprecated';
 
 
 /**
@@ -50,7 +50,8 @@ registerBlockType( metadata.name, {
 				},
 			}
 		]
-	}
+	},
+	deprecated 
 } );
 
 

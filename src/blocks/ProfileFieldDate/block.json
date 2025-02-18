@@ -41,22 +41,19 @@
 			"lineHeight": true,
 			"textAlign": true
 		},
-		"gp/field-type" : true,
-		"gp/field-key" : true
+		"gp/field-aware" : true
 	},
 	
 	"attributes": {
 		
-		"fieldType" : {
-			"type": "string",
-			"default" : "date"
-		},
+		
 		"dateFormat" : {
 			"type": "string"
 		}
 	},
 	"ancestor": [ "govpack/profile-v2" ],
 	"usesContext": [
+		"govpack/field",
 		"govpack/fieldKey",
 		"govpack/fieldType",
 		"govpack/showLabels",

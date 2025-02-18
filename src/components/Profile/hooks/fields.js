@@ -96,29 +96,55 @@ export const useRawField = ( fieldKey ) => {
 export const useFieldAttributes = (props) => {
 
 	const { attributes, setAttributes, context } = props
-	const { 
-		fieldKey : localFieldKey = null,
-		fieldType : localFieldType = null 
-	} = attributes
+	const { field = {} } = attributes
+	const { 'govpack/field' :inheritedField = {} } = context
 
-	const { 
-		'govpack/fieldKey' : inheritedFieldKey = null,
-		'govpack/fieldType' : inheritedFieldType = null 
-	} = context
+	let { 
+		key : localFieldKey = null,
+		type : localFieldType = null 
+	} = field
+
+	if(!localFieldKey){
+		localFieldKey = attributes.fieldKey
+	}
+
+	if(!localFieldType){
+		localFieldType = attributes.fieldType
+	}
+
+	
+	let { 
+		'key' : inheritedFieldKey = null,
+		'type' : inheritedFieldType = null 
+	} = inheritedField
+
+	if(!inheritedFieldKey){
+		inheritedFieldKey = context["govpack/fieldKey"]
+	}
+
+	if(!inheritedFieldType){
+		inheritedFieldType = context["govpack/fieldType"]
+	}
 
 
 	const isControlledByContext = inheritedFieldKey ? true : false;
 	const fieldKey = isControlledByContext ? inheritedFieldKey : localFieldKey
 	const fieldType = isControlledByContext ? inheritedFieldType : localFieldType
 
-	let field = useRawField(fieldKey)
+	
 
 	const setFieldKey = (newKey) => {
-		setAttributes({"fieldKey" : newKey})
+		
+		let { field } = attributes
+		field = {
+			...field,
+			"key" : newKey
+		}
+		setAttributes({"field" : field})
 	}
 
 	return {
-		field,
+		field: useRawField(fieldKey),
 		fieldType,
 		fieldKey,
 		setFieldKey,

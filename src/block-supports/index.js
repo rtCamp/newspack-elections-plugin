@@ -5,15 +5,12 @@
  */
 
 import {createGPBlockListBlockFilter, createGPBlockRegisterFilter, createGPBlockEditFilter} from "./utils"
-
-import fieldType from "./field-type"
-import fieldKey from "./field-key"
+import fieldAware from "./field-aware"
 
 
 
 const features = [
-	fieldType,
-	fieldKey
+	fieldAware
 ]
 
 export const registerBlockSupports = () => {
