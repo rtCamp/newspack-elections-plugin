@@ -82,6 +82,7 @@ function useConditionalTemplate(clientId){
 
 function Edit( props ) {
 
+
 	const {attributes, setAttributes, context, clientId} = props  
 
 	const blockProps = useBlockProps();

@@ -45,6 +45,12 @@
 		"gp/field-aware" : true
 	},
 	"attributes": {
+		"field" : {
+			"type": "object",
+			"default" : {
+				"type" : "link"
+			}
+		},
 		"linkTextOverride" : {
 			"type": "string"
 		}

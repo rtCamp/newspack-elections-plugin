@@ -70,16 +70,15 @@
 		"govpack/showLabels" : "showLabels"
 	},
 	"allowedBlocks": [
+
 		"govpack/profile-row", 
-		"govpack/profile-field-link",
-		"govpack/profile-field-text", 
 		"govpack/profile-read-more", 
-		"core/read-more", 
 		"govpack/profile-separator", 
 		"govpack/profile-bio",
-		"core/post-title", 
+		"govpack/profile-name",
+
 		"core/post-featured-image", 
-		"core/post-excerpt", 
+	
 		"core/heading",
 		"core/paragraph"
 	]

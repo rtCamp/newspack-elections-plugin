@@ -153,7 +153,6 @@ function getBlockViewScripts(){
 	const blocks = getBlocks()
 		.filter( block => fs.existsSync( path.join( getBlockDir(), block, 'view.js' ) ) );
 
-console.log(blocks)
 	const viewBlocksScripts = blocks.reduce( ( viewBlocks, block ) => {
 		viewScriptPath = path.join( getBlockDir(), block, 'view.js' );
 		let fileExists = fs.existsSync( viewScriptPath );
@@ -191,7 +190,8 @@ function getEntryPointsv2(){
 	
 }
 
-console.log(getEntryPointsv2())
+
+
 module.exports = {
     ...defaultConfig,
 	"entry": getEntryPointsv2

@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, HeadingLevelDropdown, AlignmentControl, BlockControls, InspectorControls, PlainText} from "@wordpress/block-editor"
 import { store as coreStore, useEntityProp } from '@wordpress/core-data'
 import { useSelect } from '@wordpress/data';
-import { useMemo } from "@wordpress/element"
+import { useMemo, useEffect } from "@wordpress/element"
 import { ToggleControl, TextControl, PanelBody } from '@wordpress/components';
 /**
  * Internal dependencies
@@ -24,11 +24,22 @@ function Edit( props ) {
 	const { fieldKey, field, value, profileId, ...restField } =  useProfileFieldAttributes(props) 
 	const blockProps = useBlockProps()
 
-	
-
 	const { context, attributes, setAttributes } = props
 	const { postType } = context
 	const { level, textAlign, levelOptions, isLink, linkTarget, rel } = attributes
+
+	useEffect( () => {
+			
+			if(!value){
+				return
+			}
+	
+			setAttributes({"metadata" : {
+				...attributes.metadata,
+				name: value
+			}})
+	
+	}, [value])
 
 	const postTypeSupportsTitle = useSelect(
 		( select ) => {

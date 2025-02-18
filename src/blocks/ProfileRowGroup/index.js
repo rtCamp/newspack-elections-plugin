@@ -11,7 +11,7 @@ import { group as icon } from '@wordpress/icons';
  * Style dependencies - will load in editor
  */
 import './view.scss';
-
+import "./edit.scss"
 
 
 const { attributes, category, title } = metadata;

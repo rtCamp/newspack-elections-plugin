@@ -61,10 +61,6 @@ class Admin {
 					'title' => __( 'Newspack Election', 'newspack-elections' ),
 				],
 				[
-					'slug'  => 'govpack',
-					'title' => \__( 'Newspack Election', 'newspack-elections' ),
-				],
-				[
 					'slug'  => 'newspack-elections-profile-row',
 					'title' => \__( 'Newspack Election Profile Rows', 'newspack-elections' ),
 				],

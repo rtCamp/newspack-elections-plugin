@@ -45,8 +45,12 @@
 	},
 	
 	"attributes": {
-		
-		
+		"field" : {
+			"type": "object",
+			"default" : {
+				"type" : "date"
+			}
+		},
 		"dateFormat" : {
 			"type": "string"
 		}

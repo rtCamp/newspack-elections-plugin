@@ -4,6 +4,7 @@ import {isEmpty} from "lodash"
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { useEffect } from "@wordpress/element"
 
 /**
  * Internal dependencies
@@ -15,13 +16,13 @@ import { useProfileFieldAttributes } from './../../components/Profile';
 import { useSelect } from "@wordpress/data";
 import { store as blockEditorStore, useBlockProps } from "@wordpress/block-editor"
 
+import { useBlockName } from "./../utils/use-block-name"
 
 function Edit( props ) {
 
-
+	const { setAttributes, attributes } = props
 	const { fieldKey, value, field } =  useProfileFieldAttributes(props) 
 	const blockProps = useBlockProps()
-
 
 	const profileValue = () => {
 
@@ -39,6 +40,29 @@ function Edit( props ) {
 
 	const FieldValue = profileValue(fieldKey)
 	const hasValue = !isEmpty(FieldValue)
+
+	useBlockName(FieldValue)
+
+	/*
+	useEffect( () => {
+
+		if(!hasValue){
+			return
+		}
+
+		if(!value){
+			return
+		}
+
+		setAttributes({"metadata" : {
+			...attributes.metadata,
+			name: value
+		}})
+	
+	}, [value, hasValue])
+	*/
+	
+	
 
     return (
 		<div {...blockProps} >

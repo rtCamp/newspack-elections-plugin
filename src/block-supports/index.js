@@ -5,8 +5,7 @@
  */
 
 import {createGPBlockListBlockFilter, createGPBlockRegisterFilter, createGPBlockEditFilter} from "./utils"
-import fieldAware from "./field-aware"
-
+import fieldAware from "./field-aware.js"
 
 
 const features = [

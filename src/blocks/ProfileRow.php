@@ -128,9 +128,10 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 						'key'  => $field->slug,
 					],
 				],
-				'isActive'    => [ 'field' ],
+				'isActive'    => [ 'field.type', 'field.key' ],
 				'scope'       => [ 'inserter', 'block' ],
 				'icon'        => $field->type->variation_icon(),
+				'innerBlocks' => $field->type->get_variation_inner_blocks(),
 			];
 
 			$variations[] = $variation;
@@ -159,7 +160,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 						'type' => $type->slug,
 					],
 				],
-				'isActive'    => [ 'field' ],
+				'isActive'    => [ 'field.type' ],
 				'scope'       => [],
 				'icon'        => $type->variation_icon(),
 				'innerBlocks' => $type->get_variation_inner_blocks(),
@@ -176,7 +177,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 		$variations = [];
 	
 		$variation = [
-			'category'    => 'newspack-elections-profile-row-type',
+			'category'    => 'newspack-elections',
 			'name'        => sprintf( 'profile-field-%s', 'free-text' ),
 			'title'       => sprintf( 'Profile %s Row', 'Free Text' ),
 			'description' => sprintf(
@@ -185,9 +186,11 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 				'Free Text'
 			),
 			'attributes'  => [
-				'fieldType' => 'free-text',
+				'field' => [
+					'type' => 'free-text',
+				],
 			],
-			'isActive'    => [ 'fieldType' ],
+			'isActive'    => [ 'field.type' ],
 			'scope'       => [ 'inserter', 'transform' ],
 			'icon'        => 'text',
 			'innerBlocks' => [

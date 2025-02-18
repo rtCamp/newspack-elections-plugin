@@ -6,6 +6,7 @@ import { useBlockProps, RichText } from "@wordpress/block-editor"
 
 
 import { useRawField } from "./../../components/Profile"
+import { useBlockName } from "./../utils/use-block-name"
 
 function Edit( {attributes, setAttributes, context, ...props} ) {
 	const blockProps = useBlockProps();
@@ -31,7 +32,6 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 
 	const updateLabel = (label) => {
 		setAttributes({
-			metadata: { ...attributes.metadata, name : label }, 
 			label
 		})
 	}
@@ -44,6 +44,8 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 	} else {
 		calculatedLabel = label;
 	}
+
+	useBlockName(calculatedLabel)
 
 	if( ! showLabel ) {
 		return null;

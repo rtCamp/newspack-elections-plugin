@@ -40,7 +40,7 @@ function hasAttribute( attributes = {}, attribute = "field", subAttribute = fals
 
 export function useBlockProps( props ) {
 
-	console.log("fieldaware - uBP", props)
+
 
 	if(!hasAttribute(props)){
 		return props;

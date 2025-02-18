@@ -40,6 +40,12 @@
 		"gp/field-aware" : true
 	},
 	"attributes": {
+		"field" : {
+			"type": "object",
+			"default" : {
+				"type" : "taxonomy"
+			}
+		},
 		"separator": {
 			"type": "string",
 			"default": ", "
