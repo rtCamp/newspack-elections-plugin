@@ -1,46 +1,17 @@
+import styled from '@emotion/styled';
+
 import { chevronDown } from '@wordpress/icons';
 import { __ } from "@wordpress/i18n"
 
-import {
-	MenuGroup,
-	MenuItemsChoice,
-	DropdownMenu
-} from '@wordpress/components';
+
+import { DropdownMenu } from '@wordpress/components';
 
 import { useRawField } from "./../../Profile"
+import { ProfileFieldsMenu } from './ProfileFieldsMenu';
 
-export function ProfileFieldsDropDownMenu({
-	onSelectField,
-	fields,
-	selectedValue,
-	showFieldsWithEmptyValues = true,
-	disableEmptyFields = true
-} = props){
-
-	console.log( fields )
-	let selectedOptions = fields.map( (f) => ({
-		label : f.label,
-		value : f.slug,
-		info: f.value,
-		disabled : ( (disableEmptyFields && (!f.value || f.value === "")) ? true : false)
-	}))
-
-	if(showFieldsWithEmptyValues === false && disableEmptyFields === true){
-		selectedOptions = selectedOptions.filter( (f) => !f.disabled)
-	}
-
-	return (
-		<MenuGroup>
-			<MenuItemsChoice
-				choices={ selectedOptions }
-				value={ selectedValue }
-				onSelect={ (v) => {
-					onSelectField(v) 
-				}}
-			/>
-		</MenuGroup>
-	)
-}
+const StyledDropdownMenu = styled( DropdownMenu )`
+	width: 100%;
+`;
 
 export default function ProfileFieldsDropDown( props ) {
 
@@ -53,8 +24,9 @@ export default function ProfileFieldsDropDown( props ) {
 
 	const CurrentField = useRawField(selectedValue)
 
+
 	return (
-		<DropdownMenu
+		<StyledDropdownMenu
 			className={ className }
 			label={ __( 'Profile Field Selector' ) }
 			text={ CurrentField?.label ?? "Select a Profile Field" }
@@ -64,14 +36,15 @@ export default function ProfileFieldsDropDown( props ) {
 			} }
 			icon={ chevronDown }
 			toggleProps={ { 
-				iconPosition: 'right'
+				iconPosition: 'right',
+				variant: "secondary"
 			} }
 		>
 			{ () => (
 				<div className={ `${ className }__container` }>
-					<ProfileFieldsDropDownMenu 	{...props} />
+					<ProfileFieldsMenu 	{...props} />
 				</div>
 			) }
-		</DropdownMenu>
+		</StyledDropdownMenu>
 	);
 }

@@ -190,7 +190,7 @@ function getEntryPointsv2(){
 	
 }
 
-
+console.log(getEntryPointsv2())
 
 module.exports = {
     ...defaultConfig,

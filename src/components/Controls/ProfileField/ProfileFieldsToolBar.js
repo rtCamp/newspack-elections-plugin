@@ -6,7 +6,9 @@ import { connection as connectionIcon, more,
 import { Toolbar, ToolbarDropdownMenu, ToolbarGroup } from '@wordpress/components';
 import { BlockControls } from '@wordpress/block-editor';
 
-import {ProfileFieldsDropDownMenu} from "./ProfileFieldsDropDown"
+import './view.scss'
+
+import {ProfileFieldsMenu} from "./ProfileFieldsMenu"
 
 export const ProfileFieldsToolBar = (props) => {
 
@@ -18,12 +20,20 @@ export const ProfileFieldsToolBar = (props) => {
 		disableEmptyFields = true
 	} = props
 	
+	const baseClassName = "govpack-profile-field-select"
+
 	return (
 		<BlockControls group="parent">
 		
-           		<ToolbarDropdownMenu icon = {connectionIcon}>
+           		<ToolbarDropdownMenu 
+					icon = {connectionIcon}
+					className = "gp-toolbar-item gp-toolbar-item--field-select"
+					popoverProps = { {
+						className: `${baseClassName}__popover`
+					} }
+				>
 				   { () => (
-				   <ProfileFieldsDropDownMenu 
+				   <ProfileFieldsMenu 
 				   		className={ 'govpack-profile-field-select' }
 						onSelectField={ setFieldKey }
 						selectedValue={ fieldKey }

@@ -1,0 +1,5 @@
+.govpack-profile-field-select__popover {
+	.components-menu-item__button *:has(mark){
+		white-space-collapse: preserve;
+	}
+}

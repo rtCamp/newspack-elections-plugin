@@ -114,7 +114,7 @@ const FieldAwareEdit = (props) => {
 				setFieldKey = {setFieldKey}
 				fieldType = {fieldType}
 				fields = { fieldsofType }
-			/>
+			/> 
 
 			<ProfileFieldsToolBar 
 				fieldKey = {fieldKey}
