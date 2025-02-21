@@ -16,7 +16,7 @@ import { useProfileFieldAttributes } from './../../components/Profile';
 import { useSelect } from "@wordpress/data";
 import { store as blockEditorStore, useBlockProps } from "@wordpress/block-editor"
 
-import { useBlockName } from "./../utils/use-block-name"
+import { useUpdateBlockMetaName } from "../utils"
 
 function Edit( props ) {
 
@@ -41,7 +41,7 @@ function Edit( props ) {
 	const FieldValue = profileValue(fieldKey)
 	const hasValue = !isEmpty(FieldValue)
 
-	useBlockName(FieldValue)
+	useUpdateBlockMetaName(FieldValue)
 
 	/*
 	useEffect( () => {

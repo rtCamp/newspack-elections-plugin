@@ -6,7 +6,7 @@ import { select, useSelect, dispatch } from "@wordpress/data"
 
 
 
-export const useBlockName = (name) => {
+export const useUpdateBlockMetaName = (name) => {
 
 	const { clientId } = useBlockEditContext()
 	const blockProps = useBlockProps()
@@ -39,4 +39,4 @@ export const useBlockName = (name) => {
 
 }
 
-export default useBlockName
+export default useUpdateBlockMetaName
