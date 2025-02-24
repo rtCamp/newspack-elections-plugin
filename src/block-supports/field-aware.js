@@ -6,7 +6,7 @@ import { useSelect, useDispatch } from '@wordpress/data';
 import { store as blockEditorStore } from "@wordpress/block-editor"
 
 import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from "./../components/Controls/ProfileField"
-import { useFieldsOfType, useProfileFieldAttributes } from './../components/Profile';
+import { useFieldsOfType, useProfileFieldAttributes, useRawField, useRawFields, useProfileFields } from './../components/Profile';
 
 const featureName = "gp/field-aware"
 
@@ -86,8 +86,10 @@ const FieldAwareEdit = (props) => {
 	
 	const {updateBlockAttributes} = useDispatch(blockEditorStore)
 	
-	const { setFieldKey : setFieldKeyAttribute, isControlledByContext, fieldKey, fieldType } =  useProfileFieldAttributes(props) 
+	const { setField : setFieldAttribute, isControlledByContext, fieldKey, fieldType, ...restProfileProps } =  useProfileFieldAttributes(props) 
 	const fieldsofType = useFieldsOfType(props, fieldType)
+	const fields = useProfileFields(props)
+	const availableFields = useRawFields()
 	
 	const contextProvidingBlock = useSelect( (select) => {
 		const profileRows = select(blockEditorStore).getBlockParentsByBlockName(clientId, "govpack/profile-row")
@@ -100,27 +102,37 @@ const FieldAwareEdit = (props) => {
 	}
 
 
-	const setFieldKeyContext = (newValue) => {
-		updateContextProviderAttribute({"fieldKey" : newValue})
+	const setFieldContext = (newValue) => {
+		updateContextProviderAttribute({"field" : newValue})
 	}
 	
-	const setFieldKey = isControlledByContext ? setFieldKeyContext : setFieldKeyAttribute
+	const setFieldKey = isControlledByContext ? setFieldContext : setFieldAttribute
 	
+	const onSelectField = (fieldKey) => {
+		
+		const field = availableFields.find( (f) => f.slug === fieldKey)
+		const newFieldAttr = {
+			type : field.type,
+			key: fieldKey
+		}
+
+		setFieldKey(newFieldAttr)
+	}
 	
 	return (
 		<>
 			<ProfileFieldsInspectorControl
 				fieldKey = {fieldKey}
-				setFieldKey = {setFieldKey}
+				setFieldKey = {onSelectField}
 				fieldType = {fieldType}
-				fields = { fieldsofType }
+				fields = { fields }
 			/> 
 
 			<ProfileFieldsToolBar 
 				fieldKey = {fieldKey}
-				setFieldKey = {setFieldKey}
+				onSelectField = { onSelectField }
 				fieldType = {fieldType}
-				fields = { fieldsofType }
+				fields = { fields }
 				showFieldsWithEmptyValues = {true}
 				disableEmptyFields = {false}
 			/>

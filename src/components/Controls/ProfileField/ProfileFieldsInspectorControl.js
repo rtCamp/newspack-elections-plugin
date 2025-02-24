@@ -39,7 +39,7 @@ const ToolsPanelItemWide = styled( ToolsPanelItem )`
 
 export const ProfileFieldsInspectorControl = ({
 	fieldKey,
-	setFieldKey,
+	onSelectField,
 	fieldType = "text",
 	fields
 }) => {
@@ -55,7 +55,7 @@ export const ProfileFieldsInspectorControl = ({
 					<PanelRow>
 						<ProfileFieldsDropDown 
 							className={ 'govpack-profile-field-select' }
-							onSelectField={ setFieldKey }
+							onSelectField={ onSelectField }
 							selectedValue={ fieldKey }
 							fields={ fields }
 						/>

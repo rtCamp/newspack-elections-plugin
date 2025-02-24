@@ -13,7 +13,7 @@ import {ProfileFieldsMenu} from "./ProfileFieldsMenu"
 export const ProfileFieldsToolBar = (props) => {
 
 	const {
-		setFieldKey,
+		onSelectField,
 		fieldKey,
 		fields = [],
 		showFieldsWithEmptyValues = false,
@@ -35,7 +35,7 @@ export const ProfileFieldsToolBar = (props) => {
 				   { () => (
 				   <ProfileFieldsMenu 
 				   		className={ 'govpack-profile-field-select' }
-						onSelectField={ setFieldKey }
+						onSelectField={ onSelectField }
 						selectedValue={ fieldKey }
 						fields={ fields }
 						showFieldsWithEmptyValues = {showFieldsWithEmptyValues}

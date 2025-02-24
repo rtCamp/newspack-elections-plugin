@@ -1,4 +1,5 @@
 
+import { isObject } from "lodash"
 import {useSelect} from "@wordpress/data"
 import { store as coreStore } from "@wordpress/core-data";
 
@@ -34,6 +35,16 @@ export const useProfileFields = (props) => {
 		let val
 		if(field.type === "link"){
 			val = profile?.profile?.[field.slug].url || false
+		} else if(field.type === "taxonomy"){
+
+			val = profile?.profile?.[field.slug]
+
+			if(val.length < 1){
+				val = ""
+			} else {
+				val = val.map((f) => f.name).join(", ")
+			}
+
 		} else {
 			val = profile?.profile?.[field.slug] || false
 		}
@@ -131,7 +142,43 @@ export const useFieldAttributes = (props) => {
 	const fieldKey = isControlledByContext ? inheritedFieldKey : localFieldKey
 	const fieldType = isControlledByContext ? inheritedFieldType : localFieldType
 
+	const setField = (newFieldOrType, newKey = null) => {
+
+		if(isObject(newFieldOrType)){
+			setFieldFromObject(newFieldOrType)
+			return
+		}
+
+		if(newFieldOrType === null || newKey === null){
+			console.error("Neither field Type or key can be null")
+		}
+
+		// ToDo
+		// Block attributes do not check the sub attributes, 
+		// so we should check that these match how we 
+		// specify them
+
+		const newField = {
+			type : newFieldOrType,
+			key : newKey,
+		}
+		
+		setFieldFromObject(newField)
+	}
 	
+	const setFieldFromObject = (newField) => {
+		setAttributes({"field" : newField})
+	}
+
+	const setFieldType = (newType) => {
+		
+		let { field } = attributes
+		field = {
+			...field,
+			"type" : newType
+		}
+		setField(field)
+	}
 
 	const setFieldKey = (newKey) => {
 		
@@ -140,7 +187,7 @@ export const useFieldAttributes = (props) => {
 			...field,
 			"key" : newKey
 		}
-		setAttributes({"field" : field})
+		setField(field)
 	}
 
 	return {
@@ -148,6 +195,7 @@ export const useFieldAttributes = (props) => {
 		fieldType,
 		fieldKey,
 		setFieldKey,
+		setField,
 		isControlledByContext
 	}
 }

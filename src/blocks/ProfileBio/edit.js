@@ -64,6 +64,7 @@ function Edit( props ) {
 		[ postType ]
 	);
 
+	
 
 	/**
 	 * When excerpt is editable, strip the html tags from

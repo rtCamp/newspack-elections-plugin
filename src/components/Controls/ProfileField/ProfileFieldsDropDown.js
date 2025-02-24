@@ -17,9 +17,7 @@ export default function ProfileFieldsDropDown( props ) {
 
 	const {
 		className,
-		onSelectField,
-		selectedValue,
-		fields
+		selectedValue
 	} = props
 
 	const CurrentField = useRawField(selectedValue)

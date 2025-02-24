@@ -21,8 +21,10 @@ import { useUpdateBlockMetaName } from "../utils"
 function Edit( props ) {
 
 	const { setAttributes, attributes } = props
-	const { fieldKey, value, field } =  useProfileFieldAttributes(props) 
+	const { fieldKey, value, field, ...restFieldAttrs } =  useProfileFieldAttributes(props) 
 	const blockProps = useBlockProps()
+
+
 
 	const profileValue = () => {
 
@@ -41,7 +43,8 @@ function Edit( props ) {
 	const FieldValue = profileValue(fieldKey)
 	const hasValue = !isEmpty(FieldValue)
 
-	useUpdateBlockMetaName(FieldValue)
+	//console.log("FieldValue", FieldValue)
+	//useUpdateBlockMetaName(FieldValue)
 
 	/*
 	useEffect( () => {

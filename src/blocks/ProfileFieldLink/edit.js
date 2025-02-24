@@ -17,6 +17,7 @@ import { useSelect } from "@wordpress/data";
 
 function Edit( props ) {
 
+	console.log("LinkEdit")
 	const isPreviewMode = useSelect( ( select ) => {
 		const { getSettings } = select( blockEditorStore );
 		const { isPreviewMode } = getSettings();

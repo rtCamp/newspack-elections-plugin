@@ -16,6 +16,7 @@ export function ProfileFieldsMenu({
 	emptyProfileValueText = "-"
 } = props){
 
+	console.log("ProfileFieldsMenu", fields)
 	const [searchText, setSearchText] = useState("")
 	const hasSearchText = (searchText !== "")
 

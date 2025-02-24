@@ -173,9 +173,9 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new Field( 'email_legislative', 'Legislative Email Address' ),
 				new Field( 'email_other', 'Other Email Address' ),
 
-				new Field( 'email_capitol', 'Capitol Email Address' ),
-				new Field( 'email_district', 'District Email Address' ),
-				new Field( 'email_campaign', 'Campaign Email Address' ),
+				new LinkField( 'email_capitol', 'Capitol Email Address' ),
+				new LinkField( 'email_district', 'District Email Address' ),
+				new LinkField( 'email_campaign', 'Campaign Email Address' ),
 			
 				new Field( 'address_capitol', 'Capitol Address' ),
 				new Field( 'address_district', 'District Address' ),
