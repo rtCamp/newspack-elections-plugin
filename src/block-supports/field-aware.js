@@ -109,7 +109,7 @@ const FieldAwareEdit = (props) => {
 	const setFieldKey = isControlledByContext ? setFieldContext : setFieldAttribute
 	
 	const onSelectField = (fieldKey) => {
-		
+	
 		const field = availableFields.find( (f) => f.slug === fieldKey)
 		const newFieldAttr = {
 			type : field.type,
@@ -123,9 +123,11 @@ const FieldAwareEdit = (props) => {
 		<>
 			<ProfileFieldsInspectorControl
 				fieldKey = {fieldKey}
-				setFieldKey = {onSelectField}
+				onSelectField = {onSelectField}
 				fieldType = {fieldType}
 				fields = { fields }
+				showFieldsWithEmptyValues = {true}
+				disableEmptyFields = {false}
 			/> 
 
 			<ProfileFieldsToolBar 

@@ -40,7 +40,7 @@ export default function ProfileFieldsDropDown( props ) {
 		>
 			{ () => (
 				<div className={ `${ className }__container` }>
-					<ProfileFieldsMenu 	{...props} />
+					<ProfileFieldsMenu {...props} />
 				</div>
 			) }
 		</StyledDropdownMenu>

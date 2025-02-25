@@ -8,7 +8,7 @@ import { BlockControls } from '@wordpress/block-editor';
 
 import './view.scss'
 
-import {ProfileFieldsMenu} from "./ProfileFieldsMenu"
+import { ProfileFieldsMenu } from "./ProfileFieldsMenu"
 
 export const ProfileFieldsToolBar = (props) => {
 
@@ -37,7 +37,7 @@ export const ProfileFieldsToolBar = (props) => {
 				   		className={ 'govpack-profile-field-select' }
 						onSelectField={ onSelectField }
 						selectedValue={ fieldKey }
-						fields={ fields }
+						choices={ fields }
 						showFieldsWithEmptyValues = {showFieldsWithEmptyValues}
 						disableEmptyFields = {disableEmptyFields}
 				   />

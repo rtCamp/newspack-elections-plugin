@@ -57,7 +57,7 @@ export const ProfileFieldsInspectorControl = ({
 							className={ 'govpack-profile-field-select' }
 							onSelectField={ onSelectField }
 							selectedValue={ fieldKey }
-							fields={ fields }
+							choices={ fields }
 						/>
 					</PanelRow>
 				</PanelBody>

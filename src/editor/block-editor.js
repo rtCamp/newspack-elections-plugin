@@ -1,11 +1,12 @@
 
 
-import { dispatch } from "@wordpress/data"
+import { dispatch, select } from "@wordpress/data"
 import domReady from "@wordpress/dom-ready"
 import {registerBlockSupports} from "./../block-supports" 
 
 import { registerProfileBindingSource } from "./block-bindings"
 import { restoreBlocks } from "./restore-blocks";
+import { store } from "./../profile-fields";
 
 dispatch( 'core' ).addEntities( [ {
 	baseURL: '/govpack/v1/profile',
@@ -16,6 +17,7 @@ dispatch( 'core' ).addEntities( [ {
 	label: 'Govpack Profile Fields',
 } ] );
 
+console.log("getFields", select(store).getFields())
 
 registerProfileBindingSource()
 registerBlockSupports()
