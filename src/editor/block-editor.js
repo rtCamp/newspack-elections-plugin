@@ -18,6 +18,7 @@ dispatch( 'core' ).addEntities( [ {
 } ] );
 
 console.log("getFields", select(store).getFields())
+console.log("getField", select(store).getField("name"))
 
 registerProfileBindingSource()
 registerBlockSupports()

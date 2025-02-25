@@ -153,4 +153,11 @@ class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interface
 	public function is_block_enabled(): bool {
 		return $this->allow_block;
 	}
+
+	public function for_rest(): array {
+		$data         = $this->to_array();
+		$data['type'] = $this->type->slug;
+
+		return $data;
+	}
 }

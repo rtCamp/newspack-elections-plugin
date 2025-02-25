@@ -91,6 +91,7 @@ class Govpack {
 		\add_action( 'after_setup_theme', [ $this, 'setup' ] );
 		\add_action( 'plugins_loaded', [ '\Govpack\ActionScheduler\ActionScheduler', 'hooks' ], 0 );
 		\add_action( 'init', [ $this, 'register_blocks' ] );
+		\add_action( 'rest_api_init', [ $this, 'rest_api' ] );
 	}
 
 
@@ -131,11 +132,12 @@ class Govpack {
 			\Govpack\CLI::init();
 		}
 
+		//$this->rest_api();
+
 		( new ProfileBindingSource() )->register();
 
 		\Govpack\Importer\Importer::hooks();
 		\Govpack\Admin\Export::hooks(); 
-		
 		\Govpack\Widgets::hooks();
 
 		if ( is_admin() ) {
@@ -212,5 +214,10 @@ class Govpack {
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldLink( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldTerm( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldDate( $this ) );
+	}
+
+	public function rest_api() {
+		$controller = new \Govpack\REST\ProfileFieldsRestController();
+		$controller->register_routes();
 	}
 }
