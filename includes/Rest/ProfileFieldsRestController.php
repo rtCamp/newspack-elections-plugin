@@ -126,11 +126,13 @@ class ProfileFieldsRestController extends GovpackRESTController {
 			}
 		}
 
-		$fields = array_map(
-			function ( $field ) {
-				return $field->for_rest();
-			},
-			\Govpack\Profile\CPT::fields()->all() 
+		$fields = array_values(
+			array_map(
+				function ( $field ) {
+					return $field->for_rest();
+				},
+				\Govpack\Profile\CPT::fields()->all() 
+			)
 		);
 
 
@@ -156,6 +158,7 @@ class ProfileFieldsRestController extends GovpackRESTController {
 				return true;
 			}
 		);
+
 
 		return rest_ensure_response( $fields );
 	}
