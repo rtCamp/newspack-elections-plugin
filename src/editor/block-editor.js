@@ -6,7 +6,7 @@ import {registerBlockSupports} from "./../block-supports"
 
 import { registerProfileBindingSource } from "./block-bindings"
 import { restoreBlocks } from "./restore-blocks";
-import { store } from "./../profile-fields";
+import { registerGovpackStore } from "./../profile-fields";
 
 dispatch( 'core' ).addEntities( [ {
 	baseURL: '/govpack/v1/profile',
@@ -17,9 +17,8 @@ dispatch( 'core' ).addEntities( [ {
 	label: 'Govpack Profile Fields',
 } ] );
 
-console.log("getFields", select(store).getFields())
-console.log("getField", select(store).getField("name"))
 
+registerGovpackStore()
 registerProfileBindingSource()
 registerBlockSupports()
 

@@ -24,7 +24,7 @@ export const storeConfig = {
 	initialState
 };
 
-console.log("GP Store Config", storeConfig)
+
 /**
  * Store definition for the block editor namespace.
  *
@@ -32,5 +32,6 @@ console.log("GP Store Config", storeConfig)
  */
 export const store = createReduxStore( STORE_NAME, storeConfig );
 
-
-register( store );
+export const registerGovpackStore = () => {
+	register( store );
+}
