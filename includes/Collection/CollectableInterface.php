@@ -1,8 +1,8 @@
 <?php
 
-namespace Govpack\Interfaces;
+namespace Govpack\Collection;
 
-interface Collectable {
+interface CollectableInterface {
 
 	public function slug(): string;
 

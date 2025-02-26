@@ -1,25 +1,22 @@
 <?php
 
-namespace Govpack\Abstracts;
+namespace Govpack\Collection;
 
-use Govpack\Interfaces\Collection as InterfacesCollection;
-use Govpack\Interfaces\Collectable;
-
-abstract class Collection implements InterfacesCollection {
+abstract class Collection implements CollectionInterface {
 
 	public $collection = [];
 
 	public function register( Collectable $item ) {
 
 		if ( $this->exists( $item ) ) {
-			throw new \Exception( sprintf( 'Trying to add Type that already exists (%s)', $item->slug ) );
+			throw new \Exception( sprintf( 'Trying to add Type that already exists (%s)', $item->slug() ) );
 		}
 
-		$this->collection[ $item->slug ] = $item;
+		$this->collection[ $item->slug() ] = $item;
 	}
 
 	public function exists( Collectable|string $type ): bool {
-		$slug = ( is_a( $type, Collectable::class ) ? $type->slug : $type );
+		$slug = ( is_a( $type, Collectable::class ) ? $type->slug() : $type );
 		return isset( $this->collection[ $slug ] );
 	}
 

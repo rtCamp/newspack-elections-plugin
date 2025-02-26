@@ -2,7 +2,7 @@
 
 namespace Govpack\Fields;
 
-class FieldManager extends \Govpack\Abstracts\Collection implements \Govpack\Interfaces\Collection {
+class FieldManager extends \Govpack\Collection\Collection implements \Govpack\Collection\CollectionInterface {
 
 	/**
 	 * Field Groups

@@ -1,8 +1,8 @@
 <?php
 
-namespace Govpack\Interfaces;
+namespace Govpack\Collection;
 
-interface Collection {
+interface CollectionInterface {
 
 	public function get( string $item ): Collectable|bool;
 

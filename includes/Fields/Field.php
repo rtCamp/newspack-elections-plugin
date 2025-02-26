@@ -6,7 +6,7 @@ use Govpack\Fields\FieldType;
 use Govpack\Fields\FieldTypeRegistry;
 use Govpack\Profile\Profile;
 
-class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interfaces\Collectable {
+class Field extends \Govpack\Collection\Collectable implements \Govpack\Collection\CollectableInterface {
 
 	/**
 	 * Field Slug

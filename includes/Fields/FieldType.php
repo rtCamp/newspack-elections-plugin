@@ -2,8 +2,8 @@
 
 namespace Govpack\Fields;
 
-use Govpack\Interfaces\Collectable as CollectableInterface;
-use Govpack\Abstracts\Collectable;
+use Govpack\Collection\CollectableInterface;
+use Govpack\Collection\Collectable;
 
 abstract class FieldType extends Collectable implements CollectableInterface {
 

@@ -5,9 +5,9 @@ namespace Govpack\Fields;
 
 use Govpack\Fields\FieldType;
 
-use Govpack\Abstracts\Collection;
-use Govpack\Interfaces\Collection as CollectionInterface;
-use Govpack\Interfaces\Collectable;
+use Govpack\Collection\Collection;
+use Govpack\Collection\CollectionInterface;
+use Govpack\Collection\Collectable;
 
 class FieldTypeRegistry extends Collection implements CollectionInterface {
 

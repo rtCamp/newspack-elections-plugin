@@ -1,10 +1,8 @@
 <?php
 
-namespace Govpack\Abstracts;
+namespace Govpack\Collection;
 
-use Govpack\Interfaces\Collectable as InterfacesCollectable;
-
-abstract class Collectable implements InterfacesCollectable {
+abstract class Collectable implements CollectableInterface {
 
 	protected string $slug;
 
