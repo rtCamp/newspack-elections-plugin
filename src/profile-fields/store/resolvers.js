@@ -1,12 +1,13 @@
 import apiFetch from '@wordpress/api-fetch';
 
 export const getField = ( item ) => async ( { dispatch } ) => {
-	console.log("getField Resolver")
+	
 	const path = addQueryArgs(
 		'/govpack/v1/fields',
 		query
 	);
 
+	const fields = await apiFetch( { path } );
 	dispatch.receiveFieldsQuery( path, fields );
 }
 
