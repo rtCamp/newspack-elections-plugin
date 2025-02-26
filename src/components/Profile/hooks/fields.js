@@ -20,11 +20,9 @@ export const useFieldsOfType = (props, fieldType) => {
 export const useProfileFields = (props) => {
 
 	const {context} = props
-
 	const profile = useProfileFromContext(context) ?? {}
-	
 	let fields = useFields()
-
+	
 	fields = fields.map( ( field ) => {
 	
 		let val
@@ -33,8 +31,8 @@ export const useProfileFields = (props) => {
 		} else if(field.type === "taxonomy"){
 
 			val = profile?.profile?.[field.slug]
-
-			if(val.length < 1){
+			
+			if(!val || val.length < 1){
 				val = ""
 			} else {
 				val = val.map((f) => f.name).join(", ")
