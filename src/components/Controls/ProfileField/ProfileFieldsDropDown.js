@@ -6,7 +6,7 @@ import { __ } from "@wordpress/i18n"
 
 import { DropdownMenu } from '@wordpress/components';
 
-import { useRawField } from "./../../Profile"
+import { useField } from "./../../../profile-fields"
 import { ProfileFieldsMenu } from './ProfileFieldsMenu';
 
 const StyledDropdownMenu = styled( DropdownMenu )`
@@ -20,7 +20,7 @@ export default function ProfileFieldsDropDown( props ) {
 		selectedValue
 	} = props
 
-	const CurrentField = useRawField(selectedValue)
+	const CurrentField = useField(selectedValue)
 
 
 	return (

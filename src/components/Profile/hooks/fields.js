@@ -5,6 +5,8 @@ import { store as coreStore } from "@wordpress/core-data";
 
 import { useProfileFromContext } from "./profile";
 
+import { useField, useFields } from "./../../../profile-fields"
+
 export const useFieldsOfType = (props, fieldType) => {
 	const fields = useProfileFields(props)
 	const fieldsofType = fields.filter( (f) => f.type === fieldType)
@@ -12,14 +14,7 @@ export const useFieldsOfType = (props, fieldType) => {
 }
 
 
-export const useRawFields = () => {
 
-	const fields = useSelect( ( select ) => {
-		return select( coreStore ).getEntityRecords( 'govpack', 'fields', { per_page: '-1' } ) ?? [];
-	}, [ ] );
-
-	return fields
-}
 
 
 export const useProfileFields = (props) => {
@@ -28,7 +23,7 @@ export const useProfileFields = (props) => {
 
 	const profile = useProfileFromContext(context) ?? {}
 	
-	let fields = useRawFields()
+	let fields = useFields()
 
 	fields = fields.map( ( field ) => {
 	
@@ -83,26 +78,6 @@ export const useProfileFieldAttributes = (props) => {
 	}
 }
 
-
-export const useRawField = ( fieldKey ) => {
-	
-	const fields = useRawFields()
-
-	
-	if(fields.length === 0){
-		return new Object()
-	}
-
-	if(fieldKey === null){
-		return new Object()
-	}
-
-	const field = fields.filter( (field) => {
-		return field.slug === fieldKey
-	})[0] ?? null;
-
-	return field  ;
-}
 
 export const useFieldAttributes = (props) => {
 
@@ -191,7 +166,7 @@ export const useFieldAttributes = (props) => {
 	}
 
 	return {
-		field: useRawField(fieldKey),
+		field: useField(fieldKey),
 		fieldType,
 		fieldKey,
 		setFieldKey,

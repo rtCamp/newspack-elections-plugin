@@ -6,7 +6,9 @@ import { useSelect, useDispatch } from '@wordpress/data';
 import { store as blockEditorStore } from "@wordpress/block-editor"
 
 import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from "./../components/Controls/ProfileField"
-import { useFieldsOfType, useProfileFieldAttributes, useRawField, useRawFields, useProfileFields } from './../components/Profile';
+import { useFieldsOfType, useProfileFieldAttributes, useProfileFields } from './../components/Profile';
+
+import { useField, useFields } from "./../profile-fields"
 
 const featureName = "gp/field-aware"
 
@@ -89,7 +91,7 @@ const FieldAwareEdit = (props) => {
 	const { setField : setFieldAttribute, isControlledByContext, fieldKey, fieldType, ...restProfileProps } =  useProfileFieldAttributes(props) 
 	const fieldsofType = useFieldsOfType(props, fieldType)
 	const fields = useProfileFields(props)
-	const availableFields = useRawFields()
+	const availableFields = useFields()
 	
 	const contextProvidingBlock = useSelect( (select) => {
 		const profileRows = select(blockEditorStore).getBlockParentsByBlockName(clientId, "govpack/profile-row")

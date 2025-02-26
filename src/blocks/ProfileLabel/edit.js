@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from "@wordpress/block-editor"
 
 
-import { useRawField } from "./../../components/Profile"
+import { useField } from "./../../profile-fields"
 import { useUpdateBlockMetaName } from "../utils"
 
 function Edit( {attributes, setAttributes, context, ...props} ) {
@@ -36,7 +36,7 @@ function Edit( {attributes, setAttributes, context, ...props} ) {
 		})
 	}
 	
-	const field = useRawField(fieldKey)
+	const field = useField(fieldKey)
 
 	let calculatedLabel;
 	if(!label && field){
