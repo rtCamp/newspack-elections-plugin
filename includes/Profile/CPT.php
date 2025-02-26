@@ -93,7 +93,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 		add_filter( 'govpack_profile_register_meta_field_args', [ __CLASS__, 'filter_meta_registration_for_links' ], 10, 2 );
 		
 		add_action( 'init', [ __CLASS__, 'add_rest_fields' ] );
-		add_action( 'rest_api_init', [ __CLASS__, 'register_rest_endpoint' ] );
+		
 		
 		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_x_meta_fields_to_twitter' ], 10, 5 );
 
@@ -353,11 +353,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 		return $data;
 	}
 
-	public static function register_rest_endpoint() {
-		( new RestRoute( 'profile' ) )->endpoint(
-			( new ProfileFieldsEndpoint() )->readable()
-		)->register();
-	}
+	
 
 	/**
 	 * Publishes Posts with ID passed. Handle the bulk actions from List Table

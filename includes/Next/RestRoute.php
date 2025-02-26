@@ -4,7 +4,7 @@ namespace Govpack;
 use PO;
 use WP_REST_Server;
 
-use Govpack\Abstracts\RestEndpoint;
+use Govpack\Next\RestEndpoint;
 
 class RestRoute {
 

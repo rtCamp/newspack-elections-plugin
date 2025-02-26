@@ -5,10 +5,8 @@ import { useFieldsOfType, useProfileFieldAttributes } from './../../components/P
 
 export const FieldBlockEdit = (props) => {
 
-	//const {editProps = {}} = props
 	const blockProps = useBlockProps();
-	//console.log("FieldBlockEdit blockProps", blockProps, editProps)
-	
+
 	const { isControlledByContext } =  useProfileFieldAttributes( props ) 
 
 	const { 

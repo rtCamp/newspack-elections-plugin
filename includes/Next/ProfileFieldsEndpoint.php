@@ -1,12 +1,12 @@
 <?php 
-namespace Govpack;
+namespace Govpack\Next;
 
 use Govpack\Profile\CPT;
 use WP_Error;
 use WP_REST_Request;
 
 
-class ProfileFieldsEndpoint extends \Govpack\Abstracts\RestEndpoint {
+class ProfileFieldsEndpoint extends \Govpack\Next\RestEndpoint {
 
 
 	public function schema(): array|null {
@@ -43,7 +43,7 @@ class ProfileFieldsEndpoint extends \Govpack\Abstracts\RestEndpoint {
 						]
 					);
 				},
-				Profile\CPT::fields()->to_array() 
+				CPT::fields()->to_array() 
 			) 
 		);
 	}

@@ -1,5 +1,5 @@
 <?php 
-namespace Govpack\Abstracts;
+namespace Govpack\Next;
 
 use WP_REST_Request;
 use WP_REST_Server;
