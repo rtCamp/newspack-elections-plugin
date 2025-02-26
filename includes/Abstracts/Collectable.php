@@ -8,8 +8,11 @@ abstract class Collectable implements InterfacesCollectable {
 
 	protected string $slug;
 
-	public function slug() : string {
+	public function slug(): string {
 		return $this->slug;
 	}
 
+	abstract function to_array(): array;
+	
+	abstract function to_rest(): array; 
 }

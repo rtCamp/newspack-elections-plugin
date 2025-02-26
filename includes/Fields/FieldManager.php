@@ -37,16 +37,7 @@ class FieldManager extends \Govpack\Abstracts\Collection implements \Govpack\Int
 		}
 	}
 
-	public function to_array(): array {
-
-		$arr = [];
-
-		foreach ( $this->collection as $field ) {
-			$arr[] = $field->to_array();
-		}
-
-		return $arr;
-	}
+	
 
 	public function get_by_source( string $source ): array {
 		return array_filter(

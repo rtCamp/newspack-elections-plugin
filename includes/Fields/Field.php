@@ -128,6 +128,13 @@ class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interface
 		return $val;
 	}
 
+	public function to_rest(): array {
+		$data         = $this->to_array();
+		$data['type'] = $this->type->slug;
+
+		return $data;
+	}
+
 	public function format( $raw_value ) {
 		return $this->type->format( $raw_value );
 	}
@@ -152,12 +159,5 @@ class Field extends \Govpack\Abstracts\Collectable implements \Govpack\Interface
 
 	public function is_block_enabled(): bool {
 		return $this->allow_block;
-	}
-
-	public function for_rest(): array {
-		$data         = $this->to_array();
-		$data['type'] = $this->type->slug;
-
-		return $data;
 	}
 }

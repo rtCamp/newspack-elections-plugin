@@ -126,18 +126,9 @@ class ProfileFieldsRestController extends GovpackRESTController {
 			}
 		}
 
-		$fields = array_values(
-			array_map(
-				function ( $field ) {
-					return $field->for_rest();
-				},
-				\Govpack\Profile\CPT::fields()->all() 
-			)
-		);
-
 
 		$fields = \array_filter(
-			$fields,
+			\Govpack\Profile\CPT::fields()->to_rest(),
 			function ( $field ) use ( $prepared_args ) {
 				// Loop each parameter, 
 				// if it doesn't exist within the field then return false to filter it out

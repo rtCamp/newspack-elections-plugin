@@ -42,4 +42,15 @@ abstract class FieldType extends Collectable implements CollectableInterface {
 	public function __toString() {
 		return $this->slug;
 	}
+
+	public function to_array(): array {
+		return [
+			'slug'  => $this->slug,
+			'label' => $this->label,
+		];
+	}
+
+	public function to_rest(): array {
+		return $this->to_array();
+	}
 }
