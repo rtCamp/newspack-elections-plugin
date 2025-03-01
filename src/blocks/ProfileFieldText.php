@@ -60,8 +60,6 @@ class ProfileFieldText extends \Govpack\Blocks\ProfileField {
 
 		$variations = [];
 
-
-		
 		foreach ( \Govpack\Profile\CPT::fields()->of_format( $this->field_type ) as $field ) {
 			$variation = [
 				'category'    => 'govpack-profile-fields',

@@ -130,7 +130,7 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	}
 
 	public function get_field_by_taxonomy( string $tax ) {
-		return \Govpack\Profile\CPT::fields()->find( 'taxonomy', $tax );
+		return \Govpack\Profile\CPT::fields()->where( 'taxonomy', $tax )->all();
 	}
 
 	/**

@@ -20,12 +20,14 @@ class FieldRegistry extends \Govpack\Abstracts\Registry {
 
 	
 
-	public function __construct( FieldTypeRegistry $types ) {
+	public function set_types( FieldTypeRegistry $types ) {
 		$this->types = $types;
-		parent::__construct();
-	}   
+	}
 
-	
+	public function get_types(): array {
+		return $this->types->all();
+	}
+
 	public function register_fields( Field|array $fields_input ) {
 		if ( is_array( $fields_input ) ) {
 			foreach ( $fields_input as $field ) {
@@ -36,48 +38,23 @@ class FieldRegistry extends \Govpack\Abstracts\Registry {
 		}
 	}
 
-	
-
 	public function get_by_source( string $source ): array {
-		return array_filter(
-			$this->collection->all(),
-			function ( $field ) use ( $source ) {
-				return $field->source === $source;
-			}
-		);
-	}
-
-	public function find( string $prop, mixed $value ): array {
-		return array_filter(
-			$this->collection->all(),
-			function ( $field ) use ( $prop, $value ) {
-				if ( ! isset( $field->$prop ) ) {
-					return false;
-				}
-				return $field->$prop === $value;
-			}
-		);
-	}
-
-	public function get_types(): array {
-		return $this->types->all();
+		return $this->where("source", $source)->all();
 	}
 
 	public function of_type( $type ): array {
-		return array_filter(
-			$this->collection->all(),
-			function ( $field ) use ( $type ) {
-				return $field->type->slug === $type;
-			}
-		);
+		return $this->filter(
+				function ( $field ) use ( $type ) {
+					return $field->type->slug === $type;
+				}
+			)->all();
 	}
 
 	public function of_format( $format ): array {
-		return array_filter(
-			$this->collection->all(),
+		return $this->filter(
 			function ( $field ) use ( $format ) {
 				return in_array( $format, $field->type->formats );
 			}
-		);
+		)->all();
 	}
 }

@@ -2,11 +2,14 @@
 
 namespace Govpack\Collection;
 
+use \IteratorAggregate;
 interface CollectionInterface {
 
-	public function get( string $item ): Collectable|bool;
+	public function get( string $item ): Collectable | null;
 
 	public function register( Collectable $item );
+
+	public function add( Collectable $item );
 
 	public function exists( string $item );
 

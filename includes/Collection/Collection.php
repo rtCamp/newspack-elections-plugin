@@ -2,9 +2,31 @@
 
 namespace Govpack\Collection;
 
+use ArrayIterator;
+use ArrayObject;
+use Traversable;
+
 abstract class Collection implements CollectionInterface {
 
-	public $collection = [];
+	public array $collection;
+
+	public function __construct($items = []){
+
+		$this->collection = [];
+
+		if(!empty($items)){
+			$this->collection = $items;
+		}
+
+	}
+
+	public function get( string $item ): null | Collectable {
+		if ( $this->exists( $item ) ) {
+			return $this->collection[ $item ];
+		}
+
+		return null;
+	}
 
 	public function add( Collectable $item ) {
 		$this->collection[ $item->slug() ] = $item;
@@ -15,21 +37,11 @@ abstract class Collection implements CollectionInterface {
 		return isset( $this->collection[ $slug ] );
 	}
 
-	public function get( string $item ): bool|Collectable {
-		if ( $this->exists( $item ) ) {
-			return $this->collection[ $item ];
-		}
-
-		return false;
-	}
-
-
 	public function all(): array {
 		return $this->collection;
 	}
 
 	public function to_array(): array {
-
 		$arr = [];
 
 		foreach ( $this->collection as $item ) {
@@ -48,4 +60,36 @@ abstract class Collection implements CollectionInterface {
 			array_values( $this->all() ) 
 		);
 	}
+
+	public function create($items){
+		$callingClass = get_class($this);
+		$collection = new $callingClass($items);
+		return $collection;
+	}
+
+	public function filter( callable $callback ) : self {
+		$filtered = array_filter($this->collection, $callback);
+		return $this->create($filtered);
+	}
+
+	public function where( string $prop, mixed $value ): self {
+		return $this->filter(
+			function ( $item ) use ( $prop, $value ) {
+				if ( ! isset( $item->$prop ) ) {
+					return false;
+				}
+				return $item->$prop === $value;
+			}
+		);
+	}
+
+	public function count() : int {
+		return count($this->collection);
+	}
+
+	public function length() : int {
+		return $this->count();
+	}
+
+
 }

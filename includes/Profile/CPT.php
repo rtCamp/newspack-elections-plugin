@@ -115,7 +115,8 @@ class CPT extends \Govpack\Abstracts\PostType {
 	public static function register_profile_fields() {
 		
 		self::$field_types = new FieldTypeRegistry();
-		self::$fields      = new FieldRegistry( self::$field_types );
+		self::$fields = new FieldRegistry();
+		self::$fields->set_types(self::$field_types);
 		
 
 		self::$fields->register_fields(
