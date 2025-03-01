@@ -2,7 +2,7 @@
 
 namespace Govpack\Fields;
 
-class FieldManager extends \Govpack\Collection\Collection implements \Govpack\Collection\CollectionInterface {
+class FieldRegistry extends \Govpack\Abstracts\Registry {
 
 	/**
 	 * Field Groups
@@ -18,12 +18,11 @@ class FieldManager extends \Govpack\Collection\Collection implements \Govpack\Co
 	 */
 	public FieldTypeRegistry $types;
 
-	public function get( string $item ): Field|bool {
-		return parent::get( $item );
-	}
+	
 
 	public function __construct( FieldTypeRegistry $types ) {
 		$this->types = $types;
+		parent::__construct();
 	}   
 
 	
@@ -41,7 +40,7 @@ class FieldManager extends \Govpack\Collection\Collection implements \Govpack\Co
 
 	public function get_by_source( string $source ): array {
 		return array_filter(
-			$this->collection,
+			$this->collection->all(),
 			function ( $field ) use ( $source ) {
 				return $field->source === $source;
 			}
@@ -50,7 +49,7 @@ class FieldManager extends \Govpack\Collection\Collection implements \Govpack\Co
 
 	public function find( string $prop, mixed $value ): array {
 		return array_filter(
-			$this->collection,
+			$this->collection->all(),
 			function ( $field ) use ( $prop, $value ) {
 				if ( ! isset( $field->$prop ) ) {
 					return false;
@@ -66,7 +65,7 @@ class FieldManager extends \Govpack\Collection\Collection implements \Govpack\Co
 
 	public function of_type( $type ): array {
 		return array_filter(
-			$this->collection,
+			$this->collection->all(),
 			function ( $field ) use ( $type ) {
 				return $field->type->slug === $type;
 			}
@@ -75,7 +74,7 @@ class FieldManager extends \Govpack\Collection\Collection implements \Govpack\Co
 
 	public function of_format( $format ): array {
 		return array_filter(
-			$this->collection,
+			$this->collection->all(),
 			function ( $field ) use ( $format ) {
 				return in_array( $format, $field->type->formats );
 			}

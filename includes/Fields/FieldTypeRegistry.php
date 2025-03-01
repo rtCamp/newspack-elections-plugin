@@ -3,18 +3,16 @@
 
 namespace Govpack\Fields;
 
+use Govpack\Abstracts\Registry;
 use Govpack\Fields\FieldType;
 
-use Govpack\Collection\Collection;
-use Govpack\Collection\CollectionInterface;
-use Govpack\Collection\Collectable;
 
-class FieldTypeRegistry extends Collection implements CollectionInterface {
+class FieldTypeRegistry extends Registry  {
 
 	use \Govpack\Instance;
 
 	public function __construct() {
-		$this->collection = [];
+		parent::__construct();
 		$this->create_types();
 	}
 

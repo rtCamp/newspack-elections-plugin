@@ -6,12 +6,7 @@ abstract class Collection implements CollectionInterface {
 
 	public $collection = [];
 
-	public function register( Collectable $item ) {
-
-		if ( $this->exists( $item ) ) {
-			throw new \Exception( sprintf( 'Trying to add Type that already exists (%s)', $item->slug() ) );
-		}
-
+	public function add( Collectable $item ) {
 		$this->collection[ $item->slug() ] = $item;
 	}
 

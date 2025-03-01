@@ -7,17 +7,9 @@
 
 namespace Govpack\Profile;
 
-use Govpack\ProfileFieldsEndpoint;
-
-
-use Govpack\RestField;
-use Govpack\RestRoute;
-use Govpack\Abstracts\Rest_Endpoint;
-use Govpack\Capabilities;
-
 
 use Govpack\Fields\FieldTypeRegistry;
-use Govpack\Fields\FieldManager;
+use Govpack\Fields\FieldRegistry;
 use Govpack\Fields\Field;
 use Govpack\Fields\LinkField;
 use Govpack\Fields\TaxonomyField;
@@ -48,7 +40,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 	/**
 	 * Fields used for the profile
 	 */
-	public static FieldManager $fields;
+	public static FieldRegistry $fields;
 
 	/**
 	 * Fields used for the profile
@@ -123,43 +115,43 @@ class CPT extends \Govpack\Abstracts\PostType {
 	public static function register_profile_fields() {
 		
 		self::$field_types = new FieldTypeRegistry();
-		self::$fields      = new FieldManager( self::$field_types );
+		self::$fields      = new FieldRegistry( self::$field_types );
 		
 
 		self::$fields->register_fields(
 			[
 				( new Field( 'name', 'Name' ) )
-					->group( FieldManager::GROUPS['ABOUT'] ),
+					->group( FieldRegistry::GROUPS['ABOUT'] ),
 				( new Field( 'name_prefix', 'Prefix' ) )
-					->group( FieldManager::GROUPS['ABOUT'] ),
+					->group( FieldRegistry::GROUPS['ABOUT'] ),
 				( new Field( 'name_first', 'First Name' ) )
-					->group( FieldManager::GROUPS['ABOUT'] ),
+					->group( FieldRegistry::GROUPS['ABOUT'] ),
 				( new Field( 'name_middle', 'Middle Name(s)' ) )
-					->group( FieldManager::GROUPS['ABOUT'] ),
+					->group( FieldRegistry::GROUPS['ABOUT'] ),
 				( new Field( 'name_last', 'Last Name' ) )
-					->group( FieldManager::GROUPS['ABOUT'] ),
+					->group( FieldRegistry::GROUPS['ABOUT'] ),
 				( new Field( 'name_suffix', 'Suffix' ) )
-					->group( FieldManager::GROUPS['ABOUT'] ),
+					->group( FieldRegistry::GROUPS['ABOUT'] ),
 				( new Field( 'nickname', 'Nickname' ) )
-					->group( FieldManager::GROUPS['ABOUT'] ),
+					->group( FieldRegistry::GROUPS['ABOUT'] ),
 				( new Field( 'occupation', 'Occupation' ) )
-					->group( FieldManager::GROUPS['ABOUT'] ),
+					->group( FieldRegistry::GROUPS['ABOUT'] ),
 				( new Field( 'education', 'Education' ) )
-					->group( FieldManager::GROUPS['ABOUT'] ),
+					->group( FieldRegistry::GROUPS['ABOUT'] ),
 				( new Field( 'gender', 'Gender' ) )
-					->group( FieldManager::GROUPS['ABOUT'] ),
+					->group( FieldRegistry::GROUPS['ABOUT'] ),
 				( new Field( 'race', 'Race' ) )
-					->group( FieldManager::GROUPS['ABOUT'] ),
+					->group( FieldRegistry::GROUPS['ABOUT'] ),
 				( new Field( 'ethnicity', 'Ethnicity' ) )
-					->group( FieldManager::GROUPS['ABOUT'] ),
+					->group( FieldRegistry::GROUPS['ABOUT'] ),
 				( new Field( 'date_of_birth', 'Date of Birth', 'date' ) )
-					->group( FieldManager::GROUPS['ABOUT'] ),
+					->group( FieldRegistry::GROUPS['ABOUT'] ),
 				( new Field( 'date_of_death', 'Date of Death', 'date' ) )
-					->group( FieldManager::GROUPS['ABOUT'] ),
+					->group( FieldRegistry::GROUPS['ABOUT'] ),
 				( new Field( 'district', 'District' ) )
-					->group( FieldManager::GROUPS['ABOUT'] ),
+					->group( FieldRegistry::GROUPS['ABOUT'] ),
 				( new Field( 'endorsements', 'Endorsements' ) )
-					->group( FieldManager::GROUPS['ABOUT'] ),
+					->group( FieldRegistry::GROUPS['ABOUT'] ),
 
 				( new LinkField( 'contact_form_url', 'Contact Form URL', 'link' ) )->link_text( 'Contact Form' ),
 				new Field( 'date_assumed_office', 'Date Assumed Office', 'date' ),
