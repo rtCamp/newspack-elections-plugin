@@ -41,16 +41,11 @@
 			"lineHeight": true,
 			"textAlign": true
 		},
-		"gp/field-aware" : true
+		"gp/field-aware"  : {
+			"type" : "date"
+		}
 	},
-	
 	"attributes": {
-		"field" : {
-			"type": "object",
-			"default" : {
-				"type" : "date"
-			}
-		},
 		"dateFormat" : {
 			"type": "string"
 		}

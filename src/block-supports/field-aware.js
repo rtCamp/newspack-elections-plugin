@@ -1,9 +1,10 @@
 
 import clsx from 'clsx';
 
-import { hasBlockSupport, getBlockDefaultClassName} from '@wordpress/blocks';
+import { hasBlockSupport, getBlockDefaultClassName, getBlockSupport} from '@wordpress/blocks';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { store as blockEditorStore } from "@wordpress/block-editor"
+import { useEffect } from "@wordpress/element"
 
 import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from "./../components/Controls/ProfileField"
 import { useFieldsOfType, useProfileFieldAttributes, useProfileFields } from './../components/Profile';
@@ -21,6 +22,7 @@ const FIELD_TYPE_SCHEMA = {
 
 function hasAttribute( attributes = {}, attribute = "field", subAttribute = false ) {
 
+	console.log("in hasAttributes", attributes)
 	// if the parent "field" attribute is missing, always false
 	if ( attribute in ( attributes ?? {} )  === false) {
 		return false
@@ -42,8 +44,6 @@ function hasAttribute( attributes = {}, attribute = "field", subAttribute = fals
 
 export function useBlockProps( props ) {
 
-
-
 	if(!hasAttribute(props)){
 		return props;
 	}
@@ -64,32 +64,37 @@ export function useBlockProps( props ) {
 	return props;
 }
 
-export function addAttribute( settings ) {
-	// Allow blocks to specify their own attribute definition with default values if needed.
-	if(hasAttribute(settings.attributes)){
-		return settings;
+export function addAttribute( blockSettings ) {
+
+	if ( !hasBlockSupport( blockSettings, featureName ) ) {
+		return blockSettings
 	}
 
-	if ( hasBlockSupport( settings, featureName ) ) {
-		// Gracefully handle if settings.attributes is undefined.
-		settings.attributes = {
-			...settings.attributes,
+	const blockSuport = getBlockSupport(blockSettings.name, featureName) 
+	
+	// Allow blocks to specify their own attribute definition with default values if needed.
+	if(!hasAttribute(blockSettings.attributes)){
+		// Gracefully handle if blockSettings.attributes is undefined.
+		blockSettings.attributes = {
+			...blockSettings.attributes,
 			field: FIELD_TYPE_SCHEMA,
 		};
+
+		if(blockSuport.type){
+			blockSettings.attributes.field.default.type = blockSuport.type
+		}
 	}
 
-	return settings;
+	return blockSettings;	
 }
 
 const FieldAwareEdit = (props) => {
-	
-	const {clientId} = props
-	const attributes = useSelect( (select) => select( blockEditorStore ).getBlockAttributes( clientId ) || {} )
-	
+
+	const {clientId, name : blockName, attributes} = props
 	const {updateBlockAttributes} = useDispatch(blockEditorStore)
-	
-	const { setField : setFieldAttribute, isControlledByContext, fieldKey, fieldType, ...restProfileProps } =  useProfileFieldAttributes(props) 
-	const fieldsofType = useFieldsOfType(props, fieldType)
+
+
+	const { setField : setFieldAttribute, isControlledByContext, fieldKey, fieldType } =  useProfileFieldAttributes(props) 
 	const fields = useProfileFields(props)
 	const availableFields = useFields()
 	
@@ -98,6 +103,18 @@ const FieldAwareEdit = (props) => {
 		const parentRowClientId = profileRows.at(profileRows.length - 1)
 		return select(blockEditorStore).getBlock(parentRowClientId)
 	} )
+
+	const blockSupports = getBlockSupport(blockName, featureName)
+	
+	useEffect( () => {
+
+		if(!blockSupports?.type){
+			return
+		}
+
+		console.log("useEffect block supports type is set", fieldType, blockSupports?.type)
+
+	}, [blockSupports?.type, fieldType])
 
 	const updateContextProviderAttribute = (attrs) => {
 		updateBlockAttributes(contextProvidingBlock.clientId, attrs )
@@ -111,13 +128,11 @@ const FieldAwareEdit = (props) => {
 	const setFieldKey = isControlledByContext ? setFieldContext : setFieldAttribute
 	
 	const onSelectField = (fieldKey) => {
-	
 		const field = availableFields.find( (f) => f.slug === fieldKey)
 		const newFieldAttr = {
 			type : field.type,
 			key: fieldKey
 		}
-
 		setFieldKey(newFieldAttr)
 	}
 	
