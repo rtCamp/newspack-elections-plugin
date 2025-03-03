@@ -22,7 +22,7 @@ const FIELD_TYPE_SCHEMA = {
 
 function hasAttribute( attributes = {}, attribute = "field", subAttribute = false ) {
 
-	console.log("in hasAttributes", attributes)
+
 	// if the parent "field" attribute is missing, always false
 	if ( attribute in ( attributes ?? {} )  === false) {
 		return false
@@ -106,16 +106,16 @@ const FieldAwareEdit = (props) => {
 
 	const blockSupports = getBlockSupport(blockName, featureName)
 	
+	/*
 	useEffect( () => {
 
 		if(!blockSupports?.type){
 			return
 		}
 
-		console.log("useEffect block supports type is set", fieldType, blockSupports?.type)
-
 	}, [blockSupports?.type, fieldType])
-
+	*/
+	
 	const updateContextProviderAttribute = (attrs) => {
 		updateBlockAttributes(contextProvidingBlock.clientId, attrs )
 	}
