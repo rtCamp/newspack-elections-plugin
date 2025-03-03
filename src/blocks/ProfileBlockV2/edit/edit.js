@@ -17,7 +17,7 @@ import {
 import { useInstanceId } from '@wordpress/compose';
 import { useRef, useEffect} from '@wordpress/element';
 import { ToolbarGroup, Toolbar, Icon, ResizableBox, SelectControl } from '@wordpress/components';
-import { useDispatch } from "@wordpress/data";
+import { useDispatch, useSelect} from "@wordpress/data";
 import { external, postAuthor } from '@wordpress/icons';
 
 
@@ -214,13 +214,30 @@ function ProfileBlockEdit( props ) {
 	const resizeProps = useResizeProps(props);
 	const {setProfile, resetProfile, profileId = null, profile, profileQuery} = useProfileAttributes(props)
 
+	const { isBlockSelected, hasSelectedInnerBlock, selectedInnerBlock, selectedInnerBlockParentsOfType, isSelectedBlockProfileGroup } = useSelect( (select) => {
+		const isBlockSelected = select(blockEditorStore).isBlockSelected(clientId)
+		const hasSelectedInnerBlock = select(blockEditorStore).hasSelectedInnerBlock(clientId, true)
+		const selectedInnerBlock = hasSelectedInnerBlock ? select(blockEditorStore).getSelectedBlock() : null
+		const isSelectedBlockProfileGroup = (selectedInnerBlock?.name === "govpack/profile-row-group")
+		const selectedInnerBlockParentsOfType = selectedInnerBlock ?  select(blockEditorStore).getBlockParentsByBlockName(selectedInnerBlock?.clientId, "govpack/profile-row-group" ) : []
+		//const showAppender = (isBlockSelected || (hasSelectedInnerBlock && !isSelectedBlockProfileGroup))
+		return {
+			isBlockSelected,
+			hasSelectedInnerBlock,
+			selectedInnerBlock,
+			isSelectedBlockProfileGroup,
+			selectedInnerBlockParentsOfType,
+		}
+	});
 
-
+	console.log("isSelectedBlockProfileGroup", isSelectedBlockProfileGroup)
+	const showAppender = (isBlockSelected || (hasSelectedInnerBlock && !isSelectedBlockProfileGroup && selectedInnerBlockParentsOfType.length === 0))
     const ref = useRef(null);
 	const instanceId = useInstanceId( ProfileBlockEdit );
 	const blockProps = useBlockProps( { ref } );
 	const {children, ...innerBlockProps} = useInnerBlocksProps(blockProps, {
-		template : DEFAULT_TEMPLATE
+		template : DEFAULT_TEMPLATE,
+		renderAppender : (showAppender) ? InnerBlocks.ButtonBlockAppender : false
 	})
 
 	const { __unstableMarkNextChangeAsNotPersistent } = useDispatch( blockEditorStore );

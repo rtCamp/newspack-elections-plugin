@@ -8,6 +8,7 @@ import { ProfileSelector } from "./profile-selector"
 
 import { ProfileSelector as ProfileSelectorPlaceholder } from "./../../../components/ProfileSelector.jsx"
 
+import "./../editor.scss"
 /**
  * The ProfileEdit Component's only job is to show the correct sub-component
  * 1. The Profile Selection UI
