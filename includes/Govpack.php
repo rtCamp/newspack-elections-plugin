@@ -30,6 +30,7 @@ class Govpack {
 	private null|Dev_Helpers $dev;
 	private FrontEnd $front_end;
 	private Admin $admin;
+	private Fields $fields;
 	private Blocks $blocks;
 	private Icons $icons;
 	public Version $version;
@@ -124,6 +125,8 @@ class Govpack {
 
 		$this->text_domain();
 
+		$this->fields();
+		
 		// Custom Post Types & taxonomies.
 		self::post_types();
 		self::taxonomies();
@@ -132,13 +135,15 @@ class Govpack {
 			\Govpack\CLI::init();
 		}
 
-		//$this->rest_api();
+	
 
 		( new ProfileBindingSource() )->register();
 
 		\Govpack\Importer\Importer::hooks();
 		\Govpack\Admin\Export::hooks(); 
 		\Govpack\Widgets::hooks();
+
+		
 
 		if ( is_admin() ) {
 			$this->admin();
@@ -189,7 +194,16 @@ class Govpack {
 		return $this->icons;
 	}
 
-	
+	public function fields(): Fields {
+
+		if ( ! isset( $this->fields ) ) {
+			
+			$this->fields = new Fields( $this );
+		}
+		
+		return $this->fields;
+	}
+
 	public function register_blocks_supports() {
 		BlockSupports\FieldAware::register();
 	}

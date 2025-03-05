@@ -7,13 +7,13 @@
 
 namespace Govpack\Profile;
 
-
 use Govpack\Fields\FieldTypeRegistry;
 use Govpack\Fields\FieldRegistry;
 use Govpack\Fields\Field;
 use Govpack\Fields\LinkField;
 use Govpack\Fields\TaxonomyField;
 use Govpack\Fields\PostField;
+use Govpack\Fields\FieldType\Text as TextField;
 
 use Govpack\ProfileLinks;
 use Govpack\ProfileLinkServices;
@@ -45,7 +45,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 	/**
 	 * Fields used for the profile
 	 */
-	public static FieldTypeRegistry $field_types;
+	//public static FieldTypeRegistry $field_types;
 
 	/**
 	 * Groups in which fields may appear;
@@ -57,6 +57,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 	 */
 	public static function init() {
 		$pt = self::instance();
+		
 		self::hooks();
 		self::register_profile_fields();
 	}
@@ -114,9 +115,9 @@ class CPT extends \Govpack\Abstracts\PostType {
 
 	public static function register_profile_fields() {
 		
-		self::$field_types = new FieldTypeRegistry();
+
 		self::$fields = new FieldRegistry();
-		self::$fields->set_types(self::$field_types);
+		//self::$fields->set_types(self::$field_types);
 		
 
 		self::$fields->register_fields(
@@ -232,9 +233,9 @@ class CPT extends \Govpack\Abstracts\PostType {
 		}
 	}
 
-	public static function get_field_types(): array {
-		return self::$fields->get_types();
-	}
+	//public static function get_field_types(): array {
+	//  return self::$fields->get_types();
+	//}
 	
 
 	public static function fallback_x_meta_fields_to_twitter( mixed $value, int $object_id, string $meta_key, bool $single, string $meta_type ): mixed {

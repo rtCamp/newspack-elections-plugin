@@ -57,6 +57,7 @@ class Field extends \Govpack\Collection\Collectable implements \Govpack\Collecti
 	 */
 	public null|string $default = '';
 
+
 	/**
 	 * Properties to include in array
 	 * 
@@ -72,6 +73,8 @@ class Field extends \Govpack\Collection\Collectable implements \Govpack\Collecti
 	 */
 	protected bool $allow_block = true;
 
+
+
 	/**
 	 * Construct the profile field
 	 */
@@ -86,7 +89,7 @@ class Field extends \Govpack\Collection\Collectable implements \Govpack\Collecti
 	public function slug(): string {
 		return $this->slug;
 	}
-	
+
 	public function set_type( FieldType|string|null $type ) {
 
 		if ( is_a( $type, '\Govpack\Field\FieldType' ) ) {

@@ -142,10 +142,10 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 
 
 	public function create_field_type_variations(): array {
-		$types      = \Govpack\Profile\CPT::get_field_types();
+		
 		$variations = [];
 
-		foreach ( $types as $type ) {
+		foreach ( $this->plugin->fields()->types() as $type ) {
 			$variation = [
 				'category'    => 'newspack-elections-profile-row-type',
 				'name'        => sprintf( 'profile-field-%s', $type->slug ),
