@@ -83,6 +83,10 @@ class Field extends \Govpack\Collection\Collectable implements \Govpack\Collecti
 		$this->set_type( $type );
 	}
 
+	public function slug(): string {
+		return $this->slug;
+	}
+	
 	public function set_type( FieldType|string|null $type ) {
 
 		if ( is_a( $type, '\Govpack\Field\FieldType' ) ) {
