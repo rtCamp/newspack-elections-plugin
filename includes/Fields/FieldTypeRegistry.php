@@ -10,4 +10,7 @@ use Govpack\Fields\FieldType;
 class FieldTypeRegistry extends Registry {
 
 	use \Govpack\Instance;
+
+	public function register( $field ) {
+	}
 }

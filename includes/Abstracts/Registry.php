@@ -8,16 +8,17 @@ use Govpack\Collection\Collectable;
 abstract class Registry extends Collection {
 
 
-	public function register( Collectable $item ) {
+	public function register( string|Collectable $item ) {
 
 		if ( $this->exists( $item ) ) {
-			throw new \Exception( sprintf( 'Trying to add duplicate Item (%s) to a registry.', $item->slug() ) );
+			$label = is_a( $item, '\Govpack\Collection\Collectable' ) ? $item->slug() : $item;
+			throw new \Exception( sprintf( 'Trying to add duplicate Item (%s) to a registry.', $label ) );
 		}
 
-		parent::add( $item );
+		$this->add( $item );
 	}
 
-	public function add( Collectable $item ) {
-		// do nothing, cannot add directly
+	public function add( string|Collectable $item ) {
+		$this->collection[ $item ] = $item;
 	}
 }

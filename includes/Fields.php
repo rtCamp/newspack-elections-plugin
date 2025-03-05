@@ -25,7 +25,7 @@ class Fields {
 		];
 
 		foreach ( $types as $type ) {
-			$this->registry->register( new $type() );
+			$this->registry->register( $type );
 		}
 	}
 
