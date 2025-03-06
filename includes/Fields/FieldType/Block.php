@@ -10,7 +10,8 @@ class Block extends \Govpack\Fields\FieldType {
 	 * Machine readable name to reference the field
 	 */
 	public string $slug = 'block';
-
+	const SLUG = "block";
+	
 	/**
 	 * Type Label
 	 * 

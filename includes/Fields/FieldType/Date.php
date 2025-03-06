@@ -10,6 +10,7 @@ class Date extends Text {
 	 * Machine readable name to reference the field
 	 */
 	public string $slug = 'date';
+	const SLUG = "date";
 
 	/**
 	 * Type Label

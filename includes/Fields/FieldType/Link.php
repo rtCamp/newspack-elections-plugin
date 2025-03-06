@@ -10,7 +10,7 @@ class Link extends \Govpack\Fields\FieldType {
 	 * Machine readable name to reference the field
 	 */
 	public string $slug = 'link';
-
+	const SLUG = "link";
 	/**
 	 * Type Label
 	 * 

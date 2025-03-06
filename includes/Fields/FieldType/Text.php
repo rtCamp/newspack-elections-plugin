@@ -10,6 +10,7 @@ class Text extends \Govpack\Fields\FieldType {
 	 * Machine readable name to reference the field
 	 */
 	public string $slug = 'text';
+	const SLUG = "text";
 
 	/**
 	 * Type Label
