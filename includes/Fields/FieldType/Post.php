@@ -2,7 +2,7 @@
 
 namespace Govpack\Fields\FieldType;
 
-class Block extends \Govpack\Fields\FieldType {
+class Post extends \Govpack\Fields\FieldType {
 
 	/**
 	 * Type Slug
@@ -10,7 +10,7 @@ class Block extends \Govpack\Fields\FieldType {
 	 * Machine readable name to reference the field
 	 */
 	public string $slug = 'block';
-	const SLUG = "block";
+
 	
 	/**
 	 * Type Label

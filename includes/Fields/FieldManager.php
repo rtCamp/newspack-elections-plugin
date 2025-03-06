@@ -2,7 +2,7 @@
 
 namespace Govpack\Fields;
 
-class FieldRegistry extends \Govpack\Abstracts\Registry {
+class FieldManager extends \Govpack\Abstracts\Registry {
 
 	/**
 	 * Field Groups

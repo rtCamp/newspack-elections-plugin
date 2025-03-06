@@ -39,6 +39,8 @@ abstract class FieldType extends Collectable implements CollectableInterface {
 		return $value;
 	}
 
+	
+
 	public function __toString() {
 		return $this->slug;
 	}

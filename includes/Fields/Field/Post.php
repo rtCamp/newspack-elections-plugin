@@ -1,10 +1,11 @@
 <?php
 
-namespace Govpack\Fields;
+namespace Govpack\Fields\Field;
 
+use Govpack\Fields\FieldType;
 use Govpack\Profile\Profile;
 
-class PostField extends Field {
+class Post extends \Govpack\Fields\Field {
 
 	/**
 	 * Field Source

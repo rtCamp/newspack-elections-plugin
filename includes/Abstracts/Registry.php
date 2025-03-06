@@ -2,17 +2,10 @@
 
 namespace Govpack\Abstracts;
 
-abstract class Registry {
+use Govpack\Collection\Collection;
 
-	private array $items;
+abstract class Registry extends Collection {
 
-	public function __construct(){
-		$this->items = array();
-	}
-
-	public function all() : array {
-		return $this->items;
-	}
 
 	public function register( mixed $item, string | null $name = null ) {
 
@@ -24,19 +17,20 @@ abstract class Registry {
 		$this->add($item, $name);
 	}
 
-	protected function add( mixed $item, string | null $name = null ) {
+	public function add( mixed $item, string | null $name = null ) {
 		if(!$name){
-			$this->items[] = $item;
+			$this->collection[] = $item;
 		} else {
-			$this->items[$name] = $item;
+			$this->collection[$name] = $item;
 		}
 	}
+
 
 	public function exists( mixed $item ): bool {
 
 
 		// if the passed item is used as a key on the items collection, check it exists and return true
-		if($this->isset($item)){
+		if((is_string($item) || \is_int($item)) &&  $this->isset($item)){
 			return true;
 		}
 
@@ -54,11 +48,6 @@ abstract class Registry {
 		return isset($items[$key]);
 	}
 
-	public function get( string $item ): mixed {
-		if ( $this->exists( $item ) ) {
-			return $this->items[ $item ];
-		}
 
-		return null;
-	}
+
 }	

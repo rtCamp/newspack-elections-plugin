@@ -10,7 +10,7 @@ class Taxonomy extends \Govpack\Fields\FieldType {
 	 * Machine readable name to reference the field
 	 */
 	public string $slug = 'taxonomy';
-	const SLUG = "taxonomy";
+
 
 	/**
 	 * Type Label

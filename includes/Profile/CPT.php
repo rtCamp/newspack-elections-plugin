@@ -7,13 +7,14 @@
 
 namespace Govpack\Profile;
 
-use Govpack\Fields\FieldTypeRegistry;
-use Govpack\Fields\FieldRegistry;
-use Govpack\Fields\Field;
-use Govpack\Fields\LinkField;
-use Govpack\Fields\TaxonomyField;
-use Govpack\Fields\PostField;
-use Govpack\Fields\FieldType\Text as TextField;
+
+use Govpack\Fields\FieldManager;
+
+use Govpack\Fields\Field\Post as PostField;
+use Govpack\Fields\Field\Text as TextField;
+use Govpack\Fields\Field\Link as LinkField;
+use Govpack\Fields\Field\Date as DateField;
+use Govpack\Fields\Field\Taxonomy as TaxonomyField;
 
 use Govpack\ProfileLinks;
 use Govpack\ProfileLinkServices;
@@ -40,7 +41,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 	/**
 	 * Fields used for the profile
 	 */
-	public static FieldRegistry $fields;
+	public static FieldManager $fields;
 
 	/**
 	 * Fields used for the profile
@@ -116,72 +117,72 @@ class CPT extends \Govpack\Abstracts\PostType {
 	public static function register_profile_fields() {
 		
 
-		self::$fields = new FieldRegistry();
+		self::$fields = new FieldManager();
 		//self::$fields->set_types(self::$field_types);
 		
 
 		self::$fields->register_fields(
 			[
-				( new Field( 'name', 'Name' ) )
-					->group( FieldRegistry::GROUPS['ABOUT'] ),
-				( new Field( 'name_prefix', 'Prefix' ) )
-					->group( FieldRegistry::GROUPS['ABOUT'] ),
-				( new Field( 'name_first', 'First Name' ) )
-					->group( FieldRegistry::GROUPS['ABOUT'] ),
-				( new Field( 'name_middle', 'Middle Name(s)' ) )
-					->group( FieldRegistry::GROUPS['ABOUT'] ),
-				( new Field( 'name_last', 'Last Name' ) )
-					->group( FieldRegistry::GROUPS['ABOUT'] ),
-				( new Field( 'name_suffix', 'Suffix' ) )
-					->group( FieldRegistry::GROUPS['ABOUT'] ),
-				( new Field( 'nickname', 'Nickname' ) )
-					->group( FieldRegistry::GROUPS['ABOUT'] ),
-				( new Field( 'occupation', 'Occupation' ) )
-					->group( FieldRegistry::GROUPS['ABOUT'] ),
-				( new Field( 'education', 'Education' ) )
-					->group( FieldRegistry::GROUPS['ABOUT'] ),
-				( new Field( 'gender', 'Gender' ) )
-					->group( FieldRegistry::GROUPS['ABOUT'] ),
-				( new Field( 'race', 'Race' ) )
-					->group( FieldRegistry::GROUPS['ABOUT'] ),
-				( new Field( 'ethnicity', 'Ethnicity' ) )
-					->group( FieldRegistry::GROUPS['ABOUT'] ),
-				( new Field( 'date_of_birth', 'Date of Birth', 'date' ) )
-					->group( FieldRegistry::GROUPS['ABOUT'] ),
-				( new Field( 'date_of_death', 'Date of Death', 'date' ) )
-					->group( FieldRegistry::GROUPS['ABOUT'] ),
-				( new Field( 'district', 'District' ) )
-					->group( FieldRegistry::GROUPS['ABOUT'] ),
-				( new Field( 'endorsements', 'Endorsements' ) )
-					->group( FieldRegistry::GROUPS['ABOUT'] ),
+				( new TextField( 'name', 'Name' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new TextField( 'name_prefix', 'Prefix' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new TextField( 'name_first', 'First Name' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new TextField( 'name_middle', 'Middle Name(s)' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new TextField( 'name_last', 'Last Name' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new TextField( 'name_suffix', 'Suffix' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new TextField( 'nickname', 'Nickname' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new TextField( 'occupation', 'Occupation' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new TextField( 'education', 'Education' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new TextField( 'gender', 'Gender' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new TextField( 'race', 'Race' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new TextField( 'ethnicity', 'Ethnicity' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new DateField( 'date_of_birth', 'Date of Birth') )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new DateField( 'date_of_death', 'Date of Death') )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new TextField( 'district', 'District' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
+				( new TextField( 'endorsements', 'Endorsements' ) )
+					->group( FieldManager::GROUPS['ABOUT'] ),
 
 				( new LinkField( 'contact_form_url', 'Contact Form URL', 'link' ) )->link_text( 'Contact Form' ),
-				new Field( 'date_assumed_office', 'Date Assumed Office', 'date' ),
-				new Field( 'appointed_by', 'Appointed By', 'date' ),
-				new Field( 'appointed_date', 'Appointed On', 'date' ),
-				new Field( 'confirmed_date', 'Confirmed On', 'date' ),
-				new Field( 'term_end_date', 'Term Ended/Ends On', 'date' ),
-				new Field( 'congress_year', 'Congressional Year', 'date' ),
+				new DateField( 'date_assumed_office', 'Date Assumed Office'),
+				new TextField( 'appointed_by', 'Appointed By' ),
+				new DateField( 'appointed_date', 'Appointed On'),
+				new DateField( 'confirmed_date', 'Confirmed On'),
+				new DateField( 'term_end_date', 'Term Ended/Ends On'),
+				new DateField( 'congress_year', 'Congressional Year'),
 
-				new Field( 'email_official', 'Official Email Address' ),
-				new Field( 'email_legislative', 'Legislative Email Address' ),
-				new Field( 'email_other', 'Other Email Address' ),
+				new TextField( 'email_official', 'Official Email Address' ),
+				new TextField( 'email_legislative', 'Legislative Email Address' ),
+				new TextField( 'email_other', 'Other Email Address' ),
 
 				new LinkField( 'email_capitol', 'Capitol Email Address' ),
 				new LinkField( 'email_district', 'District Email Address' ),
 				new LinkField( 'email_campaign', 'Campaign Email Address' ),
 			
-				new Field( 'address_capitol', 'Capitol Address' ),
-				new Field( 'address_district', 'District Address' ),
-				new Field( 'address_campaign', 'Campaign Address' ),
+				new TextField( 'address_capitol', 'Capitol Address' ),
+				new TextField( 'address_district', 'District Address' ),
+				new TextField( 'address_campaign', 'Campaign Address' ),
 
-				new Field( 'phone_capitol', 'Capitol Phone Number' ),
-				new Field( 'phone_district', 'District Phone Number' ),
-				new Field( 'phone_campaign', 'Campaign Phone Number' ),
+				new TextField( 'phone_capitol', 'Capitol Phone Number' ),
+				new TextField( 'phone_district', 'District Phone Number' ),
+				new TextField( 'phone_campaign', 'Campaign Phone Number' ),
 
-				new Field( 'fax_capitol', 'Capitol Fax Number' ),
-				new Field( 'fax_district', 'District Fax Number' ),
-				new Field( 'fax_campaign', 'Campaign Fax Number' ),
+				new TextField( 'fax_capitol', 'Capitol Fax Number' ),
+				new TextField( 'fax_district', 'District Fax Number' ),
+				new TextField( 'fax_campaign', 'Campaign Fax Number' ),
 
 				( new LinkField( 'website_personal', 'Personal Website URL', 'link' ) ),
 				( new LinkField( 'website_campaign', 'Campaign Website URL', 'link' ) ),
@@ -190,20 +191,20 @@ class CPT extends \Govpack\Abstracts\PostType {
 				( new LinkField( 'rss', 'RSS Feed URL', 'link' ) )->link_text( 'RSS Feed' ),
 				( new LinkField( 'linkedin', 'Linkedin URL', 'link' ) )->link_text( 'LinkedIn Profile' ),
 				
-				new Field( 'wikipedia', 'Wikipedia ID' ),
-				new Field( 'google_entity_id', 'Google Entity ID' ),
+				new TextField( 'wikipedia', 'Wikipedia ID' ),
+				new TextField( 'google_entity_id', 'Google Entity ID' ),
 
 				new LinkField( 'gab', 'Gab', 'link' ),
 				new LinkField( 'rumble', 'Rumble', 'link' ),
 
-				new Field( 'opensecrets_id', 'Open Secrets' ),
-				new Field( 'balletpedia_id', 'BallotPedia' ),
-				new Field( 'openstates_id', 'OpenStates' ),
-				new Field( 'fec_id', 'FEC ID' ),
-				new Field( 'govtrack_id', 'GovTrack ID' ),
-				new Field( 'votesmart_id', 'VoteSmart ID' ),
-				new Field( 'usio_id', 'BioGuide' ),
-				new Field( 'icpsr_id', 'Voteview' ),
+				new TextField( 'opensecrets_id', 'Open Secrets' ),
+				new TextField( 'balletpedia_id', 'BallotPedia' ),
+				new TextField( 'openstates_id', 'OpenStates' ),
+				new TextField( 'fec_id', 'FEC ID' ),
+				new TextField( 'govtrack_id', 'GovTrack ID' ),
+				new TextField( 'votesmart_id', 'VoteSmart ID' ),
+				new TextField( 'usio_id', 'BioGuide' ),
+				new TextField( 'icpsr_id', 'Voteview' ),
 
 				( new PostField( 'bio', 'Biography' ) )->key( 'post_excerpt' ),
 				( new PostField( 'postname', 'Name' ) )->key( 'post_title' ),

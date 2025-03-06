@@ -21,11 +21,11 @@ class Fields {
 			FieldType\Date::class,
 			FieldType\Link::class,
 			FieldType\Taxonomy::class,
-			FieldType\Block::class,
+			FieldType\Post::class,
 		];
 
 		foreach ( $types as $type ) {
-			$this->registry->register( $type );
+			$this->registry->register( new $type() );
 		}
 	}
 

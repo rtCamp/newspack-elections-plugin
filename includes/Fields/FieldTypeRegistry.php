@@ -14,7 +14,7 @@ class FieldTypeRegistry extends Registry {
 	public function register( mixed $item, string | null $name = null ) {
 		
 		if($name === null){
-			$name = $item::SLUG;
+			$name = $item->slug();
 		}
 		
 		if($this->isset($name)){

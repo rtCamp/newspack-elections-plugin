@@ -1,9 +1,9 @@
 <?php
 
-namespace Govpack\Fields;
+namespace Govpack\Fields\Field;
 
 use Govpack\Profile\Profile;
-class TaxonomyField extends Field {
+class Taxonomy extends \Govpack\Fields\Field {
 
 
 	/**
@@ -24,11 +24,10 @@ class TaxonomyField extends Field {
 	 * Construct the profile field
 	 */
 	public function __construct( string $slug, string $label, string $taxonomy, string $type = 'text' ) {
-		parent::__construct( $slug, $label, $type );
+		parent::__construct( $slug, $label, 'taxonomy' );
 		$this->taxonomy = $taxonomy;
 		$this->meta_key = null;
 		$this->source   = 'taxonomy';
-		$this->set_type( 'taxonomy' );
 	}
 	
 	public function raw( Profile $model ) {

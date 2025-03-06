@@ -1,10 +1,11 @@
 <?php
 
-namespace Govpack\Fields;
+namespace Govpack\Fields\Field;
 
 use Govpack\Profile\Profile;
+use Govpack\Fields\FieldType;
 
-class LinkField extends Field {
+class Link extends \Govpack\Fields\Field {
 
 
 	/**
@@ -25,11 +26,7 @@ class LinkField extends Field {
 	 * Construct the profile field
 	 */
 	public function __construct( string $slug, string $label, FieldType|string|null $type = null ) {
-		$this->slug     = $slug;
-		$this->label    = $label;
-		$this->meta_key = $this->slug;
-
-		$this->set_type( 'link' );
+		parent::__construct($slug, $label, "link");
 	}
 	
 	public function link_text( string $link_text ): self {

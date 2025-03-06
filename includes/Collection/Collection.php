@@ -28,7 +28,7 @@ abstract class Collection implements CollectionInterface {
 		return null;
 	}
 
-	public function add( Collectable $item ) {
+	public function add( mixed $item, string | null $name = null  ) {
 		$this->collection[ $item->slug() ] = $item;
 	}
 

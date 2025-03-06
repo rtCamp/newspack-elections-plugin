@@ -95,6 +95,7 @@ class Field extends \Govpack\Collection\Collectable implements \Govpack\Collecti
 		if ( is_a( $type, '\Govpack\Field\FieldType' ) ) {
 			$this->type = $type;
 		} elseif ( is_string( $type ) ) {
+			var_dump($type);
 			$this->type = FieldTypeRegistry::instance()->get( $type );
 		}
 
