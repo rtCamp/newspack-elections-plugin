@@ -18,7 +18,7 @@ import './view.scss';
 
 const { attributes, category, title } = metadata;
 
-console.log(deprecated)
+
 
 registerBlockType( metadata.name, {
 	apiVersion: 3,

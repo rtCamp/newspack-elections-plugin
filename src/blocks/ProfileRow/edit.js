@@ -8,7 +8,7 @@ import {isEmpty} from "lodash"
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, InspectorControls, useInnerBlocksProps, store as blockEditorStore} from "@wordpress/block-editor"
+import { useBlockProps, InspectorControls, useInnerBlocksProps, store as blockEditorStore, RichText} from "@wordpress/block-editor"
 
 import { useSelect} from '@wordpress/data';
 import { store as blocksStore } from "@wordpress/blocks"
@@ -59,7 +59,6 @@ const MetaInspectorControl = ({
 function useConditionalTemplate(clientId){
 
 	const defaultTemplate = [
-		['govpack/profile-label', {}],
 		['core/paragraph', {
 			"placeholder" : "Profile Value..."
 		}]
@@ -78,24 +77,19 @@ function useConditionalTemplate(clientId){
 	return variation?.innerBlocks ?? defaultTemplate 
 }
 
-
-
-
 function Edit( props ) {
 
 
 	const {attributes, setAttributes, context, clientId} = props  
-
 	const blockProps = useBlockProps();
-	const { setFieldKey, fieldKey, fieldType, value, field, profile } =  useProfileFieldAttributes(props) 
-	const fieldsofType = useFieldsOfType(props, fieldType)
-
+	const { fieldKey, fieldType, value, field } =  useProfileFieldAttributes(props) 
 	const hasValue = !isEmpty(value)
+
 	/**
 	 * Get Data From Parent Blocks
 	 */
 	const { 
-		'govpack/showLabels' : ContextShowLabels = null, 
+		'govpack/showLabels' : GroupShowLabels = null, 
 	} = context
 
 	/**
@@ -103,7 +97,7 @@ function Edit( props ) {
 	 */
 	const { 
 		label = null,
-		showLabel,
+		showLabel : RowShowLabel,
 		hideFieldIfEmpty,
 	} = attributes
 
@@ -133,49 +127,21 @@ function Edit( props ) {
 		}
 	} )
 
-
-	/*
-	useEffect( () => {
-
-		if(!contentBlock){
-			return
-		}
-
-		updateBlock(contentBlock.clientId, {
-			attributes : {
-				...contentBlock.attributes,
-				metadata : {
-					bindings: {
-						content: {
-							...contentBlock.attributes.metadata.bindings.content,
-							args : {
-								key : meta_key,
-								...contentBlock.attributes.metadata.bindings.content.args,
-							}
-						}
-					}
-				}
-			}
+	const updateLabel = (label) => {
+		setAttributes({
+			label
 		})
+	}
 
-	}, [meta_key])
-	*/
-
-	/*
-	useEffect( () => {
-		if(!wasBlockJustInserted){
-			return;
-		}
-
-		let insertAt = (currentBlockIndex + 1)
-		let block = createBlock("govpack/profile-separator")
-		insertBlock(block, insertAt, parentBlockClientId )
-
-	}, [wasBlockJustInserted])
-	*/
 	
+	let calculatedLabel;
+	if(!label && field){
+		calculatedLabel = field?.label ?? "";
+	} else {
+		calculatedLabel = label;
+	}
 
-	const displayLabel = (label ? label : field?.label ?? "")
+	const showLabel = (RowShowLabel !== null) ? RowShowLabel : GroupShowLabels ?? true
 
 	// Should we output the UI to show that a field is hidden?
 	// Add a class to the blockProps if so
@@ -191,6 +157,18 @@ function Edit( props ) {
 				hideFieldIfEmpty = {hideFieldIfEmpty}
 				fieldType = {fieldType}
 			/>
+
+			{showLabel && (
+				<div className="gp-block-row-label">
+					<RichText
+						tagName="span" // The tag here is the element output and editable in the admin
+						value={ calculatedLabel } // Any existing content, either from the database or an attribute default
+						allowedFormats={ [ 'core/bold', 'core/italic' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
+						onChange={ ( label ) => updateLabel( label ) } // Store updated content as a block attribute
+						placeholder={ __( 'Label...' ) } // Display this text before any content has been added by the user
+					/>
+				</div>
+			)}
 
 			{ children }
 		</div>

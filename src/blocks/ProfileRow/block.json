@@ -62,7 +62,8 @@
 			"default": "full"
 		},
 		"showLabel" : {
-			"type": "boolean"
+			"type": "boolean",
+			"default" : true
 		},
 		"hideFieldIfEmpty" : {
 			"type": "boolean",
