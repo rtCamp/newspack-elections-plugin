@@ -16,7 +16,7 @@ import { store as blocksStore } from "@wordpress/blocks"
 
 import {Panel, PanelBody, PanelRow, ToggleControl} from '@wordpress/components';
 import {useProfileFieldAttributes, useFieldsOfType} from "./../../components/Profile"
-
+import { useFields } from '../../profile-fields';
 
 
 const MetaInspectorControl = ({
@@ -72,7 +72,6 @@ function useConditionalTemplate(clientId){
 		}
 	} )
 	
-	console.log("conditionalTemplate", variation, variation?.innerBlocks ?? defaultTemplate)
 
 	return variation?.innerBlocks ?? defaultTemplate 
 }
@@ -84,6 +83,9 @@ function Edit( props ) {
 	const blockProps = useBlockProps();
 	const { fieldKey, fieldType, value, field } =  useProfileFieldAttributes(props) 
 	const hasValue = !isEmpty(value)
+	const fields = useFields()
+
+	console.log("fields", fields)
 
 	/**
 	 * Get Data From Parent Blocks
@@ -97,7 +99,7 @@ function Edit( props ) {
 	 */
 	const { 
 		label = null,
-		showLabel : RowShowLabel,
+		showLabel : RowShowLabel = null,
 		hideFieldIfEmpty,
 	} = attributes
 
@@ -142,6 +144,8 @@ function Edit( props ) {
 	}
 
 	const showLabel = (RowShowLabel !== null) ? RowShowLabel : GroupShowLabels ?? true
+
+
 
 	// Should we output the UI to show that a field is hidden?
 	// Add a class to the blockProps if so

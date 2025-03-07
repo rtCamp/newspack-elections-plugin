@@ -12,6 +12,8 @@ use Govpack\Fields\FieldManager;
 use Govpack\Fields\Field\PostProperty as PostPropertyField;
 use Govpack\Fields\Field\Text as TextField;
 use Govpack\Fields\Field\Link as LinkField;
+use Govpack\Fields\Field\Email as EmailField;
+use Govpack\Fields\Field\Phone as PhoneField;
 use Govpack\Fields\Field\Date as DateField;
 use Govpack\Fields\Field\Taxonomy as TaxonomyField;
 
@@ -163,21 +165,21 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new DateField( 'term_end_date', 'Term Ended/Ends On' ),
 				new DateField( 'congress_year', 'Congressional Year' ),
 
-				new TextField( 'email_official', 'Official Email Address' ),
-				new TextField( 'email_legislative', 'Legislative Email Address' ),
-				new TextField( 'email_other', 'Other Email Address' ),
+				new EmailField( 'email_official', 'Official Email Address' ),
+				new EmailField( 'email_legislative', 'Legislative Email Address' ),
+				new EmailField( 'email_other', 'Other Email Address' ),
 
-				new LinkField( 'email_capitol', 'Capitol Email Address' ),
-				new LinkField( 'email_district', 'District Email Address' ),
-				new LinkField( 'email_campaign', 'Campaign Email Address' ),
+				new EmailField( 'email_capitol', 'Capitol Email Address' ),
+				new EmailField( 'email_district', 'District Email Address' ),
+				new EmailField( 'email_campaign', 'Campaign Email Address' ),
 			
 				new TextField( 'address_capitol', 'Capitol Address' ),
 				new TextField( 'address_district', 'District Address' ),
 				new TextField( 'address_campaign', 'Campaign Address' ),
 
-				new TextField( 'phone_capitol', 'Capitol Phone Number' ),
-				new TextField( 'phone_district', 'District Phone Number' ),
-				new TextField( 'phone_campaign', 'Campaign Phone Number' ),
+				new PhoneField( 'phone_capitol', 'Capitol Phone Number' ),
+				new PhoneField( 'phone_district', 'District Phone Number' ),
+				new PhoneField( 'phone_campaign', 'Campaign Phone Number' ),
 
 				new TextField( 'fax_capitol', 'Capitol Fax Number' ),
 				new TextField( 'fax_district', 'District Fax Number' ),

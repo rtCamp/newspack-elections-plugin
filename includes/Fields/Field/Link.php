@@ -25,8 +25,9 @@ class Link extends \Govpack\Fields\Field {
 	/**
 	 * Construct the profile field
 	 */
-	public function __construct( string $slug, string $label, FieldType|string|null $type = null ) {
-		parent::__construct($slug, $label, "link");
+	public function __construct( string $slug, string $label, FieldType|string|null $type = 'link' ) {
+
+		parent::__construct( $slug, $label, $type );
 	}
 	
 	public function link_text( string $link_text ): self {

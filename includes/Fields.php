@@ -20,6 +20,8 @@ class Fields {
 			FieldType\Text::class,
 			FieldType\Date::class,
 			FieldType\Link::class,
+			FieldType\Email::class,
+			FieldType\Phone::class,
 			FieldType\Taxonomy::class,
 			FieldType\PostProperty::class,
 		];
