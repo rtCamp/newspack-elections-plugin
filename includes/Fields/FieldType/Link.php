@@ -28,7 +28,6 @@ class Link extends \Govpack\Fields\FieldType {
 
 	public function get_variation_inner_blocks(): array {
 		return [
-			[ 'govpack/profile-label', [] ],
 			[ 'govpack/profile-field-link', [ 'fieldType' => 'link' ] ],
 		];
 	}

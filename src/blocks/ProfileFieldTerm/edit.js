@@ -108,7 +108,7 @@ function EditTermBlock( props ) {
 	const { profileTerms, hasProfileTerms, isLoading } = useProfileTerms( profileId, selectedTaxonomy )
 	const hasProfile = (profileId);
 
-	console.log("blockProps", blockProps);
+
     return (
 		<>
 		<InspectorControls>
