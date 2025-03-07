@@ -230,7 +230,7 @@ function ProfileBlockEdit( props ) {
 		}
 	});
 
-	console.log("isSelectedBlockProfileGroup", isSelectedBlockProfileGroup)
+
 	const showAppender = (isBlockSelected || (hasSelectedInnerBlock && !isSelectedBlockProfileGroup && selectedInnerBlockParentsOfType.length === 0))
     const ref = useRef(null);
 	const instanceId = useInstanceId( ProfileBlockEdit );

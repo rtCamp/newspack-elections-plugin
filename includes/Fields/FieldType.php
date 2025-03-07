@@ -21,8 +21,21 @@ abstract class FieldType extends Collectable implements CollectableInterface {
 	 */
 	public string $label;
 
+	/**
+	 * Should Create Block Variations
+	 * 
+	 * Flag that controls if a field type should be used to create block variations
+	 */
+	public bool $should_create_block_variations = true;
+
+
 
 	public function get_variation_inner_blocks(): array {
+
+		if ( ! $this->should_create_block_variations ) {
+			return [];
+		}
+		
 		return [
 			[ 'govpack/profile-label', [] ],
 			[ 'core/paragraph', [] ],

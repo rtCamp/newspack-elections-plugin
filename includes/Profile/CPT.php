@@ -7,10 +7,9 @@
 
 namespace Govpack\Profile;
 
-
 use Govpack\Fields\FieldManager;
 
-use Govpack\Fields\Field\Post as PostField;
+use Govpack\Fields\Field\PostProperty as PostPropertyField;
 use Govpack\Fields\Field\Text as TextField;
 use Govpack\Fields\Field\Link as LinkField;
 use Govpack\Fields\Field\Date as DateField;
@@ -147,9 +146,9 @@ class CPT extends \Govpack\Abstracts\PostType {
 					->group( FieldManager::GROUPS['ABOUT'] ),
 				( new TextField( 'ethnicity', 'Ethnicity' ) )
 					->group( FieldManager::GROUPS['ABOUT'] ),
-				( new DateField( 'date_of_birth', 'Date of Birth') )
+				( new DateField( 'date_of_birth', 'Date of Birth' ) )
 					->group( FieldManager::GROUPS['ABOUT'] ),
-				( new DateField( 'date_of_death', 'Date of Death') )
+				( new DateField( 'date_of_death', 'Date of Death' ) )
 					->group( FieldManager::GROUPS['ABOUT'] ),
 				( new TextField( 'district', 'District' ) )
 					->group( FieldManager::GROUPS['ABOUT'] ),
@@ -157,12 +156,12 @@ class CPT extends \Govpack\Abstracts\PostType {
 					->group( FieldManager::GROUPS['ABOUT'] ),
 
 				( new LinkField( 'contact_form_url', 'Contact Form URL', 'link' ) )->link_text( 'Contact Form' ),
-				new DateField( 'date_assumed_office', 'Date Assumed Office'),
+				new DateField( 'date_assumed_office', 'Date Assumed Office' ),
 				new TextField( 'appointed_by', 'Appointed By' ),
-				new DateField( 'appointed_date', 'Appointed On'),
-				new DateField( 'confirmed_date', 'Confirmed On'),
-				new DateField( 'term_end_date', 'Term Ended/Ends On'),
-				new DateField( 'congress_year', 'Congressional Year'),
+				new DateField( 'appointed_date', 'Appointed On' ),
+				new DateField( 'confirmed_date', 'Confirmed On' ),
+				new DateField( 'term_end_date', 'Term Ended/Ends On' ),
+				new DateField( 'congress_year', 'Congressional Year' ),
 
 				new TextField( 'email_official', 'Official Email Address' ),
 				new TextField( 'email_legislative', 'Legislative Email Address' ),
@@ -206,8 +205,8 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new TextField( 'usio_id', 'BioGuide' ),
 				new TextField( 'icpsr_id', 'Voteview' ),
 
-				( new PostField( 'bio', 'Biography' ) )->key( 'post_excerpt' ),
-				( new PostField( 'postname', 'Name' ) )->key( 'post_title' ),
+				( new PostPropertyField( 'bio', 'Biography' ) )->key( 'post_excerpt' ),
+				( new PostPropertyField( 'postname', 'Name' ) )->key( 'post_title' ),
 
 				new TaxonomyField( 'party', 'Party', \Govpack\Tax\Party::TAX_SLUG ),
 				new TaxonomyField( 'state', 'State', \Govpack\Tax\State::TAX_SLUG ),

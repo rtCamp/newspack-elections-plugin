@@ -5,7 +5,7 @@ namespace Govpack\Fields\Field;
 use Govpack\Fields\FieldType;
 use Govpack\Profile\Profile;
 
-class Post extends \Govpack\Fields\Field {
+class PostProperty extends \Govpack\Fields\Field {
 
 	/**
 	 * Field Source
@@ -37,7 +37,7 @@ class Post extends \Govpack\Fields\Field {
 
 	public function __construct( string $slug, string $label, FieldType|string|null $type = null ) {
 	
-		parent::__construct( $slug, $label, 'block' );
+		parent::__construct( $slug, $label, 'post_property' );
 	}
 
 

@@ -35,6 +35,8 @@ class Text extends \Govpack\Fields\FieldType {
 	}
 
 	public function get_variation_inner_blocks(): array {
-		return [];
+		return [
+			[ 'govpack/profile-field-text' ],
+		];
 	}
 }

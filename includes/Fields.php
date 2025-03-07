@@ -21,7 +21,7 @@ class Fields {
 			FieldType\Date::class,
 			FieldType\Link::class,
 			FieldType\Taxonomy::class,
-			FieldType\Post::class,
+			FieldType\PostProperty::class,
 		];
 
 		foreach ( $types as $type ) {

@@ -35,4 +35,10 @@ class Date extends Text {
 		$timestamp = intval( $value );
 		return ( $timestamp / 1000 );
 	}
+
+	public function get_variation_inner_blocks(): array {
+		return [
+			[ 'govpack/profile-field-date' ],
+		];
+	}
 }
