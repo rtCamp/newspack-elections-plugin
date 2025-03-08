@@ -83,8 +83,7 @@ function Edit( props ) {
 	const blockProps = useBlockProps();
 	const { fieldKey, fieldType, value, field } =  useProfileFieldAttributes(props) 
 	const hasValue = !isEmpty(value)
-	const fields = useFields()
-
+	
 	/**
 	 * Get Data From Parent Blocks
 	 */
