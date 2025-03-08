@@ -27,6 +27,13 @@ class Taxonomy extends \Govpack\Fields\FieldType {
 	public array $formats = [ 'term' ];
 
 	/**
+	 * Default Block
+	 * 
+	 * Block used to output the field by default
+	 */
+	public ?string $default_block = "govpack/profile-field-term";
+
+	/**
 	 * Type Icon
 	 * 
 	 * An Icon to use for the Variation
@@ -38,10 +45,4 @@ class Taxonomy extends \Govpack\Fields\FieldType {
 	public function get_value_for_model() {
 	}
 
-
-	public function get_variation_inner_blocks(): array {
-		return [
-			[ 'govpack/profile-field-term' ],
-		];
-	}
 }

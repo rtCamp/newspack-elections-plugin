@@ -25,7 +25,15 @@ class Date extends Text {
 	 */
 	public array $formats = [ 'text', 'date' ];
 
-	
+
+	/**
+	 * Default Block
+	 * 
+	 * Block used to output the field by default
+	 */
+	public ?string $default_block = "govpack/profile-field-date";
+
+
 	public function variation_icon(): string {
 		return 'calendar';
 	}
@@ -36,9 +44,4 @@ class Date extends Text {
 		return ( $timestamp / 1000 );
 	}
 
-	public function get_variation_inner_blocks(): array {
-		return [
-			[ 'govpack/profile-field-date' ],
-		];
-	}
 }

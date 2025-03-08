@@ -25,13 +25,7 @@ class Phone extends Link {
 	 */
 	public array $formats = [ 'link' ];
 
-
-	public function get_variation_inner_blocks(): array {
-		return [
-			[ 'govpack/profile-field-link' ],
-		];
-	}
-
+	
 
 	public function variation_icon(): string {
 		return 'phone';

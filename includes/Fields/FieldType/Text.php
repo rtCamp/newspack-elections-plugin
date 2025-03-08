@@ -26,6 +26,13 @@ class Text extends \Govpack\Fields\FieldType {
 	public array $formats = [ 'text' ];
 
 	/**
+	 * Default Block
+	 * 
+	 * Block used to output the field by default
+	 */
+	public ?string $default_block = "govpack/profile-field-text";
+
+	/**
 	 * Type Icon
 	 * 
 	 * An Icon to use for the Variation
@@ -34,9 +41,4 @@ class Text extends \Govpack\Fields\FieldType {
 		return 'text';
 	}
 
-	public function get_variation_inner_blocks(): array {
-		return [
-			[ 'govpack/profile-field-text' ],
-		];
-	}
 }
