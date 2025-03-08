@@ -4,13 +4,14 @@ namespace Govpack;
 
 use Govpack\Fields\FieldTypeRegistry;
 use Govpack\Fields\FieldType;
+use Govpack\Fields\FieldManager;
 
 class Fields {
 
-	private FieldTypeRegistry $registry;
-
+	private FieldTypeRegistry $types;
+	
 	public function __construct() {
-		$this->registry = FieldTypeRegistry::instance();
+		$this->types = FieldTypeRegistry::instance();
 		$this->register_field_types();
 	}
 
@@ -27,11 +28,15 @@ class Fields {
 		];
 
 		foreach ( $types as $type ) {
-			$this->registry->register( new $type() );
+			$this->types->register( new $type() );
 		}
 	}
 
 	public function types(): array {
-		return $this->registry->all();
+		return $this->types->all();
+	}
+
+	public function create_field_set() : FieldManager{
+		return new FieldManager();
 	}
 }
