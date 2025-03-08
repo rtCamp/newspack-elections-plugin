@@ -6,7 +6,7 @@ import {registerBlockSupports} from "./../block-supports"
 
 import { registerProfileBindingSource } from "./block-bindings"
 import { restoreBlocks } from "./restore-blocks";
-import { registerGovpackStore } from "./../profile-fields";
+import { registerGovpackStore, store } from "./../profile-fields";
 
 dispatch( 'core' ).addEntities( [ {
 	baseURL: '/govpack/v1/profile',
@@ -26,3 +26,5 @@ const requiredCoreBlocks = ["core/post-featured-image"]
 domReady( () => {
 	restoreBlocks(requiredCoreBlocks)
 })
+
+

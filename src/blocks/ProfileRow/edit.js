@@ -16,7 +16,7 @@ import { store as blocksStore } from "@wordpress/blocks"
 
 import {Panel, PanelBody, PanelRow, ToggleControl} from '@wordpress/components';
 import {useProfileFieldAttributes, useFieldsOfType} from "./../../components/Profile"
-import { useFields } from '../../profile-fields';
+import { useFields, store } from '../../profile-fields';
 
 
 const MetaInspectorControl = ({
@@ -84,8 +84,6 @@ function Edit( props ) {
 	const { fieldKey, fieldType, value, field } =  useProfileFieldAttributes(props) 
 	const hasValue = !isEmpty(value)
 	const fields = useFields()
-
-	console.log("fields", fields)
 
 	/**
 	 * Get Data From Parent Blocks
