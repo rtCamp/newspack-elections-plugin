@@ -99,7 +99,7 @@ class ProfileFieldsRestController extends GovpackRESTController {
 		} 
 
 		return rest_ensure_response(
-			$field->for_rest()
+			$field->to_rest()
 		);
 	}
 
