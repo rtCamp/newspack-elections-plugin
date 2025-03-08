@@ -32,8 +32,8 @@ class Fields {
 		}
 	}
 
-	public function types(): array {
-		return $this->types->all();
+	public function types(): FieldTypeRegistry {
+		return $this->types;
 	}
 
 	public function create_field_set() : FieldManager{

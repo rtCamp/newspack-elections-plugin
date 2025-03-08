@@ -231,7 +231,10 @@ class Govpack {
 	}
 
 	public function rest_api() {
-		$controller = new \Govpack\REST\ProfileFieldsRestController();
-		$controller->register_routes();
+		$field_types_controller = new \Govpack\REST\FieldTypesRestController();
+		$field_types_controller->register_routes();
+
+		$fields_controller = new \Govpack\REST\ProfileFieldsRestController();
+		$fields_controller->register_routes();
 	}
 }
