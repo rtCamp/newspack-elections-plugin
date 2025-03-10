@@ -12,3 +12,15 @@ export const useFields = () => {
 		return select(store).getFields() ?? []
 	} )
 }
+
+export const useFieldType = ( slug ) => {
+	return useSelect( (select) => {
+		return select(store).getFieldType(slug) ?? {}
+	}, [slug] )
+}
+
+export const useFieldTypes = () => {
+	return useSelect( (select) => {
+		return select(store).getFieldTypes() ?? []
+	} )
+}
