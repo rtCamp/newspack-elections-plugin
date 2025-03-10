@@ -10,7 +10,7 @@ import { InspectorControls, store as blockEditorStore  } from "@wordpress/block-
 
 
 import { FieldBlockEdit } from '../../components/field-block-edit';
-import { useProfileFieldAttributes } from "./../../components/Profile"
+import { useProfileFieldAttributes } from "./../../profile"
 
 
 import { useSelect } from "@wordpress/data";

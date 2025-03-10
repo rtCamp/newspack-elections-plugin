@@ -4,12 +4,13 @@ import clsx from 'clsx';
 import { hasBlockSupport, getBlockDefaultClassName, getBlockSupport} from '@wordpress/blocks';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { store as blockEditorStore } from "@wordpress/block-editor"
-import { useEffect } from "@wordpress/element"
+
 
 import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from "./../components/Controls/ProfileField"
-import { useFieldsOfType, useProfileFieldAttributes, useProfileFields } from './../components/Profile';
+import { useProfileFieldAttributes} from "./../profile"
 
-import { useField, useFields } from "./../profile-fields"
+import { useProfileFields } from './../profile';
+import { useFields } from "../fields"
 
 const featureName = "gp/field-aware"
 

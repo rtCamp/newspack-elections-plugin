@@ -1,79 +1,34 @@
+import { useSelect } from "@wordpress/data"
+import { store } from "."
 
-import { isObject } from "lodash"
-import {useSelect} from "@wordpress/data"
-import { store as coreStore } from "@wordpress/core-data";
-
-import { useProfileFromContext } from "./profile";
-
-import { useField, useFields } from "./../../../profile-fields"
-
-export const useFieldsOfType = (props, fieldType) => {
-	const fields = useProfileFields(props)
-	const fieldsofType = fields.filter( (f) => f.type === fieldType)
-	return fieldsofType
+export const useField = ( slug ) => {
+	return useSelect( (select) => {
+		return select(store).getField(slug) ?? {}
+	}, [slug] )
 }
 
-
-
-
-
-export const useProfileFields = (props) => {
-
-	const {context} = props
-	const profile = useProfileFromContext(context) ?? {}
-	let fields = useFields()
-	
-	fields = fields.map( ( field ) => {
-	
-		let val
-		if(field.type === "link"){
-			val = profile?.profile?.[field.slug].url || false
-		} else if(field.type === "taxonomy"){
-
-			val = profile?.profile?.[field.slug]
-			
-			if(!val || val.length < 1){
-				val = ""
-			} else {
-				val = val.map((f) => f.name).join(", ")
-			}
-
-		} else {
-			val = profile?.profile?.[field.slug] || false
-		}
-		
-
-		if(val && (typeof val === "string")){
-			val = val.trim()
-		}
-
-		return {
-			...field,
-			'value' : val
-		} 
-	})
-
-	return fields
+export const useFields = () => {
+	return useSelect( (select) => {
+		return select(store).getFields() ?? []
+	} )
 }
 
+export const useFieldType = ( slug ) => {
+	return useSelect( (select) => {
+		return select(store).getFieldType(slug) ?? {}
+	}, [slug] )
+}
 
-export const useProfileFieldAttributes = (props) => {
+export const useFieldTypes = () => {
+	return useSelect( (select) => {
+		return select(store).getFieldTypes() ?? []
+	} )
+}
 
-	
-	const {context} = props
-	const fieldAttrs  = useFieldAttributes(props)
-	const profile = useProfileFromContext( context )
-	const value = profile?.profile?.[fieldAttrs?.fieldKey] ?? null;
-	const profileId = profile.id
-	
-
-
-	return {
-		profileId,
-		profile,
-		value,
-		...fieldAttrs
-	}
+export const useFieldsOfType = ( type ) => {
+	return useSelect( (select) => {
+		return select(store).getFieldsOfType(type) ?? []
+	} )
 }
 
 
@@ -96,7 +51,6 @@ export const useFieldAttributes = (props) => {
 		localFieldType = attributes.fieldType
 	}
 
-	
 	let { 
 		'key' : inheritedFieldKey = null,
 		'type' : inheritedFieldType = null 

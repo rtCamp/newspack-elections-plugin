@@ -9,14 +9,15 @@ import {isEmpty} from "lodash"
  */
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls, useInnerBlocksProps, store as blockEditorStore, RichText} from "@wordpress/block-editor"
-
 import { useSelect} from '@wordpress/data';
 import { store as blocksStore } from "@wordpress/blocks"
+import {PanelBody, PanelRow, ToggleControl} from '@wordpress/components';
 
+/**
+ * Internal dependencies
+ */
+import { useProfileFieldAttributes } from "./../../profile"
 
-import {Panel, PanelBody, PanelRow, ToggleControl} from '@wordpress/components';
-import {useProfileFieldAttributes, useFieldsOfType} from "./../../components/Profile"
-import { useFields, store } from '../../profile-fields';
 
 
 const MetaInspectorControl = ({
@@ -84,6 +85,7 @@ function Edit( props ) {
 	const { fieldKey, fieldType, value, field } =  useProfileFieldAttributes(props) 
 	const hasValue = !isEmpty(value)
 	
+
 	/**
 	 * Get Data From Parent Blocks
 	 */

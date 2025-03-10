@@ -9,11 +9,13 @@ export function getFields( state ) {
 }
 
 export function getFieldTypes( state ) {
-
 	return Object.keys(state.types).map( key => state.types[key])
 }
 
 export function getFieldType( state, item) {
-	//console.log("getFieldType Selector", state, item)
 	return state.types[item]
+}
+
+export function getFieldsOfType( state, type ) {
+	return Object.values(state.fields).filter( (field) => field.type === type)
 }

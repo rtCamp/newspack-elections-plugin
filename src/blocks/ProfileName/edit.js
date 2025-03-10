@@ -4,16 +4,15 @@ import {isEmpty} from "lodash"
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, HeadingLevelDropdown, AlignmentControl, BlockControls, InspectorControls, PlainText} from "@wordpress/block-editor"
+import { useBlockProps, HeadingLevelDropdown, AlignmentControl, BlockControls, InspectorControls} from "@wordpress/block-editor"
 import { store as coreStore, useEntityProp } from '@wordpress/core-data'
 import { useSelect } from '@wordpress/data';
-import { useMemo, useEffect } from "@wordpress/element"
+import { useEffect } from "@wordpress/element"
 import { ToggleControl, TextControl, PanelBody } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { FieldBlockEdit } from '../../components/field-block-edit';
-import { useProfileFieldAttributes } from './../../components/Profile';
+import { useProfileFieldAttributes } from './../../profile';
 
 
 

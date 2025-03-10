@@ -1,8 +1,10 @@
 import { registerBlockBindingsSource } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import { store as coreEditorStore } from '@wordpress/editor';
-import {getProfile, useProfileField, useProfileFields} from "./../components/Profile"
+
 import { store as coreStore } from '@wordpress/core-data';
+
+import { useProfileFields} from "./../profile"
 
 function getProfileFields(select, context){
 	const {getEntityRecord} = select(coreStore)
@@ -14,6 +16,7 @@ function getProfileFields(select, context){
 
 	return record?.profile || {}
 }
+
 function registerProfileBindingSource(){
 
 	

@@ -7,17 +7,13 @@ import { __ } from '@wordpress/i18n';
 import { InspectorControls, useBlockProps } from "@wordpress/block-editor"
 import { store as coreDataStore } from '@wordpress/core-data';
 import { useSelect } from '@wordpress/data';
-import { Spinner, PanelBody, PanelRow, ToggleControl, TextControl, RangeControl,
-	__experimentalVStack as VStack
-} from "@wordpress/components";
+import { Spinner, PanelBody, PanelRow, ToggleControl, TextControl, RangeControl} from "@wordpress/components";
 import { decodeEntities } from '@wordpress/html-entities';
 
-import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from "../../components/Controls/ProfileField"
-import { useProfileFieldAttributes, useFieldsOfType } from "./../../components/Profile"
+import { useProfileFieldAttributes } from "./../../profile"
 
 import useProfileTerms from "./use-profile-terms"
 
-import { FieldBlockEdit } from '../../components/field-block-edit';
 
 
 const WideRangeControl = styled( RangeControl )`
