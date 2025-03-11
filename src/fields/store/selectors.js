@@ -16,6 +16,7 @@ export function getFieldType( state, item) {
 	return state.types[item]
 }
 
+
 export function getFieldsOfType( state, type ) {
 	return Object.values(state.fields).filter( (field) => field.type === type)
 }

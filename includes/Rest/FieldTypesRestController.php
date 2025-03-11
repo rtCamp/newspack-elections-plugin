@@ -7,7 +7,7 @@ use WP_REST_Server;
 use WP_REST_Request;
 use WP_REST_Response;
 
-use \Govpack\Govpack;
+use Govpack\Govpack;
 
 class FieldTypesRestController extends GovpackRESTController {
 
@@ -129,27 +129,29 @@ class FieldTypesRestController extends GovpackRESTController {
 		}
 
 		
-		$types = \array_filter(
-			Govpack::instance()->fields()->types()->to_rest(),
-			function ( $field ) use ( $prepared_args ) {
-				// Loop each parameter, 
-				// if it doesn't exist within the field then return false to filter it out
-				// then check the value, if it doesn't match then return false and filter
-				// hopefully this should remove all possible non-inclusions so the 
-				// final return true is all thats included
-				foreach ( $prepared_args as $param => $value ) {
+		$types = \array_values(
+			\array_filter(
+				Govpack::instance()->fields()->types()->to_rest(),
+				function ( $field ) use ( $prepared_args ) {
+					// Loop each parameter, 
+					// if it doesn't exist within the field then return false to filter it out
+					// then check the value, if it doesn't match then return false and filter
+					// hopefully this should remove all possible non-inclusions so the 
+					// final return true is all thats included
+					foreach ( $prepared_args as $param => $value ) {
 			
-					if ( ! isset( $field[ $param ] ) ) {
-						return false;
-					}
+						if ( ! isset( $field[ $param ] ) ) {
+							return false;
+						}
 				
-					if ( ! \in_array( $field[ $param ], $value ) ) {
-						return false;
+						if ( ! \in_array( $field[ $param ], $value ) ) {
+							return false;
+						}
 					}
-				}
 
-				return true;
-			}
+					return true;
+				}
+			)
 		);
 
 

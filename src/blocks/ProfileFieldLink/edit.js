@@ -12,6 +12,7 @@ import { InspectorControls, store as blockEditorStore  } from "@wordpress/block-
 import { FieldBlockEdit } from '../../components/field-block-edit';
 import { useProfileFieldAttributes } from "./../../profile"
 
+import {Link, useAllFieldTypeObjects} from "./../../fields"
 
 import { useSelect } from "@wordpress/data";
 
@@ -27,6 +28,8 @@ function Edit( props ) {
 	}, [] );
 
 	
+	const fieldObj = useAllFieldTypeObjects()
+	console.log(fieldObj)
 
 	const {fieldKey, value, profile, field } =  useProfileFieldAttributes(props) 
 

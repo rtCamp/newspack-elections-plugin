@@ -1,5 +1,6 @@
 import { useSelect } from "@wordpress/data"
-import { store } from "."
+import { store } from "./store"
+import { getFieldTypeObject, getAllFieldTypeObjects } from "./types"
 
 export const useField = ( slug ) => {
 	return useSelect( (select) => {
@@ -19,6 +20,18 @@ export const useFieldType = ( slug ) => {
 	}, [slug] )
 }
 
+export const useFieldTypeObject = ( slug ) => {
+	//const rawType = useFieldType(slug)
+	//console.log(slug)
+	const type = getFieldTypeObject(slug)
+}
+
+export const useAllFieldTypeObjects = ( slug ) => {
+	const type = getAllFieldTypeObjects()
+	console.log("useAllFieldTypeObjects", type)
+}
+
+getAllFieldTypeObjects
 export const useFieldTypes = () => {
 	return useSelect( (select) => {
 		return select(store).getFieldTypes() ?? []

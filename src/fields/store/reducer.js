@@ -13,6 +13,7 @@ export const reducer = ( state = DEFAULT_STATE, action) => {
 			};
 			break;
 		case "RECEIVE_FIELD_TYPES_QUERY" : 
+			console.log("RECEIVE_FIELD_TYPES_QUERY", state, action.types)
 			return {
 				...state,
 				types : action.types.reduce( (accum, type) => {
