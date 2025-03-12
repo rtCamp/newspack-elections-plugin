@@ -9,9 +9,12 @@ export function ProfileFieldsMenu({
 	emptyProfileValueText = "-"
 } = props){
 
-
+	
 	let filteredChoices = choices.map( (f) => {
-		const info = (f.value && f.value !== "") ? f.value : emptyProfileValueText
+		const fieldTextValue = f.field_type.valueToText(f.value)
+		
+		const info = (f.value && f.value !== "" && fieldTextValue) ? fieldTextValue : emptyProfileValueText
+
 		return {
 			label : f.label,
 			value : f.slug,

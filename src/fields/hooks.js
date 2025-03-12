@@ -1,17 +1,33 @@
+import { isObject } from "lodash"
 import { useSelect } from "@wordpress/data"
+
 import { store } from "./store"
 import { getFieldTypeObject, getAllFieldTypeObjects } from "./types"
 
 export const useField = ( slug ) => {
-	return useSelect( (select) => {
+
+	const field = useSelect( (select) => {
 		return select(store).getField(slug) ?? {}
 	}, [slug] )
+
+	field.field_type = getFieldTypeObject(field.type)
+
+	return field
 }
 
 export const useFields = () => {
-	return useSelect( (select) => {
+	const rawFields =  useSelect( (select) => {
 		return select(store).getFields() ?? []
 	} )
+
+	const enrichedFields = rawFields.map( (field)=> {
+		return {
+			...field,
+			field_type : getFieldTypeObject(field.type)
+		}
+	})
+
+	return enrichedFields
 }
 
 export const useFieldType = ( slug ) => {
@@ -21,17 +37,14 @@ export const useFieldType = ( slug ) => {
 }
 
 export const useFieldTypeObject = ( slug ) => {
-	//const rawType = useFieldType(slug)
-	//console.log(slug)
-	const type = getFieldTypeObject(slug)
+	return getFieldTypeObject(slug)
 }
 
 export const useAllFieldTypeObjects = ( slug ) => {
-	const type = getAllFieldTypeObjects()
-	console.log("useAllFieldTypeObjects", type)
+	return getAllFieldTypeObjects()
 }
 
-getAllFieldTypeObjects
+
 export const useFieldTypes = () => {
 	return useSelect( (select) => {
 		return select(store).getFieldTypes() ?? []

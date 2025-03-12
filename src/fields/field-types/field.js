@@ -5,5 +5,9 @@ export default class FieldType {
 		this.label = args.label
 		this.block = args.block
 	}
+
+	valueToText(fieldValue){
+		return fieldValue
+	}
 }
 

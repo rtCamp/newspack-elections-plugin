@@ -22,6 +22,7 @@ class Link extends \Govpack\Fields\Field {
 	 */
 	protected array $to_array = [ 'slug', 'label', 'type', 'group', 'meta_key', 'link_text', 'allow_block' ];
 
+
 	/**
 	 * Construct the profile field
 	 */

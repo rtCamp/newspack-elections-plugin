@@ -5,7 +5,7 @@ import { createFieldTypes } from "./types";
 export { storeConfig, store } from './store';
 
 export const initStore = () => {
-	console.log("initStore Called")
+	
 	// Just create the store
 	registerGovpackStore()
 
@@ -30,9 +30,10 @@ export const initStore = () => {
 		} 
 
 		createFieldTypes(types)
-		
+
 	}, store)
 }
+
 
 
 

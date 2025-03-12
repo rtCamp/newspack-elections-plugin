@@ -30,8 +30,6 @@ export const getFields = ( query = {} ) => async ( { dispatch } ) => {
 
 export const getFieldType = ( item ) => async ( { dispatch } ) => {
 	
-	console.log("getFieldType Resolver", item)
-
 	const path = addQueryArgs(
 		'/govpack/v1/types',
 		{
@@ -40,13 +38,11 @@ export const getFieldType = ( item ) => async ( { dispatch } ) => {
 	);
 
 	const types = await apiFetch( { path } );
-	console.log("gotten types", types)
 	dispatch.receiveFieldTypesQuery( path, types );
 }
 
 export const getFieldTypes = ( query = {} ) => async ( { dispatch } ) => {
 	const path = '/govpack/v1/types'
 	const types = await apiFetch( { path } );
-	console.log("gotten types", types)
 	dispatch.receiveFieldTypesQuery( path, types );
 };

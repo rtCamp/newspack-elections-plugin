@@ -139,13 +139,21 @@ export const useProfileFields = (props) => {
 	const {context} = props
 	const profile = useProfileFromContext(context) ?? {}
 	let fields = useFields()
+
 	
+
 	fields = fields.map( ( field ) => {
 	
-		let val
-		if(field.type === "link"){
-			val = profile?.profile?.[field.slug].url || false
-		} else if(field.type === "taxonomy"){
+		let val 
+		
+		
+
+		if(profile?.profile?.[field.slug]){
+			val = profile?.profile?.[field.slug]
+		}
+
+		/*
+		if(field.type === "taxonomy"){
 
 			val = profile?.profile?.[field.slug]
 			
@@ -155,10 +163,8 @@ export const useProfileFields = (props) => {
 				val = val.map((f) => f.name).join(", ")
 			}
 
-		} else {
-			val = profile?.profile?.[field.slug] || false
 		}
-		
+		*/
 
 		if(val && (typeof val === "string")){
 			val = val.trim()

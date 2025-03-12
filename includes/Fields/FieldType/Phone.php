@@ -18,14 +18,7 @@ class Phone extends Link {
 	 */
 	public string $label = 'Phone';
 
-	/**
-	 * Output Formats
-	 * 
-	 * Formats the field can be output as
-	 */
-	public array $formats = [ 'link' ];
 
-	
 
 	public function variation_icon(): string {
 		return 'phone';

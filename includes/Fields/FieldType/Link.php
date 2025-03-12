@@ -23,14 +23,23 @@ class Link extends \Govpack\Fields\FieldType {
 	 * 
 	 * Formats the field can be output as
 	 */
-	public array $formats = [ 'link' ];
+	public array $formats = [ 
+		[
+			'value' => 'label',
+			'label' => 'Label',
+		],
+		[
+			'value' => 'url',
+			'label' => 'URL',
+		],
+	];
 
 	/**
 	 * Default Block
 	 * 
 	 * Block used to output the field by default
 	 */
-	public ?string $default_block = "govpack/profile-field-link";
+	public ?string $default_block = 'govpack/profile-field-link';
 
 
 	public function variation_icon(): string {
@@ -39,5 +48,12 @@ class Link extends \Govpack\Fields\FieldType {
 
 	public function value( $value ) {
 		return $value;
+	}
+
+	public function to_array(): array {
+		return [
+			...parent::to_array(),
+			'formats' => $this->formats,
+		];
 	}
 }
