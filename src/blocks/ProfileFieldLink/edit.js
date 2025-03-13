@@ -27,9 +27,12 @@ function Edit( props ) {
 		linkTextOverride : labelOverride = "",
 		linkFormat
 	} = attributes
- 
+	
 
-	console.log("linkField URL", field.field_type.getUrl(value))
+	// should the field's block type not match the current block, render nothing
+	if(field.field_type.block !== props.name){
+		return null;
+	}
 
 	const setLinkTextOverride = (newValue) => {
 		setAttributes({linkTextOverride : newValue })
