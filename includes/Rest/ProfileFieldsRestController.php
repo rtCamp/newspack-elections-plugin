@@ -7,7 +7,7 @@ use WP_REST_Server;
 use WP_REST_Request;
 use WP_REST_Response;
 
-class ProfileFieldsRestController extends GovpackRESTController {
+class ProfileFieldsRestController extends GovpackRestController {
 
 	
 	public function __construct() {

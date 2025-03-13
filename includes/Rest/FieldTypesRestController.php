@@ -9,7 +9,7 @@ use WP_REST_Response;
 
 use Govpack\Govpack;
 
-class FieldTypesRestController extends GovpackRESTController {
+class FieldTypesRestController extends GovpackRestController {
 
 	
 	public function __construct() {
