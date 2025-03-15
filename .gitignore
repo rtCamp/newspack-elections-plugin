@@ -4,6 +4,7 @@
 .DS_Store
 *.map
 .cache
+/dist
 /dist/*
 /build*
 vendor-prefixed/
