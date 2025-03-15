@@ -79,7 +79,6 @@ function useConditionalTemplate(clientId){
 
 function Edit( props ) {
 
-
 	const {attributes, setAttributes, context, clientId} = props  
 	const blockProps = useBlockProps();
 	const { fieldKey, fieldType, value, field } =  useProfileFieldAttributes(props) 
@@ -115,16 +114,18 @@ function Edit( props ) {
 	let {className} = innerBlocksProps
 
 	// Select Block Store Data
-	const {isBlockSelected, hasSelectedInnerBlock} = useSelect( (select) => {
+	const {isBlockSelected, hasSelectedInnerBlock, isParentSelected, isRelativeSelected} = useSelect( (select) => {
+
+		const parentProfileBlockClientIds = select(blockEditorStore).getBlockParentsByBlockName(clientId, "govpack/profile-v2")
+		const closestParentProfileBlockClientId = parentProfileBlockClientIds.at(-1)
+		const parentProfileBlock = select(blockEditorStore).getBlock(closestParentProfileBlockClientId)
 		return {
 			isBlockSelected : select(blockEditorStore).isBlockSelected(clientId),
 			hasSelectedInnerBlock : select(blockEditorStore).hasSelectedInnerBlock(clientId),
-			//currentBlock : select(blockEditorStore).getBlock(clientId),
-			//currentInnerBlocks : select(blockEditorStore).getBlock(clientId).innerBlocks,
-			//contentBlock : select(blockEditorStore).getBlock(clientId).innerBlocks.filter( (block) => block?.attributes?.metadata?.bindings !== undefined )[0],
-			//wasBlockJustInserted: select(blockEditorStore).wasBlockJustInserted(clientId) ?? false,
-			//parentBlockClientId: select(blockEditorStore).getBlockRootClientId(clientId),
-			//currentBlockIndex: select(blockEditorStore).getBlockIndex(clientId),
+			parentProfileBlockClientIds,
+			parentProfileBlock,
+			isParentSelected : select(blockEditorStore).isBlockSelected(parentProfileBlock.clientId),
+			isRelativeSelected : select(blockEditorStore).hasSelectedInnerBlock(parentProfileBlock.clientId, true)
 		}
 	} )
 
@@ -149,7 +150,12 @@ function Edit( props ) {
 	// Should we output the UI to show that a field is hidden?
 	// Add a class to the blockProps if so
 	const shouldDimField = (hideFieldIfEmpty && (!hasValue) && (!isBlockSelected) && (!hasSelectedInnerBlock) )
+	const shouldHideBlock = hideFieldIfEmpty && !hasValue && !isBlockSelected && !isRelativeSelected && !isParentSelected
 	className = clsx(className, {"gp-dim-field" : shouldDimField })
+
+	if(shouldHideBlock){
+		return null;
+	}
 
     return (
 		<div {...innerBlocksProps} className={className}>
