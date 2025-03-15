@@ -69,10 +69,9 @@ const GroupEdit = ( {attributes, setAttributes, context, clientId, ...props} ) =
 		}})
 	}
 
-	
-
-    return (
-		<>	
+	const SeparatorControls = () => {
+		return (
+			<>
 			<InspectorControls group="color">
 				<SeparatorColor
 					colorValue = {separatorColor?.color}
@@ -96,6 +95,14 @@ const GroupEdit = ( {attributes, setAttributes, context, clientId, ...props} ) =
 					</PanelBody>
 				</Panel>
 			</InspectorControls>
+			</>
+		)
+	}
+
+    return (
+		<>	
+			
+			
 
 			<InspectorControls>
 				<Panel>
@@ -113,41 +120,7 @@ const GroupEdit = ( {attributes, setAttributes, context, clientId, ...props} ) =
 				</Panel>
 			</InspectorControls>
 
-			<InspectorControls group="styles">
-				<ToolsPanel label={ __( 'Separator Dimensions', 'govpack' ) }>
-					<ToolsPanelItem label="Margin" isShownByDefault={true}  hasValue={ () => !! spacing }>
-						<SpacingSizesControl
-							values={ spacing?.margin }
-							onChange={ (nextMargin) => 
-								setSeperatorStyles({ 
-									spacing : {
-										margin : nextMargin 
-									}
-								}) 
-							}
-							minimumCustomValue={ -Infinity }
-							label={ __( 'Separator Margin' ) }
-							sides={["vertical"]}
-							units={ units }
-							allowReset={ false }
-							//onMouseOver={ onMouseOverMargin }
-							//onMouseOut={ onMouseLeaveControls }
-						/>
-						 
-					</ToolsPanelItem>
-
-					<ToolsPanelItem isShownByDefault={true} label="Seperator"  hasValue={ () => !! height }>
-						<DimensionInput
-							label={ __( 'Separator Height' ) }
-							value={ height }
-							onChange={ ( nextHeight ) =>
-								setSeperatorStyles( { height: nextHeight } )
-							}
-						/>
-					</ToolsPanelItem>
-
-				</ToolsPanel>
-			</InspectorControls>
+			
 
 			<div {...innerBlockProps} />
 		</>

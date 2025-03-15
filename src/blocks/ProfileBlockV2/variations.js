@@ -226,7 +226,7 @@ export const variations = [
 					["govpack/profile-row", { 
 						"field":{
 							"type":"taxonomy",
-							"key":"officeholder_status"
+							"key":"status"
 						},
 						"fontSize":"small"
 					}, []]
