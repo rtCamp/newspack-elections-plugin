@@ -27,6 +27,7 @@ import ResetProfileToolbar from '../../components/Toolbars/ResetProfileToolbar.j
 
 import SingleProfile from "./../../components/single-profile"
 
+import { PROFILE_POST_TYPE } from '../../profile';
 
 
 /**
@@ -126,7 +127,7 @@ const ProfileSelector = ( {
 
 						const response = await apiFetch( {
 							parse: false,
-							path: addQueryArgs( '/wp/v2/govpack_profiles', {
+							path: addQueryArgs( '/wp/v2/' + PROFILE_POST_TYPE , {
 								search,
 								offset,
 								fields: 'id,name',
@@ -195,7 +196,7 @@ function Edit( props ) {
 
 		const selectorArgs = [ 
 			'postType', 
-			'govpack_profiles', 
+			PROFILE_POST_TYPE, 
 			profileId, 
 			{ 
 				_embed : true 

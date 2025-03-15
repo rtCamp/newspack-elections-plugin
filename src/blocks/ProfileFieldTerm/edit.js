@@ -10,7 +10,8 @@ import { useSelect } from '@wordpress/data';
 import { Spinner, PanelBody, PanelRow, ToggleControl, TextControl, RangeControl} from "@wordpress/components";
 import { decodeEntities } from '@wordpress/html-entities';
 
-import { useProfileFieldAttributes } from "./../../profile"
+import { useProfileFieldAttributes, PROFILE_POST_TYPE} from "./../../profile"
+
 
 import useProfileTerms from "./use-profile-terms"
 
@@ -30,7 +31,7 @@ const WideRangeControl = styled( RangeControl )`
 
 const useProfileTaxonomies = () => {
 	return useSelect( (select) => {
-		return select( coreDataStore ).getTaxonomies( { type: 'govpack_profiles' } );
+		return select( coreDataStore ).getTaxonomies( { type: PROFILE_POST_TYPE } );
 	})
 }
 

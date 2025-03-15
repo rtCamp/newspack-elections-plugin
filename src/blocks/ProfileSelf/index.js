@@ -6,7 +6,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
- import Edit from './edit';
+import { PROFILE_POST_TYPE } from '../../profile';
+import Edit from './edit';
 
  /**
  * Style dependencies - will load in editor
@@ -42,7 +43,7 @@ function unregisterProfileSelf(){
 			return;
 		}
 		
-		if(currentPostType === "govpack_profiles"){
+		if(currentPostType === PROFILE_POST_TYPE ){
 			return;
 		}
 

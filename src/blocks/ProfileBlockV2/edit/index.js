@@ -7,6 +7,7 @@ import { ProfileVariationSelector } from "./variation-selector"
 import { ProfileSelector } from "./profile-selector"
 
 import { ProfileSelector as ProfileSelectorPlaceholder } from "./../../../components/ProfileSelector.jsx"
+import { PROFILE_POST_TYPE } from "./../../../profile"
 
 import "./../editor.scss"
 /**
@@ -40,7 +41,7 @@ export const ProfileEdit = ( props ) => {
 		setAttributes({"postId" : newProfileId})
 	}
 	
-	const hasContextQuery = (context.queryId && context.postId && (context.postType === "govpack_profiles"))
+	const hasContextQuery = (context.queryId && context.postId && (context.postType === PROFILE_POST_TYPE))
 	
 	// If we have a postId then dont show the selector
 	const hasSelectedProfile = attributes.postId ?? hasContextQuery ?? false
