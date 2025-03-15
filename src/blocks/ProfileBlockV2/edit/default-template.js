@@ -14,20 +14,28 @@ export const DEFAULT_TEMPLATE = [
 				"isLink":true
 			}, []],
 			[ "govpack/profile-row", {
-				"fieldKey":"party",
-				"fieldType":"taxonomy"
+				"field" : {
+					"key":"party",
+					"type":"taxonomy"
+				}
 			}, []],
 			[ "govpack/profile-row", {
-				"fieldKey":"legislative_body",
-				"fieldType":"taxonomy"
+				"field" : {
+					"key":"legislative_body",
+					"type":"taxonomy"
+				}
 			}, []],
 			[ "govpack/profile-row", {
-				"fieldKey":"position",
-				"fieldType":"taxonomy"
+				"field" : {
+					"key":"position",
+					"type":"taxonomy"
+				}
 			}, []],
 			[ "govpack/profile-row", {
-				"fieldKey":"status",
-				"fieldType":"taxonomy"
+				"field" : {
+					"key":"status",
+					"type":"taxonomy"
+				}
 			}, []]
 		]
 	]
