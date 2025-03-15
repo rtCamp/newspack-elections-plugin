@@ -49,6 +49,10 @@
 	"attributes": {
 		"linkTextOverride" : {
 			"type": "string"
+		},
+		"linkFormat" : {
+			"type": "string",
+			"default": "label"
 		}
 	},
 	"ancestor": [ "govpack/profile-v2" ],

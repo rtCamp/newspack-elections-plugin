@@ -4,19 +4,14 @@ import {isEmpty} from "lodash"
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useEffect } from "@wordpress/element"
+import { useBlockProps } from "@wordpress/block-editor"
 
 /**
  * Internal dependencies
  */
-import { FieldBlockEdit } from '../../components/field-block-edit';
-import { useProfileFieldAttributes } from './../../components/Profile';
+import { useProfileFieldAttributes } from './../../profile';
 
 
-import { useSelect } from "@wordpress/data";
-import { store as blockEditorStore, useBlockProps } from "@wordpress/block-editor"
-
-import { useUpdateBlockMetaName } from "../utils"
 
 function Edit( props ) {
 

@@ -7,12 +7,14 @@ use WP_REST_Server;
 use WP_REST_Request;
 use WP_REST_Response;
 
-class ProfileFieldsRestController extends GovpackRestController {
+use Govpack\Govpack;
+
+class FieldTypesRestController extends GovpackRestController {
 
 	
 	public function __construct() {
 		$this->namespace = 'govpack/v1';
-		$this->rest_base = 'fields';
+		$this->rest_base = 'types';
 	}
 	
 	public function register_routes() {
@@ -88,9 +90,9 @@ class ProfileFieldsRestController extends GovpackRestController {
 		
 		$slug = $request->get_param( 'slug' );
 
-		$field = \Govpack\Profile\CPT::fields()->get( $slug );
+		$type = Govpack::instance()->fields()->types()->get( $slug );
 
-		if ( $field === false ) {
+		if ( $type === false ) {
 			return new WP_Error(
 				'rest_gp_field_not_found',
 				__( 'Field Not Found.' ),
@@ -99,7 +101,7 @@ class ProfileFieldsRestController extends GovpackRestController {
 		} 
 
 		return rest_ensure_response(
-			$field->to_rest()
+			$type->to_rest()
 		);
 	}
 
@@ -126,10 +128,10 @@ class ProfileFieldsRestController extends GovpackRestController {
 			}
 		}
 
-
-		$fields = array_values(
+		
+		$types = \array_values(
 			\array_filter(
-				\Govpack\Profile\CPT::fields()->to_rest(),
+				Govpack::instance()->fields()->types()->to_rest(),
 				function ( $field ) use ( $prepared_args ) {
 					// Loop each parameter, 
 					// if it doesn't exist within the field then return false to filter it out
@@ -153,7 +155,7 @@ class ProfileFieldsRestController extends GovpackRestController {
 		);
 
 
-		return rest_ensure_response( $fields );
+		return rest_ensure_response( $types );
 	}
 	
 	/**

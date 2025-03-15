@@ -11,7 +11,7 @@ import {Panel, PanelBody, PanelRow,
 } from '@wordpress/components';
 import { useMemo } from "@wordpress/element"
 
-import { useProfile } from './../Profile';
+import { useProfile } from './../../profile';
 
 import { Spinner } from '../Spinner';
 import { useMedia } from '../useMedia';

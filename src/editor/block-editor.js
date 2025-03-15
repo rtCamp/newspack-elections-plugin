@@ -1,28 +1,32 @@
+/**
+ * Newspack Elections Block Editor Bootstrapper
+ * 
+ * Loads and Creates Services used by Newspack Elections Blocks. 
+ * 
+ * File is embedded into the the editor-blocks.js asset within webpack
+ * rather than being directly referenced.
+ */
 
-
-import { dispatch, select } from "@wordpress/data"
 import domReady from "@wordpress/dom-ready"
-import {registerBlockSupports} from "./../block-supports" 
 
-import { registerProfileBindingSource } from "./block-bindings"
+
+import { registerBlockSupports } from "./../block-supports" 
 import { restoreBlocks } from "./restore-blocks";
-import { registerGovpackStore } from "./../profile-fields";
-
-dispatch( 'core' ).addEntities( [ {
-	baseURL: '/govpack/v1/profile',
-	// The 'post' is not a post type - it's the "post" as in /post above. Also, "kind"
-	// and "name" are not documented, so let's assume they form the above baseURL..
-	kind: 'govpack',
-	name: 'fields',
-	label: 'Govpack Profile Fields',
-} ] );
+import { initStore } from "../fields";
 
 
-registerGovpackStore()
-registerProfileBindingSource()
+
+// Create a Redux store for fields used by Profiles
+initStore()
+
+// Add Custom Block Support
 registerBlockSupports()
 
-const requiredCoreBlocks = ["core/post-featured-image"]
+
+// Newspack disabled a few blocks we need, this is where we can re-enable them
 domReady( () => {
+	const requiredCoreBlocks = ["core/post-featured-image"]
 	restoreBlocks(requiredCoreBlocks)
 })
+
+

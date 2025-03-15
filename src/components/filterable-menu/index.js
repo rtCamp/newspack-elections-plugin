@@ -52,7 +52,7 @@ export function FilterableMenu({
 		})
 
 	
-
+		
 	if(doHighlighting){
 		filteredChoices = filteredChoices.map( (f) => {
 			return {

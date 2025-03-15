@@ -19,6 +19,9 @@ class FieldManager extends \Govpack\Abstracts\Registry {
 	public FieldTypeRegistry $types;
 
 	
+	public function get(string $item ) : Field | null {
+		return parent::get($item);
+	}
 
 	public function set_types( FieldTypeRegistry $types ) {
 		$this->types = $types;
@@ -31,10 +34,10 @@ class FieldManager extends \Govpack\Abstracts\Registry {
 	public function register_fields( Field|array $fields_input ) {
 		if ( is_array( $fields_input ) ) {
 			foreach ( $fields_input as $field ) {
-				$this->register( $field );
+				$this->register( $field, $field->slug() );
 			}
 		} else { 
-			$this->register( $fields_input );
+			$this->register( $fields_input, $fields_input->slug() );
 		}
 	}
 

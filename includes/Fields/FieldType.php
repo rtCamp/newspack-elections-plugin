@@ -28,6 +28,12 @@ abstract class FieldType extends Collectable implements CollectableInterface {
 	 */
 	public bool $should_create_block_variations = true;
 
+	/**
+	 * Default Block
+	 * 
+	 * Block used to output the field by default
+	 */
+	public ?string $default_block;
 
 
 	public function get_variation_inner_blocks(): array {
@@ -36,8 +42,13 @@ abstract class FieldType extends Collectable implements CollectableInterface {
 			return [];
 		}
 		
+		if($this->default_block){
+			return [
+				[$this->default_block]
+			];
+		}
+
 		return [
-			[ 'govpack/profile-label', [] ],
 			[ 'core/paragraph', [] ],
 		];
 	}
@@ -62,6 +73,7 @@ abstract class FieldType extends Collectable implements CollectableInterface {
 		return [
 			'slug'  => $this->slug,
 			'label' => $this->label,
+			'block' => $this->default_block ?? false
 		];
 	}
 

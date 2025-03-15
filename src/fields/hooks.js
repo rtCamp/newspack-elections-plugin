@@ -1,79 +1,60 @@
-
 import { isObject } from "lodash"
-import {useSelect} from "@wordpress/data"
-import { store as coreStore } from "@wordpress/core-data";
+import { useSelect } from "@wordpress/data"
 
-import { useProfileFromContext } from "./profile";
+import { store } from "./store"
+import { getFieldTypeObject, getAllFieldTypeObjects } from "./types"
 
-import { useField, useFields } from "./../../../profile-fields"
+export const useField = ( slug ) => {
 
-export const useFieldsOfType = (props, fieldType) => {
-	const fields = useProfileFields(props)
-	const fieldsofType = fields.filter( (f) => f.type === fieldType)
-	return fieldsofType
+	const field = useSelect( (select) => {
+		return select(store).getField(slug) ?? {}
+	}, [slug] )
+
+	field.field_type = getFieldTypeObject(field.type)
+
+	return field
 }
 
+export const useFields = () => {
+	const rawFields =  useSelect( (select) => {
+		return select(store).getFields() ?? []
+	} )
 
-
-
-
-export const useProfileFields = (props) => {
-
-	const {context} = props
-	const profile = useProfileFromContext(context) ?? {}
-	let fields = useFields()
-	
-	fields = fields.map( ( field ) => {
-	
-		let val
-		if(field.type === "link"){
-			val = profile?.profile?.[field.slug].url || false
-		} else if(field.type === "taxonomy"){
-
-			val = profile?.profile?.[field.slug]
-			
-			if(!val || val.length < 1){
-				val = ""
-			} else {
-				val = val.map((f) => f.name).join(", ")
-			}
-
-		} else {
-			val = profile?.profile?.[field.slug] || false
-		}
-		
-
-		if(val && (typeof val === "string")){
-			val = val.trim()
-		}
-
+	const enrichedFields = rawFields.map( (field)=> {
 		return {
 			...field,
-			'value' : val
-		} 
+			field_type : getFieldTypeObject(field.type)
+		}
 	})
 
-	return fields
+	return enrichedFields
+}
+
+export const useFieldType = ( slug ) => {
+	return useSelect( (select) => {
+		return select(store).getFieldType(slug) ?? {}
+	}, [slug] )
+}
+
+export const useFieldTypeObject = ( slug ) => {
+	return getFieldTypeObject(slug)
+}
+
+export const useAllFieldTypeObjects = ( slug ) => {
+	return getAllFieldTypeObjects()
 }
 
 
-export const useProfileFieldAttributes = (props) => {
+export const useFieldTypes = () => {
+	return useSelect( (select) => {
+		return select(store).getFieldTypes() ?? []
+	} )
+}
 
-	
-	const {context} = props
-	const fieldAttrs  = useFieldAttributes(props)
-	const profile = useProfileFromContext( context )
-	const value = profile?.profile?.[fieldAttrs?.fieldKey] ?? null;
-	const profileId = profile.id
-	
-
-
-	return {
-		profileId,
-		profile,
-		value,
-		...fieldAttrs
-	}
+export const useFieldsOfType = ( type ) => {
+	return useSelect( (select) => {
+		return select(store).getFieldsOfType(type) ?? []
+	} )
 }
 
 
@@ -96,7 +77,6 @@ export const useFieldAttributes = (props) => {
 		localFieldType = attributes.fieldType
 	}
 
-	
 	let { 
 		'key' : inheritedFieldKey = null,
 		'type' : inheritedFieldType = null 

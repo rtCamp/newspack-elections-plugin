@@ -11,6 +11,16 @@ export const reducer = ( state = DEFAULT_STATE, action) => {
 					return accum
 				}, state.fields )
 			};
+			break;
+		case "RECEIVE_FIELD_TYPES_QUERY" : 
+			return {
+				...state,
+				types : action.types.reduce( (accum, type) => {
+					accum[type.slug] = type
+					return accum
+				}, state.types )
+			};
+			break;
 	}
 	return state;
 }

@@ -1,7 +1,7 @@
-import {isEmpty} from "lodash"
+
 import { useBlockProps } from "@wordpress/block-editor"
-import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from "../../components/Controls/ProfileField"
-import { useFieldsOfType, useProfileFieldAttributes } from './../../components/Profile';
+
+import { useProfileFieldAttributes } from './../../profile';
 
 export const FieldBlockEdit = (props) => {
 

@@ -16,3 +16,13 @@ export function receiveFieldsQuery( queryID, fields ) {
 		queryID,
 	};
 }
+
+
+
+export function receiveFieldTypesQuery( queryID, types ) {
+	return {
+		type: 'RECEIVE_FIELD_TYPES_QUERY',
+		types: Array.isArray( types ) ? types : [ types ],
+		queryID,
+	};
+}

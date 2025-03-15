@@ -145,7 +145,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 		
 		$variations = [];
 
-		foreach ( $this->plugin->fields()->types() as $type ) {
+		foreach ( $this->plugin->fields()->types()->all() as $type ) {
 			$variation = [
 				'category'    => 'newspack-elections-profile-row-type',
 				'name'        => sprintf( 'profile-field-%s', $type->slug ),

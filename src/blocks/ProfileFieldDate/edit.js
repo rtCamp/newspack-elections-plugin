@@ -17,8 +17,7 @@ import { useEntityProp } from '@wordpress/core-data';
 /**
  * Internal dependencies
  */
-import { FieldBlockEdit } from '../../components/field-block-edit';
-import { useProfileFieldAttributes } from './../../components/Profile';
+import { useProfileFieldAttributes } from './../../profile';
 
 
 
