@@ -23,7 +23,9 @@
 			"allowSwitching": false,
 			"allowSizingOnChildren": true,
 			"default" : {
-				"type" : "flex"
+				"type" : "flex",
+				"justifyContent":"space-between",
+				"orientation": "horizontal"
 			}
 		},
 		"shadow": true, 
@@ -53,8 +55,7 @@
 			"type" : "object",
 			"default" : {
 				"type":"flex",
-				"flexWrap":"no-wrap",
-				"justifyContent":"space-between"
+				"flexWrap":"no-wrap"
 			}
 		},
 		"align": {

@@ -136,7 +136,7 @@ const useResizeProps = (props ) => {
 	}
 }
 
-const ProfileWrapper = ({children, attributes}) => {
+const ProfileWrapper = ({children, attributes, __unstableLayoutClassNames = ""}) => {
 
 	const borderProps = useBorderProps( attributes );
 
@@ -149,7 +149,7 @@ const ProfileWrapper = ({children, attributes}) => {
 
 
 	const wrapperProps = {
-		className : clsx("profile-inner", borderProps.className,  colorProps.className),
+		className : clsx("profile-inner", borderProps.className,  colorProps.className, __unstableLayoutClassNames),
 		style: {
 			...spacingStyles.style,
 			...borderProps.style,
@@ -211,6 +211,7 @@ const BlockHTMLElementControl = (props) => {
 function ProfileBlockEdit( props ) {
 	const {attributes, setAttributes, isSelected: isSingleSelected, clientId, context} = props
 
+	
 	const resizeProps = useResizeProps(props);
 	const {setProfile, resetProfile, profileId = null, profile, profileQuery} = useProfileAttributes(props)
 
@@ -239,6 +240,8 @@ function ProfileBlockEdit( props ) {
 		template : DEFAULT_TEMPLATE,
 		renderAppender : (showAppender) ? InnerBlocks.ButtonBlockAppender : false
 	})
+
+	
 
 	const { __unstableMarkNextChangeAsNotPersistent } = useDispatch( blockEditorStore );
 

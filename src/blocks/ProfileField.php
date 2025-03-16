@@ -7,6 +7,7 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 	protected $plugin;
 	protected $attributes = [];
 	protected $context    = [];
+	protected $content    = null;
 
 	protected $profile;
 
@@ -31,6 +32,7 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 
 		$this->attributes = self::merge_attributes_with_block_defaults( $this->block_name, $attributes );
 		$this->context    = $block->context;
+		$this->content    = $content;
 
 		if ( ! $this->show_block() ) {
 			return null;

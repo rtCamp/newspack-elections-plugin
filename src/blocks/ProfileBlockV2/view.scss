@@ -1,6 +1,8 @@
 
 .wp-block-govpack-profile-v2{
 
+	width:100%;
+
 	.profile-inner {
 		overflow:hidden;
 	}
@@ -8,7 +10,7 @@
 	overflow:hidden;
 	&.aligncenter,
 	.aligncenter
-	&.alignleft, 
+	&.alignleft,  
 	.alignleft, 
 	&.alignright,
 	.alignright {

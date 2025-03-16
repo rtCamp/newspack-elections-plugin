@@ -32,11 +32,30 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 			return '';
 		}
 
-		$link_text = ( $this->has_attribute( 'linkTextOverride' ) && $this->attribute( 'linkTextOverride' ) ) ? $this->attribute( 'linkTextOverride' ) : $link['linkText'];
 		
-		return sprintf( '<a href="%s">%s</a>', $link['url'], $link_text );
+		return sprintf( '<a href="%s">%s</a>', $link['url'], $this->linkText() );
 	}
 
+	public function linkText(): string {
+		$link = $this->get_value();
+
+
+
+		$hasLabelOverride = ($this->attribute( 'linkTextOverride' ) && $this->attribute( 'linkTextOverride' ) );
+		$hasDefaultLabel = (isset($link['linkText']) && $link['linkText']);
+		$defaultLabel = $hasDefaultLabel ? $link['linkText'] : "Link";
+
+		if($this->attribute("linkFormat") === "url"){
+			return $link['url'];
+		}
+
+		if($this->attribute("linkFormat") === "label"){
+			return ($hasLabelOverride ? $this->attribute( 'linkTextOverride' ) : $defaultLabel);
+		}
+
+		return	$defaultLabel;
+
+	}
 
 	public function variations(): array {
 		return $this->create_field_variations();

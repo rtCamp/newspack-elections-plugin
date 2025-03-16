@@ -32,16 +32,15 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 	 */
 	public function handle_render( array $attributes, string $content, \WP_Block $block ) {
 		
-		
 		$tagName = 'div';
 
 		$block_html = sprintf(
 			'<%s %s>%s</%s>', 
 			$tagName,
 			get_block_wrapper_attributes(
-				//$this->get_new_block_wrapper_attributes()
+				$this->get_new_block_wrapper_attributes()
 			),
-			$content,
+			$this->output(),
 			$tagName
 		);
 
@@ -86,8 +85,57 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 		return true;
 	}
 
+	
+	public function showLabel(): bool {
+
+		
+		$rowShowLabel   = $this->attribute( 'showLabel' );
+		$groupShowLabel = ( $this->has_context( 'showLabels' ) ? $this->context( 'showLabels' ) : null );
+
+		$showLabel = $rowShowLabel ?? $groupShowLabel ?? true;
+
+		return $showLabel;
+	}
+
 	public function output(): string {
-		return (string) $this->get_value();
+		ob_start();
+
+		if($this->showLabel()){
+			?>
+				<div><?php echo $this->label(); ?></div>
+			<?php
+		}
+		
+		echo $this->content;
+
+		return ob_get_clean();
+	}
+
+	public function label() : string {
+
+		if ( $this->has_label_from_attributes() ) {
+			return $this->attribute( 'label' );
+		} 
+			
+		if ( $this->has_field() ) {
+			return $this->get_field()->label;
+		}
+	
+		return '';
+	}
+
+	private function has_label_from_attributes(): bool {
+		
+		if (
+			! $this->has_attribute( 'label' ) ||
+			( $this->attribute( 'label' ) === '' ) ||
+			( $this->attribute( 'label' ) === false ) ||
+			( $this->attribute( 'label' ) === null )
+		) {
+			return false;
+		}
+
+		return true;
 	}
 
 	public function should_hide_if_empty(): bool {
