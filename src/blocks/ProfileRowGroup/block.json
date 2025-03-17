@@ -76,7 +76,7 @@
 		"govpack/profile-row", 
 		"govpack/profile-read-more", 
 		"govpack/profile-separator", 
-		"govpack/profile-bio",
+		"npe/profile-bio",
 		"npe/profile-name",
 
 		"core/post-featured-image", 

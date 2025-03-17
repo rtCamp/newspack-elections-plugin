@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "govpack/profile-bio",
+	"name": "npe/profile-bio",
 	"title": "Profile Bio",
     "editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
