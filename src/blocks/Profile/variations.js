@@ -41,7 +41,7 @@ export const variations = [
 			],
 			[
 				
-				"govpack/profile-row-group",
+				"npe/profile-row-group",
 				{
 					"separatorStyles":{"height":"1px","spacing":{"margin":{"top":"0","bottom":"0"}}},
 					"style":{"layout":{"selfStretch":"fill","flexSize":null},

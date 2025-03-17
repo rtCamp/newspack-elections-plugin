@@ -219,8 +219,8 @@ function ProfileBlockEdit( props ) {
 		const isBlockSelected = select(blockEditorStore).isBlockSelected(clientId)
 		const hasSelectedInnerBlock = select(blockEditorStore).hasSelectedInnerBlock(clientId, true)
 		const selectedInnerBlock = hasSelectedInnerBlock ? select(blockEditorStore).getSelectedBlock() : null
-		const isSelectedBlockProfileGroup = (selectedInnerBlock?.name === "govpack/profile-row-group")
-		const selectedInnerBlockParentsOfType = selectedInnerBlock ?  select(blockEditorStore).getBlockParentsByBlockName(selectedInnerBlock?.clientId, "govpack/profile-row-group" ) : []
+		const isSelectedBlockProfileGroup = (selectedInnerBlock?.name === "npe/profile-row-group")
+		const selectedInnerBlockParentsOfType = selectedInnerBlock ?  select(blockEditorStore).getBlockParentsByBlockName(selectedInnerBlock?.clientId, "npe/profile-row-group" ) : []
 		//const showAppender = (isBlockSelected || (hasSelectedInnerBlock && !isSelectedBlockProfileGroup))
 		return {
 			isBlockSelected,

@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class ProfileRowGroup extends \Govpack\Blocks\ProfileField {
 
-	public string $block_name = 'govpack/profile-row-group';
+	public string $block_name = 'npe/profile-row-group';
 
 
 	public function block_build_path(): string {

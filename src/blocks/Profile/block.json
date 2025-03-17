@@ -86,7 +86,7 @@
 		"core/paragraph", 
 		"core/image", 
 		"core/heading", 
-		"govpack/profile-row-group", 
+		"npe/profile-row-group", 
 		"govpack/profile-row", 
 		"npe/profile-bio",
 		"npe/profile-name", 

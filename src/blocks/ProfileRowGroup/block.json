@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "govpack/profile-row-group",
+	"name": "npe/profile-row-group",
 	"title": "Profile Row Group",
     "editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

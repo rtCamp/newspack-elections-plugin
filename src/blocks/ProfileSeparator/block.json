@@ -35,7 +35,7 @@
 			"type" : "string"
 		}
 	},
-	"ancestor": [ "govpack/profile-row-group" ],
+	"ancestor": [ "npe/profile-row-group" ],
 	"usesContext": [
 		"postId",
 		"postType", 
