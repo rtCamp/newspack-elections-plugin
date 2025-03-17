@@ -13,25 +13,25 @@ export const DEFAULT_TEMPLATE = [
 			[ "npe/profile-name", {
 				"isLink":true
 			}, []],
-			[ "govpack/profile-row", {
+			[ "npe/profile-row", {
 				"field" : {
 					"key":"party",
 					"type":"taxonomy"
 				}
 			}, []],
-			[ "govpack/profile-row", {
+			[ "npe/profile-row", {
 				"field" : {
 					"key":"legislative_body",
 					"type":"taxonomy"
 				}
 			}, []],
-			[ "govpack/profile-row", {
+			[ "npe/profile-row", {
 				"field" : {
 					"key":"position",
 					"type":"taxonomy"
 				}
 			}, []],
-			[ "govpack/profile-row", {
+			[ "npe/profile-row", {
 				"field" : {
 					"key":"status",
 					"type":"taxonomy"

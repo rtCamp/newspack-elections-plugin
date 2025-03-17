@@ -2,8 +2,8 @@ import { createBlock } from '@wordpress/blocks';
 
 export const FieldToRow = {
 	type: 'block',
-	blocks: [ 'govpack/profile-row' ],
+	blocks: [ 'npe/profile-row' ],
 	transform: ( attributes  ) => {
-		return createBlock( 'govpack/profile-row', attributes );
+		return createBlock( 'npe/profile-row', attributes );
 	},
 }

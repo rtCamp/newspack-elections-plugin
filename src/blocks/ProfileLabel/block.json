@@ -41,7 +41,7 @@
 			"type": "string"
 		}
 	},
-	"ancestor": [ "govpack/profile-row", "govpack/profile-field" ],
+	"ancestor": [ "npe/profile-row", "govpack/profile-field" ],
 	"usesContext": [
 		"govpack/showLabel", 
 		"govpack/showLabels", 

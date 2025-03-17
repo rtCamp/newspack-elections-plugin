@@ -35,16 +35,16 @@ registerBlockType( metadata.name, {
 		"to" : [
 			{
 				type: 'block',
-				blocks: [ 'govpack/profile-row' ],
+				blocks: [ 'npe/profile-row' ],
 				transform: ( attributes  ) => {
-					return createBlock( 'govpack/profile-row', attributes );
+					return createBlock( 'npe/profile-row', attributes );
 				},
 			}
 		],
 		"from" : [
 			{
 				type: 'block',
-				blocks: [ 'govpack/profile-row' ],
+				blocks: [ 'npe/profile-row' ],
 				transform: ( attributes  ) => {
 					return createBlock( 'govpack/profile-field-text', attributes );
 				},

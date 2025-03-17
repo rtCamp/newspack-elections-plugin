@@ -57,7 +57,7 @@ export const variations = [
 						[]
 					],
 					[
-						"govpack/profile-row", {
+						"npe/profile-row", {
 							"field":{
 								"key" : "legislative_body",
 								"type":"taxonomy"
@@ -68,7 +68,7 @@ export const variations = [
 						"govpack/profile-separator"
 					],
 					[
-						"govpack/profile-row",  {
+						"npe/profile-row",  {
 							"field":{
 								"key" : "party",
 								"type":"taxonomy"
@@ -79,7 +79,7 @@ export const variations = [
 						"govpack/profile-separator", {}
 					],
 					[	
-						"govpack/profile-row", {
+						"npe/profile-row", {
 							"field":{
 								"key" : "endorsements",
 								"type":"text"
@@ -140,7 +140,7 @@ export const variations = [
 							innerBlocks : []
 						},
 						{
-							name :"govpack/profile-row", 
+							name :"npe/profile-row", 
 							attributes :{
 								"field": {
 									"key": "legislative_body", 
@@ -151,7 +151,7 @@ export const variations = [
 							innerBlocks : []
 						},
 						{
-							name :"govpack/profile-row", 
+							name :"npe/profile-row", 
 							attributes :{
 								"field": {
 									"key": "party",
@@ -162,7 +162,7 @@ export const variations = [
 							innerBlocks :[]
 						},
 						{
-							name :"govpack/profile-row", 
+							name :"npe/profile-row", 
 							attributes :{
 								"field": {
 									"key": "officeholder_status",
@@ -209,21 +209,21 @@ export const variations = [
 				{"style":{"spacing":{"blockGap":"0.2rem"},"layout":{"selfStretch":"fill","flexSize":null}},"layout":{"type":"constrained"}} , 
 				[
 					["npe/profile-name", {"style":{"typography":{"fontStyle":"normal","fontWeight":"1000","fontSize":"1.4rem"},"spacing":{"padding":{"bottom":"0.5rem"}}}}, []],
-					["govpack/profile-row", { 
+					["npe/profile-row", { 
 						"field":{
 							"type":"taxonomy",
 							"key":"legislative_body",
 						},
 						"fontSize":"small" 
 					}, []],
-					["govpack/profile-row", { 
+					["npe/profile-row", { 
 						"field":{
 							"type":"taxonomy",
 							"key":"party"
 						},
 						"fontSize":"small"
 					}, []],
-					["govpack/profile-row", { 
+					["npe/profile-row", { 
 						"field":{
 							"type":"taxonomy",
 							"key":"status"

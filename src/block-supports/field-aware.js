@@ -100,7 +100,7 @@ const FieldAwareEdit = (props) => {
 	const availableFields = useFields()
 	
 	const contextProvidingBlock = useSelect( (select) => {
-		const profileRows = select(blockEditorStore).getBlockParentsByBlockName(clientId, "govpack/profile-row")
+		const profileRows = select(blockEditorStore).getBlockParentsByBlockName(clientId, "npe/profile-row")
 		const parentRowClientId = profileRows.at(profileRows.length - 1)
 		return select(blockEditorStore).getBlock(parentRowClientId)
 	} )

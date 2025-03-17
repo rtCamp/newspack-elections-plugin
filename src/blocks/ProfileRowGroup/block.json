@@ -73,7 +73,7 @@
 	},
 	"allowedBlocks": [
 
-		"govpack/profile-row", 
+		"npe/profile-row", 
 		"npe/profile-read-more", 
 		"govpack/profile-separator", 
 		"npe/profile-bio",
