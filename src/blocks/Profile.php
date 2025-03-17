@@ -14,18 +14,66 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class Profile extends \Govpack\Abstracts\Block {
+class Profile extends \Govpack\Blocks\LegacyProfile {
 
-	public string $block_name = 'govpack/profile';
+	public string $block_name = 'npe/profile';
 	public $template          = 'profile';
 
-	private $show       = null;
-	private $profile    = null;
+	private $show         = null;
+	private $profile      = null;
 	protected $attributes = [];
 	protected $plugin;
 
 	public function __construct( $plugin ) {
+		
 		$this->plugin = $plugin;
+		//add_filter( 'render_block_context', [$this, 'modify_context'], 10, 3);
+		//add_filter( 'render_block_data', [$this, 'modify_block_data'], 10, 3);
+		add_filter( 'pre_render_block', [ $this, 'pre_render_block' ], 10, 3 ); 
+	}
+
+	public function pre_render_block( $pre_render, $parsed_block, $parent_block ) {
+		global $post;
+
+		if ( is_null( $pre_render ) && ( isset( $parsed_block['attrs']['profileId'] ) ) ) {
+			$post = get_post( $parsed_block['attrs']['profileId'] );
+		}
+
+		return $pre_render;
+	}
+
+	public function modify_block_data( $parsed_block, $source_block, $parent_block ) {
+
+		if ( $parsed_block['blockName'] !== $this->block_name ) {
+			return $parsed_block;
+		}
+
+		if ( ! isset( $parsed_block['attrs'] ) || empty( $parsed_block['attrs'] ) ) {
+			return $parsed_block;
+		}
+
+		if ( ! isset( $parsed_block['attrs']['profileId'] ) || empty( $parsed_block['attrs']['profileId'] ) ) {
+			return $parsed_block;
+		}
+
+		if ( isset( $parsed_block['attrs']['postId'] ) ) {
+			return $parsed_block;
+		}
+
+		$parsed_block['attrs']['postId'] = $parsed_block['attrs']['profileId'];
+		
+
+		return $parsed_block;
+	}
+
+	public function modify_context( $context, $parsed_block, $parent ) {
+
+		if ( $parsed_block['blockName'] !== $this->block_name ) {
+			return $context;
+		}
+
+		//  gp_dump($context);
+		return $context;
 	}
 
 	public function disable_block( $allowed_blocks, $editor_context ): bool {
@@ -47,7 +95,9 @@ class Profile extends \Govpack\Abstracts\Block {
 	 */
 	public function render( array $attributes, ?string $content = null, ?WP_Block $block = null ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
 
-		if ( ! $attributes['profileId'] ) {
+		global $post;
+
+		if ( ! $attributes['postId'] ) {
 			return;
 		}
 
@@ -55,8 +105,19 @@ class Profile extends \Govpack\Abstracts\Block {
 			return false;
 		}
 
+		$this->profile = \Govpack\Profile\CPT::get_data( $attributes['postId'] );
+		
+		if ( ! $this->profile ) {
+			return;
+		}
 
-		return $this->handle_render( $attributes, $content, $block );
+		$this->attributes = self::merge_attributes_with_block_defaults( $this->block_name, $attributes );
+		$this->enqueue_view_assets();
+
+		ob_start();
+		$this->handle_render( $attributes, $content, $block );
+		wp_reset_postdata();
+		return \ob_get_clean();
 	}
 
 	/**
@@ -67,248 +128,66 @@ class Profile extends \Govpack\Abstracts\Block {
 	 * @param WP_Block $template The filename of the template-part to use.
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
-
-	
-		$this->profile = \Govpack\Profile\CPT::get_data( $attributes['profileId'] );
-	
-		if ( ! $this->profile ) {
-			return;
-		}
-
-		$this->enqueue_view_assets();
-
-		$this->attributes = self::merge_attributes_with_block_defaults( $this->block_name, $attributes );
-		return gp_template_loader()->render_block(
-			$this->template(),
-			$this->attributes, 
-			$content, 
-			$block, 
-			[
-				'profile_block' => $this,
-				'profile_data'  => $this->profile,
-			] 
+		
+		$tagName = $this->attributes['tagName'] ?? 'div';
+		
+		$block_html = sprintf(
+			'<%s %s>%s</%s>', 
+			$tagName,
+			get_block_wrapper_attributes(
+				$this->get_new_block_wrapper_attributes()
+			),
+			$content,
+			$tagName
 		);
-	}   
-
-	public function populate_show() {
-		return [
-			'photo'             => ( has_post_thumbnail( $this->profile['id'] ) && 
-										isset( $this->attributes['showAvatar'] ) && 
-										$this->attributes['showAvatar']  
-									),
-			'name'              => ( isset( $this->profile['name'] ) && $this->attributes['showName'] ),
-			'status_tag'        => ( isset( $this->profile['status'] ) && $this->attributes['showStatusTag'] ),
-			'secondary_address' => ( isset( $this->profile['address']['secondary'] ) && ( $this->profile['address']['secondary'] !== $this->profile['address']['default'] ) ),
-			'social'            => ( $this->attributes['showSocial'] && $this->profile['hasSocial'] ),
-			'bio'               => ( $this->attributes['showBio'] && $this->profile['bio'] ),
-			'labels'            => ( isset( $this->attributes['showLabels'] ) && ( $this->attributes['showLabels'] ) ),
-			'links'             => $this->should_show_links(),
-			'capitol_comms'     => $this->should_show_comms( 'capitol' ),
-			'district_comms'    => $this->should_show_comms( 'district' ),
-			'campaign_comms'    => $this->should_show_comms( 'campaign' ),
-			'profile_link'      => ( isset( $this->attributes['showProfileLink'] ) && $this->attributes['showProfileLink'] ),
-		];
-	}
-
-	private function should_show_comms( $group ) {
-
-		if ( $group === 'capitol' ) {
-			$show_attr     = 'showCapitolCommunicationDetails';
-			$selected_attr = 'selectedCapitolCommunicationDetails';
-		} elseif ( $group === 'district' ) {
-			$show_attr     = 'showDistrictCommunicationDetails';
-			$selected_attr = 'selectedDistrictCommunicationDetails';
-		} elseif ( $group === 'campaign' ) {
-			$show_attr     = 'showCampaignCommunicationDetails';
-			$selected_attr = 'selectedCampaignCommunicationDetails';
-		} {
-			$show_attr = 'showCampaignCommunicationDetails';
-		}
-
 		
-		if ( ! isset( $this->attributes[ $show_attr ] ) || ! isset( $this->attributes[ $selected_attr ] ) || empty( $this->attributes[ $selected_attr ] ) || ( ! $this->attributes[ $show_attr ] ) ) {
-			return false;
-		}
-
-		$selected_attrs = array_filter( $this->attributes[ $selected_attr ] );
-
-		if ( empty( $selected_attrs ) ) {
-			return false;
-		}
-
-		return true;
+		echo $block_html;
 	}
 
-	private function should_show_links() {
-		if ( isset( $this->attributes['showOtherLinks'] ) ) {
-			return $this->attributes['showOtherLinks'];
-		}
 	
-		if ( ! isset( $this->profile['links'] ) || empty( $this->profile['links'] ) ) {
-			return false;
-		}
 	
-		if (
-			( ! isset( $this->attributes['selectedLinks'] ) ) ||
-			( empty( $this->profile['selectedLinks'] ) )
-		) {
-			return true;
-		}
-	
-		return false;
-	}
-
-	public function get_profile_links() {
-		
-		if ( ! isset( $this->profile['links'] ) ) {
-			return [];
-		}
-
-		if ( empty( $this->profile['links'] ) ) {
-			return [];
-		}
-
-		
-		$links = apply_filters( 'govpack_profile_links', $this->profile['links'] ?? [], $this->profile['id'], $this->profile );
-		foreach ( $links as &$link ) {
-
-			$link = apply_filters( 'govpack_profile_link', $link, $this->profile['id'], $this->profile );
-
-			$link_attrs = array_filter(
-				$link,
-				function ( $value, $key ) {
-					if ( ( $value === null ) || ( $value === '' ) ) {
-						return false;
-					}
-
-					if ( ( $key === 'text' ) || ( $key === 'meta' ) ) {
-						return false;
-					}
-				
-					if ( is_array( $value ) && ( empty( $value ) ) ) {
-						return false;
-					}
-
-					return true;
-				},
-				ARRAY_FILTER_USE_BOTH
-			);
-
-			$link['src'] = sprintf( '<a %s>%s</a>', gp_normalise_html_element_args( $link_attrs ), $link['text'] );
-			
-		}
-
-		return $links;
-	}
-
-	public function rows() {
-
-		$rows = [ 
-			[
-				'key'        => 'age',
-				'value'      => esc_html( $this->profile['age'] ),
-				'label'      => 'Age',
-				'shouldShow' => $this->attributes['showAge'],
-			],
-			[
-				'key'        => 'leg_body',
-				'value'      => esc_html( $this->profile['legislative_body'] ),
-				'label'      => 'Legislative Body',
-				'shouldShow' => $this->attributes['showLegislativeBody'],
-			],
-			[
-				'key'        => 'position',
-				'value'      => esc_html( $this->profile['position'] ),
-				'label'      => 'Position',
-				'shouldShow' => $this->attributes['showPosition'],
-			],
-			[
-				'key'        => 'party',
-				'value'      => esc_html( $this->profile['party'] ),
-				'label'      => 'Party',
-				'shouldShow' => $this->attributes['showParty'],
-			],
-			[
-				'key'        => 'district',
-				'value'      => esc_html( $this->profile['district'] ),
-				'label'      => 'District',
-				'shouldShow' => $this->attributes['showDistrict'],
-			],
-			[
-				'key'        => 'state',
-				'value'      => esc_html( $this->profile['state'] ),
-				'label'      => 'State',
-				'shouldShow' => $this->attributes['showState'],
-			],
-			[
-				'key'        => 'status',
-				'value'      => esc_html( $this->profile['status'] ),
-				'label'      => 'Status',
-				'shouldShow' => $this->attributes['showDistrict'],
-			],
-			[
-				'key'        => 'social',
-				'value'      => $this->profile['social'],
-				'label'      => 'Social Media',
-				'shouldShow' => $this->show( 'social' ),
-			],
-			[
-				'key'        => 'comms_capitol',
-				'value'      => $this->profile['comms']['capitol'],
-				'label'      => 'Contact Info (Capitol)',
-				'shouldShow' => $this->show( 'capital_comms' ),
-				'show'       => $this->attributes['selectedCapitolCommunicationDetails'],
-			],
-			[
-				'key'        => 'comms_district',
-				'label'      => 'Contact Info (District)',
-				'value'      => $this->profile['comms']['district'],
-				'shouldShow' => $this->show( 'district_comms' ),
-				'show'       => $this->attributes['selectedDistrictCommunicationDetails'],
-			],
-			[
-				'key'        => 'comms_campaign',
-				'value'      => $this->profile['comms']['campaign'],
-				'label'      => 'Contact Info (Campaign)',
-				'shouldShow' => $this->show( 'campaign_comms' ),
-				'show'       => $this->attributes['selectedCampaignCommunicationDetails'],
-			],
-			[
-				'key'        => 'comms_other',
-				'value'      => $this->profile['comms']['other'],
-				'label'      => 'Contact Info (Campaign)',
-				'shouldShow' => $this->show( 'other_comms' ),
-				'show'       => $this->attributes['selectedOtherCommunicationDetails'],
-			],
-			[
-				'key'        => 'links',
-				'value'      => $this->get_profile_links(),
-				'shouldShow' => $this->show( 'links' ),
-			],
-			[
-				'key'        => 'more_about',
-				'shouldShow' => $this->show( 'profile_link' ),
-			],
-			
-		];
-
-		return $rows;
-	}
-
-	public function show( $key ) {
-
-		if ( $this->show === null ) {
-			$this->show = $this->populate_show();
-		}
-
-		if ( ! isset( $this->show[ $key ] ) ) {
-			return false;
-		}
-
-		return $this->show[ $key ];
-	}
-
 	public function template(): string {
 		return sprintf( 'blocks/%s', $this->template );
+	}
+
+	public function get_new_block_wrapper_attributes(): array {
+		$new_attrs = [];
+		$styles    = [];
+		$classes   = [];
+
+		if ( $this->attributes['customWidth'] ) {
+			$styles['max-width'] = $this->attributes['customWidth'];
+		}
+
+		if ( ! empty( $styles ) ) {
+			$new_attrs['style'] = trim(
+				implode(
+					' ', 
+					array_map(
+						function ( $rule, $value ) {
+							return sprintf( '%s: %s;', $rule, $value );
+						}, 
+						array_keys( $styles ), 
+						array_values( $styles )
+					)
+				)
+			);
+		}
+
+		$classes = apply_filters( 'newspack_elections_profile_block_classes', $this->get_wrapper_classes() );
+		
+		if ( ! empty( $classes ) ) {
+			$new_attrs['class'] = trim( implode( ' ', $classes ) );
+		}
+		
+		return $new_attrs;
+	}
+
+	public function get_wrapper_classes(): array {
+
+		$classes   = [];
+		$classes[] = sprintf( 'profile-%s', $this->attributes['profileId'] );
+
+		return $classes;
 	}
 }

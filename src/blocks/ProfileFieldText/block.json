@@ -48,7 +48,7 @@
 	},
 	"attributes": {
 	},
-	"ancestor": [ "govpack/profile-v2" ],
+	"ancestor": [ "npe/profile" ],
 	"usesContext": [
 		"govpack/fieldKey",
 		"govpack/fieldType",

@@ -72,7 +72,7 @@
 			}
 		}
 	},
-	"ancestor": [ "govpack/profile-v2" ],
+	"ancestor": [ "npe/profile" ],
 	"usesContext": [
 		"govpack/showLabels", 
 		"postType",

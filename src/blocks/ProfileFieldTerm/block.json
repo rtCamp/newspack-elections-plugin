@@ -56,7 +56,7 @@
 			"default" : 1
 		}
 	},
-	"ancestor": [ "govpack/profile-v2" ],
+	"ancestor": [ "npe/profile" ],
 	"usesContext": [
 		"postType",
 		"postId",

@@ -17,7 +17,7 @@ import {PanelBody, PanelRow, ToggleControl} from '@wordpress/components';
  * Internal dependencies
  */
 import { useProfileFieldAttributes } from "./../../profile"
-
+import { ProfileBlockName } from '../Profile';
 
 
 const MetaInspectorControl = ({
@@ -116,7 +116,7 @@ function Edit( props ) {
 	// Select Block Store Data
 	const {isBlockSelected, hasSelectedInnerBlock, isParentSelected, isRelativeSelected} = useSelect( (select) => {
 
-		const parentProfileBlockClientIds = select(blockEditorStore).getBlockParentsByBlockName(clientId, "govpack/profile-v2")
+		const parentProfileBlockClientIds = select(blockEditorStore).getBlockParentsByBlockName(clientId, ProfileBlockName)
 		const closestParentProfileBlockClientId = parentProfileBlockClientIds.at(-1)
 		const parentProfileBlock = select(blockEditorStore).getBlock(closestParentProfileBlockClientId)
 		return {

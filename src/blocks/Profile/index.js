@@ -1,34 +1,66 @@
-import { registerBlockType } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
+import { registerBlockCollection, registerBlockType, registerBlockVariation } from '@wordpress/blocks';
+import { addFilter } from "@wordpress/hooks"
+
 /**
  * Internal dependencies
  */
- import Edit from './edit';
+ import {ProfileEdit as Edit} from './edit/index';
+ import Save from './save';
  import metadata from './block.json';
 
  /**
  * Style dependencies - will load in editor
  */
 import './view.scss';
+import { variations } from './variations';
+import {withRestrictedAllowedBlocks} from "./edit/restrict-allowed-blocks"
+
+import deprecations from './deprecated';
+const { attributes, category, supports } = metadata;
 
 
+supports.color.__experimentalSkipSerialization = ["background"]
+supports.layout.__experimentalSkipSerialization = true
+supports.spacing.__experimentalSkipSerialization = ["padding"]
+supports.__experimentalBorder.__experimentalSkipSerialization = true
 
-const { attributes, category } = metadata;
+// Add the filter
+/*
+addFilter(
+    'editor.BlockEdit',
+    'govpack/restrict-allowed-blocks',
+    withRestrictedAllowedBlocks
+);
 
-registerBlockType( 'govpack/profile-legacy', {
-	apiVersion: 2,
-	title: __('Election Profile', "newspack-elections"),
+*/
+registerBlockType( metadata.name, {
+	apiVersion: 3,
+	title: 'Elections Profile',
     category,
     attributes,
+	supports,
 	icon: 'groups',
-	keywords: [ 'govpack', 'newspack-elections' ],
+	keywords: [ 'govpack' ],
     styles: [
-		{ name: 'default', label:  'Default', isDefault: true },
-        { name: 'boxed', label:  'Boxed' }
 	],
 	edit : Edit,
-	save() {
-		return null;
-	},
-
+	save: Save,
+	deprecated: deprecations
 } );
+
+
+// Our filter function
+function lockParagraphs( blockAttributes, blockType, innerHTML, attributes  ) {
+    if('core/paragraph' === blockType.name) {
+        blockAttributes['lock'] = {move: true}
+    }
+    return blockAttributes;
+}
+
+
+
+
+registerBlockVariation(metadata.name, variations)
+
+const ProfileBlockName = metadata.name
+export { ProfileBlockName }

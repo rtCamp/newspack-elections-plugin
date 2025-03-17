@@ -1,185 +1,108 @@
 {
-	"name": "govpack/profile",
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "npe/profile",
     "editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./index.css",
+	"style": "file:./view.css",
 	"category": "newspack-elections",
-	"attributes": {
-		"className": {
-			"type": "string",
-			"default": ""
+	"supports" : {
+		"anchor": true,
+		"align": true,
+		"alignWide": true,
+		"ariaLabel": true,
+		"color" : {
+			"background" : true,
+			"enableContrastChecker": true,
+			"gradients": true,
+			"heading": true,
+			"link": true,
+			"text": true
 		},
-		"profileId": {
-			"type": "number",
-			"default": 0
-		},
-		
-		"showAvatar": {
-			"type": "boolean",
-			"default": true
-		},
-		"avatarAlignment": {
-			"type": "string",
-			"default": "center"
-		},
-		"avatarBorderRadius": {
-			"type": "string",
-			"default": "0%"
-		},
-		"showOtherLinks" : {
-			"type": "boolean",
-			"default": false
-		},
-		"avatarSize": {
-			"type": "number",
-			"default": 128
-		},
-		"showName": {
-			"type": "boolean",
-			"default": true
-		},
-		"showStatus": {
-			"type": "boolean",
-			"default": true
-		},
-		"showStatusTag": {
-			"type": "boolean",
-			"default": false
-		},
-		"showWebsites": {
-			"type": "boolean",
-			"default": true
-		},
-		"avatarHideDefault": {
-			"type": "boolean",
-			"default": false
-		},
-        "showBio": {
-			"type": "boolean",
-			"default": true
-		},   
-		"showLabels": {
-			"type": "boolean",
-			"default": false
-		},
-		"labelsAbove": {
-			"type": "boolean",
-			"default": false
-		},
-        "showAge": {
-			"type": "boolean",
-			"default": false
-		},
-        "showLegislativeBody": {
-			"type": "boolean",
-			"default": true
-		},
-        "showPosition": {
-			"type": "boolean",
-			"default": true
-		},
-        "showParty": {
-			"type": "boolean",
-			"default": true
-		},
-        "showState": {
-			"type": "boolean",
-			"default": true
-		},
-    
-        "showSocial": {
-			"type": "boolean",
-			"default": true
-		},
-
-		"showDistrict": {
-			"type": "boolean",
-			"default": false
-		},
-
-		"selectedSocial": {
-			"type": "object",
-			"default": {
-				"showOfficial" : true,
-				"showCampaign" : true,
-				"showPersonal" : true
+		"layout" : {
+			"allowSwitching": false,
+			"allowVerticalAlignment": true,
+			"allowSizingOnChildren": true,
+			"allowEditing": true,
+			"default" : {
+				"type" : "flex"
 			}
 		},
-        "showEmail": {
-			"type": "boolean",
-			"default": true
+		"dimensions": {
+			"minHeight": true
 		},
-      
-        "align": {
+		"shadow": true, 
+		"spacing": {
+			"margin": true,  
+			"padding": true, 
+			"blockGap": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"textAlign": true
+		},
+		"__experimentalBorder": {
+			"color" : true,
+			"radius" : true,
+			"width" : true,
+			"style" : true
+		}
+	},
+	"attributes": {
+		"preview" : {
+			"type": "boolean",
+			"default": false
+		},
+		"postId": {
+			"type": "number"
+		},
+		"postType": {
 			"type": "string",
-            "default": "left"
+			"default": "govpack_profiles"
 		},
 		"width": {
+			"type": "string"
+		},
+		"customWidth": {
 			"type": "string",
-            "default": "small"
+			"default": "250px"
 		},
-		"showCapitolCommunicationDetails": {
-			"type": "boolean",
-			"default": true
+		"style": {
+			"type": "object"
 		},
-		"selectedCapitolCommunicationDetails": {
-			"type": "object",
-			"default": {
-				"showPhone" : true,
-				"showFax" : true,
-				"showEmail" : true,
-				"showAddress" : true,
-				"showWebsite" : true
-			}
-		},
-		"showDistrictCommunicationDetails": {
-			"type": "boolean",
-			"default": true
-		},
-		"selectedDistrictCommunicationDetails": {
-			"type": "object",
-			"default": {
-				"showPhone" : true,
-				"showFax" : true,
-				"showEmail" : true,
-				"showAddress" : true,
-				"showWebsite" : true
-			}
-		},
-		"showCampaignCommunicationDetails": {
-			"type": "boolean",
-			"default": true
-		},
-		"selectedCampaignCommunicationDetails": {
-			"type": "object",
-			"default": {
-				"showPhone" : true,
-				"showFax" : true,
-				"showEmail" : true,
-				"showAddress" : true,
-				"showWebsite" : true
-			}
-		},
-		"showOtherCommunicationDetails": {
-			"type": "boolean",
-			"default": true
-		},
-		"selectedOtherCommunicationDetails": {
-			"type": "object",
-			"default": {}
-		},
-		"showProfileLink" : {
-			"type": "boolean",
-			"default": true
-		},
-		"showEndorsements" : {
-			"type": "boolean",
-			"default": true
-		},
-		"selectedLinks": {
-			"type": "object",
-			"default": {
-			}
+		"tagName": {
+			"type": "string",
+			"default" : "div"
 		}
+	},
+	"allowedBlocks": [ 
+	
+		"core/spacer", 
+		"core/post-featured-image", 
+		"core/read-more", 
+		"core/post-excerpt", 
+		"core/group", 
+		"core/paragraph", 
+		"core/image", 
+		"core/heading", 
+		"govpack/profile-row-group", 
+		"govpack/profile-row", 
+		"govpack/profile-bio",
+		"govpack/profile-name", 
+		"govpack/profile-read-more", 
+		"govpack/profile-separator", 
+		"govpack/profile-field-text",
+		"govpack/profile-field-link",
+		"govpack/profile-field-term"
+	],
+	"usesContext": [
+		"postType",
+		"postId",
+		"queryId"
+	],
+	"providesContext": {
+		"postId" : "postId",
+		"postType" : "postType"
 	}
 }

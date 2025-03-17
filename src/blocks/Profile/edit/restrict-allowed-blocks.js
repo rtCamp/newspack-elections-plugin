@@ -3,6 +3,7 @@ import {useSelect} from "@wordpress/data";
 import {store as blockEditorStore} from "@wordpress/block-editor";
 import {store as blockStore} from "@wordpress/blocks";
 
+import { ProfileBlockName } from "..";
 export const withRestrictedAllowedBlocks = createHigherOrderComponent( ( BlockEdit ) => {
 
 	
@@ -11,7 +12,7 @@ export const withRestrictedAllowedBlocks = createHigherOrderComponent( ( BlockEd
 		const {clientId} = props
 
 		const {parents, parent, parentType} = useSelect( (select) => {
-			const parents = select(blockEditorStore).getBlockParentsByBlockName(clientId, "govpack/profile-v2")
+			const parents = select(blockEditorStore).getBlockParentsByBlockName(clientId, ProfileBlockName)
 			const parentId = parents?.[parents.length - 1] ?? null
 			const parent = select(blockEditorStore).getBlock(parentId) ?? []
 			const parentType = select(blockStore).getBlockType(parent?.name) ?? null

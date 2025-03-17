@@ -210,17 +210,18 @@ class Govpack {
 
 	public function register_blocks() {
 		
+		$this->blocks()->register( new \Govpack\Blocks\LegacyProfile( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\LegacyProfileSelf( $this ) );
+
 		$this->blocks()->register( new \Govpack\Blocks\Profile( $this ) );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileSelf( $this ) );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileBlockV2( $this ) );
 		
+		$this->blocks()->register( new \Govpack\Blocks\ProfileRowGroup( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileRow( $this ) );
+
 		$this->blocks()->register( new \Govpack\Blocks\ProfileBio( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileName( $this ) ); 
 		$this->blocks()->register( new \Govpack\Blocks\ProfileReadMore( $this ) ); 
 		
-		$this->blocks()->register( new \Govpack\Blocks\ProfileRowGroup( $this ) );
-		
-		$this->blocks()->register( new \Govpack\Blocks\ProfileRow( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileSeparator( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileLabel( $this ) );
 

@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register and handle the block.
  */
-class ProfileSelf extends \Govpack\Blocks\Profile {
+class LegacyProfileSelf extends \Govpack\Blocks\LegacyProfile {
 
 	public string $block_name = 'govpack/profile-self';
 	public $template          = 'profile-self';

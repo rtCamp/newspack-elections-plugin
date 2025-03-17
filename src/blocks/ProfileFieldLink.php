@@ -24,6 +24,14 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 	}
 
 	
+	public function show_block(): bool {
+		
+		if ( empty( $this->get_value() ) ) {
+			return false;
+		}
+
+		return true;
+	}
 
 	public function output(): string {
 
@@ -39,22 +47,19 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 	public function linkText(): string {
 		$link = $this->get_value();
 
+		$hasLabelOverride = ( $this->attribute( 'linkTextOverride' ) && $this->attribute( 'linkTextOverride' ) );
+		$hasDefaultLabel  = ( isset( $link['linkText'] ) && $link['linkText'] );
+		$defaultLabel     = $hasDefaultLabel ? $link['linkText'] : 'Link';
 
-
-		$hasLabelOverride = ($this->attribute( 'linkTextOverride' ) && $this->attribute( 'linkTextOverride' ) );
-		$hasDefaultLabel = (isset($link['linkText']) && $link['linkText']);
-		$defaultLabel = $hasDefaultLabel ? $link['linkText'] : "Link";
-
-		if($this->attribute("linkFormat") === "url"){
-			return $link['url'];
+		if ( $this->attribute( 'linkFormat' ) === 'url' ) {
+			return $link['url'] ?? '';
 		}
 
-		if($this->attribute("linkFormat") === "label"){
-			return ($hasLabelOverride ? $this->attribute( 'linkTextOverride' ) : $defaultLabel);
+		if ( $this->attribute( 'linkFormat' ) === 'label' ) {
+			return ( $hasLabelOverride ? $this->attribute( 'linkTextOverride' ) : $defaultLabel );
 		}
 
-		return	$defaultLabel;
-
+		return $defaultLabel;
 	}
 
 	public function variations(): array {

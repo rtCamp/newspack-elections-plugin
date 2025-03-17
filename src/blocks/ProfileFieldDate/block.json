@@ -50,7 +50,7 @@
 			"type": "string"
 		}
 	},
-	"ancestor": [ "govpack/profile-v2" ],
+	"ancestor": [ "npe/profile" ],
 	"usesContext": [
 		"govpack/field",
 		"govpack/fieldKey",
