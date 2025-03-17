@@ -65,7 +65,7 @@ export const variations = [
 						}
 					],
 					[
-						"govpack/profile-separator"
+						"npe/profile-separator"
 					],
 					[
 						"npe/profile-row",  {
@@ -76,7 +76,7 @@ export const variations = [
 						}
 					],
 					[
-						"govpack/profile-separator", {}
+						"npe/profile-separator", {}
 					],
 					[	
 						"npe/profile-row", {

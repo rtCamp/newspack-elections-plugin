@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class ProfileSeparator extends \Govpack\Blocks\ProfileField {
 
-	public string $block_name = 'govpack/profile-separator';
+	public string $block_name = 'npe/profile-separator';
 	
 	public function block_build_path(): string {
 		return $this->plugin->build_path( 'blocks/ProfileSeparator' );
