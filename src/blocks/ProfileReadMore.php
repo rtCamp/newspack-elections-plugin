@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class ProfileReadMore extends \Govpack\Blocks\ProfileFieldText {
 
-	public string $block_name = 'govpack/profile-read-more';
+	public string $block_name = 'npe/profile-read-more';
 	public $field_type        = 'block';
 	
 

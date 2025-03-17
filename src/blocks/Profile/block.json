@@ -90,7 +90,7 @@
 		"govpack/profile-row", 
 		"npe/profile-bio",
 		"npe/profile-name", 
-		"govpack/profile-read-more", 
+		"npe/profile-read-more", 
 		"govpack/profile-separator", 
 		"govpack/profile-field-text",
 		"govpack/profile-field-link",
