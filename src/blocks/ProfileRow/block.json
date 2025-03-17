@@ -10,7 +10,7 @@
 	"supports" : {
 		"anchor": true,
 		"align": true,
-		"alignWide": true,
+		"alignWide": false,
 		"ariaLabel": true,
 		"color" : {
 			"background" : true,
@@ -51,16 +51,8 @@
 				}
 			}
 		},
-		"layout":{
-			"type" : "object",
-			"default" : {
-				"type":"flex",
-				"flexWrap":"no-wrap"
-			}
-		},
 		"align": {
-			"type": "string",
-			"default": "full"
+			"type": "string"
 		},
 		"showLabel" : {
 			"type": "boolean",
