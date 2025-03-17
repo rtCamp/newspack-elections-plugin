@@ -52,7 +52,7 @@ export const variations = [
 				},
 				[ 	
 					[
-						"govpack/profile-name",
+						"npe/profile-name",
 						{"isLink":true},
 						[]
 					],
@@ -87,7 +87,7 @@ export const variations = [
 						},
 					],
 					[
-						"govpack/profile-bio",
+						"npe/profile-bio",
 						{"moreText":" ","showMoreOnNewLine":false,"excerptLength":27},
 						[]
 					]
@@ -135,7 +135,7 @@ export const variations = [
 					attributes : {"style":{"spacing":{"blockGap":"0.2rem"},"layout":{"selfStretch":"fill","flexSize":null}},"layout":{"type":"constrained"}} , 
 					innerBlocks: [
 						{
-							name : "govpack/profile-name", 
+							name : "npe/profile-name", 
 							attributes : {"style":{"typography":{"fontStyle":"normal","fontWeight":"1000","fontSize":"1.4rem"},"spacing":{"padding":{"bottom":"0.5rem"}}}}, 
 							innerBlocks : []
 						},
@@ -208,7 +208,7 @@ export const variations = [
 				"core/group", 
 				{"style":{"spacing":{"blockGap":"0.2rem"},"layout":{"selfStretch":"fill","flexSize":null}},"layout":{"type":"constrained"}} , 
 				[
-					["govpack/profile-name", {"style":{"typography":{"fontStyle":"normal","fontWeight":"1000","fontSize":"1.4rem"},"spacing":{"padding":{"bottom":"0.5rem"}}}}, []],
+					["npe/profile-name", {"style":{"typography":{"fontStyle":"normal","fontWeight":"1000","fontSize":"1.4rem"},"spacing":{"padding":{"bottom":"0.5rem"}}}}, []],
 					["govpack/profile-row", { 
 						"field":{
 							"type":"taxonomy",

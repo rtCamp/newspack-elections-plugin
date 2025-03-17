@@ -10,7 +10,7 @@ export const DEFAULT_TEMPLATE = [
 			}
 		}
 		},[
-			[ "govpack/profile-name", {
+			[ "npe/profile-name", {
 				"isLink":true
 			}, []],
 			[ "govpack/profile-row", {

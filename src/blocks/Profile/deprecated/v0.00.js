@@ -1,8 +1,8 @@
 import { InnerBlocks, useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 import {switchToBlockType, createBlock}  from '@wordpress/blocks'; 
 const targetBlockSwaps = {
-	"core/post-title" : "govpack/profile-name",
-	"core/post-excerpt": "govpack/profile-bio",
+	"core/post-title" : "npe/profile-name",
+	"core/post-excerpt": "npe/profile-bio",
 }
 
 const targetBlocks = Object.keys(targetBlockSwaps)
