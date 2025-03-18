@@ -7,6 +7,7 @@
 
 namespace Govpack;
 
+use Govpack\Abstracts\Plugin;
 use Govpack\FrontEnd\FrontEnd;
 use Govpack\Admin\Admin;
 
@@ -16,7 +17,7 @@ use Govpack\Admin\Admin;
 /**
  * Main Govpack Class.
  */
-class Govpack {
+class Govpack extends Plugin {
 
 	use \Govpack\Instance;
 
@@ -39,7 +40,9 @@ class Govpack {
 	 * Inits the class and registeres the hooks call.
 	 */
 	public function __construct() {
-		
+	}
+
+	public function init() {
 		$this->hooks();
 		$this->require( 'includes/govpack-functions.php' );
 		$this->require( 'includes/govpack-functions-template.php' );
@@ -50,24 +53,6 @@ class Govpack {
 			$this->dev = new \Govpack\Dev_Helpers( $this );
 			$this->dev->hooks();
 		}
-	}
-
-	public function path( $path ) {
-		return GOVPACK_PLUGIN_PATH . $path;
-	}
-
-	public function require( string $path ): string {
-		return require_once $this->path( $path ); //phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
-	}
-
-	public function build_path( string $path ): string {
-		return trailingslashit(
-			trailingslashit( $this->path( 'build' ) ) . $path 
-		);
-	}
-
-	public function url( string $path ): string {
-		return trailingslashit( GOVPACK_PLUGIN_URL ) . $path;
 	}
 
 	/**
@@ -84,7 +69,7 @@ class Govpack {
 
 	public static function deactivation(): void {
 		
-		// get capabilities setup first.
+		// remove capabilities from database.
 		\Govpack\Capabilities::instance()->remove_capabilities();
 	}
 
@@ -217,14 +202,12 @@ class Govpack {
 		
 		$this->blocks()->register( new \Govpack\Blocks\ProfileRowGroup( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileRow( $this ) );
+		$this->blocks()->register( new \Govpack\Blocks\ProfileSeparator( $this ) );
 
 		$this->blocks()->register( new \Govpack\Blocks\ProfileBio( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileName( $this ) ); 
 		$this->blocks()->register( new \Govpack\Blocks\ProfileReadMore( $this ) ); 
 		
-		$this->blocks()->register( new \Govpack\Blocks\ProfileSeparator( $this ) );
-		$this->blocks()->register( new \Govpack\Blocks\ProfileLabel( $this ) );
-
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldText( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldLink( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldTerm( $this ) );

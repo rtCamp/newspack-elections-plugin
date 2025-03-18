@@ -31,7 +31,6 @@ if ( ! defined( 'GOVPACK_PLUGIN_URL' ) ) {
 	define( 'GOVPACK_PLUGIN_URL', trailingslashit( plugin_dir_url( __FILE__ ) ) );
 }
 
-
 if ( ! defined( 'GOVPACK_PLUGIN_BUILD_URL' ) ) {
 	define( 'GOVPACK_PLUGIN_BUILD_URL', trailingslashit( GOVPACK_PLUGIN_URL . 'build' ) );
 }
@@ -52,17 +51,13 @@ if ( ! file_exists( GOVPACK_PLUGIN_PATH . 'vendor/autoload.php' ) ) {
 	return;
 }
 
-#if ( Govpack_Bootstrap_Helper::is_dir_empty( GOVPACK_PLUGIN_PATH . 'vendor-prefixed' ) ) {
-#   add_action( 'all_admin_notices', 'Govpack_Bootstrap_Helper::notice_prefixed_vendor_missing' );
-#   return;
-#}
+
 
 if ( ! is_dir( GOVPACK_PLUGIN_PATH . 'build' ) ) {
 	add_action( 'all_admin_notices', 'Govpack_Bootstrap_Helper::notice_build_missing' );
 	return;
 }
 
-#require_once GOVPACK_PLUGIN_PATH . 'autoloader.php';
 require_once GOVPACK_PLUGIN_FILE . 'vendor/autoload.php';
 require_once GOVPACK_PLUGIN_FILE . 'vendor-prefixed/autoload.php';
 
@@ -71,7 +66,11 @@ require_once GOVPACK_PLUGIN_FILE . 'vendor-prefixed/autoload.php';
 // Include the main Govpack class.
 if ( class_exists( '\Govpack\Govpack' ) ) {
 
-	$GLOBALS['govpack'] = \Govpack\Govpack::instance();
+	$GLOBALS['govpack'] = ( \Govpack\Govpack::instance() )
+		->set_path( GOVPACK_PLUGIN_PATH )
+		->set_url( GOVPACK_PLUGIN_URL )
+		->init();
+
 	register_activation_hook( __FILE__, [ $GLOBALS['govpack'], 'activation' ] );
 	register_deactivation_hook( __FILE__, [ $GLOBALS['govpack'], 'deactivation' ] );
 }
