@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 
-	public string $block_name = 'govpack/profile-field-term';
+	public string $block_name = 'npe/profile-field-term';
 	private string $default_variation;
 	public $field_type = 'taxonomy';
 
