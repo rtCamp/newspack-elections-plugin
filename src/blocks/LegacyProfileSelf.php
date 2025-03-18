@@ -19,7 +19,7 @@ class LegacyProfileSelf extends \Govpack\Blocks\LegacyProfile {
 
 
 	public function block_build_path(): string {
-		return $this->plugin->build_path( 'blocks/ProfileSelf' );
+		return $this->plugin->build_path( 'blocks/LegacyProfileSelf' );
 	}
 
 	/**
