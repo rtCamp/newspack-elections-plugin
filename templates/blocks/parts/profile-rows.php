@@ -30,7 +30,7 @@ foreach ( $profile_block->rows() as $index => $row ) {
 				);
 				?>
 				"
-			><?php esc_html( $row['label'] ); ?></dt>
+			><?php echo esc_html( $row['label'] ); ?></dt>
 			<?php } ?>
 			<dd class="govpack-line__content">
 				<?php

@@ -1053,10 +1053,12 @@ class CPT extends \Govpack\Abstracts\PostType {
 		$profile_data['social'] = array_map( 'array_filter', $profile_data['social'] );
 		$profile_data['social'] = array_filter( $profile_data['social'] );
 
+	
 		// force all social media links to have a protocal in the url
 		$profile_data['social'] = array_map(
 			function ( $social_set ) {
-				return array_map(
+			
+				$social_set['services'] = array_map(
 					function ( $service ) {
 
 						if ( ! $service ) {
@@ -1075,6 +1077,8 @@ class CPT extends \Govpack\Abstracts\PostType {
 					},
 					$social_set['services'] 
 				);
+
+				return $social_set;
 			},
 			$profile_data['social']
 		);

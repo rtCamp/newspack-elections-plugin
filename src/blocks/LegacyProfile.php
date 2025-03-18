@@ -70,7 +70,8 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 
 	
 		$this->profile = \Govpack\Profile\CPT::get_data( $attributes['profileId'] );
-	
+		
+
 		if ( ! $this->profile ) {
 			return;
 		}
@@ -245,6 +246,12 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 				'value'      => esc_html( $this->profile['status'] ),
 				'label'      => 'Status',
 				'shouldShow' => $this->attributes['showDistrict'],
+			],
+			[
+				'key'        => 'endorsements',
+				'value'      => esc_html( $this->profile['endorsements'] ),
+				'label'      => 'Endorsements',
+				'shouldShow' => $this->attributes['showEndorsements'],
 			],
 			[
 				'key'        => 'social',
