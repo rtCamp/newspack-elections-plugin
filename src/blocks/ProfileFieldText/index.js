@@ -46,7 +46,7 @@ registerBlockType( metadata.name, {
 				type: 'block',
 				blocks: [ 'npe/profile-row' ],
 				transform: ( attributes  ) => {
-					return createBlock( 'govpack/profile-field-text', attributes );
+					return createBlock( 'npe/profile-field-text', attributes );
 				},
 			}
 		]

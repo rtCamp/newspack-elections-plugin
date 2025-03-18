@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class ProfileFieldText extends \Govpack\Blocks\ProfileField {
 
-	public string $block_name = 'govpack/profile-field-text';
+	public string $block_name = 'npe/profile-field-text';
 	public $field_type        = 'text';
 	
 

@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "govpack/profile-field-text",
+	"name": "npe/profile-field-text",
 	"title": "Profile Field Text",
     "editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
