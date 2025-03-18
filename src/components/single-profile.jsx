@@ -134,6 +134,7 @@ const SingleProfile = (props) => {
 	
     profile = normalize_profile(profile)
 	
+	console.log(profile)
 
     const {
         showAvatar, 
@@ -409,6 +410,7 @@ const SingleProfile = (props) => {
 			data
 		} = props			
 
+		console.log("Profile Links", props)
 		
 		return (
 			<div className={`${blockClassName}__comms`}>

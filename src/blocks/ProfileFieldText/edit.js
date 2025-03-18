@@ -15,8 +15,8 @@ import { useUpdateBlockMetaName } from "./../utils"
 
 function Edit( props ) {
 
-	console.log("render text field block")
-	
+
+
 	const { setAttributes, attributes } = props
 	const { fieldKey, value, field, ...restFieldAttrs } =  useProfileFieldAttributes(props) 
 	const blockProps = useBlockProps()

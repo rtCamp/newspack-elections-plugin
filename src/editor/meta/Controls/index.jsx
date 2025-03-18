@@ -56,7 +56,6 @@ export const PanelUrlControl = (props) => {
 }
 
 export const PanelTextControl = (props) => {
-	console.log("render text control", props)
 	return DefaultControl(props, TextControl)
 }
 

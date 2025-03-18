@@ -40,8 +40,9 @@ function useProfileLoader(){
 			profileId
 		]
 
-		let entity = select( 'core' ).getEditedEntityRecord(...selectorArgs)
-		
+		let entity = select( 'core' ).getEntityRecord(...selectorArgs)
+		console.log("entity", entity )
+
 		if(!isNil(taxonomies) && !isNil(entity)){
 
 			terms = taxonomies.
@@ -70,6 +71,7 @@ function useProfileLoader(){
 
 	}, [] );
 
+	console.log("resp", resp )
 	return resp
 }
 
@@ -106,6 +108,7 @@ function Edit( props ) {
 		profile_links
 	} = entity
 
+	
 	let profile = {
 		meta, title, link, excerpt, featured_media, link_services, profile_links
 	}

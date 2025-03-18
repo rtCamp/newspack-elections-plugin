@@ -310,9 +310,16 @@ class CPT extends \Govpack\Abstracts\PostType {
 					'type'        => 'array',
 					'items'       => [
 						'type'       => 'object',
-						'properties' => [],
+						'properties' => [
+							'enabled' => [
+								'type'     => 'boolean',
+								'context'  => 'view',
+								'default'  => false,
+								'readonly' => true,
+							],
+						],
 					],
-					'context'     => [ 'edit' ],
+					'context'     => [ 'edit', 'view' ],
 					'readonly'    => true,
 				],
 			] 

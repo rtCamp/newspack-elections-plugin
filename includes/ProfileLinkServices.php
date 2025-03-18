@@ -88,11 +88,13 @@ class ProfileLinkServices {
 	 * @return array
 	 */
 	public function to_array() {
-		return array_map(
-			function ( $link ) {
-				return $link->get_service();
-			},
-			$this->get_services()
+		return array_values(
+			array_map(
+				function ( $link ) {
+					return $link->get_service();
+				},
+				$this->get_services()
+			)
 		);
 	}
 }
