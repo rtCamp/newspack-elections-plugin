@@ -39,7 +39,7 @@ class Link extends \Govpack\Fields\FieldType {
 	 * 
 	 * Block used to output the field by default
 	 */
-	public ?string $default_block = 'govpack/profile-field-link';
+	public ?string $default_block = 'govpack/npe-field-link';
 
 
 	public function variation_icon(): string {

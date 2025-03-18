@@ -93,7 +93,7 @@
 		"npe/profile-read-more", 
 		"npe/profile-separator", 
 		"govpack/npe-field-text",
-		"govpack/profile-field-link",
+		"govpack/npe-field-link",
 		"govpack/profile-field-term"
 	],
 	"usesContext": [

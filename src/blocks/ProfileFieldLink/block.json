@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "govpack/profile-field-link",
+	"name": "npe/profile-field-link",
 	"title": "Profile Field Link",
     "editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

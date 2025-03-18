@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 
-	public string $block_name = 'govpack/profile-field-link';
+	public string $block_name = 'npe/profile-field-link';
 	public $field_type        = 'link';
 	
 	public function block_build_path(): string {
