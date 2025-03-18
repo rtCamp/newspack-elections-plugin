@@ -31,7 +31,7 @@ class Date extends Text {
 	 * 
 	 * Block used to output the field by default
 	 */
-	public ?string $default_block = "govpack/profile-field-date";
+	public ?string $default_block = "npe/profile-field-date";
 
 
 	public function variation_icon(): string {
