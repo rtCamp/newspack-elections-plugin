@@ -11,10 +11,12 @@ import { useBlockProps } from "@wordpress/block-editor"
  */
 import { useProfileFieldAttributes } from './../../profile';
 
-
+import { useUpdateBlockMetaName } from "./../utils"
 
 function Edit( props ) {
 
+	console.log("render text field block")
+	
 	const { setAttributes, attributes } = props
 	const { fieldKey, value, field, ...restFieldAttrs } =  useProfileFieldAttributes(props) 
 	const blockProps = useBlockProps()
@@ -38,8 +40,8 @@ function Edit( props ) {
 	const FieldValue = profileValue(fieldKey)
 	const hasValue = !isEmpty(FieldValue)
 
-	//console.log("FieldValue", FieldValue)
-	//useUpdateBlockMetaName(FieldValue)
+
+	useUpdateBlockMetaName(FieldValue)
 
 	/*
 	useEffect( () => {

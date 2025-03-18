@@ -15,7 +15,7 @@ import { InspectorControls } from "@wordpress/block-editor"
 
 import { FieldBlockEdit } from '../../components/field-block-edit';
 import { useProfileFieldAttributes } from "./../../profile"
-
+import { useUpdateBlockMetaName } from "./../utils"
 
 
 function Edit( props ) {
@@ -66,6 +66,8 @@ function Edit( props ) {
 	}
 	
 	const linkText = calculateLinkText();
+
+	useUpdateBlockMetaName(linkText)
 
     return (
 		<>
