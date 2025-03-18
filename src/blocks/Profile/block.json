@@ -92,9 +92,9 @@
 		"npe/profile-name", 
 		"npe/profile-read-more", 
 		"npe/profile-separator", 
-		"govpack/npe-field-text",
-		"govpack/npe-field-link",
-		"govpack/profile-field-term"
+		"npe/profile-field-text",
+		"npe/profile-field-link",
+		"npe/profile-field-term"
 	],
 	"usesContext": [
 		"postType",
