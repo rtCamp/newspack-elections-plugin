@@ -16,6 +16,7 @@ use Govpack\Fields\Field\Email as EmailField;
 use Govpack\Fields\Field\Phone as PhoneField;
 use Govpack\Fields\Field\Date as DateField;
 use Govpack\Fields\Field\Taxonomy as TaxonomyField;
+use Govpack\Fields\Field\Service as ServiceField;
 
 use Govpack\ProfileLinks;
 use Govpack\ProfileLinkServices;
@@ -199,7 +200,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new LinkField( 'rumble', 'Rumble', 'link' ),
 
 				new TextField( 'opensecrets_id', 'Open Secrets' ),
-				new TextField( 'balletpedia_id', 'BallotPedia' ),
+				( new ServiceField( 'ballotpedia', 'BallotPedia' ) )->meta( 'balletpedia_id' )->set_service( \Govpack\Fields\Service\Ballotpedia::class ),
 				new TextField( 'openstates_id', 'OpenStates' ),
 				new TextField( 'fec_id', 'FEC ID' ),
 				new TextField( 'govtrack_id', 'GovTrack ID' ),

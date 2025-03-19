@@ -37,7 +37,7 @@ const useProfileTaxonomies = () => {
 }
 
 const ProfileTermSpan = ({postTerm}) => {
-	console.log("postTerm", postTerm)
+	
 	const className = clsx("npe-term", {
 		[`npe-term--${postTerm?.taxonomy}`] :postTerm?.taxonomy,
 		[`npe-term--${postTerm?.slug}`] :postTerm?.slug,

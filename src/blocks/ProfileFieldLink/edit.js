@@ -6,17 +6,55 @@ import {isEmpty} from "lodash"
 import { __ } from '@wordpress/i18n';
 
 import { 
-	PanelBody, PanelRow, TextControl,
+	PanelBody, PanelRow, TextControl, Icon,
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 	} from '@wordpress/components';
 import { InspectorControls } from "@wordpress/block-editor"
+
+import {useRef, useEffect, RawHTML} from "@wordpress/element"
 
 
 import { FieldBlockEdit } from '../../components/field-block-edit';
 import { useProfileFieldAttributes } from "./../../profile"
 import { useUpdateBlockMetaName } from "./../utils"
 
+const DynamicIcon = ({icon}) => {
+
+	/*
+	const iconRef = useRef();
+
+	console.log("DynamicIcon", iconRef)
+
+	useEffect(() => {
+		const importIcon = async () => {
+			console.log(icon)
+		  try {
+			//iconRef.current = (icon).ReactComponent;
+			iconRef.current = icon
+			console.log("set ref", iconRef)
+		  } catch (err) {
+			// @TODO - Log error somewhere
+		  }
+		};
+		importIcon();
+		console.log(iconRef)
+	}, [icon]);
+
+	*/
+
+	const SvgIcon = () => (
+		<RawHTML>
+			{icon}
+		</RawHTML>
+	)
+
+	console.log(typeof SvgIcon)
+	return (
+		<Icon icon={ SvgIcon } size={24} />
+	)
+	
+}
 
 function Edit( props ) {
 
@@ -69,6 +107,17 @@ function Edit( props ) {
 
 	useUpdateBlockMetaName(linkText)
 
+	const LinkBody = () => {
+
+		if(linkFormat === "icon"){
+
+
+			return (<DynamicIcon icon={field.icon}/>)
+		}
+
+		return (<>{linkText}</>)
+	}
+
     return (
 		<>
 			<InspectorControls group="settings">
@@ -110,7 +159,7 @@ function Edit( props ) {
 						href={ url }
 						onClick={ ( event ) => event.preventDefault() }
 					>
-						{linkText}
+						<LinkBody />
 					</a>
 				) }
 				{ (!fieldKey) && (

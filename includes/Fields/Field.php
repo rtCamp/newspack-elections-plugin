@@ -118,19 +118,25 @@ class Field extends \Govpack\Collection\Collectable implements \Govpack\Collecti
 		$this->allow_block = ! $disable;
 		return $this;
 	}
-	
+				
+	public function variation_icon(): string|null {
+		return $this->type->variation_icon();
+	}
 
 	public function to_array(): array {
 
 		$val = [];
 
 		foreach ( $this->to_array as $key ) {
-			if ( property_exists( $this, $key ) ) {
-				if ( empty( $this->$key ) ) {
-					continue;
-				}
-				$val[ $key ] = $this->$key;
+			if ( ! property_exists( $this, $key ) ) {
+				continue;
 			}
+
+			if ( empty( $this->$key ) ) {
+				continue;
+			}
+
+			$val[ $key ] = $this->$key;
 		}
 
 		return $val;

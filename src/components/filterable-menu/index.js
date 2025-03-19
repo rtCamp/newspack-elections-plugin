@@ -55,6 +55,7 @@ export function FilterableMenu({
 		
 	if(doHighlighting){
 		filteredChoices = filteredChoices.map( (f) => {
+			
 			return {
 				...f,
 				label : (<TextHighlight text={f.label} highlight={searchText}/>),

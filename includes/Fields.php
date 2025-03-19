@@ -23,6 +23,7 @@ class Fields {
 			FieldType\Link::class,
 			FieldType\Email::class,
 			FieldType\Phone::class,
+			FieldType\Service::class,
 			FieldType\Taxonomy::class,
 			FieldType\PostProperty::class,
 		];
@@ -36,7 +37,7 @@ class Fields {
 		return $this->types;
 	}
 
-	public function create_field_set() : FieldManager{
+	public function create_field_set(): FieldManager {
 		return new FieldManager();
 	}
 }

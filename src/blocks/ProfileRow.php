@@ -100,7 +100,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 	public function output(): string {
 		ob_start();
 
-		if($this->showLabel()){
+		if ( $this->showLabel() ) {
 			?>
 				<div><?php echo $this->label(); ?></div>
 			<?php
@@ -111,7 +111,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 		return ob_get_clean();
 	}
 
-	public function label() : string {
+	public function label(): string {
 
 		if ( $this->has_label_from_attributes() ) {
 			return $this->attribute( 'label' );
@@ -161,6 +161,11 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 				continue;
 			}
 			
+			//if($field->slug === "ballotpedia"){
+			//  gp_dump($field->variation_icon());
+			//  die();
+			//}
+
 			$variation = [
 				'category'    => 'newspack-elections-profile-row-fields',
 				'name'        => sprintf( 'profile-field-row-%s', $field->slug ),
@@ -178,7 +183,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 				],
 				'isActive'    => [ 'field.type', 'field.key' ],
 				'scope'       => [ 'inserter', 'block' ],
-				'icon'        => $field->type->variation_icon(),
+				'icon'        => $field->variation_icon(),
 				'innerBlocks' => $field->type->get_variation_inner_blocks(),
 			];
 
