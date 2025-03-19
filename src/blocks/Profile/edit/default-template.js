@@ -1,6 +1,7 @@
 export const DEFAULT_TEMPLATE = [
 	[ "core/post-featured-image", {
 		"isLink":true,
+		"aspectRatio":"1"
 	}, []],
 	[ "npe/profile-row-group", {
 		"style":{
@@ -19,12 +20,7 @@ export const DEFAULT_TEMPLATE = [
 					"type":"taxonomy"
 				}
 			}, []],
-			[ "npe/profile-row", {
-				"field" : {
-					"key":"legislative_body",
-					"type":"taxonomy"
-				}
-			}, []],
+			
 			[ "npe/profile-row", {
 				"field" : {
 					"key":"position",

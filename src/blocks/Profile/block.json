@@ -25,7 +25,9 @@
 			"allowSizingOnChildren": true,
 			"allowEditing": true,
 			"default" : {
-				"type" : "flex"
+				"type" : "flex",
+				"orientation": "vertical",
+				"justifyContent": "stretch"
 			}
 		},
 		"dimensions": {
