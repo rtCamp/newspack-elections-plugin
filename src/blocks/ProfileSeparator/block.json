@@ -18,11 +18,11 @@
 		},
 		"shadow": true, 
 		"spacing": {
-			"margin":[ "top", "bottom" ]  
+			"margin": true
 		}
 	},
 	"attributes": {
-		"height": {
+		"customHeight": {
 			"type": "string"
 		},
 		"width": {

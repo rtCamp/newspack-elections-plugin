@@ -1,5 +1,5 @@
 
-.wp-block-govpack-profile-v2{
+.wp-block-npe-profile{
 
 	//width:100%;
 
@@ -9,6 +9,38 @@
 
 	.wp-block-post-featured-image {
 		overflow: hidden;
+	}
+
+	&.is-style-red{
+		--npe-profile-color:rgba(201, 49, 53);
+		--npe-profile-color-tint:rgba(201, 49, 53, 0.05);
+	}
+	&.is-style-blue{
+		--npe-profile-color:rgba(19, 117, 183, 1);
+		--npe-profile-color-tint:rgba(19, 117, 183, 0.05);
+	}
+	&.is-style-yellow{
+		--npe-profile-color:rgba(223, 168, 0, 1);
+		--npe-profile-color-tint:rgba(223, 168, 0, 0.05);
+	}
+
+	&.is-style-red,
+	&.is-style-blue,
+	&.is-style-yellow {
+		border: 1px solid #cccccc;
+		border-radius:4px;
+		background-color: var(--npe-profile-color-tint);
+
+		.npe-term--govpack_party,
+		a:not(h2 > a) {
+			font-weight: bold;
+			color: var(--npe-profile-color);
+		}
+
+		.wp-block-npe-profile-separator{
+			margin-block-start: 1rem;
+			margin-block-end: 1rem;
+		}
 	}
 }
 

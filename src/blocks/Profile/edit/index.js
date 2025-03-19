@@ -60,8 +60,6 @@ export const ProfileEdit = ( props ) => {
 	}
 	
 	return (
-		<div {...innerBlockProps}>
-			<Component  {...props} setProfile = {setProfile} />
-		</div>
+		<Component  {...props} setProfile = {setProfile} />
 	)
 }

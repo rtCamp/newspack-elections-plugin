@@ -16,7 +16,7 @@ import { variations } from './variations';
 import {withRestrictedAllowedBlocks} from "./edit/restrict-allowed-blocks"
 
 import deprecations from './deprecated';
-const { attributes, category, supports } = metadata;
+const { attributes, category, supports, styles } = metadata;
 
 
 supports.color.__experimentalSkipSerialization = ["background"]
@@ -36,13 +36,12 @@ addFilter(
 registerBlockType( metadata.name, {
 	apiVersion: 3,
 	title: 'Elections Profile',
+	styles,
     category,
     attributes,
 	supports,
 	icon: 'groups',
 	keywords: [ 'govpack' ],
-    styles: [
-	],
 	edit : Edit,
 	save: Save,
 	deprecated: deprecations

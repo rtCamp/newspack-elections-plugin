@@ -6,8 +6,8 @@ export const DEFAULT_TEMPLATE = [
 	[ "npe/profile-row-group", {
 		"style":{
 			"spacing":{
-				"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10","left":"var:preset|spacing|10","right":"var:preset|spacing|10"},
-				"blockGap":"var:preset|spacing|10"
+				"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10","left":"var:preset|spacing|10","right":"var:preset|spacing|10",},
+				"blockGap":"var:preset|spacing|0"
 			}
 		}
 		},[
@@ -15,6 +15,7 @@ export const DEFAULT_TEMPLATE = [
 				"isLink":true
 			}, []],
 			[ "npe/profile-row", {
+				"showLabel":false,
 				"field" : {
 					"key":"party",
 					"type":"taxonomy"
@@ -22,17 +23,19 @@ export const DEFAULT_TEMPLATE = [
 			}, []],
 			
 			[ "npe/profile-row", {
-				"field" : {
-					"key":"position",
-					"type":"taxonomy"
-				}
-			}, []],
-			[ "npe/profile-row", {
+				"showLabel":false,
 				"field" : {
 					"key":"status",
 					"type":"taxonomy"
 				}
-			}, []]
+			}, []],
+
+			[ "npe/profile-separator", {
+			}, []],
+
+			[ "npe/profile-read-more", {
+				"linkText":"More about this candidate"
+			}, []],
 		]
 	]
 ]

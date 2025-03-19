@@ -11,7 +11,8 @@ export const variations = [
 		icon : layout,
 		attributes : {
 			width : "wide",
-			"backgroundColor":"base-2"
+			"backgroundColor":"base-2",
+			"style":{"spacing":{"blockGap":"0"}}
 		},
 		"innerBlocks": DEFAULT_TEMPLATE
 	},

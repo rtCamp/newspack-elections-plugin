@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import clsx from "clsx"
 
 /**
  * WordPress dependencies
@@ -36,9 +37,15 @@ const useProfileTaxonomies = () => {
 }
 
 const ProfileTermSpan = ({postTerm}) => {
+	console.log("postTerm", postTerm)
+	const className = clsx("npe-term", {
+		[`npe-term--${postTerm?.taxonomy}`] :postTerm?.taxonomy,
+		[`npe-term--${postTerm?.slug}`] :postTerm?.slug,
+		[`npe-term--${postTerm?.id}`] :postTerm?.id
+	})
 
 	return (
-		<span key={ postTerm.id } >
+		<span key={ postTerm.id } className = {className}>
 			{ decodeEntities( postTerm.name ) }
 		</span>
 	)
