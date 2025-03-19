@@ -199,7 +199,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new LinkField( 'rumble', 'Rumble', 'link' ),
 
 				new TextField( 'opensecrets_id', 'Open Secrets' ),
-				new TextField( 'balletpedia_id', 'BallotPedia' ),
+				new LinkField( 'balletpedia_id', 'BallotPedia' ),
 				new TextField( 'openstates_id', 'OpenStates' ),
 				new TextField( 'fec_id', 'FEC ID' ),
 				new TextField( 'govtrack_id', 'GovTrack ID' ),
