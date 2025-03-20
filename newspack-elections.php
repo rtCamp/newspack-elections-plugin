@@ -68,8 +68,8 @@ if ( class_exists( '\Govpack\Govpack' ) ) {
 
 	$GLOBALS['govpack'] = ( \Govpack\Govpack::instance() )
 		->set_path( GOVPACK_PLUGIN_PATH )
-		->set_url( GOVPACK_PLUGIN_URL )
-		->init();
+		->set_url( GOVPACK_PLUGIN_URL );
+	$GLOBALS['govpack']->init();
 
 	register_activation_hook( __FILE__, [ $GLOBALS['govpack'], 'activation' ] );
 	register_deactivation_hook( __FILE__, [ $GLOBALS['govpack'], 'deactivation' ] );

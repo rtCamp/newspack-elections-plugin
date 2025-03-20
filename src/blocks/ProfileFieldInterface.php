@@ -15,7 +15,7 @@ interface ProfileFieldInterface {
 	 *
 	 * @return string HTML for the block.
 	 */
-	public function render( array $attributes, ?string $content = null, \WP_Block $block );
+	public function render( array $attributes, string $content, \WP_Block $block );
 
 	public function get_value(): mixed;
 

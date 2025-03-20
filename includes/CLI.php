@@ -114,14 +114,7 @@ class CLI extends \WP_CLI_Command {
 	public static function init(): void {
 		WP_CLI::add_command( 'govpack import', '\Govpack\CLI' );
 		WP_CLI::add_command( 'govpack purge', [ '\Govpack\CLI', 'purge' ] );
-		WP_CLI::add_command(
-			'govpack migrate',
-			[
-				'\Govpack
-		\CLI',
-				'migrate',
-			] 
-		);
+		WP_CLI::add_command( 'govpack migrate', [ '\Govpack\CLI', 'migrate' ] );
 	}
 
 	
