@@ -44,7 +44,7 @@ jobs:
         uses: ./.github/actions/wp-cli-dist-archive
         with: 
           path: .
-          target: ./artifacts/newspack-elections.zip
+          target: ./artifacts/newspack-elections-${{github.run_number}}.zip
           plugin-dirname: "newspack-elections"
           format: "zip"
           filename-format: "{name}.{version}"
@@ -52,5 +52,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-            name: ${{steps.generate-archive.outputs.filename}}
+            name: 'newspack-elections'
             path: ./artifacts/*
