@@ -23,4 +23,8 @@ abstract class Service {
 	public function get_icon_slug(): string {
 		return isset( $this->icon_slug ) ? $this->icon_slug : $this->slug;
 	}
+
+	public function slug(): string {
+		return $this->slug;
+	}
 }

@@ -19,41 +19,15 @@ import { FieldBlockEdit } from '../../components/field-block-edit';
 import { useProfileFieldAttributes } from "./../../profile"
 import { useUpdateBlockMetaName } from "./../utils"
 
+import { NPEIcons } from "./../../components/Icons"
+
 const DynamicIcon = ({icon}) => {
-
-	/*
-	const iconRef = useRef();
-
-	console.log("DynamicIcon", iconRef)
-
-	useEffect(() => {
-		const importIcon = async () => {
-			console.log(icon)
-		  try {
-			//iconRef.current = (icon).ReactComponent;
-			iconRef.current = icon
-			console.log("set ref", iconRef)
-		  } catch (err) {
-			// @TODO - Log error somewhere
-		  }
-		};
-		importIcon();
-		console.log(iconRef)
-	}, [icon]);
-
-	*/
-
-	const SvgIcon = () => (
-		<RawHTML>
-			{icon}
-		</RawHTML>
-	)
-
-	console.log(typeof SvgIcon)
+	// Todo - make sure this exists
+	// move the function call up to the icons component
+	const SVG = NPEIcons[icon]()
 	return (
-		<Icon icon={ SvgIcon } size={24} />
+		<Icon icon={ SVG } size={24} />
 	)
-	
 }
 
 function Edit( props ) {
@@ -112,12 +86,13 @@ function Edit( props ) {
 		if(linkFormat === "icon"){
 
 
-			return (<DynamicIcon icon={field.icon}/>)
+			return (<DynamicIcon icon={field.service}/>)
 		}
 
 		return (<>{linkText}</>)
 	}
 
+	console.log("field", field)
     return (
 		<>
 			<InspectorControls group="settings">

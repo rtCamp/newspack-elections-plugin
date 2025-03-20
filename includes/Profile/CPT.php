@@ -217,13 +217,49 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new TaxonomyField( 'position', 'Office Title', \Govpack\Tax\OfficeHolderTitle::TAX_SLUG ),
 				new TaxonomyField( 'status', 'Office Status', \Govpack\Tax\OfficeHolderStatus::TAX_SLUG ),
 
+				
 			]
 		);
 
-		// Social Panel.
-		$groups = [ 'facebook', 'twitter', 'instagram', 'youtube', 'x' ];
+		self::$fields->register_fields(
+			[
+				( new ServiceField( 'x_official', 'Official X' ) )->set_service( \Govpack\Fields\Service\X::class ),
+				( new ServiceField( 'x_campaign', 'Campaign X' ) )->set_service( \Govpack\Fields\Service\X::class ),
+				( new ServiceField( 'x_personal', 'Personal X' ) )->set_service( \Govpack\Fields\Service\X::class ),
+			]
+		);
+
+		self::$fields->register_fields(
+			[
+				( new ServiceField( 'facebook_official', 'Official Facebook' ) )->set_service( \Govpack\Fields\Service\Facebook::class ),
+				( new ServiceField( 'facebook_campaign', 'Campaign Facebook' ) )->set_service( \Govpack\Fields\Service\Facebook::class ),
+				( new ServiceField( 'facebook_personal', 'Personal Facebook' ) )->set_service( \Govpack\Fields\Service\Facebook::class ),
+			]
+		);
+
+		self::$fields->register_fields(
+			[
+				( new ServiceField( 'instagram_official', 'Official Instagram' ) )->set_service( \Govpack\Fields\Service\Instagram::class ),
+				( new ServiceField( 'instagram_campaign', 'Campaign Instagram' ) )->set_service( \Govpack\Fields\Service\Instagram::class ),
+				( new ServiceField( 'instagram_personal', 'Personal Instagram' ) )->set_service( \Govpack\Fields\Service\Instagram::class ),
+			]
+		);
+
+		self::$fields->register_fields(
+			[
+				( new ServiceField( 'youtube_official', 'Official YouTube' ) )->set_service( \Govpack\Fields\Service\YouTube::class ),
+				( new ServiceField( 'youtube_campaign', 'Campaign YouTube' ) )->set_service( \Govpack\Fields\Service\YouTube::class ),
+				( new ServiceField( 'youtube_personal', 'Personal YouTube' ) )->set_service( \Govpack\Fields\Service\YouTube::class ),
+			]
+		);
+
+		/*
 		$keys   = [ 'official', 'campaign', 'personal' ];
 
+
+		// Social Panel.
+		$groups = [ 'facebook', 'twitter', 'instagram', 'youtube' ];
+		
 		foreach ( $groups as $group ) {
 			foreach ( $keys as $key ) {
 				$slug  = sprintf( '%s_%s', $group, $key );
@@ -234,6 +270,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 				);
 			}
 		}
+			*/
 	}
 
 	//public static function get_field_types(): array {

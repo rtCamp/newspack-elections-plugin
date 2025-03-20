@@ -82,6 +82,7 @@
 		"core/post-featured-image", 
 	
 		"core/heading",
-		"core/paragraph"
+		"core/paragraph",
+		"core/group"
 	]
 }

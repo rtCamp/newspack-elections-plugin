@@ -33,8 +33,13 @@
 
 		.npe-term--govpack_party,
 		a:not(h2 > a) {
+
 			font-weight: bold;
 			color: var(--npe-profile-color);
+
+			svg, path {
+				fill: var(--npe-profile-color);
+			}
 		}
 
 		.wp-block-npe-profile-separator{

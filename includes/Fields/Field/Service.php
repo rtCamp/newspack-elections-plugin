@@ -3,19 +3,19 @@
 namespace Govpack\Fields\Field;
 
 use Govpack\Fields\FieldType;
-use Govpack\Fields\Service as ProfileSurface;
+use Govpack\Fields\Service as ProfileService;
 
 class Service extends Link {
 
-	protected ProfileSurface $service;
+	protected ProfileService $service;
 
 	public function __construct( string $slug, string $label, FieldType|string|null $type = null ) {
 		parent::__construct( $slug, $label, 'service' );
 	}
 
-	public function set_service( string|ProfileSurface $service ): self {
+	public function set_service( string|ProfileService $service ): self {
 
-		if ( ! is_a( $service, ProfileSurface::class ) ) {
+		if ( ! is_a( $service, ProfileService::class ) ) {
 			$service = new $service();
 		}
 
@@ -25,7 +25,12 @@ class Service extends Link {
 	}
 
 	
-	
+	public function to_array(): array {
+		return [
+			...parent::to_array(),
+			'service' => $this->service->slug(),
+		];
+	}
 
 	
 
