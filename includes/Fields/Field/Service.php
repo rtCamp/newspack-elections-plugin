@@ -25,22 +25,9 @@ class Service extends Link {
 	}
 
 	
-	public function to_array(): array {
-		return [
-			...parent::to_array(),
-			'icon' => $this->service->icon(),
-		];
-	}
+	
 
-	public function to_rest(): array {
-
-		$data = parent::to_rest();
-		if ( $data['icon'] ) {
-			$data['icon'] = \esc_svg( $data['icon'] );
-		}
-
-		return $data;
-	}
+	
 
 	public function service(): ProfileSurface {
 		return $this->service;

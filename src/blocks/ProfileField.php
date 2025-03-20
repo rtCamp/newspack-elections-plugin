@@ -28,7 +28,7 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 	 *
 	 * @return string HTML for the block.
 	 */
-	public function render( array $attributes, ?string $content = null, \WP_Block $block ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+	public function render( array $attributes, string $content, \WP_Block $block ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
 
 		$this->attributes = self::merge_attributes_with_block_defaults( $this->block_name, $attributes );
 		$this->context    = $block->context;
