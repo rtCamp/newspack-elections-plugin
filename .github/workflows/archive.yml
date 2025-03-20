@@ -55,5 +55,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-            name: newspack-elections-${{github.run_number}}
+            name: artifact-newspack-elections-${{github.run_number}}
             path: ./artifacts/newspack-elections-${{github.run_number}}.zip
