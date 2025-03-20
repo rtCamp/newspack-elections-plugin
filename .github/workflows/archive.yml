@@ -48,7 +48,7 @@ jobs:
           plugin-dirname: "newspack-elections"
           format: "zip"
           filename-format: "{name}.{version}"
-	
+
       - name: Rename readme from md to txt
         run: touch ./artifacts/.keep
 
