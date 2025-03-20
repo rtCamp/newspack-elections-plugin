@@ -262,7 +262,7 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 			[
 				'key'        => 'comms_capitol',
 				'value'      => $this->profile['comms']['capitol'],
-				'label'      => 'Contact Info (Capitol)',
+				'label'      => 'Contact Info (Official)',
 				'shouldShow' => $this->show( 'capital_comms' ),
 				'show'       => $this->attributes['selectedCapitolCommunicationDetails'],
 			],

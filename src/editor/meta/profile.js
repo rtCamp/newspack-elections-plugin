@@ -9,9 +9,6 @@ import "./view.scss"
 
 const ABOUT_PANEL_FIELDS = [
 	{
-		label : "Name",
-		meta_key: "name"
-	},{
 		label : "Prefix",
 		meta_key: "name_prefix"
 	},{
@@ -113,26 +110,26 @@ const COMMUNICATION_PANEL_FIELDS = [{
 */
 
 const COMMUNICATION_PANEL_FIELDS = [{
-		label : "Address (Capitol)",
+		label : "Address (Official)",
 		meta_key : "address_capitol",
 		type : "textarea",
-		group:  "Capitol"
+		group:  "Official"
 	},{
-		label : "Phone (Capitol)",
+		label : "Phone (Official)",
 		meta_key : "phone_capitol",
-		group:  "Capitol"
+		group:  "Official"
 	},{
-		label : "Email (Capitol)",
+		label : "Email (Official)",
 		meta_key : "email_capitol",
-		group:  "Capitol"
+		group:  "Official"
 	},{
-		label : "Fax (Capitol)",
+		label : "Fax (Official)",
 		meta_key : "fax_capitol",
-		group:  "Capitol"
+		group:  "Official"
 	},{
-		label : "Website (Capitol)",
+		label : "Website (Official)",
 		meta_key : "website_capitol",
-		group:  "Capitol"
+		group:  "Official"
 	},
 	
 	{
@@ -289,7 +286,7 @@ const SOCIAL_PANEL_FIELDS = [{
 const GovPackProfileSidebar = () => (
     <>
 		{console.log("Sidebar Render")}
-        <MetaFieldsPanel 
+        <AboutPanel 
 			label = "About"
 			fields = {ABOUT_PANEL_FIELDS}
 		/>

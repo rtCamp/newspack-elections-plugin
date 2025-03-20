@@ -40,8 +40,8 @@ function useProfileLoader(){
 			profileId
 		]
 
-		let entity = select( 'core' ).getEntityRecord(...selectorArgs)
-		console.log("entity", entity )
+		let entity = select( 'core' ).getEditedEntityRecord(...selectorArgs)
+
 
 		if(!isNil(taxonomies) && !isNil(entity)){
 
@@ -71,7 +71,7 @@ function useProfileLoader(){
 
 	}, [] );
 
-	console.log("resp", resp )
+	
 	return resp
 }
 
@@ -127,7 +127,7 @@ function Edit( props ) {
                 <ProfileAvatarPanel attributes = {attributes} setAttributes = {setAttributes} showSizeControl = {false} showRadiusControl = {true} />
 				<ProfileLabelPanel attributes = {attributes} setAttributes = {setAttributes} />
                 <ProfileDisplaySettings attributes = {attributes} setAttributes = {setAttributes} showBioControl = {true} showLinkControl = {false} profile={profile} />
-				<ProfileCommsPanel attributes = {attributes} parentAttributeKey={"selectedCapitolCommunicationDetails"} setAttributes = {setAttributes} title="Capitol Communications" display={attributes.showCapitolCommunicationDetails} />
+				<ProfileCommsPanel attributes = {attributes} parentAttributeKey={"selectedCapitolCommunicationDetails"} setAttributes = {setAttributes} title="Official Communications" display={attributes.showCapitolCommunicationDetails} />
 				<ProfileCommsPanel attributes = {attributes} parentAttributeKey={"selectedCampaignCommunicationDetails"} setAttributes = {setAttributes} title="Campaign Communications" display={attributes.showCampaignCommunicationDetails} />
 				<ProfileCommsPanel attributes = {attributes} parentAttributeKey={"selectedDistrictCommunicationDetails"} setAttributes = {setAttributes} title="District Communications" display={attributes.showDistrictCommunicationDetails} />
 				<ProfileCommsOtherPanel attributes = {attributes} parentAttributeKey={"selectedOtherCommunicationDetails"} setAttributes = {setAttributes} title="Other Communications" display={attributes.showOtherCommunicationDetails} profile={profile}/>
