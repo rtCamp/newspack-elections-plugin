@@ -49,11 +49,11 @@ jobs:
           format: "zip"
           filename-format: "{name}.{version}"
 
-      - name: Rename readme from md to txt
-        run: touch ./artifacts/.keep
+      - name: Add extra hidden file so second zip doesn't load
+        run: touch ./artifacts/keep
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-            name: 'newspack-elections'
-            path: ./artifacts/*
+            name: newspack-elections-${{github.run_number}}
+            path: ./artifacts/newspack-elections-${{github.run_number}}.zip
