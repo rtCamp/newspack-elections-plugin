@@ -9,8 +9,10 @@ export const useField = ( slug ) => {
 	const field = useSelect( (select) => {
 		return select(store).getField(slug) ?? {}
 	}, [slug] )
-
-	field.field_type = getFieldTypeObject(field.type)
+	
+	if(field.type){
+		field.field_type = getFieldTypeObject(field.type)
+	}
 
 	return field
 }

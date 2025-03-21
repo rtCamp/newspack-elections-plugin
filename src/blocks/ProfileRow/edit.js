@@ -11,14 +11,21 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls, useInnerBlocksProps, store as blockEditorStore, RichText} from "@wordpress/block-editor"
 import { useSelect} from '@wordpress/data';
 import { store as blocksStore } from "@wordpress/blocks"
-import {PanelBody, PanelRow, ToggleControl} from '@wordpress/components';
+import {
+	PanelBody, PanelRow, ToggleControl, 
+	__experimentalHStack as HStack,
+	__experimentalText as Text,
+	FlexBlock,
+	FlexItem,
+} from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import { useProfileFieldAttributes } from "./../../profile"
+import { useProfileFieldAttributes, useProfileFields } from "./../../profile"
 import { ProfileBlockName } from '../Profile';
-
+import { ProfileFieldsDropDown } from "./../../components/Controls/ProfileField"
+import { useFields } from "./../../fields"
 
 const MetaInspectorControl = ({
 	fieldKey,
@@ -81,10 +88,15 @@ function Edit( props ) {
 
 	const {attributes, setAttributes, context, clientId} = props  
 	const blockProps = useBlockProps();
-	const { fieldKey, fieldType, value, field } =  useProfileFieldAttributes(props) 
-	const hasValue = !isEmpty(value)
-	
+	const { setField, fieldKey, fieldType, value, field } =  useProfileFieldAttributes(props) 
+	const fields = useProfileFields(props)
+	const availableFields = useFields()
 
+	const hasValue = !isEmpty(value)
+	const hasField = !isEmpty(field)
+
+	console.log("ROW", field)
+	
 	/**
 	 * Get Data From Parent Blocks
 	 */
@@ -108,7 +120,7 @@ function Edit( props ) {
 	const {children, ...innerBlocksProps } = useInnerBlocksProps(blockProps, {
 		template : useConditionalTemplate(clientId),
 		renderAppender : false,
-		templateLock: "all"
+		templateLock: "all",
 	} );
 
 	let {className} = innerBlocksProps
@@ -153,6 +165,8 @@ function Edit( props ) {
 	const shouldHideBlock = hideFieldIfEmpty && !hasValue && !isBlockSelected && !isRelativeSelected && !isParentSelected
 	className = clsx(className, {"gp-dim-field" : shouldDimField })
 
+	
+
 	if(shouldHideBlock){
 		return null;
 	}
@@ -166,20 +180,52 @@ function Edit( props ) {
 				hideFieldIfEmpty = {hideFieldIfEmpty}
 				fieldType = {fieldType}
 			/>
+			<>
+				{ !hasField && ( 
+					<HStack
+						expanded = {true}
+					
+						justify='space-between'
+						align = "center"
+					>	
+						
+							<Text as="p" expanded={true} flexGrow={true} >Select a field to display:</Text>
+						
+						<FlexItem align="flex-end">
+							<ProfileFieldsDropDown
+								className={ 'govpack-profile-field-select' }
+								onSelectField={  (fieldKey) => {
+									const field = availableFields.find( (f) => f.slug === fieldKey)
+									
+									setField({
+										type : field.type,
+										key: fieldKey
+									})
+								} }
+								selectedValue={ "" }
+								disableEmptyFields = {false}
+								choices={ fields }
+							/>
+						</FlexItem>
+					</HStack>
+				) }
 
-			{showLabel && (
-				<div className="gp-block-row-label">
-					<RichText
-						tagName="span" // The tag here is the element output and editable in the admin
-						value={ calculatedLabel } // Any existing content, either from the database or an attribute default
-						allowedFormats={ [ 'core/bold', 'core/italic' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
-						onChange={ ( label ) => updateLabel( label ) } // Store updated content as a block attribute
-						placeholder={ __( 'Label...' ) } // Display this text before any content has been added by the user
-					/>
-				</div>
-			)}
+				{ hasField && ( <>
+					{ showLabel && (
+						<div className="gp-block-row-label">
+							<RichText
+								tagName="span" // The tag here is the element output and editable in the admin
+								value={ calculatedLabel } // Any existing content, either from the database or an attribute default
+								allowedFormats={ [ 'core/bold', 'core/italic' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
+								onChange={ ( label ) => updateLabel( label ) } // Store updated content as a block attribute
+								placeholder={ __( 'Label...' ) } // Display this text before any content has been added by the user
+							/>
+						</div>
+					)}
 
-			{ children }
+					{ children }
+				</>)}
+			</>
 		</div>
 	)
 }

@@ -13,7 +13,7 @@ const StyledDropdownMenu = styled( DropdownMenu )`
 	width: 100%;
 `;
 
-export default function ProfileFieldsDropDown( props ) {
+export  function ProfileFieldsDropDown( props ) {
 
 	const {
 		className,
@@ -46,3 +46,5 @@ export default function ProfileFieldsDropDown( props ) {
 		</StyledDropdownMenu>
 	);
 }
+
+export default ProfileFieldsDropDown

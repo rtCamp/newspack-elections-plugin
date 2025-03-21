@@ -100,7 +100,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 	public function output(): string {
 		ob_start();
 
-		if($this->showLabel()){
+		if ( $this->showLabel() ) {
 			?>
 				<div><?php echo $this->label(); ?></div>
 			<?php
@@ -111,7 +111,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 		return ob_get_clean();
 	}
 
-	public function label() : string {
+	public function label(): string {
 
 		if ( $this->has_label_from_attributes() ) {
 			return $this->attribute( 'label' );
@@ -143,12 +143,37 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 	}
 
 	public function variations(): array {
-		$types     = $this->create_field_type_variations();
-		$fields    = $this->create_field_variations();
-		$free_text = $this->create_free_type_variations();
-		//$fields = [];
+		
 
-		return array_merge( $types, $fields, $free_text );
+		return array_merge( 
+		//  $this->create_empty_variations(),
+			$this->create_field_type_variations(), 
+			$this->create_field_variations(), 
+			$this->create_free_type_variations()
+		);
+	}
+
+	public function create_empty_variations(): array {
+		$variation = [
+			'category'    => 'newspack-elections-profile-row-fields',
+			'name'        => sprintf( 'profile-field-row-%s', 'empty' ),
+			'title'       => 'Profile Field',
+			'description' => sprintf(
+				/* translators: %s: taxonomy's label */
+				__( 'Display Empty Profile Field' ),
+			),
+			'attributes'  => [
+				'field' => [ 
+					'type' => '',
+					'key'  => '',
+				],
+			],
+			'scope'       => [ 'inserter', 'block' ],
+			'icon'        => 'connection',
+			'isActive'    => [ 'field.type' ],
+		];
+
+		return $variation;
 	}
 
 	public function create_field_variations(): array {
@@ -242,7 +267,6 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 			'scope'       => [ 'inserter', 'transform' ],
 			'icon'        => 'text',
 			'innerBlocks' => [
-				[ 'govpack/profile-label', [] ],
 				[
 					'core/paragraph',
 					[

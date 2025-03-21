@@ -50,7 +50,10 @@ const GroupEdit = ( {attributes, setAttributes, context, clientId, ...props} ) =
 	
 	const blockProps = useBlockProps();
 	const innerBlockProps = useInnerBlocksProps(blockProps, {
-		renderAppender : (isBlockSelected || hasSelectedInnerBlock) ? InnerBlocks.ButtonBlockAppender : undefined
+		renderAppender : (isBlockSelected || hasSelectedInnerBlock) ? InnerBlocks.ButtonBlockAppender : undefined,
+		prioritizedInserterBlocks : [
+			"npe/profile-row/field-empty"
+		]
 	});
 	
 	const units = [
@@ -101,8 +104,6 @@ const GroupEdit = ( {attributes, setAttributes, context, clientId, ...props} ) =
 
     return (
 		<>	
-			
-			
 
 			<InspectorControls>
 				<Panel>
