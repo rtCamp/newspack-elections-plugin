@@ -80,6 +80,9 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 	}
 
 	public function attribute( string $key ): mixed {
+		if(!$this->has_attribute($key)){
+			return null;
+		}
 		return $this->attributes[ $key ];
 	}
 
