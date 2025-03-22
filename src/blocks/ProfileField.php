@@ -144,9 +144,9 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 
 	public function get_profile() {
 
-		if ( isset( $this->profile ) ) {
-			return $this->profile;
-		}
+		//if ( isset( $this->profile ) ) {
+		//	return $this->profile;
+		//}
 
 		$this->profile = \Govpack\Profile\Profile::get( $this->get_profile_id() );
 
