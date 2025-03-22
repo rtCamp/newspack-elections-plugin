@@ -39,11 +39,11 @@
 	"usesContext": [
 		"postId",
 		"postType", 
-		"govpack/profileField", 
-		"govpack/separatorHeight",
-		"govpack/separatorMargin",
-		"govpack/separatorStyle",
-		"govpack/separatorColor",
-		"govpack/separatorCustomColor"
+		"npe/profileField", 
+		"npe/separatorHeight",
+		"npe/separatorMargin",
+		"npe/separatorStyle",
+		"npe/separatorColor",
+		"npe/separatorCustomColor"
 	]
 }

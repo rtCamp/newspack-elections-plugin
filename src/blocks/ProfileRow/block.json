@@ -74,15 +74,15 @@
 	},
 	"ancestor": [ "npe/profile" ],
 	"usesContext": [
-		"govpack/showLabels", 
+		"npe/showLabels", 
 		"postType",
 		"postId"
 	],
 	"providesContext": {
-		"govpack/fieldKey": "fieldKey",
-		"govpack/fieldType": "fieldType",
-		"govpack/showLabel": "showLabel",
-		"govpack/field": "field"
+		"npe/fieldKey": "fieldKey",
+		"npe/fieldType": "fieldType",
+		"npe/showLabel": "showLabel",
+		"npe/field": "field"
 	}
 	
 }

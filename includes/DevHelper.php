@@ -4,7 +4,7 @@ namespace Govpack;
 
 use Govpack\Vendor\z4kn4fein\SemVer\Version;
 
-class Dev_Helpers {
+class DevHelper {
 	
 	private Govpack $plugin;
 

@@ -77,8 +77,8 @@ function SeperatorEdit( {attributes, setAttributes, context, ...props} ) {
 	} = attributes;
 
 	let { 
-		'govpack/separatorStyle' : inheritedStyle = {},
-		'govpack/separatorColor' : inheritedSeperatorColor = {}
+		'npe/separatorStyle' : inheritedStyle = {},
+		'npe/separatorColor' : inheritedSeperatorColor = {}
 	} = context;
 
 	

@@ -28,7 +28,7 @@ supports.__experimentalBorder.__experimentalSkipSerialization = true
 /*
 addFilter(
     'editor.BlockEdit',
-    'govpack/restrict-allowed-blocks',
+    'npe/restrict-allowed-blocks',
     withRestrictedAllowedBlocks
 );
 

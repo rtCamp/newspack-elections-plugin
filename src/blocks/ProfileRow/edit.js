@@ -101,7 +101,7 @@ function Edit( props ) {
 	 * Get Data From Parent Blocks
 	 */
 	const { 
-		'govpack/showLabels' : GroupShowLabels = null, 
+		'npe/showLabels' : GroupShowLabels = null, 
 	} = context
 
 	/**
