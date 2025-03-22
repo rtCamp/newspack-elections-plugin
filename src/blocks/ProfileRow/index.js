@@ -1,5 +1,5 @@
-import { registerBlockType } from '@wordpress/blocks';
-import { row as icon } from '@wordpress/icons';
+import { registerBlockType, registerBlockVariation } from '@wordpress/blocks';
+import { row as icon, connection } from '@wordpress/icons';
 import { __ } from "@wordpress/i18n"
 
 /**
@@ -35,3 +35,11 @@ registerBlockType( metadata.name, {
 } );
 
 
+registerBlockVariation(metadata.name, {
+	name : "field-empty",
+	title : "Profile Field",
+	description: "Empty Profile Field",
+	icon : connection,
+	attributes : {},
+	isDefault : true
+})

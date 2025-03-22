@@ -99,9 +99,9 @@
 	},
 	"ancestor": [ "npe/profile" ],
 	"usesContext": [
-		"govpack/fieldKey",
-		"govpack/fieldType",
-		"govpack/showLabels",
+		"npe/fieldKey",
+		"npe/fieldType",
+		"npe/showLabels",
 		"postType", 
 		"postId"
 	]

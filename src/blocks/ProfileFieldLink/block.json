@@ -57,9 +57,9 @@
 	},
 	"ancestor": [ "npe/profile" ],
 	"usesContext": [
-		"govpack/fieldKey",
-		"govpack/field",
-		"govpack/showLabels",
+		"npe/fieldKey",
+		"npe/field",
+		"npe/showLabels",
 		"postType", 
 		"postId"
 	]

@@ -15,8 +15,6 @@ import { useUpdateBlockMetaName } from "./../utils"
 
 function Edit( props ) {
 
-
-
 	const { setAttributes, attributes } = props
 	const { fieldKey, value, field, ...restFieldAttrs } =  useProfileFieldAttributes(props) 
 	const blockProps = useBlockProps()
@@ -43,26 +41,6 @@ function Edit( props ) {
 
 	useUpdateBlockMetaName(FieldValue)
 
-	/*
-	useEffect( () => {
-
-		if(!hasValue){
-			return
-		}
-
-		if(!value){
-			return
-		}
-
-		setAttributes({"metadata" : {
-			...attributes.metadata,
-			name: value
-		}})
-	
-	}, [value, hasValue])
-	*/
-	
-	
 
     return (
 		<div {...blockProps} >

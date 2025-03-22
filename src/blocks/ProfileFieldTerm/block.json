@@ -60,7 +60,7 @@
 	"usesContext": [
 		"postType",
 		"postId",
-		"govpack/fieldKey",
-		"govpack/field"
+		"npe/fieldKey",
+		"npe/field"
 	]
 }

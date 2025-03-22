@@ -410,7 +410,6 @@ const SingleProfile = (props) => {
 			data
 		} = props			
 
-		console.log("Profile Links", props)
 		
 		return (
 			<div className={`${blockClassName}__comms`}>
@@ -551,7 +550,7 @@ const SingleProfile = (props) => {
                     </div>
 
 					<Row key="age" id="age" label="Age" value={profile.age} display={showAge}/>
-                    <Row key="leg_body" id="leg_body" label="Legislative Body" value={profile.legislative_body} display={showLegislativeBody}/>
+                    <Row key="leg_body" id="leg_body" label="Office" value={profile.legislative_body} display={showLegislativeBody}/>
                     <Row key="pos" id="position" label="Position" value={profile.position}  display={showPosition}/>
                     <Row key="party" id="party" label="Party" value={profile.party}  display={showParty}/>
 					<Row key="district" id="district" label="District" value={profile.district}  display={showDistrict}/>
@@ -559,7 +558,7 @@ const SingleProfile = (props) => {
                     <Row key="states" id="states" label="State" value={profile.state} display={showState}/>
 					<Row key="endorsements" id="endorsements" value={profile.endorsements} display={showEndorsements}/>
                     <Row key="social" id="social" label="Social Media" value={<SocialMedia data={profile.social} label="Social Media" show={selectedSocial}/>} display={doShowSocial}/>
-					<Row key="comms_capitol" id="comms_capitol" label="Contact Info (Capitol)" value={hasCommsData(profile.comms.capitol) && <Comms data={profile.comms.capitol} label="Capitol" show={selectedCapitolCommunicationDetails}/>} display={showCapitolCommunicationDetails} />
+					<Row key="comms_capitol" id="comms_capitol" label="Contact Info (Official)" value={hasCommsData(profile.comms.capitol) && <Comms data={profile.comms.capitol} label="Capitol" show={selectedCapitolCommunicationDetails}/>} display={showCapitolCommunicationDetails} />
 					<Row key="comms_district" id="comms_district" label="Contact Info (District)" value={hasCommsData(profile.comms.district) && <Comms data={profile.comms.district} label="District" show={selectedDistrictCommunicationDetails}/>} display={showDistrictCommunicationDetails} />
 					<Row key="comms_campaign" id="comms_campaign" label="Contact Info (Campaign)" value={hasCommsData(profile.comms.campaign) && <Comms data={profile.comms.campaign} label="Campaign" show={selectedCampaignCommunicationDetails}/>} display={showCampaignCommunicationDetails} />
 					<Row key="comms_other" id="comms_other" label="Contact Info (Other)" value={hasCommsOtherData(profile.comms.other) && <CommsOther data={profile.comms.other} label="Other" show={selectedOtherCommunicationDetails}/>} display={showOtherCommunicationDetails} />

@@ -9,8 +9,10 @@ export const useField = ( slug ) => {
 	const field = useSelect( (select) => {
 		return select(store).getField(slug) ?? {}
 	}, [slug] )
-
-	field.field_type = getFieldTypeObject(field.type)
+	
+	if(field.type){
+		field.field_type = getFieldTypeObject(field.type)
+	}
 
 	return field
 }
@@ -62,7 +64,7 @@ export const useFieldAttributes = (props) => {
 
 	const { attributes, setAttributes, context } = props
 	const { field = {} } = attributes
-	const { 'govpack/field' :inheritedField = {} } = context
+	const { 'npe/field' :inheritedField = {} } = context
 
 	let { 
 		key : localFieldKey = null,
@@ -83,11 +85,11 @@ export const useFieldAttributes = (props) => {
 	} = inheritedField
 
 	if(!inheritedFieldKey){
-		inheritedFieldKey = context["govpack/fieldKey"]
+		inheritedFieldKey = context["npe/fieldKey"]
 	}
 
 	if(!inheritedFieldType){
-		inheritedFieldType = context["govpack/fieldType"]
+		inheritedFieldType = context["npe/fieldType"]
 	}
 
 

@@ -167,29 +167,29 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new DateField( 'congress_year', 'Congressional Year' ),
 
 				new EmailField( 'email_official', 'Official Email Address' ),
-				new EmailField( 'email_legislative', 'Legislative Email Address' ),
+				//new EmailField( 'email_legislative', 'Legislative Email Address' ),
 				new EmailField( 'email_other', 'Other Email Address' ),
 
-				new EmailField( 'email_capitol', 'Capitol Email Address' ),
+				new EmailField( 'email_capitol', 'Official Email Address' ),
 				new EmailField( 'email_district', 'District Email Address' ),
 				new EmailField( 'email_campaign', 'Campaign Email Address' ),
 			
-				new TextField( 'address_capitol', 'Capitol Address' ),
+				new TextField( 'address_capitol', 'Official Address' ),
 				new TextField( 'address_district', 'District Address' ),
 				new TextField( 'address_campaign', 'Campaign Address' ),
 
-				new PhoneField( 'phone_capitol', 'Capitol Phone Number' ),
+				new PhoneField( 'phone_capitol', 'Official Phone Number' ),
 				new PhoneField( 'phone_district', 'District Phone Number' ),
 				new PhoneField( 'phone_campaign', 'Campaign Phone Number' ),
 
-				new PhoneField( 'fax_capitol', 'Capitol Fax Number' ),
+				new PhoneField( 'fax_capitol', 'Official Fax Number' ),
 				new PhoneField( 'fax_district', 'District Fax Number' ),
 				new PhoneField( 'fax_campaign', 'Campaign Fax Number' ),
 
 				( new LinkField( 'website_personal', 'Personal Website URL' ) ),
 				( new LinkField( 'website_campaign', 'Campaign Website URL' ) ),
 				( new LinkField( 'website_district', 'District Website URL' ) )->link_text( 'District Website' ),
-				( new LinkField( 'website_capitol', 'Capitol Website URL' ) )->link_text( 'Capitol Website' ),
+				( new LinkField( 'website_capitol', 'Official Website URL' ) )->link_text( 'Official Website' ),
 				( new LinkField( 'rss', 'RSS Feed URL' ) )->link_text( 'RSS Feed' ),
 				( new LinkField( 'linkedin', 'Linkedin URL' ) )->link_text( 'LinkedIn Profile' ),
 				
@@ -213,7 +213,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 
 				new TaxonomyField( 'party', 'Party', \Govpack\Tax\Party::TAX_SLUG ),
 				new TaxonomyField( 'state', 'State', \Govpack\Tax\State::TAX_SLUG ),
-				new TaxonomyField( 'legislative_body', 'Legislative Body', \Govpack\Tax\LegislativeBody::TAX_SLUG ),
+				new TaxonomyField( 'legislative_body', 'Office', \Govpack\Tax\LegislativeBody::TAX_SLUG ),
 				new TaxonomyField( 'position', 'Office Title', \Govpack\Tax\OfficeHolderTitle::TAX_SLUG ),
 				new TaxonomyField( 'status', 'Office Status', \Govpack\Tax\OfficeHolderStatus::TAX_SLUG ),
 

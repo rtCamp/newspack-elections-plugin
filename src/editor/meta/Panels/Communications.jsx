@@ -15,12 +15,12 @@ export const CommunicationsPanel = (props) => {
             name="gov-profile-communications"
         >
 			<PanelRow>
-				<PanelFieldset legend="Capitol">
-					<PanelTextareaControl meta={meta} label= "Address (Capitol)" meta_key="address_capitol" onChange={setPostMeta}/>
-					<PanelTextControl meta={meta} label= "Phone (Capitol)" meta_key="phone_capitol" onChange={setPostMeta}/>
-                	<PanelTextControl meta={meta} label= "Email (Capitol)" meta_key="email_capitol" onChange={setPostMeta}/>
-                	<PanelTextControl meta={meta} label= "Fax (Capitol)" meta_key="fax_capitol" onChange={setPostMeta}/>
-					<PanelTextControl meta={meta} label= "Website (Capitol)" meta_key="website_capitol" onChange={setPostMeta}/>
+				<PanelFieldset legend="Official">
+					<PanelTextareaControl meta={meta} label= "Address (Official)" meta_key="address_capitol" onChange={setPostMeta}/>
+					<PanelTextControl meta={meta} label= "Phone (Official)" meta_key="phone_capitol" onChange={setPostMeta}/>
+                	<PanelTextControl meta={meta} label= "Email (Official)" meta_key="email_capitol" onChange={setPostMeta}/>
+                	<PanelTextControl meta={meta} label= "Fax (Official)" meta_key="fax_capitol" onChange={setPostMeta}/>
+					<PanelTextControl meta={meta} label= "Website (Official)" meta_key="website_capitol" onChange={setPostMeta}/>
 				</PanelFieldset>
             </PanelRow>
             <PanelRow>

@@ -1,5 +1,19 @@
-import { registerBlockCollection, registerBlockType, registerBlockVariation } from '@wordpress/blocks';
+import { registerBlockCollection, registerBlockType, createBlock, getBlockType } from '@wordpress/blocks';
 import { addFilter } from "@wordpress/hooks"
+
+wp.hooks.addFilter(
+    'blocks.registerBlockType',
+    'my-plugin/class-names/list-block',
+    addListBlockClassName
+);
+
+function addListBlockClassName( settings, name ) {
+    
+	console.log(name, settings)
+
+    return settings
+}
+
 
 /**
  * Internal dependencies
@@ -28,7 +42,7 @@ supports.__experimentalBorder.__experimentalSkipSerialization = true
 /*
 addFilter(
     'editor.BlockEdit',
-    'govpack/restrict-allowed-blocks',
+    'npe/restrict-allowed-blocks',
     withRestrictedAllowedBlocks
 );
 
@@ -42,6 +56,7 @@ registerBlockType( metadata.name, {
 	supports,
 	icon: 'groups',
 	keywords: [ 'govpack' ],
+	variations,
 	edit : Edit,
 	save: Save,
 	deprecated: deprecations
@@ -58,8 +73,58 @@ function lockParagraphs( blockAttributes, blockType, innerHTML, attributes  ) {
 
 
 
+registerBlockType( "govpack/profile-v2", {
+	apiVersion: 3,
+	title: 'Elections Profile v2',
+	styles,
+    category,
+    attributes,
+	supports : {
+		inserter : false
+	},
+	icon: 'groups',
+	keywords: [ 'govpack' ],
+	edit : Edit,
+	save: Save,
+	deprecated: deprecations,
+	transforms: {
+		"from" : [],
+		"to" : [
+			{
+				type: 'block',
+				blocks: [ metadata.name ],
+				transform: ( attributes, innerBlocks ) => {
+					innerBlocks = innerBlocks.map( (innerBlock) => {
+						// if the innerblock is know, return as is
+						if(innerBlock.name !== "core/missing"){
+							return innerBlock
+						}
 
-registerBlockVariation(metadata.name, variations)
+						// if the innerblock's original name was not prefixed with govpack skip it
+						if(innerBlock.attributes.originalName.indexOf("govpack/") !== 0){
+							return innerBlock
+						}
+
+						// replace the old govpack with new npe prefix, try find that block and exit if it doesn't exist
+						const newBlockName = innerBlock.attributes.originalName.replace("govpack/", "npe/");
+
+						if(getBlockType(newBlockName) === undefined){
+							return innerBlock
+						}
+
+						return createBlock(newBlockName, innerBlock.attributes, innerBlock.innerBlocks)
+					})
+
+					return createBlock(
+						metadata.name,
+						attributes,
+						innerBlocks
+					);
+				},
+			},
+		]
+	}
+} );
 
 const ProfileBlockName = metadata.name
 export { ProfileBlockName }

@@ -28,7 +28,7 @@ class Govpack extends Plugin {
 	 * @var string REST API Prefix
 	 */
 	const REST_PREFIX = 'govpack/v1';
-	private null|Dev_Helpers $dev;
+	private null|DevHelper $dev;
 	private FrontEnd $front_end;
 	private Admin $admin;
 	private Fields $fields;
@@ -49,8 +49,8 @@ class Govpack extends Plugin {
 
 		$this->version = new Version( $this );
 
-		if ( class_exists( '\Govpack\Dev_Helpers' ) ) {
-			$this->dev = new \Govpack\Dev_Helpers( $this );
+		if ( class_exists( '\Govpack\DevHelper' ) ) {
+			$this->dev = new \Govpack\DevHelper( $this );
 			$this->dev->hooks();
 		}
 	}

@@ -99,7 +99,7 @@ export function normalize_profile(profile){
 			district 	: createAddress("district")
 		},
 		name : {
-			name 	: profile.meta?.name || profile.title?.rendered || generated_name,
+			name 	: generated_name || profile.title?.rendered || generated_name,
 			full 	: generated_name,
 			first 	: profile.meta?.first_name ?? null,
 			last 	: profile.meta?.last_name ?? null

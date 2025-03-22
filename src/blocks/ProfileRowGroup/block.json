@@ -66,10 +66,10 @@
 		"postId"
 	],
 	"providesContext": {
-		"govpack/separatorStyle" : "separatorStyles",
-		"govpack/separatorColor" : "separatorColor",
-		"govpack/separatorCustomColor" : "separatorCustomColor",
-		"govpack/showLabels" : "showLabels"
+		"npe/separatorStyle" : "separatorStyles",
+		"npe/separatorColor" : "separatorColor",
+		"npe/separatorCustomColor" : "separatorCustomColor",
+		"npe/showLabels" : "showLabels"
 	},
 	"allowedBlocks": [
 

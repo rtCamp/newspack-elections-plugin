@@ -84,8 +84,8 @@ if ( ! function_exists( 'gp_get_profile_lines' ) ) {
 			],
 			[
 				'key'        => 'comms_capitol',
-				'value'      => gp_contact_info( 'Capitol', $profile_data['comms']['capitol'], $attributes['selectedCapitolCommunicationDetails'] ),
-				'label'      => 'Contact Info (Capitol)',
+				'value'      => gp_contact_info( 'Official', $profile_data['comms']['capitol'], $attributes['selectedCapitolCommunicationDetails'] ),
+				'label'      => 'Contact Info (Official)',
 				'shouldShow' => $attributes['showCapitolCommunicationDetails'],
 			],
 			[

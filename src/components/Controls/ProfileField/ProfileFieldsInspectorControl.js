@@ -58,6 +58,7 @@ export const ProfileFieldsInspectorControl = ({
 							onSelectField={ onSelectField }
 							selectedValue={ fieldKey }
 							choices={ fields }
+							disableEmptyFields = {false}
 						/>
 					</PanelRow>
 				</PanelBody>

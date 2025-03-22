@@ -37,7 +37,7 @@ const ProfileDisplaySettings = (props) => {
 			help: (disableAgeToggle) ? "Date of Birth Required" : null
 		},
 		{
-			label: 'Display Legislative Body',
+			label: 'Display Office',
 			attr: "showLegislativeBody",
 		},
 		{
@@ -66,7 +66,7 @@ const ProfileDisplaySettings = (props) => {
 			attr : "showEndorsements"
 		},
 		{
-			label : 'Display Capitol Communications',
+			label : 'Display Official Communications',
 			attr : "showCapitolCommunicationDetails"
 		},
 		{

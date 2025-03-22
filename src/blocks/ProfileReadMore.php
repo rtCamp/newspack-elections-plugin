@@ -50,7 +50,7 @@ class ProfileReadMore extends \Govpack\Blocks\ProfileFieldText {
 	}
 
 	public function output(): string {
-
+		
 		// Great an array of html attributes for the link
 		$link_attrs = [
 			'target' => $this->attribute( 'linkTarget' ),

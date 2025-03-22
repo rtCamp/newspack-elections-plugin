@@ -35,8 +35,8 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 	public function pre_render_block( $pre_render, $parsed_block, $parent_block ) {
 		global $post;
 
-		if ( is_null( $pre_render ) && ( isset( $parsed_block['attrs']['profileId'] ) ) ) {
-			$post = get_post( $parsed_block['attrs']['profileId'] );
+		if ( is_null( $pre_render ) && ( isset( $parsed_block['attrs']['postId'] ) ) ) {
+			$post = get_post( $parsed_block['attrs']['postId'] );
 		}
 
 		return $pre_render;
@@ -105,7 +105,9 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 			return false;
 		}
 
-		$this->profile = \Govpack\Profile\CPT::get_data( $attributes['postId'] );
+		$this->profile = \Govpack\Profile\Profile::get( $attributes["postId"] );
+
+		
 		
 		if ( ! $this->profile ) {
 			return;
@@ -119,6 +121,7 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 		wp_reset_postdata();
 		return \ob_get_clean();
 	}
+
 
 	/**
 	 * Loads a block from display on the frontend/via render.
@@ -186,7 +189,7 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 	public function get_wrapper_classes(): array {
 
 		$classes   = [];
-		$classes[] = sprintf( 'profile-%s', $this->attributes['profileId'] );
+		$classes[] = sprintf( 'profile-%s', $this->attributes['postId'] );
 
 		return $classes;
 	}
