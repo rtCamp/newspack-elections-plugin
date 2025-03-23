@@ -2,11 +2,24 @@
 
 namespace Govpack\Fields;
 
-abstract class Service {
+use Govpack\Collection\CollectableInterface;
+
+class Service implements CollectableInterface {
 
 	protected string $slug;
-
+	protected string $label;
 	protected string $icon_slug;
+
+	public function __construct(?string $slug = null, ?string $label = null){
+
+		if($slug){
+			$this->slug = $slug;
+		}
+
+		if($label){
+			$this->label = $label;
+		}
+	}
 
 	public function icon(): string|null {
 
@@ -26,5 +39,13 @@ abstract class Service {
 
 	public function slug(): string {
 		return $this->slug;
+	}
+
+	public function to_array() : array {
+		return [];
+	}
+
+	public function to_rest() : array {
+		return [];
 	}
 }

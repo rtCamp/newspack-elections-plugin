@@ -3,6 +3,7 @@
 namespace Govpack\Fields\Field;
 
 use Govpack\Fields\FieldType;
+use Govpack\Fields\ProfileServiceRegistry;
 use Govpack\Fields\Service as ProfileService;
 
 class Service extends Link {
@@ -14,12 +15,21 @@ class Service extends Link {
 	}
 
 	public function set_service( string|ProfileService $service ): self {
+		
 
-		if ( ! is_a( $service, ProfileService::class ) ) {
-			$service = new $service();
+		if ( is_a( $service, ProfileService::class ) ) {
+			$this->service = $service;
+		} elseif(class_exists($service)) {
+			$this->service = new $service();
+		} else {
+			$services = ProfileServiceRegistry::instance();
+			if($services->exists($service)){
+				$this->service = $services->get($service);
+			} else {
+				// throw exception
+			}
+
 		}
-
-		$this->service = $service;
 
 		return $this;
 	}
@@ -34,7 +44,7 @@ class Service extends Link {
 
 	
 
-	public function service(): ProfileSurface {
+	public function service(): ProfileService {
 		return $this->service;
 	}
 }

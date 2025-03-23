@@ -196,7 +196,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new TextField( 'wikipedia', 'Wikipedia ID' ),
 				new TextField( 'google_entity_id', 'Google Entity ID' ),
 
-				new LinkField( 'gab', 'Gab', 'link' ),
+				(new ServiceField( 'gab', 'Gab' ))->set_service('gab'),
 				new LinkField( 'rumble', 'Rumble', 'link' ),
 
 				new TextField( 'opensecrets_id', 'Open Secrets' ),
@@ -223,54 +223,36 @@ class CPT extends \Govpack\Abstracts\PostType {
 
 		self::$fields->register_fields(
 			[
-				( new ServiceField( 'x_official', 'Official X' ) )->set_service( \Govpack\Fields\Service\X::class ),
-				( new ServiceField( 'x_campaign', 'Campaign X' ) )->set_service( \Govpack\Fields\Service\X::class ),
-				( new ServiceField( 'x_personal', 'Personal X' ) )->set_service( \Govpack\Fields\Service\X::class ),
+				( new ServiceField( 'x_official', 'Official X' ) )->set_service( 'x' ),
+				( new ServiceField( 'x_campaign', 'Campaign X' ) )->set_service( 'x' ),
+				( new ServiceField( 'x_personal', 'Personal X' ) )->set_service( 'x' ),
 			]
 		);
 
 		self::$fields->register_fields(
 			[
-				( new ServiceField( 'facebook_official', 'Official Facebook' ) )->set_service( \Govpack\Fields\Service\Facebook::class ),
-				( new ServiceField( 'facebook_campaign', 'Campaign Facebook' ) )->set_service( \Govpack\Fields\Service\Facebook::class ),
-				( new ServiceField( 'facebook_personal', 'Personal Facebook' ) )->set_service( \Govpack\Fields\Service\Facebook::class ),
+				( new ServiceField( 'facebook_official', 'Official Facebook' ) )->set_service( 'facebook' ),
+				( new ServiceField( 'facebook_campaign', 'Campaign Facebook' ) )->set_service( 'facebook' ),
+				( new ServiceField( 'facebook_personal', 'Personal Facebook' ) )->set_service( 'facebook' ),
 			]
 		);
 
 		self::$fields->register_fields(
 			[
-				( new ServiceField( 'instagram_official', 'Official Instagram' ) )->set_service( \Govpack\Fields\Service\Instagram::class ),
-				( new ServiceField( 'instagram_campaign', 'Campaign Instagram' ) )->set_service( \Govpack\Fields\Service\Instagram::class ),
-				( new ServiceField( 'instagram_personal', 'Personal Instagram' ) )->set_service( \Govpack\Fields\Service\Instagram::class ),
+				( new ServiceField( 'instagram_official', 'Official Instagram' ) )->set_service( 'instagram' ),
+				( new ServiceField( 'instagram_campaign', 'Campaign Instagram' ) )->set_service( 'instagram' ),
+				( new ServiceField( 'instagram_personal', 'Personal Instagram' ) )->set_service( 'instagram' ),
 			]
 		);
 
 		self::$fields->register_fields(
 			[
-				( new ServiceField( 'youtube_official', 'Official YouTube' ) )->set_service( \Govpack\Fields\Service\YouTube::class ),
-				( new ServiceField( 'youtube_campaign', 'Campaign YouTube' ) )->set_service( \Govpack\Fields\Service\YouTube::class ),
-				( new ServiceField( 'youtube_personal', 'Personal YouTube' ) )->set_service( \Govpack\Fields\Service\YouTube::class ),
+				( new ServiceField( 'youtube_official', 'Official YouTube' ) )->set_service( 'youtube' ),
+				( new ServiceField( 'youtube_campaign', 'Campaign YouTube' ) )->set_service( 'youtube' ),
+				( new ServiceField( 'youtube_personal', 'Personal YouTube' ) )->set_service( 'youtube' ),
 			]
 		);
 
-		/*
-		$keys   = [ 'official', 'campaign', 'personal' ];
-
-
-		// Social Panel.
-		$groups = [ 'facebook', 'twitter', 'instagram', 'youtube' ];
-		
-		foreach ( $groups as $group ) {
-			foreach ( $keys as $key ) {
-				$slug  = sprintf( '%s_%s', $group, $key );
-				$label = sprintf( '%s %s', ucfirst( $key ), ucfirst( $group ) );
-
-				self::$fields->register( 
-					( new LinkField( $slug, $label ) )->disable_block( ( $group === 'twitter' ) ) // disable the block if it's for twitter
-				);
-			}
-		}
-			*/
 	}
 
 	//public static function get_field_types(): array {

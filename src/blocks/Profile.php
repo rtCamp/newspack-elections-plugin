@@ -72,7 +72,6 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 			return $context;
 		}
 
-		//  gp_dump($context);
 		return $context;
 	}
 

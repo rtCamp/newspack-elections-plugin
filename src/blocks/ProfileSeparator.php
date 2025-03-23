@@ -45,7 +45,6 @@ class ProfileSeparator extends \Govpack\Blocks\ProfileField {
 
 		$color_block_styles = [];
 
-		//  gp_dump($this->attributes );
 		$preset_color               = ( array_key_exists( 'separatorColor', $this->attributes ) && $this->attribute( 'separatorColor' ) ) ? "var:preset|color|{$this->attribute('separatorColor')}" : null;
 		$custom_color               = array_key_exists( 'customSeparatorColor', $this->attributes ) ? $this->attribute( 'customSeparatorColor' ) : null;
 		$color_block_styles['text'] = $preset_color ? $preset_color : $custom_color;
@@ -53,7 +52,7 @@ class ProfileSeparator extends \Govpack\Blocks\ProfileField {
 		$color_styles = wp_style_engine_get_styles( [ 'color' => $color_block_styles ], [ 'convert_vars_to_classnames' => true ] );
 
 		$extra_attributes = [];
-		//gp_dump($color_block_styles, $styles);
+
 
 		if ( ! empty( $color_styles['classnames'] ) ) {
 			$extra_attributes['class'] = $color_styles['classnames'];

@@ -121,7 +121,7 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	 * @param WP_Block $template The filename of the template-part to use.
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
-	
+		
 		?>
 		<div <?php echo get_block_wrapper_attributes(); ?>>
 			<?php echo $this->output(); ?>
@@ -141,6 +141,7 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	 * back to getting a fieldKey from the from the fieldManager by finding a field using the taxonomy
 	 */
 	public function get_field_key() {
+
 		$field_key = parent::get_field_key();
 		
 		if ( $field_key !== false ) {
@@ -170,7 +171,8 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	public function output(): string {
 
 		$terms = $this->get_value();
-		
+
+
 		$output        = [];
 		$separator     = $this->attribute( 'separator' );
 		$term_limit    = $this->attribute( 'termLimit' );

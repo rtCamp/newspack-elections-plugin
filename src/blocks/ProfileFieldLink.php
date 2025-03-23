@@ -34,7 +34,7 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 	}
 
 	public function output(): string {
-
+		
 		$link = $this->get_value();
 		if ( ! is_array( $link ) ) {
 			return '';
@@ -59,6 +59,13 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 			return ( $hasLabelOverride ? $this->attribute( 'linkTextOverride' ) : $defaultLabel );
 		}
 
+		if ( $this->attribute( 'linkFormat' ) === 'icon' ) {
+			if(is_a($this->get_field(), "Govpack\Fields\Field\Service")){
+				return $this->get_field()->service()->icon();
+			}
+		}
+
+
 		return $defaultLabel;
 	}
 
@@ -70,6 +77,8 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 
 		$variations = [];
 		
+	
+
 		foreach ( \Govpack\Profile\CPT::fields()->of_format( $this->field_type ) as $field ) {
 
 			if ( ! $field->is_block_enabled() ) {

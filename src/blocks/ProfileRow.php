@@ -186,11 +186,6 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 				continue;
 			}
 			
-			//if($field->slug === "ballotpedia"){
-			//  gp_dump($field->variation_icon());
-			//  die();
-			//}
-
 			$variation = [
 				'category'    => 'newspack-elections-profile-row-fields',
 				'name'        => sprintf( 'profile-field-row-%s', $field->slug ),

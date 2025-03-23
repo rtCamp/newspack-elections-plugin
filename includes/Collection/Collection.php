@@ -20,7 +20,7 @@ abstract class Collection implements CollectionInterface {
 
 	}
 
-	public function get( string $item ): null | Collectable {
+	public function get( string $item ): null | CollectableInterface {
 		if ( $this->exists( $item ) ) {
 			return $this->collection[ $item ];
 		}
