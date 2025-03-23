@@ -33,7 +33,7 @@ class Admin {
 		\add_action( 'admin_menu', [ $this, 'create_menus' ], 1, 1 );
 		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'register_assets' ], 100, 1 );
 		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'load_assets' ], 101, 1 );
-		\add_action( 'block_categories_all', [ __CLASS__, 'block_categories' ], 10, 2 );                
+		//\add_action( 'block_categories_all', [ __CLASS__, 'block_categories' ], 10, 2 );                
 		\add_action( 'enqueue_block_editor_assets', [ __CLASS__, 'enqueue_block_editor_assets' ] );
 		\add_action( 'current_screen', [ __CLASS__, 'conditional_hooks' ] );
 	
@@ -52,33 +52,8 @@ class Admin {
 	 * 
 	 * @param array $categories The existing Block Categories.
 	 */
-	public static function block_categories( array $categories ): array {
-		return array_merge(
-			$categories,
-			[
-				[
-					'slug'  => 'newspack-elections',
-					'title' => __( 'Newspack Election', 'newspack-elections' ),
-				],
-				[
-					'slug'  => 'newspack-elections-profile-row',
-					'title' => \__( 'Newspack Election Profile Rows', 'newspack-elections' ),
-				],
-				[
-					'slug'  => 'newspack-elections-profile-row-type',
-					'title' => \__( 'Newspack Election Profile Row Types', 'newspack-elections' ),
-				],
-				[
-					'slug'  => 'newspack-elections-profile-row-fields',
-					'title' => \__( 'Newspack Election Profile Rows', 'newspack-elections' ),
-				],
-				[
-					'slug'  => 'newspack-elections-profile-fields',
-					'title' => \__( 'Newspack Election Profile Fields', 'newspack-elections' ),
-				],
-			]
-		);
-	}
+
+	
 	
 	/**
 	 * Utility Function that redirects to Profiles archive.

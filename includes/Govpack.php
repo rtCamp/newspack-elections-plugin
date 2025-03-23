@@ -33,6 +33,7 @@ class Govpack extends Plugin {
 	private Admin $admin;
 	private Fields $fields;
 	private Blocks $blocks;
+	private BlockEditor $block_editor;
 	private Icons $icons;
 	public Version $version;
 
@@ -128,7 +129,16 @@ class Govpack extends Plugin {
 		\Govpack\Admin\Export::hooks(); 
 		\Govpack\Widgets::hooks();
 
-		
+
+		$this->block_editor()->block_categories()->add([
+			'newspack-elections' => __( 'Newspack Election', 'newspack-elections' ),
+			'newspack-elections-profile-row' => __( 'Newspack Election Profile Rows', 'newspack-elections' ),
+			'newspack-elections-profile-row-type' => __( 'Newspack Election Profile Row Types', 'newspack-elections' ),
+			'newspack-elections-profile-row-fields' => __( 'Newspack Election Profile Rows', 'newspack-elections' ),
+			'newspack-elections-profile-fields' => __( 'Newspack Election Profile Fields', 'newspack-elections' ),
+		]);
+
+		$this->block_editor()->pattern_categories()->add("newspack-elections", "Newspack Elections");
 
 		if ( is_admin() ) {
 			$this->admin();
@@ -146,6 +156,17 @@ class Govpack extends Plugin {
 		}
 
 		return $this->admin;
+	}
+
+
+	public function block_editor() : BlockEditor {
+
+		if ( ! isset( $this->block_editor ) ) {
+			$this->block_editor = new BlockEditor();
+			$this->block_editor->hooks();
+		}
+
+		return $this->block_editor;
 	}
 
 	public function front_end(): FrontEnd {
