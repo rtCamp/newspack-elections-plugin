@@ -37,10 +37,13 @@ class Govpack extends Plugin {
 	private Icons $icons;
 	public Version $version;
 
+	public string $text_domain;
+
 	/**
 	 * Inits the class and registeres the hooks call.
 	 */
 	public function __construct() {
+
 	}
 
 	public function init() {
@@ -49,6 +52,8 @@ class Govpack extends Plugin {
 		$this->require( 'includes/govpack-functions-template.php' );
 
 		$this->version = new Version( $this );
+
+		$this->text_domain = "newspack-elections";
 
 		if ( class_exists( '\Govpack\DevHelper' ) ) {
 			$this->dev = new \Govpack\DevHelper( $this );
@@ -103,7 +108,7 @@ class Govpack extends Plugin {
 	}
 	
 	public function text_domain() {
-		load_plugin_textdomain( 'newspack-elections', false, $this->path( 'languages' ) );
+		load_plugin_textdomain( $this->text_domain, false, $this->path( 'languages' ) );
 	}
 
 	public function setup(): void {
@@ -140,6 +145,13 @@ class Govpack extends Plugin {
 
 		$this->block_editor()->pattern_categories()->add("newspack-elections", "Newspack Elections");
 
+		$this->block_editor()
+			->patterns()
+				->set_default_category("newspack-elections")
+				->set_pattern_directory($this->path("block-patterns"))
+				->load_patterns_in_directory();
+	
+
 		if ( is_admin() ) {
 			$this->admin();
 		}
@@ -162,7 +174,7 @@ class Govpack extends Plugin {
 	public function block_editor() : BlockEditor {
 
 		if ( ! isset( $this->block_editor ) ) {
-			$this->block_editor = new BlockEditor();
+			$this->block_editor = new BlockEditor($this);
 			$this->block_editor->hooks();
 		}
 
