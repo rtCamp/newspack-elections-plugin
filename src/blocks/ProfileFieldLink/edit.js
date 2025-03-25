@@ -4,22 +4,19 @@ import {isEmpty} from "lodash"
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-
+import { InspectorControls, useBlockProps} from "@wordpress/block-editor"
 import { 
 	PanelBody, PanelRow, TextControl, Icon,
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 	} from '@wordpress/components';
-import { InspectorControls } from "@wordpress/block-editor"
-
-import {useRef, useEffect, RawHTML} from "@wordpress/element"
 
 
-import { FieldBlockEdit } from '../../components/field-block-edit';
+
 import { useProfileFieldAttributes } from "./../../profile"
-import { useUpdateBlockMetaName } from "./../utils"
-
+import { useUpdateBlockMetaName, useIsPreviewMode } from "./../utils"
 import { NPEIcons } from "./../../components/Icons"
+
 
 const DynamicIcon = ({icon}) => {
 	// Todo - make sure this exists
@@ -33,12 +30,17 @@ const DynamicIcon = ({icon}) => {
 function Edit( props ) {
 
 	const {fieldKey, value, profile, field, profileId } =  useProfileFieldAttributes(props) 
+	const blockProps = useBlockProps()
+	const isPreviewMode = useIsPreviewMode()
 
 	const { attributes, setAttributes } = props
 	const { 
 		linkTextOverride : labelOverride = "",
 		linkFormat
 	} = attributes
+	
+	
+
 	
 
 	// should the field's block type not match the current block, render nothing
@@ -55,10 +57,10 @@ function Edit( props ) {
 	}
 
 	const rawHref =  value?.url ?? false
-	const url =  field.field_type.getUrl(value)
-
-	const showValue = value !== null
+	const url = isPreviewMode ? "" : field.field_type.getUrl(value)
 	const hasValue = !isEmpty(value)
+	const showValue = hasValue || isPreviewMode
+	
 	
 	const calculateLinkText = () => {
 
@@ -84,15 +86,13 @@ function Edit( props ) {
 	const LinkBody = () => {
 
 		if(linkFormat === "icon"){
-
-
 			return (<DynamicIcon icon={field.service}/>)
 		}
 
 		return (<>{linkText}</>)
 	}
 
-	console.log("field", field)
+
     return (
 		<>
 			<InspectorControls group="settings">
@@ -128,7 +128,7 @@ function Edit( props ) {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>
-			<FieldBlockEdit {...props} hasValue={hasValue}>
+			<div {...blockProps} >
 				{ (showValue) && (
 					<a 
 						href={ url }
@@ -137,10 +137,8 @@ function Edit( props ) {
 						<LinkBody />
 					</a>
 				) }
-				{ (!fieldKey) && (
-					<span>Please Select a Field </span> 
-				) }
-			</FieldBlockEdit>
+				
+			</div>
 		</>
 	)
 }

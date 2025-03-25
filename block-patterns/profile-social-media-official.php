@@ -2,6 +2,7 @@
 /**
  * Title: Profile Social Media (Official)
  * Slug: npe/profile-social-media-official
+ * Viewport Width: 250
  */
 ?>
 

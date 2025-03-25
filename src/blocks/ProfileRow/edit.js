@@ -26,6 +26,7 @@ import { useProfileFieldAttributes, useProfileFields } from "./../../profile"
 import { ProfileBlockName } from '../Profile';
 import { ProfileFieldsDropDown } from "./../../components/Controls/ProfileField"
 import { useFields } from "./../../fields"
+import { useIsPreviewMode } from '../utils';
 
 const MetaInspectorControl = ({
 	fieldKey,
@@ -94,8 +95,7 @@ function Edit( props ) {
 
 	const hasValue = !isEmpty(value)
 	const hasField = !isEmpty(field)
-
-	console.log("ROW", field)
+	const isPreviewMode = useIsPreviewMode()
 	
 	/**
 	 * Get Data From Parent Blocks
@@ -136,8 +136,8 @@ function Edit( props ) {
 			hasSelectedInnerBlock : select(blockEditorStore).hasSelectedInnerBlock(clientId),
 			parentProfileBlockClientIds,
 			parentProfileBlock,
-			isParentSelected : select(blockEditorStore).isBlockSelected(parentProfileBlock.clientId),
-			isRelativeSelected : select(blockEditorStore).hasSelectedInnerBlock(parentProfileBlock.clientId, true)
+			isParentSelected : select(blockEditorStore).isBlockSelected(parentProfileBlock?.clientId),
+			isRelativeSelected : select(blockEditorStore).hasSelectedInnerBlock(parentProfileBlock?.clientId, true)
 		}
 	} )
 
@@ -161,8 +161,8 @@ function Edit( props ) {
 
 	// Should we output the UI to show that a field is hidden?
 	// Add a class to the blockProps if so
-	const shouldDimField = (hideFieldIfEmpty && (!hasValue) && (!isBlockSelected) && (!hasSelectedInnerBlock) )
-	const shouldHideBlock = hideFieldIfEmpty && !hasValue && !isBlockSelected && !isRelativeSelected && !isParentSelected
+	const shouldDimField = (!isPreviewMode && hideFieldIfEmpty && (!hasValue) && (!isBlockSelected) && (!hasSelectedInnerBlock) )
+	const shouldHideBlock = !isPreviewMode && hideFieldIfEmpty && !hasValue && !isBlockSelected && !isRelativeSelected && !isParentSelected
 	className = clsx(className, {"gp-dim-field" : shouldDimField })
 
 	
