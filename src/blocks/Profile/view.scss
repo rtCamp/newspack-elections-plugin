@@ -32,15 +32,18 @@
 		background-color: var(--npe-profile-color-tint);
 
 		.npe-term--govpack_party,
-		a:not(h2 > a) {
-
-			font-weight: bold;
+		//a:not(h2 > a) {
+		.wp-block-npe-profile-field-link:not(.has-link-color) a {
 			color: var(--npe-profile-color);
-
-			svg, path {
-				fill: var(--npe-profile-color);
-			}
 		}
+
+		//	font-weight: bold;
+		//	color: var(--npe-profile-color);
+
+		//	svg, path {
+		//		fill: var(--npe-profile-color);
+		//	}
+		//}
 
 		.wp-block-npe-profile-separator{
 			margin-block-start: 1rem;

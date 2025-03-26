@@ -27,9 +27,8 @@
 		},
 		"layout" : {
 			"allowSwitching": false,
-			"default" : {
-				"type" : "flex"
-			}
+			"allowJustification": false,
+			"allowOrientation": false
 		},
 		"shadow": true, 
 		"spacing": {
@@ -40,7 +39,13 @@
 		"typography": {
 			"fontSize": true,
 			"lineHeight": true,
-			"textAlign": true
+			"textAlign": true,
+			"__experimentalFontFamily" : true,
+			"__experimentalFontStyle" : true,
+			"__experimentalFontWeight" : true,
+			"__experimentalLetterSpacing" : true,
+			"__experimentalTextDecoration" : true,
+			"__experimentalTextTransform" : true
 		},
 		"gp/field-aware" : {
 			"type" : "link"
@@ -53,6 +58,9 @@
 		"linkFormat" : {
 			"type": "string",
 			"default": "label"
+		},
+		"iconSize" : {
+			"type": "integer"
 		}
 	},
 	"ancestor": [ "npe/profile" ],

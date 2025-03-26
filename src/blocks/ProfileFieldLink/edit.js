@@ -17,13 +17,20 @@ import { useProfileFieldAttributes } from "./../../profile"
 import { useUpdateBlockMetaName, useIsPreviewMode } from "./../utils"
 import { NPEIcons } from "./../../components/Icons"
 
+const sizeOptions = [
+	{ name: __( 'Small' ), value: 12 },
+	{ name: __( 'Normal' ), value: 18 },
+	{ name: __( 'Large' ), value: 24 },
+	{ name: __( 'Huge' ), value: 30 },
+];
 
-const DynamicIcon = ({icon}) => {
+
+const DynamicIcon = ({icon, size = 24}) => {
 	// Todo - make sure this exists
 	// move the function call up to the icons component
 	const SVG = NPEIcons[icon]()
 	return (
-		<Icon icon={ SVG } size={24} />
+		<Icon icon={ SVG } size={size} />
 	)
 }
 
@@ -36,7 +43,8 @@ function Edit( props ) {
 	const { attributes, setAttributes, context } = props
 	const { 
 		linkTextOverride : labelOverride = "",
-		linkFormat
+		linkFormat,
+		iconSize = 24
 	} = attributes
 
 	
@@ -56,13 +64,16 @@ function Edit( props ) {
 		setAttributes({linkFormat : newValue })
 	}
 
+	const setIconSize = (newValue) => {
+		setAttributes({iconSize : newValue })
+	}
+
 	const hasValue = !isEmpty(value)
 	const rawHref =  value?.url ?? false
 	const url = (isPreviewMode || !hasValue) ? "" : field?.field_type?.getUrl(value)
 	
 	const showValue = hasValue || isPreviewMode
-	console.log("link showValue", showValue, value)
-	
+
 	const calculateLinkText = () => {
 
 		const hasLabelOverride = (labelOverride !== undefined && labelOverride !== "")
@@ -85,9 +96,9 @@ function Edit( props ) {
 	useUpdateBlockMetaName(linkText)
 
 	const LinkBody = () => {
-		console.log("LinkBody", field)
+		
 		if((linkFormat === "icon") && (field?.service)){
-			return (<DynamicIcon icon={field.service}/>)
+			return (<DynamicIcon icon={field.service} size={iconSize}/>)
 		}
 
 		return (<>{linkText}</>)
@@ -111,22 +122,47 @@ function Edit( props ) {
 						>
 							{ field?.field_type?.formats.map( (format) => (
 								<ToggleGroupControlOption 
-									key={`link-formats-${profileId}-${format.value}`} 
+									key={`link-formats-${profileId}-${format.name}`} 
 									value={format.value} 
 									label={format.label} 
 								/>
 							)) }
 						</ToggleGroupControl>
 					)}
-					<PanelRow>
-						<TextControl 
-							__nextHasNoMarginBottom
-							__next40pxDefaultSize
-							label="Override Link Text"
-							onChange={setLinkTextOverride}
-							value = {labelOverride}
-						/>
-					</PanelRow>
+					{ (linkFormat === "label") && (
+						<PanelRow>
+							<TextControl 
+								__nextHasNoMarginBottom
+								__next40pxDefaultSize
+								label="Override Link Text"
+								onChange={setLinkTextOverride}
+								value = {labelOverride}
+							/>
+						</PanelRow>
+					)}
+
+					{ (linkFormat === "icon") && (
+						<PanelRow>
+							<ToggleGroupControl
+								isBlock = {false}
+								isAdaptiveWidth = {true}
+								isDeselectable = {false}
+								label = {"Icon Size"}
+								__next40pxDefaultSize
+								__nextHasNoMarginBottom
+								value = {iconSize}
+								onChange = { setIconSize }
+							>
+								{ sizeOptions.map( (size) => (
+									<ToggleGroupControlOption 
+										key={`link-size-${profileId}-${size.value}`} 
+										value={size.value} 
+										label={size.name} 
+									/>
+								)) }
+							</ToggleGroupControl>
+						</PanelRow>
+					)}
 				</PanelBody>
 			</InspectorControls>
 			<div {...blockProps} >

@@ -3,7 +3,6 @@
  * Title: Profile Social Media (Personal)
  * Slug: npe/profile-social-media-personal
  * Viewport Width: 250
- * Inserter: false
  */
 ?>
 
