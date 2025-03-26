@@ -43,7 +43,6 @@ class Govpack extends Plugin {
 	 * Inits the class and registeres the hooks call.
 	 */
 	public function __construct() {
-
 	}
 
 	public function init() {
@@ -53,7 +52,7 @@ class Govpack extends Plugin {
 
 		$this->version = new Version( $this );
 
-		$this->text_domain = "newspack-elections";
+		$this->text_domain = 'newspack-elections';
 
 		if ( class_exists( '\Govpack\DevHelper' ) ) {
 			$this->dev = new \Govpack\DevHelper( $this );
@@ -135,20 +134,22 @@ class Govpack extends Plugin {
 		\Govpack\Widgets::hooks();
 
 
-		$this->block_editor()->block_categories()->add([
-			'newspack-elections' => __( 'Newspack Election', 'newspack-elections' ),
-			'newspack-elections-profile-row' => __( 'Newspack Election Profile Rows', 'newspack-elections' ),
-			'newspack-elections-profile-row-type' => __( 'Newspack Election Profile Row Types', 'newspack-elections' ),
-			'newspack-elections-profile-row-fields' => __( 'Newspack Election Profile Rows', 'newspack-elections' ),
-			'newspack-elections-profile-fields' => __( 'Newspack Election Profile Fields', 'newspack-elections' ),
-		]);
+		$this->block_editor()->block_categories()->add(
+			[
+				'newspack-elections'                    => __( 'Newspack Election', 'newspack-elections' ),
+				'newspack-elections-profile-row'        => __( 'Newspack Election Profile Rows', 'newspack-elections' ),
+				'newspack-elections-profile-row-type'   => __( 'Newspack Election Profile Row Types', 'newspack-elections' ),
+				'newspack-elections-profile-row-fields' => __( 'Newspack Election Profile Rows', 'newspack-elections' ),
+				'newspack-elections-profile-fields'     => __( 'Newspack Election Profile Fields', 'newspack-elections' ),
+			]
+		);
 
-		$this->block_editor()->pattern_categories()->add("newspack-elections", "Newspack Elections");
+		$this->block_editor()->pattern_categories()->add( 'newspack-elections', 'Newspack Elections' );
 
 		$this->block_editor()
 			->patterns()
-				->set_default_category("newspack-elections")
-				->set_pattern_directory($this->path("block-patterns"))
+				->set_default_category( 'newspack-elections' )
+				->set_pattern_directory( $this->path( 'block-patterns' ) )
 				->load_patterns_in_directory();
 	
 
@@ -171,10 +172,10 @@ class Govpack extends Plugin {
 	}
 
 
-	public function block_editor() : BlockEditor {
+	public function block_editor(): BlockEditor {
 
 		if ( ! isset( $this->block_editor ) ) {
-			$this->block_editor = new BlockEditor($this);
+			$this->block_editor = new BlockEditor( $this );
 			$this->block_editor->hooks();
 		}
 
@@ -240,6 +241,7 @@ class Govpack extends Plugin {
 		$this->blocks()->register( new \Govpack\Blocks\ProfileBio( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileName( $this ) ); 
 		$this->blocks()->register( new \Govpack\Blocks\ProfileReadMore( $this ) ); 
+		$this->blocks()->register( new \Govpack\Blocks\ProfileSocialLinks( $this ) ); 
 		
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldText( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldLink( $this ) );

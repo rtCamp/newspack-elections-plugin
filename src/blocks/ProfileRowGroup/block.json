@@ -34,12 +34,7 @@
 	},
 	"attributes": {
 		"layout":{
-			"type" : "object",
-			"default" : {
-				"type":"flex",
-				"orientation":"vertical",
-				"justifyContent":"stretch"
-			}
+			"type" : "object"
 		},
 		"showSeparator" : {
 			"type" : "boolean",
@@ -78,6 +73,7 @@
 		"npe/profile-separator", 
 		"npe/profile-bio",
 		"npe/profile-name",
+		"npe/profile-social-links",
 		"core/post-featured-image", 
 		"core/heading",
 		"core/paragraph",

@@ -107,7 +107,8 @@
 		"npe/profile-separator", 
 		"npe/profile-field-text",
 		"npe/profile-field-link",
-		"npe/profile-field-term"
+		"npe/profile-field-term",
+		"npe/profile-social-links"
 	],
 	"usesContext": [
 		"postType",
