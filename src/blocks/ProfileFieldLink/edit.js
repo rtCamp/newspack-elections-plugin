@@ -29,22 +29,22 @@ const DynamicIcon = ({icon}) => {
 
 function Edit( props ) {
 
-	const {fieldKey, value, profile, field, profileId } =  useProfileFieldAttributes(props) 
+	const {fieldKey, value, profile, field, profileId, fieldType } =  useProfileFieldAttributes(props) 
 	const blockProps = useBlockProps()
 	const isPreviewMode = useIsPreviewMode()
-
-	const { attributes, setAttributes } = props
+	const isInnerBlockMode = (fieldType === "block")
+	const { attributes, setAttributes, context } = props
 	const { 
 		linkTextOverride : labelOverride = "",
 		linkFormat
 	} = attributes
-	
-	
 
 	
+
+	console.log("link", context, attributes, field)
 
 	// should the field's block type not match the current block, render nothing
-	if(field.field_type.block !== props.name){
+	if(!isInnerBlockMode && (field?.field_type?.block !== props.name)){
 		return null;
 	}
 
@@ -56,11 +56,12 @@ function Edit( props ) {
 		setAttributes({linkFormat : newValue })
 	}
 
-	const rawHref =  value?.url ?? false
-	const url = isPreviewMode ? "" : field.field_type.getUrl(value)
 	const hasValue = !isEmpty(value)
-	const showValue = hasValue || isPreviewMode
+	const rawHref =  value?.url ?? false
+	const url = (isPreviewMode || !hasValue) ? "" : field?.field_type?.getUrl(value)
 	
+	const showValue = hasValue || isPreviewMode
+	console.log("link showValue", showValue, value)
 	
 	const calculateLinkText = () => {
 
@@ -84,8 +85,8 @@ function Edit( props ) {
 	useUpdateBlockMetaName(linkText)
 
 	const LinkBody = () => {
-
-		if(linkFormat === "icon"){
+		console.log("LinkBody", field)
+		if((linkFormat === "icon") && (field?.service)){
 			return (<DynamicIcon icon={field.service}/>)
 		}
 
@@ -97,7 +98,7 @@ function Edit( props ) {
 		<>
 			<InspectorControls group="settings">
 				<PanelBody title={ __( 'Link Controls', 'govpack' ) }>
-					{ (field.field_type.formats.length > 1) && (
+					{ (field?.field_type?.formats.length > 1) && (
 						<ToggleGroupControl
 							isBlock = {false}
 							isAdaptiveWidth = {true}
@@ -108,7 +109,7 @@ function Edit( props ) {
 							value = {linkFormat}
 							onChange = { setLinkFormat }
 						>
-							{ field.field_type.formats.map( (format) => (
+							{ field?.field_type?.formats.map( (format) => (
 								<ToggleGroupControlOption 
 									key={`link-formats-${profileId}-${format.value}`} 
 									value={format.value} 

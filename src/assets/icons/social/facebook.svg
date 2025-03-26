@@ -1,1 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M8.46 18h2.93v-7.3h2.45l.37-2.84h-2.82V6.04c0-.82.23-1.38 1.41-1.38h1.51V2.11c-.26-.03-1.15-.11-2.19-.11c-2.18 0-3.66 1.33-3.66 3.76v2.1H6v2.84h2.46V18z"/></svg>
+<svg 
+	width="11" height="24" 
+	viewBox="0 0 111 240" 
+	fill="none" 
+	xmlns="http://www.w3.org/2000/svg"
+	aria-hidden="true" 
+	role="img" 
+	preserveAspectRatio="xMidYMid meet"
+>
+<path 
+	fill="currentColor"
+	d="M32.6063 225.74H71.4424V129.252H103.916L108.82 91.7145H71.4424V67.6587C71.4424 56.8203 74.4909 49.4185 90.1314 49.4185H110.146V15.7139C106.7 15.3174 94.903 14.26 81.1182 14.26C52.2232 14.26 32.6063 31.8393 32.6063 63.9578V91.7145H0V129.252H32.6063V225.74Z"
+/>
+</svg>

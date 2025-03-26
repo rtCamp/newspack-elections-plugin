@@ -76,7 +76,7 @@ export const useFieldAttributes = (props) => {
 	}
 
 	if(!localFieldType){
-		localFieldType = attributes.fieldType
+		localFieldType = attributes.fieldType 
 	}
 
 	let { 
@@ -84,6 +84,7 @@ export const useFieldAttributes = (props) => {
 		'type' : inheritedFieldType = null 
 	} = inheritedField
 
+	
 	if(!inheritedFieldKey){
 		inheritedFieldKey = context["npe/fieldKey"]
 	}
@@ -91,11 +92,14 @@ export const useFieldAttributes = (props) => {
 	if(!inheritedFieldType){
 		inheritedFieldType = context["npe/fieldType"]
 	}
+		
 
-
-	const isControlledByContext = inheritedFieldKey ? true : false;
+	// if the field exists from context, use it. Unless we have a field type of block from context, then revert to the attribute value
+	const isControlledByContext = (inheritedFieldKey || inheritedFieldType) && (inheritedField.type !== "block") ? true : false;
 	const fieldKey = isControlledByContext ? inheritedFieldKey : localFieldKey
 	const fieldType = isControlledByContext ? inheritedFieldType : localFieldType
+
+	
 
 	const setField = (newFieldOrType, newKey = null) => {
 

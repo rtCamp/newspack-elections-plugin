@@ -78,9 +78,7 @@
 		"npe/profile-separator", 
 		"npe/profile-bio",
 		"npe/profile-name",
-
 		"core/post-featured-image", 
-	
 		"core/heading",
 		"core/paragraph",
 		"core/group"

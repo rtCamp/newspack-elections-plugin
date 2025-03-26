@@ -1,18 +1,6 @@
-import { registerBlockCollection, registerBlockType, createBlock, getBlockType } from '@wordpress/blocks';
-import { addFilter } from "@wordpress/hooks"
+import { registerBlockType, createBlock, getBlockType } from '@wordpress/blocks';
 
-wp.hooks.addFilter(
-    'blocks.registerBlockType',
-    'my-plugin/class-names/list-block',
-    addListBlockClassName
-);
 
-function addListBlockClassName( settings, name ) {
-    
-	console.log(name, settings)
-
-    return settings
-}
 
 
 /**

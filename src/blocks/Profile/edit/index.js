@@ -26,11 +26,11 @@ export const ProfileEdit = ( props ) => {
 
 	// Once a Profile Has Inner Blocks we can't re-choose the variation
 	const hasInnerBlocks = useSelect( ( select ) => {
-			return select( blockEditorStore ).getBlock( clientId )
+			return select( blockEditorStore ).getClientIdsOfDescendants( clientId )
 		}, [ clientId ]
 	);
 
-
+	
 
 	const hasVariations = useSelect( ( select ) => {
 			return select( blocksStore ).getBlockVariations( name )

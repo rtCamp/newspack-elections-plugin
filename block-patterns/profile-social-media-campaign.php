@@ -3,6 +3,7 @@
  * Title: Profile Social Media (Campaign)
  * Slug: npe/profile-social-media-campaign
  * Viewport Width: 250 
+ * Inserter: false
  */
 ?>
 

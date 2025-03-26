@@ -19,6 +19,8 @@ import {
 	FlexItem,
 } from '@wordpress/components';
 
+
+
 /**
  * Internal dependencies
  */
@@ -81,21 +83,32 @@ function useConditionalTemplate(clientId){
 		}
 	} )
 	
+	if(block.attributes.field.type === "block"){
+		return false
+	}
 
 	return variation?.innerBlocks ?? defaultTemplate 
 }
 
 function Edit( props ) {
 
-	const {attributes, setAttributes, context, clientId} = props  
+	const {attributes, setAttributes, context, clientId, name} = props  
 	const blockProps = useBlockProps();
 	const { setField, fieldKey, fieldType, value, field } =  useProfileFieldAttributes(props) 
 	const fields = useProfileFields(props)
 	const availableFields = useFields()
 
-	const hasValue = !isEmpty(value)
-	const hasField = !isEmpty(field)
-	const isPreviewMode = useIsPreviewMode()
+	// Once a Profile Has Inner Blocks we can't re-choose the variation
+	const {descendents, hasInnerBlocks} = useSelect( ( select ) => {
+			const descendents = select( blockEditorStore ).getBlock( clientId )?.innerBlocks ?? []
+			return {
+				descendents,
+				hasInnerBlocks : (descendents.length > 0)
+			}
+		}, [ clientId ]
+	);
+
+
 	
 	/**
 	 * Get Data From Parent Blocks
@@ -117,13 +130,12 @@ function Edit( props ) {
 	 * Get Data From The Editor
 	 */
 
-	const {children, ...innerBlocksProps } = useInnerBlocksProps(blockProps, {
+	let {children, className, ...innerBlocksProps } = useInnerBlocksProps(blockProps, {
 		template : useConditionalTemplate(clientId),
 		renderAppender : false,
-		templateLock: "all",
 	} );
 
-	let {className} = innerBlocksProps
+
 
 	// Select Block Store Data
 	const {isBlockSelected, hasSelectedInnerBlock, isParentSelected, isRelativeSelected} = useSelect( (select) => {
@@ -155,19 +167,23 @@ function Edit( props ) {
 		calculatedLabel = label;
 	}
 
+	const hasValue = !isEmpty(value)
+	const hasField = !isEmpty(field)
+	const isPreviewMode = useIsPreviewMode()
 	const showLabel = (RowShowLabel !== null) ? RowShowLabel : GroupShowLabels ?? true
-
-
+	const showFieldPicker = (!isPreviewMode && !hasField && !hasInnerBlocks)
+	const showFieldOutput = isPreviewMode || hasInnerBlocks || (hasField && hasValue)
 
 	// Should we output the UI to show that a field is hidden?
 	// Add a class to the blockProps if so
-	const shouldDimField = (!isPreviewMode && hideFieldIfEmpty && (!hasValue) && (!isBlockSelected) && (!hasSelectedInnerBlock) )
-	const shouldHideBlock = !isPreviewMode && hideFieldIfEmpty && !hasValue && !isBlockSelected && !isRelativeSelected && !isParentSelected
+	const shouldDimField = ((attributes?.field?.type !== "block") && !isPreviewMode && hideFieldIfEmpty && (!hasValue) && (!isBlockSelected) && (!hasSelectedInnerBlock) )
+	const shouldHideBlock = !hasInnerBlocks && !isPreviewMode && hideFieldIfEmpty && !hasValue && !isBlockSelected && !isRelativeSelected && !isParentSelected
 	className = clsx(className, {"gp-dim-field" : shouldDimField })
 
 	
 
 	if(shouldHideBlock){
+
 		return null;
 	}
 
@@ -181,16 +197,14 @@ function Edit( props ) {
 				fieldType = {fieldType}
 			/>
 			<>
-				{ !hasField && ( 
+				{ showFieldPicker && ( 
 					<HStack
 						expanded = {true}
-					
 						justify='space-between'
 						align = "center"
 					>	
 						
-							<Text as="p" expanded={true} flexGrow={true} >Select a field to display:</Text>
-						
+						<Text as="p" expanded={true} flexGrow={true} >Select a field to display:</Text>
 						<FlexItem align="flex-end">
 							<ProfileFieldsDropDown
 								className={ 'govpack-profile-field-select' }
@@ -210,7 +224,7 @@ function Edit( props ) {
 					</HStack>
 				) }
 
-				{ hasField && ( <>
+				{ showFieldOutput && ( <>
 					{ showLabel && (
 						<div className="gp-block-row-label">
 							<RichText
