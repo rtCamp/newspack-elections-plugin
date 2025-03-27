@@ -39,12 +39,12 @@
 
 		//	font-weight: bold;
 		//	color: var(--npe-profile-color);
-
-		//	svg, path {
-		//		fill: var(--npe-profile-color);
-		//	}
-		//}
-
+		.wp-block-social-link.wp-social-link .wp-block-social-link-anchor svg,
+		svg:not(.has-icon-color svg){
+			color: var(--npe-profile-color);
+			fill: var(--npe-profile-color);
+		}
+	
 		.wp-block-npe-profile-separator{
 			margin-block-start: 1rem;
 			margin-block-end: 1rem;

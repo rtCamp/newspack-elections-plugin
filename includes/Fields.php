@@ -42,29 +42,101 @@ class Fields {
 	public function register_services(): void {
 
 		$services = [
-			'facebook' => 'Facebook',
-			'instagram' => 'Instagram',
-			'twitter' => 'Twitter',
-			'x' => 'X',
-			'youtube' => 'YouTube',
-
-			'ballotpedia' => "Ballotpedia",
-			'fec' => "FEC",
-			'gab' =>  "Gab",
-			'google' => "Google",
-			'govtrack' => "GovTrack",
-			'linkedin' => "Linkedin",
-			'open-secrets' => "OpenSecrets",
-			'open-states' => "OpenStates",
-			'rumble' => "Rumble",
-			'vote-smart' => "VoteSmart",
-			'vote-view' => "VoteView",
-			'wikipedia' => "Wikipedia"
+			[
+				'slug'  => 'facebook',
+				'label' => 'Facebook',
+				'color' => '#1877f2',
+			],
+			[
+				'slug'  => 'instagram',
+				'label' => 'Instagram',
+				'color' => '#405de6',
+			],
+			[
+				'slug'  => 'twitter',
+				'label' => 'Twitter',
+				'color' => '#1da1f2',
+			],
+			[
+				'slug'  => 'x',
+				'label' => 'X',
+				'color' => '#000000',
+			],
+			[
+				'slug'  => 'youtube',
+				'label' => 'YouTube',
+				'color' => '#ff0000',
+			],
+			[
+				'slug'  => 'ballotpedia',
+				'label' => 'Ballotpedia',
+				'color' => '#0645ad',
+			],
+			[
+				'slug'  => 'fec',
+				'label' => 'FEC',
+				'color' => '#631010',
+			],
+			[
+				'slug'  => 'gab',
+				'label' => '"Gab',
+				'color' => '#30CE7D',
+			],
+			[
+				'slug'  => 'google',
+				'label' => 'Google',
+				'color' => '#4285f4',
+			],
+			[
+				'slug'  => 'govtrack',
+				'label' => 'GovTrack',
+				'color' => '#9D2146',
+			],
+			[
+				'slug'  => 'linkedin',
+				'label' => 'Linkedin',
+				'color' => '#0a66c2',
+			],
+			[
+				'slug'  => 'open-secrets',
+				'label' => 'OpenSecrets',
+				'color' => '#669962',
+			],
+			[
+				'slug'  => 'open-states',
+				'label' => 'OpenStates',
+				'color' => '#005E5C',
+			],
+			[
+				'slug'  => 'rumble',
+				'label' => 'Rumble',
+				'color' => '#85c742',
+			],
+			[
+				'slug'  => 'vote-smart',
+				'label' => 'VoteSmart',
+				'color' => '#EE3E37',
+			],
+			[
+				'slug'  => 'vote-view',
+				'label' => 'VoteView"',
+				'color' => '#3284bf',
+			],
+			[
+				'slug'  => 'wikipedia',
+				'label' => 'Wikipedia',
+				'color' => '#000000',
+			],
 		];
 
 
-		foreach ( $services as $slug => $label ) {
-			$this->services->register( new Fields\Service($slug, $label) );
+		foreach ( $services as $service ) {
+
+			$s = new Fields\Service( $service['slug'], $service['label'] );
+			if ( isset( $service['color'] ) ) {
+				$s->set_color( $service['color'] );
+			}
+			$this->services->register( $s );
 		}
 	}
 

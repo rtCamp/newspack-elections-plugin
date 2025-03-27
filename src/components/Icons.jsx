@@ -48,7 +48,7 @@ export const Wikipedia = () => ( <Icon icon={ WikipediaIconSVG } /> )
 
 
 export const NPEIcons = {
-	"facebook" : FacebookIconSVG,
+	"facebook" : Facebook,
 	"instagram" : InstagramIconSVG,
 	"twitter" : TwitterIconSVG,
 	"x" : XIconSVG,
@@ -66,4 +66,3 @@ export const NPEIcons = {
 	"wikipedia" : WikipediaIconSVG,
 }
 
-console.log(NPEIcons['ballotpedia'],BallotpediaIconSVG)

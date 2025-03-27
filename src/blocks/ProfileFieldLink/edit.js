@@ -49,7 +49,6 @@ function Edit( props ) {
 
 	
 
-	console.log("link", context, attributes, field)
 
 	// should the field's block type not match the current block, render nothing
 	if(!isInnerBlockMode && (field?.field_type?.block !== props.name)){

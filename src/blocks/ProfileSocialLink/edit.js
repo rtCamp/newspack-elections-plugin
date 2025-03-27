@@ -1,0 +1,104 @@
+import {isEmpty} from "lodash"
+import clsx from "clsx"
+
+/**
+ * WordPress dependencies
+ */
+import { __ } from '@wordpress/i18n';
+import { InspectorControls, useBlockProps} from "@wordpress/block-editor"
+import { 
+	PanelBody, PanelRow, TextControl, Icon,
+	__experimentalToggleGroupControl as ToggleGroupControl,
+	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
+	} from '@wordpress/components';
+
+import { useSelect } from "@wordpress/data";
+import { store as blocksStore } from '@wordpress/blocks';
+import { background, link as LinkIcon } from '@wordpress/icons';
+
+import { useProfileFieldAttributes } from "./../../profile"
+import { useUpdateBlockMetaName, useIsPreviewMode } from "./../utils"
+import { NPEIcons } from "./../../components/Icons"
+
+const sizeOptions = [
+	{ name: __( 'Small' ), value: 12 },
+	{ name: __( 'Normal' ), value: 18 },
+	{ name: __( 'Large' ), value: 24 },
+	{ name: __( 'Huge' ), value: 30 },
+];
+
+
+const DynamicIcon = ({icon, size = 24}) => {
+	// Todo - make sure this exists
+	// move the function call up to the icons component
+	const SVG = NPEIcons[icon]()
+	return (
+		<Icon icon={ SVG } size={size} />
+	)
+}
+
+function Edit( props ) {
+
+	const {fieldKey, value, profile, field, profileId, fieldType } =  useProfileFieldAttributes(props) 
+	const { attributes, setAttributes, context } = props
+
+	const {
+		"npe/showLabels" : showLabels,
+		"npe/iconColor" : iconColor,
+		"npe/iconColorValue" : iconColorValue,
+		"npe/iconBackgroundColor" : iconBackgroundColor,
+		"npe/iconBackgroundColorValue" : iconBackgroundColorValue
+	} = context
+
+	const className = clsx("wp-block-social-link", "wp-social-link", {
+		[ `has-${ iconColor }-color` ]: iconColor,
+		[ `has-${ iconBackgroundColor }-background-color` ]: iconBackgroundColor
+	})
+
+	const serviceColor = field?.service_color ?? false
+	const blockProps = useBlockProps({
+		className,
+		style : {
+			color: serviceColor ?? iconColorValue,
+			backgroundColor: iconBackgroundColorValue
+		}
+	})
+	
+	const IconComponent = () => {
+		if(!field?.service){
+			return (<LinkIcon />)
+		}
+
+		if(!NPEIcons[field.service]){
+			return (<LinkIcon />)
+		}
+
+		const Component = NPEIcons[field.service];
+
+		return (<Component />)
+	}
+
+
+    return (
+		<>
+			<li {...blockProps} >
+				<button
+					className="wp-block-social-link-anchor"
+					aria-haspopup="dialog"
+				>
+					<IconComponent />
+					<span
+						className={ clsx( 'wp-block-social-link-label', {
+							'screen-reader-text': ! showLabels,
+						} ) }
+					>
+						{ field.label }
+					</span>
+				</button>	
+			</li>
+		</>
+	)
+}
+
+export {Edit}
+export default Edit

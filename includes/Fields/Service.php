@@ -9,14 +9,15 @@ class Service implements CollectableInterface {
 	protected string $slug;
 	protected string $label;
 	protected string $icon_slug;
+	protected string $color;
 
-	public function __construct(?string $slug = null, ?string $label = null){
+	public function __construct( ?string $slug = null, ?string $label = null ) {
 
-		if($slug){
+		if ( $slug ) {
 			$this->slug = $slug;
 		}
 
-		if($label){
+		if ( $label ) {
 			$this->label = $label;
 		}
 	}
@@ -41,11 +42,20 @@ class Service implements CollectableInterface {
 		return $this->slug;
 	}
 
-	public function to_array() : array {
+	public function color(): string {
+		return $this->color;
+	}
+
+	public function set_color( string $color ): string {
+		return $this->color = $color;
+	}
+
+
+	public function to_array(): array {
 		return [];
 	}
 
-	public function to_rest() : array {
+	public function to_rest(): array {
 		return [];
 	}
 }

@@ -21,6 +21,11 @@ const FIELD_TYPE_SCHEMA = {
 	}
 };
 
+const DEFAULT_FEATURE_SUPPORT = {
+	type : "",
+	allowSwitching: true
+}
+
 function hasAttribute( attributes = {}, attribute = "field", subAttribute = false ) {
 
 
@@ -107,8 +112,9 @@ const FieldAwareEdit = (props) => {
 		return select(blockEditorStore).getBlock(parentRowClientId)
 	} )
 
-	const blockSupports = getBlockSupport(blockName, featureName)
+	const blockSupports = getBlockSupport(blockName, featureName, DEFAULT_FEATURE_SUPPORT)
 	
+	console.log("blockSupports", blockSupports)
 	/*
 	useEffect( () => {
 
@@ -140,14 +146,24 @@ const FieldAwareEdit = (props) => {
 	}
 	
 
+	if(!hasBlockSupport(blockName, "gp/field-aware.allowSwitching", DEFAULT_FEATURE_SUPPORT.allowSwitching)){
+		return null
+	}
 
+	let switchToTypes = getBlockSupport(blockName, "gp/field-aware.allowSwitching", DEFAULT_FEATURE_SUPPORT.allowSwitching)
+	switchToTypes = (switchToTypes === true) ? [] : switchToTypes // if true was passed, return an empty array and bypass
+	switchToTypes = Array.isArray(switchToTypes) ? switchToTypes : [switchToTypes] // convert a single string passed as a type to an array
+	
+	const fieldsFilteredByType = (switchToTypes.length < 1) ? fields : fields.filter( (f) => switchToTypes.includes(f.type) )
+
+	console.log("switchToTypes", switchToTypes.length, fieldsFilteredByType)
 	return (
 		<>
 			<ProfileFieldsInspectorControl
 				fieldKey = {fieldKey}
 				onSelectField = {onSelectField}
 				fieldType = {fieldType}
-				fields = { fields }
+				fields = { fieldsFilteredByType }
 				showFieldsWithEmptyValues = {true}
 				disableEmptyFields = {false}
 			/> 
@@ -156,7 +172,7 @@ const FieldAwareEdit = (props) => {
 				fieldKey = {fieldKey}
 				onSelectField = { onSelectField }
 				fieldType = {fieldType}
-				fields = { fields }
+				fields = { fieldsFilteredByType }
 				showFieldsWithEmptyValues = {true}
 				disableEmptyFields = {false}
 			/>

@@ -19,6 +19,24 @@
 		},
 		"size": {
 			"type": "string"
+		},
+		"iconColor": {
+			"type": "string"
+		},
+		"customIconColor": {
+			"type": "string"
+		},
+		"iconColorValue": {
+			"type": "string"
+		},
+		"iconBackgroundColor": {
+			"type": "string"
+		},
+		"customIconBackgroundColor": {
+			"type": "string"
+		},
+		"iconBackgroundColorValue": {
+			"type": "string"
 		}
 	},
 	"ancestor": [ "npe/profile" ],
@@ -29,7 +47,11 @@
 	"providesContext": {
 		"npe/openInNewTab" : "openInNewTab",
 		"npe/size" : "size",
-		"npe/showLabels" : "showLabels"
+		"npe/showLabels" : "showLabels",
+		"npe/iconColor": "iconColor",
+		"npe/iconColorValue": "iconColorValue",
+		"npe/iconBackgroundColor": "iconBackgroundColor",
+		"npe/iconBackgroundColorValue": "iconBackgroundColorValue"
 	},
 	"supports": {
 		"align": [ "left", "center", "right" ],
@@ -81,12 +103,11 @@
 		}
 	},
 	"styles": [
-		{ "name": "default", "label": "Default", "isDefault": true },
-		{ "name": "logos-only", "label": "Logos Only" },
+		{ "name": "logos-only", "label": "Logos Only", "isDefault": true},
+		{ "name": "default", "label": "Circle Shape"},
 		{ "name": "pill-shape", "label": "Pill Shape" }
 	],
 	"allowedBlocks": [
-		"npe/profile-social-link",
-		"npe/profile-field-link"
+		"npe/profile-social-link"
 	]
 }

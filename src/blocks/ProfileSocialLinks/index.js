@@ -14,17 +14,15 @@ import './view.scss';
 import "./edit.scss"
 
 
-const { attributes, category, title } = metadata;
+const { attributes, category, title, name } = metadata;
 
-registerBlockType( metadata.name, {
+registerBlockType( name, {
 	apiVersion: 3,
 	title,
     category,
     attributes,
 	icon,
 	keywords: [ 'govpack' ],
-    styles: [
-	],
 	edit : SocialLinksEdit,
 	save: Save,
 } );

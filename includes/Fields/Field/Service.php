@@ -19,16 +19,15 @@ class Service extends Link {
 
 		if ( is_a( $service, ProfileService::class ) ) {
 			$this->service = $service;
-		} elseif(class_exists($service)) {
+		} elseif ( class_exists( $service ) ) {
 			$this->service = new $service();
 		} else {
 			$services = ProfileServiceRegistry::instance();
-			if($services->exists($service)){
-				$this->service = $services->get($service);
+			if ( $services->exists( $service ) ) {
+				$this->service = $services->get( $service );
 			} else {
 				// throw exception
-			}
-
+			}       
 		}
 
 		return $this;
@@ -38,7 +37,8 @@ class Service extends Link {
 	public function to_array(): array {
 		return [
 			...parent::to_array(),
-			'service' => $this->service->slug(),
+			'service'       => $this->service->slug(),
+			'service_color' => $this->service->color(),
 		];
 	}
 

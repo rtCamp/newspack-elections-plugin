@@ -9,4 +9,6 @@ class X extends Service {
 	protected string $slug = 'x';
 
 	protected string $label = 'X';
+
+	protected string $color = '#000000';
 }

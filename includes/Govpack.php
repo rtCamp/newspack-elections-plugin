@@ -241,12 +241,14 @@ class Govpack extends Plugin {
 		$this->blocks()->register( new \Govpack\Blocks\ProfileBio( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileName( $this ) ); 
 		$this->blocks()->register( new \Govpack\Blocks\ProfileReadMore( $this ) ); 
-		$this->blocks()->register( new \Govpack\Blocks\ProfileSocialLinks( $this ) ); 
 		
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldText( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldLink( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldTerm( $this ) );
 		$this->blocks()->register( new \Govpack\Blocks\ProfileFieldDate( $this ) );
+
+		$this->blocks()->register( new \Govpack\Blocks\ProfileSocialLinks( $this ) ); 
+		$this->blocks()->register( new \Govpack\Blocks\ProfileSocialLink( $this ) ); 
 	}
 
 	public function rest_api() {
