@@ -114,7 +114,7 @@ const FieldAwareEdit = (props) => {
 
 	const blockSupports = getBlockSupport(blockName, featureName, DEFAULT_FEATURE_SUPPORT)
 	
-	console.log("blockSupports", blockSupports)
+	
 	/*
 	useEffect( () => {
 
@@ -156,7 +156,7 @@ const FieldAwareEdit = (props) => {
 	
 	const fieldsFilteredByType = (switchToTypes.length < 1) ? fields : fields.filter( (f) => switchToTypes.includes(f.type) )
 
-	console.log("switchToTypes", switchToTypes.length, fieldsFilteredByType)
+	
 	return (
 		<>
 			<ProfileFieldsInspectorControl

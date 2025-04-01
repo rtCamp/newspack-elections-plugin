@@ -179,13 +179,15 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 	public function create_field_variations(): array {
 
 		$variations = [];
-		
+
 		foreach ( \Govpack\Profile\CPT::fields()->all() as $field ) {
 
 			if ( ! $field->is_block_enabled() ) {
 				continue;
 			}
 			
+			
+
 			$variation = [
 				'category'    => 'newspack-elections-profile-row-fields',
 				'name'        => sprintf( 'profile-field-row-%s', $field->slug ),
@@ -204,7 +206,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 				'isActive'    => [ 'field.type', 'field.key' ],
 				'scope'       => [ 'inserter', 'block' ],
 				'icon'        => $field->variation_icon(),
-				'innerBlocks' => $field->type->get_variation_inner_blocks(),
+				'innerBlocks' => $field->get_variation_inner_blocks(),
 			];
 
 			$variations[] = $variation;

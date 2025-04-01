@@ -23,92 +23,80 @@ class ProfileSocialLink extends \Govpack\Blocks\ProfileFieldText {
 		return $this->plugin->build_path( 'blocks/ProfileSocialLink' );
 	}
 
-	
-	public function show_block(): bool {
+	public function handle_render( array $attributes, string $content, WP_Block $block ) {
 		
-		if ( empty( $this->get_value() ) ) {
-			return false;
-		}
+		$link            = $this->get_value();
+		$open_in_new_tab = isset( $block->context['npe/openInNewTab'] ) ? $block->context['npe/openInNewTab'] : false;
 
-		return true;
-	}
+		$rel = trim( isset( $attributes['rel'] ) ? $attributes['rel'] : '' );
+		$url = $link['url'];
 
-	public function output(): string {
+		$text = ! empty( $attributes['label'] ) ? trim( $attributes['label'] ) : '';
+		$text = $text ? $text : $this->get_field()->label;
+
+
+		$show_labels = array_key_exists( 'showLabels', $block->context ) ? $block->context['npe/showLabels'] : false;
+		$icon        = $this->get_field()->service()->icon();
 		
-		$link = $this->get_value();
-		if ( ! is_array( $link ) ) {
+
+		// Don't render a link if there is no URL set.
+		if ( ! $url ) {
 			return '';
 		}
 
+		/**
+		 * Prepend emails with `mailto:` if not set.
+		 * The `is_email` returns false for emails with schema.
+		 */
+		if ( is_email( $url ) ) {
+			$url = 'mailto:' . antispambot( $url );
+		}
+
+		/**
+		 * Prepend URL with https:// if it doesn't appear to contain a scheme
+		 * and it's not a relative link or a fragment.
+		 */
+		if ( ! parse_url( $url, PHP_URL_SCHEME ) && ! str_starts_with( $url, '//' ) && ! str_starts_with( $url, '#' ) ) {
+			$url = 'https://' . $url;
+		}
+
+		if ( $open_in_new_tab ) {
+			$rel = trim( $rel . ' noopener nofollow' );
+		}
+
 		
-		return sprintf( '<a href="%s">%s</a>', $link['url'], $this->linkText() );
+
+		?>
+		<li 
+		<?php
+		echo get_block_wrapper_attributes(
+			[
+				'class' => 'wp-block-social-link wp-social-link',
+			]
+		);
+		?>
+		>
+			<a 
+				href="<?php echo \esc_url( $url ); ?>" 
+				class="wp-block-social-link-anchor" 
+				rel="<?php echo esc_attr( $rel ); ?>"
+				<?php echo ( $open_in_new_tab ? 'target="_blank"' : '' ); ?>
+			>
+				<?php echo $icon; ?>
+				<span class="wp-block-social-link-label <?php echo ( $show_labels ? '' : ' screen-reader-text' ); ?>">
+					<?php echo esc_html( $text ); ?>
+				</span>
+			</a>
+		</li>
+		<?php
 	}
 
-	public function linkText(): string {
-		$link = $this->get_value();
-
-		$hasLabelOverride = ( $this->attribute( 'linkTextOverride' ) && $this->attribute( 'linkTextOverride' ) );
-		$hasDefaultLabel  = ( isset( $link['linkText'] ) && $link['linkText'] );
-		$defaultLabel     = $hasDefaultLabel ? $link['linkText'] : 'Link';
-
-		if ( $this->attribute( 'linkFormat' ) === 'url' ) {
-			return $link['url'] ?? '';
-		}
-
-		if ( $this->attribute( 'linkFormat' ) === 'label' ) {
-			return ( $hasLabelOverride ? $this->attribute( 'linkTextOverride' ) : $defaultLabel );
-		}
-
-		if ( $this->attribute( 'linkFormat' ) === 'icon' ) {
-			if ( is_a( $this->get_field(), 'Govpack\Fields\Field\Service' ) ) {
-				return $this->get_field()->service()->icon();
-			}
-		}
-
-
-		return $defaultLabel;
-	}
 
 	public function variations(): array {
-		//return $this->create_field_variations();
 		return [];
 	}
 
 	public function create_field_variations(): array {
-
-		$variations = [];
-		
-
-		foreach ( \Govpack\Profile\CPT::fields()->of_type( $this->field_type ) as $field ) {
-
-			if ( ! $field->is_block_enabled() ) {
-				continue;
-			}
-
-			$variation = [
-				'category'    => 'newspack-elections-profile-row-fields',
-				'name'        => sprintf( 'profile-field-service-%s', $field->slug ),
-				'title'       => $field->label,
-				'description' => sprintf(
-					/* translators: %s: taxonomy's label */
-					__( 'Display Profile Social media Field: %s' ),
-					$field->label
-				),
-				'attributes'  => [
-					'field' => [ 
-						'type' => $field->type->slug,
-						'key'  => $field->slug,
-					],
-				],
-				'isActive'    => [ 'field.type', 'field.key' ],
-				'scope'       => [ 'inserter' ],
-				'icon'        => $field->type->variation_icon(),
-			];
-
-			$variations[] = $variation;
-		}
-
-	
-		return $variations;
+		return [];
 	}
 }

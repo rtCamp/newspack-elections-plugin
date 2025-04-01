@@ -67,7 +67,7 @@ const MetaFieldsPanel = (props) => {
             name="gov-profile-about"
         >
 			{(groupFields) && ( <>
-				{ console.log(renderFields.grouped, Object.keys(renderFields.grouped) ) }
+		
 				{ Object.keys(renderFields.grouped).map( (groupKey) => (
 					<PanelFieldset legend={groupKey} key={`gp-panel-fieldset-${groupKey}`}>
 						

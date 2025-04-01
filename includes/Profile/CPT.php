@@ -196,7 +196,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new TextField( 'wikipedia', 'Wikipedia ID' ),
 				new TextField( 'google_entity_id', 'Google Entity ID' ),
 
-				(new ServiceField( 'gab', 'Gab' ))->set_service('gab'),
+				( new ServiceField( 'gab', 'Gab' ) )->set_service( 'gab' ),
 				new LinkField( 'rumble', 'Rumble', 'link' ),
 
 				new TextField( 'opensecrets_id', 'Open Secrets' ),
@@ -208,8 +208,8 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new TextField( 'usio_id', 'BioGuide' ),
 				new TextField( 'icpsr_id', 'Voteview' ),
 
-				( new PostPropertyField( 'bio', 'Biography' ) )->key( 'post_excerpt' ),
-				( new PostPropertyField( 'postname', 'Name' ) )->key( 'post_title' ),
+				( new PostPropertyField( 'bio', 'Biography' ) )->key( 'post_excerpt' )->block( 'npe/profile-bio' ),
+				( new PostPropertyField( 'postname', 'Name' ) )->key( 'post_title' )->block( 'npe/profile-name' ),
 
 				new TaxonomyField( 'party', 'Party', \Govpack\Tax\Party::TAX_SLUG ),
 				new TaxonomyField( 'state', 'State', \Govpack\Tax\State::TAX_SLUG ),
@@ -252,7 +252,6 @@ class CPT extends \Govpack\Abstracts\PostType {
 				( new ServiceField( 'youtube_personal', 'Personal YouTube' ) )->set_service( 'youtube' ),
 			]
 		);
-
 	}
 
 	//public static function get_field_types(): array {
@@ -588,8 +587,9 @@ class CPT extends \Govpack\Abstracts\PostType {
 	 */
 	public static function get_meta_keys(): array {
 
-		$fields    = self::fields()->get_by_source( 'meta' );
-		$meta_keys = wp_list_pluck( $fields, 'slug' );
+		$fields = self::fields()->get_by_source( 'meta' );
+
+		$meta_keys = wp_list_pluck( $fields, 'meta_key' );
 
 		return apply_filters( 'govpack_profile_meta_keys', $meta_keys );
 	}

@@ -48,7 +48,7 @@ const RawSocialLinksEdit = ( props) => {
 		clientId 
 	} = props
 
-	console.log("attributes", attributes)
+
 
 	const {
 		iconBackgroundColorValue,

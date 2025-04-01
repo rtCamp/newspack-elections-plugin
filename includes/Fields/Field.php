@@ -74,6 +74,13 @@ class Field extends \Govpack\Collection\Collectable implements \Govpack\Collecti
 	protected bool $allow_block = true;
 
 
+	/**
+	 * Own Block
+	 * 
+	 * Allows a field to specify which block to use for output.
+	 * eg a piece of profile data that has a dedicated block
+	 */
+	protected string $block;
 
 	/**
 	 * Construct the profile field
@@ -116,6 +123,11 @@ class Field extends \Govpack\Collection\Collectable implements \Govpack\Collecti
 
 	public function disable_block( $disable = true ): self {
 		$this->allow_block = ! $disable;
+		return $this;
+	}
+
+	public function block( string $block ): self {
+		$this->block = $block;
 		return $this;
 	}
 				
@@ -173,5 +185,19 @@ class Field extends \Govpack\Collection\Collectable implements \Govpack\Collecti
 
 	public function is_block_enabled(): bool {
 		return $this->allow_block;
+	}
+
+	public function has_own_block(): bool {
+		return isset( $this->block );
+	}
+
+	public function get_variation_inner_blocks(): array {
+		if ( $this->has_own_block() ) {
+			return [
+				[ $this->block ],
+			];
+		}
+
+		return $this->type->get_variation_inner_blocks();
 	}
 }

@@ -92,11 +92,17 @@ function useConditionalTemplate(clientId){
 
 function Edit( props ) {
 
+	
+
 	const {attributes, setAttributes, context, clientId, name} = props  
 	const blockProps = useBlockProps();
 	const { setField, fieldKey, fieldType, value, field } =  useProfileFieldAttributes(props) 
 	const fields = useProfileFields(props)
 	const availableFields = useFields()
+
+	
+	const isBio = (field?.slug === "bio")
+	if(isBio) console.log("profile row", field)
 
 	// Once a Profile Has Inner Blocks we can't re-choose the variation
 	const {descendents, hasInnerBlocks} = useSelect( ( select ) => {

@@ -109,6 +109,7 @@ function Edit( props ) {
 			<a
 				target={ linkTarget }
 				rel={ rel }
+				{...blockProps}
 			>	
 				{prefixWithName && profileName && (
 					<>{profileName}{separator}</>

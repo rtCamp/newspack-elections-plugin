@@ -48,7 +48,7 @@ export const Wikipedia = () => ( <Icon icon={ WikipediaIconSVG } /> )
 
 
 export const NPEIcons = {
-	"facebook" : Facebook,
+	"facebook" : FacebookIconSVG,
 	"instagram" : InstagramIconSVG,
 	"twitter" : TwitterIconSVG,
 	"x" : XIconSVG,

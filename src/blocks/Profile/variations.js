@@ -106,7 +106,7 @@ export const variations = [
 			attributes : {
 				"preview" : true,
 				"width" : "wide",
-				"align": "left",
+				"align": "none",
 				"backgroundColor":"accent",
 				"verticalAlignment":"center",
 				"fontSize":"medium",
@@ -179,7 +179,7 @@ export const variations = [
 		},
 		attributes : {
 			"width" : "wide",
-			"align": "left",
+			"align": "none",
 			"backgroundColor":"accent",
 			"verticalAlignment":"center",
 			"fontSize":"medium",
