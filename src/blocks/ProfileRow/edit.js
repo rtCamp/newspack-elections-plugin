@@ -19,6 +19,7 @@ import {
 	FlexItem,
 } from '@wordpress/components';
 
+import {useEffect} from "@wordpress/element"
 
 
 /**
@@ -101,9 +102,6 @@ function Edit( props ) {
 	const availableFields = useFields()
 
 	
-	const isBio = (field?.slug === "bio")
-	if(isBio) console.log("profile row", field)
-
 	// Once a Profile Has Inner Blocks we can't re-choose the variation
 	const {descendents, hasInnerBlocks} = useSelect( ( select ) => {
 			const descendents = select( blockEditorStore ).getBlock( clientId )?.innerBlocks ?? []
@@ -114,7 +112,19 @@ function Edit( props ) {
 		}, [ clientId ]
 	);
 
+	const updateLabel = (label) => {
+		setAttributes({
+			label
+		})
+	}
 
+
+	/**
+	 * When a 
+	 */
+	//useEffect( () => {
+		//updateLabel(undefined)
+	//}, [fieldKey])
 	
 	/**
 	 * Get Data From Parent Blocks
@@ -159,12 +169,8 @@ function Edit( props ) {
 		}
 	} )
 
-	const updateLabel = (label) => {
-		setAttributes({
-			label
-		})
-	}
 
+	
 	
 	let calculatedLabel;
 	if(!label && field){

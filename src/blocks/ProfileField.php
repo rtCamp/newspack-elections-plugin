@@ -8,6 +8,7 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 	protected $attributes = [];
 	protected $context    = [];
 	protected $content    = null;
+	protected $block      = null;
 
 	protected $profile;
 
@@ -38,9 +39,17 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 			return null;
 		}
 		
+		if ( ! $this->is_allow_field_type_for_block() ) {
+			return null;
+		}
+
 		ob_start();
 		$this->handle_render( $attributes, $content, $block );
 		return \ob_get_clean();
+	}
+
+	public function is_allow_field_type_for_block() {
+		return true;
 	}
 
 	public function output(): string {
@@ -81,7 +90,7 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 	}
 
 	public function attribute( string $key ): mixed {
-		if(!$this->has_attribute($key)){
+		if ( ! $this->has_attribute( $key ) ) {
 			return null;
 		}
 		return $this->attributes[ $key ];
@@ -146,7 +155,7 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 	public function get_profile() {
 
 		//if ( isset( $this->profile ) ) {
-		//	return $this->profile;
+		//  return $this->profile;
 		//}
 
 		$this->profile = \Govpack\Profile\Profile::get( $this->get_profile_id() );
@@ -190,7 +199,11 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 	}
 
 	public function get_field() {
-		return \Govpack\Profile\CPT::fields()->get( $this->get_field_key() );
+		$key = $this->get_field_key();
+		if ( ! $key ) {
+			return false;
+		}
+		return \Govpack\Profile\CPT::fields()->get( $key );
 	}
 
 	public function has_field_key(): bool {
