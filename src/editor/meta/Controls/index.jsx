@@ -8,6 +8,7 @@ import { useEntityId, useEntityProp } from "@wordpress/core-data";
 import {store as editorStore} from "@wordpress/editor"
 import { dateI18n, getSettings } from "@wordpress/date"
 import {MaskedTextControl} from "./MaskedTextControl"
+import MaskedDateControl from "./DateInput";
 
 
 
@@ -63,7 +64,31 @@ export const PanelTextareaControl = (props) => {
 	return DefaultControl(props, TextareaControl)
 }
 
+export const PanelDateControl = (props) => {
+	return DefaultControl(props, DateControl)
+}
 
+export const DateControl = (props) => {
+
+	console.log("DateControl", props)
+
+	return (
+		<MaskedDateControl
+			label = {props.label}
+			value={	props.value }
+			placeholder = "05/31/2021"
+			help = "mm/dd/yyyy (eg 05/01/2021)"
+			onChange = {props.onChange}
+			maskProps = {{
+				mask : "99/99/9999",
+				alwaysShowMask : true,
+				permanents : [2, 5],
+			}}
+		/>
+	)
+}
+
+/*
 export const PanelDateControl = (props) => {
 
 	const {onChange, meta, ...restProps} = props
@@ -82,65 +107,40 @@ export const PanelDateControl = (props) => {
 	}
 
 	return (
-		<MaskedTextControl
-			
-			label = {props.label}
-			value={	inputValue ?? dateValue ?? "" }
-			onChange={ ( value ) => {
-				setInputValue(value)
-				let timestamp = moment(value, "MM/DD/YYYY", true)
-				if(timestamp.isValid()){
-				onChange( { [props.meta_key]: timestamp.valueOf().toString() } )
-					setIsValid(true)
-				} else {
-					setIsValid(false)
-				}
-			}}
-			placeholder = "05/31/2021"
-			help = "mm/dd/yyyy (eg 05/01/2021)"
-			maskProps = {{
-				mask : "99/99/9999",
-				alwaysShowMask : true,
-				permanents : [2, 5],
-			}}
-			isValid = {isValid}
-			isTouched = {isTouched}
-			onFocus={ () => {
-				setIsTouched(true)
-			} }
-			{...restProps}
-		/>
-	)
-
-	/*
-
-	return (
-		<>
-			<span>{ props.label }</span>
-		
-			<Dropdown
-				renderToggle={ ( { isOpen, onToggle } ) => (
-					<Button
-						onClick={ onToggle }
-						aria-expanded={ isOpen }
-						variant="tertiary"
-					>
-						{dateI18n(settings.formats.date, date)}
-					</Button>
-				) }
-				renderContent={ ( { onClose } ) => (
-					<DatePicker
-						currentDate={ date }
-						onChange={ ( newDate ) => setDate( newDate ) }
-						onClose={ onClose }
-					/>
-				) }
+		<VStack>
+			<MaskedTextControl
+				label = {props.label}
+				value={	inputValue ?? dateValue ?? "" }
+				onChange={ ( value ) => {
+					setInputValue(value)
+					let timestamp = moment(value, "MM/DD/YYYY", true)
+					if(timestamp.isValid()){
+					onChange( { [props.meta_key]: timestamp.valueOf().toString() } )
+						setIsValid(true)
+					} else {
+						setIsValid(false)
+					}
+				}}
+				placeholder = "05/31/2021"
+				help = "mm/dd/yyyy (eg 05/01/2021)"
+				maskProps = {{
+					mask : "99/99/9999",
+					alwaysShowMask : true,
+					permanents : [2, 5],
+				}}
+				isValid = {isValid}
+				isTouched = {isTouched}
+				onFocus={ () => {
+					setIsTouched(true)
+				} }
+				{...restProps}
 			/>
+		</VStack>
+	)
+	
 
-		</>
-    )
-	*/
 }
+*/
 
 export const PanelSelectControl = (props) => {
     return (

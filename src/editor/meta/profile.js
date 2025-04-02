@@ -7,6 +7,8 @@ import { MetaFieldsPanel } from "./Panels/meta-fields-panel"
 
 import "./view.scss"
 
+
+
 const ABOUT_PANEL_FIELDS = [
 	{
 		label : "Prefix",
@@ -312,7 +314,7 @@ const GovPackProfileSidebar = () => (
     </>
 )
 
- 
+
 registerPlugin( 'profile-meta', {
     icon: more,
     render: GovPackProfileSidebar,

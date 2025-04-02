@@ -46,6 +46,7 @@
 	 return (
 		 <BaseControl
 			__nextHasNoMarginBottom = {true}
+			__next40pxDefaultSize
 			label={ label }
 			hideLabelFromVision={ hideLabelFromVision }
 			id={ id }

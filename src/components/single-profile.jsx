@@ -134,7 +134,6 @@ const SingleProfile = (props) => {
 	
     profile = normalize_profile(profile)
 	
-	console.log(profile)
 
     const {
         showAvatar, 
