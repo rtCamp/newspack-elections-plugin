@@ -19,6 +19,8 @@ import {
 	FlexItem,
 } from '@wordpress/components';
 
+import {useEffect} from "@wordpress/element"
+
 /**
  * Internal dependencies
  */
@@ -156,6 +158,12 @@ function Edit( props ) {
 		})
 	}
 
+	/**
+	 * When a fieldKey changes we reset the over ridden label
+	 */
+	useEffect( ()=> {
+		updateLabel(undefined)
+	}, [fieldKey])
 	
 	let calculatedLabel;
 	if(!label && field){
