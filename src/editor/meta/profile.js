@@ -2,7 +2,7 @@ import { more } from '@wordpress/icons';
 import { registerPlugin } from '@wordpress/plugins';
 
 
-import { MetadataIdsPanel, MetaFieldsPanel} from "./Panels"
+import { MetaFieldsPanel } from "./Panels"
 
 import "./view.scss"
 
@@ -321,8 +321,6 @@ const GovPackProfileSidebar = () => (
 			fields = {META_PANEL_FIELDS}
 			groupFields = {false}
 		/>
-		
-		<MetadataIdsPanel />
 
     </>
 )
