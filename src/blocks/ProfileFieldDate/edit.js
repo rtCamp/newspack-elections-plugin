@@ -21,8 +21,6 @@ import { useProfileFieldAttributes } from './../../profile';
 
 
 
-
-
 const getSiteDefaultDateFormat = () => {
 	// Get the generic date settings and the site specific date settings. 
 	// Use the root.site.date_format, Unless it doesn't exist. 
@@ -68,25 +66,14 @@ function DateEdit( props ) {
 	const { dateFormat = defaultFormat } = attributes
 	const blockProps = useBlockProps()
 
+	const date = field.field_type.value(value)
 
-
-	const profileValue = () => {
-
-		if(field.type !== "date"){
-			return "n/a"
-		}
-
-		if(typeof value === "object"){
-			return ""
-		}
-
-		return gmdate(dateFormat, parseInt(value), true)
+	if(date === null){
+		return null
 	}
 
+	const FieldValue = gmdate(dateFormat, date, true)
 	
-	const FieldValue = profileValue(fieldKey)
-	const hasValue = !isEmpty(FieldValue)
-
     return (
 		<div {...blockProps}>
 			<DateFormattingControls {...props}/>

@@ -88,7 +88,7 @@ export const UnforwardedDateControl = (
 	const [ isDatePickerOpen, setIsDatePickerOpen ] = useState( false );
 	console.log("isDatePickerOpen", isDatePickerOpen)
 
-	const inputValue = isEmpty(value) ? "" : format(date, "MM/dd/yyyy")
+	const inputValue = isEmpty(value) ? "" : format(value, "MM/dd/yyyy")
 	/**
 	 * The Field Must Display a consistent value in the date picker and the masked text field
 	 * possible values are a date string formatted for output, an empty string, null, or undefined
@@ -99,6 +99,7 @@ export const UnforwardedDateControl = (
 
 	const onChangeValue = ( newDate ) => {
 		const formattedDate = format(newDate, MYSQL_DATE_FORMAT)
+		setDate(newDate)
 		onChange( formattedDate );
 	}
 
@@ -132,7 +133,6 @@ export const UnforwardedDateControl = (
 					{ ...maskProps }
 					{ ...additionalProps }
 					onFocus = { (event) => {
-						console.log("onFocus")
 						setIsDatePickerOpen(true)
 					}}
 				/>

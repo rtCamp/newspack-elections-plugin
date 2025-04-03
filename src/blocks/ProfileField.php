@@ -68,6 +68,7 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 
 		
 		$value = $this->get_profile()->value( $this->get_field()->slug() );
+		
 
 		return $value;
 	}

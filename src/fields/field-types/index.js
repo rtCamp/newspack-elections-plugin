@@ -1,3 +1,4 @@
+import DateField from "./date"
 import Email from "./email"
 import FieldType from "./field"
 import Link from "./link"
@@ -7,6 +8,7 @@ import Taxonomy from "./taxonomy"
 import Text from "./text"
 
 export const availableFieldTypes = [
+	DateField,
 	Email,
 	FieldType,
 	Link,
@@ -17,6 +19,7 @@ export const availableFieldTypes = [
 ]
 
 export {
+	DateField,
 	Email,
 	FieldType,
 	Link,
