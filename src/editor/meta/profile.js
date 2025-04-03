@@ -2,12 +2,9 @@ import { more } from '@wordpress/icons';
 import { registerPlugin } from '@wordpress/plugins';
 
 
-import {AboutPanel, OfficePanel, CommunicationsPanel, SocialPanel, MetadataIdsPanel} from "./Panels"
-import { MetaFieldsPanel } from "./Panels/meta-fields-panel"
+import { MetadataIdsPanel, MetaFieldsPanel} from "./Panels"
 
 import "./view.scss"
-
-
 
 const ABOUT_PANEL_FIELDS = [
 	{
@@ -81,35 +78,8 @@ const OFFICE_PANEL_FIELDS = [{
 		label: "Date term ends",
 		meta_key: "term_end_date",
 		type : "date"
-	}]
+}]
 	
-	/*
-const COMMUNICATION_PANEL_FIELDS = [{
-		label: "Date assumed office",
-		meta_key: "date_assumed_office",
-		type : "date",
-		group: "A"
-	}, {
-		label:"Appointed by",
-		meta_key: "appointed_by",
-		group: "A"
-	}, {
-		label:"Date appointed",
-		meta_key: "appointed_date",
-		type : "date",
-		group: "B"
-	},{
-		label:"Date confirmed",
-		meta_key: "confirmed_date",
-		type : "date",
-		group: "B"
-	},{
-		label: "Date term ends",
-		meta_key: "term_end_date",
-		type : "date",
-		group: "C"
-	}]
-*/
 
 const COMMUNICATION_PANEL_FIELDS = [{
 		label : "Address (Official)",
@@ -283,12 +253,48 @@ const SOCIAL_PANEL_FIELDS = [{
 		label : "Ballotpedia",
 		meta_key : "balletpedia_id",
 		group: "Other"
-	}]
+}]
+
+
+const META_PANEL_FIELDS  = [
+	{ 	
+		label : "FEC ID",
+		meta_key: "fec_id"
+	},
+	{ 
+		label : "Google Entity ID",
+		meta_key: "google_entity_id"
+	},
+	{ 
+		label : "Govtrack ID",
+		meta_key: "govtrack_id"
+	},
+	{ 
+		label : "Opensecrets ID",
+		meta_key: "opensecrets_id"
+	},
+	{ 
+		label : "Open States ID",
+		meta_key: "openstates_id"
+	},
+	{ 
+		label : "VoteView",
+		meta_key: "icpsr_id"
+	},
+	{ 
+		label : "VoteSmart ID",
+		meta_key: "votesmart_id"
+	},
+	{ 
+		label : "Wikipedia ID",
+		meta_key: "wikipedia_id"
+	}
+]
+			
 
 const GovPackProfileSidebar = () => (
     <>
-		{console.log("Sidebar Render")}
-        <AboutPanel 
+        <MetaFieldsPanel 
 			label = "About"
 			fields = {ABOUT_PANEL_FIELDS}
 		/>
@@ -309,6 +315,13 @@ const GovPackProfileSidebar = () => (
 			fields = {SOCIAL_PANEL_FIELDS}
 			groupFields = {true}
 		/>
+
+		<MetaFieldsPanel 
+			label = "Metadata & IDS"
+			fields = {META_PANEL_FIELDS}
+			groupFields = {false}
+		/>
+		
 		<MetadataIdsPanel />
 
     </>
