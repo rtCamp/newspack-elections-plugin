@@ -1,8 +1,6 @@
-import { more } from '@wordpress/icons';
-import { registerPlugin } from '@wordpress/plugins';
 
 
-import { MetaFieldsPanel } from "./Panels"
+import { ProfileMetaSidebarPanel } from "./profile-meta-sidebar-panel"
 
 import "./view.scss"
 
@@ -292,31 +290,31 @@ const META_PANEL_FIELDS  = [
 ]
 			
 
-const GovPackProfileSidebar = () => (
+const ProfileMetaSidebar = () => (
     <>
-        <MetaFieldsPanel 
+        <ProfileMetaSidebarPanel 
 			label = "About"
 			fields = {ABOUT_PANEL_FIELDS}
 		/>
 		
-		<MetaFieldsPanel 
+		<ProfileMetaSidebarPanel 
 			label = "Office"
 			fields = {OFFICE_PANEL_FIELDS}
 		/>
 		
-        <MetaFieldsPanel 
+        <ProfileMetaSidebarPanel 
 			label = "Communications"
 			fields = {COMMUNICATION_PANEL_FIELDS}
 			groupFields = {true}
 		/>
 		
-		<MetaFieldsPanel 
+		<ProfileMetaSidebarPanel 
 			label = "Social"
 			fields = {SOCIAL_PANEL_FIELDS}
 			groupFields = {true}
 		/>
 
-		<MetaFieldsPanel 
+		<ProfileMetaSidebarPanel 
 			label = "Metadata & IDS"
 			fields = {META_PANEL_FIELDS}
 			groupFields = {false}
@@ -325,8 +323,5 @@ const GovPackProfileSidebar = () => (
     </>
 )
 
-
-registerPlugin( 'profile-meta', {
-    icon: more,
-    render: GovPackProfileSidebar,
-} );
+export default ProfileMetaSidebar
+export {ProfileMetaSidebar}

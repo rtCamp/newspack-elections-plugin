@@ -176,7 +176,7 @@ function getBlockEditorScripts(){
 
 	return {
 		"editor-blocks" : [
-			path.join( __dirname, 'src', "editor", "block-editor.js"),
+			path.join( __dirname, 'src', "block-editor", "index.js"),
 			...blockScripts( 'index', path.join( __dirname, 'src' ), blocks )
 		]
 	}

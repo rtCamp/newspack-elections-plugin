@@ -9,7 +9,7 @@
 	"category": "newspack-elections",
 	
 	"supports" : {
-		"reusable": false,
+		"reusable": true,
 		"html": false,
 		"interactivity": {
 			"clientNavigation": true

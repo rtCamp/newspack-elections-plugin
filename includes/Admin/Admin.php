@@ -165,7 +165,7 @@ class Admin {
 		);
 
 
-		$file = GOVPACK_PLUGIN_BUILD_PATH . 'editor.asset.php';
+		$file = GOVPACK_PLUGIN_BUILD_PATH . 'profile-editor.asset.php';
 
 		if ( file_exists( $file ) ) {
 		
@@ -173,17 +173,19 @@ class Admin {
 		}
 
 		wp_register_script(
-			'govpack-editor',
-			GOVPACK_PLUGIN_BUILD_URL . 'editor.js',
+			'govpack-profile-meta-editor',
+			GOVPACK_PLUGIN_BUILD_URL . 'profile-editor.js',
 			$asset_data['dependencies'] ?? [],
 			$asset_data['version'] ?? '',
 			true
 		);
+		
 		wp_register_style(
-			'govpack-editor-style',
-			GOVPACK_PLUGIN_BUILD_URL . 'editor.css',
+			'govpack-profile-meta-editor-style',
+			GOVPACK_PLUGIN_BUILD_URL . 'profile-editor.css',
 			[],
-			true
+			true,
+			'all'
 		);
 	}
 
@@ -201,8 +203,8 @@ class Admin {
 
 		if ( true === $screen->is_block_editor() && 'govpack_profiles' === $screen->post_type ) {
 			
-			\wp_enqueue_script( 'govpack-editor' );
-			\wp_enqueue_style( 'govpack-editor-style' );
+			\wp_enqueue_script( 'govpack-profile-meta-editor' );
+			\wp_enqueue_style( 'govpack-profile-meta-editor-style' );
 		}
 	}
 }

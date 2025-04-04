@@ -1,3 +1,4 @@
-import './meta/profile.js';
+import {initSidebar} from "./profile-sidebar"
 
-console.log("Editor Index")
+// Load the Meta Data Sidebar
+initSidebar()

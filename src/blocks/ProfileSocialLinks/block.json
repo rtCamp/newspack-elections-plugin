@@ -57,6 +57,7 @@
 		"align": [ "left", "center", "right" ],
 		"anchor": true,
 		"html": false,
+		"reusable": true,
 		"__experimentalExposeControlsToChildren": true,
 		"layout": {
 			"allowSwitching": false,

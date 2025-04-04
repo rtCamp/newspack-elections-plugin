@@ -1,7 +1,10 @@
 import { PanelRow } from "@wordpress/components";
+import { PluginDocumentSettingPanel } from '@wordpress/editor';
+import { Fragment } from "@wordpress/element";
 
-import {GovPackSidebarPanel} from "./../../../components/sidebar-panel"
-import {PanelTextControl, PanelDateControl, PanelTextareaControl, PanelFieldset, PanelUrlControl} from "./../Controls"
+
+
+import {PanelTextControl, PanelDateControl, PanelTextareaControl, PanelFieldset, PanelUrlControl} from "./Controls"
 
 const fieldTypes = {
 	text : PanelTextControl,
@@ -10,8 +13,20 @@ const fieldTypes = {
 	url : PanelUrlControl,
 }
 
+const SidebarPluginPanel = (props) => {
+	return (
+		<PluginDocumentSettingPanel 
+			title = {props.title}
+			name = {props.name}
+			icon={ <Fragment /> }
+		>
+			{props.children}
+		</PluginDocumentSettingPanel>
+	)
+}
 
-const MetaFieldsPanel = (props) => {
+
+export const ProfileMetaSidebarPanel = (props) => {
 
 	const { 
 		label,
@@ -60,9 +75,8 @@ const MetaFieldsPanel = (props) => {
 		renderFields.ungrouped = fieldsWithComponents
 	}
 
-	console.log("renderFields", renderFields)
 	return (
-        <GovPackSidebarPanel 
+        <SidebarPluginPanel 
             title={label}
             name="gov-profile-about"
         >
@@ -91,10 +105,10 @@ const MetaFieldsPanel = (props) => {
 					/>
 				</PanelRow>
 			))}
-		</GovPackSidebarPanel>
+		</SidebarPluginPanel>
     )
 
 }
 
-export { MetaFieldsPanel }
-export default MetaFieldsPanel
+
+export default ProfileMetaSidebarPanel
