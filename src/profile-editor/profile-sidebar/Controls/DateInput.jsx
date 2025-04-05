@@ -1,5 +1,5 @@
 import Moment from "moment"
-import {format} from "date-fns"
+import {format, isMatch} from "date-fns"
 import clsx from "clsx"
 import styled from '@emotion/styled';
 import InputMask from '@mona-health/react-input-mask';
@@ -87,7 +87,8 @@ export const UnforwardedDateControl = (
 
 	const [ isDatePickerOpen, setIsDatePickerOpen ] = useState( false );
 	console.log("isDatePickerOpen", isDatePickerOpen)
-
+	
+	console.log("date val", value, isMatch(value, MYSQL_DATE_FORMAT.replace("-", "'-'") , new Date() ) )
 	const inputValue = isEmpty(value) ? "" : format(value, "MM/dd/yyyy")
 	/**
 	 * The Field Must Display a consistent value in the date picker and the masked text field

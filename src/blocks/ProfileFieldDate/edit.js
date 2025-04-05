@@ -66,7 +66,7 @@ function DateEdit( props ) {
 	const { dateFormat = defaultFormat } = attributes
 	const blockProps = useBlockProps()
 
-	const date = field.field_type.value(value)
+	const date = field?.field_type?.value(value)
 
 	if(date === null){
 		return null
