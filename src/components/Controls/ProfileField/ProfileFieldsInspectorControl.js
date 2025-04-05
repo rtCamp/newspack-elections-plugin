@@ -45,11 +45,10 @@ export const ProfileFieldsInspectorControl = ({
 }) => {
 
 
-	const dropdownMenuProps = useToolsPanelDropdownMenuProps()
-	const isMobile = useViewportMatch( 'medium', '<' );
+	//const dropdownMenuProps = useToolsPanelDropdownMenuProps()
+	//const isMobile = useViewportMatch( 'medium', '<' );
 
-	console.log("dropdownMenuProps", dropdownMenuProps)
-
+	
 	return(
 		<InspectorControls group="settings">
 		

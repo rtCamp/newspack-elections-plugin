@@ -4,7 +4,7 @@ import {isEmpty} from "lodash"
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { InspectorControls, useBlockProps} from "@wordpress/block-editor"
+import { InspectorControls, useBlockProps, RichText} from "@wordpress/block-editor"
 import { 
 	PanelBody, PanelRow, TextControl, Icon,
 	__experimentalToggleGroupControl as ToggleGroupControl,
@@ -96,11 +96,39 @@ function Edit( props ) {
 
 	const LinkBody = () => {
 		
-		if((linkFormat === "icon") && (field?.service)){
-			return (<DynamicIcon icon={field.service} size={iconSize}/>)
+		if(linkFormat === "label"){
+			return (
+				<RichText
+					identifier="labelOverride"
+					tagName="a"
+					aria-label={ __( '“Read more” link text' ) }
+					placeholder={ linkText }
+					value={ labelOverride }
+					onChange={ ( newValue ) =>
+						setLinkTextOverride( newValue )
+					}
+					withoutInteractiveFormatting
+				/>
+			)
 		}
 
-		return (<>{linkText}</>)
+		const showIcon = ((linkFormat === "icon") && (field?.service))
+		const showUrl = ((linkFormat === "url")) 
+
+		return (
+			<a 
+				href="#"
+				onClick={ ( event ) => event.preventDefault() }
+			>
+				{showIcon && (
+					<DynamicIcon icon={field.service} size={iconSize}/>
+				)}
+
+				{showUrl && (
+					<>{linkText}</>
+				)}
+			</a>
+		)
 	}
 
 
@@ -121,7 +149,7 @@ function Edit( props ) {
 						>
 							{ field?.field_type?.formats.map( (format) => (
 								<ToggleGroupControlOption 
-									key={`link-formats-${profileId}-${format.name}`} 
+									key={`link-formats-${profileId}-${format.value}`} 
 									value={format.value} 
 									label={format.label} 
 								/>
@@ -165,15 +193,7 @@ function Edit( props ) {
 				</PanelBody>
 			</InspectorControls>
 			<div {...blockProps} >
-				{ (showValue) && (
-					<a 
-						href={ url }
-						onClick={ ( event ) => event.preventDefault() }
-					>
-						<LinkBody />
-					</a>
-				) }
-				
+				{ (showValue) && ( <LinkBody /> ) }
 			</div>
 		</>
 	)
