@@ -27,15 +27,19 @@ function Edit( props ) {
 	const { postType } = context
 	const { level, textAlign, levelOptions, isLink, linkTarget, rel } = attributes
 
+	
+
 	useEffect( () => {
 			
 			if(!value){
 				return
 			}
-	
+			
+			const name = field.field_type.valueToText(value)
+
 			setAttributes({"metadata" : {
 				...attributes.metadata,
-				name: value
+				name: name
 			}})
 	
 	}, [value])
@@ -49,6 +53,7 @@ function Edit( props ) {
 
 	const [ link ] = useEntityProp( 'postType', postType, 'link', profileId );
 	const hasValue = !isEmpty(value)
+	let textValue = field.field_type.valueToText(value)
 
 	if(!postTypeSupportsTitle){
 		return null
@@ -120,10 +125,10 @@ function Edit( props ) {
 						rel={ rel }
 						onClick={ ( event ) => event.preventDefault() }
 					>
-					{ value }
+					{ textValue }
 					</a>
 				) : (
-					<>{ value }</>
+					<>{ textValue }</>
 				)}
 				
 			</TagName>
