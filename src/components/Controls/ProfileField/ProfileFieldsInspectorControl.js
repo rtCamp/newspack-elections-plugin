@@ -26,7 +26,7 @@ const useToolsPanelDropdownMenuProps = () => {
 				popoverProps: {
 					placement: 'left-start',
 					// For non-mobile, inner sidebar width (248px) - button width (24px) - border (1px) + padding (16px) + spacing (20px)
-					offset: 259,
+					//offset: 259,
 				},
 		  }
 		: {};
@@ -47,6 +47,8 @@ export const ProfileFieldsInspectorControl = ({
 
 	const dropdownMenuProps = useToolsPanelDropdownMenuProps()
 	const isMobile = useViewportMatch( 'medium', '<' );
+
+	console.log("dropdownMenuProps", dropdownMenuProps)
 
 	return(
 		<InspectorControls group="settings">

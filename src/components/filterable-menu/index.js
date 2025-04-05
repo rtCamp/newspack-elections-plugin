@@ -3,6 +3,7 @@ import { useState } from "@wordpress/element"
 
 import {
 	MenuGroup,
+	MenuItem,
 	MenuItemsChoice,
 	TextHighlight,
 	SearchControl
@@ -73,13 +74,23 @@ export function FilterableMenu({
 				label = "Field Filter"
 			/>
 			<MenuGroup>
-				<MenuItemsChoice
-					choices={ filteredChoices }
-					value={ selectedValue }
-					onSelect={ (v) => {
-						onSelect(v) 
-					}}
-				/>
+				{(filteredChoices.length >= 1) && (
+					<MenuItemsChoice
+						choices={ filteredChoices }
+						value={ selectedValue }
+						onSelect={ (v) => {
+							onSelect(v) 
+						}}
+					/>
+				)}
+
+				{(filteredChoices.length === 0) && (
+					<MenuItem
+						disabled = {true}
+					>
+						No Fields Found
+					</MenuItem>
+				)}
 			</MenuGroup>
 		</>
 	)

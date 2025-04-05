@@ -9,6 +9,8 @@ import { DropdownMenu } from '@wordpress/components';
 import { useField } from "../../../fields"
 import { ProfileFieldsMenu } from './ProfileFieldsMenu';
 
+
+
 const StyledDropdownMenu = styled( DropdownMenu )`
 	width: 100%;
 `;
@@ -17,7 +19,8 @@ export  function ProfileFieldsDropDown( props ) {
 
 	const {
 		className,
-		selectedValue
+		selectedValue,
+		popoverProps = {}
 	} = props
 
 	const CurrentField = useField(selectedValue)
@@ -29,7 +32,10 @@ export  function ProfileFieldsDropDown( props ) {
 			label={ __( 'Profile Field Selector' ) }
 			text={ CurrentField?.label ?? "Select a Profile Field" }
 			popoverProps={ {
-				position: 'bottom center',
+				...popoverProps,
+				style : {
+					"minWidth" : "250px"
+				},
 				className: `${ className }__popover`,
 			} }
 			icon={ chevronDown }
