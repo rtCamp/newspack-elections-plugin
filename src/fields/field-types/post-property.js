@@ -1,4 +1,4 @@
-import {isObject} from "lodash"
+import {isObject, isEmpty, isString} from "lodash"
 import FieldType from "./field"
 
 export default class PostProperty extends FieldType {
@@ -11,11 +11,24 @@ export default class PostProperty extends FieldType {
 
 	valueToText(value){
 
+		if(isString(value)){
+			return value
+		}
+
+		if(isEmpty(value)){
+			return ""
+		}
+
 		if(isObject(value) && Object.hasOwn(value, "rendered")){
 			return this.stripHTML(value.rendered)
 		}
 
-		return "val?"
+		if(isObject(value) && Object.hasOwn(value, "toString")){
+			return value.toString()
+		}
+		
+		return "";
+		
 	}
 
 	stripHTML(value){
