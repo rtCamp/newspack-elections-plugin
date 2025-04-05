@@ -191,7 +191,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 				( new LinkField( 'website_district', 'District Website URL' ) )->link_text( 'District Website' ),
 				( new LinkField( 'website_capitol', 'Official Website URL' ) )->link_text( 'Official Website' ),
 				( new LinkField( 'rss', 'RSS Feed URL' ) )->link_text( 'RSS Feed' ),
-				( new LinkField( 'linkedin', 'Linkedin URL' ) )->link_text( 'LinkedIn Profile' ),
+				( new LinkField( 'linkedin', 'LinkedIn' ) )->link_text( 'LinkedIn' ),
 				
 				new TextField( 'wikipedia', 'Wikipedia ID' ),
 				new TextField( 'google_entity_id', 'Google Entity ID' ),

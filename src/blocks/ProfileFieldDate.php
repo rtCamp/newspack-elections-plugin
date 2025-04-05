@@ -26,6 +26,9 @@ class ProfileFieldDate extends \Govpack\Blocks\ProfileFieldText {
 	public function get_value(): string {
 		
 		$date = \DateTime::createFromFormat( 'Y-m-d', parent::get_value() );
+		if($date === false){
+			return "";
+		}
 		return $date->format( $this->get_date_format() );
 	}
 
