@@ -157,7 +157,9 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 		$styles    = [];
 		$classes   = [];
 
-		if ( $this->attributes['customWidth'] ) {
+
+		if ( isset($this->attributes['align']) && $this->attributes['customWidth'] ) {
+			
 			$styles['max-width'] = $this->attributes['customWidth'];
 		}
 
