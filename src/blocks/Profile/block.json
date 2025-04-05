@@ -73,8 +73,7 @@
 			"type": "string"
 		},
 		"customWidth": {
-			"type": "string",
-			"default": "250px"
+			"type": "string"
 		},
 		"style": {
 			"type": "object",
