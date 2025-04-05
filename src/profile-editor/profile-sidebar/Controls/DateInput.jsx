@@ -86,10 +86,17 @@ export const UnforwardedDateControl = (
 	const [ date, setDate ] = useState( !isEmpty(value) ? new Date(value) : new Date() );
 
 	const [ isDatePickerOpen, setIsDatePickerOpen ] = useState( false );
-	console.log("isDatePickerOpen", isDatePickerOpen)
 	
-	console.log("date val", value, isMatch(value, MYSQL_DATE_FORMAT.replace("-", "'-'") , new Date() ) )
-	const inputValue = isEmpty(value) ? "" : format(value, "MM/dd/yyyy")
+	const hasValue = !isEmpty(value)
+	const hasValidFormat = isMatch(value, MYSQL_DATE_FORMAT.replace("-", "'-'") , new Date() )
+
+
+	let inputValue
+	try {
+		inputValue = (hasValue && hasValidFormat) ? "" : format(value, "MM/dd/yyyy")
+	} catch {
+		inputValue = ""
+	}
 	/**
 	 * The Field Must Display a consistent value in the date picker and the masked text field
 	 * possible values are a date string formatted for output, an empty string, null, or undefined
