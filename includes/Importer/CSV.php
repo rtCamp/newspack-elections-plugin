@@ -9,12 +9,31 @@ namespace Govpack\Importer;
 
 use Exception;
 use Govpack\Vendor\League\Csv\Reader;
+use Govpack\Vendor\League\Csv\Writer;
+use Govpack\Profile\CPT;
 
 /**
  * Register and handle the "CSV" Importer
  */
 class CSV extends \Govpack\Importer\Abstracts\AbstractImporter {
 
+	public static function example(): array {
+
+		$model = CPT::get_import_model();
+
+		unset( $model['post_id'] );
+		unset( $model['post_status'] );
+		unset( $model['thumbnail_id'] );
+		$headers = array_unique( array_keys( $model ) );
+
+		$example = Writer::createFromString();
+		$example->insertOne( $headers );
+
+
+		return [
+			'content' => $example->toString(),
+		];
+	}
 
 	/**
 	 * Creates and returns the CSV reader for the Import File

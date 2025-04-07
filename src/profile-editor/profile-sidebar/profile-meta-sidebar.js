@@ -249,7 +249,7 @@ const SOCIAL_PANEL_FIELDS = [{
 	},{
 		type: "url",
 		label : "Ballotpedia",
-		meta_key : "balletpedia_id",
+		meta_key : "ballotpedia_id",
 		group: "Other"
 }]
 

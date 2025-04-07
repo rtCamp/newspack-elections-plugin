@@ -20,7 +20,8 @@ import api from "@wordpress/api"
 const Importer = (props) => {
 
 
-  
+	console.log("options", props.options)
+
     let [step, setStep] = useState(stage.UPLOADER);
     let [didInitialStatusCheck, setDidInitialStatusCheck] = useState(false)
     let [uploadProgress, setUploadProgress] = useState(0)
@@ -52,7 +53,9 @@ const Importer = (props) => {
 
 	if(!didInitialStatusCheck){
 		return (
-			<Checking />
+			<Checking 
+				options = {props.options}
+			/>
 		) 
 	}
 
@@ -64,6 +67,7 @@ const Importer = (props) => {
 			errorMessage = {errorMessage}
 			file = {file}
 			setFile = {setFile}
+			options = {props.options}
         />)
     }
 

@@ -92,6 +92,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 		
 		
 		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_x_meta_fields_to_twitter' ], 10, 5 );
+		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_ballotpedia_to_balletpedia' ], 10, 5 );
 
 		add_action( 'load-post.php', [ __CLASS__, 'initialize_editor_changes' ] );
 		add_action( 'load-post-new.php', [ __CLASS__, 'initialize_editor_changes' ] );
@@ -200,7 +201,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new LinkField( 'rumble', 'Rumble', 'link' ),
 
 				new TextField( 'opensecrets_id', 'Open Secrets' ),
-				( new ServiceField( 'ballotpedia', 'BallotPedia' ) )->meta( 'balletpedia_id' )->set_service( \Govpack\Fields\Service\Ballotpedia::class ),
+				( new ServiceField( 'ballotpedia', 'Ballotpedia' ) )->meta( 'ballotpedia_id' )->set_service( \Govpack\Fields\Service\Ballotpedia::class ),
 				new TextField( 'openstates_id', 'OpenStates' ),
 				new TextField( 'fec_id', 'FEC ID' ),
 				new TextField( 'govtrack_id', 'GovTrack ID' ),
@@ -258,6 +259,28 @@ class CPT extends \Govpack\Abstracts\PostType {
 	//  return self::$fields->get_types();
 	//}
 	
+	public static function fallback_ballotpedia_to_balletpedia( mixed $value, int $object_id, string $meta_key, bool $single, string $meta_type ): mixed {
+		
+		if ( $meta_key !== 'ballotpedia_id' ) {
+			return $value;
+		}
+
+		if ( $single && $value !== '' ) {
+			return $value;
+		}
+
+		// check for an empty array if we expect an array, exit otherwise
+		if ( ! $single && ! empty( $value ) ) {
+			return $value;
+		}
+
+		// if we're looking at some other entity type then exit
+		if ( $meta_type !== 'post' ) {
+			return $value;
+		}
+
+		return get_metadata( $meta_type, $object_id, 'balletpedia_id', $single );
+	}
 
 	public static function fallback_x_meta_fields_to_twitter( mixed $value, int $object_id, string $meta_key, bool $single, string $meta_type ): mixed {
 
@@ -517,11 +540,11 @@ class CPT extends \Govpack\Abstracts\PostType {
 		}
 
 		$taxonomies = [
-			'status' => 'govpack_officeholder_status',
-			'state'  => 'govpack_state',
-			'office' => 'govpack_legislative_body',
-			'party'  => 'govpack_party',
-			'title'  => 'govpack_officeholder_title',
+			'office_status' => 'govpack_officeholder_status',
+			'office_state'  => 'govpack_state',
+			'office_name'   => 'govpack_legislative_body',
+			'party'         => 'govpack_party',
+			'office_title'  => 'govpack_officeholder_title',
 		];
 
 		foreach ( $taxonomies as $key => $taxonomy ) {

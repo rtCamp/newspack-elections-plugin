@@ -14,11 +14,16 @@ use Govpack\Profile\CPT as Profile;
  */
 class Import {
 
-
+	const CSV_EXAMPLE_QUERY_ARG = 'csv-example';
 	/**
 	 * Handle View for the Import Form
 	 */
 	public static function view(): void {
+		
+		if ( isset( $_GET[ self::CSV_EXAMPLE_QUERY_ARG ] ) ) {
+			self::example();
+			die();
+		}
 
 		\Govpack\Importer\Importer::check_for_stuck_import();
 
@@ -28,11 +33,22 @@ class Import {
 		wp_add_inline_script(
 			'govpack-importer',
 			'var govpack_importer_options = ' . 
-			wp_json_encode( [ 'profiles_path' => admin_url( 'edit.php?post_type=' . Profile::CPT_SLUG ) ] ),
+			wp_json_encode(
+				[ 
+					'profiles_path'   => admin_url( 'edit.php?post_type=' . Profile::CPT_SLUG ),
+					'support_email'   => 'hello@govpack.org',
+					'csv_example_url' => \add_query_arg( self::CSV_EXAMPLE_QUERY_ARG, true ),
+				] 
+			),
 			'before' 
 		);
 		
 
 		include __DIR__ . './../Views/import.php';
+	}
+
+	public static function example() {
+		die();
+		gp_dump( \Govpack\Importer\Importer::example() );
 	}
 }

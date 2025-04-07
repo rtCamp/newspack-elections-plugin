@@ -11,11 +11,15 @@ use Exception;
 use Govpack\Govpack;
 use Govpack\Capabilities;
 use Govpack\Importer\Abstracts\AbstractImporter;
+use Govpack\Profile\CPT;
 
 /**
  * Register and handle the "USIO" Importer
  */
 class Importer {
+
+	const CSV_EXAMPLE_QUERY_ARG = 'csv-example';
+	const CSV_EXAMPLE_FILE_NAME = 'npe-profile-import-template.csv';
 
 	/**
 	 * Adds Actions to Hooks
@@ -28,6 +32,26 @@ class Importer {
 		Actions::hooks();
 
 		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'register_scripts' ] );
+		\add_action( 'admin_init', [ __CLASS__, 'maybe_download_example' ] );
+	}
+
+	public static function maybe_download_example() {
+		if ( isset( $_GET[ self::CSV_EXAMPLE_QUERY_ARG ] ) ) {
+			echo self::download_example();
+			die();
+		}
+	}
+
+	public static function download_example() {
+
+		header( 'Access-Control-Expose-Headers: Content-Disposition', false );
+		header( 'Content-type: text/csv' );
+		header( 'Content-Disposition: attachment; filename="' . self::CSV_EXAMPLE_FILE_NAME . '"' );
+
+		$example_file = self::example();
+		$csv          = $example_file['content'];
+		echo $csv;
+		die();
 	}
 
 	/**
@@ -107,8 +131,27 @@ class Importer {
 				},
 			] 
 		);
+
+		\register_rest_route(
+			Govpack::REST_PREFIX,
+			'/import/example',
+			[
+				'methods'             => 'GET',
+				'callback'            => [
+					__CLASS__,
+					'example',
+				],
+				'permission_callback' => function () {
+					return true;
+					//return \current_user_can( 'govpack_import' );
+				},
+			] 
+		);
 	}
 
+	public static function example(): array {
+		return CSV::example();
+	}
 	/**
 	 * Called By The REST API to Check the status of an ongoing import
 	 *

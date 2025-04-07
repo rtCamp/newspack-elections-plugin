@@ -27,6 +27,9 @@ const Uploader = (props) => {
     const [errorMessage, setErrorMessage] = useState("")
     const allowed = ["text/csv"]
 
+	const {
+		options = {}
+	} = props
 
     const onFileChosen = ( event ) => {
 
@@ -124,8 +127,13 @@ const Uploader = (props) => {
         uploadChunk()
 	};
 
+	console.log(options)
     return (
         <>
+			{ (typeof options?.support_email === "undefined" || !options?.support_email) && (
+				<Error message="huh" />
+			) }
+			
             <InfoPanel
                 heading="Upload Data?"
             >
@@ -133,7 +141,7 @@ const Uploader = (props) => {
                       spacing="4"
                 >  
                     <p>
-                    Please select a <code>.csv</code> file that has the same fields as our template. You can <a target="_blank" href="https://bit.ly/3B22gzA">download a copy of that template here</a>. If you need help, please contact <a href="mailto:hello@govpack.org">hello@govpack.org</a>. Your import file doesn’t have to include data for each field, but importing will not function properly if you change the column headers.
+                    Please select a <code>.csv</code> file that has the same fields as our template. You can <a target="_blank" href={options.csv_example_url}>download a copy of that template here</a>. If you need help, please contact <a href={`mailto:${options.support_email}`}>{options.support_email}</a>. Your import file doesn’t have to include data for each field, but importing will not function properly if you change the column headers.
                     </p>
 
                     {props.hasError && (
