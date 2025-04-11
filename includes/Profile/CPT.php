@@ -93,6 +93,9 @@ class CPT extends \Govpack\Abstracts\PostType {
 		
 		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_x_meta_fields_to_twitter' ], 10, 5 );
 		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_ballotpedia_to_balletpedia' ], 10, 5 );
+		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_suffix_official_to_capitol' ], 10, 5 );
+
+		add_filter( 'get_post_metadata', [ __CLASS__, 'fallback_suffix_official_to_capitol' ], 10, 5 );
 
 		add_action( 'load-post.php', [ __CLASS__, 'initialize_editor_changes' ] );
 		add_action( 'load-post-new.php', [ __CLASS__, 'initialize_editor_changes' ] );
@@ -167,47 +170,48 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new DateField( 'term_end_date', 'Term Ended/Ends On' ),
 				new DateField( 'congress_year', 'Congressional Year' ),
 
-				new EmailField( 'email_official', 'Official Email Address' ),
-				//new EmailField( 'email_legislative', 'Legislative Email Address' ),
 				new EmailField( 'email_other', 'Other Email Address' ),
-
-				new EmailField( 'email_capitol', 'Official Email Address' ),
+				new EmailField( 'email_official', 'Official Email Address' ),
 				new EmailField( 'email_district', 'District Email Address' ),
 				new EmailField( 'email_campaign', 'Campaign Email Address' ),
-			
-				new TextField( 'address_capitol', 'Official Address' ),
+				
+				
+				new TextField( 'address_official', 'Official Address' ),
 				new TextField( 'address_district', 'District Address' ),
 				new TextField( 'address_campaign', 'Campaign Address' ),
 
-				new PhoneField( 'phone_capitol', 'Official Phone Number' ),
+				
+				new PhoneField( 'phone_official', 'Official Phone Number' ),
 				new PhoneField( 'phone_district', 'District Phone Number' ),
 				new PhoneField( 'phone_campaign', 'Campaign Phone Number' ),
 
-				new PhoneField( 'fax_capitol', 'Official Fax Number' ),
+				
+				new PhoneField( 'fax_official', 'Official Fax Number' ),
 				new PhoneField( 'fax_district', 'District Fax Number' ),
 				new PhoneField( 'fax_campaign', 'Campaign Fax Number' ),
 
 				( new LinkField( 'website_personal', 'Personal Website URL' ) ),
 				( new LinkField( 'website_campaign', 'Campaign Website URL' ) ),
 				( new LinkField( 'website_district', 'District Website URL' ) )->link_text( 'District Website' ),
-				( new LinkField( 'website_capitol', 'Official Website URL' ) )->link_text( 'Official Website' ),
-				( new LinkField( 'rss', 'RSS Feed URL' ) )->link_text( 'RSS Feed' ),
-				( new LinkField( 'linkedin', 'LinkedIn' ) )->link_text( 'LinkedIn' ),
 				
-				new TextField( 'wikipedia', 'Wikipedia ID' ),
-				new TextField( 'google_entity_id', 'Google Entity ID' ),
+				( new LinkField( 'website_official', 'Official Website URL' ) )->link_text( 'Official Website' ),
+				( new LinkField( 'rss', 'RSS Feed URL' ) )->link_text( 'RSS Feed' ),
 
+				( new ServiceField( 'ballotpedia', 'Ballotpedia' ) )->set_service( \Govpack\Fields\Service\Ballotpedia::class )->meta( 'ballotpedia_id' ),
+				( new ServiceField( 'fec_id', 'Federal Election Commission' ) )->set_service( 'fec' ),
 				( new ServiceField( 'gab', 'Gab' ) )->set_service( 'gab' ),
-				new LinkField( 'rumble', 'Rumble', 'link' ),
-
-				new TextField( 'opensecrets_id', 'Open Secrets' ),
-				( new ServiceField( 'ballotpedia', 'Ballotpedia' ) )->meta( 'ballotpedia_id' )->set_service( \Govpack\Fields\Service\Ballotpedia::class ),
-				new TextField( 'openstates_id', 'OpenStates' ),
-				new TextField( 'fec_id', 'FEC ID' ),
-				new TextField( 'govtrack_id', 'GovTrack ID' ),
-				new TextField( 'votesmart_id', 'VoteSmart ID' ),
-				new TextField( 'usio_id', 'BioGuide' ),
-				new TextField( 'icpsr_id', 'Voteview' ),
+				( new ServiceField( 'linkedin', 'LinkedIn' ) )->set_service( 'linkedin' )->link_text( 'LinkedIn' ),
+				( new ServiceField( 'rumble', 'Rumble', 'link' ) )->set_service( 'rumble' ),
+				( new ServiceField( 'opensecrets_id', 'Open Secrets' ) )->set_service( 'open-secrets' ),
+				( new ServiceField( 'openstates_id', 'OpenStates' ) )->set_service( 'open-states' ),
+				( new ServiceField( 'wikipedia', 'Wikipedia ID' ) )->set_service( 'wikipedia' ),
+				
+				// Legacy maybe to  be reincluded later, need updated to services
+				//new TextField( 'google_entity_id', 'Google Entity ID' ),
+				//new TextField( 'govtrack_id', 'GovTrack ID' ),
+				//new TextField( 'votesmart_id', 'VoteSmart ID' ),
+				//new TextField( 'usio_id', 'BioGuide' ),
+				//new TextField( 'icpsr_id', 'Voteview' ),
 
 				( new PostPropertyField( 'bio', 'Biography' ) )->key( 'post_excerpt' )->block( 'npe/profile-bio' ),
 				( new PostPropertyField( 'postname', 'Name' ) )->key( 'post_title' )->block( 'npe/profile-name' ),
@@ -258,6 +262,40 @@ class CPT extends \Govpack\Abstracts\PostType {
 	//public static function get_field_types(): array {
 	//  return self::$fields->get_types();
 	//}
+	public static function fallback_suffix_official_to_capitol( mixed $value, int $object_id, string $meta_key, bool $single, string $meta_type ): mixed {
+
+		$fallback_map = [
+			'email_official'   => 'email_capitol',
+			'address_official' => 'address_capitol',
+			'phone_official'   => 'phone_capitol',
+			'fax_official'     => 'fax_capitol',
+			'website_official' => 'website_capitol',
+		];
+	
+
+		if ( ! isset( $fallback_map[ $meta_key ] ) ) {
+			return $value;
+		}
+
+		
+
+		if ( $single && $value !== '' ) {
+			return $value;
+		}
+
+		// check for an empty array if we expect an array, exit otherwise
+		if ( ! $single && ! empty( $value ) ) {
+			return $value;
+		}
+
+		// if we're looking at some other entity type then exit
+		if ( $meta_type !== 'post' ) {
+			return $value;
+		}
+
+		return get_metadata( $meta_type, $object_id, $fallback_map[ $meta_key ], $single );
+	}
+
 	
 	public static function fallback_ballotpedia_to_balletpedia( mixed $value, int $object_id, string $meta_key, bool $single, string $meta_type ): mixed {
 		
@@ -635,6 +673,8 @@ class CPT extends \Govpack\Abstracts\PostType {
 	 * @param array  $args extra arguments the meta_field may take.
 	 */
 	public static function register_meta( string $slug, array $args = [] ): void {
+
+		
 
 		$args = apply_filters(
 			'govpack_profile_register_meta_field_args',

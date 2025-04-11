@@ -96,7 +96,8 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 
 		global $post;
 
-		if ( ! $attributes['postId'] ) {
+	
+		if (!isset($attributes['postId']) || (! $attributes['postId'] ) ) {
 			return;
 		}
 

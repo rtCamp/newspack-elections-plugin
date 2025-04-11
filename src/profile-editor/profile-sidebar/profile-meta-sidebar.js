@@ -65,15 +65,15 @@ const OFFICE_PANEL_FIELDS = [{
 		label:"Appointed by",
 		meta_key: "appointed_by"
 	}, {
-		label:"Date appointed",
+		label:"Appointed On",
 		meta_key: "appointed_date",
 		type : "date"
 	},{
-		label:"Date confirmed",
+		label:"Confirmed On",
 		meta_key: "confirmed_date",
 		type : "date"
 	},{
-		label: "Date term ends",
+		label: "Terms Ends/Ended On",
 		meta_key: "term_end_date",
 		type : "date"
 }]
@@ -81,24 +81,24 @@ const OFFICE_PANEL_FIELDS = [{
 
 const COMMUNICATION_PANEL_FIELDS = [{
 		label : "Address (Official)",
-		meta_key : "address_capitol",
+		meta_key : "address_official",
 		type : "textarea",
 		group:  "Official"
 	},{
 		label : "Phone (Official)",
-		meta_key : "phone_capitol",
+		meta_key : "phone_official",
 		group:  "Official"
 	},{
 		label : "Email (Official)",
-		meta_key : "email_capitol",
+		meta_key : "email_official",
 		group:  "Official"
 	},{
 		label : "Fax (Official)",
-		meta_key : "fax_capitol",
+		meta_key : "fax_official",
 		group:  "Official"
 	},{
 		label : "Website (Official)",
-		meta_key : "website_capitol",
+		meta_key : "website_official",
 		group:  "Official"
 	},
 	
@@ -231,6 +231,24 @@ const SOCIAL_PANEL_FIELDS = [{
 		label : "YouTube (Campaign)",
 		meta_key : "youtube_campaign",
 		group: "Youtube"
+	},
+	
+	
+	{
+		type: "url",
+		label : "Ballotpedia",
+		meta_key : "ballotpedia_id",
+		group: "Other"
+	},{ 	
+		type: "url",
+		label : "Federal Election Commission",
+		meta_key: "fec_id",
+		group: "Other"
+	},{ 
+		type: "url",
+		label : "Gab",
+		meta_key : "gab",
+		group: "Other"
 	},{ 
 		type: "url",
 		label : "LinkedIn",
@@ -238,56 +256,38 @@ const SOCIAL_PANEL_FIELDS = [{
 		group: "Other"
 	},{ 
 		type: "url",
+		label : "Open Secrets",
+		meta_key: "opensecrets_id",
+		group: "Other"
+	},
+	{ 
+		type: "url",
+		label : "Open States",
+		meta_key: "openstates_id",
+		group: "Other"
+	},{ 
+		
+		type: "url",
 		label : "Rumble",
 		meta_key : "rumble",
 		group: "Other"
-	},{ 
+	},
+	{ 
 		type: "url",
-		label : "Gab",
-		meta_key : "gab",
+		label : "VoteSmart",
+		meta_key: "votesmart_id",
 		group: "Other"
-	},{
+	},
+	{ 
 		type: "url",
-		label : "Ballotpedia",
-		meta_key : "ballotpedia_id",
+		label : "Wikipedia",
+		meta_key: "wikipedia_id",
 		group: "Other"
-}]
-
-
-const META_PANEL_FIELDS  = [
-	{ 	
-		label : "FEC ID",
-		meta_key: "fec_id"
-	},
-	{ 
-		label : "Google Entity ID",
-		meta_key: "google_entity_id"
-	},
-	{ 
-		label : "Govtrack ID",
-		meta_key: "govtrack_id"
-	},
-	{ 
-		label : "Opensecrets ID",
-		meta_key: "opensecrets_id"
-	},
-	{ 
-		label : "Open States ID",
-		meta_key: "openstates_id"
-	},
-	{ 
-		label : "VoteView",
-		meta_key: "icpsr_id"
-	},
-	{ 
-		label : "VoteSmart ID",
-		meta_key: "votesmart_id"
-	},
-	{ 
-		label : "Wikipedia ID",
-		meta_key: "wikipedia_id"
 	}
 ]
+
+
+
 			
 
 const ProfileMetaSidebar = () => (
@@ -314,11 +314,7 @@ const ProfileMetaSidebar = () => (
 			groupFields = {true}
 		/>
 
-		<ProfileMetaSidebarPanel 
-			label = "Metadata & IDS"
-			fields = {META_PANEL_FIELDS}
-			groupFields = {false}
-		/>
+		
 
     </>
 )

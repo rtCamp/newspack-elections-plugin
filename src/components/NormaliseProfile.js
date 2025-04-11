@@ -40,7 +40,10 @@ export function normalize_profile(profile){
 	
     // dateOfBirth is in milliseconds since the epoch.
     let today = new Date();
-    let dateOfBirth = new Date(Number(dateOfBirthMs));
+    let dateOfBirth = new Date(dateOfBirthMs);
+
+	console.log("dateOfBirth", dateOfBirth)
+	
     // Did the birthday pass this month yet?
     let birthdayThisYearYet = (today.getMonth() > dateOfBirth.getMonth() ||
                                (today.getMonth() == dateOfBirth.getMonth() && today.getDate() >= dateOfBirth.getDate()));
@@ -104,7 +107,7 @@ export function normalize_profile(profile){
 			first 	: profile.meta?.first_name ?? null,
 			last 	: profile.meta?.last_name ?? null
 		},
-        age : profile.meta?.date_of_birth ? getAgeFromEpoch(Number(profile.meta?.date_of_birth)) : null,
+        age : profile.meta?.date_of_birth ? getAgeFromEpoch(profile.meta?.date_of_birth) : null,
 		websites : {
 			campaign : profile.meta?.campaign_url ?? null,
 			legislative : profile.meta?.leg_url ?? null,

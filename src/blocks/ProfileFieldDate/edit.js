@@ -68,11 +68,15 @@ function DateEdit( props ) {
 
 	const date = field?.field_type?.value(value)
 
+	let FieldValue
+
 	if(date === null){
-		return null
+		 FieldValue = "No Date Set"
+	} else {
+		FieldValue = gmdate(dateFormat, date, true)
 	}
 
-	const FieldValue = gmdate(dateFormat, date, true)
+	
 	
     return (
 		<div {...blockProps}>

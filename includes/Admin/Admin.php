@@ -79,7 +79,7 @@ class Admin {
 				self::redirect_to_profiles();
 				break;
 			case 'options-permalink':
-				Permalink_Settings::hooks();
+				PermalinkSettings::hooks();
 				break;
 		}
 	}

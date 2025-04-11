@@ -2,7 +2,7 @@
 
 namespace Govpack\Admin;
 
-class Permalink_Settings {
+class PermalinkSettings {
 
 	private array $permalinks;
 	private string $base_slug   = 'profile';

@@ -93,7 +93,7 @@ export const UnforwardedDateControl = (
 
 	let inputValue
 	try {
-		inputValue = (hasValue && hasValidFormat) ? "" : format(value, "MM/dd/yyyy")
+		inputValue = (hasValue && hasValidFormat) ? format(value, "MM/dd/yyyy") : ""
 	} catch {
 		inputValue = ""
 	}
