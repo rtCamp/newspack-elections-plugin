@@ -10,8 +10,6 @@ export const variations = [
 		isDefault : false,
 		icon : layout,
 		attributes : {
-			width : "wide",
-			"backgroundColor":"base-2",
 			"style":{"spacing":{"blockGap":"0"}}
 		},
 		"innerBlocks": DEFAULT_TEMPLATE
@@ -22,7 +20,7 @@ export const variations = [
 		isDefault : false,
 		icon : mediaAndText,
 		attributes : {
-			width : "thin",
+			
 			align: "left",
 			"style": {
 				"spacing":{
@@ -180,10 +178,10 @@ export const variations = [
 		attributes : {
 			"width" : "wide",
 			"align": "none",
-			"backgroundColor":"accent",
+			
 			"verticalAlignment":"center",
 			"fontSize":"medium",
-			"textColor":"base-2",
+			
 			"style":{
 				"spacing":{
 					"padding":{
@@ -206,7 +204,7 @@ export const variations = [
 				{"style":{"layout":{"selfStretch":"fixed","flexSize":"130px"},"border":{"radius":"100px"}}}
 			],
 			[
-				"core/group", 
+				"npe/profile-row-group",
 				{"style":{"spacing":{"blockGap":"0.2rem"},"layout":{"selfStretch":"fill","flexSize":null}},"layout":{"type":"constrained"}} , 
 				[
 					["npe/profile-name", {"style":{"typography":{"fontStyle":"normal","fontWeight":"1000","fontSize":"1.4rem"},"spacing":{"padding":{"bottom":"0.5rem"}}}}, []],

@@ -1,6 +1,6 @@
 
 .wp-block-npe-profile{
-	.profile-inner > .block-list-appender{
+	&.is-vertical .profile-inner > .block-list-appender{
 		position:relative;
 		width:100%;
 	}

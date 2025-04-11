@@ -88,9 +88,10 @@ const ProfileTerms = ({terms, displayLinks, separator, termLimit}) => {
 
 function EditTermBlock( props ) {
 	
-	const { attributes, setAttributes, context } = props
+	const { attributes, setAttributes, context, isSelected } = props
 	const blockProps = useBlockProps();
 
+	console.log( "EditTermBlockisSelected", isSelected)
 
 	const { 
 		displayLinks,
