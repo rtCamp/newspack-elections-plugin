@@ -80,7 +80,7 @@ class CSV extends \Govpack\Importer\Abstracts\AbstractImporter {
 			'govpack_importer_required_columns',
 			[
 				'name',
-				'status',
+				'office_status',
 			]
 		);
 
