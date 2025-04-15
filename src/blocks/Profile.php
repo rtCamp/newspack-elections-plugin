@@ -126,20 +126,16 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 	public function render( array $attributes, ?string $content = null, ?WP_Block $block = null ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
 
 		global $post;
-
-	
-		if ( ! isset( $attributes['postId'] ) || ( ! $attributes['postId'] ) ) {
-			return;
-		}
-
 		if ( \is_admin() ) {
 			return false;
 		}
+	
+		if (isset($attributes['postId']) && ($attributes['postId'] ) ) {
+			$this->profile = \Govpack\Profile\Profile::get( $attributes["postId"] );
+		} else if($post->post_type = "govpack_profiles") {
+			$this->profile = \Govpack\Profile\Profile::get( $post->ID );
+		}
 
-		$this->profile = \Govpack\Profile\Profile::get( $attributes['postId'] );
-
-		
-		
 		if ( ! $this->profile ) {
 			return;
 		}

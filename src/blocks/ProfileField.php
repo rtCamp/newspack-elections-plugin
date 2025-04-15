@@ -42,10 +42,13 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 		if ( ! $this->is_allow_field_type_for_block() ) {
 			return null;
 		}
-
+		
 		ob_start();
-		$this->handle_render( $attributes, $content, $block );
-		return \ob_get_clean();
+		$this->handle_render( $attributes, $this->content, $block );
+		$content = \ob_get_clean();
+		
+		
+		return $content;
 	}
 
 	public function is_allow_field_type_for_block() {
@@ -57,7 +60,7 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 	}
 
 	public function get_value(): mixed {
-
+	
 		if ( ! $this->has_field() ) {
 			return '';
 		}
@@ -122,6 +125,7 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 	}
 
 	public function get_from_context( $key ): mixed {
+	
 		if ( isset( $this->context[ $key ] ) ) {
 			return $this->context[ $key ];
 		}

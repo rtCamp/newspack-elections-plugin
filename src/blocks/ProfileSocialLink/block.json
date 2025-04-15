@@ -41,7 +41,7 @@
 		"npe/iconBackgroundColorValue",
 		"npe/field",
 		"postType", 
-		"postId"
+		"npe/postId"
 	]
 	
 }

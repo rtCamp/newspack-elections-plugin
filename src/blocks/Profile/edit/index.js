@@ -1,6 +1,7 @@
 import {useSelect} from "@wordpress/data"
 import {store as blockEditorStore, useInnerBlocksProps, useBlockProps} from "@wordpress/block-editor"
 import { store as blocksStore } from '@wordpress/blocks';
+import { store as editorStore } from '@wordpress/editor';
 
 import { ProfileBlockEdit } from "./edit"
 import { ProfileVariationSelector } from "./variation-selector"
@@ -30,6 +31,12 @@ export const ProfileEdit = ( props ) => {
 		}, [ clientId ]
 	);
 
+	const {currentPostType, currentPostId} = useSelect( (select) => {
+		return {
+			currentPostType : select(editorStore).getCurrentPostType(),
+			currentPostId: select(editorStore).getCurrentPostId()
+		}
+	})
 	
 
 	const hasVariations = useSelect( ( select ) => {
@@ -41,12 +48,13 @@ export const ProfileEdit = ( props ) => {
 		setAttributes({"postId" : newProfileId})
 	}
 	
+	const isProfilePage = (currentPostType === PROFILE_POST_TYPE) && (context.postId === currentPostId)
 	const hasContextQuery = (context.queryId && context.postId && (context.postType === PROFILE_POST_TYPE))
 	
 	// If we have a postId then dont show the selector
 	const hasSelectedProfile = attributes.postId ?? hasContextQuery ?? false
 	const showVariationSelector = (hasInnerBlocks.length === 0) && (hasVariations.length > 0);
-	const showProfileSelector = !hasSelectedProfile;
+	const showProfileSelector = !isProfilePage && !hasSelectedProfile;
 	const showEdit = hasInnerBlocks && hasSelectedProfile;
 
 	
@@ -60,6 +68,6 @@ export const ProfileEdit = ( props ) => {
 	}
 	
 	return (
-		<Component  {...props} setProfile = {setProfile} />
+		<Component  {...props} setProfile = {setProfile} isProfilePage={isProfilePage} />
 	)
 }
