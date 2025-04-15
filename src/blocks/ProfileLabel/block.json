@@ -49,6 +49,6 @@
 		"govpack/fieldType",
 		"govpack/field",
 		"postType",
-		"postId"
+		"npe/postId"
 	]
 }

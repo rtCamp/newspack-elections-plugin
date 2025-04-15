@@ -115,7 +115,6 @@
 		"queryId"
 	],
 	"providesContext": {
-		"postId" : "postId",
 		"postType" : "postType"
 	}
 }

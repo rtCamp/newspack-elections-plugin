@@ -60,6 +60,7 @@
 	"usesContext": [
 		"postType",
 		"postId",
+		"npe/postId",
 		"npe/fieldKey",
 		"npe/field"
 	]

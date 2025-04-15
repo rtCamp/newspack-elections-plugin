@@ -135,7 +135,6 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
 		
-		
 		?>
 		<div <?php echo get_block_wrapper_attributes(); ?>>
 			<?php echo $this->output(); ?>
@@ -186,6 +185,7 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 
 		$terms = $this->get_value();
 
+		
 
 		$output        = [];
 		$separator     = $this->attribute( 'separator' );

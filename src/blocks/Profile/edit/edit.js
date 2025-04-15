@@ -20,6 +20,7 @@ import { ToolbarGroup, Toolbar, Icon, ResizableBox, SelectControl } from '@wordp
 import { useDispatch, useSelect} from "@wordpress/data";
 import { external, postAuthor } from '@wordpress/icons';
 
+import { BlockContextProvider } from '@wordpress/block-editor';
 
 import { ProfileResetPanel } from '../../../components/Panels/ProfileResetPanel.jsx';
 import { Spinner } from './../../../components/Spinner.jsx';
@@ -209,7 +210,7 @@ const BlockHTMLElementControl = (props) => {
 }
 
 function ProfileBlockEdit( props ) {
-	const {attributes, setAttributes, isSelected: isSingleSelected, clientId, context} = props
+	const {attributes, setAttributes, isSelected: isSingleSelected, clientId, context, isProfilePage} = props
 
 	
 	const resizeProps = useResizeProps(props);
@@ -264,6 +265,7 @@ function ProfileBlockEdit( props ) {
 	}, [ queryId, instanceId ] );
 
 
+
 	const setTagName = ( nextTagValue ) => {
 		setAttributes( { tagName: nextTagValue } )
 	}
@@ -293,7 +295,13 @@ function ProfileBlockEdit( props ) {
 
 	return (
 		<>
-
+		<BlockContextProvider
+			value = {{
+				"postId" : 14215,
+				"npe/postId" : 14215,
+				"npe/test": "well"
+			}}
+		>
 			{ showSpinner && (
 				<Spinner />
 			) }
@@ -324,7 +332,9 @@ function ProfileBlockEdit( props ) {
 					</ResizableBox>
 				</TagName>
 			)}
-		</>
+		
+		</BlockContextProvider>
+		</>	
 	);
 }
 

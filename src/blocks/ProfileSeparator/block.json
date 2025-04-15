@@ -37,7 +37,7 @@
 	},
 	"ancestor": [ "npe/profile-row-group" ],
 	"usesContext": [
-		"postId",
+		"npe/postId",
 		"postType", 
 		"npe/profileField", 
 		"npe/separatorHeight",

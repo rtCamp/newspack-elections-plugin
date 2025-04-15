@@ -108,9 +108,13 @@ export const useProfileAttributes = ( props ) => {
 export const useProfileFromContext = ( context ) => {
 
 	let { 
-		postId : profileId = null,
+		'npe/postId' : selectedProfileId = null,
+		postId : pageInheritedPostId = null,
 		postType = false
 	} = context
+	
+	
+	const profileId = selectedProfileId ?? pageInheritedPostId
 
 	// Must be within a block that provide a govpack profile context..
 	// Or an actual profile page
