@@ -25,7 +25,13 @@ class ProfileSocialLink extends \Govpack\Blocks\ProfileFieldText {
 
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
 		
-		$link            = $this->get_value();
+		$link 			= $this->get_value();
+		$field 			= $this->get_field();
+		$service 		= $field->service();
+		$icon 			= $service->icon();
+
+		
+
 		$open_in_new_tab = isset( $block->context['npe/openInNewTab'] ) ? $block->context['npe/openInNewTab'] : false;
 
 		$rel = trim( isset( $attributes['rel'] ) ? $attributes['rel'] : '' );
@@ -36,7 +42,7 @@ class ProfileSocialLink extends \Govpack\Blocks\ProfileFieldText {
 
 
 		$show_labels = array_key_exists( 'showLabels', $block->context ) ? $block->context['npe/showLabels'] : false;
-		$icon        = $this->get_field()->service()->icon();
+		$icon        = $service->icon();
 		
 
 		// Don't render a link if there is no URL set.
@@ -65,6 +71,12 @@ class ProfileSocialLink extends \Govpack\Blocks\ProfileFieldText {
 		}
 
 		
+		$styles = [
+			'color' => $service->color() ?? $this->context("iconColorValue") ?? false,
+			'background-color' => $this->context('iconBackgroundColorValue' ?? false)
+		];
+
+	
 
 		?>
 		<li 
@@ -72,6 +84,7 @@ class ProfileSocialLink extends \Govpack\Blocks\ProfileFieldText {
 		echo get_block_wrapper_attributes(
 			[
 				'class' => 'wp-block-social-link wp-social-link',
+				'style' => self::style_array_to_string($styles)
 			]
 		);
 		?>
@@ -91,6 +104,38 @@ class ProfileSocialLink extends \Govpack\Blocks\ProfileFieldText {
 		<?php
 	}
 
+	public static function style_array_to_string(array|string $styles) : string{
+		
+		if(is_string($styles)){
+			return $styles;
+		}
+
+		$style = "";
+
+		// remove false or null values
+		$styles = array_filter($styles);
+
+		// return empty string if no styles
+		if(empty($styles)){
+			return "";
+		}
+
+		$style = trim(
+			implode(
+				' ', 
+				array_map(
+					function ( $rule, $value ) {
+						return sprintf( '%s: %s;', $rule, $value );
+					}, 
+					array_keys( $styles ), 
+					array_values( $styles )
+				)
+			)
+		);
+
+		return $style;
+
+	}
 
 	public function variations(): array {
 		return [];
