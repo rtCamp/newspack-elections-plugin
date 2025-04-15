@@ -19,6 +19,17 @@ class Email extends Link {
 	public string $label = 'Email';
 
 
+	public array $formats = [ 
+		[
+			'value' => 'label',
+			'label' => 'Label',
+		],
+		[
+			'value' => 'url',
+			'label' => 'Email',
+		],
+	];
+
 	public function variation_icon(): string {
 		return 'email';
 	}
