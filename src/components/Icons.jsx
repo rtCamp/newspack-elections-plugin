@@ -16,8 +16,8 @@ import {ReactComponent as BallotpediaIconSVG} from "./../assets/icons/profile-li
 import {ReactComponent as FecIconSVG} from "./../assets/icons/profile-links/fec.svg"
 import {ReactComponent as GabIconSVG} from "./../assets/icons/profile-links/gab.svg"
 import {ReactComponent as GoogleIconSVG} from "./../assets/icons/profile-links/google.svg"
-import {ReactComponent as OpenStatesIconSVG} from "./../assets/icons/profile-links/openstates.svg"
-import {ReactComponent as OpenSecretsIconSVG} from "./../assets/icons/profile-links/opensecrets.svg"
+import {ReactComponent as OpenStatesIconSVG} from "./../assets/icons/profile-links/open-states.svg"
+import {ReactComponent as OpenSecretsIconSVG} from "./../assets/icons/profile-links/open-secrets.svg"
 import {ReactComponent as RumbleIconSVG} from "./../assets/icons/profile-links/rumble.svg"
 import {ReactComponent as VoteSmartIconSVG} from "./../assets/icons/profile-links/votesmart.svg"
 import {ReactComponent as WikipediaIconSVG} from "./../assets/icons/profile-links/wikipedia.svg"
@@ -59,8 +59,8 @@ export const NPEIcons = {
 	"google" : GoogleIconSVG,
 	"web" : WebIconSVG,
 	"linkedin" : LinkedinIconSVG,
-	"openstates" : OpenStatesIconSVG,
-	"opensecrets" : OpenSecretsIconSVG,
+	"open-states" : OpenStatesIconSVG,
+	"open-secrets" : OpenSecretsIconSVG,
 	"rumble" : RumbleIconSVG,
 	"votesmart" : VoteSmartIconSVG,
 	"wikipedia" : WikipediaIconSVG,

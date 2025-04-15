@@ -65,13 +65,18 @@ function Edit( props ) {
 	})
 	
 	const IconComponent = () => {
+
+		console.log("IconComponent", field)
+		
 		if(!field?.service){
-			return (<LinkIcon />)
+			return (<Icon icon = { LinkIcon } />)
 		}
 
 		if(!NPEIcons[field.service]){
-			return (<LinkIcon />)
+			return (<Icon icon = { LinkIcon } />)
 		}
+
+		
 
 		const Component = NPEIcons[field.service];
 
