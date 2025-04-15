@@ -143,10 +143,9 @@ function Edit( props ) {
 		}
 	} )
 
-	const {descendents, hasInnerBlocks} = useSelect( ( select ) => {
+	const {hasInnerBlocks} = useSelect( ( select ) => {
 		const descendents = select( blockEditorStore ).getBlock( clientId )?.innerBlocks ?? []
 		return {
-			descendents,
 			hasInnerBlocks : (descendents.length > 0)
 		}
 	}, [ clientId ]
@@ -162,7 +161,7 @@ function Edit( props ) {
 	 * When a fieldKey changes we reset the over ridden label
 	 */
 	useEffect( ()=> {
-		updateLabel(undefined)
+		//updateLabel(undefined)
 	}, [fieldKey])
 	
 	let calculatedLabel;
@@ -203,10 +202,14 @@ function Edit( props ) {
 				{ showLabel && (
 					<div className="gp-block-row-label">
 						<RichText
+							identifier = "label"
 							tagName="span" // The tag here is the element output and editable in the admin
 							value={ calculatedLabel } // Any existing content, either from the database or an attribute default
+							//value={ "label" } // Any existing content, either from the database or an attribute default
 							allowedFormats={ [ 'core/bold', 'core/italic' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
-							onChange={ ( label ) => updateLabel( label ) } // Store updated content as a block attribute
+							onChange={ ( label ) => {
+								updateLabel( label ) 
+							} } // Store updated content as a block attribute
 							placeholder={ __( 'Label...' ) } // Display this text before any content has been added by the user
 						/>
 					</div>

@@ -37,6 +37,46 @@ const DynamicIcon = ({icon, size = 24}) => {
 	)
 }
 
+const LinkBody = ({ linkFormat, value, linkText, field, iconSize, setLinkTextOverride }) => {
+		
+	
+	if(linkFormat === "label"){
+		
+		return (
+			<RichText
+				identifier="labelOverride"
+				tagName="a"
+				aria-label={ __( '“Read more” link text' ) }
+				placeholder={ linkText }
+				value={ value }
+				onChange={ ( newValue ) => {
+					setLinkTextOverride( newValue )
+				} }
+				withoutInteractiveFormatting
+			/>
+		)
+	}
+
+	const showIcon = ((linkFormat === "icon") && (field?.service))
+	const showUrl = ((linkFormat === "url")) 
+
+	return (
+		<a 
+			href="#"
+			onClick={ ( event ) => event.preventDefault() }
+		>
+			{showIcon && (
+				<DynamicIcon icon={field.service} size={iconSize}/>
+			)}
+
+			{showUrl && (
+				<>{linkText}</>
+			)}
+		</a>
+	)
+}
+
+
 function Edit( props ) {
 
 	const {fieldKey, value, profile, field, profileId, fieldType } =  useProfileFieldAttributes(props) 
@@ -199,7 +239,15 @@ function Edit( props ) {
 				</PanelBody>
 			</InspectorControls>
 			<div {...blockProps} >
-				{ (showValue) && ( <LinkBody /> ) }
+				{ (showValue) && ( 
+				<LinkBody
+					linkFormat = {linkFormat}
+					value = {labelOverride}
+					linkText = {linkText}
+					field = {field}
+					iconSize = {iconSize}
+					setLinkTextOverride = {setLinkTextOverride}
+				 /> ) }
 			</div>
 		</>
 	)

@@ -64,12 +64,8 @@ function DateEdit( props ) {
 	const { attributes } = props
 	const defaultFormat = getSiteDefaultDateFormat()
 	const { dateFormat = defaultFormat } = attributes
-	const blockProps = useBlockProps()
-
-	console.log("DateEdit", value)
+	const blockProps = useBlockProps()	
 	const date = field?.field_type?.value(value)
-
-	console.log("value", value, date)
 
 	let FieldValue
 

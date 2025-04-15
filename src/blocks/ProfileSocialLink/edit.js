@@ -66,8 +66,6 @@ function Edit( props ) {
 	
 	const IconComponent = () => {
 
-		
-		
 		if(!field?.service){
 			return (<Icon icon = { LinkIcon } />)
 		}

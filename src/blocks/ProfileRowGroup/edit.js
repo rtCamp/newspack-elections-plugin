@@ -23,7 +23,6 @@ import { separator } from '@wordpress/icons';
 const GroupEdit = ( {attributes, setAttributes, context, clientId, ...props} ) => {
 
 
-
 	const {
 		separatorColor, 
 		setSeparatorColor
@@ -47,7 +46,7 @@ const GroupEdit = ( {attributes, setAttributes, context, clientId, ...props} ) =
 		}
 	});
 
-	console.log("hasSelectedInnerBlock",hasSelectedInnerBlock)
+	
 	
 	const blockProps = useBlockProps();
 	const innerBlockProps = useInnerBlocksProps(blockProps, {
