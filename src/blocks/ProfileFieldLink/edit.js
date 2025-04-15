@@ -25,6 +25,7 @@ const sizeOptions = [
 ];
 
 
+
 const DynamicIcon = ({icon, size = 24}) => {
 	// Todo - make sure this exists
 	// move the function call up to the icons component
@@ -47,7 +48,7 @@ function Edit( props ) {
 		iconSize = 24
 	} = attributes
 
-	
+	console.log("field", field)
 
 
 	// should the field's block type not match the current block, render nothing

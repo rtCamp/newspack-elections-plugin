@@ -7,6 +7,6 @@ use Govpack\Fields\FieldType;
 class Phone extends Link {
 
 	public function __construct( string $slug, string $label, FieldType|string|null $type = null ) {
-		parent::__construct( $slug, $label, 'email' );
+		parent::__construct( $slug, $label, 'phone' );
 	}
 }

@@ -18,6 +18,16 @@ class Phone extends Link {
 	 */
 	public string $label = 'Phone';
 
+	public array $formats = [ 
+		[
+			'value' => 'label',
+			'label' => 'Label',
+		],
+		[
+			'value' => 'url',
+			'label' => 'Number',
+		],
+	];
 	
 	public function variation_icon(): string {
 		return 'phone';
