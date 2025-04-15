@@ -14,28 +14,31 @@ export default class DateField extends FieldType {
 
 	value( value = null){
 
-		console.log("value", value)
+		
 		if(!value){
 			return null
 		}
 
-		if( ! isMatch(value, MYSQL_DATE_FORMAT ) ) {
-			return null
-		}
+		let dateValue
 
-		const dateValue = parse(value, MYSQL_DATE_FORMAT.replace("-", "'-'"), new Date() )
+		if(  isMatch(value, MYSQL_DATE_FORMAT ) ) {
+			dateValue = parse(value, MYSQL_DATE_FORMAT.replace("-", "'-'"), new Date() )
+			return dateValue
+		}
 
 		
-
-		if (typeof dateValue !== "object"){
+		try{
+			dateValue = new Date(value)
+		} catch {
 			return null
 		}
+			
 
 		if(!(dateValue instanceof Date)){
 			return null
 		}
 
-		console.log("dateValue", dateValue)
+		
 		
 		return dateValue
 	}

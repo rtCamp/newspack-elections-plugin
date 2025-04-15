@@ -32,7 +32,7 @@ const getSiteDefaultDateFormat = () => {
 }
 
 const DateTimeDropdown = ({value, onChange, dropdownProps}) => {
-	console.log("dropdownProps", dropdownProps)
+	
 	return (
 		<Dropdown
 			{...dropdownProps}
@@ -90,13 +90,24 @@ export const UnforwardedDateControl = (
 	const hasValue = !isEmpty(value)
 	const hasValidFormat = isMatch(value, MYSQL_DATE_FORMAT.replace("-", "'-'") , new Date() )
 
-
 	let inputValue
+
+	/*
 	try {
 		inputValue = (hasValue && hasValidFormat) ? format(value, "MM/dd/yyyy") : ""
 	} catch {
 		inputValue = ""
 	}
+		*/
+
+	if(hasValue && !hasValidFormat){
+		try {
+			inputValue = format(value, "MM/dd/yyyy")
+		} catch {
+			inputValue = ""
+		}
+	}
+
 	/**
 	 * The Field Must Display a consistent value in the date picker and the masked text field
 	 * possible values are a date string formatted for output, an empty string, null, or undefined

@@ -6,7 +6,7 @@ import { compose } from "@wordpress/compose";
 import { withSelect, useSelect } from "@wordpress/data";
 import { useEntityId, useEntityProp } from "@wordpress/core-data";
 import {store as editorStore} from "@wordpress/editor"
-import { dateI18n, getSettings } from "@wordpress/date"
+import { date, dateI18n, getSettings } from "@wordpress/date"
 import {MaskedTextControl} from "./MaskedTextControl"
 import MaskedDateControl from "./DateInput";
 
@@ -69,8 +69,6 @@ export const PanelDateControl = (props) => {
 }
 
 export const DateControl = (props) => {
-
-	console.log("DateControl", props)
 
 	return (
 		<MaskedDateControl
