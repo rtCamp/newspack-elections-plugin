@@ -28,14 +28,14 @@ class Blocks {
 	 */
 	public function enqueue_block_editor_assets(): void {
 	
-		$this->register_script( 'govpack-block-editor', 'block-editor' );
-		wp_enqueue_script( 'govpack-block-editor' );
+		//$this->register_script( 'govpack-block-editor', 'block-editor' );
+		//wp_enqueue_script( 'govpack-block-editor' );
 
-		$this->register_script( 'govpack-blocks-editor', 'editor-blocks' );
-		wp_enqueue_script( 'govpack-blocks-editor' );
+		$this->register_script( 'npe-blocks', 'npe-blocks' );
+		wp_enqueue_script( 'npe-blocks' );
 
-		$this->register_style( 'govpack-blocks-editor-style', 'editor-blocks' );
-		wp_enqueue_style( 'govpack-blocks-editor-style' );
+		$this->register_style( 'npe-blocks-editor-style', 'npe-blocks' );
+		wp_enqueue_style( 'npe-blocks-editor-style' );
 	}
 
 	public function register_style( $handle, $asset_name ) {

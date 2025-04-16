@@ -175,7 +175,7 @@ function getBlockEditorScripts(){
 	const blocks = fs.readdirSync( getBlockDir() ).filter( block => fs.existsSync( path.join( __dirname, 'src', 'blocks', block, 'index.js' ) ) );
 
 	return {
-		"editor-blocks" : [
+		"npe-blocks" : [
 			path.join( __dirname, 'src', "block-editor", "index.js"),
 			...blockScripts( 'index', path.join( __dirname, 'src' ), blocks )
 		]
