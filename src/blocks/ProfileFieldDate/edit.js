@@ -17,7 +17,7 @@ import { useEntityProp } from '@wordpress/core-data';
 /**
  * Internal dependencies
  */
-import { useProfileFieldAttributes } from './../../profile';
+import { useProfileFieldAttributes } from "@npe/editor";
 
 
 

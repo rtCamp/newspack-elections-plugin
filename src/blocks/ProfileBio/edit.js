@@ -21,7 +21,7 @@ import { getBlockDefaultClassName } from "@wordpress/blocks"
 /**
  * Internal dependencies
  */
-import { useProfileFieldAttributes } from './../../profile';
+import { useProfileFieldAttributes } from "@npe/editor";
 
 
 const ELLIPSIS = '…';

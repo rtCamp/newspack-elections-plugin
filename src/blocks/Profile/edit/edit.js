@@ -26,8 +26,8 @@ import { Spinner } from './../../../components/Spinner.jsx';
 
 import { DEFAULT_TEMPLATE } from './default-template.js';
 
-import { useProfileAttributes } from '../../../profile';
-import { usePostEditURL } from '../../../components/post-edit-url';
+import { useProfileAttributes } from "@npe/editor";
+import { usePostEditURL } from '@npe/editor';
 
 
 

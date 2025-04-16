@@ -8,11 +8,12 @@ import { postCategories as icon } from '@wordpress/icons';
  import Save from './save';
  import metadata from './block.json';
  import deprecated from "./deprecated"
+ 
  /**
  * Style dependencies - will load in editor
  */
 import './view.scss';
-
+import "./editor.scss"
 
 
 const { attributes, category, title } = metadata;

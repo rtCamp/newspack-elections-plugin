@@ -13,7 +13,7 @@ import {
 
 
 
-import { useProfileFieldAttributes } from "./../../profile"
+import { useProfileFieldAttributes } from "@npe/editor"
 import { useUpdateBlockMetaName, useIsPreviewMode } from "./../utils"
 import { NPEIcons } from "./../../components/Icons"
 

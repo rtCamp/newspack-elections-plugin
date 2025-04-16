@@ -1,4 +1,4 @@
-import { migrateLegacyAttrsToField, isEligibleForFieldAttrMigration } from "./../../../block-supports/field-aware"
+import { migrateLegacyAttrsToField, isEligibleForFieldAttrMigration } from "@npe/editor"
 
 const dep0_01 = {
 	"attributes": {

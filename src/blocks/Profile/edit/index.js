@@ -7,7 +7,7 @@ import { ProfileVariationSelector } from "./variation-selector"
 import { ProfileSelector } from "./profile-selector"
 
 import { ProfileSelector as ProfileSelectorPlaceholder } from "./../../../components/ProfileSelector.jsx"
-import { PROFILE_POST_TYPE } from "./../../../profile"
+import { PROFILE_POST_TYPE } from "@npe/editor"
 
 import "./../editor.scss"
 /**

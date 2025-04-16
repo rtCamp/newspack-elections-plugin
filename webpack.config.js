@@ -3,7 +3,7 @@ const fs = require( 'fs' );
 
 let defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 const { getWebpackEntryPoints, getPackageProp, hasPackageProp, getProjectSourcePath} = require("@wordpress/scripts/utils")
-
+const DependencyExtractionWebpackPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { optimize } = require('svgo');
 const TerserPlugin = require( 'terser-webpack-plugin' );
@@ -176,7 +176,7 @@ function getBlockEditorScripts(){
 
 	return {
 		"npe-blocks" : [
-			path.join( __dirname, 'src', "block-editor", "index.js"),
+		//	path.join( __dirname, 'src', "block-editor", "index.js"),
 			...blockScripts( 'index', path.join( __dirname, 'src' ), blocks )
 		]
 	}
@@ -188,14 +188,63 @@ function getEntryPointsv2(){
 	return {
 		...getBlockEditorScripts(),
 		...getEntryPointsFromPackage(),
-		...getBlockViewScripts()
+		...getBlockViewScripts(),
+		"npe-editor" : {
+			import : './src/block-editor/index.js',
+			library: {
+				name: [ 'npe', 'editor' ],
+				type: 'window'
+			},
+		}
 	}
 	
 }
 
-console.log(getEntryPointsv2())
+const DependencyRequestMap = {
+	"@npe/editor" : [
+		["window", "npe", "editor"],
+		"npe-editor"
+	]
+}
 
+function requestToExternal( request ){
+	
+	if(request in DependencyRequestMap){
+		return DependencyRequestMap[request][0]
+	}
+}
+
+function requestToHandle( request ){
+	if(request in DependencyRequestMap){
+		return DependencyRequestMap[request][1]
+	}
+}
+
+
+console.log(defaultConfig.resolve)
 module.exports = {
     ...defaultConfig,
-	"entry": getEntryPointsv2
+	output:{
+		...defaultConfig.output,
+		enabledLibraryTypes: ['window'],
+	},
+	resolve: {
+		...defaultConfig.resolve,
+		alias : {
+			...defaultConfig.resolve.alias,
+			"@npe/editor" : path.resolve(__dirname, "src/block-editor")
+		}
+	},
+	plugins : [
+		...defaultConfig.plugins.filter( ( plugin ) => {
+			return plugin.constructor.name !== "DependencyExtractionWebpackPlugin"
+		}),
+		new DependencyExtractionWebpackPlugin( {
+			injectPolyfill: false,
+			requestToExternal,
+			requestToHandle,
+			externalizedReport: true
+		})
+	],
+	entry: getEntryPointsv2
 };  

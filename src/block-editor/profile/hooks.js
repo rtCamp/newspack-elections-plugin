@@ -3,7 +3,7 @@ import { store as coreDataStore } from '@wordpress/core-data';
 
 import { PROFILE_POST_TYPE } from './constants';
 import { useAttributeOverContext, useContextOverAttribute } from './utils';
-import { useFieldAttributes, useFields } from "./../fields"
+import { useFieldAttributes, useFields } from "@npe/editor"
 
 /**
  * Gets the ID of the Profile to use from the Block's Context, falling back to Attributes. 

@@ -12,7 +12,7 @@ import { ToggleControl, TextControl, PanelBody } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { useProfileFieldAttributes } from './../../profile';
+import { useProfileFieldAttributes } from "@npe/editor";
 
 
 

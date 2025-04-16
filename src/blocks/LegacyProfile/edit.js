@@ -27,7 +27,7 @@ import ResetProfileToolbar from '../../components/Toolbars/ResetProfileToolbar.j
 
 import SingleProfile from "./../../components/single-profile"
 
-import { PROFILE_POST_TYPE } from '../../profile';
+import { PROFILE_POST_TYPE } from "@npe/editor";
 
 
 /**

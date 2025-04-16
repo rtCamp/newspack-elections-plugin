@@ -19,6 +19,7 @@ const SidebarPluginPanel = (props) => {
 			title = {props.title}
 			name = {props.name}
 			icon={ <Fragment /> }
+			className = {props.className ?? null}
 		>
 			{props.children}
 		</PluginDocumentSettingPanel>
@@ -79,6 +80,7 @@ export const ProfileMetaSidebarPanel = (props) => {
         <SidebarPluginPanel 
             title={label}
             name="gov-profile-about"
+			className = "npe-profile-editor__panel"
         >
 			{(groupFields) && ( <>
 		

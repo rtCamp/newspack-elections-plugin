@@ -1,4 +1,4 @@
-import { FilterableMenu } from "../../filterable-menu";
+import { FilterableMenu } from "./../filterable-menu";
 
 export function ProfileFieldsMenu({
 	onSelectField,

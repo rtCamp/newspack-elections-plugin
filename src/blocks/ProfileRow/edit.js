@@ -24,10 +24,10 @@ import {useEffect} from "@wordpress/element"
 /**
  * Internal dependencies
  */
-import { useProfileFieldAttributes, useProfileFields } from "./../../profile"
+import { useProfileFieldAttributes, useProfileFields } from "@npe/editor"
 import { ProfileBlockName } from '../Profile';
-import { ProfileFieldsDropDown } from "./../../components/Controls/ProfileField"
-import { useFields } from "./../../fields"
+
+import { useFields } from "@npe/editor"
 import { useIsPreviewMode } from '../utils';
 
 const MetaInspectorControl = ({

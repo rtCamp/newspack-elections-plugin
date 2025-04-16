@@ -9,7 +9,7 @@ import { useBlockProps } from "@wordpress/block-editor"
 /**
  * Internal dependencies
  */
-import { useProfileFieldAttributes } from './../../profile';
+import { useProfileFieldAttributes } from "@npe/editor";
 
 import { useUpdateBlockMetaName } from "./../utils"
 

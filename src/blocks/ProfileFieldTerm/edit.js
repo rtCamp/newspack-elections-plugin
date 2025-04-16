@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+
 import clsx from "clsx"
 
 /**
@@ -11,16 +11,17 @@ import { useSelect } from '@wordpress/data';
 import { Spinner, PanelBody, PanelRow, ToggleControl, TextControl, RangeControl} from "@wordpress/components";
 import { decodeEntities } from '@wordpress/html-entities';
 
-import { useProfileFieldAttributes, PROFILE_POST_TYPE} from "./../../profile"
+import { useProfileFieldAttributes, PROFILE_POST_TYPE} from "@npe/editor"
 
 
 import useProfileTerms from "./use-profile-terms"
 
 
 
-const WideRangeControl = styled( RangeControl )`
-	width: 100%
-`;
+
+
+
+//const WideRangeControl = RangeControl
 
 /**
  * TODO:
@@ -148,7 +149,8 @@ function EditTermBlock( props ) {
 			</PanelRow>
 			<PanelRow>
 				
-					<WideRangeControl
+					<RangeControl
+						className = "npe-term-count-range"
 						__nextHasNoMarginBottom
 						__next40pxDefaultSize
 						label={ __( 'Term Limit' ) }

@@ -28,8 +28,8 @@ class Blocks {
 	 */
 	public function enqueue_block_editor_assets(): void {
 	
-		//$this->register_script( 'govpack-block-editor', 'block-editor' );
-		//wp_enqueue_script( 'govpack-block-editor' );
+		$this->register_script( 'npe-editor', 'npe-editor' );
+		wp_enqueue_script( 'npe-editor' );
 
 		$this->register_script( 'npe-blocks', 'npe-blocks' );
 		wp_enqueue_script( 'npe-blocks' );

@@ -6,11 +6,11 @@ import { useSelect, useDispatch } from '@wordpress/data';
 import { store as blockEditorStore } from "@wordpress/block-editor"
 
 
-import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from "./../components/Controls/ProfileField"
-import { useProfileFieldAttributes} from "./../profile"
+import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from "./../components"
 
-import { useProfileFields } from './../profile';
-import { useFields } from "../fields"
+
+import { useProfileFields, useProfileFieldAttributes } from './../profile';
+import { useFields } from "./../fields"
 
 const featureName = "gp/field-aware"
 

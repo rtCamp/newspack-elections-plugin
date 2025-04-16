@@ -16,7 +16,7 @@ import { useSelect } from "@wordpress/data";
 import { store as blocksStore } from '@wordpress/blocks';
 import { background, link as LinkIcon } from '@wordpress/icons';
 
-import { useProfileFieldAttributes } from "./../../profile"
+import { useProfileFieldAttributes } from "@npe/editor"
 import { useUpdateBlockMetaName, useIsPreviewMode } from "./../utils"
 import { NPEIcons } from "./../../components/Icons"
 

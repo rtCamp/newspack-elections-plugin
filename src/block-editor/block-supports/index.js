@@ -18,3 +18,4 @@ export const registerBlockSupports = () => {
 	createGPBlockEditFilter(features)
 }
 
+export {migrateLegacyAttrsToField, isEligibleForFieldAttrMigration} from "./field-aware"

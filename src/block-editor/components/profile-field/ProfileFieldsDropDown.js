@@ -6,7 +6,7 @@ import { __ } from "@wordpress/i18n"
 
 import { DropdownMenu } from '@wordpress/components';
 
-import { useField } from "../../../fields"
+import { useField } from "./../../fields"
 import { ProfileFieldsMenu } from './ProfileFieldsMenu';
 
 

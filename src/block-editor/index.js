@@ -10,9 +10,9 @@
 import domReady from "@wordpress/dom-ready"
 
 
-import { registerBlockSupports } from "./../block-supports" 
+import { registerBlockSupports } from "./block-supports" 
 import { restoreBlocks } from "./restore-blocks";
-import { initStore } from "../fields";
+import { initStore } from "./fields";
 
 
 
@@ -30,3 +30,6 @@ domReady( () => {
 })
 
 
+export * from "./block-supports" 
+export * from "./profile"
+export * from "./components" 

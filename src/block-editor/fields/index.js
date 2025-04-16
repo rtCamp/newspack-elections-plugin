@@ -9,6 +9,7 @@ export const initStore = () => {
 	// Just create the store
 	registerGovpackStore()
 
+	
 	// early request for fields and fieldTypes
 	select(store).getFieldTypes()
 	select(store).getFields()

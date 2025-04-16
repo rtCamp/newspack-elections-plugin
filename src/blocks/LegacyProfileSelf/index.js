@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { PROFILE_POST_TYPE } from '../../profile';
+import { PROFILE_POST_TYPE } from "@npe/editor";
 import Edit from './edit';
 
  /**

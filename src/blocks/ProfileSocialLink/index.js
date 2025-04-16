@@ -4,7 +4,7 @@ import { link as icon } from '@wordpress/icons';
 import { __ , sprintf} from "@wordpress/i18n"
 
 import {subscribe, select} from "@wordpress/data"
-import {store as FieldStore} from "./../../fields"
+import {store as FieldStore} from "@npe/editor"
 import { NPEIcons } from "./../../components/Icons"
 /**
  * Internal dependencies
