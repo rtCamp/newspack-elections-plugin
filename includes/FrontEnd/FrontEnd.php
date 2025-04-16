@@ -9,10 +9,14 @@ namespace Govpack\FrontEnd;
 
 use Exception;
 use Govpack\TemplateLoader;
+use Govpack\PluginAware;
+use Govpack\Abstracts\Plugin;
 /**
  * GovPack FrontEnd Hooks
  */
 class FrontEnd {
+
+	use PluginAware;
 
 	/**
 	 * Stores static instance of class.
@@ -43,12 +47,18 @@ class FrontEnd {
 
 	private TemplateLoader $template_loader;
 
+
+	public function __construct(Plugin $plugin)
+	{
+		$this->plugin($plugin);
+	}
+
 	/**
 	 * Adds Hooks Specifically for the Frontend display
 	 */
 	public function hooks(): void {
 		add_filter( 'newspack_can_show_post_thumbnail', [ __CLASS__, 'newspack_can_show_post_thumbnail' ], 10, 1 );
-		add_action( 'enqueue_block_assets', [ __CLASS__, 'enqueue_front_end_style' ], 10, 0 );
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_front_end_style' ], 10, 0 );
 
 		add_action( 'govpack_before_main_content', [ $this, 'output_wrapper_start' ] );
 		add_action( 'govpack_after_main_content', [ $this, 'output_wrapper_end' ] );
@@ -70,7 +80,7 @@ class FrontEnd {
 	public function template_loader(): TemplateLoader {
 
 		if ( ! isset( $this->template_loader ) ) {
-			$this->template_loader = new TemplateLoader();
+			$this->template_loader = new TemplateLoader($this->plugin);
 			$this->template_loader->hooks();
 		}
 
@@ -82,11 +92,11 @@ class FrontEnd {
 	/**
 	 * Enqueue Front End Style
 	 */
-	public static function enqueue_front_end_style(): void {
+	public function enqueue_front_end_style(): void {
 
 		wp_register_style(
 			'govpack-block-styles',
-			GOVPACK_PLUGIN_BUILD_URL . 'frontend.css',
+			$this->plugin->build_url('frontend.css'),
 			[],
 			'1.00',
 			'screen'

@@ -8,6 +8,7 @@
 namespace Govpack\Admin;
 
 use Govpack\Govpack;
+use Govpack\PluginAware;
 use Govpack\Profile\CPT as Profile;
 use Govpack\Vendor\League\Csv\Writer;
 
@@ -16,22 +17,29 @@ use Govpack\Vendor\League\Csv\Writer;
  */
 class Export {
 
+	use PluginAware;
+
+	public function __construct(Govpack $plugin){
+		$this->plugin($plugin);
+	}
 	/**
 	 * Adds Hooks used for exporting  
 	 */
-	public static function hooks(): void {
+	public function hooks(): void {
 		
 		\add_action( 'rest_api_init', [ __CLASS__, 'register_rest_endpoints' ] );
-		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'register_scripts' ] );
+		\add_action( 'admin_enqueue_scripts', [ $this, 'register_scripts' ] );
 	}
 
 
 	/**
 	 * Adds ASSETS used for importing  
 	 */
-	public static function register_scripts(): void {
+	public  function register_scripts(): void {
 
-		$file = GOVPACK_PLUGIN_BUILD_PATH . 'exporter.asset.php';
+		
+
+		$file = $this->plugin->build_path('exporter.asset.php');
 		if ( file_exists( $file ) ) {
 			$asset_data = require_once $file; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
 		}
@@ -40,7 +48,7 @@ class Export {
 
 		wp_register_script(
 			$script_handle,
-			GOVPACK_PLUGIN_BUILD_URL . 'exporter.js',
+			 $this->plugin->build_url('exporter.js'),
 			$asset_data['dependencies'] ?? [],
 			$asset_data['version'] ?? '',
 			true

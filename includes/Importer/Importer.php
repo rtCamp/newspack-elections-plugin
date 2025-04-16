@@ -11,6 +11,8 @@ use Exception;
 use Govpack\Govpack;
 use Govpack\Capabilities;
 use Govpack\Importer\Abstracts\AbstractImporter;
+use Govpack\PluginAware;
+use Govpack\Abstracts\Plugin;
 use Govpack\Profile\CPT;
 
 /**
@@ -18,20 +20,25 @@ use Govpack\Profile\CPT;
  */
 class Importer {
 
+	use PluginAware;
+
 	const CSV_EXAMPLE_QUERY_ARG = 'csv-example';
 	const CSV_EXAMPLE_FILE_NAME = 'npe-profile-import-template.csv';
 
+	public function __construct(Plugin $plugin){
+		$this->plugin($plugin);
+	}
 	/**
 	 * Adds Actions to Hooks
 	 */
-	public static function hooks(): void {
+	public function hooks(): void {
 
 		\add_action( 'rest_api_init', [ __CLASS__, 'register_rest_endpoints' ] );
 		
 		ChunkedUpload::hooks();
 		Actions::hooks();
 
-		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'register_scripts' ] );
+		\add_action( 'admin_enqueue_scripts', [ $this, 'register_scripts' ] );
 		\add_action( 'admin_init', [ __CLASS__, 'maybe_download_example' ] );
 	}
 
@@ -57,9 +64,10 @@ class Importer {
 	/**
 	 * Adds ASSETS used for importing
 	 */
-	public static function register_scripts(): void {
+	public  function register_scripts(): void {
 
-		$file = GOVPACK_PLUGIN_BUILD_PATH . 'importer.asset.php';
+		$file = $this->plugin->build_path('importer.asset.php');
+
 		if ( file_exists( $file ) ) {
 			$asset_data = require_once $file; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
 		}
@@ -70,13 +78,13 @@ class Importer {
 
 		wp_register_script(
 			$script_handle,
-			GOVPACK_PLUGIN_BUILD_URL . 'importer.js',
+			$this->plugin->build_url('importer.js'),
 			$asset_data['dependencies'] ?? [],
 			$asset_data['version'] ?? '',
 			true
 		);
 
-		wp_script_add_data( $script_handle, 'profiles_url', 'aksgdkasjdh' );
+		wp_script_add_data( $script_handle, 'profiles_url', []);
 	}
 
 	/**

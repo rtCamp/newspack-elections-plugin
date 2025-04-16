@@ -6,8 +6,11 @@
  */
 
 namespace Govpack;
+use Govpack\Abstracts\Plugin;
 
 class TemplateLoader extends \Govpack_Vendor_Gamajo_Template_Loader {
+
+	use PluginAware;
 
 		/**
 		 * Prefix for filter names.
@@ -16,7 +19,7 @@ class TemplateLoader extends \Govpack_Vendor_Gamajo_Template_Loader {
 		 *
 		 * @var string
 		 */
-		protected $filter_prefix = 'govpack';
+		protected $filter_prefix;
 
 		/**
 		 * Directory name where custom templates for this plugin should be found in the theme.
@@ -27,7 +30,7 @@ class TemplateLoader extends \Govpack_Vendor_Gamajo_Template_Loader {
 		 *
 		 * @var string
 		 */
-		protected $theme_template_directory = 'govpack';
+		protected $theme_template_directory;
 
 		/**
 		 * Reference to the root directory path of this plugin.
@@ -40,7 +43,17 @@ class TemplateLoader extends \Govpack_Vendor_Gamajo_Template_Loader {
 		 *
 		 * @var string
 		 */
-		protected $plugin_directory = GOVPACK_PLUGIN_PATH;
+		protected $plugin_directory;
+
+
+	public function __construct(Plugin $plugin) {
+
+		$this->plugin($plugin);
+
+		$this->filter_prefix = "govpack";
+		$this->theme_template_directory = "govpack";
+		$this->plugin_directory = $this->plugin->path();
+	}
 
 	public function hooks(): void {
 		add_filter( 'template_include', [ $this, 'template_include' ] );

@@ -41,14 +41,14 @@ class Blocks {
 	public function register_style( $handle, $asset_name ) {
 		wp_enqueue_style(
 			$handle,
-			GOVPACK_PLUGIN_BUILD_URL . $asset_name . '.css',
+			$this->plugin->build_url( $asset_name . '.css'),
 			[],
 			1
 		);
 	}
 
 	public function register_script( $handle, $asset_name ) {
-		$file = GOVPACK_PLUGIN_BUILD_PATH . $asset_name . '.asset.php';
+		$file = $this->plugin->build_path($asset_name . '.asset.php');
 
 		if ( file_exists( $file ) ) {
 			$asset_data = require_once $file; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
@@ -56,7 +56,7 @@ class Blocks {
 
 		wp_register_script(
 			$handle,
-			GOVPACK_PLUGIN_BUILD_URL . $asset_name . '.js',
+			$this->plugin->build_url( $asset_name . '.js'),
 			$asset_data['dependencies'] ?? '',
 			$asset_data['version'] ?? '',
 			true

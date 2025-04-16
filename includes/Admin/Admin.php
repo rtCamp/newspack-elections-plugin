@@ -31,15 +31,20 @@ class Admin {
 	public function hooks(): void {
 		\add_action( 'admin_menu', [ '\Govpack\Admin\Menu', 'add_taxonomy_submenus' ], 10, 1 );
 		\add_action( 'admin_menu', [ $this, 'create_menus' ], 1, 1 );
-		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'register_assets' ], 100, 1 );
+		\add_action( 'admin_enqueue_scripts', [ $this, 'register_assets' ], 100, 1 );
 		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'load_assets' ], 101, 1 );
 		//\add_action( 'block_categories_all', [ __CLASS__, 'block_categories' ], 10, 2 );                
 		\add_action( 'enqueue_block_editor_assets', [ __CLASS__, 'enqueue_block_editor_assets' ] );
 		\add_action( 'current_screen', [ __CLASS__, 'conditional_hooks' ] );
 	
-		\add_action( 'after_setup_theme', [ '\Govpack\Admin\Export', 'hooks' ], 11, 1 );
+		\add_action( 'admin_init', [ $this, 'exporter' ], 11, 1 );
 	}
 
+	public function exporter() {
+		
+		$exporter = new Export($this->plugin);
+		$exporter->hooks();
+	}
 
 	/**
 	 * Register Block Assets.
@@ -140,9 +145,9 @@ class Admin {
 	/**
 	 * Register Govpack JS/CSS Assets for wp-admin 
 	 */
-	public static function register_assets(): void {
+	public function register_assets(): void {
 
-		$file = GOVPACK_PLUGIN_BUILD_PATH . 'admin.asset.php';
+		$file = $this->plugin->build_path('admin.asset.php');
 
 		if ( file_exists( $file ) ) {
 			$asset_data = require_once $file; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
@@ -150,7 +155,7 @@ class Admin {
 
 		wp_register_style(
 			'govpack-admin-style',
-			GOVPACK_PLUGIN_BUILD_URL . 'admin.css',
+			$this->plugin->build_url('admin.css'),
 			$asset_data['dependencies'] ?? '',
 			$asset_data['version'] ?? '',
 			'all'
@@ -158,14 +163,14 @@ class Admin {
 
 		wp_register_script(
 			'govpack-admin-script',
-			GOVPACK_PLUGIN_BUILD_URL . 'admin.js',
+			$this->plugin->build_url('admin.js'),
 			$asset_data['dependencies'] ?? '',
 			$asset_data['version'] ?? '',
 			true
 		);
 
 
-		$file = GOVPACK_PLUGIN_BUILD_PATH . 'profile-editor.asset.php';
+		$file = $this->plugin->build_path('profile-editor.asset.php');
 
 		if ( file_exists( $file ) ) {
 		
@@ -174,7 +179,7 @@ class Admin {
 
 		wp_register_script(
 			'govpack-profile-meta-editor',
-			GOVPACK_PLUGIN_BUILD_URL . 'profile-editor.js',
+			$this->plugin->build_url('profile-editor.js'),
 			$asset_data['dependencies'] ?? [],
 			$asset_data['version'] ?? '',
 			true
@@ -182,7 +187,7 @@ class Admin {
 		
 		wp_register_style(
 			'govpack-profile-meta-editor-style',
-			GOVPACK_PLUGIN_BUILD_URL . 'profile-editor.css',
+			$this->plugin->build_url('profile-editor.css'),
 			[],
 			true,
 			'all'

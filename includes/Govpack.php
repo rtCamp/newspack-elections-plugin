@@ -129,8 +129,10 @@ class Govpack extends Plugin {
 
 		( new ProfileBindingSource() )->register();
 
-		\Govpack\Importer\Importer::hooks();
-		\Govpack\Admin\Export::hooks(); 
+		$importer = new \Govpack\Importer\Importer($this);
+		$importer->hooks();
+		
+		//\Govpack\Admin\Export::hooks(); 
 		\Govpack\Widgets::hooks();
 
 
@@ -185,7 +187,7 @@ class Govpack extends Plugin {
 	public function front_end(): FrontEnd {
 
 		if ( ! isset( $this->front_end ) ) {
-			$this->front_end = FrontEnd::instance();
+			$this->front_end =  new FrontEnd($this);
 			$this->front_end->hooks();
 			$this->front_end->template_loader();
 		} 

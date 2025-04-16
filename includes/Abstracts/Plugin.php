@@ -11,9 +11,7 @@ abstract class Plugin {
 	}
 
 	public function build_path( string $path ): string {
-		return trailingslashit(
-			trailingslashit( $this->path( 'build' ) ) . $path 
-		);
+		return trailingslashit( $this->path( 'build' ) ) . $path ;
 	}
 
 	public function set_path( string $path ): self {
@@ -26,11 +24,21 @@ abstract class Plugin {
 		return $this;
 	}
 
-	public function path( $path ): string {
-		return $this->path . $path;
+	public function path( string|null $path = null): string {
+		$base_path = \trailingslashit($this->path);
+
+		if(!$path){
+			return $base_path;
+		}
+
+		return $base_path . $path;
 	}
 
 	public function url( string $path ): string {
-		return trailingslashit( $this->url ) . $path;
+		return trailingslashit(trailingslashit( $this->url ) . $path);
+	}
+
+	public function build_url( string $path ): string {
+		return $this->url("build") . $path;
 	}
 }
