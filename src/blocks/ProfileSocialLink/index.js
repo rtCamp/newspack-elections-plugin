@@ -20,6 +20,7 @@ import metadata from './block.json';
  */
 import './view.scss';
 
+console.log("FieldStore", FieldStore)
 
 const { attributes, category, title } = metadata;
 
