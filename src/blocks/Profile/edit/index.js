@@ -19,6 +19,7 @@ import "./../editor.scss"
 */
 export const ProfileEdit = ( props ) => {
 
+	console.log("Profile Render", props.context)
 	const { clientId, attributes, name, setAttributes, context} = props
 	const blockProps = useBlockProps()
 	const {children, ...innerBlockProps} = useInnerBlocksProps(blockProps)
@@ -36,7 +37,7 @@ export const ProfileEdit = ( props ) => {
 			currentPostType : select(editorStore).getCurrentPostType(),
 			currentPostId: select(editorStore).getCurrentPostId()
 		}
-	})
+	}, [clientId])
 	
 
 	const hasVariations = useSelect( ( select ) => {

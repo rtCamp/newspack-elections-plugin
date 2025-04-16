@@ -34,6 +34,7 @@ const DefaultControl = (props, Control) => {
 	
     return (
         <Control
+			key = {`npe-field-input-${props.meta_key}`}
 			__nextHasNoMarginBottom = {true}
             label = {props.label}
             value={ meta[props.meta_key] }
@@ -52,7 +53,8 @@ export const PanelUrlControl = (props) => {
 		onChange : (value, event) => {
 			console.log("URL On Change", value, event)
 			props.onChange(value)
-		}
+		},
+		
 	}, TextControl)
 }
 

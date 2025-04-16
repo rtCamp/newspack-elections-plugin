@@ -82,11 +82,12 @@ export const ProfileMetaSidebarPanel = (props) => {
             title={label}
             name={name}
 			className = "npe-profile-editor__panel"
+			key={`gov-profile-meta-${label}`}
         >
 			{(groupFields) && ( <>
 		
 				{ Object.keys(renderFields.grouped).map( (groupKey) => (
-					<PanelFieldset legend={groupKey} key={`gp-panel-fieldset-${groupKey}`}>
+					<PanelFieldset legend={groupKey} key={`gp-panel-${label}-fieldset-${groupKey}`}>
 						
 						{ renderFields.grouped[groupKey].map( ({Component, ...field}, index) => (
 							<Component 
@@ -94,6 +95,7 @@ export const ProfileMetaSidebarPanel = (props) => {
 								meta_key = { field["meta_key"] }
 								onChange = { null } 
 								__next40pxDefaultSize = {true}
+								key = {`field-${groupKey}-${field["meta_key"]}`}
 							/>
 						))}
 						
