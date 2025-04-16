@@ -49,6 +49,7 @@ class Blocks {
 
 	public function register_script( $handle, $asset_name ) {
 		$file = $this->plugin->build_path($asset_name . '.asset.php');
+	
 
 		if ( file_exists( $file ) ) {
 			$asset_data = require_once $file; // phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable

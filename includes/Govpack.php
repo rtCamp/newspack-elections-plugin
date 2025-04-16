@@ -112,14 +112,15 @@ class Govpack extends Plugin {
 
 	public function setup(): void {
 
-
 		$this->text_domain();
-
 		$this->fields();
-		
-		// Custom Post Types & taxonomies.
+
+			// Custom Post Types & taxonomies.
 		self::post_types();
 		self::taxonomies();
+
+		/*
+
 
 		if ( defined( 'WP_CLI' ) && \WP_CLI ) {
 			\Govpack\CLI::init();
@@ -129,8 +130,8 @@ class Govpack extends Plugin {
 
 		( new ProfileBindingSource() )->register();
 
-		$importer = new \Govpack\Importer\Importer($this);
-		$importer->hooks();
+		//$importer = new \Govpack\Importer\Importer($this);
+		//$importer->hooks();
 		
 		//\Govpack\Admin\Export::hooks(); 
 		\Govpack\Widgets::hooks();
@@ -162,6 +163,7 @@ class Govpack extends Plugin {
 		if ( ! is_admin() ) {
 			$this->front_end();
 		}
+			*/
 	}
 
 	public function admin(): Admin {
