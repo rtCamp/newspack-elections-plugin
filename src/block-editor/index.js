@@ -14,7 +14,7 @@ import { registerBlockSupports } from "./block-supports"
 import { restoreBlocks } from "./restore-blocks";
 import { initStore } from "./fields";
 
-console.log("here?")
+
 
 // Create a Redux store for fields used by Profiles
 initStore()
