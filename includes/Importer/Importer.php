@@ -49,8 +49,7 @@ class Importer {
 		header( 'Content-Disposition: attachment; filename="' . self::CSV_EXAMPLE_FILE_NAME . '"' );
 
 		$example_file = self::example();
-		$csv          = $example_file['content'];
-		echo $csv;
+		$example_file->download();
 		die();
 	}
 
@@ -149,7 +148,7 @@ class Importer {
 		);
 	}
 
-	public static function example(): array {
+	public static function example() {
 		return CSV::example();
 	}
 	/**

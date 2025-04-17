@@ -17,7 +17,7 @@ use Govpack\Profile\CPT;
  */
 class CSV extends \Govpack\Importer\Abstracts\AbstractImporter {
 
-	public static function example(): array {
+	public static function example(): Writer {
 
 		$model = CPT::get_import_model();
 
@@ -30,9 +30,7 @@ class CSV extends \Govpack\Importer\Abstracts\AbstractImporter {
 		$example->insertOne( $headers );
 
 
-		return [
-			'content' => $example->toString(),
-		];
+		return $example;
 	}
 
 	/**
