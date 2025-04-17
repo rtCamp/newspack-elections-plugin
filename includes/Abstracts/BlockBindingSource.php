@@ -44,5 +44,5 @@ abstract class BlockBindingSource {
 	 * @param WP_Block $block_instance The block instance.
 	 * @param string $attribute_name The name of an attribute.
 	 */
-	public abstract function callback( array $source_args, \WP_Block $block_instance, string $attribute_name ): mixed;
+	abstract public function callback( array $source_args, \WP_Block $block_instance, string $attribute_name ): mixed;
 }

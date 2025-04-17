@@ -43,7 +43,7 @@ class ProfileName extends \Govpack\Blocks\ProfileFieldText {
 			$tagName
 		);
 
-		echo wp_kses_post($block_html);
+		echo wp_kses_post( $block_html );
 	}
 
 	public function output(): string {

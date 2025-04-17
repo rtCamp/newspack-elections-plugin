@@ -35,7 +35,7 @@ class ProfileFieldText extends \Govpack\Blocks\ProfileField {
 		
 		?>
 		<div <?php echo get_block_wrapper_attributes(); ?>>
-			<?php echo wp_kses_post($this->output()); ?>
+			<?php echo wp_kses_post( $this->output() ); ?>
 		</div>
 		<?php
 	}

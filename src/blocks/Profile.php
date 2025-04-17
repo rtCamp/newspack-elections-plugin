@@ -144,7 +144,7 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 			$tagName
 		);
 		
-		echo wp_kses_post($block_html);
+		echo wp_kses_post( $block_html );
 	}
 
 	

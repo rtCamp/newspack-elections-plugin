@@ -243,11 +243,10 @@ class Patterns {
 			if ( empty( $pattern['slug'] ) ) {
 				_doing_it_wrong(
 					__FUNCTION__,
-					
 					sprintf(
 						/* translators: 1: file name. */
 						__( 'Could not register file "%s" as a block pattern ("Slug" field missing)' ), //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						esc_attr($file)
+						esc_attr( $file )
 					),
 					'6.0.0'
 				);
@@ -260,8 +259,8 @@ class Patterns {
 					sprintf(
 						/* translators: 1: file name; 2: slug value found. */
 						__( 'Could not register file "%1$s" as a block pattern (invalid slug "%2$s")' ), //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						esc_attr($file),
-						esc_attr($pattern['slug'])
+						esc_attr( $file ),
+						esc_attr( $pattern['slug'] )
 					),
 					'6.0.0'
 				);
@@ -274,7 +273,7 @@ class Patterns {
 					sprintf(
 						/* translators: 1: file name. */
 						__( 'Could not register file "%s" as a block pattern ("Title" field missing)' ), //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						esc_attr($file)
+						esc_attr( $file )
 					),
 					'6.0.0'
 				);

@@ -95,7 +95,7 @@ class ProfileSocialLink extends \Govpack\Blocks\ProfileFieldText {
 				rel="<?php echo esc_attr( $rel ); ?>"
 				<?php echo ( $open_in_new_tab ? 'target="_blank"' : '' ); ?>
 			>
-				<?php echo \esc_svg($icon); ?>
+				<?php echo \esc_svg( $icon ); ?>
 				<span class="wp-block-social-link-label <?php echo ( $show_labels ? '' : ' screen-reader-text' ); ?>">
 					<?php echo esc_html( $text ); ?>
 				</span>

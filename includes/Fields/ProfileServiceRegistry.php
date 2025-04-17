@@ -18,7 +18,7 @@ class ProfileServiceRegistry extends Registry {
 		}
 		
 		if ( $this->isset( $name ) ) {
-			throw new \Exception( esc_html(sprintf( 'Duplicate name (%s) Profile Service Registry. Each Name must be unique.', $name )) );
+			throw new \Exception( esc_html( sprintf( 'Duplicate name (%s) Profile Service Registry. Each Name must be unique.', $name ) ) );
 		}
 
 		if ( $this->exists( $item ) ) {
