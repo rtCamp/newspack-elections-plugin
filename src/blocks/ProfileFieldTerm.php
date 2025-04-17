@@ -65,8 +65,8 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 		return $variations;
 	}
 
-	public function get_block_support( $feature = null, $default = false ) {
-		return _wp_array_get( $this->block_type->supports, $feature, $default );
+	public function get_block_support( $feature = null, $default_value = false ) {
+		return _wp_array_get( $this->block_type->supports, $feature, $default_value );
 	}
 
 	public function is_allow_field_type_for_block() {
@@ -75,7 +75,7 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 			$supported_types = [ $supported_types ];
 		}
 
-		return in_array( $this->get_field()->type, $supported_types );
+		return in_array( $this->get_field()->type, $supported_types, true );
 	}
 	
 	public function create_taxonomy_field_variations(): array {
@@ -135,10 +135,9 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
 		
-		
 		?>
 		<div <?php echo get_block_wrapper_attributes(); ?>>
-			<?php echo $this->output(); ?>
+			<?php echo wp_kses_post( $this->output() ); ?>
 		</div>
 		<?php
 	}

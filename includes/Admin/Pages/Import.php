@@ -20,10 +20,7 @@ class Import {
 	 */
 	public static function view(): void {
 		
-		if ( isset( $_GET[ self::CSV_EXAMPLE_QUERY_ARG ] ) ) {
-			self::example();
-			die();
-		}
+		
 
 		\Govpack\Importer\Importer::check_for_stuck_import();
 
@@ -47,8 +44,5 @@ class Import {
 		include __DIR__ . './../Views/import.php';
 	}
 
-	public static function example() {
-		die();
-		gp_dump( \Govpack\Importer\Importer::example() );
-	}
+	
 }

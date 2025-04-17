@@ -42,9 +42,9 @@ abstract class FieldType extends Collectable implements CollectableInterface {
 			return [];
 		}
 		
-		if($this->default_block){
+		if ( $this->default_block ) {
 			return [
-				[$this->default_block]
+				[ $this->default_block ],
 			];
 		}
 
@@ -73,7 +73,7 @@ abstract class FieldType extends Collectable implements CollectableInterface {
 		return [
 			'slug'  => $this->slug,
 			'label' => $this->label,
-			'block' => $this->default_block ?? false
+			'block' => $this->default_block ?? false,
 		];
 	}
 

@@ -34,7 +34,10 @@ class ProfileRowGroup extends \Govpack\Blocks\ProfileField {
 		
 		?>
 		<div <?php echo get_block_wrapper_attributes(); ?>>
-			<?php echo $content; ?>
+			<?php 
+				// $content will be escaped already as passed up from other blocks
+				echo $content;  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+			?>
 		</div>
 		<?php
 	}

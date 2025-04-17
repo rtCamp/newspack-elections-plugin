@@ -16,7 +16,8 @@ class Profile {
 	public function __construct( WP_Post $post ) {
 		$this->post   = $post;
 		$this->values = [];
-		$this->id     = $this->ID = $this->post->ID;
+		$this->ID     = $this->post->ID;
+		$this->id     = $this->ID;
 	}
 
 	public static function get( $id ) {

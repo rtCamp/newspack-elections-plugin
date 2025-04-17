@@ -34,7 +34,7 @@ class ProfileLabel extends \Govpack\Blocks\ProfileField {
 		
 		?>
 		<div <?php echo get_block_wrapper_attributes(); ?>>
-			<?php echo $this->output(); ?>
+			<?php echo wp_kses_post( $this->output() ); ?>
 		</div>
 		<?php
 	}
@@ -60,11 +60,11 @@ class ProfileLabel extends \Govpack\Blocks\ProfileField {
 	}
 
 	public function show_label(): bool {
-		$rowShowLabel   = ( $this->has_context( 'showLabel' ) ? $this->context( 'showLabel' ) : null );
-		$groupShowLabel = ( $this->has_context( 'showLabels' ) ? $this->context( 'showLabels' ) : null );
+		$row_show_label   = ( $this->has_context( 'showLabel' ) ? $this->context( 'showLabel' ) : null );
+		$group_show_label = ( $this->has_context( 'showLabels' ) ? $this->context( 'showLabels' ) : null );
 
-		$showLabel = $rowShowLabel ?? $groupShowLabel ?? true;
-		return $showLabel;
+		$show_label = $row_show_label ?? $group_show_label ?? true;
+		return $show_label;
 	}
 
 	public function has_label(): bool {

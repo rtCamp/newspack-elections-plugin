@@ -44,7 +44,7 @@ class Importer {
 
 	public static function maybe_download_example() {
 		if ( isset( $_GET[ self::CSV_EXAMPLE_QUERY_ARG ] ) ) {
-			echo self::download_example();
+			self::download_example();
 			die();
 		}
 	}
@@ -56,8 +56,7 @@ class Importer {
 		header( 'Content-Disposition: attachment; filename="' . self::CSV_EXAMPLE_FILE_NAME . '"' );
 
 		$example_file = self::example();
-		$csv          = $example_file['content'];
-		echo $csv;
+		$example_file->download();
 		die();
 	}
 
@@ -157,7 +156,7 @@ class Importer {
 		);
 	}
 
-	public static function example(): array {
+	public static function example() {
 		return CSV::example();
 	}
 	/**
@@ -299,7 +298,7 @@ class Importer {
 		// can't be sure what the return type of the query will, force result though intval to make sure.
 		$count = intval( $count );
 		if ( $count > 1 ) {
-			$count = ( $count - 1 );
+			--$count;
 		}
 
 		return $count;

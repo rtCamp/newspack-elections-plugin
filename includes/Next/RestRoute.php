@@ -16,12 +16,12 @@ class RestRoute {
 
 	protected mixed $schema;
 	
-	public function __construct( string $route, string|null $namespace = null, bool $override = false ) {
+	public function __construct( string $route, string|null $rest_namespace = null, bool $override = false ) {
 
-		if ( is_null( $namespace ) ) {
+		if ( is_null( $rest_namespace ) ) {
 			$this->namespace = 'govpack/v1';
 		} else {
-			$this->namespace = $namespace;
+			$this->namespace = $rest_namespace;
 		}
 
 		$this->route       = $route;
@@ -30,8 +30,8 @@ class RestRoute {
 		$this->allow_batch = false;
 	}
 
-	public function namespace( string $namespace ): self {
-		$this->namespace = $namespace;
+	public function namespace( string $rest_namespace ): self {
+		$this->namespace = $rest_namespace;
 		return $this;
 	}
 

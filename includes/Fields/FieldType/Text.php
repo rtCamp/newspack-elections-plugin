@@ -30,7 +30,7 @@ class Text extends \Govpack\Fields\FieldType {
 	 * 
 	 * Block used to output the field by default
 	 */
-	public ?string $default_block = "npe/profile-field-text";
+	public ?string $default_block = 'npe/profile-field-text';
 
 	/**
 	 * Type Icon
@@ -40,5 +40,4 @@ class Text extends \Govpack\Fields\FieldType {
 	public function variation_icon(): string {
 		return 'text';
 	}
-
 }

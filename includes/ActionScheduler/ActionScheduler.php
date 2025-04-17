@@ -30,7 +30,7 @@ class ActionScheduler {
 	 *
 	 * @psalm-return 1
 	 */
-	public static function as_concurrent_batches( $concurrent_batches = 1 ): int { //phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+	public static function as_concurrent_batches( $concurrent_batches = 1 ): int { //phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found
 		return 1;
 	}
 
@@ -41,7 +41,7 @@ class ActionScheduler {
 	 *
 	 * @psalm-return '\Govpack\ActionScheduler\Store'
 	 */
-	public static function replace_store( $current_store ): string { //phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+	public static function replace_store( $current_store ): string { //phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found
 		remove_filter( 'action_scheduler_store_class', [ 'ActionScheduler_DataController', 'set_store_class' ], 100 );
 		return '\Govpack\ActionScheduler\Store';
 	}
@@ -53,11 +53,11 @@ class ActionScheduler {
 	 *
 	 * @psalm-return 'ActionScheduler_DBLogger'
 	 */
-	public static function replace_logger( $current_logging_class ): string {
+	public static function replace_logger( $current_logging_class ): string { //phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found
 		return 'ActionScheduler_DBLogger';
 	}
 	
-	public static function increase_time_limit( $time_limit ): int {
+	public static function increase_time_limit( $time_limit ): int { //phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found
 		return 59;
 	}
 	
@@ -69,7 +69,7 @@ class ActionScheduler {
 	 *
 	 * @psalm-return 10
 	 */
-	public static function set_timeout_seconds( $seconds ): int {
+	public static function set_timeout_seconds( $seconds ): int { //phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found
 		return 10;
 	}
 }

@@ -32,7 +32,7 @@ class ProfileFieldsRestController extends GovpackRestController {
 
 		register_rest_route(
 			$this->namespace,
-			'/' . $this->rest_base . '/' . '(?P<slug>[\S]+)',
+			'/' . $this->rest_base . '/(?P<slug>[\S]+)',
 			[
 				'args'   => [
 					'slug' => [
@@ -142,7 +142,7 @@ class ProfileFieldsRestController extends GovpackRestController {
 							return false;
 						}
 				
-						if ( ! \in_array( $field[ $param ], $value ) ) {
+						if ( ! \in_array( $field[ $param ], $value, true ) ) {
 							return false;
 						}
 					}
