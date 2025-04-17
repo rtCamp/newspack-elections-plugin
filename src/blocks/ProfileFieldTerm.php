@@ -135,10 +135,9 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
 		
-		
 		?>
 		<div <?php echo get_block_wrapper_attributes(); ?>>
-			<?php echo $this->output(); ?>
+			<?php echo wp_kses_post($this->output()); ?>
 		</div>
 		<?php
 	}

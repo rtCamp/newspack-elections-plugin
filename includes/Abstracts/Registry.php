@@ -11,7 +11,7 @@ abstract class Registry extends Collection {
 
 		if ( $this->exists( $item ) ) {
 			$label = is_a( $item, '\Govpack\Collection\Collectable' ) ? $item->slug() : $item;
-			throw new \Exception( sprintf( 'Trying to add duplicate Item (%s) to a registry.', $label ) );
+			throw new \Exception( esc_html( sprintf( 'Trying to add duplicate Item (%s) to a registry.', $label ) ) );
 		}
 		
 		$this->add( $item, $name );

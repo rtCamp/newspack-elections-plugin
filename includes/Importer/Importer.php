@@ -37,7 +37,7 @@ class Importer {
 
 	public static function maybe_download_example() {
 		if ( isset( $_GET[ self::CSV_EXAMPLE_QUERY_ARG ] ) ) {
-			echo self::download_example();
+			self::download_example();
 			die();
 		}
 	}

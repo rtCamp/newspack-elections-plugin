@@ -45,8 +45,8 @@ class ProfileReadMore extends \Govpack\Blocks\ProfileFieldText {
 			$this->output(),
 			$tagName
 		);
-
-		echo $block_html;
+		
+		echo wp_kses_post($block_html);
 	}
 
 	public function output(): string {

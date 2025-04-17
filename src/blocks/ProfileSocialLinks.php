@@ -50,7 +50,10 @@ class ProfileSocialLinks extends \Govpack\Blocks\ProfileField {
 		);
 		?>
 			>
-			<?php echo $content; ?>
+			<?php 
+				// $content will be escaped already as passed up from other blocks
+				echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+			?>
 		</ul>
 		<?php
 	}

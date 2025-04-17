@@ -18,11 +18,11 @@ class ProfileServiceRegistry extends Registry {
 		}
 		
 		if ( $this->isset( $name ) ) {
-			throw new \Exception( sprintf( 'Duplicate name (%s) Profile Service Registry. Each Name must be unique.', $name ) );
+			throw new \Exception( esc_html(sprintf( 'Duplicate name (%s) Profile Service Registry. Each Name must be unique.', $name )) );
 		}
 
 		if ( $this->exists( $item ) ) {
-			throw new \Exception( sprintf( 'Trying to add duplicate Item (%s) to a registry.', $name ) );
+			throw new \Exception( esc_html( sprintf( 'Trying to add duplicate Item (%s) to a registry.', $name ) ) );
 		}
 		
 		$this->add( $item, $name );
