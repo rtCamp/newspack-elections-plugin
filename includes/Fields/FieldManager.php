@@ -56,7 +56,7 @@ class FieldManager extends \Govpack\Abstracts\Registry {
 	public function of_format( $format ): array {
 		return $this->filter(
 			function ( $field ) use ( $format ) {
-				return in_array( $format, $field->type->formats );
+				return in_array( $format, $field->type->formats, true );
 			}
 		)->all();
 	}

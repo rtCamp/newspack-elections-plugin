@@ -33,14 +33,14 @@ class ProfileName extends \Govpack\Blocks\ProfileFieldText {
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
 		
-		$tagName = $this->get_wrapper_tag();
+		$tag_name = $this->get_wrapper_tag();
 		
 		$block_html = sprintf(
 			'<%s %s>%s</%s>', 
-			$tagName,
+			$tag_name,
 			get_block_wrapper_attributes(),
 			$this->output(),
-			$tagName
+			$tag_name
 		);
 
 		echo wp_kses_post( $block_html );

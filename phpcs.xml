@@ -26,6 +26,7 @@
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
 		<exclude name="Squiz.Commenting" />
 		<exclude name="Generic.Commenting.DocComment" />
+		<exclude name="Squiz.PHP.CommentedOutCode" />
 	</rule>
 
 	<rule ref="WordPress.WP.Capabilities">
@@ -96,4 +97,5 @@
 	<exclude-pattern>version.php</exclude-pattern>
 	<exclude-pattern>*/includes/deprecated/*</exclude-pattern>
 	<exclude-pattern>*/includes/govpack-functions-template-deprecated.php</exclude-pattern>
+	<exclude-pattern>*/bin/psalm</exclude-pattern>
 </ruleset>

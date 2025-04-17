@@ -66,7 +66,7 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 		return $parsed_block;
 	}
 
-	public function modify_context( $context, $parsed_block, $parent ) {
+	public function modify_context( $context, $parsed_block, $parent_block ) {
 
 		if ( $parsed_block['blockName'] !== $this->block_name ) {
 			return $context;
@@ -132,16 +132,16 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
 		
-		$tagName = $this->attributes['tagName'] ?? 'div';
+		$tag_name = $this->attributes['tagName'] ?? 'div';
 		
 		$block_html = sprintf(
 			'<%s %s>%s</%s>', 
-			$tagName,
+			$tag_name,
 			get_block_wrapper_attributes(
 				$this->get_new_block_wrapper_attributes()
 			),
 			$content,
-			$tagName
+			$tag_name
 		);
 		
 		echo wp_kses_post( $block_html );

@@ -75,7 +75,7 @@ if ( ! function_exists( 'gp_dump' ) ) {
 		echo '<pre>';
 
 		foreach ( $args as $index => $arg ) {
-			var_dump( $arg );
+			var_dump( $arg ); //phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_dump
 
 			if ( $index !== count( $args ) ) {
 				echo '<hr />';

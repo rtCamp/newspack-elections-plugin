@@ -61,8 +61,8 @@ abstract class Collection implements CollectionInterface {
 	}
 
 	public function create( $items ) {
-		$callingClass = get_class( $this );
-		$collection   = new $callingClass( $items );
+		$calling_class = get_class( $this );
+		$collection    = new $calling_class( $items );
 		return $collection;
 	}
 

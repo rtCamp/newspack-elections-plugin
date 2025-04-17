@@ -62,7 +62,7 @@ class ProfileSocialLink extends \Govpack\Blocks\ProfileFieldText {
 		 * Prepend URL with https:// if it doesn't appear to contain a scheme
 		 * and it's not a relative link or a fragment.
 		 */
-		if ( ! parse_url( $url, PHP_URL_SCHEME ) && ! str_starts_with( $url, '//' ) && ! str_starts_with( $url, '#' ) ) {
+		if ( ! wp_parse_url( $url, PHP_URL_SCHEME ) && ! str_starts_with( $url, '//' ) && ! str_starts_with( $url, '#' ) ) {
 			$url = 'https://' . $url;
 		}
 

@@ -36,14 +36,14 @@ class ProfileReadMore extends \Govpack\Blocks\ProfileFieldText {
 	 */
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
 		
-		$tagName = 'div';
+		$tag_name = 'div';
 		
 		$block_html = sprintf(
 			'<%s %s>%s</%s>', 
-			$tagName,
+			$tag_name,
 			get_block_wrapper_attributes(),
 			$this->output(),
-			$tagName
+			$tag_name
 		);
 		
 		echo wp_kses_post( $block_html );
@@ -61,13 +61,13 @@ class ProfileReadMore extends \Govpack\Blocks\ProfileFieldText {
 			$link_attrs['rel'] = $this->attribute( 'rel' );
 		}
 
-		$linkText = $this->attribute( 'linkText' );
-		$prefix   = $this->attribute( 'prefixWithName' ) ? $this->get_profile()->value( 'name' ) : '';
-		$suffix   = $this->attribute( 'suffixWithName' ) ? $this->get_profile()->value( 'name' ) : '';
-		$linkText = trim( sprintf( '%s %s %s', $prefix, $linkText, $suffix ) );
+		$link_text = $this->attribute( 'linkText' );
+		$prefix    = $this->attribute( 'prefixWithName' ) ? $this->get_profile()->value( 'name' ) : '';
+		$suffix    = $this->attribute( 'suffixWithName' ) ? $this->get_profile()->value( 'name' ) : '';
+		$link_text = trim( sprintf( '%s %s %s', $prefix, $link_text, $suffix ) );
 		
 
-		return sprintf( '<a %s>%s</a>', self::array_to_html_attributes( $link_attrs ), $linkText );
+		return sprintf( '<a %s>%s</a>', self::array_to_html_attributes( $link_attrs ), $link_text );
 	}
 
 	

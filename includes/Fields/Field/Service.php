@@ -25,9 +25,7 @@ class Service extends Link {
 			$services = ProfileServiceRegistry::instance();
 			if ( $services->exists( $service ) ) {
 				$this->service = $services->get( $service );
-			} else {
-				// throw exception
-			}       
+			}      
 		}
 
 		return $this;

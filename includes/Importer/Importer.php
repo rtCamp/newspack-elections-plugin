@@ -290,7 +290,7 @@ class Importer {
 		// can't be sure what the return type of the query will, force result though intval to make sure.
 		$count = intval( $count );
 		if ( $count > 1 ) {
-			$count = ( $count - 1 );
+			--$count;
 		}
 
 		return $count;

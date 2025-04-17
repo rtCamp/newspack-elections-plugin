@@ -32,16 +32,16 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 	 */
 	public function handle_render( array $attributes, string $content, \WP_Block $block ) {
 		
-		$tagName = 'div';
+		$tag_name = 'div';
 
 		$block_html = sprintf(
 			'<%s %s>%s</%s>', 
-			$tagName,
+			$tag_name,
 			get_block_wrapper_attributes(
 				$this->get_new_block_wrapper_attributes()
 			),
 			$this->output(),
-			$tagName
+			$tag_name
 		);
 
 		echo wp_kses_post( $block_html );
@@ -89,12 +89,12 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 	public function showLabel(): bool {
 
 		
-		$rowShowLabel   = $this->attribute( 'showLabel' );
-		$groupShowLabel = ( $this->has_context( 'showLabels' ) ? $this->context( 'showLabels' ) : null );
+		$row_show_label   = $this->attribute( 'showLabel' );
+		$group_show_label = ( $this->has_context( 'showLabels' ) ? $this->context( 'showLabels' ) : null );
 
-		$showLabel = $rowShowLabel ?? $groupShowLabel ?? true;
+		$show_label = $row_show_label ?? $group_show_label ?? true;
 
-		return $showLabel;
+		return $show_label;
 	}
 
 	public function output(): string {

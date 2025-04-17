@@ -196,9 +196,9 @@ class DevHelper {
 		try {
 
 			$git_head_file = '.git/refs/heads/' . $this->get_git_branch();
-			$commit        = file_get_contents( $this->plugin->path( $git_head_file ), true );
-			$this->commit  = explode( '/', $git_head_file, 3 );
-			$this->commit  = rtrim( $ref[2] );
+			$commit        = file_get_contents( $this->plugin->path( $git_head_file ), true ); //phpcs:ignore WordPressVIPMinimum.Performance.FetchingRemoteData.FileGetContentsUnknown
+			$ref           = explode( '/', $git_head_file, 3 );
+			$this->branch  = rtrim( $ref[2] );
 			return $this->branch;
 
 		} catch ( \Exception $e ) {

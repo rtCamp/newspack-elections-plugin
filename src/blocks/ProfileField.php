@@ -165,9 +165,9 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 	}
 
 	public function has_profile_id(): bool {
-		$profileId = $this->get_profile_id();
+		$profile_id = $this->get_profile_id();
 
-		if ( ( $profileId === false ) || ( $profileId === null ) || ( $profileId === '' ) ) {
+		if ( ( $profile_id === false ) || ( $profile_id === null ) || ( $profile_id === '' ) ) {
 			return false;
 		} 
 

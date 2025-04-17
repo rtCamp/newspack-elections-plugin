@@ -47,16 +47,16 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 	public function linkText(): string {
 		$link = $this->get_value();
 
-		$hasLabelOverride = ( $this->attribute( 'linkTextOverride' ) && $this->attribute( 'linkTextOverride' ) );
-		$hasDefaultLabel  = ( isset( $link['linkText'] ) && $link['linkText'] );
-		$defaultLabel     = $hasDefaultLabel ? $link['linkText'] : 'Link';
+		$has_label_override = ( $this->attribute( 'linkTextOverride' ) && $this->attribute( 'linkTextOverride' ) );
+		$has_default_label  = ( isset( $link['linkText'] ) && $link['linkText'] );
+		$default_label      = $has_default_label ? $link['linkText'] : 'Link';
 
 		if ( $this->attribute( 'linkFormat' ) === 'url' ) {
 			return $link['url'] ?? '';
 		}
 
 		if ( $this->attribute( 'linkFormat' ) === 'label' ) {
-			return ( $hasLabelOverride ? $this->attribute( 'linkTextOverride' ) : $defaultLabel );
+			return ( $has_label_override ? $this->attribute( 'linkTextOverride' ) : $default_label );
 		}
 
 		if ( $this->attribute( 'linkFormat' ) === 'icon' ) {
@@ -66,7 +66,7 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 		}
 
 
-		return $defaultLabel;
+		return $default_label;
 	}
 
 	public function variations(): array {

@@ -35,7 +35,7 @@ abstract class Registry extends Collection {
 		}
 
 		// if the passed item exists with the array, true return
-		if ( in_array( $item, $this->all() ) ) {
+		if ( in_array( $item, $this->all(), true ) ) {
 			return true;
 		}
 
