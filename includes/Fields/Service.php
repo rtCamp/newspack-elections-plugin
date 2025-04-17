@@ -47,7 +47,8 @@ class Service implements CollectableInterface {
 	}
 
 	public function set_color( string $color ): string {
-		return $this->color = $color;
+		$this->color = $color;
+		return $this->color;
 	}
 
 

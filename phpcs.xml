@@ -25,6 +25,7 @@
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
 		<exclude name="Squiz.Commenting" />
+		<exclude name="Generic.Commenting.DocComment" />
 	</rule>
 
 	<rule ref="WordPress.WP.Capabilities">
