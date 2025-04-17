@@ -72,16 +72,16 @@ if ( ! function_exists( 'gp_deprecated' ) ) {
 if ( ! function_exists( 'gp_dump' ) ) {
 	function gp_dump( ...$args ): void {
 
-		echo "<pre>";
+		echo '<pre>';
 
-		foreach($args as $index => $arg){
-			var_dump($arg);
+		foreach ( $args as $index => $arg ) {
+			var_dump( $arg );
 
-			if($index !== count($args)){
-				echo "<hr />";
+			if ( $index !== count( $args ) ) {
+				echo '<hr />';
 			}
 		}
 
-		echo "</pre>";
+		echo '</pre>';
 	}
 }

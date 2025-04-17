@@ -31,7 +31,7 @@ class Taxonomy extends \Govpack\Fields\FieldType {
 	 * 
 	 * Block used to output the field by default
 	 */
-	public ?string $default_block = "npe/profile-field-term";
+	public ?string $default_block = 'npe/profile-field-term';
 
 	/**
 	 * Type Icon
@@ -44,5 +44,4 @@ class Taxonomy extends \Govpack\Fields\FieldType {
 
 	public function get_value_for_model() {
 	}
-
 }

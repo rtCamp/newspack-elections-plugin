@@ -97,7 +97,7 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 		global $post;
 
 	
-		if (!isset($attributes['postId']) || (! $attributes['postId'] ) ) {
+		if ( ! isset( $attributes['postId'] ) || ( ! $attributes['postId'] ) ) {
 			return;
 		}
 
@@ -105,7 +105,7 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 			return false;
 		}
 
-		$this->profile = \Govpack\Profile\Profile::get( $attributes["postId"] );
+		$this->profile = \Govpack\Profile\Profile::get( $attributes['postId'] );
 
 		
 		
@@ -159,7 +159,7 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 		$classes   = [];
 
 
-		if ( isset($this->attributes['align']) && $this->attributes['customWidth'] ) {
+		if ( isset( $this->attributes['align'] ) && $this->attributes['customWidth'] ) {
 			
 			$styles['max-width'] = $this->attributes['customWidth'];
 		}

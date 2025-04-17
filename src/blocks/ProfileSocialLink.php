@@ -25,10 +25,10 @@ class ProfileSocialLink extends \Govpack\Blocks\ProfileFieldText {
 
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
 		
-		$link 			= $this->get_value();
-		$field 			= $this->get_field();
-		$service 		= $field->service();
-		$icon 			= $service->icon();
+		$link    = $this->get_value();
+		$field   = $this->get_field();
+		$service = $field->service();
+		$icon    = $service->icon();
 
 		
 
@@ -72,8 +72,8 @@ class ProfileSocialLink extends \Govpack\Blocks\ProfileFieldText {
 
 		
 		$styles = [
-			'color' => $service->color() ?? $this->context("iconColorValue") ?? false,
-			'background-color' => $this->context('iconBackgroundColorValue' ?? false)
+			'color'            => $service->color() ?? $this->context( 'iconColorValue' ) ?? false,
+			'background-color' => $this->context( 'iconBackgroundColorValue' ?? false ),
 		];
 
 	
@@ -84,7 +84,7 @@ class ProfileSocialLink extends \Govpack\Blocks\ProfileFieldText {
 		echo get_block_wrapper_attributes(
 			[
 				'class' => 'wp-block-social-link wp-social-link',
-				'style' => self::style_array_to_string($styles)
+				'style' => self::style_array_to_string( $styles ),
 			]
 		);
 		?>
@@ -104,20 +104,20 @@ class ProfileSocialLink extends \Govpack\Blocks\ProfileFieldText {
 		<?php
 	}
 
-	public static function style_array_to_string(array|string $styles) : string{
+	public static function style_array_to_string( array|string $styles ): string {
 		
-		if(is_string($styles)){
+		if ( is_string( $styles ) ) {
 			return $styles;
 		}
 
-		$style = "";
+		$style = '';
 
 		// remove false or null values
-		$styles = array_filter($styles);
+		$styles = array_filter( $styles );
 
 		// return empty string if no styles
-		if(empty($styles)){
-			return "";
+		if ( empty( $styles ) ) {
+			return '';
 		}
 
 		$style = trim(
@@ -134,7 +134,6 @@ class ProfileSocialLink extends \Govpack\Blocks\ProfileFieldText {
 		);
 
 		return $style;
-
 	}
 
 	public function variations(): array {

@@ -75,31 +75,31 @@ class PostProperty extends \Govpack\Fields\Field {
 
 		$value = $this->raw( $model );
 
-		if($this->source_key === "post_excerpt"){
+		if ( $this->source_key === 'post_excerpt' ) {
 
-			$data = array(
+			$data = [
 				'raw'       => $value,
 				'rendered'  => post_password_required( $model->post ) ? '' : $value,
 				'protected' => (bool) $model->post->post_password,
-			);
+			];
 
 			return $data;
 		}
 
-		if($this->source_key === "post_title"){
+		if ( $this->source_key === 'post_title' ) {
 
-			$data = array(
+			$data = [
 				'raw'       => $value,
 				'protected' => (bool) $model->post->post_password,
-			);
+			];
 
-			add_filter( 'protected_title_format', array( $this, 'protected_title_format' ) );
-			add_filter( 'private_title_format', array( $this, 'protected_title_format' ) );
+			add_filter( 'protected_title_format', [ $this, 'protected_title_format' ] );
+			add_filter( 'private_title_format', [ $this, 'protected_title_format' ] );
 
 			$data['rendered'] = get_the_title( $model->post->ID );
 
-			remove_filter( 'protected_title_format', array( $this, 'protected_title_format' ) );
-			remove_filter( 'private_title_format', array( $this, 'protected_title_format' ) );
+			remove_filter( 'protected_title_format', [ $this, 'protected_title_format' ] );
+			remove_filter( 'private_title_format', [ $this, 'protected_title_format' ] );
 
 			return $data;
 		}

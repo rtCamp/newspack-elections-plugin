@@ -35,7 +35,7 @@ class Patterns {
 	 * 
 	 * @since 1.2.0
 	 */
-	private string $cache_transient_name = "npe_plugin_files_patterns";
+	private string $cache_transient_name = 'npe_plugin_files_patterns';
 
 	/**
 	 * Expiration time for the plugin patttern cache bucket.
@@ -50,17 +50,16 @@ class Patterns {
 	/**
 	 * Constructor
 	 */
-	public function __construct(Plugin $plugin){
-		$this->plugin($plugin);
+	public function __construct( Plugin $plugin ) {
+		$this->plugin( $plugin );
 	}
 
 	/**
 	 * Set pattern_directory
 	 * 
 	 * Allows the pattern directory to be configured from above
-	 * 
 	 */
-	public function set_pattern_directory(string $path) : self {
+	public function set_pattern_directory( string $path ): self {
 		$this->pattern_directory = $path;
 		return $this;
 	}
@@ -69,9 +68,8 @@ class Patterns {
 	 * Set default_category
 	 * 
 	 * Allows the default category to be configured from above
-	 * 
 	 */
-	public function set_default_category(string $category) : self {
+	public function set_default_category( string $category ): self {
 		$this->default_category = $category;
 		return $this;
 	}
@@ -80,10 +78,9 @@ class Patterns {
 	 * Register Hooks 
 	 * 
 	 * Integrate with WordPress Load Order
-	 * 
 	 */
 	public function hooks() {
-	//	add_action( 'admin_init', [ __CLASS__, 'register_block_patterns' ] );
+		//  add_action( 'admin_init', [ __CLASS__, 'register_block_patterns' ] );
 	}
 
 	/**
@@ -91,7 +88,7 @@ class Patterns {
 	 * 
 	 * Utility method for chaining the WP_Block_Patterns_Registry
 	 */
-	private function registry() : WP_Block_Patterns_Registry {
+	private function registry(): WP_Block_Patterns_Registry {
 		return WP_Block_Patterns_Registry::get_instance();
 	}
 
@@ -102,7 +99,7 @@ class Patterns {
 	 * as needed, Set the Default Category, Mark the pattern source as plugin 
 	 * finally register the actual pattern
 	 */
-	public function register_patterns() : self {
+	public function register_patterns(): self {
 		
 		// Either from cache or the files on disk
 		$patterns = $this->get_patterns();
@@ -112,7 +109,7 @@ class Patterns {
 				continue;
 			}
 
-			$path = trailingslashit($this->pattern_directory) . $file;
+			$path = trailingslashit( $this->pattern_directory ) . $file;
 
 			if ( ! file_exists( $path ) ) {
 				_doing_it_wrong(
@@ -140,14 +137,14 @@ class Patterns {
 
 			
 			// if categories are set then force the default category
-			if( $this->use_default_category() && (
-				(!isset($pattern_data["categories"])) || ( empty($pattern_data["categories"]))
-			)){
-				$pattern_data["categories"] = [$this->default_category];
+			if ( $this->use_default_category() && (
+				( ! isset( $pattern_data['categories'] ) ) || ( empty( $pattern_data['categories'] ) )
+			) ) {
+				$pattern_data['categories'] = [ $this->default_category ];
 			}
 
-			if(!isset($pattern_data["source"]) || empty($pattern_data["source"])){
-				$pattern_data["source"] = "plugin";
+			if ( ! isset( $pattern_data['source'] ) || empty( $pattern_data['source'] ) ) {
+				$pattern_data['source'] = 'plugin';
 			}
 			
 		
@@ -161,8 +158,8 @@ class Patterns {
 	/**
 	 * Conditional check to see if there is a valid default category
 	 */
-	private function use_default_category() : bool{
-		return isset($this->default_category) && $this->default_category;
+	private function use_default_category(): bool {
+		return isset( $this->default_category ) && $this->default_category;
 	}
 
 	/**
@@ -170,7 +167,7 @@ class Patterns {
 	 * 
 	 * If WordPress is in "plugin" or "any" development mode, then do not use the cache
 	 */
-	private function can_use_cached() : bool {
+	private function can_use_cached(): bool {
 		return ! wp_is_development_mode( 'plugin' );
 	}
 
@@ -179,7 +176,7 @@ class Patterns {
 	 * 
 	 * Abstraction over using the cached pattern data or loading from files
 	 */
-	public function get_patterns() : array | bool {
+	public function get_patterns(): array|bool {
 
 		$pattern_data = $this->get_pattern_cache();
 
@@ -197,7 +194,7 @@ class Patterns {
 	/**
 	 * Get Pattern Data from the files in the pattern directory
 	 */
-	public function load_patterns_files() : array | bool{
+	public function load_patterns_files(): array|bool {
 
 		$pattern_data = [];
 
@@ -219,7 +216,7 @@ class Patterns {
 			return $pattern_data;
 		}
 		
-		$default_headers = array(
+		$default_headers = [
 			'title'         => 'Title',
 			'slug'          => 'Slug',
 			'description'   => 'Description',
@@ -230,15 +227,15 @@ class Patterns {
 			'blockTypes'    => 'Block Types',
 			'postTypes'     => 'Post Types',
 			'templateTypes' => 'Template Types',
-		);
+		];
 
-		$properties_to_parse = array(
+		$properties_to_parse = [
 			'categories',
 			'keywords',
 			'blockTypes',
 			'postTypes',
 			'templateTypes',
-		);
+		];
 
 		foreach ( $files as $file ) {
 			$pattern = get_file_data( $file, $default_headers );
@@ -305,14 +302,14 @@ class Patterns {
 			if ( ! empty( $pattern[ $property ] ) ) {
 				$pattern[ $property ] = in_array(
 					strtolower( $pattern[ $property ] ),
-					array( 'yes', 'true' ),
+					[ 'yes', 'true' ],
 					true
 				);
 			} else {
 				unset( $pattern[ $property ] );
 			}
 
-			$key = str_replace( trailingslashit($this->pattern_directory), '', $file );
+			$key = str_replace( trailingslashit( $this->pattern_directory ), '', $file );
 
 			$pattern_data[ $key ] = $pattern;
 		}
@@ -345,7 +342,7 @@ class Patterns {
 		}
 
 		$results = scandir( $path );
-		$files   = array();
+		$files   = [];
 
 		/**
 		 * Filters the array of excluded directories and files while scanning theme folder.
@@ -354,7 +351,7 @@ class Patterns {
 		 *
 		 * @param string[] $exclusions Array of excluded directories and files.
 		 */
-		$exclusions = (array) apply_filters( 'npe_scandir_exclusions', array( 'CVS', 'node_modules', 'vendor', 'bower_components' ) );
+		$exclusions = (array) apply_filters( 'npe_scandir_exclusions', [ 'CVS', 'node_modules', 'vendor', 'bower_components' ] );
 
 		foreach ( $results as $result ) {
 			if ( '.' === $result[0] || in_array( $result, $exclusions, true ) ) {
@@ -391,7 +388,7 @@ class Patterns {
 	 */
 	private function get_pattern_cache() {
 	
-		$pattern_data = get_site_transient( $this->cache_transient_name);
+		$pattern_data = get_site_transient( $this->cache_transient_name );
 
 		if ( is_array( $pattern_data ) && $pattern_data['version'] === $this->plugin->version->version() ) {
 			return $pattern_data['patterns'];
@@ -405,10 +402,10 @@ class Patterns {
 	 * @since 1.2.0
 	 */
 	private function set_pattern_cache( array $patterns ) {
-		$pattern_data = array(
+		$pattern_data = [
 			'version'  => $this->plugin->version->version(),
 			'patterns' => $patterns,
-		);
+		];
 
 		/**
 		 * Filters the cache expiration time for theme files.

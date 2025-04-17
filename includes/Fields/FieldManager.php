@@ -19,8 +19,8 @@ class FieldManager extends \Govpack\Abstracts\Registry {
 	public FieldTypeRegistry $types;
 
 	
-	public function get(string $item ) : Field | null {
-		return parent::get($item);
+	public function get( string $item ): Field|null {
+		return parent::get( $item );
 	}
 
 	public function set_types( FieldTypeRegistry $types ) {
@@ -42,15 +42,15 @@ class FieldManager extends \Govpack\Abstracts\Registry {
 	}
 
 	public function get_by_source( string $source ): array {
-		return $this->where("source", $source)->all();
+		return $this->where( 'source', $source )->all();
 	}
 
 	public function of_type( $type ): array {
 		return $this->filter(
-				function ( $field ) use ( $type ) {
-					return $field->type->slug === $type;
-				}
-			)->all();
+			function ( $field ) use ( $type ) {
+				return $field->type->slug === $type;
+			}
+		)->all();
 	}
 
 	public function of_format( $format ): array {

@@ -19,16 +19,14 @@ class BlockEditor {
 	private Patterns $patterns;
 	private Govpack $plugin;
 
-	public function __construct(Govpack $plugin)
-	{
+	public function __construct( Govpack $plugin ) {
 		$this->plugin = $plugin;
 	}
 	
-	public function hooks(){
-
+	public function hooks() {
 	}
 
-	public function block_categories() : BlockCategories {
+	public function block_categories(): BlockCategories {
 		if ( ! isset( $this->block_categories ) ) {
 			$this->block_categories = new BlockCategories();
 			$this->block_categories->add_hooks();
@@ -45,9 +43,8 @@ class BlockEditor {
 
 	public function patterns() {
 		if ( ! isset( $this->patterns ) ) {
-			$this->patterns = new Patterns($this->plugin);
+			$this->patterns = new Patterns( $this->plugin );
 		}
 		return $this->patterns;
 	}
-
 }

@@ -60,7 +60,7 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 		}
 
 		if ( $this->attribute( 'linkFormat' ) === 'icon' ) {
-			if(is_a($this->get_field(), "Govpack\Fields\Field\Service")){
+			if ( is_a( $this->get_field(), 'Govpack\Fields\Field\Service' ) ) {
 				return $this->get_field()->service()->icon();
 			}
 		}

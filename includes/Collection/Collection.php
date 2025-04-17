@@ -10,17 +10,16 @@ abstract class Collection implements CollectionInterface {
 
 	public array $collection;
 
-	public function __construct($items = []){
+	public function __construct( $items = [] ) {
 
 		$this->collection = [];
 
-		if(!empty($items)){
+		if ( ! empty( $items ) ) {
 			$this->collection = $items;
 		}
-
 	}
 
-	public function get( string $item ): null | CollectableInterface {
+	public function get( string $item ): null|CollectableInterface {
 		if ( $this->exists( $item ) ) {
 			return $this->collection[ $item ];
 		}
@@ -28,7 +27,7 @@ abstract class Collection implements CollectionInterface {
 		return null;
 	}
 
-	public function add( mixed $item, string | null $name = null  ) {
+	public function add( mixed $item, string|null $name = null ) {
 		$this->collection[ $item->slug() ] = $item;
 	}
 
@@ -61,15 +60,15 @@ abstract class Collection implements CollectionInterface {
 		);
 	}
 
-	public function create($items){
-		$callingClass = get_class($this);
-		$collection = new $callingClass($items);
+	public function create( $items ) {
+		$callingClass = get_class( $this );
+		$collection   = new $callingClass( $items );
 		return $collection;
 	}
 
-	public function filter( callable $callback ) : self {
-		$filtered = array_filter($this->collection, $callback);
-		return $this->create($filtered);
+	public function filter( callable $callback ): self {
+		$filtered = array_filter( $this->collection, $callback );
+		return $this->create( $filtered );
 	}
 
 	public function where( string $prop, mixed $value ): self {
@@ -83,13 +82,11 @@ abstract class Collection implements CollectionInterface {
 		);
 	}
 
-	public function count() : int {
-		return count($this->collection);
+	public function count(): int {
+		return count( $this->collection );
 	}
 
-	public function length() : int {
+	public function length(): int {
 		return $this->count();
 	}
-
-
 }

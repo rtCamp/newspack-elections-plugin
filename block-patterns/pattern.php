@@ -2,9 +2,8 @@
 /**
  * Title: My Pattern
  * Slug: npe/my-pattern
- *
  */
 ?>
- <div>
+<div>
 	Pattern
- </div>
+</div>
