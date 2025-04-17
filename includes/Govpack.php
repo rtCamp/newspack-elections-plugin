@@ -150,7 +150,7 @@ class Govpack extends Plugin {
 			->patterns()
 				->set_default_category( 'newspack-elections' )
 				->set_pattern_directory( $this->path( 'block-patterns' ) )
-				->load_patterns_in_directory();
+				->register_patterns();
 	
 
 		if ( is_admin() ) {
