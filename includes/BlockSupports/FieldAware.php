@@ -33,7 +33,7 @@ class FieldAware extends \Govpack\Abstracts\BlockSupport {
 	 *
 	 * @param WP_Block_Type $block_type Block Type.
 	 */
-	function attributes( WP_Block_Type $block_type ): void {
+	public function attributes( WP_Block_Type $block_type ): void {
 		
 		if ( ! $this->is_supported_by_block_type( $block_type ) ) {
 			return;

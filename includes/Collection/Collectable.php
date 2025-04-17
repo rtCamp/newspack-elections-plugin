@@ -10,7 +10,7 @@ abstract class Collectable implements CollectableInterface {
 		return $this->slug;
 	}
 
-	abstract function to_array(): array;
+	abstract public function to_array(): array;
 	
-	abstract function to_rest(): array; 
+	abstract public function to_rest(): array; 
 }
