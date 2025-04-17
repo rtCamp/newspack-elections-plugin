@@ -84,7 +84,8 @@
 	"usesContext": [
 		"npe/showLabels", 
 		"postType",
-		"npe/postId"
+		"npe/postId",
+		"postId"
 	],
 	"providesContext": {
 		"npe/fieldKey": "fieldKey",

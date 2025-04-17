@@ -67,6 +67,7 @@
 		"npe/field",
 		"npe/showLabels",
 		"postType", 
+		"postId",
 		"npe/postId"
 	]
 	

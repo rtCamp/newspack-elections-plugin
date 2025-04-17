@@ -222,6 +222,8 @@ function ProfileBlockEdit( props ) {
 	const [resizeEnabled, resizeProps] = useResizeProps(props);
 	const {setProfile, resetProfile, profileId = null, profile, profileQuery} = useProfileAttributes(props)
 
+	
+	/*
 	const { isBlockSelected, hasSelectedInnerBlock, selectedInnerBlock, selectedInnerBlockParentsOfType, isSelectedBlockProfileGroup } = useSelect( (select) => {
 		const isBlockSelected = select(blockEditorStore).isBlockSelected(clientId)
 		const hasSelectedInnerBlock = select(blockEditorStore).hasSelectedInnerBlock(clientId, true)
@@ -237,7 +239,7 @@ function ProfileBlockEdit( props ) {
 			selectedInnerBlockParentsOfType,
 		}
 	});
-
+	*/
 
 	//const showAppender = (isBlockSelected || (hasSelectedInnerBlock && !isSelectedBlockProfileGroup && selectedInnerBlockParentsOfType.length === 0))
 	const showAppender = false
@@ -269,6 +271,7 @@ function ProfileBlockEdit( props ) {
 		setAttributes( { tagName: nextTagValue } )
 	}
 
+	/*
 	useEffect( () => {
 		
 		if(!profile){
@@ -286,7 +289,7 @@ function ProfileBlockEdit( props ) {
 
 	}, [profile])
 
-
+	*/
 	const showSpinner = profileQuery.isLoading
 	const showProfile = profileQuery.hasLoaded === true
 
@@ -334,9 +337,8 @@ function ProfileBlockEdit( props ) {
 		<>
 		<BlockContextProvider
 			value = {{
-				"postId" : 14215,
-				"npe/postId" : 14215,
-				"npe/test": "well"
+				"postId" : profileId,
+				"npe/postId" : profileId,
 			}}
 		>
 			{ showSpinner && (

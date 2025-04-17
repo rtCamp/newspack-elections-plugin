@@ -1,37 +1,63 @@
 import { useSelect } from '@wordpress/data';
 import { store as coreDataStore } from '@wordpress/core-data';
 
+import { store as editorStore } from '@wordpress/editor';
+
 import { PROFILE_POST_TYPE } from './constants';
 import { useAttributeOverContext, useContextOverAttribute } from './utils';
 import { useFieldAttributes, useFields } from "./../fields"
 
+import {useMemo} from "@wordpress/element"
 /**
  * Gets the ID of the Profile to use from the Block's Context, falling back to Attributes. 
  * Provides an ID and booleans indicating if the ID was found in Context, or Attributes  
  */
 export const useProfileId = (props) => {
 
-	const { context } = props
+	
+	const { attributes, context, clientId } = props
 
 	const { 
 		postType = null,
-		queryId = null
+		queryId = null,
+		'npe/postId' : inheritedSelectedProfileId = null,
+		postId : queryPostId,
 	} = context
 
+	const {
+		postId : selectedProfileId = null
+	} = attributes
+
+	useMemo( () => {
+		console.log("Memo calculation", postType, selectedProfileId, inheritedSelectedProfileId, queryPostId)
+		return "woo"
+	}, [postType, selectedProfileId, inheritedSelectedProfileId, queryPostId])
+
+	const {currentPostType, currentPostId} = useSelect( (select) => {
+		console.log("run get current postType and postId selector")
+		return {
+			currentPostType : select(editorStore).getCurrentPostType(),
+			currentPostId: select(editorStore).getCurrentPostId()
+		}
+	}, [postType])
+
+	const isProfilePage = ((currentPostType === PROFILE_POST_TYPE) && (context.postId === currentPostId))
 	const isQuery = (queryId && postType) ? true : false
-	const contextSource = useContextOverAttribute(props, "postId", "postId")
-	const attrSource = useAttributeOverContext(props, "postId", "postId")
+	const isInheritedSelection = (inheritedSelectedProfileId !== null)
+	const isDirectSelection = (selectedProfileId !== null)
 
-	// if queryId exists and postType then we're inside a query loop
-	const source = isQuery ? contextSource : attrSource
-	
-	const [profileId, isControlledByContext, isControlledByAttribute] = source
+	let profileId
 
-	return {
-		profileId,
-		isControlledByAttribute,
-		isControlledByContext
+	if(isProfilePage){
+		profileId = currentPostId
+	} else if(isQuery){
+		profileId = context.postId
+	} else {
+		profileId = isDirectSelection ? selectedProfileId : inheritedSelectedProfileId
 	}
+
+	
+	return  profileId
 }
 
 /**
@@ -84,8 +110,8 @@ export const useProfile = ( profileId ) => {
 export const useProfileAttributes = ( props ) => {
 
 	const { setAttributes } = props
-	const {profileId} = useProfileId(props)
-	const {profile, ...profileQuery} = useProfile(profileId)
+	const profileId = useProfileId(props)
+	const { profile, ...profileQuery } = useProfile(profileId)
 
 	const resetProfile = () => {
 		setProfile( 0 )
@@ -112,6 +138,7 @@ export const useProfileFromContext = ( context ) => {
 		postId : pageInheritedPostId = null,
 		postType = false
 	} = context
+	
 	
 	
 	const profileId = selectedProfileId ?? pageInheritedPostId
@@ -141,7 +168,9 @@ export const useProfileFromContext = ( context ) => {
 export const useProfileFields = (props) => {
 
 	const {context} = props
-	const profile = useProfileFromContext(context) ?? {}
+	const profileId = useProfileId(props)
+
+	const {profile} = useProfile(profileId) ?? {}
 	let fields = useFields()
 
 	
@@ -187,7 +216,7 @@ export const useProfileFields = (props) => {
 export const useProfileFieldAttributes = (props) => {  
 
 	const {context} = props
-	const fieldAttrs  = useFieldAttributes(props)
+	const fieldAttrs  = useFieldAttributes( props )
 	const profile = useProfileFromContext( context )
 	const value = profile?.profile?.[fieldAttrs?.fieldKey] ?? null;
 	const profileId = profile.id
