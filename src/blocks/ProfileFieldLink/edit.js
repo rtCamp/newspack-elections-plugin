@@ -81,9 +81,10 @@ function Edit( props ) {
 
 	const {fieldKey, value, profile, field, profileId, fieldType } =  useProfileFieldAttributes(props) 
 	const blockProps = useBlockProps()
-	const isPreviewMode = useIsPreviewMode()
+	
 	const isInnerBlockMode = (fieldType === "block")
-	const { attributes, setAttributes, context } = props
+	const { attributes, setAttributes, context, clientId } = props
+	const isPreviewMode = useIsPreviewMode(clientId)
 	const { 
 		linkTextOverride : labelOverride = "",
 		linkFormat,

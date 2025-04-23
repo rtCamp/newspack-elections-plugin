@@ -3,7 +3,7 @@ import { group as icon } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
- import Edit from './edit';
+ import RowGroupEdit from './edit';
  import Save from './save';
  import metadata from './block.json';
 
@@ -25,6 +25,6 @@ registerBlockType( metadata.name, {
 	keywords: [ 'govpack' ],
     styles: [
 	],
-	edit : Edit,
+	edit : RowGroupEdit,
 	save: Save,
 } );

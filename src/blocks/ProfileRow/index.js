@@ -5,7 +5,7 @@ import { __ } from "@wordpress/i18n"
 /**
  * Internal dependencies
  */
-import Edit from './edit';
+import ProfileRowEdit from './edit';
 import Save from './save';
 import metadata from './block.json';
 import deprecated from './deprecated';
@@ -29,7 +29,7 @@ registerBlockType( metadata.name, {
 	keywords: [ 'govpack' ],
     styles: [
 	],
-	edit : Edit,
+	edit : ProfileRowEdit,
 	save: Save,
 	deprecated : deprecated
 } );

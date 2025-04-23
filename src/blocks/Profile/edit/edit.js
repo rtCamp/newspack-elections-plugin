@@ -32,6 +32,7 @@ import { DEFAULT_TEMPLATE } from './default-template.js';
 import { useProfileAttributes } from "@npe/editor";
 import { usePostEditURL } from '@npe/editor';
 
+import {useState} from "@wordpress/element"
 
 
 const ProfileBlockControls = ({ attributes, setAttributes, ...props}) => {
@@ -243,9 +244,7 @@ function ProfileBlockEdit( props ) {
 
 	//const showAppender = (isBlockSelected || (hasSelectedInnerBlock && !isSelectedBlockProfileGroup && selectedInnerBlockParentsOfType.length === 0))
 	const showAppender = false
-    const ref = useRef(null);
-	const instanceId = useInstanceId( ProfileBlockEdit );
-	const blockProps = useBlockProps( { ref } );
+	const blockProps = useBlockProps();
 	const {children, ...innerBlockProps} = useInnerBlocksProps(blockProps, {
 		template : DEFAULT_TEMPLATE,
 		renderAppender : (showAppender) ? InnerBlocks.ButtonBlockAppender : false

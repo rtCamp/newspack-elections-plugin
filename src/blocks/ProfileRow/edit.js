@@ -9,7 +9,7 @@ import {isEmpty} from "lodash"
  */
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls, useInnerBlocksProps, store as blockEditorStore, RichText} from "@wordpress/block-editor"
-import { useSelect} from '@wordpress/data';
+import { useSelect, select} from '@wordpress/data';
 import { store as blocksStore } from "@wordpress/blocks"
 import {
 	PanelBody, PanelRow, ToggleControl, 
@@ -19,7 +19,7 @@ import {
 	FlexItem,
 } from '@wordpress/components';
 
-import {useEffect} from "@wordpress/element"
+import {useEffect, useMemo} from "@wordpress/element"
 
 /**
  * Internal dependencies
@@ -29,6 +29,13 @@ import { ProfileBlockName } from '../Profile';
 
 import { useFields } from "@npe/editor"
 import { useIsPreviewMode } from '../utils';
+
+const defaultTemplate = [
+	['core/paragraph', {
+		"placeholder" : "Profile Value..."
+	}]
+]
+
 
 const MetaInspectorControl = ({
 	fieldKey,
@@ -69,27 +76,22 @@ const MetaInspectorControl = ({
 
 function useConditionalTemplate(clientId){
 
-	const defaultTemplate = [
-		['core/paragraph', {
-			"placeholder" : "Profile Value..."
-		}]
-	]
+	const {name, attributes} = select(blockEditorStore).getBlock(clientId)
+		
+	const template = useMemo( () => {
+		const variation = select(blocksStore).getActiveBlockVariation(name, attributes)
+		return variation?.innerBlocks ?? defaultTemplate 
+	}, [attributes.field] )
 
-	const { block, variation } = useSelect( (select) => {
-		const block = select(blockEditorStore).getBlock(clientId)
-		return {
-			block,
-			variation: select(blocksStore).getActiveBlockVariation(block.name, block.attributes),
-		}
-	} )
-	
-
-	return variation?.innerBlocks ?? defaultTemplate 
+	return template
 }
 
-function Edit( props ) {
+function ProfileRowEdit( props ) {
 
 	const {attributes, setAttributes, context, clientId} = props  
+
+	console.count("row render: " + clientId )
+
 	const blockProps = useBlockProps();
 	const { setField, fieldKey, fieldType, value, field } =  useProfileFieldAttributes(props) 
 	const fields = useProfileFields(props)
@@ -97,7 +99,7 @@ function Edit( props ) {
 
 	const hasValue = !isEmpty(value)
 	const hasField = !isEmpty(field)
-	const isPreviewMode = useIsPreviewMode()
+	const isPreviewMode = useIsPreviewMode(clientId)
 	
 	/**
 	 * Get Data From Parent Blocks
@@ -222,5 +224,5 @@ function Edit( props ) {
 	)
 }
 
-export {Edit}
-export default Edit
+export {ProfileRowEdit}
+export default ProfileRowEdit

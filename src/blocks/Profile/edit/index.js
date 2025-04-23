@@ -2,6 +2,7 @@ import {useSelect} from "@wordpress/data"
 import {store as blockEditorStore, useInnerBlocksProps, useBlockProps} from "@wordpress/block-editor"
 import { store as blocksStore } from '@wordpress/blocks';
 import { store as editorStore } from '@wordpress/editor';
+import { useCallback } from '@wordpress/element';
 
 import { ProfileBlockEdit } from "./edit"
 import { ProfileVariationSelector } from "./variation-selector"
@@ -19,12 +20,12 @@ import "./../editor.scss"
 */
 export const ProfileEdit = ( props ) => {
 
-	console.log("Profile Render", props.context)
+	
 	const { clientId, attributes, name, setAttributes, context} = props
 	const blockProps = useBlockProps()
 	const {children, ...innerBlockProps} = useInnerBlocksProps(blockProps)
 
-	const isPreview = attributes.preview ?? true
+	
 
 	// Once a Profile Has Inner Blocks we can't re-choose the variation
 	const hasInnerBlocks = useSelect( ( select ) => {
@@ -45,9 +46,9 @@ export const ProfileEdit = ( props ) => {
 		}, [ name ]
 	);
 	
-	const setProfile = (newProfileId) => {
+	const setProfile = useCallback ((newProfileId) => {
 		setAttributes({"postId" : newProfileId})
-	}
+	}, [setAttributes])
 	
 	const isProfilePage = (currentPostType === PROFILE_POST_TYPE) && (context.postId === currentPostId)
 	const hasContextQuery = (context.queryId && context.postId && (context.postType === PROFILE_POST_TYPE))

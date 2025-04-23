@@ -1,4 +1,4 @@
-import { useSelect } from '@wordpress/data';
+import { useSelect, select} from '@wordpress/data';
 import { store as coreDataStore } from '@wordpress/core-data';
 
 import { store as editorStore } from '@wordpress/editor';
@@ -7,7 +7,7 @@ import { PROFILE_POST_TYPE } from './constants';
 import { useAttributeOverContext, useContextOverAttribute } from './utils';
 import { useFieldAttributes, useFields } from "./../fields"
 
-import {useMemo} from "@wordpress/element"
+import {useMemo, useState} from "@wordpress/element"
 /**
  * Gets the ID of the Profile to use from the Block's Context, falling back to Attributes. 
  * Provides an ID and booleans indicating if the ID was found in Context, or Attributes  
@@ -15,48 +15,65 @@ import {useMemo} from "@wordpress/element"
 export const useProfileId = (props) => {
 
 	
-	const { attributes, context, clientId } = props
+
+	const [profileId, setProfileId] = useState(null)
+	
+
+	const { attributes, context, clientId, name } = props
+	console.count("useProfileId" )
+	console.count("useProfileId : " + clientId )
 
 	const { 
-		postType = null,
-		queryId = null,
-		'npe/postId' : inheritedSelectedProfileId = null,
+		postType,
+		queryId,
+		'npe/postId' : inheritedSelectedProfileId,
 		postId : queryPostId,
 	} = context
 
 	const {
-		postId : selectedProfileId = null
+		postId : selectedProfileId
 	} = attributes
 
-	useMemo( () => {
-		console.log("Memo calculation", postType, selectedProfileId, inheritedSelectedProfileId, queryPostId)
-		return "woo"
-	}, [postType, selectedProfileId, inheritedSelectedProfileId, queryPostId])
-
+	
 	const {currentPostType, currentPostId} = useSelect( (select) => {
-		console.log("run get current postType and postId selector")
+		console.count("run get current postType and postId selector")
+		console.count("run get current postType and postId selector : "+ name + " : " + clientId)
 		return {
 			currentPostType : select(editorStore).getCurrentPostType(),
-			currentPostId: select(editorStore).getCurrentPostId()
+			currentPostId : select(editorStore).getCurrentPostId()
 		}
-	}, [postType])
+	}, [clientId])
+	
+
+	//const currentPostType = select(editorStore).getCurrentPostType()
+	//const currentPostId = select(editorStore).getCurrentPostId()
+
+	const m = useMemo( () => {
+		console.log("Memo calculation", clientId, selectedProfileId, queryPostId, inheritedSelectedProfileId)
+		return "woo"
+	}, [clientId])
+
+	
 
 	const isProfilePage = ((currentPostType === PROFILE_POST_TYPE) && (context.postId === currentPostId))
 	const isQuery = (queryId && postType) ? true : false
 	const isInheritedSelection = (inheritedSelectedProfileId !== null)
 	const isDirectSelection = (selectedProfileId !== null)
 
-	let profileId
-
+	let derivedProfileId
 	if(isProfilePage){
-		profileId = currentPostId
+		derivedProfileId = currentPostId
 	} else if(isQuery){
-		profileId = context.postId
+		derivedProfileId = context.postId
 	} else {
-		profileId = isDirectSelection ? selectedProfileId : inheritedSelectedProfileId
+		derivedProfileId = isDirectSelection ? selectedProfileId : inheritedSelectedProfileId
 	}
 
-	
+	if( profileId !== derivedProfileId){
+		setProfileId(derivedProfileId)
+		return derivedProfileId
+	}
+
 	return  profileId
 }
 
@@ -66,6 +83,9 @@ export const useProfileId = (props) => {
 export const useProfile = ( profileId ) => {
 
 	const query = useSelect( (select) => {
+
+		
+
 		const selectorArgs = [ 
 			'postType', 
 			PROFILE_POST_TYPE,
@@ -133,6 +153,7 @@ export const useProfileAttributes = ( props ) => {
  */
 export const useProfileFromContext = ( context ) => {
 
+	console.log("useProfileFromContext")
 	let { 
 		'npe/postId' : selectedProfileId = null,
 		postId : pageInheritedPostId = null,
@@ -215,11 +236,11 @@ export const useProfileFields = (props) => {
 
 export const useProfileFieldAttributes = (props) => {  
 
-	const {context} = props
+	const profileId = useProfileId(props)
 	const fieldAttrs  = useFieldAttributes( props )
-	const profile = useProfileFromContext( context )
+	const {profile} = useProfile( profileId )
 	const value = profile?.profile?.[fieldAttrs?.fieldKey] ?? null;
-	const profileId = profile.id
+	
 	
 	return {
 		profileId,
