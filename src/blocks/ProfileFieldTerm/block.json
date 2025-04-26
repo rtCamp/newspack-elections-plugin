@@ -62,7 +62,6 @@
 		"postType",
 		"postId",
 		"npe/postId",
-		"npe/fieldKey",
-		"npe/field"
+		"npe/profileId"
 	]
 }

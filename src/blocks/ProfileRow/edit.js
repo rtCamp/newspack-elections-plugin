@@ -90,7 +90,7 @@ function ProfileRowEdit( props ) {
 
 	const {attributes, setAttributes, context, clientId} = props  
 
-	console.count("row render: " + clientId )
+	
 
 	const blockProps = useBlockProps();
 	const { setField, fieldKey, fieldType, value, field } =  useProfileFieldAttributes(props) 

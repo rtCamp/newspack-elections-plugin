@@ -110,16 +110,21 @@ function EditTermBlock( props ) {
 	const { attributes, setAttributes, context, isSelected } = props
 	const blockProps = useBlockProps();
 
+	const {
+		"npe/profileId" : profileId
+	} = context
 
+	console.log("EditTermBlock", profileId)
 
-	const { 
+	const { 	
 		displayLinks,
 		separator,
 		termLimit
 	} = attributes
 
-	const { profileId, field } =  useProfileFieldAttributes(props) 
+	const { field } =  useProfileFieldAttributes(props, profileId) 
 
+	console.log(field)
 	
 	const taxonomySlug = field?.taxonomy ?? attributes.taxonomy ?? null
 	const taxonomies = useProfileTaxonomies();
@@ -132,7 +137,7 @@ function EditTermBlock( props ) {
 	const { profileTerms, hasProfileTerms, isLoading } = useProfileTerms( profileId, selectedTaxonomy )
 	const hasProfile = (profileId);
 
-
+	console.log("hasProfile", hasProfile, hasProfileTerms, selectedTaxonomy)
     return (
 		<>
 		<InspectorControls>

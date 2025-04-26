@@ -128,5 +128,8 @@
 		"postType",
 		"postId",
 		"queryId"
-	]
+	],
+	"providesContext": {
+		
+	}
 }

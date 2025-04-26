@@ -22,31 +22,11 @@ import { separator } from '@wordpress/icons';
 
 const RowGroupEdit = ( {attributes, setAttributes, context, clientId, ...props} ) => {
 
-	
-	console.log("ROW GROUP props context", context)
-	const [isInitial, setIsInitial] = useState(true)
-
 	const {
 		postType,
 		"npe/postId" : pid
 	} = context
 
-	useEffect( () => {
-		console.log("ROW GROUP postType inital or changed", "initial", isInitial, postType)
-	}, [postType])
-
-	useEffect( () => {
-		console.log("ROW GROUP pid inital or changed", "initial", isInitial, pid)
-	}, [pid])
-
-	useEffect( () => {
-		if(isInitial){
-			console.log("ROW GROUP recording non initial")
-			setIsInitial(false)
-		}
-	}, [isInitial, setIsInitial])
-
-	console.log("ROW GROUP passed state")
 
 	const {
 		separatorColor, 

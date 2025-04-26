@@ -115,12 +115,11 @@
 	},
 	"ancestor": [ "npe/profile" ],
 	"usesContext": [
-		"npe/fieldKey",
-		"npe/fieldType",
+		
 		"npe/showLabels",
 		"postType", 
 		"npe/postId",
-		"npe/test"
+		"npe/profileId"
 	]
 	
 }

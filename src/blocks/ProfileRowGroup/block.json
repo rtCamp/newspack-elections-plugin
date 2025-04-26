@@ -58,7 +58,9 @@
 	"ancestor": [ "npe/profile" ],
 	"usesContext": [
 		"postType",
-		"npe/postId"
+		"npe/postId",
+		"npe/profileId",
+		"profileId"
 	],
 	"providesContext": {
 		"npe/separatorStyle" : "separatorStyles",

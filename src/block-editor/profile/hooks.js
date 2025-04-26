@@ -12,21 +12,16 @@ import {useMemo, useState} from "@wordpress/element"
  * Gets the ID of the Profile to use from the Block's Context, falling back to Attributes. 
  * Provides an ID and booleans indicating if the ID was found in Context, or Attributes  
  */
-export const useProfileId = (props) => {
-
-	
-
-	const [profileId, setProfileId] = useState(null)
-	
+export const useProfileId = (props, pid = null) => {
 
 	const { attributes, context, clientId, name } = props
-	console.count("useProfileId" )
-	console.count("useProfileId : " + clientId )
+	const [profileId, setProfileId] = useState(null)
+	const [lastClientId, setLastClientId] = useState(props.clientId)
 
 	const { 
 		postType,
 		queryId,
-		'npe/postId' : inheritedSelectedProfileId,
+		'npe/profileId' : inheritedSelectedProfileId,
 		postId : queryPostId,
 	} = context
 
@@ -36,8 +31,7 @@ export const useProfileId = (props) => {
 
 	
 	const {currentPostType, currentPostId} = useSelect( (select) => {
-		console.count("run get current postType and postId selector")
-		console.count("run get current postType and postId selector : "+ name + " : " + clientId)
+
 		return {
 			currentPostType : select(editorStore).getCurrentPostType(),
 			currentPostId : select(editorStore).getCurrentPostId()
@@ -49,11 +43,13 @@ export const useProfileId = (props) => {
 	//const currentPostId = select(editorStore).getCurrentPostId()
 
 	const m = useMemo( () => {
-		console.log("Memo calculation", clientId, selectedProfileId, queryPostId, inheritedSelectedProfileId)
+		
 		return "woo"
-	}, [clientId])
+	}, [props.clientId])
 
-	
+	if(pid){
+		return pid
+	}
 
 	const isProfilePage = ((currentPostType === PROFILE_POST_TYPE) && (context.postId === currentPostId))
 	const isQuery = (queryId && postType) ? true : false
@@ -234,9 +230,9 @@ export const useProfileFields = (props) => {
 }
 
 
-export const useProfileFieldAttributes = (props) => {  
-
-	const profileId = useProfileId(props)
+export const useProfileFieldAttributes = (props, pid = null) => {  
+	console.log("useProfileFieldAttributes pid", pid)
+	const profileId = useProfileId(props, pid)
 	const fieldAttrs  = useFieldAttributes( props )
 	const {profile} = useProfile( profileId )
 	const value = profile?.profile?.[fieldAttrs?.fieldKey] ?? null;

@@ -1,8 +1,10 @@
-import {useSelect} from "@wordpress/data"
-import {store as blockEditorStore, useInnerBlocksProps, useBlockProps} from "@wordpress/block-editor"
+import { isNil } from "lodash"
+
+import {useSelect, select} from "@wordpress/data"
+import {store as blockEditorStore, useInnerBlocksProps, useBlockProps, BlockContextProvider} from "@wordpress/block-editor"
 import { store as blocksStore } from '@wordpress/blocks';
 import { store as editorStore } from '@wordpress/editor';
-import { useCallback } from '@wordpress/element';
+import { useCallback, useState } from '@wordpress/element';
 
 import { ProfileBlockEdit } from "./edit"
 import { ProfileVariationSelector } from "./variation-selector"
@@ -18,6 +20,14 @@ import "./../editor.scss"
  * 2. The Pattern / Variation Picker UI
  * 3. The Block Editing UI
 */
+
+const BLOCK_MODES = {
+	UNKNOWN: 0,
+	PROFILE : 1,
+	QUERY: 2,
+	EMBEDED: 3
+}
+
 export const ProfileEdit = ( props ) => {
 
 	
@@ -25,7 +35,12 @@ export const ProfileEdit = ( props ) => {
 	const blockProps = useBlockProps()
 	const {children, ...innerBlockProps} = useInnerBlocksProps(blockProps)
 
-	
+	const [blockMode, setBlockMode] = useState(BLOCK_MODES["UNKNOWN"])
+	const [profileId, setProfileId] = useState(null)
+
+	const {
+		queryId
+	} = context
 
 	// Once a Profile Has Inner Blocks we can't re-choose the variation
 	const hasInnerBlocks = useSelect( ( select ) => {
@@ -33,14 +48,11 @@ export const ProfileEdit = ( props ) => {
 		}, [ clientId ]
 	);
 
-	const {currentPostType, currentPostId} = useSelect( (select) => {
-		return {
-			currentPostType : select(editorStore).getCurrentPostType(),
-			currentPostId: select(editorStore).getCurrentPostId()
-		}
-	}, [clientId])
-	
 
+	const currentPostType = select(editorStore).getCurrentPostType()
+	const currentPostId = select(editorStore).getCurrentPostId()
+
+	
 	const hasVariations = useSelect( ( select ) => {
 			return select( blocksStore ).getBlockVariations( name )
 		}, [ name ]
@@ -51,10 +63,32 @@ export const ProfileEdit = ( props ) => {
 	}, [setAttributes])
 	
 	const isProfilePage = (currentPostType === PROFILE_POST_TYPE) && (context.postId === currentPostId)
-	const hasContextQuery = (context.queryId && context.postId && (context.postType === PROFILE_POST_TYPE))
+	const isInQueryLoop = (!isNil(queryId))
+	//const isEmbeded = (!isProfilePage && !isInQueryLoop)
+
+	let calculatedBlockMode
+	let calculatedProfileId
+	if(isProfilePage){
+		calculatedBlockMode = BLOCK_MODES["PROFILE"]
+		calculatedProfileId = currentPostId
+	} else if(isInQueryLoop) {
+		calculatedBlockMode = BLOCK_MODES["QUERY"]
+		calculatedProfileId = postId
+	} else {
+		calculatedBlockMode = BLOCK_MODES["EMBEDED"]
+		calculatedProfileId = attributes.postId
+	}
+
+	if(calculatedBlockMode !== blockMode){
+		setBlockMode(calculatedBlockMode)
+	}
+
+	if(calculatedProfileId !== profileId){
+		setProfileId(calculatedProfileId)
+	}
 	
 	// If we have a postId then dont show the selector
-	const hasSelectedProfile = attributes.postId ?? hasContextQuery ?? false
+	const hasSelectedProfile = attributes.postId ?? false
 	const showVariationSelector = (hasInnerBlocks.length === 0) && (hasVariations.length > 0);
 	const showProfileSelector = !isProfilePage && !hasSelectedProfile;
 	const showEdit = hasInnerBlocks && hasSelectedProfile;
@@ -69,7 +103,21 @@ export const ProfileEdit = ( props ) => {
 		Component = ProfileBlockEdit
 	}
 	
+	console.log("blockMode", blockMode, profileId)
 	return (
-		<Component  {...props} setProfile = {setProfile} isProfilePage={isProfilePage} />
+		<BlockContextProvider
+			value = {{
+				"postId" : profileId,
+				"npe/postId" : profileId,
+				"npe/profileId" : profileId,
+				"npe/mode" : blockMode,
+			}}
+		>
+			<Component  {...props} 
+				setProfile = {setProfile} 
+				isProfilePage = {isProfilePage} 
+				blockMode = {blockMode} 
+			/>
+		</BlockContextProvider>
 	)
 }

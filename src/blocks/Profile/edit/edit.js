@@ -334,12 +334,7 @@ function ProfileBlockEdit( props ) {
 
 	return (
 		<>
-		<BlockContextProvider
-			value = {{
-				"postId" : profileId,
-				"npe/postId" : profileId,
-			}}
-		>
+		
 			{ showSpinner && (
 				<Spinner />
 			) }
@@ -377,8 +372,6 @@ function ProfileBlockEdit( props ) {
 					)}
 				</TagName>
 			)}
-		
-		</BlockContextProvider>
 		</>	
 	);
 }
