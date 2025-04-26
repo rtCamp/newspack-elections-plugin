@@ -92,6 +92,7 @@ export const ProfileMetaSidebarPanel = (props) => {
 								label = { field["label"] } 
 								meta_key = { field["meta_key"] }
 								onChange = { null } 
+								__next40pxDefaultSize = {true}
 							/>
 						))}
 						
