@@ -47,7 +47,7 @@ export function normalize_profile(profile){
     // Did the birthday pass this month yet?
     let birthdayThisYearYet = (today.getMonth() > dateOfBirth.getMonth() ||
                                (today.getMonth() == dateOfBirth.getMonth() && today.getDate() >= dateOfBirth.getDate()));
-    return today.getFullYear() - dateOfBirth.getFullYear() - (birthdayThisYearYet ? 0 : 1) + " Years";
+    return today.getFullYear() - dateOfBirth.getFullYear() - (birthdayThisYearYet ? 0 : 1) + " Years old";
   }
 
 

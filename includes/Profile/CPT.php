@@ -95,7 +95,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_ballotpedia_to_balletpedia' ], 10, 5 );
 		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_suffix_official_to_capitol' ], 10, 5 );
 
-		add_filter( 'get_post_metadata', [ __CLASS__, 'fallback_suffix_official_to_capitol' ], 10, 5 );
+		//add_filter( 'get_post_metadata', [ __CLASS__, 'fallback_suffix_official_to_capitol' ], 10, 5 );
 
 		add_action( 'load-post.php', [ __CLASS__, 'initialize_editor_changes' ] );
 		add_action( 'load-post-new.php', [ __CLASS__, 'initialize_editor_changes' ] );
@@ -277,11 +277,14 @@ class CPT extends \Govpack\Abstracts\PostType {
 			return $value;
 		}
 
-		
+	
 
 		if ( $single && $value !== '' ) {
 			return $value;
 		}
+
+		gp_dump("fallback", $object_id, $meta_key, $single, $value);
+		die();
 
 		// check for an empty array if we expect an array, exit otherwise
 		if ( ! $single && ! empty( $value ) ) {
@@ -659,11 +662,14 @@ class CPT extends \Govpack\Abstracts\PostType {
 	 * Register Meta data for the post in the REST API 
 	 */
 	public static function register_post_meta(): void {
+
 		
 		foreach ( self::get_meta_keys() as $key ) {
 			
 			self::register_meta( $key );
 		}
+
+		
 	}   
 
 	/**
@@ -693,6 +699,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 		);
 
 		register_post_meta( self::CPT_SLUG, $slug, $args );
+
 	}
 
 	public static function filter_meta_registration_for_links( array $args = [], string $slug = '' ): array {
@@ -981,7 +988,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 		$date_of_birth = new \DateTime();
 		$date_of_birth->setTimestamp( ( $dob / 1000 ) ); //js timestime is milliseconds, we just want seconds since epoc
 		$diff = $date_of_birth->diff( $today );
-		return sprintf( '%d Years', $diff->y );
+		return sprintf( '%d years old', $diff->y );
 	}
 
 	/**
