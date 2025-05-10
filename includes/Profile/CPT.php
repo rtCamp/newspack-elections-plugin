@@ -1177,12 +1177,13 @@ class CPT extends \Govpack\Abstracts\PostType {
 		// force all social media links to have a protocal in the url
 		$profile_data['social'] = array_map(
 			function ( $social_set ) {
-			
+				
+				
 				$social_set['services'] = array_map(
 					function ( $service ) {
-
+						
 						if ( ! $service ) {
-							return $service;
+							return false;
 						}
 
 						if ( gp_is_url_valid( $service ) ) {
@@ -1197,6 +1198,8 @@ class CPT extends \Govpack\Abstracts\PostType {
 					},
 					$social_set['services'] 
 				);
+
+				$social_set['services'] = \array_filter($social_set['services']);
 
 				return $social_set;
 			},
