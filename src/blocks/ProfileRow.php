@@ -30,8 +30,10 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 	 * @param string $content Any HTML or content redurned form the block.
 	 * @param WP_Block $template The filename of the template-part to use.
 	 */
-	public function handle_render( array $attributes, string $content, \WP_Block $block ) {
+	public function handle_render( array $attributes, string $content = "", \WP_Block $block ) {
 		
+		gp_dump("Row Render");
+		gp_dump($content);
 		$tag_name = 'div';
 
 		$block_html = sprintf(
@@ -40,7 +42,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 			get_block_wrapper_attributes(
 				$this->get_new_block_wrapper_attributes()
 			),
-			$this->output(),
+			$content,
 			$tag_name
 		);
 
