@@ -7,12 +7,42 @@ if ( ! defined( 'ABSPATH' ) ) {
 $profile_block = $extra['profile_block'];
 
 foreach ( $profile_block->rows() as $index => $row ) {
-
+	
 	if ( ! $row['shouldShow'] ) {
+		continue;
+	}	
+
+	ob_start();
+	switch ( $row['key'] ) {
+		case 'social':
+			gp_get_block_part( 'blocks/parts/row', 'social', $attributes, $content, $block, $extra );
+			break;
+		case 'comms_capitol':
+		case 'comms_district':
+		case 'comms_campaign':
+			gp_get_block_part( 'blocks/parts/row', 'contact', $attributes, $content, $block, [ 'row' => $row ] );
+			break;
+		case 'comms_other':
+			echo 'other';
+			break;
+		case 'links':
+			gp_get_block_part( 'blocks/parts/row', 'links', $attributes, $content, $block, $extra );
+			break;
+		case 'more_about':
+			gp_get_block_part( 'blocks/parts/row', 'more-link', $attributes, $content, $block, $extra );
+			break;
+		default:
+			if ( isset( $row['value'] ) && $row['value'] ) {
+				echo $row['value']; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			}
+			break;
+	}
+	$row_content = ob_get_clean();
+	
+	if(empty($row_content)){
 		continue;
 	}
 
-	
 	?>
 		<div <?php echo gp_line_attributes( $row, $attributes ); ?>>
 			<?php if ( isset( $row['label'] ) && ( $row['label'] ) ) { 
@@ -29,30 +59,7 @@ foreach ( $profile_block->rows() as $index => $row ) {
 			<?php } ?>
 			<dd class="govpack-line__content">
 				<?php
-				switch ( $row['key'] ) {
-					case 'social':
-						gp_get_block_part( 'blocks/parts/row', 'social', $attributes, $content, $block, $extra );
-						break;
-					case 'comms_capitol':
-					case 'comms_district':
-					case 'comms_campaign':
-						gp_get_block_part( 'blocks/parts/row', 'contact', $attributes, $content, $block, [ 'row' => $row ] );
-						break;
-					case 'comms_other':
-						echo 'other';
-						break;
-					case 'links':
-						gp_get_block_part( 'blocks/parts/row', 'links', $attributes, $content, $block, $extra );
-						break;
-					case 'more_about':
-						gp_get_block_part( 'blocks/parts/row', 'more-link', $attributes, $content, $block, $extra );
-						break;
-					default:
-						if ( isset( $row['value'] ) && $row['value'] ) {
-							echo $row['value']; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						}
-						break;
-				}
+					echo $row_content;
 				?>
 			</dd>
 		</div>

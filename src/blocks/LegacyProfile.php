@@ -127,6 +127,8 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 		}
 
 		
+
+		
 		if ( ! isset( $this->attributes[ $show_attr ] ) || ! isset( $this->attributes[ $selected_attr ] ) || empty( $this->attributes[ $selected_attr ] ) || ( ! $this->attributes[ $show_attr ] ) ) {
 			return false;
 		}
@@ -209,49 +211,49 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 				'key'        => 'age',
 				'value'      => esc_html( $this->profile['age'] ),
 				'label'      => 'Age',
-				'shouldShow' => $this->attributes['showAge'],
+				'shouldShow' => $this->attributes['showAge']  && !empty($this->profile['age']),
 			],
 			[
 				'key'        => 'leg_body',
 				'value'      => esc_html( $this->profile['legislative_body'] ),
 				'label'      => 'Legislative Body',
-				'shouldShow' => $this->attributes['showLegislativeBody'],
+				'shouldShow' => $this->attributes['showLegislativeBody']  && !empty($this->profile['legislative_body']),
 			],
 			[
 				'key'        => 'position',
 				'value'      => esc_html( $this->profile['position'] ),
 				'label'      => 'Position',
-				'shouldShow' => $this->attributes['showPosition'],
+				'shouldShow' => $this->attributes['showPosition'] && !empty($this->profile['position']),
 			],
 			[
 				'key'        => 'party',
 				'value'      => esc_html( $this->profile['party'] ),
 				'label'      => 'Party',
-				'shouldShow' => $this->attributes['showParty'],
+				'shouldShow' => $this->attributes['showParty']  && !empty($this->profile['party']),
 			],
 			[
 				'key'        => 'district',
 				'value'      => esc_html( $this->profile['district'] ),
 				'label'      => 'District',
-				'shouldShow' => $this->attributes['showDistrict'],
+				'shouldShow' => $this->attributes['showDistrict'] && !empty($this->profile['district']),
 			],
 			[
 				'key'        => 'state',
 				'value'      => esc_html( $this->profile['state'] ),
 				'label'      => 'State',
-				'shouldShow' => $this->attributes['showState'],
+				'shouldShow' => $this->attributes['showState'] && !empty($this->profile['state']),
 			],
 			[
 				'key'        => 'status',
 				'value'      => esc_html( $this->profile['status'] ),
 				'label'      => 'Status',
-				'shouldShow' => $this->attributes['showDistrict'],
+				'shouldShow' => $this->attributes['showStatus'] && !empty($this->profile['status']),
 			],
 			[
 				'key'        => 'endorsements',
 				'value'      => esc_html( $this->profile['endorsements'] ),
 				'label'      => 'Endorsements',
-				'shouldShow' => $this->attributes['showEndorsements'],
+				'shouldShow' => $this->attributes['showEndorsements'] && !empty($this->profile['endorsements']),
 			],
 			[
 				'key'        => 'social',

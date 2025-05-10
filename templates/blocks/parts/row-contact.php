@@ -77,9 +77,13 @@ foreach ( $services as $service => $attr ) {
 		</li>";
 }
 
-if ( ! $content && ! $address ) {
+
+
+if ( empty($content) && empty($address) ) {
 	return;
 }
+
+gp_dump($content);
 ?>
 
 <div class="wp-block-govpack-profile__comms">
