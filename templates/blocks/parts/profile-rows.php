@@ -8,10 +8,13 @@ $profile_block = $extra['profile_block'];
 
 foreach ( $profile_block->rows() as $index => $row ) {
 	
+
+
 	if ( ! $row['shouldShow'] ) {
 		continue;
 	}	
 
+	
 	ob_start();
 	switch ( $row['key'] ) {
 		case 'social':

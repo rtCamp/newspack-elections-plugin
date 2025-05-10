@@ -30,7 +30,7 @@ if ( count( $links ) <= 0 ) {
 
 ?>
 	<div class="wp-block-govpack-profile__comms">
-		<div class="wp-block-govpack-profile__label">Links:</div>
+		
 			<ul class="wp-block-govpack-profile__comms-icons govpack-inline-list">
 			<?php
 			foreach ( $links as &$profile_link ) {

@@ -265,7 +265,7 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 				'key'        => 'comms_capitol',
 				'value'      => $this->profile['comms']['capitol'],
 				'label'      => 'Contact Info (Official)',
-				'shouldShow' => $this->show( 'capital_comms' ),
+				'shouldShow' => $this->show( 'capitol_comms' ),
 				'show'       => $this->attributes['selectedCapitolCommunicationDetails'],
 			],
 			[
@@ -285,7 +285,7 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 			[
 				'key'        => 'comms_other',
 				'value'      => $this->profile['comms']['other'],
-				'label'      => 'Contact Info (Campaign)',
+				'label'      => 'Contact Info (Other)',
 				'shouldShow' => $this->show( 'other_comms' ),
 				'show'       => $this->attributes['selectedOtherCommunicationDetails'],
 			],
@@ -293,6 +293,7 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 				'key'        => 'links',
 				'value'      => $this->get_profile_links(),
 				'shouldShow' => $this->show( 'links' ),
+				'label'      => 'Links',
 			],
 			[
 				'key'        => 'more_about',

@@ -36,10 +36,12 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 		$this->content    = $content;
 
 		if ( ! $this->show_block() ) {
+			var_dump("Dont show block");
 			return null;
 		}
 		
 		if ( ! $this->is_allow_field_type_for_block() ) {
+			var_dump("field type not allowed");
 			return null;
 		}
 

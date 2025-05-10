@@ -3,6 +3,7 @@
 $row = $extra['row'];
 
 
+
 if ( ! $row['shouldShow'] ) {
 	return;
 }
@@ -83,11 +84,11 @@ if ( empty($content) && empty($address) ) {
 	return;
 }
 
-gp_dump($content);
+
 ?>
 
 <div class="wp-block-govpack-profile__comms">
-	<div class="wp-block-govpack-profile__label"><?php esc_html( $row['label'] ); ?></div>
+	
 	<ul class="wp-block-govpack-profile__comms-icons govpack-inline-list">
 		<?php
 		if ( $content ) {
