@@ -281,7 +281,7 @@ const SOCIAL_PANEL_FIELDS = [{
 	{ 
 		type: "url",
 		label : "Wikipedia",
-		meta_key: "wikipedia_id",
+		meta_key: "wikipedia",
 		group: "Other"
 	}
 ]

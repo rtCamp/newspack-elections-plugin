@@ -94,6 +94,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_x_meta_fields_to_twitter' ], 10, 5 );
 		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_ballotpedia_to_balletpedia' ], 10, 5 );
 		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_suffix_official_to_capitol' ], 10, 5 );
+		add_filter( 'default_post_metadata', [ __CLASS__, 'fallback_wikipedia_id_to_wikipedia' ], 10, 5 );
 
 		//add_filter( 'get_post_metadata', [ __CLASS__, 'fallback_suffix_official_to_capitol' ], 10, 5 );
 
@@ -283,8 +284,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 			return $value;
 		}
 
-		gp_dump("fallback", $object_id, $meta_key, $single, $value);
-		die();
+	
 
 		// check for an empty array if we expect an array, exit otherwise
 		if ( ! $single && ! empty( $value ) ) {
@@ -321,6 +321,29 @@ class CPT extends \Govpack\Abstracts\PostType {
 		}
 
 		return get_metadata( $meta_type, $object_id, 'balletpedia_id', $single );
+	}
+
+	public static function fallback_wikipedia_id_to_wikipedia( mixed $value, int $object_id, string $meta_key, bool $single, string $meta_type ): mixed {
+		
+		if ( $meta_key !== 'wikipedia_id' ) {
+			return $value;
+		}
+
+		if ( $single && $value !== '' ) {
+			return $value;
+		}
+
+		// check for an empty array if we expect an array, exit otherwise
+		if ( ! $single && ! empty( $value ) ) {
+			return $value;
+		}
+
+		// if we're looking at some other entity type then exit
+		if ( $meta_type !== 'post' ) {
+			return $value;
+		}
+
+		return get_metadata( $meta_type, $object_id, 'wikipedia', $single );
 	}
 
 	public static function fallback_x_meta_fields_to_twitter( mixed $value, int $object_id, string $meta_key, bool $single, string $meta_type ): mixed {
