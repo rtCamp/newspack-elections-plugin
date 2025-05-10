@@ -15,22 +15,17 @@ foreach ( $profile_block->rows() as $index => $row ) {
 	
 	?>
 		<div <?php echo gp_line_attributes( $row, $attributes ); ?>>
-			<?php if ( isset( $row['label'] ) && ( $row['label'] ) ) { ?>
-			<dt 
-				class="
-				<?php
-				echo esc_attr(
-					gp_classnames(
+			<?php if ( isset( $row['label'] ) && ( $row['label'] ) ) { 
+					$label_classes = gp_classnames(
 						'govpack-line__label',
 						[
 							'govpack-line__label--show' => $profile_block->show( 'labels' ),
 							'govpack-line__label--hide' => ! $profile_block->show( 'labels' ),
 						]
 					)
-				);
 				?>
-				"
-			><?php echo esc_html( $row['label'] ); ?></dt>
+			<dt class="<?php echo esc_attr($label_classes);?>">
+				<?php echo esc_html( $row['label'] ); ?></dt>
 			<?php } ?>
 			<dd class="govpack-line__content">
 				<?php
