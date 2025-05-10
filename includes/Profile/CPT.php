@@ -997,6 +997,10 @@ class CPT extends \Govpack\Abstracts\PostType {
 		if ( $dob === '' ) {
 			return '';
 		}
+
+		if ( is_int( $dob ) ) {
+			$dob = ($dob / 1000);
+		}
 		
 		// attempt to convert a string to a date
 		if ( is_string( $dob ) ) {
@@ -1009,7 +1013,8 @@ class CPT extends \Govpack\Abstracts\PostType {
 
 		$today         = new \DateTime();
 		$date_of_birth = new \DateTime();
-		$date_of_birth->setTimestamp( ( $dob / 1000 ) ); //js timestime is milliseconds, we just want seconds since epoc
+		$date_of_birth->setTimestamp( ( $dob ) ); //js timestime is milliseconds, we just want seconds since epoc
+		
 		$diff = $date_of_birth->diff( $today );
 		return sprintf( '%d years old', $diff->y );
 	}
