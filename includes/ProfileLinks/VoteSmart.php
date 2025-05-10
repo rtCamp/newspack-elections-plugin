@@ -23,6 +23,10 @@ class VoteSmart extends \Govpack\ProfileLinks\ProfileLink {
 		return 'VoteSmart';
 	}
 
+	public function enabled(): bool {
+		return false;
+	}
+
 	/**
 	 * @return string
 	 *

@@ -5,6 +5,10 @@ class Google extends \Govpack\ProfileLinks\ProfileLink {
 
 	protected string $slug = 'google';
 
+	public function enabled(): bool {
+		return false;
+	}
+
 	/**
 	 * @return string
 	 *

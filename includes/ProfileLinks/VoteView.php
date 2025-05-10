@@ -5,6 +5,10 @@ class VoteView extends \Govpack\ProfileLinks\ProfileLink {
 
 	protected string $slug = 'voteview';
 
+	public function enabled(): bool {
+		return false;
+	}
+	
 	/**
 	 * @return string
 	 *

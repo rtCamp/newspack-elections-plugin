@@ -5,6 +5,10 @@ class GovTrack extends \Govpack\ProfileLinks\ProfileLink {
 
 	protected string $slug = 'govtrack';
 
+	public function enabled(): bool {
+		return false;
+	}
+	
 	/**
 	 * @return string
 	 *

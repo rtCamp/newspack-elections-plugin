@@ -28,14 +28,10 @@ class ProfileLinkServices {
 			'Ballotpedia',
 			'Fec',
 			'Gab',
-			'Google',
-			'Govtrack',
 			'Linkedin',
 			'OpenSecrets',
 			'OpenStates',
 			'Rumble',
-			'VoteSmart',
-			'VoteView',
 			'WikiPedia', 
 		];
 
