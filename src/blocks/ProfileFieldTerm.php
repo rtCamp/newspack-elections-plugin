@@ -183,7 +183,7 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	}
 
 	public function output(): string {
-		gp_dump("output");
+		
 		$terms = $this->get_value();
 
 		$output        = [];

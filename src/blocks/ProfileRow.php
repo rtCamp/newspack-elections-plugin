@@ -32,8 +32,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 	 */
 	public function handle_render( array $attributes, string $content = "", \WP_Block $block ) {
 		
-		gp_dump("Row Render");
-		gp_dump($content);
+
 		$tag_name = 'div';
 
 		$block_html = sprintf(
