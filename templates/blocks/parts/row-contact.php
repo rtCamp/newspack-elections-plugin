@@ -1,109 +1,112 @@
 <?php
 
-$row = $extra['row'];
+$profile_data  = $extra['profile_data'];
+$profile_block = $extra['profile_block'];
 
-
-
-if ( ! $row['shouldShow'] ) {
+if ( ! $profile_block->show( 'contact' ) ) {
 	return;
 }
 
-$address = '';
-if ( $row['show']['showAddress'] && $row['value']['address'] ) {
-	$row_classes = gp_classnames(
-		'wp-block-govpack-profile__contact',
-		[
-			'wp-block-govpack-profile__contact--hide-label',
-			'wp-block-govpack-profile__contact--address',
-		]
-	);
-
-		ob_start();
-	?>
-		<address class="<?php esc_attr( $row_classes ); ?>">
-			<?php echo wp_kses_post( $row['value']['address'] ); ?>
-		</address>
-		<?php
-		$address = ob_get_clean();
+if ( empty( $profile_data['contact'] ) ) {
+	return;
 }
+
+$groups = [
+	"official" => "selectedCapitolCommunicationDetails",
+	"district" => "selectedDistrictCommunicationDetails",
+	"campaign" => "selectedCampaignCommunicationDetails",
+];
+
+
 
 $services = [ 
 	'email'   => 'showEmail',
 	'phone'   => 'showPhone',
 	'fax'     => 'showFax',
 	'website' => 'showWebsite',
+	'address' => 'showAddress',
 ];
 
-$content = '';
+$contact_info = [];
 
-foreach ( $services as $service => $attr ) {
-
-	// no data, dont show it.
-	if ( ! isset( $row['value'][ $service ] ) || ! $row['value'][ $service ] ) {
-		continue;
+foreach($groups as $group_key => $group_view_attr){
+	$contact_info[$group_key] = []; //$profile_block->attributes[$group_view_attr];
+	$contact_info[$group_key]["label"]  = $profile_data['contact'][$group_key]["label"];
+	$contact_info[$group_key]["services"] = [];
+	foreach($services as $service => $attr){
+		if($profile_block->attributes[$group_view_attr][$attr] === true){
+			$value = $profile_data['contact'][$group_key]["services"][$service];
+			if($value){
+				$contact_info[$group_key]["services"][$service] = $value;
+			}
+		}
 	}
-
-	// show control might be disabled.
-	if ( ! $row['show'][ $attr ] ) {
-		continue;
-	}
-
-	$row_classes = gp_classnames(
-		'wp-block-govpack-profile__contact',
-		[
-			'wp-block-govpack-profile__contact--hide-label',
-			"wp-block-govpack-profile__contact--{$service}",
-		]
-	);
-
-	$row_classes = esc_attr( $row_classes );
-
-	$icon         = '<span class="wp-block-govpack-profile__contact__icon wp-block-govpack-profile__contact__icon--{%s}">%s</span>';
-	$contact_icon = sprintf( $icon, esc_attr( $service ), esc_svg( gp_get_icon( $service ) ) );
-
-	if ( ( 'phone' === $service ) || ( 'fax' === $service ) ) {
-		$protocol = 'tel:';
-	} elseif ( 'email' === $service ) {
-		$protocol = 'mailto:';
-	} else {
-		$protocol = ''; // web has no protocol as it should come from the url itself.
-	}
-
-	$content .=  
-		"<li class=\"{$row_classes} \">
-			<a href=\"{$protocol}{$row["value"][$service]}\" class=\"wp-block-govpack-profile__contact__link\">
-				{$contact_icon}
-				<span class=\"wp-block-govpack-profile__contact__label\">{$service}</span>
-			</a>
-		</li>";
 }
-
-
-
-if ( empty($content) && empty($address) ) {
-	return;
-}
-
-
+//gp_dump($profile_data['contact']);
+//gp_dump($contact_info)
 ?>
 
 <div class="wp-block-govpack-profile__comms">
-	
-	<ul class="wp-block-govpack-profile__comms-icons govpack-inline-list">
+	<ul class="wp-block-govpack-profile__services govpack-vertical-list">
 		<?php
-		if ( $content ) {
-			// TODO : Move the content generation above into this area so it easier to loop out, 
-			// needs to have a better way of detecting the presence of address or contact info
-			echo $content; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		}
-		?>
-	</ul>
-	<?php
-	if ( $address ) {
-		echo wp_kses_post( $address ); 
-	}
-	?>
-</div>
+		foreach ( $contact_info as $group_key => $group ) {
 
+			if ( empty( $group['services'] ) ) {
+				continue;
+			}
+
+			?>
+			<li class="wp-block-govpack-profile__contact_group">
+				
+					<div class="wp-block-govpack-profile__label"><?php echo esc_html( $group['label'] ); ?>:</div>
+					<ul class="wp-block-govpack-profile__comms-icons govpack-inline-list">
+						<?php
+						foreach($services as $service => $attr ){
+
+						}
+
+						foreach ( $group['services'] as $service => $social_link ) {
+
+							if ( ! $social_link ) {
+								continue;
+							}
+
+							if($service === "address"){
+								continue;
+							}
+
+							$row_classes = gp_classnames(
+								'wp-block-govpack-profile__contact', 
+								[ 
+									'wp-block-govpack-profile__contact--hide-label',
+									"wp-block-govpack-profile__contact--{$service}",
+								]
+							);
+							
+
+							$icon_classes = gp_classnames(
+								'wp-block-govpack-profile__contact__icon',
+								[
+									"wp-block-govpack-profile__contact__icon--{$service}",
+								]
+							);
+		
+							?>
+								<li class="<?php echo esc_attr( $row_classes ); ?>">
+									<a href="<?php echo esc_url( $social_link ); ?>" class="wp-block-govpack-profile__contact__link">
+										<span class="<?php echo esc_attr( $icon_classes ); ?>"><?php echo esc_svg( gp_get_icon( $service ) ); ?></span>
+										<span class="wp-block-govpack-profile__contact__label"><?php esc_html( $service ); ?></span>
+									</a>
+								</li>
+								<?php
+						}
+						?>
+					</ul>
+				
+				<address class="wp-block-govpack-profile__contact_address">addrewss</address>
+			</li>
+		<?php } ?>
+	</ul>
+</div>
 
 

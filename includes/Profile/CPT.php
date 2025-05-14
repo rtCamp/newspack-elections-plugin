@@ -1124,27 +1124,36 @@ class CPT extends \Govpack\Abstracts\PostType {
 					],
 				],
 			],
-			'comms'            => [
-				'capitol'  => [
-					'email'   => $profile_raw_meta_data['email_official'][0] ?? null,
-					'phone'   => $profile_raw_meta_data['phone_official'][0] ?? null,
-					'fax'     => $profile_raw_meta_data['fax_official'][0] ?? null,
-					'address' => $profile_raw_meta_data['address_official'][0] ?? null,
-					'website' => $profile_raw_meta_data['website_official'][0] ?? null,
+			'contact'  => [
+				'official'  => [
+					'label' => "Official",
+					'services' => [ 
+						'email'   => $profile_raw_meta_data['email_official'][0] ?? null,
+						'phone'   => $profile_raw_meta_data['phone_official'][0] ?? null,
+						'fax'     => $profile_raw_meta_data['fax_official'][0] ?? null,
+						'address' => $profile_raw_meta_data['address_official'][0] ?? null,
+						'website' => $profile_raw_meta_data['website_official'][0] ?? null,
+					]
 				],
 				'district' => [
-					'email'   => $profile_raw_meta_data['email_district'][0] ?? null,
-					'phone'   => $profile_raw_meta_data['phone_district'][0] ?? null,
-					'fax'     => $profile_raw_meta_data['fax_district'][0] ?? null,
-					'address' => $profile_raw_meta_data['address_district'][0] ?? null,
-					'website' => $profile_raw_meta_data['website_district'][0] ?? null,
+					'label' => "District",
+					'services' => [ 
+						'email'   => $profile_raw_meta_data['email_district'][0] ?? null,
+						'phone'   => $profile_raw_meta_data['phone_district'][0] ?? null,
+						'fax'     => $profile_raw_meta_data['fax_district'][0] ?? null,
+						'address' => $profile_raw_meta_data['address_district'][0] ?? null,
+						'website' => $profile_raw_meta_data['website_district'][0] ?? null,
+					]
 				],
 				'campaign' => [
-					'email'   => $profile_raw_meta_data['email_campaign'][0] ?? null,
-					'phone'   => $profile_raw_meta_data['phone_campaign'][0] ?? null,
-					'fax'     => $profile_raw_meta_data['fax_campaign'][0] ?? null,
-					'address' => $profile_raw_meta_data['address_campaign'][0] ?? null,
-					'website' => $profile_raw_meta_data['website_campaign'][0] ?? null,
+					'label' => "Campaign",
+					'services' => [ 
+						'email'   => $profile_raw_meta_data['email_campaign'][0] ?? null,
+						'phone'   => $profile_raw_meta_data['phone_campaign'][0] ?? null,
+						'fax'     => $profile_raw_meta_data['fax_campaign'][0] ?? null,
+						'address' => $profile_raw_meta_data['address_campaign'][0] ?? null,
+						'website' => $profile_raw_meta_data['website_campaign'][0] ?? null,
+					]
 				],
 				'other'    => [
 					'website_other'    => [

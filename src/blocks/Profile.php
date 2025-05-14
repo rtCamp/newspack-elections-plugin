@@ -21,7 +21,7 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 
 	private $show         = null;
 	private $profile      = null;
-	protected $attributes = [];
+	public $attributes = [];
 	protected $plugin;
 
 	public function __construct( $plugin ) {

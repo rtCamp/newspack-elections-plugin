@@ -21,7 +21,7 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 
 	private $show         = null;
 	private $profile      = null;
-	protected $attributes = [];
+	public $attributes = [];
 	protected $plugin;
 
 	public function __construct( $plugin ) {
@@ -107,6 +107,7 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 			'capitol_comms'     => $this->should_show_comms( 'capitol' ),
 			'district_comms'    => $this->should_show_comms( 'district' ),
 			'campaign_comms'    => $this->should_show_comms( 'campaign' ),
+			'contact'           => ($this->should_show_comms( 'capitol' ) ||  $this->should_show_comms( 'district' ) || $this->should_show_comms( 'campaign' )),
 			'profile_link'      => ( isset( $this->attributes['showProfileLink'] ) && $this->attributes['showProfileLink'] ),
 		];
 	}
@@ -216,7 +217,7 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 			[
 				'key'        => 'leg_body',
 				'value'      => esc_html( $this->profile['legislative_body'] ),
-				'label'      => 'Legislative Body',
+				'label'      => 'Office',
 				'shouldShow' => $this->attributes['showLegislativeBody']  && !empty($this->profile['legislative_body']),
 			],
 			[
@@ -262,15 +263,23 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 				'shouldShow' => $this->show( 'social' ),
 			],
 			[
+				'key'        => 'contact',
+				'value'      => $this->profile['contact'],
+				'label'      => 'Contact Info',
+				'shouldShow' => $this->show( 'contact' ),
+			],
+			[
 				'key'        => 'comms_capitol',
 				'value'      => $this->profile['comms']['capitol'],
 				'label'      => 'Contact Info (Official)',
+				'subLabel'   => 'Official',
 				'shouldShow' => $this->show( 'capitol_comms' ),
 				'show'       => $this->attributes['selectedCapitolCommunicationDetails'],
 			],
 			[
 				'key'        => 'comms_district',
 				'label'      => 'Contact Info (District)',
+				'subLabel'   => 'District',
 				'value'      => $this->profile['comms']['district'],
 				'shouldShow' => $this->show( 'district_comms' ),
 				'show'       => $this->attributes['selectedDistrictCommunicationDetails'],
@@ -279,6 +288,7 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 				'key'        => 'comms_campaign',
 				'value'      => $this->profile['comms']['campaign'],
 				'label'      => 'Contact Info (Campaign)',
+				'subLabel'   => 'Campaign',
 				'shouldShow' => $this->show( 'campaign_comms' ),
 				'show'       => $this->attributes['selectedCampaignCommunicationDetails'],
 			],
