@@ -45,7 +45,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 			$tag_name
 		);
 
-		echo wp_kses_post( $block_html );
+		echo $block_html;
 	}
 
 	public function get_new_block_wrapper_attributes(): array {
