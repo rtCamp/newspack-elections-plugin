@@ -25,7 +25,7 @@ import AvatarAlignmentToolBar from '../../components/Toolbars/AvatarAlignment.js
 import BlockSizeAlignmentToolbar from '../../components/Toolbars/BlockSizeAlignmentToolbar.jsx';
 import ResetProfileToolbar from '../../components/Toolbars/ResetProfileToolbar.jsx';
 
-import SingleProfile from "./../../components/single-profile"
+import SingleProfile from "./../../components/legacy-single-profile/single-profile.jsx"
 
 import { PROFILE_POST_TYPE } from "@npe/editor";
 

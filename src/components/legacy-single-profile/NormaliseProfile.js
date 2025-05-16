@@ -114,13 +114,13 @@ export function normalize_profile(profile){
 		},
 		hasWebsites : !!(profile.meta?.campaign_url ?? profile.meta?.leg_url),
         bio : decodeEntities(profile.excerpt?.rendered ?? profile.excerpt ?? null),
-		comms : {
-			capitol : {
-				email : profile.meta?.email_capitol,
-				phone : profile.meta?.phone_capitol,
-				fax : profile.meta?.fax_capitol,
-				address : profile.meta?.address_capitol,
-				website : profile.meta?.website_capitol,
+		contact : {
+			official : {
+				email : profile.meta?.email_official,
+				phone : profile.meta?.phone_official,
+				fax : profile.meta?.fax_official,
+				address : profile.meta?.address_official,
+				website : profile.meta?.website_official,
 			},
 			district : {
 				email : profile.meta?.email_district,

@@ -3,10 +3,9 @@
 .wp-block-govpack-profile-self {
 
     $block : &;
-
+	margin-bottom:1rem;
 
     &__contacts ul,
-	&__comms ul,
     &__container {
         display: flex;  
         flex-direction: row;
@@ -80,6 +79,8 @@
 	&__comms{
 		display: flex;
 		flex-wrap: wrap;
+		width: 100%;
+		flex-grow: 1;
 
 		&-icons{
 			width: auto !important; //todo rafctor
@@ -180,9 +181,17 @@
         }
 	}
 
+	&__contact_group {
+		display: flex;
+		flex-wrap: wrap;
+		margin-right:0;
+	}
+
 	.editor-styles-wrapper &__contacts,
+	.editor-styles-wrapper &__contact,
 	.editor-styles-wrapper &__comms,
 	.editor-styles-wrapper &__social,
+	&__contact,
 	&__social,
 	&__comms,
     &__contacts{
@@ -239,15 +248,7 @@
     }
 	*/
 
-    &__line{
-        padding-top:.5rem;
-        padding-bottom:.5rem;
-        border-bottom: 1px solid;
 
-        &:first-of-type{
-            padding-top:0rem;
-        }
-    }
 
     &.is-style-boxed_centered,
     &.is-style-center{

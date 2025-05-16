@@ -17,7 +17,7 @@ import ProfileCommsOtherPanel from '../../components/Panels/ProfileCommsOtherPan
 import ProfileCommsSocialPanel from '../../components/Panels/ProfileCommsSocialPanel'
 import {ProfileLinksPanel} from '../../components/Panels/ProfileLinksPanel.jsx'
 
-import SingleProfile from "./../../components/single-profile"
+import SingleProfile from "./../../components/legacy-single-profile/single-profile"
 import AvatarAlignmentToolBar from '../../components/Toolbars/AvatarAlignment.jsx';
 import BlockSizeAlignmentToolbar from '../../components/Toolbars/BlockSizeAlignmentToolbar.jsx';
 
@@ -94,6 +94,8 @@ function Edit( props ) {
 		hasResolved
 	} = useProfileLoader()
 
+	console.log("ProfileEntity", entity)
+
     const ref = useRef();
 	const blockProps = useBlockProps( { ref } );
 
@@ -148,7 +150,7 @@ function Edit( props ) {
 				</div>
 			) : (
 				<>
-					<SingleProfile blockClassName="wp-block-govpack-profile-self" profile={profile} attributes={ attributes } showSelf = {true} />
+					<SingleProfile blockClassName="wp-block-govpack-profile" profile={profile} attributes={ attributes } showSelf = {true} />
 				</>
 			) }
 		</div>

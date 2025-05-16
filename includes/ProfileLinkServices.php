@@ -77,6 +77,7 @@ class ProfileLinkServices {
 			$this->services[ $linkable->get_slug() ] = $linkable;
 		}
 
+		
 		return $this->services;
 	}
 
@@ -84,13 +85,16 @@ class ProfileLinkServices {
 	 * @return array
 	 */
 	public function to_array() {
-		return array_values(
+		$vals =  array_values(
 			array_map(
 				function ( $link ) {
-					return $link->get_service();
+					$s = $link->get_service();
+					return $s;
 				},
 				$this->get_services()
 			)
 		);
+
+		return $vals;
 	}
 }

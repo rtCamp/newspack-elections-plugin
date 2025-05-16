@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import {Panel, PanelBody, PanelRow, ToggleControl, BaseControl, ButtonGroup, Button} from '@wordpress/components';
 import { isNil } from 'lodash';
-import { normalize_profile } from '../NormaliseProfile';
+import { normalize_profile } from '../legacy-single-profile/NormaliseProfile';
 import {useEffect} from "@wordpress/element"
 
 export const ProfileLinksPanel = (props) => {

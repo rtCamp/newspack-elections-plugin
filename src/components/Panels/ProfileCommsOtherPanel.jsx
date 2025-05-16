@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { isNil } from 'lodash';
-import { normalize_profile } from '../NormaliseProfile';
+import { normalize_profile } from '../legacy-single-profile/NormaliseProfile';
 import { ControlledPanel } from './ControlledPanel';
 
 const ProfileCommsOtherPanel = (props) => {

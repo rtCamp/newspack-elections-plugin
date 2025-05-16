@@ -31,7 +31,7 @@ const DefaultControl = (props, Control) => {
 	//const [meta, setMeta] = useEntityProp("postType", "govpack_profiles", "meta", postId)
 	const postId = useEntityId("postType", "govpack_profiles")
 	const [meta, setMeta] = useEntityProp("postType", "govpack_profiles", "meta", postId)
-	console.log(meta)
+	
     return (
         <Control
 			__nextHasNoMarginBottom = {true}

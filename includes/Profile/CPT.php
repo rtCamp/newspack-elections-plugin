@@ -408,6 +408,12 @@ class CPT extends \Govpack\Abstracts\PostType {
 			'link_services',
 			[
 				'get_callback'    => function ( $request ) {
+
+					//$links = \array_map(function($link){
+					//	$link["enabled"] = "true";
+					//	return $link;
+					//}, self::generate_link_services( $request['id'] ));
+					//return $links;
 					return self::generate_link_services( $request['id'] );
 				},
 				'update_callback' => false,

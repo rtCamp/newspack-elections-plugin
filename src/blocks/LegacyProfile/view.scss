@@ -251,23 +251,7 @@
     }
 
 
-    &__line{
-        padding-top:.5rem;
-        padding-bottom:.5rem;
-        border-bottom: 1px solid;
 
-        &:first-of-type{
-            padding-top:0rem;
-        }
-
-        .alignright & {
-            text-align: right;
-        }
-
-		p {
-			margin: 0;
-		}
-    }
 
     &.is-style-boxed_centered,
     &.is-style-center{
@@ -358,8 +342,24 @@
 
 
 
-.govpack-line {	
+.npe-profile-row {	
 	$block : &;
+
+	padding-top:.5rem;
+    padding-bottom:.5rem;
+    border-bottom: 1px solid;
+
+	&:first-of-type{
+		padding-top:0rem;
+	}
+
+	.alignright & {
+		text-align: right;
+	}
+
+	p {
+		margin: 0;
+	}
 
 	&--labels-above, &{
 		#{$block}__label,
