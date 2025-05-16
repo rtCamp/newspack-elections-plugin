@@ -102,8 +102,11 @@ foreach($groups as $group_key => $group_view_attr){
 						}
 						?>
 					</ul>
-				
-				<address class="wp-block-govpack-profile__contact_address">addrewss</address>
+				<?php if(isset($group['services']['address'])){ ?>
+					<address class="wp-block-govpack-profile__contact_address">
+						<?php echo wp_kses_post($group['services']['address']); ?>
+					</address>
+				<?php } ?>
 			</li>
 		<?php } ?>
 	</ul>
