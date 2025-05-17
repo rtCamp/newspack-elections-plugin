@@ -409,6 +409,13 @@ class CPT extends \Govpack\Abstracts\PostType {
 			[
 				'get_callback'    => function ( $request ) {
 
+					/*
+						When a profile is edited, the "enabled" property of a link service  is always set to "undefined" 
+						when passed as a boolean. This is something to do with the pre-fetch middleware used to save the 
+						http request. There is no use for the disabled link services anyway so just filter them out. 
+						For completeness, pass the enabled property as a string "true". False would just become 
+						undefined anyway.
+					*/
 					$links = array_filter(self::generate_link_services( $request['id']), function($link){
 						return $link["enabled"];
 					}, true);
@@ -420,7 +427,6 @@ class CPT extends \Govpack\Abstracts\PostType {
 
 			
 					return $links;
-					//return self::generate_link_services( $request['id'] );
 				},
 				'update_callback' => false,
 				'schema'          => [

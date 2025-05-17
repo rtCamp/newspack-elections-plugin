@@ -496,7 +496,7 @@ const SingleProfile = (props) => {
 						).map( (slug, index) => {
 							
 							let link = data[slug]
-							console.log(slug)
+							
 							let Icon = null
 							if(NPEIcons[slug]){
 								Icon = NPEIcons[slug]()

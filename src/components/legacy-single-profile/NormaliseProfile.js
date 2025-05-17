@@ -176,7 +176,6 @@ export function normalize_profile(profile){
 
 	function generateLinks(){
 
-		console.log(profile.link_services)
 		const services = Object.keys(profile.link_services).filter( (key) => {
 
 			let service = profile.link_services[key]
