@@ -85,14 +85,14 @@ class ProfileLinkServices {
 	 * @return array
 	 */
 	public function to_array() {
-		$vals =  array_values(
-			array_map(
+		//$vals =  array_values(
+		$vals = array_map(
 				function ( $link ) {
 					$s = $link->get_service();
 					return $s;
 				},
 				$this->get_services()
-			)
+		//	)
 		);
 
 		return $vals;

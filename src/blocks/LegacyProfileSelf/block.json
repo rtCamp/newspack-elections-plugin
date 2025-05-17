@@ -23,7 +23,7 @@
 		},
 		"showOtherLinks" : {
 			"type": "boolean",
-			"default": false
+			"default": true
 		},
 		"avatarHideDefault": {
 			"type": "boolean",

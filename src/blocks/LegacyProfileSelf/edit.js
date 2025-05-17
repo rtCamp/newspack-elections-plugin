@@ -94,7 +94,7 @@ function Edit( props ) {
 		hasResolved
 	} = useProfileLoader()
 
-	console.log("ProfileEntity", entity)
+	
 
     const ref = useRef();
 	const blockProps = useBlockProps( { ref } );

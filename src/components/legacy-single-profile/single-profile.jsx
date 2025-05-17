@@ -9,44 +9,9 @@
  */
 import { normalize_profile } from './NormaliseProfile';
 import {prependHTTPS} from "@wordpress/url"
- 
-import {
-	Facebook as FacebookIcon,
-	Instagram as InstagramIcon,
-	Linkedin as LinkedinIcon,
-	Twitter as TwitterIcon,
-	X as XIcon,
-	YouTube as YouTubeIcon,
 
-	Email as EmailIcon,
-	Fax as FaxIcon,
-	Phone as PhoneIcon,
-	Web as WebIcon,
+import { NPEIcons, Facebook, X, Instagram, YouTube, Web, Phone, Email, Fax } from "./../../components/Icons"
 
-	Ballotpedia as BallotpediaIcon,
-	Fec as FecIcon,
-	Gab as GabIcon,
-	Google as GoogleIcon,
-	OpenSecrets as OpenSecretsIcon,
-	OpenStates as OpenStatesIcon,
-	Rumble as RumbleIcon,
-	VoteSmart as VoteSmartIcon,
-	Wikipedia as WikipediaIcon
-} from "../Icons"
-
-const ProfileLinksIcons = {
-	"ballotpedia" : BallotpediaIcon,
-	"fec" : FecIcon,
-	"gab" : GabIcon,
-	"google" : GoogleIcon,
-	
-	"linkedin" : LinkedinIcon,
-	"openstates" : OpenStatesIcon,
-	"opensecrets" : OpenSecretsIcon,
-	"rumble" : RumbleIcon,
-	"votesmart" : VoteSmartIcon,
-	"wikipedia" : WikipediaIcon,
-}
 
 const Link = (props) => {
 
@@ -193,8 +158,6 @@ const SingleProfile = (props) => {
 	
     profile = normalize_profile(profile)
 	
-	
-
     const {
         showAvatar, 
         avatarBorderRadius, 
@@ -243,11 +206,10 @@ const SingleProfile = (props) => {
 		other : selectedOtherCommunicationDetails
 	}
 
-	console.log("profile", profile)
+	
+
 	const Contact = (props) => {
-
 		const href= prependHTTPS(props.href)
-
         return (
             <li className={clsx(`${blockClassName}__contact`, {
                 [`${blockClassName}__contact--hide-label`] : true
@@ -285,7 +247,7 @@ const SingleProfile = (props) => {
 								service = "facebook"
 								href={props.services.facebook} 
 								label = "Facebook"
-								icon = { <FacebookIcon />}
+								icon = { <Facebook />}
 							/>
 						)}
 
@@ -294,7 +256,7 @@ const SingleProfile = (props) => {
 								service = "x"
 								href={props.services.x} 
 								label = "X" 
-								icon = { <XIcon />}
+								icon = { <X />}
 							/>
 						)}
 
@@ -303,7 +265,7 @@ const SingleProfile = (props) => {
 								service = "instagram"
 								href={props.services.instagram} 
 								label = "Instagram" 
-								icon = { <InstagramIcon />}
+								icon = { <Instagram />}
 							/>
 						)}
 
@@ -312,7 +274,7 @@ const SingleProfile = (props) => {
 								service = "youtube"
 								href={props.services.youtube} 
 								label = "YouTube" 
-								icon = { <YouTubeIcon />}
+								icon = { <YouTube />}
 							/>
 						)}
 					</ul>
@@ -427,7 +389,7 @@ const SingleProfile = (props) => {
 									href={`tel:${services.phone}`} 
 									tooltip = {`${label} Phone : ${services.phone}`} 
 									label = "Phone"  
-									icon = { <PhoneIcon />}
+									icon = { <Phone />}
 								/>
 								
                             )}
@@ -437,7 +399,7 @@ const SingleProfile = (props) => {
 									href={`tel:${services.fax}`} 
 									tooltip = {`${label} Fax : ${services.fax}`} 
 									label = "Fax" 
-									icon = { <FaxIcon />}
+									icon = { <Fax />}
 								/>
 								
                             )}
@@ -447,7 +409,7 @@ const SingleProfile = (props) => {
 									href={`mailto:${services.email}`} 
 									tooltip = {`${label} Email : ${services.email}`} 
 									label = "Email" 
-									icon = { <EmailIcon />}
+									icon = { <Email />}
 								/>
 								
                         )}
@@ -457,7 +419,7 @@ const SingleProfile = (props) => {
 									href={services.website} 
 									tooltip = {`${label} Website : ${services.website}`} 
 									label = "Website" 
-									icon = { <WebIcon />}
+									icon = { <Web />}
 								/>
 								
                         )}
@@ -518,11 +480,10 @@ const SingleProfile = (props) => {
 
 		const {
 			label = "Links",
-			data
-		} = props			
+			data,
+			show
+		} = props
 
-		console.log("ProfileLinks", props)
-		
 		return (
 			<div className={`${blockClassName}__comms`}>
 				
@@ -530,15 +491,15 @@ const SingleProfile = (props) => {
 					<ul className={`${blockClassName}__comms-icons govpack-inline-list govpack-vertical-list`}>
 					
 						{Object.keys(data).filter( key => ( 
-							(Object.keys(selectedLinks).length === 0) 
-							|| (selectedLinks[key]))
+							(Object.keys(show).length === 0) 
+							|| (show[key]))
 						).map( (slug, index) => {
-							let link = data[slug]
-
 							
+							let link = data[slug]
+							console.log(slug)
 							let Icon = null
-							if(ProfileLinksIcons[slug]){
-								Icon = ProfileLinksIcons[slug]()
+							if(NPEIcons[slug]){
+								Icon = NPEIcons[slug]()
 							}
 							if(!Icon){
 								return false;
@@ -572,7 +533,6 @@ const SingleProfile = (props) => {
 		
 
 	function hasLinksData(item){
-		console.log("hasLinksData", item, Object.keys(item), Object.keys(item).length, (Object.keys(item).length > 0) )
 		return (Object.keys(item).length > 0);	
 	}	
 
