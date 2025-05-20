@@ -40,8 +40,19 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 			return '';
 		}
 
+		$url = $link['url'];
+
+		if( is_email($url)) {
+			$url = "mailto:" . antispambot( $url );
+		} elseif( $this->get_field()->type->slug === "phone"){
+			$url = "tel:" . $url;
+		}
+
+		if ( ! wp_parse_url( $url, PHP_URL_SCHEME ) && ! str_starts_with( $url, '//' ) && ! str_starts_with( $url, '#' ) ) {
+			$url = 'https://' . $url;
+		}
 		
-		return sprintf( '<a href="%s">%s</a>', $link['url'], $this->linkText() );
+		return sprintf( '<a href="%s">%s</a>', $url, $this->linkText() );
 	}
 
 	public function linkText(): string {
@@ -50,7 +61,7 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 		$has_label_override = ( $this->attribute( 'linkTextOverride' ) && $this->attribute( 'linkTextOverride' ) );
 		$has_default_label  = ( isset( $link['linkText'] ) && $link['linkText'] );
 		$default_label      = $has_default_label ? $link['linkText'] : 'Link';
-
+		
 		if ( $this->attribute( 'linkFormat' ) === 'url' ) {
 			return $link['url'] ?? '';
 		}
