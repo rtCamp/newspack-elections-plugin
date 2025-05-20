@@ -90,10 +90,24 @@ foreach($groups as $group_key => $group_view_attr){
 									"wp-block-govpack-profile__contact__icon--{$service}",
 								]
 							);
+
+							if ( is_email( $social_link ) ) {
+								$url = 'mailto:' . antispambot( $social_link );
+							} elseif ( ( 'phone' === $service ) || ( 'fax' === $service ) ) {
+								$url = 'tel:' . $social_link;
+							} else {
+								$url = $social_link;
+							}	
+
+							
+
+							if ( ! wp_parse_url( $url, PHP_URL_SCHEME ) && ! str_starts_with( $url, '//' ) && ! str_starts_with( $url, '#' ) ) {
+								$url = 'https://' . $url;
+							}
 		
 							?>
 								<li class="<?php echo esc_attr( $row_classes ); ?>">
-									<a href="<?php echo esc_url( $social_link ); ?>" class="wp-block-govpack-profile__contact__link">
+									<a href="<?php echo esc_url( $url ); ?>" class="wp-block-govpack-profile__contact__link">
 										<span class="<?php echo esc_attr( $icon_classes ); ?>"><?php echo esc_svg( gp_get_icon( $service ) ); ?></span>
 										<span class="wp-block-govpack-profile__contact__label"><?php esc_html( $service ); ?></span>
 									</a>
