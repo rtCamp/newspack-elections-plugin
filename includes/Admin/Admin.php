@@ -109,37 +109,27 @@ class Admin {
 	 */
 	public function create_menus(): void {
 
-	
-		$menu = new Menu();
-		$menu->set_page_title( __( 'Elections', 'newspack-elections' ) )
-			->set_menu_title( __( 'Elections', 'newspack-elections' ) )
-			->set_menu_slug( 'govpack' )
-			->set_icon( $this->create_menu_svg() )
-			->set_callback(
-				function () {
-					// no call back as this should be redirected.
-				}
-			);
 
-		$item = new MenuItem();
-		$menu->add_item(
-			$item->set_page_title( __( 'Import', 'newspack-elections' ) )
-				->set_menu_title( __( 'Import', 'newspack-elections' ) )
-				->set_menu_slug( 'govpack_import' )
-				->set_capability( Capabilities::CAN_IMPORT )
-				->set_callback( [ '\Govpack\Admin\Pages\Import', 'view' ] ) 
-		);
+		$import_item = (new MenuItem())
+			->set_parent_slug("edit.php?post_type=govpack_profiles")
+			->set_page_title( __( 'Import', 'newspack-elections' ) )
+			->set_menu_title( __( 'Import', 'newspack-elections' ) )
+			->set_menu_slug( 'govpack_import' )
+			->set_capability( Capabilities::CAN_IMPORT )
+			->set_callback( [ '\Govpack\Admin\Pages\Import', 'view' ] )
+			->create();
+		
+		
+		$export_item = (new MenuItem())
+			->set_parent_slug("edit.php?post_type=govpack_profiles")
+			->set_page_title( __( 'Export', 'newspack-elections' ) )
+			->set_menu_title( __( 'Export', 'newspack-elections' ) )
+			->set_menu_slug( 'govpack_export' )
+			->set_capability( Capabilities::CAN_EXPORT )
+			->set_callback( [ '\Govpack\Admin\Pages\Export', 'view' ] )
+			->create();
 
-		$item = new MenuItem();
-		$menu->add_item(
-			$item->set_page_title( __( 'Export', 'newspack-elections' ) )
-				->set_menu_title( __( 'Export', 'newspack-elections' ) )
-				->set_menu_slug( 'govpack_export' )
-				->set_capability( Capabilities::CAN_EXPORT )
-				->set_callback( [ '\Govpack\Admin\Pages\Export', 'view' ] ) 
-		);
-
-		$menu->create();
+		
 	}
 
 	/**

@@ -572,7 +572,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 					'labels'       => [
 						'name'               => _x( 'Profiles', 'post type general name', 'govpack' ),
 						'singular_name'      => _x( 'Profile', 'post type singular name', 'govpack' ),
-						'menu_name'          => _x( 'Profiles', 'admin menu', 'govpack' ),
+						'menu_name'          => _x( 'Election Profiles', 'admin menu', 'govpack' ),
 						'name_admin_bar'     => _x( 'Profile', 'add new on admin bar', 'govpack' ),
 						'add_new'            => _x( 'Add New', 'popup', 'govpack' ),
 						'add_new_item'       => __( 'Add New Profile', 'govpack' ),
@@ -588,9 +588,9 @@ class CPT extends \Govpack\Abstracts\PostType {
 					'public'       => true,
 					'show_in_rest' => true,
 					'show_ui'      => true,
-					'show_in_menu' => 'govpack',
+					//'show_in_menu' => 'govpack',
 					'supports'     => [ 'revisions', 'thumbnail', 'editor', 'custom-fields', 'title', 'excerpt' ],
-					'taxonomies'   => [ 'post_tag' ],
+				//	'taxonomies'   => [ 'post_tag' ],
 				
 					'menu_icon'    => 'dashicons-groups',
 					'rewrite'      => [
