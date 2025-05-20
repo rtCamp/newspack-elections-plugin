@@ -28,8 +28,12 @@ class ProfileFieldDate extends \Govpack\Blocks\ProfileFieldText {
 		
 		$date = \DateTime::createFromFormat( 'Y-m-d', parent::get_value() ); 
 		
-		if($date === false){
-			$date = new DateTime( parent::get_value() );
+		try {
+			if($date === false){
+				$date = new DateTime( parent::get_value() );
+			}
+		} catch (\Exception $e) {
+			$date = false;
 		}
 		
 		if ( $date === false ) {

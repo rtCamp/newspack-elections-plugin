@@ -218,11 +218,13 @@ export function normalize_profile(profile){
 			return {
 				...prev,
 				...{
-					[current] : link
+					[link.slug] : link
 				}
 			}
 		}, {})
 
+
+		
 		
 		return services
 	}
