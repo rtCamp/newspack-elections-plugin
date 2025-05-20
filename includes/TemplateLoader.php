@@ -59,7 +59,7 @@ class TemplateLoader extends \Govpack_Vendor_Gamajo_Template_Loader {
 		add_filter( 'template_include', [ $this, 'template_include' ] );
 	}
 
-	public function template_include( string $template ): string {
+	public function template_include( $template ) {
 
 		if ( is_embed() ) {
 			return $template;
