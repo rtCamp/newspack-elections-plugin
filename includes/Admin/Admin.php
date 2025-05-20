@@ -29,7 +29,7 @@ class Admin {
 	 * Register Hooks for usage in wp-admin.
 	 */
 	public function hooks(): void {
-		\add_action( 'admin_menu', [ '\Govpack\Admin\Menu', 'add_taxonomy_submenus' ], 10, 1 );
+		
 		\add_action( 'admin_menu', [ $this, 'create_menus' ], 1, 1 );
 		\add_action( 'admin_enqueue_scripts', [ $this, 'register_assets' ], 100, 1 );
 		\add_action( 'admin_enqueue_scripts', [ __CLASS__, 'load_assets' ], 101, 1 );
