@@ -20,7 +20,7 @@ import api from "@wordpress/api"
 const Importer = (props) => {
 
 
-	console.log("options", props.options)
+
 
     let [step, setStep] = useState(stage.UPLOADER);
     let [didInitialStatusCheck, setDidInitialStatusCheck] = useState(false)
