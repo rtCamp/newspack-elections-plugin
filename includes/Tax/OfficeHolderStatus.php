@@ -35,7 +35,7 @@ class OfficeHolderStatus extends \Govpack\Abstracts\Taxonomy {
 				'labels'            => [
 					'name'                       => _x( 'Profile Office Statuses', 'Taxonomy General Name', 'govpack' ),
 					'singular_name'              => _x( 'Profile Office Status', 'Taxonomy Singular Name', 'govpack' ),
-					'menu_name'                  => __( 'Statuses', 'govpack' ),
+					'menu_name'                  => __( 'Office Holder Status', 'govpack' ),
 					'all_items'                  => __( 'All Statuses', 'govpack' ),
 					'parent_item'                => __( 'Parent Status', 'govpack' ),
 					'parent_item_colon'          => __( 'Parent Status:', 'govpack' ),
