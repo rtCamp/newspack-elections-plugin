@@ -3,7 +3,7 @@ import { addQueryArgs } from '@wordpress/url';
 import { decodeEntities } from '@wordpress/html-entities';
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
-import { Icon, postAuthor, } from '@wordpress/icons';
+import { Icon, commentAuthorAvatar, } from '@wordpress/icons';
 import { useEntityRecord, store as coreData } from "@wordpress/core-data"
 import { Placeholder } from '@wordpress/components';
 
@@ -21,7 +21,7 @@ export const ProfileSelector = ( {
 
 	return (
 		<Placeholder
-            icon={ <Icon icon={ postAuthor } /> }
+            icon={ <Icon icon={ commentAuthorAvatar } /> }
             label={ __( 'Profile', 'govpack-blocks' ) }
         >
             { isLoading && (
