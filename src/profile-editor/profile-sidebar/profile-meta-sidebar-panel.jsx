@@ -32,7 +32,8 @@ export const ProfileMetaSidebarPanel = (props) => {
 	const { 
 		label,
 		fields = [],
-		groupFields = false
+		groupFields = false,
+		name
 	 } = props
 
 
@@ -79,7 +80,7 @@ export const ProfileMetaSidebarPanel = (props) => {
 	return (
         <SidebarPluginPanel 
             title={label}
-            name="gov-profile-about"
+            name={name}
 			className = "npe-profile-editor__panel"
         >
 			{(groupFields) && ( <>

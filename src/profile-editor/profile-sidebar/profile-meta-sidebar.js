@@ -288,23 +288,27 @@ const SOCIAL_PANEL_FIELDS = [{
 const ProfileMetaSidebar = () => (
     <>
         <ProfileMetaSidebarPanel 
-			label = "About"
+			name = "profile-panel-about"
+			label = "Profile Personal Information"
 			fields = {ABOUT_PANEL_FIELDS}
 		/>
 		
 		<ProfileMetaSidebarPanel 
-			label = "Office"
+			name = "profile-panel-office"
+			label = "Profile Office Information"
 			fields = {OFFICE_PANEL_FIELDS}
 		/>
 		
         <ProfileMetaSidebarPanel 
-			label = "Communications"
+			name = "profile-panel-contact"
+			label = "Profile Contact Information"
 			fields = {COMMUNICATION_PANEL_FIELDS}
 			groupFields = {true}
 		/>
 		
 		<ProfileMetaSidebarPanel 
-			label = "Social"
+			name = "profile-panel-social"
+			label = "Profile Social Media"
 			fields = {SOCIAL_PANEL_FIELDS}
 			groupFields = {true}
 		/>
