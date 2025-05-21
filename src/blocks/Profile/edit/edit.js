@@ -307,9 +307,7 @@ function ProfileBlockEdit( props ) {
 						setProfile = {setProfile}
 					/>
 					
-					<InspectorControls>
-						<ProfileResetPanel profileId = {profileId} setProfile = {resetProfile}  />
-					</InspectorControls>
+					
 					
 					<BlockHTMLElementControl
 						tagName = {TagName}
