@@ -583,15 +583,13 @@ class CPT extends \Govpack\Abstracts\PostType {
 						'search_items'       => __( 'Search Profiles', 'govpack' ),
 						'not_found'          => __( 'No profiles found.', 'govpack' ),
 						'not_found_in_trash' => __( 'No profiles found in Trash.', 'govpack' ),
+						'set_featured_image' => __( 'Set Profile Image', 'govpack' ),
 					],
 					'has_archive'  => true,
 					'public'       => true,
 					'show_in_rest' => true,
 					'show_ui'      => true,
-					//'show_in_menu' => 'govpack',
 					'supports'     => [ 'revisions', 'thumbnail', 'editor', 'custom-fields', 'title', 'excerpt' ],
-				//	'taxonomies'   => [ 'post_tag' ],
-				
 					'menu_icon'    => self::create_menu_svg(),
 					'rewrite'      => [
 						'slug'       => apply_filters( 'govpack_profile_filter_slug', $permalink_structure ),
