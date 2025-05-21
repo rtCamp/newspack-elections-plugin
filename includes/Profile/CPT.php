@@ -592,7 +592,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 					'supports'     => [ 'revisions', 'thumbnail', 'editor', 'custom-fields', 'title', 'excerpt' ],
 				//	'taxonomies'   => [ 'post_tag' ],
 				
-					'menu_icon'    => 'dashicons-groups',
+					'menu_icon'    => self::create_menu_svg(),
 					'rewrite'      => [
 						'slug'       => apply_filters( 'govpack_profile_filter_slug', $permalink_structure ),
 						'with_front' => false,
@@ -603,6 +603,23 @@ class CPT extends \Govpack\Abstracts\PostType {
 				]
 			)
 		);
+	}
+
+	public static function get_menu_svg() {
+
+		return '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
+			<path
+				fillRule="evenodd"
+				fill="black"
+				d="M7.25 16.437a6.5 6.5 0 1 1 9.5 0V16A2.75 2.75 0 0 0 14 13.25h-4A2.75 2.75 0 0 0 7.25 16v.437Zm1.5 1.193a6.47 6.47 0 0 0 3.25.87 6.47 6.47 0 0 0 3.25-.87V16c0-.69-.56-1.25-1.25-1.25h-4c-.69 0-1.25.56-1.25 1.25v1.63ZM4 12a8 8 0 1 1 16 0 8 8 0 0 1-16 0Zm10-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"
+				clipRule="evenodd"
+			/>
+		</svg>';
+
+	}
+
+	public static function create_menu_svg() {
+		return sprintf( 'data:image/svg+xml;base64,%s', base64_encode( self::get_menu_svg() ) );
 	}
 
 	/**
