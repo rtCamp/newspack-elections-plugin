@@ -36,11 +36,11 @@ const ProfileCommsPanel = (props) => {
 			label : "Display Email",
 			attr : "showEmail", 
 		},{
-			label : "Display Address",
-			attr : "showAddress", 
-		},{
 			label : "Display Website",
 			attr : "showWebsite", 
+		},{
+			label : "Display Address",
+			attr : "showAddress", 
 		},
 	]
 

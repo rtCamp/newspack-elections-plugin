@@ -107,7 +107,7 @@ export const ProfileLinksPanel = (props) => {
 	
     return (
 		<Panel>
-			<PanelBody title={ title }>
+			<PanelBody title={ title } initialOpen = { false }>
 			{Object.keys(profile.link_services ?? {}).map( (key) => (
 					<PanelRow key={key}>
 						<ToggleControl

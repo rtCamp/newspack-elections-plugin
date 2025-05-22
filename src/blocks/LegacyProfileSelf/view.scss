@@ -144,6 +144,9 @@
                 display:block;
 				width:100%;
             }
+			svg, path {
+				fill : currentColor;
+			}
 
 			&--x svg{
 				margin-top:2px;

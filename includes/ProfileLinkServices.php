@@ -32,7 +32,7 @@ class ProfileLinkServices {
 			'OpenSecrets',
 			'OpenStates',
 			'Rumble',
-			'WikiPedia', 
+			'Wikipedia', 
 		];
 
 		

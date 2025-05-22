@@ -3,7 +3,7 @@ namespace Govpack\ProfileLinks;
 
 class OpenStates extends \Govpack\ProfileLinks\ProfileLink {
 
-	protected string $slug = 'openstates';
+	protected string $slug = 'open-states';
 
 	/**
 	 * @return string
@@ -20,13 +20,17 @@ class OpenStates extends \Govpack\ProfileLinks\ProfileLink {
 	 * @psalm-return 'OpenStates'
 	 */
 	public function label(): string {
-		return 'OpenStates';
+		return 'Open States';
 	}
 
 	/**
 	 * @return false
 	 */
 	public function enabled(): bool {
-		return false;
+		return true;
+	}
+
+	public function url_template(): string {
+		return '{openstates_id}';
 	}
 }

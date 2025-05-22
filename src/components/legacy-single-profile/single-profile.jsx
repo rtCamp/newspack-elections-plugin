@@ -202,11 +202,12 @@ const SingleProfile = (props) => {
 	const selectedContact = {
 		official : showCapitolCommunicationDetails,
 		district : showDistrictCommunicationDetails,
-		campaign : showOtherCommunicationDetails,
+		campaign : showCampaignCommunicationDetails,
 		other : selectedOtherCommunicationDetails
 	}
 
 	
+	console.log("selectedContact", selectedContact)
 
 	const Contact = (props) => {
 		const href= prependHTTPS(props.href)
@@ -356,9 +357,15 @@ const SingleProfile = (props) => {
            
             <div className={`${blockClassName}__comms`}>
                 <ul className={`${blockClassName}__services`}>
-					<ContactRow services={props.data.official} show={selectedCapitolCommunicationDetails} label="Official" />
-					<ContactRow services={props.data.campaign} show={selectedCampaignCommunicationDetails} label="Campaign" />
-					<ContactRow services={props.data.district} show={selectedDistrictCommunicationDetails} label="District" />
+					{ selectedContact.official && (
+						<ContactRow services={props.data.official} show={selectedCapitolCommunicationDetails} label="Official" />
+					)}
+					{ selectedContact.campaign && (
+						<ContactRow services={props.data.campaign} show={selectedCampaignCommunicationDetails} label="Campaign" />
+					)}
+					{ selectedContact.district && (	
+						<ContactRow services={props.data.district} show={selectedDistrictCommunicationDetails} label="District" />
+					)}
 					{ hasCommsOtherData(props.data.other) && (
 						<CommsOther services={props.data.other} show={selectedOtherCommunicationDetails} label="Other" />
 					)}
@@ -484,6 +491,7 @@ const SingleProfile = (props) => {
 			show
 		} = props
 
+		console.log("Profile Links", props)
 		return (
 			<div className={`${blockClassName}__comms`}>
 				
@@ -495,12 +503,17 @@ const SingleProfile = (props) => {
 							|| (show[key]))
 						).map( (slug, index) => {
 							
+							
 							let link = data[slug]
 							
 							let Icon = null
+
 							if(NPEIcons[slug]){
 								Icon = NPEIcons[slug]()
 							}
+
+							console.log(link, Icon)
+							
 							if(!Icon){
 								return false;
 							}
@@ -544,7 +557,7 @@ const SingleProfile = (props) => {
 	let bio = excerptElement.textContent || excerptElement.innerText || '';
 
 	const doShowSocial = ((showSocial) && (selectedSocial.showOfficial || selectedSocial.showCampaign || selectedSocial.showPersonal) && (isValidCollection(profile.social)));	
-	const doShowContact = ((showCapitolCommunicationDetails || showCapitolCommunicationDetails || showCapitolCommunicationDetails) && (isValidCollection(profile.social)));		
+	const doShowContact = ( (selectedContact.official || selectedContact.district || selectedContact.campaign) && (isValidCollection(profile.contact)));		
 
 	const defaultRowProps = {
 		showLabel : showLabels,

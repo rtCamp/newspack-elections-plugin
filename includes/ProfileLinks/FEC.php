@@ -25,7 +25,7 @@ class Fec extends \Govpack\ProfileLinks\ProfileLink {
 
 
 	public function enabled(): bool {
-		return false;
+		return true;
 	}
 
 	/**

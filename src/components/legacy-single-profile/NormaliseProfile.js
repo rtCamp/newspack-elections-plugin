@@ -42,7 +42,7 @@ export function normalize_profile(profile){
     let today = new Date();
     let dateOfBirth = new Date(dateOfBirthMs);
 
-	console.log("dateOfBirth", dateOfBirth)
+	
 	
     // Did the birthday pass this month yet?
     let birthdayThisYearYet = (today.getMonth() > dateOfBirth.getMonth() ||
@@ -176,6 +176,7 @@ export function normalize_profile(profile){
 
 	function generateLinks(){
 
+		console.log(profile.link_services)
 		const services = Object.keys(profile.link_services).filter( (key) => {
 
 			let service = profile.link_services[key]
@@ -184,6 +185,8 @@ export function normalize_profile(profile){
 		}).filter( (key) => {
 
 			let service = profile.link_services[key]
+
+			console.log(service, profile.meta[service.meta_key])
 
 			if (typeof profile.meta[service.meta_key] === "undefined"){
 				return false;
@@ -224,7 +227,7 @@ export function normalize_profile(profile){
 		}, {})
 
 
-		
+		console.log("Links", services)
 		
 		return services
 	}

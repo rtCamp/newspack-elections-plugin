@@ -3,7 +3,7 @@ namespace Govpack\ProfileLinks;
 
 class OpenSecrets extends \Govpack\ProfileLinks\ProfileLink {
 
-	protected string $slug = 'opensecrets';
+	protected string $slug = 'open-secrets';
 
 	/**
 	 * @return string
@@ -20,10 +20,14 @@ class OpenSecrets extends \Govpack\ProfileLinks\ProfileLink {
 	 * @psalm-return 'OpenSecrets'
 	 */
 	public function label(): string {
-		return 'OpenSecrets';
+		return 'Open Secrets';
 	}
 
 	public function enabled(): bool {
-		return false;
+		return true;
+	}
+
+	public function url_template(): string {
+		return '{opensecrets_id}';
 	}
 }

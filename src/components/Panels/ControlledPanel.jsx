@@ -14,7 +14,10 @@ export const ControlledPanel = ({
 
 	return (
 	<Panel>
-		<PanelBody title={ title }>
+		<PanelBody 
+			title={ title }
+			initialOpen={ false }
+			>
 			{ controls.filter( (control) => ( control.shouldDisplay ?? true) ).map( (control, index) => (
 				<PanelRow key={`panel-${key}-control-${index}`}>
 					<ToggleControl

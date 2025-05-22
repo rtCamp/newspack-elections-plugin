@@ -16,7 +16,10 @@ const ProfileLabelPanel = (props) => {
 
 	return (
 		<Panel>
-			<PanelBody title={ __( 'Label', 'newspack-elections' ) }>
+			<PanelBody 
+				title={ __( 'Label', 'newspack-elections' ) }
+				initialOpen = { false }
+			>
 				<PanelRow>
 					<ToggleControl
 						label={ __( 'Display Row Labels', 'newspack-elections' ) }
