@@ -67,6 +67,7 @@ require_once GOVPACK_PLUGIN_FILE . 'vendor-prefixed/autoload.php';
 if ( class_exists( '\Govpack\Govpack' ) ) {
 
 	$GLOBALS['govpack'] = ( \Govpack\Govpack::instance() )
+		->set_uri( "newspack-elections" )
 		->set_path( GOVPACK_PLUGIN_PATH )
 		->set_url( GOVPACK_PLUGIN_URL );
 	$GLOBALS['govpack']->init();

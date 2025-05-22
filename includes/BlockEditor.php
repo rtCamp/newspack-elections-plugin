@@ -8,6 +8,7 @@
 namespace Govpack;
 
 use Govpack\BlockEditor\BlockCategories;
+use Govpack\BlockEditor\BlockTemplates;
 use Govpack\BlockEditor\PatternCategories;
 use Govpack\BlockEditor\Patterns;
 
@@ -16,6 +17,7 @@ class BlockEditor {
 
 	private BlockCategories $block_categories;
 	private PatternCategories $pattern_categories;
+	private BlockTemplates $block_templates;
 	private Patterns $patterns;
 	private Govpack $plugin;
 
@@ -46,5 +48,12 @@ class BlockEditor {
 			$this->patterns = new Patterns( $this->plugin );
 		}
 		return $this->patterns;
+	}
+
+	public function block_templates(): BlockTemplates {
+		if ( ! isset( $this->block_templates ) ) {
+			$this->block_templates = new BlockTemplates($this->plugin );
+		}
+		return $this->block_templates;
 	}
 }
