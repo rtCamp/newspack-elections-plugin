@@ -67,7 +67,7 @@ class ProfileFieldDate extends \Govpack\Blocks\ProfileFieldText {
 				'title'       => sprintf( 'Profile %s Field', ucfirst( $type->label ) ),
 				'description' => sprintf(
 					/* translators: %s: taxonomy's label */
-					__( 'Display a profile field of type: %s' ),
+					__( 'Display a profile field of type: %s', 'newspack-elections' ),
 					$type->label
 				),
 				'attributes'  => [

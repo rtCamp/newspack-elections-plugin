@@ -47,7 +47,7 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 				'title'       => $field->label,
 				'description' => sprintf(
 					/* translators: %s: taxonomy's label */
-					__( 'Display Profile Field: %s' ),
+					__( 'Display Profile Field: %s', 'newspack-elections' ),
 					$field->label
 				),
 				'attributes'  => [
@@ -105,7 +105,7 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 				'title'       => $taxonomy->label,
 				'description' => sprintf(
 					/* translators: %s: taxonomy's label */
-					__( 'Display a list of assigned terms from the taxonomy: %s' ),
+					__( 'Display a list of assigned terms from the taxonomy: %s', 'newspack-elections' ),
 					$taxonomy->label
 				),
 				'attributes'  => [

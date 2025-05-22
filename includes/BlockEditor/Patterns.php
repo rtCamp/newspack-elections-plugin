@@ -116,7 +116,7 @@ class Patterns {
 					__FUNCTION__,
 					sprintf(
 						/* translators: %s: file name. */
-						__( 'Could not register file "%s" as a block pattern as the file does not exist.' ), //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						__( 'Could not register file "%s" as a block pattern as the file does not exist.', 'newspack-elections' ), //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						$file //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					),
 					'6.4.0'
@@ -245,7 +245,7 @@ class Patterns {
 					__FUNCTION__,
 					sprintf(
 						/* translators: 1: file name. */
-						__( 'Could not register file "%s" as a block pattern ("Slug" field missing)' ), //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						__( 'Could not register file "%s" as a block pattern ("Slug" field missing)', 'newspack-elections' ), //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						esc_attr( $file )
 					),
 					'6.0.0'
@@ -258,7 +258,7 @@ class Patterns {
 					__FUNCTION__,
 					sprintf(
 						/* translators: 1: file name; 2: slug value found. */
-						__( 'Could not register file "%1$s" as a block pattern (invalid slug "%2$s")' ), //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						__( 'Could not register file "%1$s" as a block pattern (invalid slug "%2$s")', 'newspack-elections' ), //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						esc_attr( $file ),
 						esc_attr( $pattern['slug'] )
 					),
@@ -272,7 +272,7 @@ class Patterns {
 					__FUNCTION__,
 					sprintf(
 						/* translators: 1: file name. */
-						__( 'Could not register file "%s" as a block pattern ("Title" field missing)' ), //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						__( 'Could not register file "%s" as a block pattern ("Title" field missing)', 'newspack-elections' ), //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						esc_attr( $file )
 					),
 					'6.0.0'
@@ -423,7 +423,7 @@ class Patterns {
 				__METHOD__,
 				sprintf(
 					/* translators: %1$s: The filter name.*/
-					__( 'The %1$s filter must return an integer value greater than 0.' ), //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					__( 'The %1$s filter must return an integer value greater than 0.', 'newspack-elections' ), //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					'<code>npe_plugin_files_patterns_ttl</code>'
 				),
 				'6.6.0'

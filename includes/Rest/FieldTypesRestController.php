@@ -38,7 +38,7 @@ class FieldTypesRestController extends GovpackRestController {
 			[
 				'args'   => [
 					'slug' => [
-						'description' => __( 'An alphanumeric identifier for the field.' ),
+						'description' => __( 'An alphanumeric identifier for the field.', 'newspack-elections' ),
 						'type'        => 'string',
 					],
 				],
@@ -95,7 +95,7 @@ class FieldTypesRestController extends GovpackRestController {
 		if ( $type === false ) {
 			return new WP_Error(
 				'rest_gp_field_not_found',
-				__( 'Field Not Found.' ),
+				__( 'Field Not Found.', 'newspack-elections' ),
 				[ 'status' => 404 ]
 			);
 		} 
@@ -177,43 +177,43 @@ class FieldTypesRestController extends GovpackRestController {
 			'type'       => 'object',
 			'properties' => [
 				'slug'        => [
-					'description' => __( 'Unique identifier for the field.' ),
+					'description' => __( 'Unique identifier for the field.', 'newspack-elections' ),
 					'type'        => 'string',
 					'context'     => [ 'view', 'edit' ],
 					'readonly'    => true,
 				],
 				'label'       => [
-					'description' => __( 'Human readable name for the field.' ),
+					'description' => __( 'Human readable name for the field.', 'newspack-elections' ),
 					'type'        => 'string',
 					'context'     => [ 'view', 'edit' ],
 					'readonly'    => true,
 				],
 				'type'        => [
-					'description' => __( 'Field Type Slug.' ),
+					'description' => __( 'Field Type Slug.', 'newspack-elections' ),
 					'type'        => 'string',
 					'context'     => [ 'view', 'edit' ],
 					'readonly'    => true,
 				],
 				'group'       => [
-					'description' => __( 'Field Group Slug.' ),
+					'description' => __( 'Field Group Slug.', 'newspack-elections' ),
 					'type'        => 'string',
 					'context'     => [ 'view', 'edit' ],
 					'readonly'    => true,
 				],
 				'meta_key'    => [
-					'description' => __( 'Meta Key used to store field value.' ),
+					'description' => __( 'Meta Key used to store field value.', 'newspack-elections' ),
 					'type'        => 'string',
 					'context'     => [ 'view', 'edit' ],
 					'readonly'    => true,
 				],
 				'source'      => [
-					'description' => __( 'Source of Field Data.' ),
+					'description' => __( 'Source of Field Data.', 'newspack-elections' ),
 					'type'        => 'string',
 					'context'     => [ 'view', 'edit' ],
 					'readonly'    => true,
 				],
 				'allow_block' => [
-					'description' => __( 'Can this field Create a block variation.' ),
+					'description' => __( 'Can this field Create a block variation.', 'newspack-elections' ),
 					'type'        => 'boolean',
 					'context'     => [ 'view', 'edit' ],
 					'readonly'    => true,
@@ -231,7 +231,7 @@ class FieldTypesRestController extends GovpackRestController {
 		$query_params['context']['default'] = 'view';
 
 		$query_params['slug'] = [
-			'description' => __( 'Limit result set to fields with one or more specific slugs.' ),
+			'description' => __( 'Limit result set to fields with one or more specific slugs.', 'newspack-elections' ),
 			'type'        => 'array',
 			'items'       => [
 				'type' => 'string',

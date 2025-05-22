@@ -8,7 +8,8 @@
  * Text Domain:       newspack-elections
  * Domain Path:       /languages
  * Version:           1.2.0
- * Requires at least: 6.4 
+ * Requires at least: 6.7 
+ * License:           GPL2
  *
  * @package         Newspack_Elections
  */

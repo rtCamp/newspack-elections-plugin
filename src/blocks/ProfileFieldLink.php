@@ -102,7 +102,7 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 				'title'       => $field->label,
 				'description' => sprintf(
 					/* translators: %s: taxonomy's label */
-					__( 'Display Profile Field: %s' ),
+					__( 'Display Profile Field: %s', 'newspack-elections' ),
 					$field->label
 				),
 				'attributes'  => [

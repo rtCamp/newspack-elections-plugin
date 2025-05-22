@@ -161,7 +161,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 			'title'       => 'Profile Field',
 			'description' => sprintf(
 				/* translators: %s: taxonomy's label */
-				__( 'Display Empty Profile Field' ),
+				__( 'Display Empty Profile Field', 'newspack-elections' ),
 			),
 			'attributes'  => [
 				'field' => [ 
@@ -195,7 +195,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 				'title'       => $field->label,
 				'description' => sprintf(
 					/* translators: %s: taxonomy's label */
-					__( 'Display Profile Field: %s' ),
+					__( 'Display Profile Field: %s', 'newspack-elections' ),
 					$field->label
 				),
 				'attributes'  => [
@@ -228,7 +228,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 				'title'       => sprintf( 'Profile %s', ucfirst( $type->label ) ),
 				'description' => sprintf(
 					/* translators: %s: taxonomy's label */
-					__( 'Display a profile row of type: %s' ),
+					__( 'Display a profile row of type: %s', 'newspack-elections' ),
 					$type->label
 				),
 				'attributes'  => [
@@ -258,7 +258,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 			'title'       => sprintf( 'Profile %s Row', 'Free Text' ),
 			'description' => sprintf(
 				/* translators: %s: taxonomy's label */
-				__( 'Display a profile row of type: %s' ),
+				__( 'Display a profile row of type: %s', 'newspack-elections' ),
 				'Free Text'
 			),
 			'attributes'  => [

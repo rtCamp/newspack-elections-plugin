@@ -1,16 +1,15 @@
-# Govpack #
+# Newspack Elections #
 Contributors: govpack, thefuturewasnow, stewarty, poweredbycoffee, paulschreib, leanderiversen
-Donate link: https://buy.stripe.com/8wM3cNh2ugU9cdW288
-Tags: politics, US, elections, democracy, local government, Gutenberg
-Requires at least: 5.9
-Tested up to: 6.0
-Stable tag: 1.0.2
-Requires PHP: 7.4
+Tags: politics, elections, democracy, local government
+Requires at least: 6.7
+Tested up to: 6.8
+Stable tag: 1.2.0
+Requires PHP: 8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 
-Govpack allows WordPress users to create and maintain profiles of elected officials that can be inserted into posts with Gutenberg blocks. It has been built by govpack, thefuturewasnow, stewarty, poweredbycoffee, paulschreib, leanderiversen. You can help fund the [project here](https://buy.stripe.com/8wM3cNh2ugU9cdW288). Please address questions, comments, feedback to hello@govpack.org.
+Newspack Elections allows WordPress users to create and maintain profiles of elected officials that can be inserted into posts with Gutenberg blocks. 
 
 ## Description ##
 

@@ -496,7 +496,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 		foreach ( (array) $post_ids as $post_id ) {
 			
 			if ( ! current_user_can( 'publish_posts', $post_id ) ) {
-				wp_die( __( 'Sorry, you are not allowed to publish this item.' ) ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				wp_die( __( 'Sorry, you are not allowed to publish this item.', 'newspack-elections' ) ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 
 			wp_update_post(
@@ -570,19 +570,19 @@ class CPT extends \Govpack\Abstracts\PostType {
 				'govpack_register_post_type_profile',
 				[
 					'labels'       => [
-						'name'               => _x( 'Profiles', 'post type general name', 'govpack' ),
-						'singular_name'      => _x( 'Profile', 'post type singular name', 'govpack' ),
-						'menu_name'          => _x( 'Profiles', 'admin menu', 'govpack' ),
-						'name_admin_bar'     => _x( 'Profile', 'add new on admin bar', 'govpack' ),
-						'add_new'            => _x( 'Add New', 'popup', 'govpack' ),
-						'add_new_item'       => __( 'Add New Profile', 'govpack' ),
-						'new_item'           => __( 'New Profile', 'govpack' ),
-						'edit_item'          => __( 'Edit Profile', 'govpack' ),
-						'view_item'          => __( 'View Profile', 'govpack' ),
-						'all_items'          => __( 'Profiles', 'govpack' ),
-						'search_items'       => __( 'Search Profiles', 'govpack' ),
-						'not_found'          => __( 'No profiles found.', 'govpack' ),
-						'not_found_in_trash' => __( 'No profiles found in Trash.', 'govpack' ),
+						'name'               => _x( 'Profiles', 'post type general name', 'newspack-elections' ),
+						'singular_name'      => _x( 'Profile', 'post type singular name', 'newspack-elections' ),
+						'menu_name'          => _x( 'Profiles', 'admin menu', 'newspack-elections' ),
+						'name_admin_bar'     => _x( 'Profile', 'add new on admin bar', 'newspack-elections' ),
+						'add_new'            => _x( 'Add New', 'popup', 'newspack-elections' ),
+						'add_new_item'       => __( 'Add New Profile', 'newspack-elections' ),
+						'new_item'           => __( 'New Profile', 'newspack-elections' ),
+						'edit_item'          => __( 'Edit Profile', 'newspack-elections' ),
+						'view_item'          => __( 'View Profile', 'newspack-elections' ),
+						'all_items'          => __( 'Profiles', 'newspack-elections' ),
+						'search_items'       => __( 'Search Profiles', 'newspack-elections' ),
+						'not_found'          => __( 'No profiles found.', 'newspack-elections' ),
+						'not_found_in_trash' => __( 'No profiles found in Trash.', 'newspack-elections' ),
 					],
 					'has_archive'  => true,
 					'public'       => true,
