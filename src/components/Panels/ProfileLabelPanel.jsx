@@ -2,6 +2,25 @@ import { __ } from '@wordpress/i18n';
 import {Panel, PanelBody, PanelRow, ToggleControl} from '@wordpress/components';
 
 
+const LabelPositionToggle = ({
+	labelsAbove,
+	setAttributes
+}) => {
+	return (
+
+		<ToggleControl
+			label={ __( 'Position Labels Above', 'newspack-elections' ) }
+			checked={ labelsAbove }
+			onChange={ () => setAttributes( { labelsAbove: ! labelsAbove } ) }
+			help={
+				labelsAbove
+					? 'Labels will be shown above.'
+					: 'Labels will be shown beside.'
+			}
+		/>
+	)
+}
+
 const ProfileLabelPanel = (props) => {
 
     const {
@@ -25,18 +44,6 @@ const ProfileLabelPanel = (props) => {
 						label={ __( 'Display Row Labels', 'newspack-elections' ) }
 						checked={ showLabels }
 						onChange={ () => setAttributes( { showLabels: ! showLabels } ) }
-					/>
-				</PanelRow>
-				<PanelRow>
-					<ToggleControl
-						label={ __( 'Position Labels Above', 'newspack-elections' ) }
-						checked={ labelsAbove }
-						onChange={ () => setAttributes( { labelsAbove: ! labelsAbove } ) }
-						help={
-							labelsAbove
-								? 'Labels will be shown above.'
-								: 'Labels will be shown beside.'
-						}
 					/>
 				</PanelRow>
 			</PanelBody>
