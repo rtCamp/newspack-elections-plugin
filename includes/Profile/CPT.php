@@ -210,7 +210,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 				// Legacy maybe to  be reincluded later, need updated to services
 				//new TextField( 'google_entity_id', 'Google Entity ID' ),
 				//new TextField( 'govtrack_id', 'GovTrack ID' ),
-				//new TextField( 'votesmart_id', 'VoteSmart ID' ),
+				new TextField( 'votesmart_id', 'VoteSmart ID' ),
 				//new TextField( 'usio_id', 'BioGuide' ),
 				//new TextField( 'icpsr_id', 'Voteview' ),
 

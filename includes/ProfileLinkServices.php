@@ -32,6 +32,7 @@ class ProfileLinkServices {
 			'OpenSecrets',
 			'OpenStates',
 			'Rumble',
+			'VoteSmart',
 			'Wikipedia', 
 		];
 

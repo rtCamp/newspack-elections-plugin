@@ -20,11 +20,11 @@ class VoteSmart extends \Govpack\ProfileLinks\ProfileLink {
 	 * @psalm-return 'VoteSmart'
 	 */
 	public function label(): string {
-		return 'VoteSmart';
+		return 'Vote Smart';
 	}
 
 	public function enabled(): bool {
-		return false;
+		return true;
 	}
 
 	/**

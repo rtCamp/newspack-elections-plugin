@@ -272,7 +272,12 @@ const SOCIAL_PANEL_FIELDS = [{
 		meta_key : "rumble",
 		group: "Other"
 	},
-
+	{ 
+		type: "url",
+		label : "Vote Smart",
+		meta_key: "votesmart_id",
+		group: "Other"
+	},
 	{ 
 		type: "url",
 		label : "Wikipedia",
