@@ -24,14 +24,11 @@ const LabelPositionToggle = ({
 const ProfileLabelPanel = (props) => {
 
     const {
-        attributes,
+        attributes : {showLabels = true} = {},
         setAttributes,
     } = props
 
-    const {
-        showLabels,
-		labelsAbove
-    } = attributes
+   
 
 	return (
 		<Panel>

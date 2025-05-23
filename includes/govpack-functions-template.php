@@ -98,7 +98,7 @@ if ( ! function_exists( 'gp_line_attributes' ) ) {
 					[
 						'wp-block-govpack-profile__line--' . $line['key'],
 						'npe-profile-row',
-						'npe-profile-row--labels-' . ( $attributes['labelsAbove'] ? 'above' : 'beside' ),
+						'npe-profile-row--labels-beside',
 					]
 				)
 			),
