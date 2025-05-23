@@ -6,15 +6,11 @@ import {
 
 const InfoPanel = (props) => {
     return (
-        <div style={{  
-            "backgroundColor" : "#fff",
-            padding: "1rem",
+        <div style={{
+            
             marginBottom : "1rem"
         }} >  
-            <Spacer padding="4">
-                <Heading level = "3">
-                    {props.heading}
-                </Heading>
+            <Spacer padding="0">
                 <Spacer marginBottom="4" />
                 { props.children }
             </Spacer>

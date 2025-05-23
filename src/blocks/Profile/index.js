@@ -1,7 +1,7 @@
 import { registerBlockType, createBlock, getBlockType } from '@wordpress/blocks';
 
 
-
+import { commentAuthorAvatar as icon } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -42,7 +42,7 @@ registerBlockType( metadata.name, {
     category,
     attributes,
 	supports,
-	icon: 'groups',
+	icon,
 	keywords: [ 'govpack' ],
 	variations,
 	edit : Edit,

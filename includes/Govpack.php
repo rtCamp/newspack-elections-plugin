@@ -107,7 +107,7 @@ class Govpack extends Plugin {
 	}
 	
 	public function text_domain() {
-		load_plugin_textdomain( $this->text_domain, false, $this->path( 'languages' ) );
+		load_plugin_textdomain( "newspack-elections", false, $this->path( 'languages' ) );
 	}
 
 	public function setup(): void {
@@ -145,13 +145,23 @@ class Govpack extends Plugin {
 			]
 		);
 
-		$this->block_editor()->pattern_categories()->add( 'newspack-elections', 'Newspack Elections' );
+		$this->block_editor()
+			->pattern_categories()
+				->add( 'newspack-elections', 'Newspack Elections' );
 
 		$this->block_editor()
 			->patterns()
 				->set_default_category( 'newspack-elections' )
 				->set_pattern_directory( $this->path( 'block-patterns' ) )
 				->register_patterns();
+		
+		$this->block_editor()
+			->block_templates()
+				->register_from_file( "single-govpack_profiles", "single/single-govpack_profiles.html", [
+					'title'       => __( 'Single Profile', 'newspack-elections' ),
+					'description' => __( 'Output a single Election Profile.', 'newspack-elections' ),
+					'post_types' => [ "govpack_profiles" ],
+				] );
 	
 
 		if ( is_admin() ) {
@@ -161,7 +171,7 @@ class Govpack extends Plugin {
 		if ( ! is_admin() ) {
 			$this->front_end();
 		}
-			
+
 	}
 
 	public function admin(): Admin {

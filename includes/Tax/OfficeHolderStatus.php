@@ -35,7 +35,7 @@ class OfficeHolderStatus extends \Govpack\Abstracts\Taxonomy {
 				'labels'            => [
 					'name'                       => _x( 'Profile Office Statuses', 'Taxonomy General Name', 'newspack-elections' ),
 					'singular_name'              => _x( 'Profile Office Status', 'Taxonomy Singular Name', 'newspack-elections' ),
-					'menu_name'                  => __( 'Statuses', 'newspack-elections' ),
+					'menu_name'                  => __( 'Office Holder Status', 'newspack-elections' ),
 					'all_items'                  => __( 'All Statuses', 'newspack-elections' ),
 					'parent_item'                => __( 'Parent Status', 'newspack-elections' ),
 					'parent_item_colon'          => __( 'Parent Status:', 'newspack-elections' ),
@@ -52,7 +52,7 @@ class OfficeHolderStatus extends \Govpack\Abstracts\Taxonomy {
 					'not_found'                  => __( 'Not Found', 'newspack-elections' ),
 					'no_terms'                   => __( 'No statuses', 'newspack-elections' ),
 					'items_list'                 => __( 'Statuses list', 'newspack-elections' ),
-					'items_list_navigation'      => __( 'Statuses list navigation', 'newspack-elections' ),
+					'items_list_navigation'      => __( 'Statuses list navigation', 'newspack-elections' )
 				],
 				'public'            => true,
 				'hierarchical'      => true,

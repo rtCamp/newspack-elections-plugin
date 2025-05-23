@@ -52,7 +52,7 @@ export const ProfileEdit = ( props ) => {
 	
 	let Component
 	if(showProfileSelector){
-		Component = ProfileSelectorPlaceholder
+		Component = ProfileSelector
 	} else if (showVariationSelector) {
 		Component = ProfileVariationSelector
 	} else {

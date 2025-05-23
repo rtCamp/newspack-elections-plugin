@@ -79,10 +79,10 @@ const ProfileAvatarPanel = (props) => {
 
     return (
                 <Panel>
-					<PanelBody title={ __( 'Photo', 'newspack-elections' ) }>
+					<PanelBody title={ __( 'Profile Picture', 'newspack-elections' ) }>
                         <PanelRow>
 						    <ToggleControl
-				    			label={ __( 'Display Photo', 'newspack-elections' ) }
+				    			label={ __( 'Display Profile Picture', 'newspack-elections' ) }
 			    				checked={ showAvatar }
 		    					onChange={ () => setAttributes( { showAvatar: ! showAvatar } ) }
 	    					/>
@@ -90,7 +90,7 @@ const ProfileAvatarPanel = (props) => {
                         { showAvatar && showRadiusControl && (
 						<PanelRow>
 							<UnitControl
-								label={ __( 'Photo border radius', 'newspack-elections' ) }
+								label={ __( 'Picture border radius', 'newspack-elections' ) }
 								labelPosition="edge"
 								__unstableInputWidth="80px"
 								units={ units }
@@ -103,7 +103,7 @@ const ProfileAvatarPanel = (props) => {
 					) }
                     { showAvatar && showSizeControl &&(
 						<BaseControl
-							label={ __( 'Photo size', 'newspack-elections' ) }
+							label={ __( 'Picture size', 'newspack-elections' ) }
 							id="govpack__avatar-size-control"
 						>
 							<PanelRow>

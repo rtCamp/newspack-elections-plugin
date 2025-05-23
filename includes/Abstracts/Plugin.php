@@ -5,6 +5,7 @@ abstract class Plugin {
 
 	private string $path;
 	private string $url;
+	private string $uri;
 
 	public function require( string $path ): string {
 		return require_once $this->path( $path ); //phpcs:ignore WordPressVIPMinimum.Files.IncludingFile.UsingVariable
@@ -24,6 +25,11 @@ abstract class Plugin {
 		return $this;
 	}
 
+	public function set_uri( string $uri ): self {
+		$this->uri = $uri;
+		return $this;
+	}
+
 	public function path( string|null $path = null): string {
 		$base_path = \trailingslashit($this->path);
 
@@ -36,6 +42,10 @@ abstract class Plugin {
 
 	public function url( string $path ): string {
 		return trailingslashit(trailingslashit( $this->url ) . $path);
+	}
+
+	public function uri( ): string {
+		return $this->uri;
 	}
 
 	public function build_url( string $path ): string {

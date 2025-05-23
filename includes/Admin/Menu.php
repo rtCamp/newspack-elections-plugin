@@ -211,8 +211,7 @@ class Menu {
 	 * @since 3.1.0
 	 */
 	public static function add_taxonomy_submenus(): void {
-		
-		
+	
 		/**
 		 * @var \WP_Taxonomy $tax 
 		 */

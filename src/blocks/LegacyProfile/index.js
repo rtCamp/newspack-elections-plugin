@@ -1,5 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
+import { commentAuthorAvatar as icon } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
@@ -20,7 +21,7 @@ registerBlockType( 'govpack/profile-legacy', {
 	title: __('Election Profile (Legacy)', "newspack-elections"),
     category,
     attributes,
-	icon: 'groups',
+	icon,
 	keywords: [ 'govpack', 'newspack-elections' ],
     styles: [
 		{ name: 'default', label:  'Default', isDefault: true },

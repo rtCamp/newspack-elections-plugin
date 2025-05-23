@@ -18,7 +18,7 @@ import { useInstanceId } from '@wordpress/compose';
 import { useRef, useEffect} from '@wordpress/element';
 import { ToolbarGroup, Toolbar, Icon, ResizableBox, SelectControl } from '@wordpress/components';
 import { useDispatch, useSelect} from "@wordpress/data";
-import { external, postAuthor } from '@wordpress/icons';
+import { external, edit } from '@wordpress/icons';
 
 
 import { ProfileResetPanel } from '../../../components/Panels/ProfileResetPanel.jsx';
@@ -41,15 +41,15 @@ const ProfileBlockControls = ({ attributes, setAttributes, ...props}) => {
 				<Toolbar
                 	controls={ [
                     	{
-                        	icon: <Icon icon={ postAuthor } />,
-                        	title: __( 'Modify Selection', 'govpack' ),
+                        	icon: <Icon icon={ edit } />,
+                        	title: __( 'Choose Another Profile', 'govpack' ),
                         	onClick: () => {
                             	props.setProfile( null );
                         	},
                     	},
 						{
                         	icon: <Icon icon={ external } />,
-                        	title: __( 'Edit Profile', 'govpack' ),
+                        	title: __( 'View Profile (Opens in new page)', 'govpack' ),
                         	href : postEditURL,
 							target: "_blank"
                     	},
@@ -307,9 +307,7 @@ function ProfileBlockEdit( props ) {
 						setProfile = {setProfile}
 					/>
 					
-					<InspectorControls>
-						<ProfileResetPanel profileId = {profileId} setProfile = {resetProfile}  />
-					</InspectorControls>
+					
 					
 					<BlockHTMLElementControl
 						tagName = {TagName}

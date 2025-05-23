@@ -52,25 +52,18 @@ const AutocompleteField = (props) => {
 					//	return;
 					//}
 
-					const currentSuggestions = [ ...suggestions ].map( (suggestion) => {
-						return {
-							...suggestion,
-							"label" : (suggestion.label + " (ID:" + suggestion.value + ")")
-						}
-					});
-					
+					// flatted an array of objects containing value:"" and label:"" to an object of value:"label"
 					const currentValidValues = {};
-
 					suggestions.forEach( suggestion => {
-						currentValidValues[ suggestion.value ] = suggestion.label + " (ID:" + suggestion.value + ")";
+						currentValidValues[ suggestion.value ] = suggestion.label 
 					} );
 
 			
-					setSuggestions(currentSuggestions);
+					setSuggestions(suggestions);
 					setValidValues(currentValidValues);
 					setLoading(false);
 			}).catch( () => {
-				console.log("catch", request)
+				
 				if ( suggestionsRequest === request ) {
 					setLoading(false);
 				}
@@ -89,6 +82,8 @@ const AutocompleteField = (props) => {
 	 * @return {Array} array of valid labels corresponding to the values.
 	 */
 	const getLabelsForValues = ( values ) => {
+
+		console.log("getLabelsForValues", values)
 		return values.reduce( ( accumulator, value ) => {
 			if ( ! value ) {
 				return accumulator;
@@ -154,6 +149,7 @@ const AutocompleteField = (props) => {
 					onChange={ tokens => handleOnChange( tokens ) }
 					onInputChange={ input => debouncedUpdateSuggestions( input ) }
 					label={ label }
+					__experimentalShowHowTo = {false}
 		
 				/>
 				{ loading && <Spinner /> }
@@ -209,10 +205,12 @@ const AutocompleteWithSuggestions = (props) => {
 	 const renderSuggestion = suggestion => {
 		
 		return (
-			<Button  key={ suggestion.value } onClick={ () => {
-				console.log("handle on change")
-				handleOnChange( [ suggestion ] ) }
-			}>
+			<Button 
+				key={ suggestion.value } onClick={ () => {
+					handleOnChange( [ suggestion ] ) }
+				}
+				variant='link'
+			>
 				{ suggestion.label }
 			</Button>
 		);
@@ -263,7 +261,7 @@ const AutocompleteWithSuggestions = (props) => {
 		}
 
 		const className = 'newspack-autocomplete-with-suggestions__search-suggestions';
-
+		
 		return (
 			<>
 				{ ! hideHelp && (
@@ -281,8 +279,9 @@ const AutocompleteWithSuggestions = (props) => {
 					{ suggestions.length < ( maxItemsToSuggest || maxSuggestions ) && (
 						<Button
 							disabled={ isLoadingMore }
-							isSecondary
+
 							onClick={ () => setIsLoadingMore( true ) }
+							variant="secondary"
 						>
 							{ isLoadingMore ? __( 'Loading…', 'newspack' ) : __( 'Load more', 'newspack' ) }
 						</Button>
@@ -292,7 +291,7 @@ const AutocompleteWithSuggestions = (props) => {
 		);
 	};
 
-	const classNames = [ 'govpack-autocomplete-with-suggestions' ];
+	const classNames = [ 'newspack-autocomplete-with-suggestions' ];
 
 	if ( hideHelp ) {
 		classNames.push( 'hide-help' );
@@ -335,7 +334,6 @@ const AutocompleteWithSuggestions = (props) => {
 				return acc;
 			}, [] );
 	   };
-
 
     return (
 		<div className={ classNames.join( ' ' ) }>

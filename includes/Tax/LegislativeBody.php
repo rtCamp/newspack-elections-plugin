@@ -33,7 +33,7 @@ class LegislativeBody extends \Govpack\Abstracts\Taxonomy {
 				'labels'             => [
 					'name'                       => _x( 'Offices', 'Taxonomy General Name', 'newspack-elections' ),
 					'singular_name'              => _x( 'Office', 'Taxonomy Singular Name', 'newspack-elections' ),
-					'menu_name'                  => __( 'Offices', 'newspack-elections' ),
+					'menu_name'                  => __( 'Profile Office', 'newspack-elections' ),
 					'all_items'                  => __( 'All Offices', 'newspack-elections' ),
 					'parent_item'                => __( 'Parent Office', 'newspack-elections' ),
 					'parent_item_colon'          => __( 'Parent Office:', 'newspack-elections' ),
@@ -50,7 +50,7 @@ class LegislativeBody extends \Govpack\Abstracts\Taxonomy {
 					'not_found'                  => __( 'Not Found', 'newspack-elections' ),
 					'no_terms'                   => __( 'No Offices', 'newspack-elections' ),
 					'items_list'                 => __( 'Offices list', 'newspack-elections' ),
-					'items_list_navigation'      => __( 'Offices list navigation', 'newspack-elections' ),
+					'items_list_navigation'      => __( 'Offices list navigation', 'newspack-elections' )
 				],
 				'public'             => true,
 				'hierarchical'       => true,

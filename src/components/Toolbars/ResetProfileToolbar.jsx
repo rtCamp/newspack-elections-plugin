@@ -2,7 +2,7 @@
 import { __ } from '@wordpress/i18n';
 import { BlockControls } from '@wordpress/block-editor';
 import { Toolbar } from '@wordpress/components';
-import { Icon, postAuthor} from '@wordpress/icons';
+import { Icon, postAuthor, edit} from '@wordpress/icons';
 
 
 const ResetProfileToolbar = (props) => {
@@ -17,8 +17,8 @@ const ResetProfileToolbar = (props) => {
             <Toolbar
                 controls={ [
                     {
-                        icon: <Icon icon={ postAuthor } />,
-                        title: __( 'Modify Selection', 'newspack-elections' ),
+                        icon: <Icon icon={ edit } />,
+                        title: __( 'Edit Selected Profile', 'newspack-elections' ),
                         onClick: () => {
                             setProfile( null );
                         },

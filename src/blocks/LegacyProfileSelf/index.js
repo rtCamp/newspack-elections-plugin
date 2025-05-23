@@ -2,7 +2,7 @@ import { registerBlockType, unregisterBlockType } from '@wordpress/blocks';
 import domReady from '@wordpress/dom-ready';
 import {subscribe, select} from "@wordpress/data"
 import { __ } from '@wordpress/i18n';
-
+import { commentAuthorAvatar as icon } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
@@ -25,7 +25,7 @@ registerBlockType( 'govpack/profile-self', {
 	title : __("Election Profile (Self)", "newspack-elections"),
     category,
     attributes,
-	icon: 'groups',
+	icon,
 	keywords: [ ],
 	edit : Edit,
 	save() {
