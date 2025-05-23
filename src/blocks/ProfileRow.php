@@ -41,7 +41,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 			get_block_wrapper_attributes(
 				$this->get_new_block_wrapper_attributes()
 			),
-			$content,
+			$this->output(),
 			$tag_name
 		);
 
@@ -100,7 +100,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 
 	public function output(): string {
 		ob_start();
-
+		
 		if ( $this->showLabel() ) {
 			?>
 				<div><?php echo wp_kses_post( $this->label() ); ?></div>
