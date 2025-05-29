@@ -484,9 +484,15 @@ const SingleProfile = (props) => {
 
 		const {
 			label = "Comms",
-			services
+			services,
+			show = {}
 		} = props		
 
+		if(!isAnyKeyTrue(show)){
+			return null;
+		}
+		
+		console.log("comms other", props)
 		return (
 			<div className={`${blockClassName}__comms-other`}>
 				<div className={`${blockClassName}__label`}>{label}:</div>
@@ -496,7 +502,7 @@ const SingleProfile = (props) => {
 						{Object.keys(services).filter((key) => {
 							return !!services[key] && services[key].value
 						}).filter( (key) => {
-							return (props.show[key] ?? true)
+							return (show[key] ?? false)
 						}).map( (key, value) => (<div key={key} className="key-pair-list__group" role="listitem">
 							<dt className="key-pair-list__key" role="term">{services[key].label}</dt>
 							<dd className="key-pair-list__value">{services[key].value}</dd>

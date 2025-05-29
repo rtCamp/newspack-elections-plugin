@@ -29,13 +29,13 @@ const ProfileCommsOtherPanel = (props) => {
 		setAttributes({ [parentAttributeKey] : newAttrs })
 	}
 
-	if( isNil(profile) || isNil(profile.comms)){
+	if( isNil(profile) || isNil(profile.contact)){
 		return null;
 	}
 
-	let controls = Object.keys(profile.comms?.other).map( (key) => {
+	let controls = Object.keys(profile.contact?.other).map( (key) => {
 		return {
-			label : profile.comms?.other[key].label,
+			label : profile.contact?.other[key].label,
 			attr : key,
 			checked : attributes[parentAttributeKey][key],
 			onChange : () => {

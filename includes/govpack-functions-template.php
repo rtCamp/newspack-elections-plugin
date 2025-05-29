@@ -315,9 +315,6 @@ if ( ! function_exists( 'gp_contact_other' ) ) {
 		if ( ! $content ) {
 			return null;
 		}
-		if ( ! $content ) {
-			return null;
-		}
 
 		return sprintf( $outer_template, $label, $content );
 	}

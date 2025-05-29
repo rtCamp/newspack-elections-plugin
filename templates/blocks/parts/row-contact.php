@@ -12,9 +12,10 @@ if ( empty( $profile_data['contact'] ) ) {
 }
 
 $groups = [
-	"official" => "selectedCapitolCommunicationDetails",
-	"district" => "selectedDistrictCommunicationDetails",
-	"campaign" => "selectedCampaignCommunicationDetails",
+//	"official" => "selectedCapitolCommunicationDetails",
+//	"district" => "selectedDistrictCommunicationDetails",
+//	"campaign" => "selectedCampaignCommunicationDetails",
+	"other"    => "selectedOtherCommunicationDetails"
 ];
 
 
@@ -33,6 +34,22 @@ foreach($groups as $group_key => $group_view_attr){
 	$contact_info[$group_key] = []; //$profile_block->attributes[$group_view_attr];
 	$contact_info[$group_key]["label"]  = $profile_data['contact'][$group_key]["label"];
 	$contact_info[$group_key]["services"] = [];
+
+	if($group_key === "other"){
+		foreach($profile_block->attributes[$group_view_attr] as $link_attribute => $show_other_link){
+			if(!$show_other_link){
+				continue;
+			}
+			$link = $profile_data['contact'][$group_key]["services"][$link_attribute];
+			if($link["value"]){
+				$contact_info[$group_key]["services"][$link_attribute] = $link;
+			}
+			
+		}
+		
+		continue;
+	}
+	
 	foreach($services as $service => $attr){
 		if($profile_block->attributes[$group_view_attr][$attr] === true){
 			$value = $profile_data['contact'][$group_key]["services"][$service];
@@ -42,18 +59,32 @@ foreach($groups as $group_key => $group_view_attr){
 		}
 	}
 }
-//gp_dump($profile_data['contact']);
-//gp_dump($contact_info)
+
 ?>
 
 <div class="wp-block-govpack-profile__comms">
 	<ul class="wp-block-govpack-profile__services govpack-vertical-list">
 		<?php
 		foreach ( $contact_info as $group_key => $group ) {
-
+			
 			if ( empty( $group['services'] ) ) {
 				continue;
 			}
+
+			if( $group_key === "other"){
+					?>
+					<div class="wp-block-govpack-profile__comms-other">
+						<div class="wp-block-govpack-profile__label"><?php echo esc_html( $group['label'] ); ?>:</div>
+						<dl class="wp-block-govpack-profile__comms-other key-pair-list">
+							<?php foreach( $group['services'] as $service => $link) { ?>
+								<dt class="key-pair-list__key" role="term"> <?php echo esc_html( $link['label'] ) ?></dt>
+								<dd class="key-pair-list__value"><?php echo esc_html( $link['value'] ) ?> </dd>
+							<?php } ?>
+						</dl>
+					</div>
+					<?php
+					continue;
+				}
 
 			?>
 			<li class="wp-block-govpack-profile__contact_group">
@@ -61,10 +92,6 @@ foreach($groups as $group_key => $group_view_attr){
 					<div class="wp-block-govpack-profile__label"><?php echo esc_html( $group['label'] ); ?>:</div>
 					<ul class="wp-block-govpack-profile__comms-icons govpack-inline-list">
 						<?php
-						foreach($services as $service => $attr ){
-
-						}
-
 						foreach ( $group['services'] as $service => $social_link ) {
 
 							if ( ! $social_link ) {
@@ -98,8 +125,6 @@ foreach($groups as $group_key => $group_view_attr){
 							} else {
 								$url = $social_link;
 							}	
-
-							
 
 							if ( ! wp_parse_url( $url, PHP_URL_SCHEME ) && ! str_starts_with( $url, '//' ) && ! str_starts_with( $url, '#' ) ) {
 								$url = 'https://' . $url;

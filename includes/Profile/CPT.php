@@ -1190,22 +1190,25 @@ class CPT extends \Govpack\Abstracts\PostType {
 					]
 				],
 				'other'    => [
-					'website_other'    => [
-						'label' => 'Website (Personal)',
-						'value' => $profile_raw_meta_data['website_personal'][0] ?? null,
-					],
-					'email_other'      => [
-						'label' => 'Email (Other)',
-						'value' => $profile_raw_meta_data['email_other'][0] ?? null,
-					],
-					'rss'              => [
-						'label' => 'RSS Feed URL',
-						'value' => trim( $profile_raw_meta_data['rss'][0] ) ?? null,
-					], 
-					'contact_form_url' => [
-						'label' => 'Contact Form URL',
-						'value' => $profile_raw_meta_data['contact_form_url'][0] ?? null,
-					],
+					'label' => "Other",
+					'services' => [ 
+						'website_other'    => [
+							'label' => 'Website (Personal)',
+							'value' => $profile_raw_meta_data['website_personal'][0] ?? null,
+						],
+						'email_other'      => [
+							'label' => 'Email (Other)',
+							'value' => $profile_raw_meta_data['email_other'][0] ?? null,
+						],
+						'rss'              => [
+							'label' => 'RSS Feed URL',
+							'value' => trim( $profile_raw_meta_data['rss'][0] ) ?? null,
+						], 
+						'contact_form_url' => [
+							'label' => 'Contact Form URL',
+							'value' => $profile_raw_meta_data['contact_form_url'][0] ?? null,
+						],
+					]
 				],
 				
 			],
