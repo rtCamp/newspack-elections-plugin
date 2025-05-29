@@ -59,7 +59,7 @@ class BlockTemplates {
 
 	public function register_from_file(string $template_name, string $template_file, array $args ) : self {
 
-		$args['content'] = esc_html($this->get_template_content($template_file));
+		$args['content'] = $this->get_template_content($template_file);
 		$this->register($template_name, $args);
 
 		return $this;
