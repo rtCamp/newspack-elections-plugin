@@ -130,6 +130,13 @@ const isValidCollection = (testObj) => {
 
 	let found = false
 
+	// sometimes the object to test will have a value and label.
+	// if the object has a key of "value", return true if the 
+	// value is truthy and not an empty string
+	if(Object.hasOwn(testObj, "value")){
+		return (testObj.value && (testObj.value !== "") )
+	}
+
 	for(const key in testObj){
 			
 		if (typeof testObj[key] === "object") {
@@ -146,6 +153,20 @@ const isValidCollection = (testObj) => {
 	return found
 }
 
+const isAnyKeyTrue = ( testObj ) => {
+
+	let found = false;
+
+	for(const key in testObj){
+
+		if(testObj[key] === true){
+			found = true
+			break;
+		}
+	}
+
+	return found
+}
 const SingleProfile = (props) => {
 
     let {
@@ -207,7 +228,6 @@ const SingleProfile = (props) => {
 	}
 
 	
-	console.log("selectedContact", selectedContact)
 
 	const Contact = (props) => {
 		const href= prependHTTPS(props.href)
@@ -378,9 +398,14 @@ const SingleProfile = (props) => {
 
 		const {
 			label = "Comms",
-			services = {}
+			services = {},
+			show = {}
 		} = props
 
+		if(!isAnyKeyTrue(show)){
+			return null;
+		}
+		
 		if( !( services.phone || services.fax || services.email || services.website || services.address ) ){
 			return null;
 		}
@@ -491,7 +516,6 @@ const SingleProfile = (props) => {
 			show
 		} = props
 
-		console.log("Profile Links", props)
 		return (
 			<div className={`${blockClassName}__comms`}>
 				
@@ -511,8 +535,6 @@ const SingleProfile = (props) => {
 							if(NPEIcons[slug]){
 								Icon = NPEIcons[slug]()
 							}
-
-							console.log(link, Icon)
 							
 							if(!Icon){
 								return false;
@@ -558,6 +580,7 @@ const SingleProfile = (props) => {
 
 	const doShowSocial = ((showSocial) && (selectedSocial.showOfficial || selectedSocial.showCampaign || selectedSocial.showPersonal) && (isValidCollection(profile.social)));	
 	const doShowContact = ( (selectedContact.official || selectedContact.district || selectedContact.campaign) && (isValidCollection(profile.contact)));		
+
 
 	const defaultRowProps = {
 		showLabel : showLabels,
