@@ -130,9 +130,7 @@ const Uploader = (props) => {
 	console.log(options)
     return (
         <>
-			{ (typeof options?.support_email === "undefined" || !options?.support_email) && (
-				<Error message="huh" />
-			) }
+			
 			
             <InfoPanel
                 heading="Upload Data?"
