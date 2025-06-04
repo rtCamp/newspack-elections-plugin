@@ -141,7 +141,9 @@ const Uploader = (props) => {
                       spacing="4"
                 >  
                     <p>
-                    Please select a <code>.csv</code> file that has the same fields as our template. You can <a target="_blank" href={options.csv_example_url}>download a copy of that template here</a>. If you need help, please contact <a href={`mailto:${options.support_email}`}>{options.support_email}</a>. Your import file doesn’t have to include data for each field, but importing will not function properly if you change the column headers.
+                    Please select a <code>.csv</code> file that has the same fields as our template. 
+					You can <a target="_blank" href={options.csv_example_url}>download a copy of that template here</a>. 
+					Your import file doesn’t have to include data for each field, but importing will not function properly if you change the column headers.
                     </p>
 
                     {props.hasError && (

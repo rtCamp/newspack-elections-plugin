@@ -33,7 +33,6 @@ class Import {
 			wp_json_encode(
 				[ 
 					'profiles_path'   => admin_url( 'edit.php?post_type=' . Profile::CPT_SLUG ),
-					'support_email'   => 'hello@govpack.org',
 					'csv_example_url' => \add_query_arg( self::CSV_EXAMPLE_QUERY_ARG, true ),
 				] 
 			),
