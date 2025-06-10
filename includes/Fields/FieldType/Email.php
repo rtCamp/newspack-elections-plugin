@@ -18,6 +18,7 @@ class Email extends Link {
 	 */
 	public string $label = 'Email';
 
+	public ?string $display_icon = "email";
 
 	public array $formats = [ 
 		[
@@ -27,6 +28,10 @@ class Email extends Link {
 		[
 			'value' => 'url',
 			'label' => 'Email',
+		],
+		[
+			'value' => 'icon',
+			'label' => 'Icon',
 		],
 	];
 

@@ -49,6 +49,7 @@ function Edit( props ) {
 	} = attributes
 
 	console.log("field", field)
+	
 
 
 	// should the field's block type not match the current block, render nothing

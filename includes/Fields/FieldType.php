@@ -35,6 +35,13 @@ abstract class FieldType extends Collectable implements CollectableInterface {
 	 */
 	public ?string $default_block;
 
+	/**
+	 * Default Display Icon
+	 * 
+	 * Block used to output the field by default
+	 */
+	public ?string $display_icon = "";
+
 
 	public function get_variation_inner_blocks(): array {
 
@@ -63,8 +70,6 @@ abstract class FieldType extends Collectable implements CollectableInterface {
 		return $value;
 	}
 
-	
-
 	public function __toString() {
 		return $this->slug;
 	}
@@ -74,6 +79,7 @@ abstract class FieldType extends Collectable implements CollectableInterface {
 			'slug'  => $this->slug,
 			'label' => $this->label,
 			'block' => $this->default_block ?? false,
+			'icon' => $this->display_icon
 		];
 	}
 

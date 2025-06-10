@@ -57,13 +57,20 @@ class Field extends \Govpack\Collection\Collectable implements \Govpack\Collecti
 	 */
 	public null|string $default = '';
 
+	/**
+	 * Default Display Icon
+	 * 
+	 * Block used to output the field by default
+	 */
+	public ?string $display_icon = null;
+
 
 	/**
 	 * Properties to include in array
 	 * 
 	 * Array of property names that will be included when transformed to an array
 	 */
-	protected array $to_array = [ 'slug', 'label', 'type', 'group', 'meta_key', 'source', 'allow_block' ];
+	protected array $to_array = [ 'slug', 'label', 'type', 'group', 'meta_key', 'source', 'allow_block', 'display_icon' ];
 
 	/**
 	 * Allow Block Variation
@@ -111,6 +118,11 @@ class Field extends \Govpack\Collection\Collectable implements \Govpack\Collecti
 		}
 	}
 
+	public function set_display_icon( string $icon_slug ) : self {
+		$this->display_icon = $icon_slug;
+		return $this;
+	}
+
 	public function group( string $group ): self {
 		$this->group = $group;
 		return $this;
@@ -133,6 +145,15 @@ class Field extends \Govpack\Collection\Collectable implements \Govpack\Collecti
 				
 	public function variation_icon(): string|null {
 		return $this->type->variation_icon();
+	}
+
+	public function display_icon(): string|null {
+
+		if($this->display_icon){
+			return $this->display_icon;
+		}
+
+		return $this->type->display_icon;
 	}
 
 	public function to_array(): array {
@@ -200,4 +221,6 @@ class Field extends \Govpack\Collection\Collectable implements \Govpack\Collecti
 
 		return $this->type->get_variation_inner_blocks();
 	}
+
+
 }

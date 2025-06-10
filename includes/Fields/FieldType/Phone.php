@@ -27,6 +27,10 @@ class Phone extends Link {
 			'value' => 'url',
 			'label' => 'Number',
 		],
+		[
+			'value' => 'icon',
+			'label' => 'Icon',
+		],
 	];
 	
 	public function variation_icon(): string {

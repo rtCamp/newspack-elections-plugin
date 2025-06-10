@@ -20,7 +20,7 @@ class Link extends \Govpack\Fields\Field {
 	 * 
 	 * Array of property names that will be included when transformed to an array
 	 */
-	protected array $to_array = [ 'slug', 'label', 'type', 'group', 'meta_key', 'link_text', 'allow_block' ];
+	protected array $to_array = [ 'slug', 'label', 'type', 'group', 'meta_key', 'link_text', 'allow_block', "display_icon" ];
 
 
 	/**

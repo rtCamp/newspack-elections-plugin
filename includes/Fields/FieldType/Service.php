@@ -20,7 +20,6 @@ class Service extends Link {
 
 	public function __construct() {
 		
-
 		$this->formats = [
 			...$this->formats,
 			[
