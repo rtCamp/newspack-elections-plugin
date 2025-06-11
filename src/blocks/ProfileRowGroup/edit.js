@@ -27,7 +27,6 @@ const RowGroupEdit = ( {attributes, setAttributes, context, clientId, ...props} 
 		"npe/postId" : pid
 	} = context
 
-
 	const {
 		separatorColor, 
 		setSeparatorColor

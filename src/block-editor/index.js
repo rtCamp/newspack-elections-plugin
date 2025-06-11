@@ -8,6 +8,7 @@
  */
 
 import domReady from "@wordpress/dom-ready"
+import { registerBlockVariation } from "@wordpress/blocks"
 
 
 import { registerBlockSupports } from "./block-supports" 
@@ -15,6 +16,35 @@ import { restoreBlocks } from "./restore-blocks";
 import { initStore } from "./fields";
 
 
+registerBlockVariation("core/query", {
+	name : "npe/profile-query",
+	title : "Election Profile Loop",
+	attributes: {
+		align : "wide",
+        query: {
+            postType: 'govpack_profiles',
+			perPage: 12,
+			order: "asc",
+			orderBy:"title"
+        },
+    },
+	innerBlocks: [
+    [
+        'core/post-template',
+        	{
+				layout: {
+					type: "grid",
+					columnCount: 3
+				}
+			},
+        	[ 
+				[ 'npe/profile' ]
+			],
+    	],
+    	[ 'core/query-pagination' ],
+    	[ 'core/query-no-results' ],
+	]
+})
 
 // Create a Redux store for fields used by Profiles
 initStore()
