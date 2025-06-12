@@ -217,7 +217,7 @@ const BlockHTMLElementControl = (props) => {
 }
 
 function ProfileBlockEdit( props ) {
-	const {attributes, setAttributes, isSelected: isSingleSelected, clientId, context, isProfilePage} = props
+	const {attributes, setAttributes, clientId, context, isProfilePage} = props
 
 	
 	const [resizeEnabled, resizeProps] = useResizeProps(props);

@@ -21,12 +21,12 @@ export const useProfileId = (props, pid = null) => {
 	const { 
 		postType,
 		queryId,
-		'npe/profileId' : inheritedSelectedProfileId,
+		'npe/profileId' : inheritedSelectedProfileId = null,
 		postId : queryPostId,
 	} = context
 
 	const {
-		postId : selectedProfileId
+		postId : selectedProfileId = null
 	} = attributes
 
 	
@@ -54,16 +54,21 @@ export const useProfileId = (props, pid = null) => {
 	const isProfilePage = ((currentPostType === PROFILE_POST_TYPE) && (context.postId === currentPostId))
 	const isQuery = (queryId && postType) ? true : false
 	const isInheritedSelection = (inheritedSelectedProfileId !== null)
-	const isDirectSelection = (selectedProfileId !== null)
+	const isDirectSelection = (selectedProfileId !== null )
 
 	let derivedProfileId
 	if(isProfilePage){
+		console.log("isProfilePage")
 		derivedProfileId = currentPostId
 	} else if(isQuery){
-		derivedProfileId = context.postId
+		console.log("isQuery")
+		derivedProfileId = queryPostId
 	} else {
+		console.log("isDerived", queryId, postType, context, isDirectSelection, selectedProfileId, isInheritedSelection, inheritedSelectedProfileId)
 		derivedProfileId = isDirectSelection ? selectedProfileId : inheritedSelectedProfileId
 	}
+
+	console.log("useProfileId", derivedProfileId)
 
 	if( profileId !== derivedProfileId){
 		setProfileId(derivedProfileId)
@@ -231,7 +236,7 @@ export const useProfileFields = (props) => {
 
 
 export const useProfileFieldAttributes = (props, pid = null) => {  
-	console.log("useProfileFieldAttributes pid", pid)
+	
 	const profileId = useProfileId(props, pid)
 	const fieldAttrs  = useFieldAttributes( props )
 	const {profile} = useProfile( profileId )

@@ -97,6 +97,8 @@
 	},
 	"ancestor": [ "npe/profile" ],
 	"usesContext": [
+		"queryId",
+		"postId",
 		"postType", 
 		"npe/postId"
 	]

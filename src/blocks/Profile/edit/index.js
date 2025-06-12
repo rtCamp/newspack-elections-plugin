@@ -36,7 +36,7 @@ export const ProfileEdit = ( props ) => {
 	const {children, ...innerBlockProps} = useInnerBlocksProps(blockProps)
 
 	const [blockMode, setBlockMode] = useState(BLOCK_MODES["UNKNOWN"])
-	const [profileId, setProfileId] = useState(null)
+	//const [profileId, setProfileId] = useState(null)
 
 	const {
 		queryId
@@ -59,8 +59,11 @@ export const ProfileEdit = ( props ) => {
 	);
 	
 	const setProfile = useCallback ((newProfileId) => {
+		console.log("set profileId", newProfileId)
 		setAttributes({"postId" : newProfileId})
 	}, [setAttributes])
+
+	
 	
 	const isProfilePage = (currentPostType === PROFILE_POST_TYPE) && (context.postId === currentPostId)
 	const isInQueryLoop = (!isNil(queryId))
@@ -73,7 +76,7 @@ export const ProfileEdit = ( props ) => {
 		calculatedProfileId = currentPostId
 	} else if(isInQueryLoop) {
 		calculatedBlockMode = BLOCK_MODES["QUERY"]
-		calculatedProfileId = postId
+		calculatedProfileId = context.postId
 	} else {
 		calculatedBlockMode = BLOCK_MODES["EMBEDED"]
 		calculatedProfileId = attributes.postId
@@ -83,16 +86,17 @@ export const ProfileEdit = ( props ) => {
 		setBlockMode(calculatedBlockMode)
 	}
 
-	if(calculatedProfileId !== profileId){
-		setProfileId(calculatedProfileId)
-	}
+	//if(calculatedProfileId !== profileId){
+	//	setProfileId(calculatedProfileId)
+//	}
 	
 	// If we have a postId then dont show the selector
 	const hasSelectedProfile = attributes.postId ?? false
 	const showVariationSelector = (hasInnerBlocks.length === 0) && (hasVariations.length > 0);
-	const showProfileSelector = !isProfilePage && !hasSelectedProfile;
+	const showProfileSelector = !isInQueryLoop && !isProfilePage && !hasSelectedProfile;
 	const showEdit = hasInnerBlocks && hasSelectedProfile;
 
+	console.log("render Block Edit", attributes)
 	
 	let Component
 	if(showProfileSelector){
@@ -103,13 +107,13 @@ export const ProfileEdit = ( props ) => {
 		Component = ProfileBlockEdit
 	}
 	
-	console.log("blockMode", blockMode, profileId)
+	
 	return (
 		<BlockContextProvider
 			value = {{
-				"postId" : profileId,
-				"npe/postId" : profileId,
-				"npe/profileId" : profileId,
+				"postId" : calculatedProfileId,
+				"npe/postId" : calculatedProfileId,
+				
 				"npe/mode" : blockMode,
 			}}
 		>

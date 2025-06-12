@@ -6,15 +6,11 @@ export const ProfileSelector = ( props ) => {
 	const {attributes, setAttributes} = props
 	const blockProps = useBlockProps();
 
-	const setProfile = (newProfileId) => {
-	
-		setAttributes({"postId" : newProfileId})
-	}
 
 
 	return (
 		<div {...blockProps }>
-			<ProfileSelectorPlaceholder setProfile = {setProfile} />
+			<ProfileSelectorPlaceholder setProfile = {props.setProfile} />
 		</div>
 	)
 }

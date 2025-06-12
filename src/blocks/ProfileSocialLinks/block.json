@@ -42,6 +42,8 @@
 	"ancestor": [ "npe/profile" ],
 	"usesContext": [
 		"postType",
+		"queryId",
+		"postId",
 		"npe/postId"
 	],
 	"providesContext": {

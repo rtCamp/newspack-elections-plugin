@@ -28,6 +28,7 @@ const restoreDeregisteredBlock = (blockName) => {
 	}
 
 	const block = getCoreBlock(blockName)
+	console.log(block)
 	block.init()
 }
 

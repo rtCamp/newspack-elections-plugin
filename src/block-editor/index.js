@@ -55,7 +55,10 @@ registerBlockSupports()
 
 // Newspack disabled a few blocks we need, this is where we can re-enable them
 domReady( () => {
-	const requiredCoreBlocks = ["core/post-featured-image"]
+	const requiredCoreBlocks = [
+		"core/post-featured-image",
+		"core/query",
+	]
 	restoreBlocks(requiredCoreBlocks)
 })
 

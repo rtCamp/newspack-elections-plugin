@@ -76,7 +76,7 @@ const MetaInspectorControl = ({
 
 function useConditionalTemplate(clientId){
 
-	const {name, attributes} = select(blockEditorStore).getBlock(clientId)
+	const {name, attributes} = select(blockEditorStore).getBlock(clientId) ?? {}
 		
 	const template = useMemo( () => {
 		const variation = select(blocksStore).getActiveBlockVariation(name, attributes)

@@ -203,10 +203,11 @@ const AutocompleteWithSuggestions = (props) => {
 	 * @param {Object} suggestion Suggestion object with value and label keys.
 	 */
 	 const renderSuggestion = suggestion => {
-		
+		console.log( "renderSuggestion" )
 		return (
 			<Button 
 				key={ suggestion.value } onClick={ () => {
+					console.log("onClick")
 					handleOnChange( [ suggestion ] ) }
 				}
 				variant='link'
@@ -248,6 +249,7 @@ const AutocompleteWithSuggestions = (props) => {
 	 * Render a list of suggestions that can be clicked to select instead of searching by title.
 	 */
 	 const RenderSuggestions = () => {
+		console.log( "RenderSuggestions" )
 		if ( isLoading ) {
 			return (
 				<div className="newspack-autocomplete-with-suggestions__suggestions-spinner">
