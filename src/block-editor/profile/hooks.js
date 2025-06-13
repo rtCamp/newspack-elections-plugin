@@ -38,15 +38,6 @@ export const useProfileId = (props, pid = null) => {
 		}
 	}, [clientId])
 	
-
-	//const currentPostType = select(editorStore).getCurrentPostType()
-	//const currentPostId = select(editorStore).getCurrentPostId()
-
-	const m = useMemo( () => {
-		
-		return "woo"
-	}, [props.clientId])
-
 	if(pid){
 		return pid
 	}
@@ -58,17 +49,17 @@ export const useProfileId = (props, pid = null) => {
 
 	let derivedProfileId
 	if(isProfilePage){
-		console.log("isProfilePage")
+		
 		derivedProfileId = currentPostId
 	} else if(isQuery){
-		console.log("isQuery")
+		
 		derivedProfileId = queryPostId
 	} else {
-		console.log("isDerived", queryId, postType, context, isDirectSelection, selectedProfileId, isInheritedSelection, inheritedSelectedProfileId)
+		
 		derivedProfileId = isDirectSelection ? selectedProfileId : inheritedSelectedProfileId
 	}
 
-	console.log("useProfileId", derivedProfileId)
+	
 
 	if( profileId !== derivedProfileId){
 		setProfileId(derivedProfileId)

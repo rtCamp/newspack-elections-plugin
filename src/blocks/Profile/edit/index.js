@@ -86,17 +86,13 @@ export const ProfileEdit = ( props ) => {
 		setBlockMode(calculatedBlockMode)
 	}
 
-	//if(calculatedProfileId !== profileId){
-	//	setProfileId(calculatedProfileId)
-//	}
-	
+
 	// If we have a postId then dont show the selector
 	const hasSelectedProfile = attributes.postId ?? false
 	const showVariationSelector = (hasInnerBlocks.length === 0) && (hasVariations.length > 0);
 	const showProfileSelector = !isInQueryLoop && !isProfilePage && !hasSelectedProfile;
 	const showEdit = hasInnerBlocks && hasSelectedProfile;
 
-	console.log("render Block Edit", attributes)
 	
 	let Component
 	if(showProfileSelector){

@@ -261,34 +261,10 @@ function ProfileBlockEdit( props ) {
 		verticalAlignment
 	} = attributes;
 
-	const {
-		postId = null
-	} = context;
-
-
 	const setTagName = ( nextTagValue ) => {
 		setAttributes( { tagName: nextTagValue } )
 	}
 
-	/*
-	useEffect( () => {
-		
-		if(!profile){
-			return
-		}
-
-		if(!profile?.meta?.name){
-			return
-		}
-
-		setAttributes({"metadata" : {
-			...attributes.metadata,
-			name: `Profile : ${profile.meta.name}`
-		}})
-
-	}, [profile])
-
-	*/
 	const showSpinner = profileQuery.isLoading
 	const showProfile = profileQuery.hasLoaded === true
 
