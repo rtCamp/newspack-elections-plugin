@@ -12,7 +12,7 @@ import { ToggleControl, TextControl, PanelBody } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { useProfileFieldAttributes } from "@npe/editor";
+import { PROFILE_POST_TYPE, useProfileFieldAttributes } from "@npe/editor";
 
 
 
@@ -20,7 +20,8 @@ import { useProfileFieldAttributes } from "@npe/editor";
 
 function Edit( props ) {
 
-	const { fieldKey, field, profileId, profile, ...restField } =  useProfileFieldAttributes(props) 
+	const { fieldKey, field, profile, profileId, ...restField } =  useProfileFieldAttributes(props) 
+	
 	const blockProps = useBlockProps()
 
 	const { context, attributes, setAttributes } = props
@@ -31,7 +32,7 @@ function Edit( props ) {
 		setAttributes({"linkText" : newValue})
 	}
 
-
+	
 	const postTypeSupportsTitle = useSelect(
 		( select ) => {
 			return !! select( coreStore ).getPostType( postType )?.supports?.title;
@@ -40,12 +41,13 @@ function Edit( props ) {
 	);
 
 	// get the title from 
-	const [postTitle] = useEntityProp( 'postType', postType, 'title', profileId );
+	const [postTitle] = useEntityProp( 'postType', PROFILE_POST_TYPE, 'title', profileId );
 	
-	const profileName = (postTypeSupportsTitle ? 
-		postTitle : 
+
+	const profileName = (postTypeSupportsTitle ?
+		postTitle :
 		profile?.profile?.name
-	) ?? null
+	) 
 
 	const separator = " ";
 

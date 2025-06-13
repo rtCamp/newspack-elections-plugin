@@ -27,7 +27,6 @@ function Edit( props ) {
 	const { postType } = context
 	const { level, textAlign, levelOptions, isLink, linkTarget, rel } = attributes
 
-	console.log("profileId", profileId)
 
 	useEffect( () => {
 			

@@ -108,21 +108,17 @@ const ProfileTerms = ({terms, displayLinks, separator, termLimit}) => {
 function EditTermBlock( props ) {
 	
 	const { attributes, setAttributes, context, isSelected } = props
+	const { fieldKey, field, value, profileId, ...restField } =  useProfileFieldAttributes(props) 
 	const blockProps = useBlockProps();
 
-	const {
-		"npe/profileId" : profileId
-	} = context
-
-	console.log("EditTermBlock", profileId)
-
+	console.log("Term Block", attributes.field)
 	const { 	
 		displayLinks,
 		separator,
 		termLimit
 	} = attributes
 
-	const { field } =  useProfileFieldAttributes(props, profileId) 
+
 
 	console.log(field)
 	
