@@ -570,9 +570,9 @@ class CPT extends \Govpack\Abstracts\PostType {
 				'govpack_register_post_type_profile',
 				[
 					'labels'       => [
-						'name'               => _x( 'Profiles', 'post type general name', 'newspack-elections' ),
-						'singular_name'      => _x( 'Profile', 'post type singular name', 'newspack-elections' ),
-						'menu_name'          => _x( 'Profiles', 'admin menu', 'newspack-elections' ),
+						'name'               => _x( 'Election Profiles', 'post type general name', 'newspack-elections' ),
+						'singular_name'      => _x( 'Election Profile', 'post type singular name', 'newspack-elections' ),
+						'menu_name'          => _x( 'Election Profiles', 'admin menu', 'newspack-elections' ),
 						'name_admin_bar'     => _x( 'Profile', 'add new on admin bar', 'newspack-elections' ),
 						'add_new'            => _x( 'Add New', 'popup', 'newspack-elections' ),
 						'add_new_item'       => __( 'Add New Profile', 'newspack-elections' ),
