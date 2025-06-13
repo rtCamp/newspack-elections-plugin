@@ -80,10 +80,12 @@ export function addAttribute( blockSettings ) {
 		// Gracefully handle if blockSettings.attributes is undefined.
 		blockSettings.attributes = {
 			...blockSettings.attributes,
-			field : FIELD_TYPE_SCHEMA
-			//...{ field: {
-			//	type: 'object',
-			//}},
+			field : {
+				type: 'object',
+				default: {
+					"type" : "text" 
+				}
+			}
 		};
 
 		if(blockSuport.type){
