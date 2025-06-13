@@ -63,6 +63,7 @@
 		"queryId",
 		"postId",
 		"npe/postId",
-		"npe/profileId"
+		"npe/profileId",
+		"npe/field"
 	]
 }
