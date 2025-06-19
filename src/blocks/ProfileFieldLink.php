@@ -23,7 +23,22 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 		return $this->plugin->build_path( 'blocks/ProfileFieldLink' );
 	}
 
-	
+	/**
+	 * Loads a block from display on the frontend/via render.
+	 *
+	 * @param array  $attributes array of block attributes.
+	 * @param string $content Any HTML or content redurned form the block.
+	 * @param WP_Block $template The filename of the template-part to use.
+	 */
+	public function handle_render( array $attributes, string $content, WP_Block $block ) {
+		
+		?>
+		<div <?php echo get_block_wrapper_attributes(); ?>>
+			<?php echo $this->output() ; ?>
+		</div>
+		<?php
+	}
+
 	public function show_block(): bool {
 		
 		if ( empty( $this->get_value() ) ) {
@@ -71,9 +86,7 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 		}
 
 		if ( $this->attribute( 'linkFormat' ) === 'icon' ) {
-			if ( is_a( $this->get_field(), 'Govpack\Fields\Field\Service' ) ) {
-				return $this->get_field()->service()->icon();
-			}
+			return $this->get_field()->icon_markup();
 		}
 
 

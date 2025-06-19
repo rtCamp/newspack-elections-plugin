@@ -11,6 +11,7 @@ import {
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 	} from '@wordpress/components';
 
+import { useState } from "@wordpress/element"
 
 
 import { useProfileFieldAttributes } from "@npe/editor"
@@ -29,7 +30,8 @@ const sizeOptions = [
 const DynamicIcon = ({icon, size = 24}) => {
 	// Todo - make sure this exists
 	// move the function call up to the icons component
-	const SVG = NPEIcons[icon]()
+	const SVG = NPEIcons[icon]
+	console.log("SVG", SVG)
 	return (
 		<Icon icon={ SVG } size={size} />
 	)
@@ -49,8 +51,10 @@ function Edit( props ) {
 	} = attributes
 
 	console.log("field", field)
+	console.log("icon", field.display_icon)
 	
-
+	
+	const [iconSlug, setIconSlug] = useState( field.service ?? field.display_icon ?? null )
 
 	// should the field's block type not match the current block, render nothing
 	if(!isInnerBlockMode && (field?.field_type?.block !== props.name)){
@@ -94,7 +98,7 @@ function Edit( props ) {
 	
 	const linkText = calculateLinkText();
 
-	useUpdateBlockMetaName(linkText)
+	//useUpdateBlockMetaName(linkText)
 
 	const LinkBody = () => {
 		
@@ -114,7 +118,7 @@ function Edit( props ) {
 			)
 		}
 
-		const showIcon = ((linkFormat === "icon") && (field?.service))
+		const showIcon = ((linkFormat === "icon") && (iconSlug))
 		const showUrl = ((linkFormat === "url")) 
 
 		return (
@@ -123,7 +127,7 @@ function Edit( props ) {
 				onClick={ ( event ) => event.preventDefault() }
 			>
 				{showIcon && (
-					<DynamicIcon icon={field.service} size={iconSize}/>
+					<DynamicIcon icon={iconSlug} size={iconSize}/>
 				)}
 
 				{showUrl && (

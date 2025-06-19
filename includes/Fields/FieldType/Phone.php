@@ -33,6 +33,8 @@ class Phone extends Link {
 		],
 	];
 	
+	public ?string $display_icon = "phone";
+
 	public function variation_icon(): string {
 		return 'phone';
 	}

@@ -187,9 +187,9 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new PhoneField( 'phone_campaign', 'Campaign Phone Number' ),
 
 				
-				new PhoneField( 'fax_official', 'Official Fax Number' ),
-				new PhoneField( 'fax_district', 'District Fax Number' ),
-				new PhoneField( 'fax_campaign', 'Campaign Fax Number' ),
+				(new PhoneField( 'fax_official', 'Official Fax Number' ))->set_display_icon("fax"),
+				(new PhoneField( 'fax_district', 'District Fax Number' ))->set_display_icon("fax"),
+				(new PhoneField( 'fax_campaign', 'Campaign Fax Number' ))->set_display_icon("fax"),
 
 				( new LinkField( 'website_personal', 'Personal Website URL' ) ),
 				( new LinkField( 'website_campaign', 'Campaign Website URL' ) ),

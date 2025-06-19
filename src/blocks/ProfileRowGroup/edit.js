@@ -22,7 +22,7 @@ import { separator } from '@wordpress/icons';
 
 const GroupEdit = ( {attributes, setAttributes, context, clientId, ...props} ) => {
 
-	console.log("GroupEdit", attributes)
+
 
 	const {
 		separatorColor, 

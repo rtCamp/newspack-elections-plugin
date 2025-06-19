@@ -83,6 +83,37 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 		return $this->plugin->build_path( 'blocks/Profile' );
 	}
 	
+	public function filter_kses_for_svg($tags, $context){
+		if($context !== "post"){
+			return $tags;
+		}
+		
+		$tags = \array_merge($tags, [
+			'svg'      => [
+				'xmlns'   => [], 
+				'width'   => [], 
+				'height'  => [], 
+				'viewbox' => [], //lowercase not camelcase!
+			], 
+			'path'     => [
+				'd' => [],
+			],
+			'g'        => [
+				'path' => [],
+			],
+			'defs'     => [],
+			'clippath' => []]
+		);
+
+		return $tags;
+	}
+	private function allow_svg_in_wp_kses(){
+		add_filter( 'wp_kses_allowed_html', [$this, 'filter_kses_for_svg'], 10, 2 );
+	}
+
+	private function restore_original_wp_kses(){
+		remove_filter( 'wp_kses_allowed_html', [$this, 'filter_kses_for_svg'], 10, 2 );
+	}
 	/**
 	 * Block render handler for .
 	 *
@@ -113,12 +144,15 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 			return;
 		}
 
+		$this->allow_svg_in_wp_kses();
+	
 		$this->attributes = self::merge_attributes_with_block_defaults( $this->block_name, $attributes );
 		$this->enqueue_view_assets();
 
 		ob_start();
 		$this->handle_render( $attributes, $content, $block );
 		wp_reset_postdata();
+		$this->restore_original_wp_kses();
 		return \ob_get_clean();
 	}
 
@@ -144,7 +178,7 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 			$tag_name
 		);
 		
-		echo  $block_html;
+		echo  wp_kses_post($block_html);
 	}
 
 	

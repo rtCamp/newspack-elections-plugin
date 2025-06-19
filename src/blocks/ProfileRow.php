@@ -107,7 +107,7 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 			<?php
 		}
 		
-		echo wp_kses_post( $this->content );
+		echo $this->content;
 
 		return ob_get_clean();
 	}

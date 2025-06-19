@@ -149,6 +149,22 @@ class Field extends \Govpack\Collection\Collectable implements \Govpack\Collecti
 
 	public function display_icon(): string|null {
 
+		return $this->get_icon_slug();
+	}
+
+	public function icon_markup(): string|null {
+
+		$plugin = \Govpack\Govpack::instance();
+		$icon   = $plugin->icons()->get( $this->get_icon_slug() );
+
+		if ( $icon === '' ) {
+			return null;
+		}
+
+		return $icon;
+	}
+
+	public function get_icon_slug(): string {
 		if($this->display_icon){
 			return $this->display_icon;
 		}
