@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aefb3598fb5307f92c4f9c0d0aa7ebac",
+    "content-hash": "5d09673e04d663d41c2881a2585c7cb3",
     "packages": [
         {
             "name": "gamajo/template-loader",
@@ -717,23 +717,23 @@
         },
         {
             "name": "captainhook/captainhook-phar",
-            "version": "5.24.1",
+            "version": "5.25.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/captainhookphp/captainhook-phar.git",
-                "reference": "cf50ad07abd291af2770eceb3c1dcadf615f0819"
+                "url": "https://github.com/captainhook-git/captainhook-phar.git",
+                "reference": "a5dbcd8d20b3dcdb1cbd6948d0d3a058453b3d6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/captainhookphp/captainhook-phar/zipball/cf50ad07abd291af2770eceb3c1dcadf615f0819",
-                "reference": "cf50ad07abd291af2770eceb3c1dcadf615f0819",
+                "url": "https://api.github.com/repos/captainhook-git/captainhook-phar/zipball/a5dbcd8d20b3dcdb1cbd6948d0d3a058453b3d6a",
+                "reference": "a5dbcd8d20b3dcdb1cbd6948d0d3a058453b3d6a",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.1||^2.0",
                 "ext-json": "*",
                 "ext-spl": "*",
-                "phar-io/composer-distributor": "^1.0",
+                "phar-io/composer-distributor": "^1.0.1",
                 "php": ">=8.0"
             },
             "require-dev": {
@@ -759,7 +759,7 @@
                 }
             ],
             "description": "PHP git hook manager",
-            "homepage": "https://github.com/captainhookphp/captainhook",
+            "homepage": "https://github.com/captainhook-git/captainhook",
             "keywords": [
                 "commit-msg",
                 "git",
@@ -770,8 +770,8 @@
                 "prepare-commit-msg"
             ],
             "support": {
-                "issues": "https://github.com/captainhookphp/captainhook/issues",
-                "source": "https://github.com/captainhookphp/captainhook-phar/tree/5.24.1"
+                "issues": "https://github.com/captainhook-git/captainhook/issues",
+                "source": "https://github.com/captainhook-git/captainhook-phar/tree/5.25.5"
             },
             "funding": [
                 {
@@ -779,7 +779,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-18T15:40:42+00:00"
+            "time": "2025-04-08T07:07:48+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -5541,11 +5541,11 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
+    "platform": {},
+    "platform-dev": {},
     "platform-overrides": {
         "php": "8.1.2"
     },
