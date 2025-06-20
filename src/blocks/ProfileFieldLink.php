@@ -86,7 +86,7 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 		}
 
 		if ( $this->attribute( 'linkFormat' ) === 'icon' ) {
-			return $this->get_field()->icon_markup();
+			return $this->get_field()->icon_markup() ?? "";
 		}
 
 

@@ -22,16 +22,20 @@ class Service implements CollectableInterface {
 		}
 	}
 
-	public function icon_markup(): string|null {
+	public function icon_markup(): string {
 
 		$plugin = \Govpack\Govpack::instance();
 		$icon   = $plugin->icons()->get( $this->get_icon_slug() );
 
 		if ( $icon === '' ) {
-			return null;
+			return "";
 		}
 
 		return $icon;
+	}
+
+	public function icon() : string {
+		return $this->icon_markup();
 	}
 
 	public function get_icon_slug(): string {
