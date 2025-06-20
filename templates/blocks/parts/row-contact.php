@@ -12,9 +12,9 @@ if ( empty( $profile_data['contact'] ) ) {
 }
 
 $groups = [
-//	"official" => "selectedCapitolCommunicationDetails",
-//	"district" => "selectedDistrictCommunicationDetails",
-//	"campaign" => "selectedCampaignCommunicationDetails",
+	"official" => "selectedCapitolCommunicationDetails",
+	"district" => "selectedDistrictCommunicationDetails",
+	"campaign" => "selectedCampaignCommunicationDetails",
 	"other"    => "selectedOtherCommunicationDetails"
 ];
 
@@ -59,6 +59,7 @@ foreach($groups as $group_key => $group_view_attr){
 		}
 	}
 }
+
 
 ?>
 
