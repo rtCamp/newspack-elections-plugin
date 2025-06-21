@@ -1,6 +1,6 @@
 
 body {
-	--npe-profile-default-border-radius: 4px;
+	--npe-profile-default-border-radius: 8px;
 	--npe-profile-default-color-tint: rgba(0,0,0,0.1);
 	--npe-profile-default-color-tint: rgba(0,0,0,0.02);
 	--npe-profile-default-border-color: rgba(0,0,0,0.05);
@@ -10,11 +10,13 @@ body {
 .wp-block-npe-profile{
 
 	--npe-profile-color: --npe-profile-default-color;
-	--npe-profile-color-tint:--npe-profile-default-color-tint
+	--npe-profile-color-tint:--npe-profile-default-color-tint;
 
 	min-height : 0px;
-
+	
 	.profile-inner {
+		border: 1px solid #cccccc;
+		background-color: var(--npe-profile-color-tint);
 		border-radius: var(--npe-profile-default-border-radius);
 		overflow:hidden;
 	}
@@ -33,10 +35,6 @@ body {
 		gap: 0.2rem;
 	}
 
-	
-	background-color: var(--npe-profile-color-tint);
-	border: 1px solid #cccccc;
-
 	.wp-block-npe-profile-separator{
 		margin-block-start: 1rem;
 		margin-block-end: 1rem;
@@ -45,23 +43,24 @@ body {
 
 
 .wp-block-npe-profile {
-	&.is-style-red{
+	&.is-style-red-tint{
 		--npe-profile-color:#c93135;
 		--npe-profile-color-tint:rgba(201, 49, 53, 0.05);
 	}
-	&.is-style-blue{
+	&.is-style-blue-tint{
 		--npe-profile-color:rgb(19, 117, 183);
 		--npe-profile-color-tint:rgba(19, 117, 183, 0.05);
 	}
-	&.is-style-yellow{
+	&.is-style-yellow-tint{
 		--npe-profile-color:rgba(223, 168, 0, 1);
 		--npe-profile-color-tint:rgba(223, 168, 0, 0.05);
 	}
 
-	&.is-style-red,
-	&.is-style-blue,
-	&.is-style-yellow {
+	&.is-style-red-tint,
+	&.is-style-blue-tint,
+	&.is-style-yellow-tint {
 		
+		.wp-block-npe-profile-name,
 		.wp-block-npe-profile-name:not(.has-link-color) a,
 		.wp-block-npe-profile-field-link:not(.has-link-color) a,
 		.npe-term--govpack_party {
