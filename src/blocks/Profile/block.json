@@ -8,9 +8,9 @@
 	"category": "newspack-elections",
 	"styles": [
         { "name": "default", "label": "Default", "isDefault": true },
-        { "name": "red", "label": "Red Tint" },
-		{ "name": "blue", "label": "Blue Tint" },
-		{ "name": "yellow", "label": "Yellow Tint" }
+        { "name": "red-tint", "label": "Red Tint" },
+		{ "name": "blue-tint", "label": "Blue Tint" },
+		{ "name": "yellow-tint", "label": "Yellow Tint" }
     ],
 	"supports" : {
 		"anchor": true,
