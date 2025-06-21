@@ -1,22 +1,56 @@
 
+body {
+	--npe-profile-default-border-radius: 4px;
+	--npe-profile-default-color-tint: rgba(0,0,0,0.1);
+	--npe-profile-default-color-tint: rgba(0,0,0,0.02);
+	--npe-profile-default-border-color: rgba(0,0,0,0.05);
+	--npe-profile-default-padding: 1rem;
+}
+
 .wp-block-npe-profile{
 
-	//width:100%;
+	--npe-profile-color: --npe-profile-default-color;
+	--npe-profile-color-tint:--npe-profile-default-color-tint
+
+	min-height : 0px;
 
 	.profile-inner {
-		//overflow:hidden;
+		border-radius: var(--npe-profile-default-border-radius);
+		overflow:hidden;
 	}
 
 	.wp-block-post-featured-image {
 		overflow: hidden;
+		img {
+			border-radius: revert;
+		}
 	}
 
+	.wp-block-npe-profile-row-group{
+		padding: var(--npe-profile-default-padding)
+	}
+	.wp-block-npe-profile-row-group.is-vertical{
+		gap: 0.2rem;
+	}
+
+	
+	background-color: var(--npe-profile-color-tint);
+	border: 1px solid #cccccc;
+
+	.wp-block-npe-profile-separator{
+		margin-block-start: 1rem;
+		margin-block-end: 1rem;
+	}
+}
+
+
+.wp-block-npe-profile {
 	&.is-style-red{
-		--npe-profile-color:rgba(201, 49, 53);
+		--npe-profile-color:#c93135;
 		--npe-profile-color-tint:rgba(201, 49, 53, 0.05);
 	}
 	&.is-style-blue{
-		--npe-profile-color:rgba(19, 117, 183, 1);
+		--npe-profile-color:rgb(19, 117, 183);
 		--npe-profile-color-tint:rgba(19, 117, 183, 0.05);
 	}
 	&.is-style-yellow{
@@ -27,48 +61,18 @@
 	&.is-style-red,
 	&.is-style-blue,
 	&.is-style-yellow {
-		border: 1px solid #cccccc;
-		border-radius:4px;
-		background-color: var(--npe-profile-color-tint);
-
-		.npe-term--govpack_party,
-		//a:not(h2 > a) {
-		.wp-block-npe-profile-field-link:not(.has-link-color) a {
+		
+		.wp-block-npe-profile-name:not(.has-link-color) a,
+		.wp-block-npe-profile-field-link:not(.has-link-color) a,
+		.npe-term--govpack_party {
 			color: var(--npe-profile-color);
 		}
 
-		//	font-weight: bold;
-		//	color: var(--npe-profile-color);
 		.wp-block-social-link.wp-social-link .wp-block-social-link-anchor svg,
 		svg:not(.has-icon-color svg){
 			color: var(--npe-profile-color);
 			fill: var(--npe-profile-color);
 		}
-	
-		.wp-block-npe-profile-separator{
-			margin-block-start: 1rem;
-			margin-block-end: 1rem;
-		}
 	}
 }
 
-.gp-dim-field{
-	
-	background-color: rgba(111,111,111,0.2);
-	outline: 1px dashed #000000;
-	> * {
-		opacity : 0.5;
-	}
-
-	&::before{
-		content : "Hidden Field";
-		position: absolute;
-		background-color :#000;
-		color: #fff;
-		font-size: 0.5rem;
-		padding: 0.1rem 0.2rem;
-		bottom:100%;
-		left: -1px;
-		opacity:1;
-	}
-}

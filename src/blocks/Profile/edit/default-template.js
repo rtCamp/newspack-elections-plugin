@@ -12,30 +12,42 @@ export const DEFAULT_TEMPLATE = [
 		}
 		},[
 			[ "npe/profile-name", {
-				"isLink":true
+				level: 4,
+				isLink: false,
+				fontSize: "medium",
+				fontFamily: "system-sans-serif",
+				style: {
+					typography: {
+						fontWeight: "1000"
+					}
+				}
 			}, []],
 			[ "npe/profile-row", {
-				"showLabel":false,
-				"field" : {
+				showLabel : false,
+				
+				field : {
 					"key":"party",
 					"type":"taxonomy"
+				},
+				fontFamily: "system-sans-serif",
+				fontSize: "small",
+				style : {
+					typography: {
+						fontWeight: "700"
+					}
 				}
 			}, []],
 			
 			[ "npe/profile-row", {
-				"showLabel":false,
+				"showLabel": false,
 				"field" : {
 					"key":"status",
 					"type":"taxonomy"
-				}
+				},
+				fontFamily: "system-sans-serif",
+				fontSize: "small",
 			}, []],
 
-			[ "npe/profile-separator", {
-			}, []],
-
-			[ "npe/profile-read-more", {
-				"linkText":"More about this candidate"
-			}, []],
 		]
 	]
 ]
