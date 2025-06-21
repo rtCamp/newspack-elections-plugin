@@ -1,7 +1,6 @@
 
 body {
 	--npe-profile-default-border-radius: 8px;
-	--npe-profile-default-color-tint: rgba(0,0,0,0.1);
 	--npe-profile-default-color-tint: rgba(0,0,0,0.02);
 	--npe-profile-default-border-color: rgba(0,0,0,0.05);
 	--npe-profile-default-padding: 1rem;
@@ -9,14 +8,14 @@ body {
 
 .wp-block-npe-profile{
 
-	--npe-profile-color: --npe-profile-default-color;
-	--npe-profile-color-tint:--npe-profile-default-color-tint;
+	--npe-profile-contrast-color: --npe-profile-default-color;
+	--npe-profile-background-color:--npe-profile-default-color-tint;
 
 	min-height : 0px;
 	
 	.profile-inner {
 		border: 1px solid #cccccc;
-		background-color: var(--npe-profile-color-tint);
+		background-color: var(--npe-profile-background-color);
 		border-radius: var(--npe-profile-default-border-radius);
 		overflow:hidden;
 	}
@@ -43,17 +42,43 @@ body {
 
 
 .wp-block-npe-profile {
+	
 	&.is-style-red-tint{
-		--npe-profile-color:#c93135;
-		--npe-profile-color-tint:rgba(201, 49, 53, 0.05);
+		--npe-profile-contrast-color:#c93135;
+		--npe-profile-background-color:rgba(201, 49, 53, 0.05);
 	}
 	&.is-style-blue-tint{
-		--npe-profile-color:rgb(19, 117, 183);
-		--npe-profile-color-tint:rgba(19, 117, 183, 0.05);
+		--npe-profile-contrast-color:rgb(19, 117, 183);
+		--npe-profile-background-color:rgba(19, 117, 183, 0.05);
 	}
 	&.is-style-yellow-tint{
-		--npe-profile-color:rgba(223, 168, 0, 1);
-		--npe-profile-color-tint:rgba(223, 168, 0, 0.05);
+		--npe-profile-contrast-color:rgba(223, 168, 0, 1);
+		--npe-profile-background-color:rgba(223, 168, 0, 0.05);
+	}
+
+	&.is-style-red{
+		--npe-profile-contrast-color:#fff;
+		--npe-profile-background-color:rgb(201, 49, 53, 1);
+	}
+
+	&.is-style-blue{
+		--npe-profile-contrast-color:#fff;
+		--npe-profile-background-color:rgb(19, 117, 183, 1);
+	}
+
+	&.is-style-yellow{
+		--npe-profile-contrast-color:#fff;
+		--npe-profile-background-color:rgba(223, 168, 0, 1);
+	}
+
+	&.is-style-red,
+	&.is-style-blue,
+	&.is-style-yellow {
+		color : var(--npe-profile-contrast-color);
+
+		.wp-block-npe-profile-name{
+			color : var(--npe-profile-contrast-color);
+		}
 	}
 
 	&.is-style-red-tint,
@@ -64,14 +89,17 @@ body {
 		.wp-block-npe-profile-name:not(.has-link-color) a,
 		.wp-block-npe-profile-field-link:not(.has-link-color) a,
 		.npe-term--govpack_party {
-			color: var(--npe-profile-color);
+			color: var(--npe-profile-contrast-color);
 		}
 
 		.wp-block-social-link.wp-social-link .wp-block-social-link-anchor svg,
 		svg:not(.has-icon-color svg){
-			color: var(--npe-profile-color);
-			fill: var(--npe-profile-color);
+			color: var(--npe-profile-contrast-color);
+			fill: var(--npe-profile-cocontrast-colorlor);
 		}
 	}
+
+
+	
 }
 

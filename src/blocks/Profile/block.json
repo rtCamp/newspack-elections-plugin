@@ -10,7 +10,10 @@
         { "name": "default", "label": "Default", "isDefault": true },
         { "name": "red-tint", "label": "Red Tint" },
 		{ "name": "blue-tint", "label": "Blue Tint" },
-		{ "name": "yellow-tint", "label": "Yellow Tint" }
+		{ "name": "yellow-tint", "label": "Yellow Tint" },
+		{ "name": "red", "label": "Red" },
+		{ "name": "blue", "label": "Blue" },
+		{ "name": "yellow", "label": "Yellow" }
     ],
 	"supports" : {
 		"anchor": true,
