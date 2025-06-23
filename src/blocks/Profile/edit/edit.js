@@ -12,7 +12,8 @@ import {
 	InspectorControls, useBlockProps, useInnerBlocksProps, InnerBlocks, BlockControls, store as blockEditorStore,
 	__experimentalUseBorderProps as useBorderProps,
 	__experimentalUseColorProps as useColorProps,
-	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles
+	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
+	__experimentalGetShadowClassesAndStyles as getShadowClassesAndStyles
 } from '@wordpress/block-editor';
 import { useInstanceId } from '@wordpress/compose';
 import { useRef, useEffect} from '@wordpress/element';
@@ -145,8 +146,10 @@ const ProfileWrapper = ({children, attributes, __unstableLayoutClassNames = ""})
 	const { padding : paddingAttributes = {} } = spacing
 
 	const spacingStyles = getSpacingClassesAndStyles({style:{spacing:{padding:paddingAttributes}}})
+	const shadowStyles = getShadowClassesAndStyles(attributes)
 	const colorProps = useColorProps(attributes)
 
+	console.log("shadowStyles", shadowStyles)
 
 	const wrapperProps = {
 		className : clsx("profile-inner", borderProps.className,  colorProps.className, __unstableLayoutClassNames),

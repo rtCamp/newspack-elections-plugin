@@ -91,6 +91,14 @@
 		"tagName": {
 			"type": "string",
 			"default" : "div"
+		},
+		"align": {
+			"type": "string",
+			"default" : "left"
+		},
+		"fontSize": {
+			"type": "string",
+			"default": "small"
 		}
 	},
 	"allowedBlocks": [ 

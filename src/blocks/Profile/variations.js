@@ -114,8 +114,7 @@ export const variations = [
 						"padding":{
 							"top":"0.5rem","bottom":"0.5rem","left":"0.5rem","right":"0.5rem"}
 					},
-					"typography":{ "textAlign":"left" },
-					"dimensions" : { "minHeight" : "10rem" }
+					"typography":{ "textAlign":"left" }
 				},
 				"layout":{
 					"type":"flex",
@@ -180,7 +179,7 @@ export const variations = [
 			"align": "none",
 			
 			"verticalAlignment":"center",
-			"fontSize":"medium",
+			"fontSize":"small",
 			
 			"style":{
 				"spacing":{
@@ -188,7 +187,7 @@ export const variations = [
 						"top":"0.5rem","bottom":"0.5rem","left":"0.5rem","right":"0.5rem"}
 				},
 				"typography":{"textAlign":"left"},
-				"dimensions" : { "minHeight" : "10rem" }
+				
 			},
 			"layout":{
 				"type":"flex",

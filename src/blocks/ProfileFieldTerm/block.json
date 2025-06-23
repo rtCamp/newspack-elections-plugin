@@ -40,7 +40,10 @@
 		}
 	},
 	"attributes": {
-		
+		"fontSize" : {
+			"type" : "string",
+			"default" : "small"
+		},
 		"separator": {
 			"type": "string",
 			"default": ", "

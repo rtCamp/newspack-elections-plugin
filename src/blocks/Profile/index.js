@@ -24,6 +24,7 @@ const { attributes, category, supports, styles } = metadata;
 supports.color.__experimentalSkipSerialization = ["background"]
 supports.layout.__experimentalSkipSerialization = true
 supports.spacing.__experimentalSkipSerialization = ["padding"]
+supports.shadow = {__experimentalSkipSerialization : true}
 supports.__experimentalBorder.__experimentalSkipSerialization = true
 
 // Add the filter
