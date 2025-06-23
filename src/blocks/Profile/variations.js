@@ -1,6 +1,6 @@
 import {justifyLeft, layout, mediaAndText} from "@wordpress/icons"
 
-import { DEFAULT_TEMPLATE } from "./edit/default-template"
+import { DEFAULT_TEMPLATE, HORIZONTAL_TEMPLATE } from "./edit/default-template"
 
 export const variations = [
 	{
@@ -232,5 +232,20 @@ export const variations = [
 				]
 			]
 		]
+	},
+	{
+		name : "horizontal-profile",
+		title : "Horizontal Profile",
+		isDefault : false,
+		icon : justifyLeft,
+		attributes : {
+			align : "wide",
+			layout: {
+				type: "flex",
+				orientation: "horizontal",
+				justifyContent: "left"
+			}
+		},
+		innerBlocks : HORIZONTAL_TEMPLATE
 	}
 ]

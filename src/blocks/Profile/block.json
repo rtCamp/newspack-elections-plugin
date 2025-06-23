@@ -32,7 +32,9 @@
 			"allowSwitching": false,
 			"allowVerticalAlignment": true,
 			"allowSizingOnChildren": true,
+			"allowJustification": false,
 			"allowEditing": true,
+			"allowOrientation": true,
 			"default" : {
 				"type" : "flex",
 				"orientation": "vertical",

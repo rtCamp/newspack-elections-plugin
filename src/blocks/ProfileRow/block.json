@@ -9,8 +9,6 @@
 	"category": "newspack-elections",
 	"supports" : {
 		"anchor": true,
-		"align": true,
-		"alignWide": false,
 		"ariaLabel": true,
 		"color" : {
 			"background" : true,

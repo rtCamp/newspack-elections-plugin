@@ -15,8 +15,6 @@
 	},
 	"supports" : {
 		"anchor": true,
-		"align": true,
-		"align-wide": true,
 		"aria-label": true,
 		"color" : {
 			"background" : true,

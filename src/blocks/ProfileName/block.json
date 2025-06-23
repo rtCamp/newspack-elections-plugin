@@ -75,7 +75,7 @@
 		},
 		"level": {
 			"type": "number",
-			"default": 2
+			"default": 4
 		},
 		"levelOptions" : {
 			"type": "array"
@@ -95,6 +95,22 @@
 			"type": "string",
 			"default": "_self",
 			"role": "content"
+		},
+		"fontSize": {
+			"type" : "string",
+			"default": "medium"
+		},
+		"fontFamily": {
+			"type" : "string",
+			"default": "system-sans-serif"
+		},
+		"style": {
+			"type" : "object",
+			"default" : {
+				"typography": {
+					"fontWeight": "1000"
+				}
+			}
 		}
 	},
 	"ancestor": [ "npe/profile" ],
