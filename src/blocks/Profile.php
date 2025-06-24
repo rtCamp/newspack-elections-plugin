@@ -174,6 +174,7 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 			get_block_wrapper_attributes(
 				$this->get_new_block_wrapper_attributes()
 			),
+			//sprintf('<div class="profile-inner">%s</div>', $content),
 			$content,
 			$tag_name
 		);
@@ -226,6 +227,10 @@ class Profile extends \Govpack\Blocks\LegacyProfile {
 
 		$classes   = [];
 		$classes[] = sprintf( 'profile-%s', $this->attributes['postId'] );
+
+		if(isset($this->attributes['verticalAlignment']) && ($this->attributes['verticalAlignment'])){
+			$classes[] = sprintf(  "is-vertically-aligned-%s",  $this->attributes['verticalAlignment'] );
+		}
 
 		return $classes;
 	}

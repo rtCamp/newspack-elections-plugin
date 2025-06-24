@@ -23,15 +23,23 @@ body {
 	--npe-profile-background-color: var(--npe-profile-default-color-tint);
 	--npe-profile-border-color: var(--npe-profile-default-color-tint);
 
+	background-color: var(--npe-profile-background-color);
+	border-radius: var(--npe-profile-default-border-radius);
+
 	max-width:100%;
 	
+	overflow:hidden;
 	min-height : 0px;
 	font-family: var(--npe-profile-default-font-family);
 	
 
+	&.is-layout-flex{
+		gap: 0;
+	}
 	
 
-	&.is-vertically-aligned-stretch,  
+	&.is-vertically-aligned-stretch,
+	&.is-vertically-aligned-stretch .profile-inner,
 	&.is-vertically-aligned-stretch .profile-inner.is-vertically-aligned-stretch {
 		align-self: stretch;
 		flex-grow: 1;
@@ -43,21 +51,15 @@ body {
 	
 	.profile-inner {
 		width:100%;
-		background-color: var(--npe-profile-background-color);
-		border-radius: var(--npe-profile-default-border-radius);
-		overflow:hidden;
 		&:not(.has-border-color){
 			border:1px solid var(--npe-npe-profile-border-color);
-		}
-
-		:where(.is-layout-flex.is-vertical) & {
-			gap: 0;
 		}
 	}
 
 	
 	.wp-block-post-featured-image {
 		overflow: hidden;
+		margin-bottom:0;
 		img {
 			border-radius: revert;
 		}
