@@ -13,7 +13,8 @@ import {
 	__experimentalUseBorderProps as useBorderProps,
 	__experimentalUseColorProps as useColorProps,
 	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
-	__experimentalGetShadowClassesAndStyles as getShadowClassesAndStyles
+	__experimentalGetShadowClassesAndStyles as getShadowClassesAndStyles,
+	BlockVerticalAlignmentToolbar,
 } from '@wordpress/block-editor';
 import { useInstanceId } from '@wordpress/compose';
 import { useRef, useEffect} from '@wordpress/element';
@@ -116,7 +117,7 @@ const useResizeProps = (props ) => {
 	//const maxWidthBuffer = maxWidth * 2.5;
 	//const maxResizeWidth = maxContentWidth || maxWidthBuffer;
 
-	return {
+	return [resizeEnabled, {
 		size : {
 			width: currentWidth ?? 'auto'
 		},
@@ -134,25 +135,27 @@ const useResizeProps = (props ) => {
 			left: showLeftHandle,
 		},
 		resizeRatio : (align === 'center' ? 2 : 1 )
-	}
+	}]
 }
 
 const ProfileWrapper = ({children, attributes, __unstableLayoutClassNames = ""}) => {
 
 	const borderProps = useBorderProps( attributes );
 
-	const { style  = {} } = attributes
+	const { style  = {}, verticalAlignment } = attributes
 	const { spacing = {} } = style
 	const { padding : paddingAttributes = {} } = spacing
 
 	const spacingStyles = getSpacingClassesAndStyles({style:{spacing:{padding:paddingAttributes}}})
-	const shadowStyles = getShadowClassesAndStyles(attributes)
+
 	const colorProps = useColorProps(attributes)
 
-	console.log("shadowStyles", shadowStyles)
+	
 
 	const wrapperProps = {
-		className : clsx("profile-inner", borderProps.className,  colorProps.className, __unstableLayoutClassNames),
+		className : clsx("profile-inner", borderProps.className,  colorProps.className, __unstableLayoutClassNames, {
+			[ `is-vertically-aligned-${ verticalAlignment }` ]: verticalAlignment,
+		}),
 		style: {
 			...spacingStyles.style,
 			...borderProps.style,
@@ -215,7 +218,7 @@ function ProfileBlockEdit( props ) {
 	const {attributes, setAttributes, isSelected: isSingleSelected, clientId, context} = props
 
 	
-	const resizeProps = useResizeProps(props);
+	const [resizeEnabled, resizeProps] = useResizeProps(props);
 	const {setProfile, resetProfile, profileId = null, profile, profileQuery} = useProfileAttributes(props)
 
 	const { isBlockSelected, hasSelectedInnerBlock, selectedInnerBlock, selectedInnerBlockParentsOfType, isSelectedBlockProfileGroup } = useSelect( (select) => {
@@ -247,24 +250,18 @@ function ProfileBlockEdit( props ) {
 
 	
 
-	const { __unstableMarkNextChangeAsNotPersistent } = useDispatch( blockEditorStore );
+	const { __unstableMarkNextChangeAsNotPersistent, updateBlockAttributes } = useDispatch( blockEditorStore );
+	
 
+	
 	const {
-		queryId,	
 		tagName : TagName = 'div',
+		verticalAlignment
 	} = attributes;
 
 	const {
 		postId = null
 	} = context;
-
-
-	useEffect( () => {
-		if ( ! Number.isFinite( queryId ) ) {
-			__unstableMarkNextChangeAsNotPersistent();
-			setAttributes( { queryId: instanceId } );
-		}
-	}, [ queryId, instanceId ] );
 
 
 	const setTagName = ( nextTagValue ) => {
@@ -292,7 +289,45 @@ function ProfileBlockEdit( props ) {
 	const showSpinner = profileQuery.isLoading
 	const showProfile = profileQuery.hasLoaded === true
 
+	const classes = clsx( innerBlockProps.className , {
+		[ `is-vertically-aligned-${ verticalAlignment }` ]: verticalAlignment,
+	} );
 
+	const { columnsClientIds, columnClientIds } = useSelect(
+		( select ) => {
+
+			return {
+				columnsClientIds : select( blockEditorStore ).getBlockParentsByBlockName( clientId , ["core/column"], true),
+				columnClientIds: select( blockEditorStore ).getBlockParentsByBlockName( clientId , ["core/columns"], true)
+			};
+		},
+		[ clientId ]
+	);
+
+	const columnsClientId = columnsClientIds[0] ?? null
+	const columnClientId = columnClientIds[0] ?? null
+
+	const updateAlignment = ( value ) => {
+		// Update own alignment.
+		setAttributes( { verticalAlignment: value } );
+
+		// match value on parent Column block.
+		updateBlockAttributes( columnClientId, {
+			verticalAlignment: value,
+		} );
+
+		// Reset parent Columns block.
+		updateBlockAttributes( columnsClientId, {
+			verticalAlignment: null,
+		} );
+	};
+
+
+	let WrappedProfile = (
+		<ProfileWrapper {...props}>
+			{ children }
+		</ProfileWrapper>
+	)
 
 	return (
 		<>
@@ -302,7 +337,7 @@ function ProfileBlockEdit( props ) {
 			) }
 			
 			{ showProfile && (
-				<TagName {...innerBlockProps}>
+				<TagName {...innerBlockProps} className = {classes}>
 					
 					<ProfileBlockControls 
 						attributes = {attributes} 
@@ -310,19 +345,28 @@ function ProfileBlockEdit( props ) {
 						setProfile = {setProfile}
 					/>
 					
-					
+					<BlockControls>
+						<BlockVerticalAlignmentToolbar
+							onChange={ updateAlignment }
+							value={ verticalAlignment }
+							controls={ [ 'top', 'center', 'bottom', 'stretch' ] }
+						/>
+					</BlockControls>
 					
 					<BlockHTMLElementControl
 						tagName = {TagName}
 						onSelectTagName = {setTagName}
 					/>
 
-					
-					<ResizableBox {...resizeProps} >
-						<ProfileWrapper {...props}>
-							{ children }
-						</ProfileWrapper>
-					</ResizableBox>
+					{ resizeEnabled && (
+						<ResizableBox {...resizeProps} >
+							{ WrappedProfile }
+						</ResizableBox>
+					)}
+
+					{ !resizeEnabled && (
+						<>{ WrappedProfile }</>
+					)}
 				</TagName>
 			)}
 		</>

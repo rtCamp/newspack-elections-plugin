@@ -16,24 +16,46 @@ body {
 	--npe-profile-default-font-family: sans-serif;
 }
 
+
 .wp-block-npe-profile{
 
 	--npe-profile-contrast-color: var(--npe-profile-default-color);
 	--npe-profile-background-color: var(--npe-profile-default-color-tint);
 	--npe-profile-border-color: var(--npe-profile-default-color-tint);
 
+	max-width:100%;
+	
 	min-height : 0px;
 	font-family: var(--npe-profile-default-font-family);
 	
+
+	
+
+	&.is-vertically-aligned-stretch,  
+	&.is-vertically-aligned-stretch .profile-inner.is-vertically-aligned-stretch {
+		align-self: stretch;
+		flex-grow: 1;
+		min-height:100%;
+	}
+
+	
+
+	
 	.profile-inner {
+		width:100%;
 		background-color: var(--npe-profile-background-color);
 		border-radius: var(--npe-profile-default-border-radius);
 		overflow:hidden;
 		&:not(.has-border-color){
 			border:1px solid var(--npe-npe-profile-border-color);
 		}
+
+		:where(.is-layout-flex.is-vertical) & {
+			gap: 0;
+		}
 	}
 
+	
 	.wp-block-post-featured-image {
 		overflow: hidden;
 		img {
@@ -42,9 +64,14 @@ body {
 	}
 
 	.wp-block-npe-profile-row-group{
-		padding: var(--npe-profile-default-padding)
+		padding: var(--npe-profile-default-padding);
+		gap: 0.2rem;
 	}
 	
+	.wp-block-npe-profile-name{
+		line-height:1.1;
+	}
+
 	.wp-block-npe-profile-separator{
 		margin-block-start: 1rem;
 		margin-block-end: 1rem;

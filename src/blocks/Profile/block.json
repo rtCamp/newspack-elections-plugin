@@ -30,7 +30,7 @@
 		},
 		"layout" : {
 			"allowSwitching": false,
-			"allowVerticalAlignment": true,
+			"allowVerticalAlignment": false,
 			"allowSizingOnChildren": true,
 			"allowJustification": false,
 			"allowEditing": true,
@@ -92,13 +92,15 @@
 			"type": "string",
 			"default" : "div"
 		},
-		"align": {
-			"type": "string",
-			"default" : "left"
-		},
+		
 		"fontSize": {
 			"type": "string",
 			"default": "small"
+		},
+		
+		"verticalAlignment": {
+			"type": "string",
+			"default": "top"
 		}
 	},
 	"allowedBlocks": [ 

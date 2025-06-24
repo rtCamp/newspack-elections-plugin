@@ -53,10 +53,13 @@ export const DEFAULT_TEMPLATE = [
 	]
 ]
 
+
 export const HORIZONTAL_TEMPLATE = [
 	[ "core/post-featured-image", {
 		isLink: true,
 		aspectRatio: "1",
+		width: "100px",
+		height: "100%",
 		style: {
 			layout: {
 				selfStretch: "fixed",

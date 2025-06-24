@@ -239,6 +239,7 @@ export const variations = [
 		icon : justifyLeft,
 		attributes : {
 			align : "wide",
+			"verticalAlignment" : "stretch",
 			layout: {
 				type: "flex",
 				orientation: "horizontal",

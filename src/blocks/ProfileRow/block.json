@@ -53,6 +53,9 @@
 				"layout" : {
 					"selfStretch":"fill",
 					"flexSize":null
+				}, 
+				"spacing" : {
+					"blockGap" : 0
 				}
 			}
 		},
