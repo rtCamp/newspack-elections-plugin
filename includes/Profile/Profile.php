@@ -21,7 +21,11 @@ class Profile {
 	}
 
 	public static function get( $id ) {
-		return new self( get_post( $id ) );
+		$post = get_post( $id );
+		if(!$post){
+			return false;
+		}
+		return new self( $post );
 	}
 
 	public function terms( $taxonomy ): array {
