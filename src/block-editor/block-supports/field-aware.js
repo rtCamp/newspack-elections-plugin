@@ -51,23 +51,20 @@ function hasAttribute( attributes = {}, attribute = "field", subAttribute = fals
 export function useBlockProps( props ) {
 
 	if(!hasAttribute(props)){
-		return props;
+		return {};
 	}
 	
 	const blockClass = getBlockDefaultClassName(props.name)
-	const classNames = []
+	let {className, field } = props
 
-	if(hasAttribute(props, "field", 'type')){
-		classNames.push(`${blockClass}--type-${props.field.type}`)
-	}
+	className = clsx(className, {
+		[`${blockClass}--type-${field.type}`] : hasAttribute(props, "field", 'type'),
+		[`${blockClass}--key-${field.key}`] : hasAttribute(props, "field", 'key')
+	});
 
-	if(hasAttribute(props, "field", 'key')){
-		classNames.push(`${blockClass}--key-${props.field.key}`)
-	}
-
-	props.className = clsx(props.className, classNames)
-
-	return props;
+	return {
+		className
+	};
 }
 
 export function addAttribute( blockSettings ) {
