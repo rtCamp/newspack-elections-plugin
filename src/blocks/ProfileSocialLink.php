@@ -35,8 +35,7 @@ class ProfileSocialLink extends \Govpack\Blocks\ProfileFieldText {
 		$open_in_new_tab = isset( $block->context['npe/openInNewTab'] ) ? $block->context['npe/openInNewTab'] : false;
 
 		$rel = trim( isset( $attributes['rel'] ) ? $attributes['rel'] : '' );
-		$url = $link['url'];
-
+	
 		$text = ! empty( $attributes['label'] ) ? trim( $attributes['label'] ) : '';
 		$text = $text ? $text : $this->get_field()->label;
 
@@ -46,9 +45,11 @@ class ProfileSocialLink extends \Govpack\Blocks\ProfileFieldText {
 		
 
 		// Don't render a link if there is no URL set.
-		if ( ! $url ) {
+		if ( !isset($link['url']) || (! $link['url'])) {
 			return '';
 		}
+
+		$url = $link['url'];
 
 		/**
 		 * Prepend emails with `mailto:` if not set.
