@@ -236,4 +236,24 @@ abstract class ProfileField extends \Govpack\Abstracts\Block implements ProfileF
 		
 		return $attributes;
 	}
+
+	public function get_new_block_wrapper_attributes(): array {
+		
+		$new_attrs = [];
+
+		$styles  = [];
+		$classes = [];
+
+		$classes = apply_filters( "newspack_elections_block_{$this->block_name}_wrapper_classes", $this->get_wrapper_classes() );
+
+		if ( ! empty( $classes ) ) {
+			$new_attrs['class'] = trim( implode( ' ', $classes ) );
+		}
+
+		return $new_attrs;
+	}
+
+	public function get_wrapper_classes()  : array {
+		return [];
+	}
 }

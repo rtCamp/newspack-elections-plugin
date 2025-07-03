@@ -48,33 +48,10 @@ class ProfileRow extends \Govpack\Blocks\ProfileField {
 		echo $block_html;
 	}
 
-	public function get_new_block_wrapper_attributes(): array {
-		
-		$new_attrs = [];
-
-		$styles  = [];
-		$classes = [];
-
-		$classes = apply_filters( "newspack_elections_block_{$this->block_name}_wrapper_classes", $this->get_wrapper_classes() );
-
-		if ( ! empty( $classes ) ) {
-			$new_attrs['class'] = trim( implode( ' ', $classes ) );
-		}
-
-		return $new_attrs;
-	}
+	
 
 	public function get_block_class_name(): string {
 		return wp_get_block_default_classname( $this->block_name );
-	}
-
-	public function get_wrapper_classes(): array {
-
-		$classes = [];
-		//$classes[] = sprintf( '%s--%s', $this->get_block_class_name(), $this->attribute('fieldType') );
-		//$classes[] = sprintf( '%s--%s', $this->get_block_class_name(), $this->attribute('fieldKey') );
-
-		return $classes;
 	}
 
 	public function show_block(): bool {

@@ -37,26 +37,44 @@ const useProfileTaxonomies = () => {
 	})
 }
 
-const ProfileTermSpan = ({postTerm}) => {
+const getProfileTermClasses = (postTerm, context = "") => {
 	
-	const className = clsx("npe-term", {
+	let classes = clsx("npe-term", {
 		[`npe-term--${postTerm?.taxonomy}`] :postTerm?.taxonomy,
 		[`npe-term--${postTerm?.slug}`] :postTerm?.slug,
-		[`npe-term--${postTerm?.id}`] :postTerm?.id
+		[`npe-term--${postTerm?.id}`] :postTerm?.id,
+		[`npe-term--is-child-term`] :postTerm?.parent !== 0,
+		[`npe-term--parent-${postTerm?.parent}`] :postTerm?.parent !== 0,
+
+		[`npe-term--is-link`] : context === "link"
 	})
 
+	return classes
+}
+const ProfileTermSpan = ({postTerm}) => {
+	
+	const className = getProfileTermClasses(postTerm)
+
 	return (
-		<span key={ postTerm.id } className = {className}>
+		<span 
+			key={ postTerm.id } 
+			className = {className}
+		>
 			{ decodeEntities( postTerm.name ) }
 		</span>
 	)
 }
 
 const ProfileTermLink = ({postTerm}) => {
+
+	let className = getProfileTermClasses(postTerm, "link")
+	
+
 	return (
 		<a 
 			key={ postTerm.id } 
 			href={ postTerm.link }
+			className = {className}
 			onClick={ ( event ) => event.preventDefault() }
 		>
 			{ decodeEntities( postTerm.name ) }

@@ -137,7 +137,9 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 	public function handle_render( array $attributes, string $content, WP_Block $block ) {
 		
 		?>
-		<div <?php echo get_block_wrapper_attributes(); ?>>
+		<div <?php echo get_block_wrapper_attributes(
+				$this->get_new_block_wrapper_attributes()
+			); ?>>
 			<?php echo wp_kses_post( $this->output() ); ?>
 		</div>
 		<?php
@@ -207,12 +209,39 @@ class ProfileFieldTerm extends \Govpack\Blocks\ProfileField {
 		return $output;
 	}
 
-	public function term_span( WP_Term $term ): string {
+	public function get_term_classes(WP_Term $term, string $context = "") : string {
+
+		$root_class = "npe-term";
+		$classes = [];
+		$classes[] = $root_class;
+		$classes[] = sprintf("%s--%s", $root_class, $term->taxonomy );
+		$classes[] = sprintf("%s--%s", $root_class, $term->term_id );
+		$classes[] = sprintf("%s--%s", $root_class, $term->slug );
+
+		if($term->parent !== 0){
+			$classes[] = sprintf("%s--is-child-term", $root_class );
+			$classes[] = sprintf("%s--parent-%s", $root_class, $term->parent );
+		}
 		
-		return $term->name;
+		if( $context === "link") {
+			$classes[] = sprintf("%s--is-link", $root_class );
+		}
+
+		$classes = apply_filters( "newspack_elections_block_term_classes", $classes, $term, $this );
+		$classes = implode(" ", $classes);
+		return $classes;
+	}
+
+	public function term_span( WP_Term $term ): string {
+		return sprintf('<span %s>%s</span>', self::array_to_html_attributes([
+			"class" => $this->get_term_classes($term)
+		]), $term->name);
 	}
 
 	public function term_link( WP_Term $term ): string {
-		return sprintf( '<a href="%s">%s</a>', get_term_link( $term ), $term->name );
+		return sprintf( '<a %s>%s</a>', self::array_to_html_attributes([
+			"class" => $this->get_term_classes($term, "link"),
+			"href" => get_term_link( $term ),
+		]) , $term->name );
 	}
 }
