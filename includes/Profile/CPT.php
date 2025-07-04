@@ -192,7 +192,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 				(new PhoneField( 'fax_campaign', 'Campaign Fax Number' ))->set_display_icon("fax"),
 
 				( new LinkField( 'website_personal', 'Personal Website URL' ) ),
-				( new LinkField( 'website_campaign', 'Campaign Website URL' ) ),
+				( new LinkField( 'website_campaign', 'Campaign Website URL' ) )->link_text( 'Campaign Website' ),
 				( new LinkField( 'website_district', 'District Website URL' ) )->link_text( 'District Website' ),
 				
 				( new LinkField( 'website_official', 'Official Website URL' ) )->link_text( 'Official Website' ),

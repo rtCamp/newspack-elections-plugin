@@ -22,7 +22,7 @@ const Processing = (props) => {
             }
 
         } ).catch(( error, res ) => {
-            console.log(error)
+            
             props.setHasError(true)
             props.setErrorMessage(error.response.data.message)
 			props.updateStep(stage.UPLOADER)

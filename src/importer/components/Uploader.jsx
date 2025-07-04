@@ -61,7 +61,7 @@ const Uploader = (props) => {
         }
 
 
-        console.log("Number of Chunks: ", number_of_chunks)
+        
         
         const createChunk = (start_byte = 0) => {
             let start = start_byte ?? 0
@@ -91,8 +91,6 @@ const Uploader = (props) => {
                 },
                 data: data
             } ).then( ( res ) => {
-
-                console.log(res)
 
                 if(res.data[0][0].error){
                     setHasError(true)
@@ -127,7 +125,6 @@ const Uploader = (props) => {
         uploadChunk()
 	};
 
-	console.log(options)
     return (
         <>
 			

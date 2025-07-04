@@ -59,7 +59,6 @@ export const ProfileEdit = ( props ) => {
 	);
 	
 	const setProfile = useCallback ((newProfileId) => {
-		console.log("set profileId", newProfileId)
 		setAttributes({"postId" : newProfileId})
 	}, [setAttributes])
 

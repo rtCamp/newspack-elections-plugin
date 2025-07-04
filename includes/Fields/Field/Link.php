@@ -29,6 +29,7 @@ class Link extends \Govpack\Fields\Field {
 	public function __construct( string $slug, string $label, FieldType|string|null $type = 'link' ) {
 
 		parent::__construct( $slug, $label, $type );
+		$this->set_display_icon("website");
 	}
 	
 	public function link_text( string $link_text ): self {

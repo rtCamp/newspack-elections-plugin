@@ -38,7 +38,7 @@ const dep0_0 = {
 		return false
 	},
 	save: (props) => {
-		//console.log("save called")
+		
 	},
 	migrate:  (attributes, innerBlocks) => {
 		// Destructure attributes to remove the old taxonomy attribute

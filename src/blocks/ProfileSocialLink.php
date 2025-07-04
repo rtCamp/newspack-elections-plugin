@@ -30,8 +30,6 @@ class ProfileSocialLink extends \Govpack\Blocks\ProfileFieldText {
 		$service = $field->service();
 		$icon    = $service->icon();
 
-		
-
 		$open_in_new_tab = isset( $block->context['npe/openInNewTab'] ) ? $block->context['npe/openInNewTab'] : false;
 
 		$rel = trim( isset( $attributes['rel'] ) ? $attributes['rel'] : '' );

@@ -492,7 +492,7 @@ const SingleProfile = (props) => {
 			return null;
 		}
 		
-		console.log("comms other", props)
+		
 		return (
 			<div className={`${blockClassName}__comms-other`}>
 				<div className={`${blockClassName}__label`}>{label}:</div>

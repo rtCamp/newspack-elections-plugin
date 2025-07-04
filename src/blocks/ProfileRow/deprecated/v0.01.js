@@ -69,8 +69,6 @@ const dep0_01 = {
 
 		const newInnerBlocks = innerBlocks.filter( (innerBlock) => (innerBlock.name !== "govpack/profile-label"))
 
-		console.log("newInnerBlocks", newInnerBlocks)
-
 		return [
 			attributes, 
 			newInnerBlocks

@@ -95,7 +95,6 @@ const blocks = fs.readdirSync( blocksDir )
 
 
 
-
 defaultConfig = {
 	...defaultConfig,
 	optimization : {
@@ -106,6 +105,7 @@ defaultConfig = {
 	},
 	plugins: [
 		...defaultConfig.plugins,
+		
 		new CopyWebpackPlugin({
 			patterns: [{
 				context: getProjectSourcePath(),
@@ -113,8 +113,7 @@ defaultConfig = {
 				to : "icons/[name][ext]",
 				transform : {
 					transformer(content, absoluteFrom) {
-						//console.log(content.toString())
-						//return content.toString();
+
 						let result = optimize(content.toString())
 						return result.data;
 					}
@@ -184,7 +183,7 @@ function getBlockEditorScripts(){
 
 function getEntryPointsv2(){
 
-	//console.log( getBlockViewScripts() )
+
 	return {
 		...getBlockEditorScripts(),
 		...getEntryPointsFromPackage(),
@@ -221,7 +220,7 @@ function requestToHandle( request ){
 }
 
 
-console.log(defaultConfig.resolve)
+
 module.exports = {
     ...defaultConfig,
 	output:{

@@ -2,7 +2,7 @@ import InfoPanel from "./InfoPanel";
 
 const Done = (props) => {
 
-	console.log(props)
+	
 
 	return (
         <div>

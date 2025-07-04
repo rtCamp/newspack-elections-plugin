@@ -58,7 +58,7 @@
 			"default": "label"
 		},
 		"iconSize" : {
-			"type": "integer"
+			"type": "string"
 		}
 	},
 	"ancestor": [ "npe/profile" ],

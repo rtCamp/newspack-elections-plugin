@@ -12,7 +12,7 @@ import { ToggleControl, TextControl, PanelBody } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { useProfileFieldAttributes } from "@npe/editor";
+import { PROFILE_POST_TYPE, useProfileFieldAttributes } from "@npe/editor";
 
 
 
@@ -20,13 +20,16 @@ import { useProfileFieldAttributes } from "@npe/editor";
 
 function Edit( props ) {
 
-	const { fieldKey, field, value, profileId, ...restField } =  useProfileFieldAttributes(props) 
+	const { fieldKey, field, profileId, ...restField } =  useProfileFieldAttributes(props) 
 	const blockProps = useBlockProps()
 
 	const { context, attributes, setAttributes } = props
 	const { postType } = context
 	const { level, textAlign, levelOptions, isLink, linkTarget, rel } = attributes
 
+	
+	const [value] = useEntityProp("postType", PROFILE_POST_TYPE, "title", profileId)
+	
 
 	useEffect( () => {
 			

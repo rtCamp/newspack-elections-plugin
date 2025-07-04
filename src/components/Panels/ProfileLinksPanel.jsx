@@ -83,7 +83,7 @@ export const ProfileLinksPanel = (props) => {
 	}
 
 	
-	console.log("Link Services", profile.link_services)
+	
 
 	
 

@@ -24,7 +24,7 @@ import {ReactComponent as WikipediaIconSVG} from "./../assets/icons/profile-link
 
 
 
-export const Facebook = () => ( <Icon icon={ FacebookIconSVG } /> )
+export const Facebook = (props) => ( <Icon icon={ FacebookIconSVG } {...props} /> )
 export const Instagram = () => ( <Icon icon={ InstagramIconSVG } /> )
 export const Linkedin = () => ( <Icon icon={ LinkedinIconSVG } /> )
 export const Twitter = () => ( <Icon icon={ TwitterIconSVG } /> )
@@ -60,6 +60,7 @@ export const NPEIcons = {
 	"gab" : GabIconSVG,
 	"google" : GoogleIconSVG,
 	"web" : WebIconSVG,
+	"website" : WebIconSVG,
 	"linkedin" : LinkedinIconSVG,
 	"open-states" : OpenStatesIconSVG,
 	"open-secrets" : OpenSecretsIconSVG,
@@ -71,6 +72,5 @@ export const NPEIcons = {
 	"email" : EmailIconSVG,
 	"fax" : FaxIconSVG,
 	"web" : WebIconSVG
-
 }
 

@@ -46,7 +46,7 @@ const Importing = (props) => {
             return;
         }
 
-        console.log("UseEffectCalled")
+        
         Tick();
         timeout = setTimeout( () => {
             Tock(timeout)

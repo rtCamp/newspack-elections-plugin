@@ -30,7 +30,6 @@ export const ProfileVariationSelector = ( props ) => {
 		useDispatch( blockEditorStore );
 
 	const selectVariation = ( nextVariation ) => {
-		console.log(nextVariation)
 		setAttributes( nextVariation.attributes );
 		const nextBlocks = synchronizeBlocksWithTemplate([], nextVariation.innerBlocks ?? DEFAULT_TEMPLATE)
 

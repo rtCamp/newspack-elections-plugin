@@ -1,4 +1,5 @@
 import {isEmpty} from "lodash"
+import clsx from "clsx"
 
 /**
  * WordPress dependencies
@@ -14,15 +15,16 @@ import {
 import { useState } from "@wordpress/element"
 
 
+
 import { useProfileFieldAttributes } from "@npe/editor"
 import { useUpdateBlockMetaName, useIsPreviewMode } from "./../utils"
 import { NPEIcons } from "./../../components/Icons"
 
 const sizeOptions = [
-	{ name: __( 'Small' ), value: 12 },
-	{ name: __( 'Normal' ), value: 18 },
-	{ name: __( 'Large' ), value: 24 },
-	{ name: __( 'Huge' ), value: 30 },
+	{ name: __( 'Small' ), value: 'has-small-icon-size' },
+	{ name: __( 'Normal' ), value: 'has-normal-icon-size' },
+	{ name: __( 'Large' ), value: 'has-large-icon-size' },
+	{ name: __( 'Huge' ), value: 'has-huge-icon-size' }
 ];
 
 
@@ -30,10 +32,13 @@ const sizeOptions = [
 const DynamicIcon = ({icon, size = 24}) => {
 	// Todo - make sure this exists
 	// move the function call up to the icons component
-	const SVG = NPEIcons[icon]
-	console.log("SVG", SVG)
-	return (
-		<Icon icon={ SVG } size={size} />
+	const svg = NPEIcons[icon]
+
+	return ( 
+		<Icon 
+			icon = { svg }
+			size = { size }
+		/>
 	)
 }
 
@@ -80,7 +85,7 @@ const LinkBody = ({ linkFormat, value, linkText, field, iconSize, setLinkTextOve
 function Edit( props ) {
 
 	const {fieldKey, value, profile, field, profileId, fieldType } =  useProfileFieldAttributes(props) 
-	const blockProps = useBlockProps()
+	let {className, ...blockProps} = useBlockProps()
 	
 	const isInnerBlockMode = (fieldType === "block")
 	const { attributes, setAttributes, context, clientId } = props
@@ -88,12 +93,16 @@ function Edit( props ) {
 	const { 
 		linkTextOverride : labelOverride = "",
 		linkFormat,
-		iconSize = 24
+		iconSize = 'has-normal-icon-size'
 	} = attributes
 
 	console.log("field", field)
 	console.log("icon", field.display_icon)
 	
+	className = clsx(className, {
+		"is-format-icon" : (linkFormat === "icon"),
+		[iconSize] : (linkFormat === "icon")
+	})
 	
 	const [iconSlug, setIconSlug] = useState( field.service ?? field.display_icon ?? null )
 
@@ -239,7 +248,7 @@ function Edit( props ) {
 					)}
 				</PanelBody>
 			</InspectorControls>
-			<div {...blockProps} >
+			<div {...blockProps} className = {className}>
 				{ (showValue) && ( 
 				<LinkBody
 					linkFormat = {linkFormat}

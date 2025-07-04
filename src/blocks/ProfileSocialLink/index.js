@@ -92,7 +92,7 @@ const createServiceFieldVariations = (fields) => {
 			return;
 		}
 
-		//console.log(field, NPEIcons[field.service])
+	
 		registerBlockVariation(metadata.name, {
 			'category' : 'newspack-elections-profile-row-fields',
 			'name' : variationToCreateName,

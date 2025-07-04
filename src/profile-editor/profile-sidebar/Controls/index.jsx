@@ -51,7 +51,6 @@ export const PanelUrlControl = (props) => {
 		...props,
 		"type": "url",
 		onChange : (value, event) => {
-			console.log("URL On Change", value, event)
 			props.onChange(value)
 		},
 		

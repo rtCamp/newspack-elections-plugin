@@ -145,7 +145,7 @@ export const useProfileAttributes = ( props ) => {
  */
 export const useProfileFromContext = ( context ) => {
 
-	console.log("useProfileFromContext")
+	
 	let { 
 		'npe/postId' : selectedProfileId = null,
 		postId : pageInheritedPostId = null,
@@ -165,7 +165,6 @@ export const useProfileFromContext = ( context ) => {
 
 	// At least one of profileId or postId exists in context
 	if(!profileId){
-	//	console.log("must have a profile id or a postId", profileId, postId, context)
 		return false;
 	}
 

@@ -32,6 +32,10 @@ class Link extends \Govpack\Fields\FieldType {
 			'value' => 'url',
 			'label' => 'URL',
 		],
+		[
+			'value' => 'icon',
+			'label' => 'Icon',
+		],
 	];
 
 	/**

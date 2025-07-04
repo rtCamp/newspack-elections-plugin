@@ -25,7 +25,6 @@ export const withRestrictedAllowedBlocks = createHigherOrderComponent( ( BlockEd
 		}, [clientId])
 
 		if((props.name === "core/group") && (parents.length > 0) && (parentType?.allowedBlocks?.length > 0)){
-			//console.log(props, parents, parent, parentType, parentType?.allowedBlocks)
 			props.attributes.allowedBlocks = parentType?.allowedBlocks 
 		}
 
