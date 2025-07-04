@@ -597,7 +597,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 						'with_front' => false,
 					],
 					'template'     => [
-						[ 'govpack/profile-self' ],
+						[ 'npe/profile' ],
 					],
 				]
 			)
@@ -1308,7 +1308,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 	 * The default block string for a profile.  Usually injected into the profile import before any content 
 	 */
 	public static function default_profile_content(): string {
-		return '<!-- wp:govpack/profile-self {"showName":true} /-->';
+		return '<!-- wp:npe/profile /-->';
 	}
 
 	public static function remove_custom_fields_metabox() {
