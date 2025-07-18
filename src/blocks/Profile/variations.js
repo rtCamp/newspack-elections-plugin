@@ -1,6 +1,8 @@
 import {justifyLeft, layout, mediaAndText} from "@wordpress/icons"
 
-import { DEFAULT_TEMPLATE, HORIZONTAL_TEMPLATE } from "./edit/default-template"
+import { DEFAULT_TEMPLATE, FULL_TEMPLATE, HORIZONTAL_TEMPLATE } from "./edit/default-template"
+
+
 
 export const variations = [
 	{
@@ -12,7 +14,7 @@ export const variations = [
 		attributes : {
 			"style":{"spacing":{"blockGap":"0"}}
 		},
-		"innerBlocks": DEFAULT_TEMPLATE
+		"innerBlocks": FULL_TEMPLATE
 	},
 	{
 		'name' : "gp-profile-full-inline",
