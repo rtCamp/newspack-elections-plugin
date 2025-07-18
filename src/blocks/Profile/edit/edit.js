@@ -27,7 +27,7 @@ import { BlockContextProvider } from '@wordpress/block-editor';
 import { ProfileResetPanel } from '../../../components/Panels/ProfileResetPanel.jsx';
 import { Spinner } from './../../../components/Spinner.jsx';
 
-import { DEFAULT_TEMPLATE } from './default-template.js';
+import { DEFAULT_TEMPLATE, FULL_TEMPLATE } from './default-template.js';
 
 import { useProfileAttributes } from "@npe/editor";
 import { usePostEditURL } from '@npe/editor';
@@ -223,30 +223,13 @@ function ProfileBlockEdit( props ) {
 	const [resizeEnabled, resizeProps] = useResizeProps(props);
 	const {setProfile, resetProfile, profileId = null, profile, profileQuery} = useProfileAttributes(props)
 
-	
-	/*
-	const { isBlockSelected, hasSelectedInnerBlock, selectedInnerBlock, selectedInnerBlockParentsOfType, isSelectedBlockProfileGroup } = useSelect( (select) => {
-		const isBlockSelected = select(blockEditorStore).isBlockSelected(clientId)
-		const hasSelectedInnerBlock = select(blockEditorStore).hasSelectedInnerBlock(clientId, true)
-		const selectedInnerBlock = hasSelectedInnerBlock ? select(blockEditorStore).getSelectedBlock() : null
-		const isSelectedBlockProfileGroup = (selectedInnerBlock?.name === "npe/profile-row-group")
-		const selectedInnerBlockParentsOfType = selectedInnerBlock ?  select(blockEditorStore).getBlockParentsByBlockName(selectedInnerBlock?.clientId, "npe/profile-row-group" ) : []
-		//const showAppender = (isBlockSelected || (hasSelectedInnerBlock && !isSelectedBlockProfileGroup))
-		return {
-			isBlockSelected,
-			hasSelectedInnerBlock,
-			selectedInnerBlock,
-			isSelectedBlockProfileGroup,
-			selectedInnerBlockParentsOfType,
-		}
-	});
-	*/
 
-	//const showAppender = (isBlockSelected || (hasSelectedInnerBlock && !isSelectedBlockProfileGroup && selectedInnerBlockParentsOfType.length === 0))
+	
+	
 	const showAppender = false
 	const blockProps = useBlockProps();
 	const {children, ...innerBlockProps} = useInnerBlocksProps(blockProps, {
-		template : DEFAULT_TEMPLATE,
+		template : (isProfilePage ? FULL_TEMPLATE : DEFAULT_TEMPLATE),
 		renderAppender : (showAppender) ? InnerBlocks.ButtonBlockAppender : false
 	})
 
