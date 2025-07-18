@@ -11,7 +11,7 @@ import { normalize_profile } from './NormaliseProfile';
 import {prependHTTPS} from "@wordpress/url"
 
 import { NPEIcons, Facebook, X, Instagram, YouTube, Web, Phone, Email, Fax } from "./../../components/Icons"
-
+import { Icon } from "@wordpress/components"
 
 const Link = (props) => {
 
@@ -231,13 +231,17 @@ const SingleProfile = (props) => {
 
 	const Contact = (props) => {
 		const href= prependHTTPS(props.href)
+		
         return (
             <li className={clsx(`${blockClassName}__contact`, {
                 [`${blockClassName}__contact--hide-label`] : true
             })}>
                 <a href={href} className={`${blockClassName}__link`} title={props.tooltip ?? props.label ?? ""}>
                     {props.icon && (
-                        <span className={`${blockClassName}__contact__icon ${blockClassName}__contact__icon--${props.service}`}>{props.icon}</span>
+                        <span className={`${blockClassName}__contact__icon ${blockClassName}__contact__icon--${props.service}`}>
+							<Icon
+								icon = { props.icon }
+						 	/></span>
                     )}
                     <span className = {`${blockClassName}__contact__label`}>{props.label}</span>
                 </a>
@@ -536,10 +540,10 @@ const SingleProfile = (props) => {
 							
 							let link = data[slug]
 							
-							let Icon = null
+							let icon = null
 
 							if(NPEIcons[slug]){
-								Icon = NPEIcons[slug]()
+								icon = NPEIcons[slug]
 							}
 							
 							if(!Icon){
@@ -555,7 +559,7 @@ const SingleProfile = (props) => {
 									href={link.href} 
 									tooltip = {`Link : ${link.text}`} 
 									label = {link.text}
-									icon = { Icon }
+									icon = { icon }
 								/>
 							)
 						} )}

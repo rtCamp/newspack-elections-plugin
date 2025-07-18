@@ -96,8 +96,7 @@ function Edit( props ) {
 		iconSize = 'has-normal-icon-size'
 	} = attributes
 
-	console.log("field", field)
-	console.log("icon", field.display_icon)
+
 	
 	className = clsx(className, {
 		"is-format-icon" : (linkFormat === "icon"),
@@ -177,7 +176,7 @@ function Edit( props ) {
 				onClick={ ( event ) => event.preventDefault() }
 			>
 				{showIcon && (
-					<DynamicIcon icon={iconSlug} size={iconSize}/>
+					<DynamicIcon icon={iconSlug} size="1rem"/>
 				)}
 
 				{showUrl && (

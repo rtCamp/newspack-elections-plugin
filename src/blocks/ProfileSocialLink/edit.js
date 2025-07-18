@@ -28,6 +28,7 @@ const sizeOptions = [
 ];
 
 
+
 const DynamicIcon = ({icon, size = 24}) => {
 	// Todo - make sure this exists
 	// move the function call up to the icons component
@@ -64,21 +65,21 @@ function Edit( props ) {
 		}
 	})
 	
-	const IconComponent = () => {
+	const IconComponent = ( {size = "1rem"} ) => {
 
 		if(!field?.service){
-			return (<Icon icon = { LinkIcon } />)
+			return (<Icon icon = { LinkIcon } size={size} />)
 		}
 
 		if(!NPEIcons[field.service]){
-			return (<Icon icon = { LinkIcon } />)
+			return (<Icon icon = { LinkIcon } size={size} />)
 		}
 
 		
 
 		const Component = NPEIcons[field.service];
 
-		return (<Component />)
+		return (<Component size={size} />)
 	}
 
 
