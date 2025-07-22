@@ -10,8 +10,8 @@ body {
 	--npe-profile-color-yellow-tint: rgba(223, 168, 0, 0.05);
 
 	--npe-profile-default-border-radius: 8px;
-	--npe-profile-default-color-tint: rgba(0,0,0,0,0);
-	--npe-profile-default-border-color: rgba(0,0,0,0.05);
+	--npe-profile-default-color-tint: rgba(0, 0, 0, 0);
+	--npe-profile-default-border-color: rgba(0, 0, 0, 0.05 );
 	--npe-profile-default-padding: 0.6rem;
 	--npe-profile-default-font-family: sans-serif;
 }
@@ -21,7 +21,7 @@ body {
 
 	--npe-profile-contrast-color: var(--npe-profile-default-color);
 	--npe-profile-background-color: var(--npe-profile-default-color-tint);
-	--npe-profile-border-color: var(--npe-profile-default-color-tint);
+	--npe-profile-border-color: var(--npe-profile-default-border-color);
 
 	background-color: var(--npe-profile-background-color);
 	border-radius: var(--npe-profile-default-border-radius);
@@ -52,7 +52,7 @@ body {
 	.profile-inner {
 		width:100%;
 		&:not(.has-border-color){
-			border:1px solid var(--npe-npe-profile-border-color);
+			border:1px solid var(--npe-profile-border-color);
 		}
 	}
 

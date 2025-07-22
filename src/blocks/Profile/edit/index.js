@@ -102,7 +102,7 @@ export const ProfileEdit = ( props ) => {
 		Component = ProfileBlockEdit
 	}
 	
-	
+	console.log("calculatedProfileId", calculatedProfileId)
 	return (
 		<BlockContextProvider
 			value = {{

@@ -101,6 +101,8 @@ export const useProfile = ( profileId ) => {
 			selectorArgs
 		)
 
+		console.log("useProfile", selectorArgs)
+
 		return {
 			profile : select( coreDataStore ).getEntityRecord(...selectorArgs),
 			hasStartedLoading : hasStartedResolution,
