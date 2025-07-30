@@ -130,7 +130,7 @@
 		"queryId"
 	],
 	"providesContext": {
-		"npe/profileId" : "postId",
+		
 		"postId" : "postId",
 		"postType" : "postType"
 	}

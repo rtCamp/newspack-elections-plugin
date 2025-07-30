@@ -43,6 +43,7 @@
 		"postType", 
 		"queryId",
 		"postId",
+		"npe/profileId",
 		"npe/postId"
 	]
 	

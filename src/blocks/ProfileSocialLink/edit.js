@@ -1,6 +1,7 @@
 import {isEmpty} from "lodash"
 import clsx from "clsx"
 
+
 /**
  * WordPress dependencies
  */
@@ -41,8 +42,9 @@ const DynamicIcon = ({icon, size = 24}) => {
 function Edit( props ) {
 
 	const {fieldKey, value, profile, field, profileId, fieldType } =  useProfileFieldAttributes(props) 
-	const { attributes, setAttributes, context } = props
+	const { attributes, setAttributes, context, clientId } = props
 
+	console.log("profileSocialLink", context, value )
 	const {
 		"npe/showLabels" : showLabels,
 		"npe/iconColor" : iconColor,
@@ -55,6 +57,10 @@ function Edit( props ) {
 		[ `has-${ iconColor }-color` ]: iconColor,
 		[ `has-${ iconBackgroundColor }-background-color` ]: iconBackgroundColor
 	})
+
+	const isPreviewMode = useIsPreviewMode(clientId)
+	const hasValue = !isEmpty(value)
+	const showValue = hasValue || isPreviewMode
 
 	const serviceColor = field?.service_color ?? false
 	const blockProps = useBlockProps({
@@ -86,19 +92,21 @@ function Edit( props ) {
     return (
 		<>
 			<li {...blockProps} >
-				<button
-					className="wp-block-social-link-anchor"
-					aria-haspopup="dialog"
-				>
-					<IconComponent />
-					<span
-						className={ clsx( 'wp-block-social-link-label', {
-							'screen-reader-text': ! showLabels,
-						} ) }
+				{ (showValue) && (
+					<button
+						className="wp-block-social-link-anchor"
+						aria-haspopup="dialog"
 					>
-						{ field.label }
-					</span>
-				</button>	
+						<IconComponent />
+						<span
+							className={ clsx( 'wp-block-social-link-label', {
+								'screen-reader-text': ! showLabels,
+							} ) }
+						>
+							{ field.label }
+						</span>
+					</button>
+				) }
 			</li>
 		</>
 	)

@@ -108,7 +108,7 @@ export const ProfileEdit = ( props ) => {
 			value = {{
 				"postId" : calculatedProfileId,
 				"npe/postId" : calculatedProfileId,
-				
+				"npe/profileId" : calculatedProfileId,
 				"npe/mode" : blockMode,
 			}}
 		>

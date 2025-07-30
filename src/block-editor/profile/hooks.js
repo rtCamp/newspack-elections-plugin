@@ -18,6 +18,8 @@ export const useProfileId = (props, pid = null) => {
 	const [profileId, setProfileId] = useState(null)
 	const [lastClientId, setLastClientId] = useState(props.clientId)
 
+	
+
 	const { 
 		postType,
 		queryId,
@@ -101,7 +103,7 @@ export const useProfile = ( profileId ) => {
 			selectorArgs
 		)
 
-		console.log("useProfile", selectorArgs)
+		
 
 		return {
 			profile : select( coreDataStore ).getEntityRecord(...selectorArgs),
@@ -228,12 +230,16 @@ export const useProfileFields = (props) => {
 
 
 export const useProfileFieldAttributes = (props, pid = null) => {  
+		
 	
+
 	const profileId = useProfileId(props, pid)
 	const fieldAttrs  = useFieldAttributes( props )
+
 	const {profile} = useProfile( profileId )
 	const value = profile?.profile?.[fieldAttrs?.fieldKey] ?? null;
 	
+	//console.log("fieldAttrs", fieldAttrs.fieldKey, value, pid, profileId, profile)
 	
 	return {
 		profileId,
