@@ -597,11 +597,15 @@ class CPT extends \Govpack\Abstracts\PostType {
 						'with_front' => false,
 					],
 					'template'     => [
-						[ 'npe/profile' ],
+						[ self::get_default_profile_block() ],
 					],
 				]
 			)
 		);
+	}
+
+	public static function get_default_profile_block(){
+		return 'govpack/profile-self';
 	}
 
 	public static function get_menu_svg() {
@@ -1308,7 +1312,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 	 * The default block string for a profile.  Usually injected into the profile import before any content 
 	 */
 	public static function default_profile_content(): string {
-		return '<!-- wp:npe/profile /-->';
+		return sprintf('<!-- %s /-->', self::get_default_profile_block());
 	}
 
 	public static function remove_custom_fields_metabox() {
