@@ -1,6 +1,10 @@
+import {select} from "@wordpress/data";
+import { store as editorStore } from '@wordpress/editor';
 
+import { PROFILE_POST_TYPE } from "./../../block-editor/profile";
 
 import { ProfileMetaSidebarPanel } from "./profile-meta-sidebar-panel"
+
 
 import "./view.scss"
 
@@ -290,7 +294,15 @@ const SOCIAL_PANEL_FIELDS = [{
 
 			
 
-const ProfileMetaSidebar = () => (
+const ProfileMetaSidebar = () => {
+
+	const currentPostType = select( editorStore ).getCurrentPostType();
+
+	if(PROFILE_POST_TYPE !== currentPostType){
+		return null
+	}
+
+	return (
     <>
         <ProfileMetaSidebarPanel 
 			name = "profile-panel-about"
@@ -318,10 +330,9 @@ const ProfileMetaSidebar = () => (
 			groupFields = {true}
 		/>
 
-		
-
     </>
-)
+	)
+}
 
 export default ProfileMetaSidebar
 export {ProfileMetaSidebar}
