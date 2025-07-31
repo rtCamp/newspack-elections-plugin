@@ -44,7 +44,7 @@ function Edit( props ) {
 	const {fieldKey, value, profile, field, profileId, fieldType } =  useProfileFieldAttributes(props) 
 	const { attributes, setAttributes, context, clientId } = props
 
-	console.log("profileSocialLink", context, value )
+	console.log("profileSocialLink", props )
 	const {
 		"npe/showLabels" : showLabels,
 		"npe/iconColor" : iconColor,

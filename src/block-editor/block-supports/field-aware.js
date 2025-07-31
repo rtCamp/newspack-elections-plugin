@@ -1,5 +1,6 @@
 
 import clsx from 'clsx';
+import { isEmpty } from "lodash"
 
 import { hasBlockSupport, getBlockDefaultClassName, getBlockSupport} from '@wordpress/blocks';
 import { useSelect, useDispatch } from '@wordpress/data';
@@ -54,9 +55,12 @@ export function useBlockProps( props ) {
 		return {};
 	}
 	
+	
+
 	const blockClass = getBlockDefaultClassName(props.name)
 	let {className, field } = props
 
+	// add new classnames to blocks for field key and field-type
 	className = clsx(className, {
 		[`${blockClass}--type-${field.type}`] : hasAttribute(props, "field", 'type'),
 		[`${blockClass}--key-${field.key}`] : hasAttribute(props, "field", 'key')
@@ -102,7 +106,9 @@ const FieldAwareEdit = (props) => {
 	const {updateBlockAttributes} = useDispatch(blockEditorStore)
 
 
-	const { setField : setFieldAttribute, isControlledByContext, fieldKey, fieldType } =  useProfileFieldAttributes(props) 
+	const { setField : setFieldAttribute, isControlledByContext, fieldKey, fieldType, value } =  useProfileFieldAttributes(props) 
+
+	
 	const fields = useProfileFields(props)
 	const availableFields = useFields()
 	

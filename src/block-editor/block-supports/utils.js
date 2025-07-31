@@ -173,8 +173,11 @@ export function createGPBlockEditFilter( features ) {
 
 	const withGPBlockEditHooks = createHigherOrderComponent(
 		( OriginalBlockEdit ) => ( props ) => {
+
+			
 			const context = useBlockEditContext();
 			
+			const injectProps = {}
 			// CAUTION: code added before this line will be executed for all
 			// blocks, not just those that support the feature! Code added
 			// above this line should be carefully evaluated for its impact on
@@ -208,6 +211,8 @@ export function createGPBlockEditFilter( features ) {
 						}
 					}
 
+					injectProps["injectedProp"] = "foobar"
+
 					return (
 						<Edit
 							// We can use the index because the array length
@@ -228,7 +233,7 @@ export function createGPBlockEditFilter( features ) {
 						/>
 					);
 				} ),
-				<OriginalBlockEdit key="edit" { ...props } />,
+				<OriginalBlockEdit key="edit" { ...props } {...injectProps } />,
 			];
 		},
 		'withGPBlockEditHooks'

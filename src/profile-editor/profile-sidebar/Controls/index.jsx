@@ -27,11 +27,14 @@ export const PanelFieldset = ({legend = null, children}) => {
 const DefaultControl = (props, Control) => {
 	const {onChange = null, value, ...restProps} = props
 
-	//const postId = useEntityId("postType", "govpack_profiles")
-	//const [meta, setMeta] = useEntityProp("postType", "govpack_profiles", "meta", postId)
+	
 	const postId = useEntityId("postType", "govpack_profiles")
 	const [meta, setMeta] = useEntityProp("postType", "govpack_profiles", "meta", postId)
 	
+	if(!meta){
+		return
+	}
+
     return (
         <Control
 			key = {`npe-field-input-${props.meta_key}`}
