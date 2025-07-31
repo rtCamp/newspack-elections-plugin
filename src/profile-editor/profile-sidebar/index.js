@@ -8,7 +8,7 @@ import "./view.scss"
 
 const initSidebar = () => {
 
-	registerPlugin( 'profile-meta', {
+	registerPlugin( 'npe-profile-meta', {
 		icon: more,
 		render: ProfileMetaSidebar,
 	} );
