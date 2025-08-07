@@ -125,7 +125,8 @@ function EditTermBlock( props ) {
 	})
 
 	
-	
+	const FieldUnsetValue = `No Value Set for ${field.label}`
+
 	const { profileTerms, hasProfileTerms, isLoading } = useProfileTerms( profileId, selectedTaxonomy )
 	const hasProfile = (profileId);
 
@@ -188,6 +189,9 @@ function EditTermBlock( props ) {
 					separator = {separator}
 					termLimit = {termLimit}
 				/>
+		 	}
+			{ !isLoading && hasProfile && !hasProfileTerms && 
+				<>{FieldUnsetValue}</>
 		 	}
 		</div>
 		</>

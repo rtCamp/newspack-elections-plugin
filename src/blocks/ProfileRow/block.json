@@ -84,7 +84,7 @@
 	"usesContext": [
 		"npe/showLabels", 
 		"postType",
-		"npe/profileId",
+		"npe/postId",
 		"postId"
 	],
 	"providesContext": {

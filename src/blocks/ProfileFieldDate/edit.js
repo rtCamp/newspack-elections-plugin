@@ -67,10 +67,11 @@ function DateEdit( props ) {
 	const blockProps = useBlockProps()	
 	const date = field?.field_type?.value(value)
 
+	console.log(field.label)
 	let FieldValue
 
 	if(date === null){
-		 FieldValue = "No Date Set"
+		 FieldValue = `No Date Set for ${field.label}`
 	} else {
 		FieldValue = gmdate(dateFormat, date, true)
 	}

@@ -84,10 +84,12 @@ const LinkBody = ({ linkFormat, value, linkText, field, iconSize, setLinkTextOve
 
 function Edit( props ) {
 
-	console.log("LinkProps", props)
+	
 
 	const {fieldKey, value, profile, field, profileId, fieldType } =  useProfileFieldAttributes(props) 
 	let {className, ...blockProps} = useBlockProps()
+
+	console.log("LinkProps", profileId)
 	
 	const isInnerBlockMode = (fieldType === "block")
 	const { attributes, setAttributes, context, clientId } = props

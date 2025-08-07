@@ -23,7 +23,7 @@ export const useProfileId = (props, pid = null) => {
 	const { 
 		postType,
 		queryId,
-		'npe/profileId' : inheritedSelectedProfileId = null,
+		'npe/postId' : inheritedSelectedProfileId = null,
 		postId : queryPostId,
 	} = context
 

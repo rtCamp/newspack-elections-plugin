@@ -187,7 +187,7 @@ function ProfileRowEdit( props ) {
  	const shouldHideBlock = !hasInnerBlocks && !isPreviewMode && hideFieldIfEmpty && !hasValue && !isBlockSelected && !isRelativeSelected && !isParentSelected
 	className = clsx(className, {"gp-dim-field" : shouldDimField })
 
-	
+	console.log("Row : should dim", shouldDimField, (attributes?.field?.type !== "block"), !isPreviewMode, hideFieldIfEmpty, (!hasValue), value)
 
 	if(shouldHideBlock){
 		return null;
