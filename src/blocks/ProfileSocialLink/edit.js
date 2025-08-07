@@ -41,8 +41,10 @@ const DynamicIcon = ({icon, size = 24}) => {
 
 function Edit( props ) {
 
+	
+
 	const {fieldKey, value, profile, field, profileId, fieldType } =  useProfileFieldAttributes(props) 
-	const { attributes, setAttributes, context, clientId } = props
+	const { attributes, setAttributes, context, clientId, isSelected } = props
 
 	console.log("profileSocialLink", props )
 	const {
@@ -53,14 +55,23 @@ function Edit( props ) {
 		"npe/iconBackgroundColorValue" : iconBackgroundColorValue
 	} = context
 
-	const className = clsx("wp-block-social-link", "wp-social-link", {
-		[ `has-${ iconColor }-color` ]: iconColor,
-		[ `has-${ iconBackgroundColor }-background-color` ]: iconBackgroundColor
-	})
+	
 
 	const isPreviewMode = useIsPreviewMode(clientId)
 	const hasValue = !isEmpty(value)
-	const showValue = hasValue || isPreviewMode
+	const hideFieldIfEmpty = true
+
+	const showValue = hasValue || isPreviewMode || hideFieldIfEmpty
+	
+	const shouldDimField = !isPreviewMode && hideFieldIfEmpty && (!hasValue) && (!isSelected)
+
+	console.log("profile social shouldDimField", shouldDimField )
+	
+	const className = clsx("wp-block-social-link", "wp-social-link", {
+		[ `has-${ iconColor }-color` ]: iconColor,
+		[ `has-${ iconBackgroundColor }-background-color` ]: iconBackgroundColor,
+		"is-dimmed" : shouldDimField
+	})
 
 	const serviceColor = field?.service_color ?? false
 	const blockProps = useBlockProps({

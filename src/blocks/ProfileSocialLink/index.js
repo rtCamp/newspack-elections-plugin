@@ -18,7 +18,7 @@ import metadata from './block.json';
 /**
  * Style dependencies - will load in editor
  */
-import './view.scss';
+import './editor.scss';
 
 
 

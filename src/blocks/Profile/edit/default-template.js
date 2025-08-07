@@ -11,7 +11,9 @@ const DEFAULT_ROW_PARTY = [ "npe/profile-row", {
 			fontWeight: "700"
 		}
 	}
-}, []]
+}, [
+	[ "npe/profile-field-term", {}, [] ]
+]]
 
 const DEFAULT_ROW_STATUS = [ "npe/profile-row", {
 	showLabel : false,
@@ -26,7 +28,9 @@ const DEFAULT_ROW_STATUS = [ "npe/profile-row", {
 			fontWeight: "500"
 		}
 	}
-}, []]
+}, [
+	[ "npe/profile-field-term", {}, [] ]
+]]
 
 const DEFAULT_IMAGE = [ "core/post-featured-image", {
 		"isLink":true,

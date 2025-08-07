@@ -92,7 +92,7 @@ function Edit( props ) {
 	console.log("LinkProps", profileId)
 	
 	const isInnerBlockMode = (fieldType === "block")
-	const { attributes, setAttributes, context, clientId } = props
+	const { attributes, setAttributes, context, clientId, isSelected} = props
 	const isPreviewMode = useIsPreviewMode(clientId)
 	const { 
 		linkTextOverride : labelOverride = "",
@@ -100,11 +100,18 @@ function Edit( props ) {
 		iconSize = 'has-normal-icon-size'
 	} = attributes
 
+	const hasValue = !isEmpty(value)
+	const rawHref =  value?.url ?? false
+	const url = (isPreviewMode || !hasValue) ? "" : field?.field_type?.getUrl(value)
+	const hideFieldIfEmpty = false
 
+	const showValue = hasValue || isPreviewMode || !hideFieldIfEmpty
+	const shouldDimField = !isPreviewMode && !hideFieldIfEmpty && (!hasValue) && (!isSelected)
 	
 	className = clsx(className, {
 		"is-format-icon" : (linkFormat === "icon"),
-		[iconSize] : (linkFormat === "icon")
+		[iconSize] : (linkFormat === "icon"),
+		'is-dimmed' : shouldDimField
 	})
 	
 	const [iconSlug, setIconSlug] = useState( field.service ?? field.display_icon ?? null )
@@ -126,11 +133,10 @@ function Edit( props ) {
 		setAttributes({iconSize : newValue })
 	}
 
-	const hasValue = !isEmpty(value)
-	const rawHref =  value?.url ?? false
-	const url = (isPreviewMode || !hasValue) ? "" : field?.field_type?.getUrl(value)
 	
-	const showValue = hasValue || isPreviewMode
+	
+	
+	
 
 	const calculateLinkText = () => {
 
