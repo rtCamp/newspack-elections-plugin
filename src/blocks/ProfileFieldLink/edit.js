@@ -84,6 +84,8 @@ const LinkBody = ({ linkFormat, value, linkText, field, iconSize, setLinkTextOve
 
 function Edit( props ) {
 
+	console.log("LinkProps", props)
+
 	const {fieldKey, value, profile, field, profileId, fieldType } =  useProfileFieldAttributes(props) 
 	let {className, ...blockProps} = useBlockProps()
 	

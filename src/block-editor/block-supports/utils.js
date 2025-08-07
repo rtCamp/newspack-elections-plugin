@@ -51,6 +51,8 @@ export const createGPBlockListBlockFilter = (features = []) => {
 				Array( features.length ).fill( undefined )
 			);
 
+			
+
 			return [
 				...features.map( ( feature, i ) => {
 

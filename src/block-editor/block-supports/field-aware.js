@@ -6,6 +6,8 @@ import { hasBlockSupport, getBlockDefaultClassName, getBlockSupport} from '@word
 import { useSelect, useDispatch } from '@wordpress/data';
 import { store as blockEditorStore } from "@wordpress/block-editor"
 
+import { createHigherOrderComponent, useInstanceId } from '@wordpress/compose';
+import { addFilter } from '@wordpress/hooks';
 
 import { ProfileFieldsInspectorControl, ProfileFieldsToolBar } from "./../components"
 
@@ -26,6 +28,77 @@ const DEFAULT_FEATURE_SUPPORT = {
 	type : "",
 	allowSwitching: true
 }
+
+
+
+
+export const withFieldValue = createHigherOrderComponent(
+	( BlockEditBlock ) => ( props ) => {
+		const { clientId, name, attributes } = props;
+		//const blockSupportsLayout = hasLayoutBlockSupport( name );
+
+		if(!hasBlockSupport(name, "gp/field-aware", false)){
+			return (
+				<BlockEditBlock
+					{ ...props }
+				/>
+			);
+		}
+
+		const extraProps = {
+			"extraFieldProp" : "foobar"
+		}
+		console.log("filter listBlock", name, props)
+		/*
+		const layoutClasses = useLayoutClasses( attributes, name );
+		const extraProps = useSelect(
+			( select ) => {
+				// The callback returns early to avoid block editor subscription.
+				if ( ! blockSupportsLayout ) {
+					return;
+				}
+
+				const { getSettings, getBlockSettings } = unlock(
+					select( blockEditorStore )
+				);
+				const { disableLayoutStyles } = getSettings();
+
+				if ( disableLayoutStyles ) {
+					return;
+				}
+
+				const [ blockGapSupport ] = getBlockSettings(
+					clientId,
+					'spacing.blockGap'
+				);
+
+				return { blockGapSupport };
+			},
+			[ blockSupportsLayout, clientId ]
+		);
+
+		if ( ! extraProps ) {
+			return (
+				<BlockListBlock
+					{ ...props }
+					__unstableLayoutClassNames={
+						blockSupportsLayout ? layoutClasses : undefined
+					}
+				/>
+			);
+		}
+			*/
+
+		return (
+
+			<BlockEditBlock
+				{ ...props }
+				{ ...extraProps }
+			/>
+		);
+	},
+	'withFieldValues'
+);
 
 function hasAttribute( attributes = {}, attribute = "field", subAttribute = false ) {
 
@@ -218,6 +291,13 @@ const isEligibleForFieldAttrMigration = (attributes, innerBlocks, data) => {
 
 	return hasDeprecatedFieldTypeAttr || hasDeprecatedFieldKeyAttr
 }
+
+
+addFilter(
+	'editor.BlockEdit',
+	'npe/block-supports/field-aware/with-field-value',
+	withFieldValue
+);
 
 export default {
 	edit: FieldAwareEdit,
