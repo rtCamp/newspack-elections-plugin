@@ -91,7 +91,7 @@ foreach($groups as $group_key => $group_view_attr){
 			<li class="wp-block-govpack-profile__contact_group">
 				
 					<div class="wp-block-govpack-profile__label"><?php echo esc_html( $group['label'] ); ?>:</div>
-					<ul class="wp-block-govpack-profile__comms-icons govpack-inline-list">
+					<ul class="wp-block-govpack-profile__comms-icons wp-block-govpack-profile__icon-set">
 						<?php
 						foreach ( $group['services'] as $service => $social_link ) {
 

@@ -31,7 +31,7 @@ if ( count( $links ) <= 0 ) {
 ?>
 	<div class="wp-block-govpack-profile__comms">
 		
-			<ul class="wp-block-govpack-profile__comms-icons govpack-inline-list">
+			<ul class="wp-block-govpack-profile__comms-icons wp-block-govpack-profile__icon-set">
 			<?php
 			foreach ( $links as &$profile_link ) {
 					
@@ -51,7 +51,7 @@ if ( count( $links ) <= 0 ) {
 				?>
 					<li class="<?php echo esc_attr( $row_classes ); ?>">
 						<a href="<?php echo esc_url( $profile_link['href'] ); ?>" title="Link to <?php echo esc_attr( $profile_link['text'] ); ?>">
-							<span class="wp-block-govpack-profile__contact__icon wp-block-govpack-profile__contact__icon--<?php echo esc_attr( $profile_link['slug'] ); ?>">
+							<span class="wp-block-govpack-profile__icon wp-block-govpack-profile__icon--<?php echo esc_attr( $profile_link['slug'] ); ?>">
 							<?php echo esc_svg( gp_get_icon( $profile_link['slug'] ) ); ?>
 							</span>
 							<span class="wp-block-govpack-profile__contact__label">

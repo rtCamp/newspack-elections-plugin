@@ -61,7 +61,9 @@ foreach ( $profile_block->rows() as $index => $row ) {
 			<dt class="<?php echo esc_attr($label_classes);?>">
 				<?php echo esc_html( $row['label'] ); ?></dt>
 			<?php } ?>
-			<dd class="npe-profile-row__content">
+			<dd class="<?php echo esc_attr(gp_classnames("npe-profile-row__content",[
+				'npe-profile-row__content--' . $row['key'] => true
+			]));?>">
 				<?php
 					echo $row_content;
 				?>

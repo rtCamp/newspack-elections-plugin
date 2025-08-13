@@ -4,14 +4,40 @@
 .wp-block-govpack-profile{
 
     $block : &;
+
+	// force a gap between the block and content
     margin-bottom:1rem;
 
-    &__contacts ul,
-    &__container {
-        display: flex;  
-        flex-direction: row;
+	// good baseline font size
+	font-size: 1rem;
+
+	// give us a nice border radius that clips images etc
+	&__container{
+		border-radius: 8px;
+		overflow: hidden;
+	}
+
+	// the photo has to be 100% wide by default
+	&__avatar {
         width:100%;
+		aspect-ratio: 1/1;
+		overflow: hidden;
     }
+
+	// the info box needs some spacing between it and the border
+	&__info{
+		padding: 1rem 2rem;
+		margin: 0;
+	}
+
+
+
+    //&__contacts ul,
+    //&__container {
+    //   display: flex;  
+    //    flex-direction: row;
+    //    width:100%;
+    //}
 
 	&__comms{
 		display: flex;
@@ -152,9 +178,29 @@
 
     }
 
+	&__icon-set{
+		list-style: none;
+		display: flex;
+		flex-direction: row;
+		gap: 0.5rem;
+		align-items: center;
+		padding-left:0;
+	}
+
+	&__icon{
+		display: flex;
+		width: 1rem;
+		height: auto;
+		max-height: 1rem;
+
+		svg {
+			fill: currentColor
+		}
+	}
 	
 	&__social_group{
 		display: flex;
+		align-items: center;
 
         .aligncenter & {
             justify-content: center;
@@ -172,6 +218,7 @@
 		margin-right:0;
 	}
 
+	/*
 	.editor-styles-wrapper &__contacts,
 	.editor-styles-wrapper &__contact,
 	.editor-styles-wrapper &__comms,
@@ -197,10 +244,8 @@
             }
         }
     }
-
-    &__avatar {
-        width:50%;
-    }
+	*/
+   
 
 
     &__contact {
@@ -352,9 +397,15 @@
 	padding-top:.5rem;
     padding-bottom:.5rem;
     border-bottom: 1px solid;
+	border-color: #ccc;
 
 	&:first-of-type{
 		padding-top:0rem;
+	}
+
+	&:last-child{
+		padding-bottom:0rem;
+		border-bottom: 0px;
 	}
 
 	.alignright & {
@@ -398,6 +449,10 @@
 		line-height:1.2;
 		margin: 0;
 		padding-left: 0;
+	}
+
+	&__content--party{
+		font-weight: 700;
 	}
 }
 
