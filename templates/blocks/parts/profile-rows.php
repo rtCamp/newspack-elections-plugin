@@ -8,26 +8,19 @@ $profile_block = $extra['profile_block'];
 
 foreach ( $profile_block->rows() as $index => $row ) {
 	
-
-
 	if ( ! $row['shouldShow'] ) {
 		continue;
 	}	
-
 	
 	ob_start();
 	switch ( $row['key'] ) {
 		case 'social':
 			gp_get_block_part( 'blocks/parts/row', 'social', $attributes, $content, $block, $extra );
 			break;
-	//	case 'comms_capitol':
-	//	case 'comms_district':
-	//	case 'comms_campaign':
 		case 'contact':
 			gp_get_block_part( 'blocks/parts/row', 'contact', $attributes, $content, $block,  $extra);
 			break;
 		case 'comms_other':
-			echo 'other';
 			break;
 		case 'links':
 			gp_get_block_part( 'blocks/parts/row', 'links', $attributes, $content, $block, $extra );
@@ -49,25 +42,26 @@ foreach ( $profile_block->rows() as $index => $row ) {
 
 	?>
 		<div <?php echo gp_line_attributes( $row, $attributes ); ?>>
-			<?php if ( isset( $row['label'] ) && ( $row['label'] ) ) { 
+
+			<?php if ( isset( $row['label'] ) && ( $row['label'] ) && ( $row["format"] !== "group" ) ) { 
 					$label_classes = gp_classnames(
 						'npe-profile-row__label',
 						[
 							'npe-profile-row__label--show' => $profile_block->show( 'labels' ),
 							'npe-profile-row__label--hide' => ! $profile_block->show( 'labels' ),
-						]
-					)
-				?>
-			<dt class="<?php echo esc_attr($label_classes);?>">
-				<?php echo esc_html( $row['label'] ); ?></dt>
+						] );
+			?>
+				<div class="<?php echo esc_attr($label_classes);?>">
+					<?php echo esc_html( $row['label'] ); ?>
+						</div>
 			<?php } ?>
-			<dd class="<?php echo esc_attr(gp_classnames("npe-profile-row__content",[
+			<div class="<?php echo esc_attr(gp_classnames("npe-profile-row__content",[
 				'npe-profile-row__content--' . $row['key'] => true
 			]));?>">
 				<?php
 					echo $row_content;
 				?>
-			</dd>
+			</div>
 		</div>
 	<?php
 }

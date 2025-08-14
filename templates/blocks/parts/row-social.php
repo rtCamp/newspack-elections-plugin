@@ -14,8 +14,11 @@ if ( empty( $profile_data['social'] ) ) {
 
 ?>
 
-<div class="wp-block-govpack-profile__social">
-	<ul class="wp-block-govpack-profile__services govpack-vertical-list">
+<div class="wp-block-govpack-profile__social wp-block-govpack-profile__group">
+	<h4 class="wp-block-govpack-profile__heading wp-block-govpack-profile__heading--social">
+		Social Media
+	</h4>
+	<div class="wp-block-govpack-profile__services wp-block-govpack-profile__group-items">
 		<?php
 		foreach ( $profile_data['social'] as $group_key => $group ) {
 
@@ -24,9 +27,9 @@ if ( empty( $profile_data['social'] ) ) {
 			}
 
 			?>
-			<li class="wp-block-govpack-profile__social_group">
-				<div class="wp-block-govpack-profile__label"><?php echo esc_html( $group['label'] ); ?>:</div>
-				<ul class="govpack-inline-list">
+			<div class="gp-profile-contact">
+				<div class="wp-block-govpack-profile__label npe-profile-sub-heading	"><?php echo esc_html( $group['label'] ); ?>:</div>
+				<div class="wp-block-govpack-profile__icon-set">
 					<?php
 					foreach ( $group['services'] as $service => $social_link ) {
 
@@ -34,36 +37,36 @@ if ( empty( $profile_data['social'] ) ) {
 							continue;
 						}
 
-						$row_classes = gp_classnames(
-							'wp-block-govpack-profile__contact', 
+						$link_classes = gp_classnames(
+							'gp-profile-contact__link', 
 							[ 
-								'wp-block-govpack-profile__contact--hide-label',
-								"wp-block-govpack-profile__contact--{$service}",
+								'gp-profile-contact__link--hide-label',
+								"gp-profile-contact__link--{$service}",
 							]
 						);
 						
 
 						$icon_classes = gp_classnames(
-							'wp-block-govpack-profile__contact__icon',
+							'wp-block-govpack-profile__icon',
 							[
-								"wp-block-govpack-profile__contact__icon--{$service}",
+								"wp-block-govpack-profile__icon--{$service}",
 							]
 						);
 	
 						?>
-							<li class="<?php echo esc_attr( $row_classes ); ?>">
-								<a href="<?php echo esc_url( $social_link ); ?>" class="wp-block-govpack-profile__contact__link">
-									<span class="<?php echo esc_attr( $icon_classes ); ?>"><?php echo esc_svg( gp_get_icon( $service ) ); ?></span>
-									<span class="wp-block-govpack-profile__contact__label"><?php esc_html( $service ); ?></span>
-								</a>
-							</li>
-							<?php
+							
+							<a href="<?php echo esc_url( $social_link ); ?>" class="<?php echo esc_attr( $link_classes ); ?>">
+								<span class="<?php echo esc_attr( $icon_classes ); ?>"><?php echo esc_svg( gp_get_icon( $service ) ); ?></span>
+								<span class="gp-profile-contact__label"><?php esc_html( $service ); ?></span>
+							</a>
+							
+						<?php
 					}
 					?>
-				</ul>
-			</li>
+				</div>
+			</div>
 		<?php } ?>
-	</ul>
+	</div>
 </div>
 
 

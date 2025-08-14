@@ -63,8 +63,11 @@ foreach($groups as $group_key => $group_view_attr){
 
 ?>
 
-<div class="wp-block-govpack-profile__comms">
-	<ul class="wp-block-govpack-profile__services govpack-vertical-list">
+<div class="wp-block-govpack-profile__group">
+	<h4 class="wp-block-govpack-profile__heading wp-block-govpack-profile__heading--contact">
+		Contact Information
+	</h4>
+	<div class="wp-block-govpack-profile__services wp-block-govpack-profile__group-items">
 		<?php
 		foreach ( $contact_info as $group_key => $group ) {
 			
@@ -75,7 +78,7 @@ foreach($groups as $group_key => $group_view_attr){
 			if( $group_key === "other"){
 					?>
 					<div class="wp-block-govpack-profile__comms-other">
-						<div class="wp-block-govpack-profile__label"><?php echo esc_html( $group['label'] ); ?>:</div>
+						<div class="wp-block-govpack-profile__label npe-profile-sub-heading"><?php echo esc_html( $group['label'] ); ?>:</div>
 						<dl class="wp-block-govpack-profile__comms-other key-pair-list">
 							<?php foreach( $group['services'] as $service => $link) { ?>
 								<dt class="key-pair-list__key" role="term"> <?php echo esc_html( $link['label'] ) ?></dt>
@@ -88,10 +91,10 @@ foreach($groups as $group_key => $group_view_attr){
 				}
 
 			?>
-			<li class="wp-block-govpack-profile__contact_group">
+			<div class="gp-profile-contact">
 				
-					<div class="wp-block-govpack-profile__label"><?php echo esc_html( $group['label'] ); ?>:</div>
-					<ul class="wp-block-govpack-profile__comms-icons wp-block-govpack-profile__icon-set">
+					<div class="wp-block-govpack-profile__label npe-profile-sub-heading"><?php echo esc_html( $group['label'] ); ?>:</div>
+					<div class="wp-block-govpack-profile__icon-set">
 						<?php
 						foreach ( $group['services'] as $service => $social_link ) {
 
@@ -103,19 +106,19 @@ foreach($groups as $group_key => $group_view_attr){
 								continue;
 							}
 
-							$row_classes = gp_classnames(
-								'wp-block-govpack-profile__contact', 
+							$link_classes = gp_classnames(
+								'gp-profile-contact__link', 
 								[ 
-									'wp-block-govpack-profile__contact--hide-label',
-									"wp-block-govpack-profile__contact--{$service}",
+									'gp-profile-contact__link--hide-label',
+									"gp-profile-contact__link--{$service}",
 								]
 							);
-							
+						
 
 							$icon_classes = gp_classnames(
-								'wp-block-govpack-profile__contact__icon',
+								'wp-block-govpack-profile__icon',
 								[
-									"wp-block-govpack-profile__contact__icon--{$service}",
+									"wp-block-govpack-profile__icon--{$service}",
 								]
 							);
 
@@ -132,24 +135,24 @@ foreach($groups as $group_key => $group_view_attr){
 							}
 		
 							?>
-								<li class="<?php echo esc_attr( $row_classes ); ?>">
-									<a href="<?php echo esc_url( $url ); ?>" class="wp-block-govpack-profile__contact__link">
-										<span class="<?php echo esc_attr( $icon_classes ); ?>"><?php echo esc_svg( gp_get_icon( $service ) ); ?></span>
-										<span class="wp-block-govpack-profile__contact__label"><?php esc_html( $service ); ?></span>
-									</a>
-								</li>
-								<?php
+								
+								<a href="<?php echo esc_url( $url ); ?>" class="<?php echo esc_attr( $link_classes ); ?>">
+									<span class="<?php echo esc_attr( $icon_classes ); ?>"><?php echo esc_svg( gp_get_icon( $service ) ); ?></span>
+									<span class="gp-profile-contact__label"><?php esc_html( $service ); ?></span>
+								</a>
+							
+							<?php
 						}
 						?>
-					</ul>
-				<?php if(isset($group['services']['address'])){ ?>
-					<address class="wp-block-govpack-profile__contact_address">
-						<?php echo wp_kses_post($group['services']['address']); ?>
-					</address>
-				<?php } ?>
-			</li>
+					</div>
+					<?php if(isset($group['services']['address'])){ ?>
+						<address class="wp-block-govpack-profile__contact_address">
+							<?php echo wp_kses_post($group['services']['address']); ?>
+						</address>
+					<?php } ?>
+					</div>
 		<?php } ?>
-	</ul>
+	</div>
 </div>
 
 

@@ -20,14 +20,15 @@ class Blocks {
 	public function hooks(): void {
 		add_action( 'init', [ $this, 'provide_register_blocks_hook' ], 99 );
 		add_action( 'gp_register_blocks', [ $this, 'register_blocks' ] );
-		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_editor_assets' ] );
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_block_assets' ] );
 	}
 
 	/**
 	 * Register Block Assets.
 	 */
-	public function enqueue_block_editor_assets(): void {
-	
+	public function enqueue_block_assets(): void {
+		
+
 		$this->register_script( 'npe-editor', 'npe-editor' );
 		wp_enqueue_script( 'npe-editor' );
 
@@ -36,16 +37,21 @@ class Blocks {
 
 		$this->register_style( 'npe-blocks-editor-style', 'npe-blocks' );
 		wp_enqueue_style( 'npe-blocks-editor-style' );
+
+		$this->register_style( 'npe-blocks-shared-styles', 'profile-shared-styles' );
 	}
 
 	public function register_style( $handle, $asset_name ) {
+
 		wp_enqueue_style(
 			$handle,
 			$this->plugin->build_url( $asset_name . '.css'),
 			[],
 			1
 		);
-	}
+
+		wp_style_add_data( $handle, 'path', $this->plugin->build_path($asset_name . '.css' ) );
+	}	
 
 	public function register_script( $handle, $asset_name ) {
 		$file = $this->plugin->build_path($asset_name . '.asset.php');

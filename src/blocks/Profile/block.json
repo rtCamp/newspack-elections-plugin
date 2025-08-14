@@ -4,7 +4,8 @@
 	"name": "npe/profile",
     "editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./view.css",
+	
+	"style": ["npe-blocks-shared-styles", "file:./view.css"],
 	"category": "newspack-elections",
 	"styles": [
         { "name": "default", "label": "Default", "isDefault": true },

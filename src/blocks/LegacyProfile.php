@@ -209,35 +209,40 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 
 		$rows = [ 
 			[
-				'key'        => 'age',
-				'value'      => esc_html( $this->profile['age'] ),
-				'label'      => 'Age',
-				'shouldShow' => $this->attributes['showAge']  && !empty($this->profile['age']),
+				'key'        => 'party',
+				'value'      => esc_html( $this->profile['party'] ),
+				'label'      => 'Party',
+				'shouldShow' => $this->attributes['showParty']  && !empty($this->profile['party']),
 			],
-			[
-				'key'        => 'leg_body',
-				'value'      => esc_html( $this->profile['legislative_body'] ),
-				'label'      => 'Office',
-				'shouldShow' => $this->attributes['showLegislativeBody']  && !empty($this->profile['legislative_body']),
-			],
+
 			[
 				'key'        => 'position',
 				'value'      => esc_html( $this->profile['position'] ),
 				'label'      => 'Position',
 				'shouldShow' => $this->attributes['showPosition'] && !empty($this->profile['position']),
 			],
+
 			[
-				'key'        => 'party',
-				'value'      => esc_html( $this->profile['party'] ),
-				'label'      => 'Party',
-				'shouldShow' => $this->attributes['showParty']  && !empty($this->profile['party']),
+				'key'        => 'leg_body',
+				'value'      => esc_html( $this->profile['legislative_body'] ),
+				'label'      => 'Office',
+				'shouldShow' => $this->attributes['showLegislativeBody']  && !empty($this->profile['legislative_body']),
 			],
+			
 			[
-				'key'        => 'district',
-				'value'      => esc_html( $this->profile['district'] ),
-				'label'      => 'District',
-				'shouldShow' => $this->attributes['showDistrict'] && !empty($this->profile['district']),
+				'key'        => 'status',
+				'value'      => esc_html( $this->profile['status'] ),
+				'label'      => 'Status',
+				'shouldShow' => $this->attributes['showStatus'] && !empty($this->profile['status']),
 			],
+
+			[
+				'key'        => 'age',
+				'value'      => esc_html( $this->profile['age'] ),
+				'label'      => 'Age',
+				'shouldShow' => $this->attributes['showAge']  && !empty($this->profile['age']),
+			],
+			
 			[
 				'key'        => 'state',
 				'value'      => esc_html( $this->profile['state'] ),
@@ -245,11 +250,12 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 				'shouldShow' => $this->attributes['showState'] && !empty($this->profile['state']),
 			],
 			[
-				'key'        => 'status',
-				'value'      => esc_html( $this->profile['status'] ),
-				'label'      => 'Status',
-				'shouldShow' => $this->attributes['showStatus'] && !empty($this->profile['status']),
+				'key'        => 'district',
+				'value'      => esc_html( $this->profile['district'] ),
+				'label'      => 'District',
+				'shouldShow' => $this->attributes['showDistrict'] && !empty($this->profile['district']),
 			],
+			
 			[
 				'key'        => 'endorsements',
 				'value'      => esc_html( $this->profile['endorsements'] ),
@@ -257,16 +263,18 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 				'shouldShow' => $this->attributes['showEndorsements'] && !empty($this->profile['endorsements']),
 			],
 			[
-				'key'        => 'social',
-				'value'      => $this->profile['social'],
-				'label'      => 'Social Media',
-				'shouldShow' => $this->show( 'social' ),
+				'key'			=> 'social',
+				'value'			=> $this->profile['social'],
+				'label'			=> 'Social Media',
+				'shouldShow'	=> $this->show( 'social' ),
+				'format' 		=> 'group'
 			],
 			[
 				'key'        => 'contact',
 				'value'      => $this->profile['contact'],
 				'label'      => 'Contact Info',
 				'shouldShow' => $this->show( 'contact' ),
+				'format' 	=> 'group'
 			],
 			/*
 			[
@@ -302,10 +310,11 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 			],
 			*/
 			[
-				'key'        => 'links',
-				'value'      => $this->get_profile_links(),
-				'shouldShow' => $this->show( 'links' ),
-				'label'      => 'Links',
+				'key'			=> 'links',
+				'value'			=> $this->get_profile_links(),
+				'shouldShow'	=> $this->show( 'links' ),
+				'label'			=> 'Links',
+				'format' 		=> 'collection'
 			],
 			[
 				'key'        => 'more_about',
@@ -314,7 +323,15 @@ class LegacyProfile extends \Govpack\Abstracts\Block {
 			
 		];
 
-		return $rows;
+		// the format key was added late, array map each row so a format is definatley set
+		return array_map(function ($r){
+
+			if(!isset($r['format'])){
+				$r['format'] = "row";
+			}
+
+			return $r;
+		}, $rows);
 	}
 
 	public function show( $key ) {

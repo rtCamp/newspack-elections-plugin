@@ -36,16 +36,10 @@ $container_classes = gp_classnames(
 echo get_block_wrapper_attributes(
 	[
 		'class' => gp_classnames(
-			'',
+			'wp-block-govpack-profile',
 			[
-				//( isset( $attributes['align'] ) ? 'align' . $attributes['align'] : false ),
 				'wp-block-govpack-profile--show-labels' => $profile_block->show( 'labels' ),
 			] 
-		),
-		'style' => gp_style_attribute_generator(
-			[
-			//"max-width" => $available_widths[ $attributes['width'] ?? 'auto' ]['maxWidth']
-			]
 		),
 	]
 );
@@ -54,10 +48,10 @@ echo get_block_wrapper_attributes(
 	<!-- start block__container -->
 	<div class="<?php echo esc_attr( $container_classes ); ?>">	
 		<?php gp_get_block_part( 'blocks/parts/profile', 'photo', $attributes, $content, $block, $extra ); ?>
-		<dl class="wp-block-govpack-profile__info">
+		<div class="wp-block-govpack-profile__info">
 			<?php gp_get_block_part( 'blocks/parts/profile', 'header', $attributes, $content, $block, $extra ); ?>
 			<?php gp_get_block_part( 'blocks/parts/profile', 'rows', $attributes, $content, $block, $extra ); ?>
-		</dl>
+		</div>
 	</div>
 	<!-- end block__container -->
 </aside>

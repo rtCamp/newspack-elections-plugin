@@ -233,19 +233,17 @@ const SingleProfile = (props) => {
 		const href= prependHTTPS(props.href)
 		
         return (
-            <li className={clsx(`${blockClassName}__contact`, {
-                [`${blockClassName}__contact--hide-label`] : true
-            })}>
-                <a href={href} className={`${blockClassName}__link`} title={props.tooltip ?? props.label ?? ""}>
+            
+                <a href={href} className={`gp-profile-contact__link gp-profile-contact__link--hide-label gp-profile-contact__link--${props.service}`} title={props.tooltip ?? props.label ?? ""}>
                     {props.icon && (
-                        <span className={`${blockClassName}__contact__icon ${blockClassName}__contact__icon--${props.service}`}>
+                        <span className={`${blockClassName}__icon ${blockClassName}__icon--${props.service}`}>
 							<Icon
 								icon = { props.icon }
 						 	/></span>
                     )}
-                    <span className = {`${blockClassName}__contact__label`}>{props.label}</span>
+                    <span className = {`gp-profile-contact__label`}>{props.label}</span>
                 </a>
-            </li >
+            
         )
     }
 
@@ -266,7 +264,7 @@ const SingleProfile = (props) => {
 			return (
 				<li className={`${blockClassName}__social_group`}>
 					<div className={`${blockClassName}__label`}>{label}: </div>
-					<ul className='govpack-inline-list'>
+					<ul className='wp-block-govpack-profile__icon-set'>
 						{ props.services.facebook && (
 							<Contact 
 								service = "facebook"
@@ -309,12 +307,15 @@ const SingleProfile = (props) => {
 
         return (
            
-            <div className={`${blockClassName}__social`}>
-                <ul className={`${blockClassName}__services`}>
+            <div className={`${blockClassName}__social wp-block-govpack-profile__group`}>
+				<h4 class="wp-block-govpack-profile__heading wp-block-govpack-profile__heading--social">
+					Social Media
+				</h4>
+                <div className={`${blockClassName}__services wp-block-govpack-profile__group-items`}>
 					<SocialRow services={props.data.official} show={props.show.showOfficial} label="Official" />
 					<SocialRow services={props.data.campaign} show={props.show.showCampaign} label="Campaign" />
 					<SocialRow services={props.data.personal} show={props.show.showPersonal} label="Personal" />
-                </ul>
+                </div>
             </div>
         )
     }
@@ -379,8 +380,11 @@ const SingleProfile = (props) => {
 	*/
         return (
            
-            <div className={`${blockClassName}__comms`}>
-                <ul className={`${blockClassName}__services`}>
+            <div className={`${blockClassName}__comms wp-block-govpack-profile__group`}>
+				<h4 class="wp-block-govpack-profile__heading wp-block-govpack-profile__heading--social">
+					Contact Information
+				</h4>
+                <ul className={`${blockClassName}__services wp-block-govpack-profile__group-items`}>
 					{ selectedContact.official && (
 						<ContactRow services={props.data.official} show={selectedCapitolCommunicationDetails} label="Official" />
 					)}
@@ -415,11 +419,11 @@ const SingleProfile = (props) => {
 		}
 
 		return (
-			<li className={`${blockClassName}__contact_group`}>
-					<div className={`${blockClassName}__label`}>{label}: </div>
+			<div className="gp-profile-contact">
+				<div class="wp-block-govpack-profile__label npe-profile-sub-heading	">{label}:</div>
 				
 				{services && (<>
-					<ul className={`${blockClassName}__comms-icons govpack-inline-list`}>
+					<div className="wp-block-govpack-profile__icon-set">
 						{ services.phone && props.show.showPhone && (
                                 <Contact 
 									href={`tel:${services.phone}`} 
@@ -459,7 +463,7 @@ const SingleProfile = (props) => {
 								/>
 								
                         )}
-					</ul>
+					</div>
 
 					{ services.address && props.show.showAddress && (
 						<address className={clsx(`${blockClassName}__contact`, {
@@ -471,7 +475,7 @@ const SingleProfile = (props) => {
 					) }
 
 					</>)}
-			</li>
+			</div>
 		)
 	}
 
@@ -530,7 +534,7 @@ const SingleProfile = (props) => {
 			<div className={`${blockClassName}__comms`}>
 				
 				{props.data && (
-					<ul className={`${blockClassName}__comms-icons govpack-inline-list govpack-vertical-list`}>
+					<ul className={`${blockClassName}__comms-icons wp-block-govpack-profile__icon-set`}>
 					
 						{Object.keys(data).filter( key => ( 
 							(Object.keys(show).length === 0) 
@@ -598,7 +602,7 @@ const SingleProfile = (props) => {
 	}
 		
 	return (
-		<div className= {clsx(`${blockClassName}__container`, {
+		<div className= {clsx(`wp-block-govpack-profile-self__container`, {
             [`${blockClassName}__container--right`] : (avatarAlignment === "right"),
             [`${blockClassName}__container--left`] : (avatarAlignment === "left"),
             [`${blockClassName}__container--center`] : (className === "is-styled-center"),

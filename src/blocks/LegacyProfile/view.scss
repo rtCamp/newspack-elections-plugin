@@ -24,52 +24,56 @@
 		overflow: hidden;
     }
 
+	&__name{
+		margin:0;
+	}
+
 	// the info box needs some spacing between it and the border
 	&__info{
 		padding: 1rem 2rem;
 		margin: 0;
 	}
 
+	&__heading {
+		margin:0 0 .3rem 0;
+		padding:0;
+		font-size:1rem;
+	}
 
+	.npe-profile-sub-heading,	
+	&__sub-heading {
+		margin:0;
+		padding:0;
+		font-size:0.9rem;
+	}
 
-    //&__contacts ul,
-    //&__container {
-    //   display: flex;  
-    //    flex-direction: row;
-    //    width:100%;
-    //}
+	&__group {
+		&, &-items{
+			margin:0;
+			padding:0;
 
-	&__comms{
-		display: flex;
-		flex-wrap: wrap;
+			display:flex;
+			flex-direction: column;
+		}
 
-        .aligncenter & {
-            justify-content: center;
-            align-items: center;
-        }
-
-        .alignright & {
-            justify-content: flex-end;
-        }
-
-		&-icons{
-            flex-grow: 1;
-
-            .aligncenter &, .alignright & {
-			    flex-grow: 0;
-            }
-		}        
-
-		address {
-			width: 100%;
-			flex-grow: 1;
-			margin-bottom: 0.3rem;
-
-            .alignright & {
-                text-align: right;
-            }
+		&-items{
+			gap: 0.5rem;
 		}
 	}
+
+	&__label{
+		white-space: nowrap;
+	}
+
+	.npe-profile-heading,
+	&__heading,
+	.npe-profile-sub-heading,
+	.npe-profile-row__content--party{
+		font-weight: 700;
+	}
+
+
+	
 
 	&__comms-other{
 		width: 100%;
@@ -109,10 +113,7 @@
 
 	}
 
-	&__label{
-		margin-right: .5rem;
-		white-space: nowrap;
-	}
+	
 
     &__container {
 
@@ -185,6 +186,7 @@
 		gap: 0.5rem;
 		align-items: center;
 		padding-left:0;
+		margin:0;
 	}
 
 	&__icon{
@@ -193,8 +195,13 @@
 		height: auto;
 		max-height: 1rem;
 
-		svg {
-			fill: currentColor
+		svg, path {
+			fill : currentColor;
+		}
+
+		&--x {
+			max-width:18px;
+			max-height:18px;
 		}
 	}
 	
@@ -212,39 +219,9 @@
         }
 	}
 
-	&__contact_group {
-		display: flex;
-		flex-wrap: wrap;
-		margin-right:0;
-	}
 
-	/*
-	.editor-styles-wrapper &__contacts,
-	.editor-styles-wrapper &__contact,
-	.editor-styles-wrapper &__comms,
-	.editor-styles-wrapper &__social,
 
-	&__social,
-	&__comms,
-    &__contact,
-	&__contacts
-	{
 
-		ul{
-            margin:0;
-            padding:0;
-            list-style: none;
-        }
-
-        ul li{
-            margin-right:.5rem;
-
-            &:last-of-type{
-                margin-right:0;
-            }
-        }
-    }
-	*/
    
 
 
@@ -277,10 +254,7 @@
 				fill : currentColor;
 			}
 
-			&--x svg{
-				max-width:18px;
-                max-height:18px;
-			}
+			
         }
 
         &__label{
@@ -292,11 +266,6 @@
                 display:none;
             }
         }
-
-		&_address{
-			width: 100%;
-		}
-
     }
 
 
@@ -356,6 +325,28 @@
 	}
 }
 
+.gp-profile-contact {
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-right:0;
+	column-gap:.5rem;
+	row-gap: .25rem;
+
+	&__icons{
+		flex-grow: 1;
+	}
+
+	address {
+		width: 100%;
+		flex-grow: 1;
+		margin-bottom: 0rem;
+		font-style: normal;
+		font-size:0.9em;
+	}
+}
+
 .wp-block-column .wp-block-govpack-profile{
 	margin-right:0;
 }
@@ -369,25 +360,10 @@
 	border-radius: 3px;
 }
 
-.govpack-inline-list {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-
-	> li {
-		float: left;
-	}
-}
 
 
-.govpack-vertical-list {
-	&,
-	.editor-styles-wrapper &{
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-}
+
+
 
 
 
@@ -399,6 +375,7 @@
     border-bottom: 1px solid;
 	border-color: #ccc;
 
+	
 	&:first-of-type{
 		padding-top:0rem;
 	}
@@ -435,8 +412,9 @@
 	}
 	
 	&__label {
-		line-height:1.2;
+		font-size: .9rem;
 		font-weight: bold;
+
 		#{$block} &--hide{
 			display: none;
 		}
@@ -451,10 +429,10 @@
 		padding-left: 0;
 	}
 
-	&__content--party{
-		font-weight: 700;
-	}
+	
 }
+
+
 
 .govpack-photo {
 	margin: 0 auto;
@@ -469,3 +447,55 @@
 		object-position: center;
 	}
 }
+
+
+
+/*
+.govpack-inline-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	> li {
+		float: left;
+	}
+}
+
+.govpack-vertical-list {
+	&,
+	.editor-styles-wrapper &{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+}
+
+
+.wp-block-govpack-profile{
+	.editor-styles-wrapper &__contacts,
+	.editor-styles-wrapper &__contact,
+	.editor-styles-wrapper &__comms,
+	.editor-styles-wrapper &__social,
+
+	&__social,
+	&__comms,
+    &__contact,
+	&__contacts
+	{
+
+		ul{
+            margin:0;
+            padding:0;
+            list-style: none;
+        }
+
+        ul li{
+            margin-right:.5rem;
+
+            &:last-of-type{
+                margin-right:0;
+            }
+        }
+    }
+}
+	*/

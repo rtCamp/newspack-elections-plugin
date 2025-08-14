@@ -43,7 +43,8 @@
       "admin": "./src/admin/index.js",
       "importer": "./src/importer/index.js",
       "frontend": "./src/frontend/index.js",
-      "exporter": "./src/admin/exporter/index.js"
+      "exporter": "./src/admin/exporter/index.js",
+	  "profile-shared-styles" : "./src/block-styles/profile-blocks-shared-vars.scss"
     }
   },
   "jscpd": {

@@ -6,10 +6,13 @@
 	margin-bottom:1rem;
 	font-size: 1rem;
 
+
+
 	&__container{
 		border-radius: 8px;
 		overflow: hidden;
-		border: 1px solid #cccccc;
+		border: 1px solid var(--npe-profile-default-border-color);
+		background-color: var(--npe-profile-background-color, tranparent);
 	}
 
 	&__avatar {
@@ -26,7 +29,7 @@
         width:100%;
     }
 
-
+	
 
     &__container {
 
@@ -299,4 +302,19 @@
         background-color:rgba(0,0,0,0.02);
         margin-top: 0 !important;
     }
+
+
+	a,
+	.wp-block-govpack-profile__name,
+	.npe-profile-row__content--party {
+		color : var(--npe-profile-contrast-color, inherit)
+	}
+
+	&.is-style-red-tint,
+	&.is-style-blue-tint,
+	&.is-style-yellow-tint {
+		#{$block}__container{
+			border: none;
+		}
+	}
 }
