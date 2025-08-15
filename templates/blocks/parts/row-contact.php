@@ -138,7 +138,7 @@ foreach($groups as $group_key => $group_view_attr){
 								
 								<a href="<?php echo esc_url( $url ); ?>" class="<?php echo esc_attr( $link_classes ); ?>">
 									<span class="<?php echo esc_attr( $icon_classes ); ?>"><?php echo esc_svg( gp_get_icon( $service ) ); ?></span>
-									<span class="gp-profile-contact__label"><?php esc_html( $service ); ?></span>
+									<span class="gp-profile-contact__label"><?php echo esc_html( $service ); ?></span>
 								</a>
 							
 							<?php

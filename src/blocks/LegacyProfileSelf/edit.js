@@ -97,7 +97,10 @@ function Edit( props ) {
 	
 
     const ref = useRef();
-	const blockProps = useBlockProps( { ref } );
+	const blockProps = useBlockProps( { 
+		ref, 
+		"className" : "wp-block-govpack-profile"
+	} );
 
 	let {
 		meta = {}, 

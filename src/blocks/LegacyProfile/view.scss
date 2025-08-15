@@ -15,6 +15,8 @@
 	&__container{
 		border-radius: 8px;
 		overflow: hidden;
+		border: 1px solid var(--npe-profile-default-border-color);
+		background-color: var(--npe-profile-background-color, tranparent);
 	}
 
 	// the photo has to be 100% wide by default
@@ -22,11 +24,15 @@
         width:100%;
 		aspect-ratio: 1/1;
 		overflow: hidden;
+
+		
     }
 
 	&__name{
 		margin:0;
 	}
+
+
 
 	// the info box needs some spacing between it and the border
 	&__info{
@@ -118,31 +124,24 @@
     &__container {
 
         $element : &;
-
+		display:flex;
 		flex-direction: column;
 
-		#{$block}__avatar{
-			margin-right:0;
-			margin-left:0;
+		&--left,
+		&--right {
+			padding:1.5rem;
+			gap:1.5rem;
+			.wp-block-govpack-profile__info{
+				padding:0;
+			}
 		}
-
 
         &--right {
             flex-direction: row-reverse;
-
-            #{$block}__avatar{
-                margin-right:0;
-                margin-left:1rem;
-            }
         }
 
-		&--left {
+        &--left {
             flex-direction: row;
-
-            #{$block}__avatar{
-                margin-right:1rem;
-                margin-left:0;
-            }
         }
 		
 
@@ -190,11 +189,12 @@
 	}
 
 	&__icon{
-		display: flex;
-		width: 1rem;
-		height: auto;
-		max-height: 1rem;
-
+		&, svg {
+			display: flex;
+			width: 1rem;
+			height: auto;
+			max-height: 1rem;
+		}
 		svg, path {
 			fill : currentColor;
 		}
@@ -323,6 +323,21 @@
 		margin:0;
 		padding:0;
 	}
+
+	a,
+	.wp-block-govpack-profile__name,
+	.npe-profile-row__content--party {
+		color : var(--npe-profile-contrast-color, inherit)
+	}
+
+	&.is-style-red-tint,
+	&.is-style-blue-tint,
+	&.is-style-yellow-tint {
+		#{$block}__container{
+			border: none;
+		}
+	}
+
 }
 
 .gp-profile-contact {
@@ -338,12 +353,24 @@
 		flex-grow: 1;
 	}
 
+	&__label{
+        display:inline-block;
+    }
+
 	address {
 		width: 100%;
 		flex-grow: 1;
 		margin-bottom: 0rem;
 		font-style: normal;
 		font-size:0.9em;
+	}
+
+	&__link{
+		&--hide-label{
+			.gp-profile-contact__label{
+				display:none;
+			}
+		}
 	}
 }
 
@@ -445,6 +472,11 @@
 		height: 100%;
 		object-fit: cover;
 		object-position: center;
+	}
+
+	.wp-block-govpack-profile__container--right & img,
+	.wp-block-govpack-profile__container--left  & img{
+		border-radius: 4px;
 	}
 }
 

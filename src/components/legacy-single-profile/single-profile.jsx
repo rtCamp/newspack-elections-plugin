@@ -49,6 +49,7 @@ const Photo = (props) => {
 		<div className={`${blockClassName}__avatar`}>
 			<Link {...LinkProps} >
 				<figure
+					className="govpack-photo"
 					style={ {
 						borderRadius: avatarBorderRadius,
 						height: `${ avatarSize }px`,
@@ -114,12 +115,15 @@ const Row = (props) => {
 		[`${className}--${id}`] : (id ?? false)
 	} )
 
+	const contentClasses = clsx("npe-profile-row__content", {
+		[`npe-profile-row__content--${id}`] : true
+	})
 	return (
 		<div className={classes} role="listitem">
 			{(showLabel) && (label !== "") && (
 				<dt className="npe-profile-row__label">{label}</dt>
 			)}
-			<dd className="npe-profile-row__content">
+			<dd className={contentClasses}>
 				{children}
 			</dd>
 		</div>
@@ -262,8 +266,9 @@ const SingleProfile = (props) => {
 			}
 
 			return (
-				<li className={`${blockClassName}__social_group`}>
-					<div className={`${blockClassName}__label`}>{label}: </div>
+				<div className={`${blockClassName}__social_group gp-profile-contact`}>
+
+					<div className={"wp-block-govpack-profile__label npe-profile-sub-heading"}>{label}: </div>
 					<ul className='wp-block-govpack-profile__icon-set'>
 						{ props.services.facebook && (
 							<Contact 
@@ -301,7 +306,7 @@ const SingleProfile = (props) => {
 							/>
 						)}
 					</ul>
-				</li>
+				</div>
 			)
 		}
 
@@ -311,7 +316,7 @@ const SingleProfile = (props) => {
 				<h4 class="wp-block-govpack-profile__heading wp-block-govpack-profile__heading--social">
 					Social Media
 				</h4>
-                <div className={`${blockClassName}__services wp-block-govpack-profile__group-items`}>
+                <div className={`wp-block-govpack-profile__services wp-block-govpack-profile__group-items`}>
 					<SocialRow services={props.data.official} show={props.show.showOfficial} label="Official" />
 					<SocialRow services={props.data.campaign} show={props.show.showCampaign} label="Campaign" />
 					<SocialRow services={props.data.personal} show={props.show.showPersonal} label="Personal" />
@@ -520,8 +525,6 @@ const SingleProfile = (props) => {
 		)
 	}
 
-
-	
 	const ProfileLinks = (props) => {
 
 		const {
@@ -602,10 +605,10 @@ const SingleProfile = (props) => {
 	}
 		
 	return (
-		<div className= {clsx(`wp-block-govpack-profile-self__container`, {
-            [`${blockClassName}__container--right`] : (avatarAlignment === "right"),
-            [`${blockClassName}__container--left`] : (avatarAlignment === "left"),
-            [`${blockClassName}__container--center`] : (className === "is-styled-center"),
+		<div className= {clsx(`wp-block-govpack-profile__container`, {
+            [`wp-block-govpack-profile__container--right`] : (avatarAlignment === "right"),
+            [`wp-block-govpack-profile__container--left`] : (avatarAlignment === "left"),
+            [`wp-block-govpack-profile__container--center`] : (className === "is-styled-center"),
             [`${blockClassName}__container--align-center`] : (align === "center"),
 			[`${blockClassName}__container--align-right`] : (align === "right"),
             [`${blockClassName}__container--show-self`] : showSelf,
@@ -652,30 +655,39 @@ const SingleProfile = (props) => {
                         
                     </div>
 
-					<Row {...defaultRowProps} key="age" id="age" label="Age" display={showAge}>
-						{profile.age} 
-					</Row>
-                    <Row {...defaultRowProps} key="leg_body" id="leg_body" label="Office" display={showLegislativeBody}>
-						{profile.legislative_body}
-					</Row>
-                    <Row {...defaultRowProps} key="pos" id="position" label="Position" display={showPosition} >
-						{profile.position}
-					</Row>
-                    <Row {...defaultRowProps} key="party" id="party" label="Party" display={showParty} >
+					<Row {...defaultRowProps} key="party" id="party" label="Party" display={showParty} >
 						{profile.party}
 					</Row>
-					<Row {...defaultRowProps} key="district" id="district" label="District" display={showDistrict} >
-						{profile.district} 
+
+					<Row {...defaultRowProps} key="pos" id="position" label="Position" display={showPosition} >
+						{profile.position}
 					</Row>
+
+					<Row {...defaultRowProps} key="leg_body" id="leg_body" label="Office" display={showLegislativeBody}>
+						{profile.legislative_body}
+					</Row>
+
 					<Row {...defaultRowProps} key="status" id="status" label="Status" display={showStatus} >
 						{profile.status}
 					</Row>
+
+					<Row {...defaultRowProps} key="age" id="age" label="Age" display={showAge}>
+						{profile.age} 
+					</Row>
+                    
                     <Row {...defaultRowProps} key="states" id="states" label="State" display={showState} >
 						{profile.state}
 					</Row>
+                    
+					<Row {...defaultRowProps} key="district" id="district" label="District" display={showDistrict} >
+						{profile.district} 
+					</Row>
+					
+                    
 					<Row {...defaultRowProps} key="endorsements" id="endorsements" display={showEndorsements}> 
 						{profile.endorsements}
 					</Row>
+
                     <Row {...defaultRowProps} key="social" id="social" label="Social Media"  display={doShowSocial} >
 						<SocialMedia data={profile.social} label="Social Media" show={selectedSocial}/>
 					</Row>

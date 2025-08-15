@@ -37,19 +37,24 @@
 
         flex-direction: column;
 
+		&--left,
+		&--right {
+			padding:1.5rem;
+			gap:1.5rem;
+			.wp-block-govpack-profile__info{
+				padding:0;
+			}
+		}
+
         &--right {
             flex-direction: row-reverse;
-
-            #{$block}__avatar{
-                margin-right:0;
-                
-            }
         }
 
         &--left {
             flex-direction: row;
         }
 
+		/*
         &--align-center{
             margin-left: auto;
             margin-right: auto;
@@ -89,6 +94,7 @@
             }
 
         }
+		*/
 
     }
 
@@ -304,17 +310,5 @@
     }
 
 
-	a,
-	.wp-block-govpack-profile__name,
-	.npe-profile-row__content--party {
-		color : var(--npe-profile-contrast-color, inherit)
-	}
-
-	&.is-style-red-tint,
-	&.is-style-blue-tint,
-	&.is-style-yellow-tint {
-		#{$block}__container{
-			border: none;
-		}
-	}
+	
 }
