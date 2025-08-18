@@ -325,6 +325,9 @@
 	}
 
 	a,
+	&.is-style-red,
+	&.is-style-blue,
+	&.is-style-yellow,
 	.wp-block-govpack-profile__name,
 	.npe-profile-row__content--party {
 		color : var(--npe-profile-contrast-color, inherit)
