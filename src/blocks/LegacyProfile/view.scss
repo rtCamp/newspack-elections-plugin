@@ -326,16 +326,23 @@
 
 	a,
 	&.is-style-red,
+	&.is-style-red a,
 	&.is-style-blue,
 	&.is-style-yellow,
+
 	.wp-block-govpack-profile__name,
 	.npe-profile-row__content--party {
 		color : var(--npe-profile-contrast-color, inherit)
 	}
 
 	&.is-style-red-tint,
+
 	&.is-style-blue-tint,
 	&.is-style-yellow-tint {
+
+		a {
+			color : var(--npe-profile-contrast-color, inherit)
+		}
 		#{$block}__container{
 			border: none;
 		}
