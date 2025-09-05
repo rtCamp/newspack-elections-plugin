@@ -64,6 +64,10 @@
 		}
 	},
 	"attributes": {
+		"variation" : {
+			"type": ["boolean", "string"],
+			"default": false
+		},
 		"preview" : {
 			"type": "boolean",
 			"default": false
@@ -79,7 +83,8 @@
 			"type": "string"
 		},
 		"customWidth": {
-			"type": "string"
+			"type": "string",
+			"default" : "250px"
 		},
 		"style": {
 			"type": "object",
