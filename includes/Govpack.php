@@ -10,9 +10,7 @@ namespace Govpack;
 use Govpack\Abstracts\Plugin;
 use Govpack\FrontEnd\FrontEnd;
 use Govpack\Admin\Admin;
-
-
-
+use Govpack\Profile\CPT;
 
 /**
  * Main Govpack Class.
@@ -76,6 +74,7 @@ class Govpack extends Plugin {
 		
 		// remove capabilities from database.
 		\Govpack\Capabilities::instance()->remove_capabilities();
+		CPT::cleanup_dummy_posts();
 	}
 
 	public function hooks(): void {
@@ -107,7 +106,7 @@ class Govpack extends Plugin {
 	}
 	
 	public function text_domain() {
-		load_plugin_textdomain( "newspack-elections", false, $this->path( 'languages' ) );
+		load_plugin_textdomain( 'newspack-elections', false, $this->path( 'languages' ) );
 	}
 
 	public function setup(): void {
@@ -128,7 +127,7 @@ class Govpack extends Plugin {
 
 		( new ProfileBindingSource() )->register();
 
-		$importer = new \Govpack\Importer\Importer($this);
+		$importer = new \Govpack\Importer\Importer( $this );
 		$importer->hooks();
 		
 		//\Govpack\Admin\Export::hooks(); 
@@ -157,11 +156,15 @@ class Govpack extends Plugin {
 		
 		$this->block_editor()
 			->block_templates()
-				->register_from_file( "single-govpack_profiles", "single/single-govpack_profiles.html", [
-					'title'       => __( 'Single Profile', 'newspack-elections' ),
-					'description' => __( 'Output a single Election Profile.', 'newspack-elections' ),
-					'post_types' => [ "govpack_profiles" ],
-				] );
+				->register_from_file(
+					'single-govpack_profiles',
+					'single/single-govpack_profiles.html',
+					[
+						'title'       => __( 'Single Profile', 'newspack-elections' ),
+						'description' => __( 'Output a single Election Profile.', 'newspack-elections' ),
+						'post_types'  => [ 'govpack_profiles' ],
+					] 
+				);
 	
 
 		if ( is_admin() ) {
@@ -171,7 +174,6 @@ class Govpack extends Plugin {
 		if ( ! is_admin() ) {
 			$this->front_end();
 		}
-
 	}
 
 	public function admin(): Admin {
@@ -197,7 +199,7 @@ class Govpack extends Plugin {
 	public function front_end(): FrontEnd {
 
 		if ( ! isset( $this->front_end ) ) {
-			$this->front_end =  new FrontEnd($this);
+			$this->front_end = new FrontEnd( $this );
 			$this->front_end->hooks();
 			$this->front_end->template_loader();
 		} 

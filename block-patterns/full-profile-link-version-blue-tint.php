@@ -2,10 +2,15 @@
 /**
  * Title: Full Profile Link Version (Blue Tint)
  * Slug: npe/full-profile-link-version-blue-tint
+ * Viewport Width: 400
  * Inserter: true
  */
+
+use Govpack\Profile\CPT;
+
+$preview_post_id = CPT::get_dummy_profile_id();
 ?>
-<!-- wp:npe/profile {"style":{"spacing":{"blockGap":"0","padding":{"top":"0","bottom":"0","left":"0","right":"0"}},"border":{"width":"1px"}},"className":"is-style-blue-tint","borderColor":"contrast"} -->
+<!-- wp:npe/profile {"postId":<?php echo esc_attr( $preview_post_id ); ?>,"style":{"spacing":{"blockGap":"0","padding":{"top":"0","bottom":"0","left":"0","right":"0"}},"border":{"width":"1px"}},"className":"is-style-blue-tint","borderColor":"contrast"} -->
 <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1","linkTarget":"_blank","style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20","left":"var:preset|spacing|20","right":"var:preset|spacing|20"}}}} /-->
 
 <!-- wp:npe/profile-row-group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40","right":"var:preset|spacing|40"},"blockGap":"var:preset|spacing|0"}}} -->

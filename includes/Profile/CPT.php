@@ -187,9 +187,9 @@ class CPT extends \Govpack\Abstracts\PostType {
 				new PhoneField( 'phone_campaign', 'Campaign Phone Number' ),
 
 				
-				(new PhoneField( 'fax_official', 'Official Fax Number' ))->set_display_icon("fax"),
-				(new PhoneField( 'fax_district', 'District Fax Number' ))->set_display_icon("fax"),
-				(new PhoneField( 'fax_campaign', 'Campaign Fax Number' ))->set_display_icon("fax"),
+				( new PhoneField( 'fax_official', 'Official Fax Number' ) )->set_display_icon( 'fax' ),
+				( new PhoneField( 'fax_district', 'District Fax Number' ) )->set_display_icon( 'fax' ),
+				( new PhoneField( 'fax_campaign', 'Campaign Fax Number' ) )->set_display_icon( 'fax' ),
 
 				( new LinkField( 'website_personal', 'Personal Website URL' ) ),
 				( new LinkField( 'website_campaign', 'Campaign Website URL' ) )->link_text( 'Campaign Website' ),
@@ -416,14 +416,21 @@ class CPT extends \Govpack\Abstracts\PostType {
 						For completeness, pass the enabled property as a string "true". False would just become 
 						undefined anyway.
 					*/
-					$links = array_filter(self::generate_link_services( $request['id']), function($link){
-						return $link["enabled"];
-					}, true);
+					$links = array_filter(
+						self::generate_link_services( $request['id'] ),
+						function ( $link ) {
+							return $link['enabled'];
+						},
+						true
+					);
 
-					$links = \array_map(function($link){
-						$link["enabled"] = $link["enabled"] ? "true" : false;
-						return $link;
-					}, $links);
+					$links = \array_map(
+						function ( $link ) {
+							$link['enabled'] = $link['enabled'] ? 'true' : false;
+							return $link;
+						},
+						$links
+					);
 
 			
 					return $links;
@@ -604,7 +611,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 		);
 	}
 
-	public static function get_default_profile_block(){
+	public static function get_default_profile_block() {
 		return 'govpack/profile-self';
 	}
 
@@ -618,7 +625,6 @@ class CPT extends \Govpack\Abstracts\PostType {
 				clipRule="evenodd"
 			/>
 		</svg>';
-
 	}
 
 	public static function create_menu_svg() {
@@ -729,8 +735,6 @@ class CPT extends \Govpack\Abstracts\PostType {
 			
 			self::register_meta( $key );
 		}
-
-		
 	}   
 
 	/**
@@ -760,7 +764,6 @@ class CPT extends \Govpack\Abstracts\PostType {
 		);
 
 		register_post_meta( self::CPT_SLUG, $slug, $args );
-
 	}
 
 	public static function filter_meta_registration_for_links( array $args = [], string $slug = '' ): array {
@@ -1037,7 +1040,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 		}
 
 		if ( is_int( $dob ) ) {
-			$dob = ($dob / 1000);
+			$dob = ( $dob / 1000 );
 		}
 		
 		// attempt to convert a string to a date
@@ -1162,39 +1165,39 @@ class CPT extends \Govpack\Abstracts\PostType {
 					],
 				],
 			],
-			'contact'  => [
-				'official'  => [
-					'label' => "Official",
+			'contact'          => [
+				'official' => [
+					'label'    => 'Official',
 					'services' => [ 
 						'email'   => $profile_raw_meta_data['email_official'][0] ?? null,
 						'phone'   => $profile_raw_meta_data['phone_official'][0] ?? null,
 						'fax'     => $profile_raw_meta_data['fax_official'][0] ?? null,
 						'address' => $profile_raw_meta_data['address_official'][0] ?? null,
 						'website' => $profile_raw_meta_data['website_official'][0] ?? null,
-					]
+					],
 				],
 				'district' => [
-					'label' => "District",
+					'label'    => 'District',
 					'services' => [ 
 						'email'   => $profile_raw_meta_data['email_district'][0] ?? null,
 						'phone'   => $profile_raw_meta_data['phone_district'][0] ?? null,
 						'fax'     => $profile_raw_meta_data['fax_district'][0] ?? null,
 						'address' => $profile_raw_meta_data['address_district'][0] ?? null,
 						'website' => $profile_raw_meta_data['website_district'][0] ?? null,
-					]
+					],
 				],
 				'campaign' => [
-					'label' => "Campaign",
+					'label'    => 'Campaign',
 					'services' => [ 
 						'email'   => $profile_raw_meta_data['email_campaign'][0] ?? null,
 						'phone'   => $profile_raw_meta_data['phone_campaign'][0] ?? null,
 						'fax'     => $profile_raw_meta_data['fax_campaign'][0] ?? null,
 						'address' => $profile_raw_meta_data['address_campaign'][0] ?? null,
 						'website' => $profile_raw_meta_data['website_campaign'][0] ?? null,
-					]
+					],
 				],
 				'other'    => [
-					'label' => "Other",
+					'label'    => 'Other',
 					'services' => [ 
 						'website_other'    => [
 							'label' => 'Website (Personal)',
@@ -1212,7 +1215,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 							'label' => 'Contact Form URL',
 							'value' => $profile_raw_meta_data['contact_form_url'][0] ?? null,
 						],
-					]
+					],
 				],
 				
 			],
@@ -1254,7 +1257,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 					$social_set['services'] 
 				);
 
-				$social_set['services'] = \array_filter($social_set['services']);
+				$social_set['services'] = \array_filter( $social_set['services'] );
 
 				return $social_set;
 			},
@@ -1312,7 +1315,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 	 * The default block string for a profile.  Usually injected into the profile import before any content 
 	 */
 	public static function default_profile_content(): string {
-		return sprintf('<!-- wp:%s /-->', self::get_default_profile_block());
+		return sprintf( '<!-- wp:%s /-->', self::get_default_profile_block() );
 	}
 
 	public static function remove_custom_fields_metabox() {
@@ -1321,6 +1324,81 @@ class CPT extends \Govpack\Abstracts\PostType {
 
 	public static function modify_meta_boxes( $post_type, $post ) {
 		self::remove_custom_fields_metabox();
+	}
+
+	/**
+	 * Create or get a dummy profile post for pattern previews
+	 *
+	 * @return int|null Dummy post ID or null on failure
+	 */
+	public static function create_dummy_post(): ?int {
+		// Check if dummy post already exists
+		$existing = get_posts( 
+			[
+				'post_type'        => self::CPT_SLUG,
+				'meta_key'         => '_is_dummy_profile', 
+				'meta_value'       => '1', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+				'posts_per_page'   => 1,
+				'post_status'      => 'publish',
+				'suppress_filters' => false,
+			]
+		);
+
+		if ( ! empty( $existing ) ) {
+			return $existing[0]->ID;
+		}
+
+		// Create dummy post
+		$dummy_post_id = wp_insert_post(
+			[
+				'post_type'    => self::CPT_SLUG,
+				'post_title'   => 'Test Data',
+				'post_excerpt' => 'This is a dummy profile used for pattern previews.',
+				'post_status'  => 'publish',
+			]
+		);
+
+		// set meta to mark as dummy
+		if ( ! is_wp_error( $dummy_post_id ) ) {
+			update_post_meta( $dummy_post_id, '_is_dummy_profile', '1' );
+		}
+
+		if ( is_wp_error( $dummy_post_id ) ) {
+			return null;
+		}
+
+		return $dummy_post_id;
+	}
+
+	/**
+	 * Get dummy profile ID for pattern previews
+	 *
+	 * @return int|string Returns post ID or 'dummy' fallback
+	 */
+	public static function get_dummy_profile_id() {
+		$dummy_id = self::create_dummy_post();
+		return $dummy_id;
+	}
+
+	/**
+	 * Clean up dummy posts (useful for development)
+	 */
+	public static function cleanup_dummy_posts(): void {
+		$dummy_posts = get_posts(
+			[
+				'post_type'        => self::CPT_SLUG,
+				'meta_key'         => '_is_dummy_profile',
+				'meta_value'       => '1', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+				'posts_per_page'   => 1,
+				'post_status'      => 'any',
+				'suppress_filters' => false,
+			]
+		);
+
+		foreach ( $dummy_posts as $post ) {
+			// Delete the post
+			wp_delete_post( $post->ID, true );
+		}
 	}
 }
 
