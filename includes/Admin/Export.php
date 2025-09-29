@@ -110,7 +110,7 @@ class Export {
 							$terms
 						);
 						$data[ $key ] = implode( ';', $labels );
-					}               
+					}
 				} elseif ( 'post' === $action['type'] ) {
 					$data[ $key ] = wp_strip_all_tags( $profile->{$action['key']} ?? ' ' );
 				} elseif ( 'meta' === $action['type'] ) {
