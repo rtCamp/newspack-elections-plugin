@@ -1331,7 +1331,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 	 *
 	 * @return int|null Dummy post ID or null on failure
 	 */
-	public static function create_dummy_post(): ?int {
+	public static function get_or_create_dummy_post(): ?int {
 		// Check if dummy post already exists
 		$existing = get_posts( 
 			[
@@ -1368,16 +1368,6 @@ class CPT extends \Govpack\Abstracts\PostType {
 		}
 
 		return $dummy_post_id;
-	}
-
-	/**
-	 * Get dummy profile ID for pattern previews
-	 *
-	 * @return int|string Returns post ID or 'dummy' fallback
-	 */
-	public static function get_dummy_profile_id() {
-		$dummy_id = self::create_dummy_post();
-		return $dummy_id;
 	}
 
 	/**

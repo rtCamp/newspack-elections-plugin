@@ -8,7 +8,7 @@
 
 use Govpack\Profile\CPT;
 
-$preview_post_id = CPT::get_dummy_profile_id();
+$preview_post_id = CPT::get_or_create_dummy_post();
 ?>
 <!-- wp:npe/profile {"postId":<?php echo esc_attr( $preview_post_id ); ?>,"style":{"spacing":{"blockGap":"0","padding":{"top":"0","bottom":"0","left":"0","right":"0"}},"border":{"width":"1px"}},"className":"is-style-blue-tint","borderColor":"contrast"} -->
 <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1","linkTarget":"_blank","style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20","left":"var:preset|spacing|20","right":"var:preset|spacing|20"}}}} /-->

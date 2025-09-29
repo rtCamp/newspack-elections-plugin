@@ -9,7 +9,7 @@
 
 use Govpack\Profile\CPT;
 
-$preview_post_id = CPT::get_dummy_profile_id();
+$preview_post_id = CPT::get_or_create_dummy_post();
 ?>
 <!-- wp:npe/profile {"postId":<?php echo esc_attr( $preview_post_id ); ?>,"variation":"mini","width":"wide","style":{"spacing":{"padding":{"top":"0.5rem","bottom":"0.5rem","left":"0.5rem","right":"0.5rem"}},"typography":{"textAlign":"left"}},"verticalAlignment":"center","align":"none","className":"is-style-red-tint","layout":{"type":"flex","verticalAlignment":"middle","justifyContent":"left","flexWrap":"nowrap"}} -->
 <!-- wp:post-featured-image {"style":{"layout":{"selfStretch":"fixed","flexSize":"130px"},"border":{"radius":"100px"}}} /-->

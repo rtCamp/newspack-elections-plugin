@@ -8,7 +8,7 @@
 
 use Govpack\Profile\CPT;
 
-$preview_post_id = CPT::get_dummy_profile_id();
+$preview_post_id = CPT::get_or_create_dummy_post();
 ?>
 
 <!-- wp:npe/profile {"postId":<?php echo esc_attr( $preview_post_id ); ?>,"style":{"spacing":{"blockGap":"0"},"border":{"width":"1px"}},"className":"is-style-default","borderColor":"contrast"} -->
