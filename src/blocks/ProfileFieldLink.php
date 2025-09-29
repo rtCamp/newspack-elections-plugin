@@ -141,11 +141,24 @@ class ProfileFieldLink extends \Govpack\Blocks\ProfileFieldText {
 	 * @return string CSS class.
 	 */
 	public function get_css_class( $attributes ): string {
-		$classes  = '';
-		$classes .= $attributes['linkFormat'] ? ' is-format-' . $attributes['linkFormat'] : '';
-		if ( isset( $attributes['iconSize'] ) ) {
-			$classes .= $attributes['linkFormat'] === 'icon' ? ' ' . $attributes['iconSize'] : '';
+		$classes     = [];
+		$link_format = '';
+
+		if ( ! empty( $attributes['linkFormat'] ) ) {
+			$link_format = sanitize_html_class( $attributes['linkFormat'] );
+			if ( $link_format ) {
+				$classes[] = 'is-format-' . $link_format;
+			}
 		}
-		return $classes;
+	
+		// Add iconSize class only for icon format
+		if ( $link_format === 'icon' && ! empty( $attributes['iconSize'] ) ) {
+			$icon_size = sanitize_html_class( $attributes['iconSize'] );
+			if ( $icon_size ) {
+				$classes[] = $icon_size;
+			}
+		}
+	
+		return implode( ' ', $classes );
 	}
 }
