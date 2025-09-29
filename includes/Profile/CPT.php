@@ -1381,7 +1381,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 	}
 
 	/**
-	 * Clean up dummy posts (useful for development)
+	 * Clean up dummy posts
 	 */
 	public static function cleanup_dummy_posts(): void {
 		$dummy_posts = get_posts(
