@@ -1339,7 +1339,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 				'meta_key'         => '_is_dummy_profile', 
 				'meta_value'       => '1', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 				'posts_per_page'   => 1,
-				'post_status'      => 'publish',
+				'post_status'      => 'any',
 				'suppress_filters' => false,
 			]
 		);
@@ -1354,7 +1354,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 				'post_type'    => self::CPT_SLUG,
 				'post_title'   => 'Test Data',
 				'post_excerpt' => 'This is a dummy profile used for pattern previews.',
-				'post_status'  => 'publish',
+				'post_status'  => 'draft', // do not publish dummy posts.
 			]
 		);
 
