@@ -1,84 +1,74 @@
-import { isEmpty } from 'lodash';
+import {isEmpty} from "lodash"
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import {
-	useBlockProps,
-	HeadingLevelDropdown,
-	AlignmentControl,
-	BlockControls,
-	InspectorControls,
-} from '@wordpress/block-editor';
-import { store as coreStore, useEntityProp } from '@wordpress/core-data';
+import { useBlockProps, HeadingLevelDropdown, AlignmentControl, BlockControls, InspectorControls} from "@wordpress/block-editor"
+import { store as coreStore, useEntityProp } from '@wordpress/core-data'
 import { useSelect } from '@wordpress/data';
-import { useEffect } from '@wordpress/element';
+import { useEffect } from "@wordpress/element"
 import { ToggleControl, TextControl, PanelBody } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { PROFILE_POST_TYPE, useProfileFieldAttributes } from '@npe/editor';
+import { PROFILE_POST_TYPE, useProfileFieldAttributes } from "@npe/editor";
 
-/**
- *
- * @param props
- */
+
+
+
+
 function Edit( props ) {
-	const { fieldKey, field, profileId, ...restField } =
-		useProfileFieldAttributes( props );
-	const blockProps = useBlockProps();
 
-	const { context, attributes, setAttributes } = props;
-	const { postType } = context;
-	const { level, textAlign, levelOptions, isLink, linkTarget, rel } =
-		attributes;
+	const { fieldKey, field, profileId, ...restField } =  useProfileFieldAttributes(props) 
+	const blockProps = useBlockProps()
 
-	const [ value ] = useEntityProp(
-		'postType',
-		PROFILE_POST_TYPE,
-		'title',
-		profileId
-	);
+	const { context, attributes, setAttributes } = props
+	const { postType } = context
+	const { level, textAlign, levelOptions, isLink, linkTarget, rel } = attributes
+
+	
+	const [value] = useEntityProp("postType", PROFILE_POST_TYPE, "title", profileId)
+	
 
 	useEffect( () => {
-		if ( ! value ) {
-			return;
-		}
+			
+			if(!value){
+				return
+			}
+			
+			const name = field.field_type.valueToText(value)
 
-		const name = field.field_type.valueToText( value );
-
-		setAttributes( {
-			metadata: {
+			setAttributes({"metadata" : {
 				...attributes.metadata,
-				name,
-			},
-		} );
-	}, [ value ] );
+				name: name
+			}})
+	
+	}, [value])
 
 	const postTypeSupportsTitle = useSelect(
 		( select ) => {
-			return !! select( coreStore ).getPostType( postType )?.supports
-				?.title;
+			return !! select( coreStore ).getPostType( postType )?.supports?.title;
 		},
 		[ postType ]
 	);
 
 	const [ link ] = useEntityProp( 'postType', postType, 'link', profileId );
-	const hasValue = ! isEmpty( value );
-	let textValue = field.field_type.valueToText( value );
+	const hasValue = !isEmpty(value)
+	let textValue = field.field_type.valueToText(value)
 
 	if ( profileId === 'dummy' ) {
 		textValue = __( 'Preview Profile', 'govpack' );
 	}
+	
 
-	if ( ! postTypeSupportsTitle ) {
-		return null;
+	if(!postTypeSupportsTitle){
+		return null
 	}
 
 	const TagName = level === 0 ? 'p' : `h${ level }`;
 
-	return (
+    return (
 		<>
 			<BlockControls group="block">
 				<HeadingLevelDropdown
@@ -101,7 +91,9 @@ function Edit( props ) {
 					<ToggleControl
 						__nextHasNoMarginBottom
 						label={ __( 'Make title a link' ) }
-						onChange={ () => setAttributes( { isLink: ! isLink } ) }
+						onChange={ () =>
+							setAttributes( { isLink: ! isLink } )
+						}
 						checked={ isLink }
 					/>
 					{ isLink && (
@@ -111,7 +103,9 @@ function Edit( props ) {
 								label={ __( 'Open in new tab' ) }
 								onChange={ ( value ) =>
 									setAttributes( {
-										linkTarget: value ? '_blank' : '_self',
+										linkTarget: value
+											? '_blank'
+											: '_self',
 									} )
 								}
 								checked={ linkTarget === '_blank' }
@@ -130,23 +124,26 @@ function Edit( props ) {
 				</PanelBody>
 			</InspectorControls>
 
-			<TagName { ...blockProps }>
-				{ isLink ? (
+			<TagName {...blockProps}>
+				{isLink ? (
 					<a
 						href={ link }
 						target={ linkTarget }
 						rel={ rel }
 						onClick={ ( event ) => event.preventDefault() }
 					>
-						{ textValue }
+					{ textValue }
 					</a>
 				) : (
 					<>{ textValue }</>
-				) }
+				)}
+				
 			</TagName>
 		</>
-	);
+	)
 }
 
-export { Edit };
-export default Edit;
+
+
+export {Edit}
+export default Edit
