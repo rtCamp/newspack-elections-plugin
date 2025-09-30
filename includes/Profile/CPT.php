@@ -664,10 +664,7 @@ class CPT extends \Govpack\Abstracts\PostType {
 		}
 		
 		$post_fields = [
-			'bio'          => 'post_content',
-			'post_id'      => 'ID',
-			'post_status'  => 'post_status',
-			'thumbnail_id' => '_thumbnail_id',
+			'bio' => 'post_content',
 		];
 
 		foreach ( $post_fields as $key => $attr ) {
@@ -708,7 +705,6 @@ class CPT extends \Govpack\Abstracts\PostType {
 			'type' => 'post',
 			'key'  => '_thumbnail_id',
 		];
-
 
 		return apply_filters( 'govpack_profile_export_model', $model );
 	}

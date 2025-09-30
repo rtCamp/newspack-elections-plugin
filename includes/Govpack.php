@@ -11,6 +11,7 @@ use Govpack\Abstracts\Plugin;
 use Govpack\FrontEnd\FrontEnd;
 use Govpack\Admin\Admin;
 use Govpack\Profile\CPT;
+use Govpack\Admin\Export;
 
 /**
  * Main Govpack Class.
@@ -131,8 +132,10 @@ class Govpack extends Plugin {
 
 		$importer = new \Govpack\Importer\Importer( $this );
 		$importer->hooks();
-		
-		//\Govpack\Admin\Export::hooks(); 
+
+		$exporter = new Export( $this );
+		$exporter->hooks();
+
 		\Govpack\Widgets::hooks();
 
 
