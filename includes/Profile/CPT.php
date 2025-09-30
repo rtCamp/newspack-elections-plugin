@@ -690,6 +690,22 @@ class CPT extends \Govpack\Abstracts\PostType {
 	public static function get_export_model(): array {
 
 		$model = self::get_import_model();
+
+		$model['post_id'] = [
+			'type' => 'post',
+			'key'  => 'ID',
+		];
+
+		$model['post_status'] = [
+			'type' => 'post',
+			'key'  => 'post_status',
+		];
+
+		$model['thumbnail_id'] = [
+			'type' => 'post',
+			'key'  => '_thumbnail_id',
+		];
+
 		return apply_filters( 'govpack_profile_export_model', $model );
 	}
 
