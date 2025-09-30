@@ -5,12 +5,8 @@
  * Viewport Width: 400
  * Inserter: true
  */
-
-use Govpack\Profile\CPT;
-
-$preview_post_id = CPT::get_or_create_dummy_post();
 ?>
-<!-- wp:npe/profile {"postId":<?php echo esc_attr( $preview_post_id ); ?>,"style":{"spacing":{"blockGap":"0"},"border":{"width":"1px"}},"className":"is-style-red-tint","borderColor":"contrast"} -->
+<!-- wp:npe/profile {"postId":"dummy","style":{"spacing":{"blockGap":"0"},"border":{"width":"1px"}},"className":"is-style-red-tint","borderColor":"contrast"} -->
 <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1","linkTarget":"_blank","style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20","left":"var:preset|spacing|20","right":"var:preset|spacing|20"}}}} /-->
 
 <!-- wp:npe/profile-row-group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40","right":"var:preset|spacing|40"},"blockGap":"var:preset|spacing|0"}}} -->

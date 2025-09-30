@@ -75,9 +75,6 @@ class Govpack extends Plugin {
 		
 		// remove capabilities from database.
 		\Govpack\Capabilities::instance()->remove_capabilities();
-
-		// remove dummy posts.
-		CPT::cleanup_dummy_posts();
 	}
 
 	public function hooks(): void {
