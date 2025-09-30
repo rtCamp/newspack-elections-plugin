@@ -57,7 +57,7 @@ function Edit( props ) {
 	const hasValue = !isEmpty(value)
 	let textValue = field.field_type.valueToText(value)
 
-	if ( profileId === 'dummy' ) {
+	if ( 'dummy' === profileId ) {
 		textValue = __( 'Preview Profile', 'govpack' );
 	}
 	
