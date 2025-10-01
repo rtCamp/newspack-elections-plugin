@@ -91,6 +91,13 @@ body {
 		.profile-inner {
 			border: none;
 		}
+
+		.wp-block-social-link.wp-social-link .wp-block-social-link-anchor svg,
+		svg:not(.has-icon-color svg),
+		.is-format-icon a svg {
+			color: var(--npe-profile-contrast-color);
+			fill: var(--npe-profile-contrast-color);
+		}
 	}
 
 	&.is-style-red-tint,
@@ -106,7 +113,8 @@ body {
 		}
 
 		.wp-block-social-link.wp-social-link .wp-block-social-link-anchor svg,
-		svg:not(.has-icon-color svg) {
+		svg:not(.has-icon-color svg),
+		.is-format-icon a svg {
 			color: var(--npe-profile-contrast-color);
 			fill: var(--npe-profile-contrast-color);
 		}
