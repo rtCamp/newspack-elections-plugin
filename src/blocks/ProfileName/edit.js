@@ -60,7 +60,6 @@ function Edit( props ) {
 	if ( 'dummy' === profileId ) {
 		textValue = __( 'Preview Profile', 'govpack' );
 	}
-	
 
 	if(!postTypeSupportsTitle){
 		return null
