@@ -38,22 +38,6 @@ export const ProfileEdit = ( props ) => {
 	const [blockMode, setBlockMode] = useState(BLOCK_MODES["UNKNOWN"])
 	//const [profileId, setProfileId] = useState(null)
 
-	/*
-	 * This code block is for determining if the block is inserted in the editor or is it in inserter preview
-	 * We can use this to render the profile selector if block with dummy profileId is inserted in the editor
-	 */
-	const { isSelected } = useSelect(
-		( select ) => {
-			const be = select( 'core/block-editor' );
-			return { isSelected: be.isBlockSelected( clientId ) };
-		},
-		[ clientId ]
-	);
-
-	if ( attributes?.postId === 'dummy' && isSelected ) {
-		setProfile( 0 );
-	}
-
 	const {
 		queryId
 	} = context
@@ -77,7 +61,22 @@ export const ProfileEdit = ( props ) => {
 	const setProfile = useCallback ((newProfileId) => {
 		setAttributes({"postId" : newProfileId})
 	}, [setAttributes])
-	
+
+	/*
+	 * This code block is for determining if the block is inserted in the editor or is it in inserter preview
+	 * We can use this to render the profile selector if block with dummy profileId is inserted in the editor
+	 */
+	const { isSelected } = useSelect(
+		( select ) => {
+			const be = select( 'core/block-editor' );
+			return { isSelected: be.isBlockSelected( clientId ) };
+		},
+		[ clientId ]
+	);
+
+	if ( attributes?.postId === 'dummy' && isSelected ) {
+		setProfile( 0 );
+	}
 	
 	const isProfilePage = (currentPostType === PROFILE_POST_TYPE) && (context.postId === currentPostId)
 	const isInQueryLoop = (!isNil(queryId))
