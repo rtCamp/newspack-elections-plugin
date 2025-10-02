@@ -4,7 +4,7 @@ import {useSelect, select} from "@wordpress/data"
 import {store as blockEditorStore, useInnerBlocksProps, useBlockProps, BlockContextProvider} from "@wordpress/block-editor"
 import { store as blocksStore } from '@wordpress/blocks';
 import { store as editorStore } from '@wordpress/editor';
-import { useCallback, useState } from '@wordpress/element';
+import { useCallback, useState, useEffect } from '@wordpress/element';
 
 import { ProfileBlockEdit } from "./edit"
 import { ProfileVariationSelector } from "./variation-selector"
@@ -74,9 +74,12 @@ export const ProfileEdit = ( props ) => {
 		[ clientId ]
 	);
 
-	if ( attributes?.postId === 'dummy' && isSelected ) {
-		setProfile( 0 );
-	}
+	useEffect( () => {
+		if ( attributes?.postId === 'dummy' && isSelected ) {
+			console.log( 'Dummy block selected, resetting profile' );
+			setProfile( 0 );
+		}
+	}, [ attributes?.postId, isSelected, setProfile ] );
 	
 	const isProfilePage = (currentPostType === PROFILE_POST_TYPE) && (context.postId === currentPostId)
 	const isInQueryLoop = (!isNil(queryId))
