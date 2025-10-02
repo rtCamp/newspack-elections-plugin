@@ -1322,5 +1322,3 @@ class CPT extends \Govpack\Abstracts\PostType {
 		self::remove_custom_fields_metabox();
 	}
 }
-
-
