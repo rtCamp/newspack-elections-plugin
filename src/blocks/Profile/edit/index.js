@@ -78,7 +78,7 @@ export const ProfileEdit = ( props ) => {
 		if ( attributes?.postId === 'preview' && isSelected ) {
 			setProfile( 0 );
 		}
-	}, [ attributes?.postId, isSelected, setProfile ] );
+	}, [ attributes?.postId, isSelected ] );
 
 	const isProfilePage = (currentPostType === PROFILE_POST_TYPE) && (context.postId === currentPostId)
 	const isInQueryLoop = (!isNil(queryId))
