@@ -73,7 +73,7 @@
 			"default": false
 		},
 		"postId": {
-			"type": "number"
+			"type": ["number", "string"]
 		},
 		"postType": {
 			"type": "string",
