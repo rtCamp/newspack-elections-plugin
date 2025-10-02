@@ -64,7 +64,7 @@ export const ProfileEdit = ( props ) => {
 
 	/*
 	 * This code block is for determining if the block is inserted in the editor or is it in inserter preview
-	 * We can use this to render the profile selector if block with dummy profileId is inserted in the editor
+	 * We can use this to render the profile selector if block with preview profileId is inserted in the editor
 	 */
 	const { isSelected } = useSelect(
 		( select ) => {
@@ -75,12 +75,11 @@ export const ProfileEdit = ( props ) => {
 	);
 
 	useEffect( () => {
-		if ( attributes?.postId === 'dummy' && isSelected ) {
-			console.log( 'Dummy block selected, resetting profile' );
+		if ( attributes?.postId === 'preview' && isSelected ) {
 			setProfile( 0 );
 		}
 	}, [ attributes?.postId, isSelected, setProfile ] );
-	
+
 	const isProfilePage = (currentPostType === PROFILE_POST_TYPE) && (context.postId === currentPostId)
 	const isInQueryLoop = (!isNil(queryId))
 	//const isEmbeded = (!isProfilePage && !isInQueryLoop)

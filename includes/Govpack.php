@@ -10,7 +10,6 @@ namespace Govpack;
 use Govpack\Abstracts\Plugin;
 use Govpack\FrontEnd\FrontEnd;
 use Govpack\Admin\Admin;
-use Govpack\Profile\CPT;
 use Govpack\Admin\Export;
 
 /**

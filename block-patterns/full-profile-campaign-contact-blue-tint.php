@@ -7,7 +7,7 @@
  */
 
 ?>
-<!-- wp:npe/profile {"postId":"dummy","style":{"spacing":{"blockGap":"0"},"border":{"width":"1px"}},"className":"is-style-blue-tint","borderColor":"contrast"} -->
+<!-- wp:npe/profile {"postId":"preview","style":{"spacing":{"blockGap":"0"},"border":{"width":"1px"}},"className":"is-style-blue-tint","borderColor":"contrast"} -->
 <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1","linkTarget":"_blank","style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20","left":"var:preset|spacing|20","right":"var:preset|spacing|20"}}}} /-->
 
 <!-- wp:npe/profile-row-group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40","right":"var:preset|spacing|40"},"blockGap":"var:preset|spacing|0"}}} -->
